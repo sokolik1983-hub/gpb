@@ -1,0 +1,14 @@
+{
+  "client.form.title": {
+    "ru": "Клиентская форма"
+  },
+  "admin.form.title": {
+    "ru": "Админская форма"
+  },
+  "client.scroller.title": {
+    "ru": "Клиентский скроллер"
+  },
+  "admin.scroller.title": {
+    "ru": "Админский скроллер"
+  }
+}

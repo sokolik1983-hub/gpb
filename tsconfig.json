@@ -1,0 +1,4 @@
+{
+  "extends": "./node_modules/@platform/tools/configs/tsconfig.json",
+  "exclude": ["client", "admin"]
+}
