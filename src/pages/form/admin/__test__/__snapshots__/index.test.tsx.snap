@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdminFormPage renders 1`] = `
+<t>
+  Админская форма
+</t>
+`;

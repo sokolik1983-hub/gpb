@@ -1,0 +1,51 @@
+{
+  "name": "@eco/statement",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "test:update": "jest --updateSnapshot",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "eslint:write": "npm run eslint -- --fix",
+    "stylelint": "stylelint src/**/*.{scss,tsx} --aei",
+    "stylelint:fix": "npm run stylelint -- --fix",
+    "lint": "npm run eslint && npm run stylelint",
+    "locale": "localization -a statement -s ./src/localization/locale.json -o ./dictionaries/ -t ./src/localization/ -l ru",
+    "build": "cross-env NODE_ENV=production webpack --progress",
+    "build:client": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.client.js",
+    "build:admin": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.admin.js",
+    "prepublishOnly": "cross-env META_MODE=ALL npm run build",
+    "update": "rm -rf node_modules/@platform && rm -f package-lock.json && npm i",
+    "please": "rm -rf node_modules && rm -f package-lock.json && npm i",
+    "start": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.client.js --host=0.0.0.0",
+    "start:admin": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.admin.js",
+    "rc": "cross-env DEV_ENV=stage npm start",
+    "prod": "cross-env DEV_ENV=release npm start",
+    "rc:admin": "cross-env DEV_ENV=stage npm run start:admin",
+    "prod:admin": "cross-env DEV_ENV=release npm run start:admin",
+    "prettier": "prettier --config ./prettier.config.js --write \"./src/**/*.{ts,tsx}\" \"!./src/**/*.d.ts\" \"!.src/localization/**\"",
+    "cm": "git-cz",
+    "commitlint": "npx commitlint --from HEAD~1 --to HEAD --verbose",
+    "semantic-release": "semantic-release -e @eco/semantic-release-config",
+    "release:patch": "semantic-release -e @eco/semantic-release-config/patch"
+  },
+  "publishConfig": {
+    "registry": "https://nexus.gboteam.ru/repository/npm-eco-hosted/"
+  },
+  "files": [
+    "client",
+    "admin"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-customizable"
+    }
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "devDependencies": {
+    "@platform/services": "8.79.1"
+  }
+}
