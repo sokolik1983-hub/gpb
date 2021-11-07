@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ClientScrollerPage renders 1`] = `
-<t>
-  Клиентский скроллер
-</t>
-`;
