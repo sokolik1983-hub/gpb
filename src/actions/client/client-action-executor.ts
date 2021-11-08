@@ -2,9 +2,11 @@ import { createExecuter } from '@platform/core';
 import { createContext } from '@platform/services';
 
 /** Контекст экзекутора клиента. */
-export const context = {
+export const clientExecutorContext = {
   ...createContext(),
 };
 
 /** Экзекутор клиента. */
-export const executor = createExecuter(context);
+export const clientActionExecutor = createExecuter(clientExecutorContext);
+
+export type ClientExecutorContext = typeof clientExecutorContext;

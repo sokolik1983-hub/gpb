@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScrollerHeader } from 'components';
-import { useTurnoverScrollerTabNavigationProps, useScrollerBreadcrumbsProps } from 'hooks';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { MainLayout, ScrollerPageLayout } from '@platform/services/client';
 
 /**
@@ -9,16 +9,18 @@ import { MainLayout, ScrollerPageLayout } from '@platform/services/client';
  * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309}
  */
 export const StatementHistoryScrollerPage = () => {
-  const scrollerBreadcrumbsProps = useScrollerBreadcrumbsProps();
+  const headerProps = useTurnoverScrollerHeaderProps([
+    /* TODO: Передавать выбранные в фильтре счета. */
+  ]);
 
-  const tabNavigationProps = useTurnoverScrollerTabNavigationProps();
+  const tabsProps = useScrollerTabsProps();
 
   return (
     <ScrollerPageLayout
-      categoryTabsProps={tabNavigationProps}
+      categoryTabsProps={tabsProps}
       isLoading={false}
       mainLayout={MainLayout}
-      navigationLine={<ScrollerHeader {...scrollerBreadcrumbsProps} />}
+      navigationLine={<ScrollerHeader {...headerProps} />}
       pageTitle=""
     />
   );

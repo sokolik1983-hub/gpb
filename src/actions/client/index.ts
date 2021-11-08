@@ -1,2 +1,2 @@
-export * from './executor';
+export * from './client-action-executor';
 export * from './create-statement-action';

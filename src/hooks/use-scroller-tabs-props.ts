@@ -7,7 +7,7 @@ import type { ICategoryTabsProps } from '@platform/ui';
  * Возвращает свойства вкладок навигации (сделаны через вкладки категорий) для скроллеров:
  * "Обороты (ОСВ)", "История запросов", "Шаблоны запросов".
  */
-export const useTurnoverScrollerTabNavigationProps = (): ICategoryTabsProps => {
+export const useScrollerTabsProps = (): ICategoryTabsProps => {
   const {
     push,
     location: { pathname },

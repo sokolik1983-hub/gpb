@@ -1,8 +1,7 @@
 import React from 'react';
 import { ScrollerHeader } from 'components';
-import { useTurnoverScrollerTabNavigationProps, useScrollerBreadcrumbsProps } from 'hooks';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { MainLayout, ScrollerPageLayout } from '@platform/services/client';
-import { useHeaderActions } from './hooks';
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -10,20 +9,18 @@ import { useHeaderActions } from './hooks';
  * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309}
  */
 export const StatementTurnoverScrollerPage = () => {
-  const scrollerBreadcrumbsProps = useScrollerBreadcrumbsProps();
-
-  const headerActions = useHeaderActions([
+  const headerProps = useTurnoverScrollerHeaderProps([
     /* TODO: Передавать выбранные в фильтре счета. */
   ]);
 
-  const tabNavigationProps = useTurnoverScrollerTabNavigationProps();
+  const tabsProps = useScrollerTabsProps();
 
   return (
     <ScrollerPageLayout
-      categoryTabsProps={tabNavigationProps}
+      categoryTabsProps={tabsProps}
       isLoading={false}
       mainLayout={MainLayout}
-      navigationLine={<ScrollerHeader actions={headerActions} {...scrollerBreadcrumbsProps} />}
+      navigationLine={<ScrollerHeader {...headerProps} />}
       pageTitle=""
     />
   );
