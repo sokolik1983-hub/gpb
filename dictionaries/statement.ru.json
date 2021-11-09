@@ -1,6 +1,9 @@
 {
+  "client.scroller.title": "Выписки",
+  "scroller.navTabs.labels.turnover": "Обороты",
+  "scroller.navTabs.labels.history": "История запросов",
   "client.form.title": "Клиентская форма",
   "admin.form.title": "Админская форма",
-  "client.scroller.title": "Клиентский скроллер",
-  "admin.scroller.title": "Админский скроллер"
+  "admin.scroller.title": "Админский скроллер",
+  "action.labels.createStatement": "Запросить выписку"
 }

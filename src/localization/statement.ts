@@ -6,6 +6,15 @@ export const t = (key: string, params?: any) => translate('statement', key, para
 
 export default {
 	client: {
+		scroller: {
+			/**
+			 * @ru
+			 * Выписки
+			 */
+			get title() {
+				return t('client.scroller.title');
+			},
+		},
 		form: {
 			/**
 			 * @ru
@@ -15,13 +24,24 @@ export default {
 				return t('client.form.title');
 			},
 		},
-		scroller: {
-			/**
-			 * @ru
-			 * Клиентский скроллер
-			 */
-			get title() {
-				return t('client.scroller.title');
+	},
+	scroller: {
+		navTabs: {
+			labels: {
+				/**
+				 * @ru
+				 * Обороты
+				 */
+				get turnover() {
+					return t('scroller.navTabs.labels.turnover');
+				},
+				/**
+				 * @ru
+				 * История запросов
+				 */
+				get history() {
+					return t('scroller.navTabs.labels.history');
+				},
 			},
 		},
 	},
@@ -42,6 +62,17 @@ export default {
 			 */
 			get title() {
 				return t('admin.scroller.title');
+			},
+		},
+	},
+	action: {
+		labels: {
+			/**
+			 * @ru
+			 * Запросить выписку
+			 */
+			get createStatement() {
+				return t('action.labels.createStatement');
 			},
 		},
 	},
