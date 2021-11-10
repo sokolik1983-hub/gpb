@@ -1,0 +1,28 @@
+.filterWrapper {
+  padding: 12px 32px;
+  background-color: var(--line-fill-faint-weak);
+}
+
+.dateDelimiter {
+  color: var(--line-fill-base-strong);
+  opacity: 0.7;
+}
+
+.groupingPanelWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 32px;
+}
+
+.important.groupingLeftColumn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.important.groupingRightColumn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

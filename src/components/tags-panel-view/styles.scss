@@ -1,0 +1,24 @@
+.btn {
+  border: none;
+}
+
+.tag {
+  align-items: center;
+  box-sizing: border-box;
+  max-width: 320px;
+  height: 32px;
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background-color: var(--box-lightdown-fill-faint-weak);
+}
+
+.tagBtn {
+  background-color: var(--line-fill-base-weak);
+}
+
+.tagsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: -8px;
+}

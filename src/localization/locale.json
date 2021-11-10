@@ -1,4 +1,7 @@
 {
+  "scroller.tags.labels.resetAll": {
+    "ru": "Сбросить всё"
+  },
   "client.scroller.title": {
     "ru": "Выписки"
   },
@@ -7,6 +10,75 @@
   },
   "scroller.navTabs.labels.history": {
     "ru": "История запросов"
+  },
+  "turnoverScroller.filter.tags.dateFrom": {
+    "ru": "Дата от:"
+  },
+  "turnoverScroller.filter.tags.dateTo": {
+    "ru": "Дата до:"
+  },
+  "turnoverScroller.filter.tags.accounts": {
+    "ru": "Счёт:"
+  },
+  "turnoverScroller.filter.tags.organizations": {
+    "ru": "Организация:"
+  },
+  "turnoverScroller.filter.labels.onlyActiveAccounts": {
+    "ru": "Только активные счета"
+  },
+  "turnoverScroller.filter.grouping.noGrouping": {
+    "ru": "Без группировки"
+  },
+  "turnoverScroller.filter.grouping.organizationsAndCurrencies": {
+    "ru": "По организациям и валютам"
+  },
+  "turnoverScroller.filter.grouping.organizations": {
+    "ru": "По организациям"
+  },
+  "turnoverScroller.filter.grouping.currencies": {
+    "ru": "По валютам"
+  },
+  "turnoverScroller.filter.grouping.branches": {
+    "ru": "По подразделениям"
+  },
+  "turnoverScroller.filter.grouping.accountType": {
+    "ru": "По типу счета"
+  },
+  "turnoverScroller.filter.datePeriods.selectPeriod": {
+    "ru": "Выбрать период"
+  },
+  "turnoverScroller.filter.datePeriods.yesterday": {
+    "ru": "Вчера"
+  },
+  "turnoverScroller.filter.datePeriods.today": {
+    "ru": "Сегодня"
+  },
+  "turnoverScroller.filter.datePeriods.last3Days": {
+    "ru": "Последние 3 дня"
+  },
+  "turnoverScroller.filter.datePeriods.curMonth": {
+    "ru": "Текущий месяц"
+  },
+  "turnoverScroller.filter.datePeriods.lastMonth": {
+    "ru": "Прошлый месяц"
+  },
+  "turnoverScroller.filter.datePeriods.prevQuarter": {
+    "ru": "Предыдущий квартал"
+  },
+  "turnoverScroller.groupInfo.organizations": {
+    "ru": "Организации"
+  },
+  "turnoverScroller.groupInfo.currencies": {
+    "ru": "Валюты"
+  },
+  "turnoverScroller.groupInfo.branches": {
+    "ru": "Подразделения"
+  },
+  "turnoverScroller.groupInfo.accountType": {
+    "ru": "Типов счетов"
+  },
+  "turnoverScroller.groupInfo.noGrouping": {
+    "ru": "Cчетов"
   },
   "client.form.title": {
     "ru": "Клиентская форма"
