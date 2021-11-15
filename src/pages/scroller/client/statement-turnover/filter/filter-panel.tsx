@@ -27,8 +27,8 @@ export const FilterPanel = () => {
     }
 
     batch(() => {
-      change('dateFrom', period.dateFrom);
-      change('dateTo', period.dateTo);
+      change('dateFrom', period.from);
+      change('dateTo', period.to);
     });
     setIsLoading(false);
     void submit();

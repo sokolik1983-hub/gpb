@@ -1,15 +1,7 @@
+import type { IAccountV2 } from '@platform/services/client';
+
 /** ДТО ответа запроса счетов. */
-export interface IGetAccountsResponseDto {
-  // TODO: Уточнить ДТО после готовности реста
-  /** Идентификатор счёта. */
-  id: string;
-  /** Номер счёта клиента. */
-  accountNumber: string;
-  /** Информация о клиенте банка. */
-  bankClient: {
-    /** Идентификатор клиента банка (организации). */
-    id: string;
-    /** Краткое наименование клиента. */
-    name: string;
-  };
+export interface IGetAccountsResponseDto extends IAccountV2 {
+  /** Наименование счёта. */
+  accountName: string;
 }

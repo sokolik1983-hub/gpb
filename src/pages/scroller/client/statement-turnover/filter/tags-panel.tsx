@@ -26,13 +26,13 @@ export const TagsPanel = () => {
       accounts.reduce<[Record<string, string>, Record<string, string>]>(
         (acc, account) => {
           const {
-            bankClient: { name, id: bankClientId },
+            bankClient: { shortName, fullName, id: bankClientId },
             id,
             accountNumber,
           } = account;
 
           acc[0][id] = accountNumber;
-          acc[1][bankClientId] = name;
+          acc[1][bankClientId] = shortName ?? fullName;
 
           return acc;
         },

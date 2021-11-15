@@ -28,7 +28,7 @@ export const StatementTurnoverScrollerPage = () => {
   ]);
 
   // Вызывается один раз.
-  const { accounts, isAccountsError } = useAccounts();
+  const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
 
   // TODO: Хук для отладки UI. При реализации таблицы скроллера убрать.
   useEffect(() => {
@@ -53,6 +53,10 @@ export const StatementTurnoverScrollerPage = () => {
     }),
     [accounts, filterPanel, hasError, isLoading, tagsPanel]
   );
+
+  if (isAccountsFetching) {
+    return null;
+  }
 
   if (hasError || isAccountsError) {
     return (

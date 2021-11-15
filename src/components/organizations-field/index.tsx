@@ -32,15 +32,15 @@ export const OrganizationsField: FC<IOrganizationsFieldProps> = ({ name, account
     return accounts
       .reduce<Array<IOption<string>>>((acc, account) => {
         const {
-          bankClient: { name: organizationName, id },
+          bankClient: { shortName, fullName, id: bankClientId },
         } = account;
 
-        if (usedOrgs[id]) {
+        if (usedOrgs[bankClientId]) {
           return acc;
         }
 
-        usedOrgs[id] = true;
-        acc.push({ value: id, label: organizationName });
+        usedOrgs[bankClientId] = true;
+        acc.push({ value: bankClientId, label: shortName ?? fullName });
 
         return acc;
       }, [])

@@ -36,10 +36,10 @@ export interface IDatePeriodFieldProps {
 
 /** Селект выбора периода. */
 export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetching = noop, onStartFetching, onSuccessFetching }) => {
-  const getPeriod = async (period: IGetDatePeriodRequestDto['period']) => {
+  const getPeriod = async (period: IGetDatePeriodRequestDto['periodType']) => {
     onStartFetching();
 
-    const [res, err] = await to(statementService.getDatePeriod({ period }));
+    const [res, err] = await to(statementService.getDatePeriod({ periodType: period }));
 
     if (err) {
       onErrorFetching(err);
@@ -59,13 +59,13 @@ export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetchi
       case DATE_PERIODS.TODAY:
         date = dateTime().format();
 
-        onSuccessFetching({ dateTo: date, dateFrom: date });
+        onSuccessFetching({ to: date, from: date });
 
         return;
       case DATE_PERIODS.YESTERDAY:
         date = getYesterday().format();
 
-        onSuccessFetching({ dateTo: date, dateFrom: date });
+        onSuccessFetching({ to: date, from: date });
 
         return;
       default:

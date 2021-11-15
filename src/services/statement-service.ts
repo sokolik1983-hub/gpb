@@ -1,38 +1,20 @@
-// TODO: Привести в порядок когда будут готовы ресты, пока тут тулько занлушки
+import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
+import type { IServerDataResp } from '@platform/services/client';
+import { request } from '@platform/services/client';
 
-import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto, IGetAccountsResponseDto } from 'interfaces/client';
-import { DATE_PERIODS } from 'interfaces/client';
-import { mockAccounts } from 'mocks/mock-accounts';
+const STATEMENT_BASE_URL = '/api/statement-client';
 
+/**
+ * Сервис выписок клиента.
+ *
+ * @see {@link http://api-gateway.sandbox.gboteam.ru/statement-client/swagger-ui.html}
+ */
 export const statementService = {
-  /** Получение временного периода. */
-  getDatePeriod: async (data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> =>
-    // TODO: заглушка чтобы потестить UI, переписать когда будет рест.
-    new Promise<IGetDatePeriodResponseDto>((resolve, reject) => {
-      setTimeout(() => {
-        switch (data.period) {
-          case DATE_PERIODS.LAST_3_DAYS:
-            resolve({ dateFrom: '2021-11-09', dateTo: '2021-12-09' });
-
-            return;
-          case DATE_PERIODS.CUR_MONTH:
-          case DATE_PERIODS.LAST_MONTH:
-            resolve({ dateFrom: '2021-10-01', dateTo: '2021-12-31' });
-
-            return;
-          case DATE_PERIODS.PREV_QUARTER:
-          default:
-            reject('err');
-
-            return;
-        }
-      }, 500);
-    }),
-  // TODO: заглушка чтобы потестить UI, переписать когда будет рест.
-  getAccounts: async (): Promise<IGetAccountsResponseDto[]> =>
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve(mockAccounts);
-      }, 500);
-    }),
+  /** Возвращает временной период. */
+  getDatePeriod: (data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> =>
+    request<IServerDataResp<IGetDatePeriodResponseDto>>({
+      method: 'POST',
+      data: { data },
+      url: `${STATEMENT_BASE_URL}/calculate-period`,
+    }).then(result => result.data.data),
 };
