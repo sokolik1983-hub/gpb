@@ -1,19 +1,19 @@
 /** Значения периодов. */
 export enum DATE_PERIODS {
   /** Выбрать период. */
-  SELECT_PERIOD = 'SELECTPERIOD',
+  SELECT_PERIOD = 'SELECT_PERIOD',
   /** Вчера. */
   YESTERDAY = 'YESTERDAY',
   /** Сегодня. */
   TODAY = 'TODAY',
   /** Последние 3 дня. */
-  LAST_3_DAYS = 'LAST3DAYS',
+  LAST_3_DAYS = 'LAST_3_DAYS',
   /** Текущий месяц. */
-  CUR_MONTH = 'CURMONTH',
+  CURRENT_MONTH = 'CURRENT_MONTH',
   /** Прошлый месяц. */
-  LAST_MONTH = 'LASTMONTH',
+  LAST_MONTH = 'LAST_MONTH',
   /** Предыдущий квартал. */
-  PREV_QUARTER = 'PREVQUARTER',
+  PREVIOUS_QUARTER = 'PREVIOUS_QUARTER',
 }
 
 /** ДТО запроса периода. */
@@ -25,7 +25,7 @@ export interface IGetDatePeriodRequestDto {
 /** ДТО ответа запроса периода. */
 export interface IGetDatePeriodResponseDto {
   /** Начальная дата периода, по которому запрашивается выписка. */
-  from: string;
+  dateFrom: string;
   /** Конечная дата периода, по которому запрашивается выписка. */
-  to: string;
+  dateTo: string;
 }

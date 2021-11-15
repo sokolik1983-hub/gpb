@@ -16,7 +16,7 @@ interface ITagProps extends IOption {
 }
 
 /** Тег фильтра. */
-const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick }) => {
+const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick, disabled }) => {
   const handleRemoveClick = (e: MouseEvent) => {
     e.stopPropagation();
     onRemoveTag();
@@ -29,7 +29,7 @@ const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick }) => {
         <Gap.X2S />
         <Typography.P line="COLLAPSE">{value}</Typography.P>
         <Gap.XS />
-        <ServiceIcons.Close clickable fill="ACCENT" scale="SM" onClick={handleRemoveClick} />
+        {!disabled && <ServiceIcons.Close clickable fill="ACCENT" scale="SM" onClick={handleRemoveClick} />}
       </Horizon>
     </Box>
   );
@@ -66,7 +66,7 @@ export const TagsPanelView: React.FC<ITagsPanelViewProps> = ({ tags, onRemoveTag
   const { values } = getState();
 
   const handleRemoveTag = (key: string) => () => {
-    change(key, '');
+    change(key);
     onRemoveTag(key);
   };
 
@@ -77,12 +77,12 @@ export const TagsPanelView: React.FC<ITagsPanelViewProps> = ({ tags, onRemoveTag
 
   return (
     <Box className={css.tagsWrapper}>
-      {tags.map(({ value: key, label }) => {
+      {tags.map(({ value: key, label, disabled }) => {
         const value = tagValueFormatter(key, values);
 
         return (
           <>
-            <Tag key={label} label={label} value={value} onClick={onTagClick} onRemoveTag={handleRemoveTag(key)} />
+            <Tag key={label} disabled={disabled} label={label} value={value} onClick={onTagClick} onRemoveTag={handleRemoveTag(key)} />
             <Gap.XS />
           </>
         );

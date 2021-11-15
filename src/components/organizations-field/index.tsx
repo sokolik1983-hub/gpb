@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useEffect } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
-import { useForm, useField } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { byLabel } from '@platform/services';
 import type { IOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -20,10 +20,6 @@ export interface IOrganizationsFieldProps {
 /** Селект выбора организации. */
 export const OrganizationsField: FC<IOrganizationsFieldProps> = ({ name, accounts, onChange }) => {
   const { change } = useForm();
-
-  const {
-    input: { value },
-  } = useField<string[]>(name);
 
   const options = useMemo(() => {
     /* Организации уже добавленные в массив опций. */
@@ -48,13 +44,14 @@ export const OrganizationsField: FC<IOrganizationsFieldProps> = ({ name, account
   }, [accounts]);
 
   useEffect(() => {
-    // Если значение для выбора всего одно, то хук ставит его по умолчанию.
+    // Если значение для выбора всего одно, то при инициализации формы выбирается по умолчанию.
     if (options.length === 1) {
       change(name, [options[0].value]);
     }
-  }, [change, name, options, value.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [options]);
 
-  return <Fields.MultiSelect extraSmall withSearch disabled={options.length === 1} name={name} options={options} onChange={onChange} />;
+  return <Fields.MultiSelect extraSmall withSearch name={name} options={options} onChange={onChange} />;
 };
 
 OrganizationsField.displayName = 'OrganizationsField';

@@ -4,8 +4,8 @@ import type { IGetDatePeriodResponseDto } from 'interfaces/client';
 import { DATE_PERIODS } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
-import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
+import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS } from './constants';
 import type { FormState } from './interfaces';
 import css from './styles.scss';
@@ -27,8 +27,8 @@ export const FilterPanel = () => {
     }
 
     batch(() => {
-      change('dateFrom', period.from);
-      change('dateTo', period.to);
+      change('dateFrom', period.dateFrom);
+      change('dateTo', period.dateTo);
     });
     setIsLoading(false);
     void submit();

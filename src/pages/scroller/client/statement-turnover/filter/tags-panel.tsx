@@ -1,19 +1,23 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 import { TagsPanelView } from 'components';
+import { DATE_PERIODS } from 'interfaces/client';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-turnover/filter/constants';
 import type { FormState } from 'pages/scroller/client/statement-turnover/filter/interfaces';
 import { orderTags, getInitialFilterValues, filerTags } from 'pages/scroller/client/statement-turnover/filter/utils';
 import type { ITurnoverScrollerContext } from 'pages/scroller/client/statement-turnover/turnover-scroller-context';
 import { TurnoverScrollerContext } from 'pages/scroller/client/statement-turnover/turnover-scroller-context';
-import { useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
+import type { IOption } from '@platform/ui';
 import { Gap } from '@platform/ui';
 
 /** Панель тегов фильтра. */
 export const TagsPanel = () => {
   const { restart, initialize, submit } = useForm();
+
+  const { values } = useFormState<FormState>();
 
   const {
     tagsPanel: { onClick, tags, onRemoveTag, onRemoveAllTags },
@@ -41,10 +45,21 @@ export const TagsPanel = () => {
     [accounts]
   );
 
-  const organizationIds = useMemo(() => Object.keys(organizationNamesById), [organizationNamesById]);
+  const disableTags = (tagsToDisable: Array<IOption<string>>) =>
+    tagsToDisable.map(tag => {
+      const { value } = tag;
 
-  const tagValueFormatter = (name: string, values: FormState) => {
-    const value = values[name];
+      if ((value === FORM_FIELDS.DATE_TO || value === FORM_FIELDS.DATE_FROM) && values.datePeriod !== DATE_PERIODS.SELECT_PERIOD) {
+        tag.disabled = true;
+
+        return tag;
+      }
+
+      return { ...tag, disabled: false };
+    });
+
+  const tagValueFormatter = (name: string, formValues: FormState) => {
+    const value = formValues[name];
 
     switch (name) {
       case FORM_FIELDS.DATE_FROM:
@@ -59,30 +74,22 @@ export const TagsPanel = () => {
     }
   };
 
-  const filteredTags = orderTags(filerTags(tags));
+  const preparedTags = disableTags(orderTags(filerTags(tags)));
 
   const resetFilters = () => {
-    let initialValues = getInitialFilterValues();
-
-    // Если одна организация, то она не сбрасывается.
-    if (organizationIds.length === 1) {
-      initialValues = { ...initialValues, organizations: [organizationIds[0]] };
-    }
-
     onRemoveAllTags();
     restart();
-    initialize(initialValues);
+    initialize(getInitialFilterValues());
     void submit();
   };
 
   useEffect(() => {
-    // Устанавливает окончательное значение фильтров и тэгов.
-    // После того как с сервера будут получены счета.
-    resetFilters();
+    // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены счета.
+    void submit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [organizationIds]);
+  }, [accounts]);
 
-  if (filteredTags.length === 0) {
+  if (preparedTags.length === 0) {
     return null;
   }
 
@@ -91,7 +98,7 @@ export const TagsPanel = () => {
       <Gap.SM />
       <TagsPanelView
         tagValueFormatter={tagValueFormatter}
-        tags={filteredTags}
+        tags={preparedTags}
         onRemoveTag={onRemoveTag}
         onRemoveTags={resetFilters}
         onTagClick={onClick}

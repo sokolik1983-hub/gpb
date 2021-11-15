@@ -28,7 +28,7 @@ export interface IFilterPanel {
  * поэтому неудачные имена).
  */
 export interface ITagsPanel {
-  /** Теги. */
+  /** Теги. Значение value будет равен пути name в форме, для соответствующего значения. */
   tags: Array<IOption<string>>;
   /** Открывает дополнительные фильтры. */
   onClick(): void;

@@ -95,6 +95,14 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, selecte
     change(name, newValue);
   }, [selectedOrganizations, filtredOptions, change, name, getFieldState]);
 
+  useEffect(() => {
+    // Если значение для выбора всего одно, то при инициализации формы выбирается по умолчанию.
+    if (sortedOptions.length === 1) {
+      change(name, [sortedOptions[0].value]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortedOptions]);
+
   return <Fields.MultiSelect extraSmall withSearch name={name} options={filtredOptions} onChange={onChange} />;
 };
 
