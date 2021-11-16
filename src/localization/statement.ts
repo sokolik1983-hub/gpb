@@ -5,6 +5,37 @@ import { translate } from "@platform/tools/localization";
 export const t = (key: string, params?: any) => translate('statement', key, params);
 
 export default {
+	scroller: {
+		tags: {
+			labels: {
+				/**
+				 * @ru
+				 * Сбросить всё
+				 */
+				get resetAll() {
+					return t('scroller.tags.labels.resetAll');
+				},
+			},
+		},
+		navTabs: {
+			labels: {
+				/**
+				 * @ru
+				 * Обороты
+				 */
+				get turnover() {
+					return t('scroller.navTabs.labels.turnover');
+				},
+				/**
+				 * @ru
+				 * История запросов
+				 */
+				get history() {
+					return t('scroller.navTabs.labels.history');
+				},
+			},
+		},
+	},
 	client: {
 		scroller: {
 			/**
@@ -25,23 +56,178 @@ export default {
 			},
 		},
 	},
-	scroller: {
-		navTabs: {
+	turnoverScroller: {
+		filter: {
+			tags: {
+				/**
+				 * @ru
+				 * Дата от:
+				 */
+				get dateFrom() {
+					return t('turnoverScroller.filter.tags.dateFrom');
+				},
+				/**
+				 * @ru
+				 * Дата до:
+				 */
+				get dateTo() {
+					return t('turnoverScroller.filter.tags.dateTo');
+				},
+				/**
+				 * @ru
+				 * Счёт:
+				 */
+				get accounts() {
+					return t('turnoverScroller.filter.tags.accounts');
+				},
+				/**
+				 * @ru
+				 * Организация:
+				 */
+				get organizations() {
+					return t('turnoverScroller.filter.tags.organizations');
+				},
+			},
 			labels: {
 				/**
 				 * @ru
-				 * Обороты
+				 * Только активные счета
 				 */
-				get turnover() {
-					return t('scroller.navTabs.labels.turnover');
+				get onlyActiveAccounts() {
+					return t('turnoverScroller.filter.labels.onlyActiveAccounts');
+				},
+			},
+			grouping: {
+				/**
+				 * @ru
+				 * Без группировки
+				 */
+				get noGrouping() {
+					return t('turnoverScroller.filter.grouping.noGrouping');
 				},
 				/**
 				 * @ru
-				 * История запросов
+				 * По организациям и валютам
 				 */
-				get history() {
-					return t('scroller.navTabs.labels.history');
+				get organizationsAndCurrencies() {
+					return t('turnoverScroller.filter.grouping.organizationsAndCurrencies');
 				},
+				/**
+				 * @ru
+				 * По организациям
+				 */
+				get organizations() {
+					return t('turnoverScroller.filter.grouping.organizations');
+				},
+				/**
+				 * @ru
+				 * По валютам
+				 */
+				get currencies() {
+					return t('turnoverScroller.filter.grouping.currencies');
+				},
+				/**
+				 * @ru
+				 * По подразделениям
+				 */
+				get branches() {
+					return t('turnoverScroller.filter.grouping.branches');
+				},
+				/**
+				 * @ru
+				 * По типу счета
+				 */
+				get accountType() {
+					return t('turnoverScroller.filter.grouping.accountType');
+				},
+			},
+			datePeriods: {
+				/**
+				 * @ru
+				 * Выбрать период
+				 */
+				get selectPeriod() {
+					return t('turnoverScroller.filter.datePeriods.selectPeriod');
+				},
+				/**
+				 * @ru
+				 * Вчера
+				 */
+				get yesterday() {
+					return t('turnoverScroller.filter.datePeriods.yesterday');
+				},
+				/**
+				 * @ru
+				 * Сегодня
+				 */
+				get today() {
+					return t('turnoverScroller.filter.datePeriods.today');
+				},
+				/**
+				 * @ru
+				 * Последние 3 дня
+				 */
+				get last3Days() {
+					return t('turnoverScroller.filter.datePeriods.last3Days');
+				},
+				/**
+				 * @ru
+				 * Текущий месяц
+				 */
+				get curMonth() {
+					return t('turnoverScroller.filter.datePeriods.curMonth');
+				},
+				/**
+				 * @ru
+				 * Прошлый месяц
+				 */
+				get lastMonth() {
+					return t('turnoverScroller.filter.datePeriods.lastMonth');
+				},
+				/**
+				 * @ru
+				 * Предыдущий квартал
+				 */
+				get prevQuarter() {
+					return t('turnoverScroller.filter.datePeriods.prevQuarter');
+				},
+			},
+		},
+		groupInfo: {
+			/**
+			 * @ru
+			 * Организации
+			 */
+			get organizations() {
+				return t('turnoverScroller.groupInfo.organizations');
+			},
+			/**
+			 * @ru
+			 * Валюты
+			 */
+			get currencies() {
+				return t('turnoverScroller.groupInfo.currencies');
+			},
+			/**
+			 * @ru
+			 * Подразделения
+			 */
+			get branches() {
+				return t('turnoverScroller.groupInfo.branches');
+			},
+			/**
+			 * @ru
+			 * Типов счетов
+			 */
+			get accountType() {
+				return t('turnoverScroller.groupInfo.accountType');
+			},
+			/**
+			 * @ru
+			 * Cчетов
+			 */
+			get noGrouping() {
+				return t('turnoverScroller.groupInfo.noGrouping');
 			},
 		},
 	},
