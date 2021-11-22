@@ -46,7 +46,7 @@ export const TAGS_ORDER = [FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO, FORM_FIEL
 export const GROUPING_OPTIONS: Array<IOption<GROUPING_VALUES>> = [
   { value: GROUPING_VALUES.NO_GROUPING, label: locale.turnoverScroller.filter.grouping.noGrouping },
   { value: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES, label: locale.turnoverScroller.filter.grouping.organizationsAndCurrencies },
-  { value: GROUPING_VALUES.ORGANIZATION, label: locale.turnoverScroller.filter.grouping.organizations },
+  { value: GROUPING_VALUES.ORGANIZATIONS, label: locale.turnoverScroller.filter.grouping.organizations },
   { value: GROUPING_VALUES.CURRENCIES, label: locale.turnoverScroller.filter.grouping.currencies },
   { value: GROUPING_VALUES.BRANCHES, label: locale.turnoverScroller.filter.grouping.branches },
   { value: GROUPING_VALUES.ACCOUNT_TYPE, label: locale.turnoverScroller.filter.grouping.accountType },

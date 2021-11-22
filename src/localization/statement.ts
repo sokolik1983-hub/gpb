@@ -230,6 +230,103 @@ export default {
 				return t('turnoverScroller.groupInfo.noGrouping');
 			},
 		},
+		headers: {
+			/**
+			 * @ru
+			 * Организация
+			 */
+			get organization() {
+				return t('turnoverScroller.headers.organization');
+			},
+			/**
+			 * @ru
+			 * Номер счета
+			 */
+			get accountNumber() {
+				return t('turnoverScroller.headers.accountNumber');
+			},
+			/**
+			 * @ru
+			 * Входящий остаток
+			 */
+			get incomingBalance() {
+				return t('turnoverScroller.headers.incomingBalance');
+			},
+			/**
+			 * @ru
+			 * Расход
+			 */
+			get outcome() {
+				return t('turnoverScroller.headers.outcome');
+			},
+			/**
+			 * @ru
+			 * Приход
+			 */
+			get income() {
+				return t('turnoverScroller.headers.income');
+			},
+			/**
+			 * @ru
+			 * Исходящий остаток
+			 */
+			get outgoingBalance() {
+				return t('turnoverScroller.headers.outgoingBalance');
+			},
+		},
+		buttons: {
+			/**
+			 * @ru
+			 * * "rowsAmount === 4" - Все {rowsAmount} счета
+			 * * "true" - Все {rowsAmount} счетов
+			 */
+			expandRows: (p: { rowsAmount: number }) => t('turnoverScroller.buttons.expandRows', p),
+			/**
+			 * @ru
+			 * Скрыть счета
+			 */
+			get collapseRows() {
+				return t('turnoverScroller.buttons.collapseRows');
+			},
+			/**
+			 * @ru
+			 * Скрыть валюты
+			 */
+			get hideTotals() {
+				return t('turnoverScroller.buttons.hideTotals');
+			},
+			/**
+			 * @ru
+			 * Все валюты
+			 */
+			get showTotals() {
+				return t('turnoverScroller.buttons.showTotals');
+			},
+		},
+		/**
+		 * @ru
+		 * Счета не найдены
+		 */
+		get tablePlaceholder() {
+			return t('turnoverScroller.tablePlaceholder');
+		},
+	},
+	moneyString: {
+		/**
+		 * @ru
+		 * {amount, money} {currencyCode}
+		 */
+		unsigned: (p: { amount: string; currencyCode: string }) => t('moneyString.unsigned', p),
+		/**
+		 * @ru
+		 * -{amount, money} {currencyCode}
+		 */
+		negative: (p: { amount: string; currencyCode: string }) => t('moneyString.negative', p),
+		/**
+		 * @ru
+		 * +{amount, money} {currencyCode}
+		 */
+		positive: (p: { amount: string; currencyCode: string }) => t('moneyString.positive', p),
 	},
 	admin: {
 		form: {
@@ -259,6 +356,38 @@ export default {
 			 */
 			get createStatement() {
 				return t('action.labels.createStatement');
+			},
+		},
+	},
+	accountType: {
+		labels: {
+			/**
+			 * @ru
+			 * Расчётный
+			 */
+			get checking() {
+				return t('accountType.labels.checking');
+			},
+			/**
+			 * @ru
+			 * Счёт исполнителя ГК
+			 */
+			get goz() {
+				return t('accountType.labels.goz');
+			},
+			/**
+			 * @ru
+			 * Счёт головного исполнителя ГК
+			 */
+			get mainGoz() {
+				return t('accountType.labels.mainGoz');
+			},
+			/**
+			 * @ru
+			 * Счёт участника закупок
+			 */
+			get participant() {
+				return t('accountType.labels.participant');
 			},
 		},
 	},

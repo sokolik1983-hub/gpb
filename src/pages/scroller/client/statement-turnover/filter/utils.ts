@@ -12,7 +12,7 @@ import type { FormState } from './interfaces';
  */
 export const getGroupingInfoLabel = (grouping: GROUPING_VALUES): string => {
   switch (grouping) {
-    case GROUPING_VALUES.ORGANIZATION:
+    case GROUPING_VALUES.ORGANIZATIONS:
     case GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES:
       return locale.turnoverScroller.groupInfo.organizations;
     case GROUPING_VALUES.CURRENCIES:

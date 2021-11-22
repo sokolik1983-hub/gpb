@@ -1,4 +1,11 @@
-import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
+import type {
+  IGetDatePeriodResponseDto,
+  IGetDatePeriodRequestDto,
+  IGetTurnoversResponseDto,
+  IGetTurnoversRequestDto,
+} from 'interfaces/client';
+import { getMockedDataByGrouping } from 'mocks';
+import { totals } from 'mocks/turnover/totals';
 import type { IServerDataResp } from '@platform/services/client';
 import { request } from '@platform/services/client';
 
@@ -17,4 +24,15 @@ export const statementService = {
       data: { data },
       url: `${STATEMENT_BASE_URL}/calculate-period`,
     }).then(result => result.data.data),
+  /** Возвращает обороты по счетам. */
+  // TODO: Заглкшка удалить при подключении рестов.
+  getTurnovers: (data: IGetTurnoversRequestDto): Promise<IGetTurnoversResponseDto> =>
+    new Promise<IGetTurnoversResponseDto>(resolve => {
+      setTimeout(() => {
+        resolve({
+          accounts: getMockedDataByGrouping(data.grouping),
+          totals,
+        });
+      }, 500);
+    }),
 };

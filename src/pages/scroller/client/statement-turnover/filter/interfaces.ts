@@ -1,9 +1,19 @@
-import type { DATE_PERIODS, IGetTurnoversRequestDto } from 'interfaces/client';
+import type { DATE_PERIODS, GROUPING_VALUES } from 'interfaces/client';
 
 /** Стейт формы фильтрации. */
-export type FormState = Omit<IGetTurnoversRequestDto, 'multiSort'> & {
+export interface FormState {
+  /** Начало периода.  */
+  dateFrom?: string;
+  /** Конец периода. */
+  dateTo?: string;
+  /** Выбранные счета клиента. */
+  accounts: string[];
+  /** Группировка записей. */
+  grouping: GROUPING_VALUES;
+  /** Только активные счета. */
+  onlyActiveAccounts: boolean;
   /** Временной период. */
   datePeriod: DATE_PERIODS;
   /** Выбранные организации. */
   organizations: string[];
-};
+}

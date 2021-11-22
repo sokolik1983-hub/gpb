@@ -80,6 +80,58 @@
   "turnoverScroller.groupInfo.noGrouping": {
     "ru": "Cчетов"
   },
+  "turnoverScroller.headers.organization": {
+    "ru": "Организация"
+  },
+  "turnoverScroller.headers.accountNumber": {
+    "ru": "Номер счета"
+  },
+  "turnoverScroller.headers.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "turnoverScroller.headers.outcome": {
+    "ru": "Расход"
+  },
+  "turnoverScroller.headers.income": {
+    "ru": "Приход"
+  },
+  "turnoverScroller.headers.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "turnoverScroller.buttons.expandRows": {
+    "@rowsAmount": "number",
+    "ru": {
+      "rowsAmount === 4": "Все {rowsAmount} счета",
+      "true": "Все {rowsAmount} счетов"
+    }
+  },
+  "turnoverScroller.buttons.collapseRows": {
+    "ru": "Скрыть счета"
+  },
+  "turnoverScroller.buttons.hideTotals": {
+    "ru": "Скрыть валюты"
+  },
+  "turnoverScroller.buttons.showTotals": {
+    "ru": "Все валюты"
+  },
+  "turnoverScroller.tablePlaceholder": {
+    "ru": "Счета не найдены"
+  },
+  "moneyString.unsigned": {
+    "@amount": "string",
+    "@currencyCode": "string",
+    "ru": "{amount, money} {currencyCode}"
+  },
+  "moneyString.negative": {
+    "@amount": "string",
+    "@currencyCode": "string",
+    "ru": "-{amount, money} {currencyCode}"
+  },
+  "moneyString.positive": {
+    "@amount": "string",
+    "@currencyCode": "string",
+    "ru": "+{amount, money} {currencyCode}"
+  },
   "client.form.title": {
     "ru": "Клиентская форма"
   },
@@ -91,5 +143,17 @@
   },
   "action.labels.createStatement": {
     "ru": "Запросить выписку"
+  },
+  "accountType.labels.checking": {
+    "ru": "Расчётный"
+  },
+  "accountType.labels.goz": {
+    "ru": "Счёт исполнителя ГК"
+  },
+  "accountType.labels.mainGoz": {
+    "ru": "Счёт головного исполнителя ГК"
+  },
+  "accountType.labels.participant": {
+    "ru": "Счёт участника закупок"
   }
 }

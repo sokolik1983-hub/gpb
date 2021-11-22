@@ -1,12 +1,15 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import { ScrollerHeader } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
+import type { Sorting, IFilterPanel } from 'interfaces';
 import { FatalErrorContent, MainLayout, ScrollerPageLayout, useFilter } from '@platform/services/client';
-import { Typography } from '@platform/ui';
 import { fields, tagLabels, Filter } from './filter';
+import type { FormState } from './filter/interfaces';
+import { useTurnovers } from './hooks';
+import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
-import { TurnoverScrollerContext } from './turnover-scroller-context';
+import { TurnoverScrollerContext, DEFAULT_SORTING } from './turnover-scroller-context';
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -19,9 +22,14 @@ export const StatementTurnoverScrollerPage = () => {
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
   // endregion
 
   const { filterPanel, tagsPanel } = useFilter({ fields, labels: tagLabels });
+
+  // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
+  // у которого не определена "index signatures".
+  const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<FormState>;
 
   const headerProps = useTurnoverScrollerHeaderProps([
     /* TODO: При реализации действия передавать выбранные в фильтре счета. */
@@ -30,33 +38,35 @@ export const StatementTurnoverScrollerPage = () => {
   // Вызывается один раз.
   const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
 
-  // TODO: Хук для отладки UI. При реализации таблицы скроллера убрать.
-  useEffect(() => {
-    setIsLoading(true);
-    void new Promise(resolve => {
-      setTimeout(() => {
-        setIsLoading(false);
-        resolve('');
-      }, 500);
-    });
-  }, [filterPanel.values]);
+  const { turnovers, isTurnoversError, isTurnoversFetching } = useTurnovers(properlyTypedFilterPanel.values, sorting);
 
   const contextValue: ITurnoverScrollerContext = useMemo(
     () => ({
-      hasError,
+      hasError: hasError || isTurnoversError || isAccountsError,
       setHasError,
-      isLoading,
+      isLoading: isLoading || isTurnoversFetching || isAccountsFetching,
       setIsLoading,
-      filterPanel,
+      filterPanel: properlyTypedFilterPanel,
       accounts,
       tagsPanel,
+      sorting,
+      setSorting,
+      turnovers,
     }),
-    [accounts, filterPanel, hasError, isLoading, tagsPanel]
+    [
+      properlyTypedFilterPanel,
+      accounts,
+      hasError,
+      isAccountsError,
+      isAccountsFetching,
+      isLoading,
+      isTurnoversError,
+      isTurnoversFetching,
+      sorting,
+      tagsPanel,
+      turnovers,
+    ]
   );
-
-  if (isAccountsFetching) {
-    return null;
-  }
 
   if (hasError || isAccountsError) {
     return (
@@ -77,8 +87,7 @@ export const StatementTurnoverScrollerPage = () => {
           pageTitle=""
         >
           <Filter />
-          {/* TODO: Тестовый лоадер для отладки UI. Переделается когда будет подключатся таблица. */}
-          {isLoading && <Typography.H3>LOADING...</Typography.H3>}
+          <TurnoversTable />
         </ScrollerPageLayout>
       </MainLayout>
     </TurnoverScrollerContext.Provider>
