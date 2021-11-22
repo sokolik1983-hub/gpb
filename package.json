@@ -46,6 +46,6 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "8.87.0"
+    "@platform/services": "8.88.0"
   }
 }
