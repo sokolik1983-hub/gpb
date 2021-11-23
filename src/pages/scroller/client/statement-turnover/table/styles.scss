@@ -99,3 +99,11 @@
   flex: 1 1 0;
   padding: 0 24px;
 }
+
+.placeholderOverlay {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

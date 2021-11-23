@@ -1,16 +1,14 @@
 import type { FC } from 'react';
 import React from 'react';
 import { Spinner } from 'components/spinner';
-import { Gap, Adjust } from '@platform/ui';
+import { Box } from '@platform/ui';
+import css from './styles.scss';
 
 /** Лоадер скроллера, отображается вместо содержимого таблицы, во время выполнения запроса. */
 export const ScrollerSpinnerPlaceholder: FC = () => (
-  <Adjust hor="CENTER">
-    <Gap.X3L />
-    <Gap.X3L />
-    <Gap.X2L />
+  <Box className={css.overlay}>
     <Spinner />
-  </Adjust>
+  </Box>
 );
 
 ScrollerSpinnerPlaceholder.displayName = 'ScrollerSpinner';

@@ -16,6 +16,7 @@ declare namespace StylesScssModule {
     'headerRowWrapper': string;
     'headerText': string;
     'layoutScrollWrapper': string;
+    'placeholderOverlay': string;
     'scrollIconBox': string;
     'sortIconWrapper': string;
     'table': string;

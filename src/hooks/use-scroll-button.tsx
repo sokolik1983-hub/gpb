@@ -13,6 +13,7 @@ export enum SCROLL_DIRECTIONS {
 /** Смещение при котором кнопка становится прокрутки видна. */
 const OFFSET_WHEN_BUTTON_VISIBLE = 40;
 
+// TODO: Такая же логика используется в РРКО, возможно стоит вынести в платформу.
 /** Возвращает данные для кнопки прокрутки. */
 export const useScrollButton = () => {
   const [isScrollButtonVisible, setIsScrollButtonVisible] = useState(false);
