@@ -43,7 +43,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   sorting: DEFAULT_SORTING,
   setSorting: noop,
   turnovers: {
-    totals: [],
+    total: [],
     accounts: [],
   },
   tagsPanel: {
@@ -56,7 +56,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
     values: {
       accounts: [],
       onlyActiveAccounts: true,
-      grouping: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
+      groupBy: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
       datePeriod: DATE_PERIODS.YESTERDAY,
       dateTo: '',
       dateFrom: '',

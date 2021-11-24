@@ -9,7 +9,7 @@ export interface FormState {
   /** Выбранные счета клиента. */
   accounts: string[];
   /** Группировка записей. */
-  grouping: GROUPING_VALUES;
+  groupBy: GROUPING_VALUES;
   /** Только активные счета. */
   onlyActiveAccounts: boolean;
   /** Временной период. */

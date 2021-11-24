@@ -19,7 +19,7 @@ export const FORM_FIELDS = {
   /** Выбранные счета клиента. */
   ACCOUNTS: getPath('accounts'),
   /** Группировка записей. */
-  GROUP_BY: getPath('grouping'),
+  GROUP_BY: getPath('groupBy'),
   /** Только активные счета. */
   ONLY_ACTIVE_ACCOUNTS: getPath('onlyActiveAccounts'),
   /** Выбранные организации. */

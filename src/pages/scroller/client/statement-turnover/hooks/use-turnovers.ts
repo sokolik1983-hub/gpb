@@ -7,7 +7,7 @@ import { statementService } from 'services';
 import { SORT_DIRECTION } from '@platform/core';
 
 const DEFAULT_TURNOVERS: IGetTurnoversResponseDto = {
-  totals: [],
+  total: [],
   accounts: [],
 };
 
@@ -18,7 +18,7 @@ const DEFAULT_TURNOVERS: IGetTurnoversResponseDto = {
  */
 const convertTableSortingToDto = (sorting: Sorting): IGetTurnoversRequestDto['sort'] => ({
   field: sorting[0].id,
-  direction: sorting[0].desc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC,
+  direction: (sorting[0].desc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC).toUpperCase(),
 });
 
 /**
@@ -28,11 +28,11 @@ const convertTableSortingToDto = (sorting: Sorting): IGetTurnoversRequestDto['so
  * @param sorting - Значение сортировки.
  */
 export const useTurnovers = (filterValues: FormState, sorting: Sorting) => {
-  const { accounts, onlyActiveAccounts, dateTo, dateFrom, grouping } = filterValues;
+  const { accounts, onlyActiveAccounts, dateTo, dateFrom, groupBy } = filterValues;
 
   const requestDto: IGetTurnoversRequestDto = useMemo(
     () => ({
-      grouping,
+      groupBy,
       filter: {
         onlyActiveAccounts,
         dateTo,
@@ -41,13 +41,14 @@ export const useTurnovers = (filterValues: FormState, sorting: Sorting) => {
       },
       sort: convertTableSortingToDto(sorting),
     }),
-    [accounts, onlyActiveAccounts, dateTo, dateFrom, grouping, sorting]
+    [accounts, onlyActiveAccounts, dateTo, dateFrom, groupBy, sorting]
   );
 
   const { data = DEFAULT_TURNOVERS, isFetching: isTurnoversFetching, isError: isTurnoversError } = useQuery<IGetTurnoversResponseDto>({
     queryKey: ['@eco/statement', 'turnovers', requestDto],
     queryFn: () => statementService.getTurnovers(requestDto),
     enabled: Boolean(requestDto.filter.accountsIds?.length),
+    retry: false,
   });
 
   return { turnovers: data, isTurnoversFetching, isTurnoversError };

@@ -9,15 +9,15 @@ import css from './styles.scss';
 /** Суммарные остатки и обороты по валютам. */
 export const Totals: FC = () => {
   const {
-    turnovers: { totals },
+    turnovers: { total },
     isLoading,
   } = useContext(TurnoverScrollerContext);
 
   const [isAllTotalVisible, toggleIsAllTotalVisible] = useToggle(false);
 
-  const visibleTotals = isAllTotalVisible ? totals : totals.slice(0, 2);
+  const visibleTotals = isAllTotalVisible ? total : total.slice(0, 2);
 
-  if (!isLoading && totals.length === 0) {
+  if (!isLoading && total.length === 0) {
     return null;
   }
 
@@ -78,7 +78,7 @@ export const Totals: FC = () => {
       ))}
 
       {/* Кнопка управления видимостью строк. */}
-      {totals.length > 2 && (
+      {total.length > 2 && (
         <>
           <Gap.XS />
           <Box className={css.totalsRow}>

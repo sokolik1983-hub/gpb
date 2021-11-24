@@ -1,5 +1,6 @@
 import { GROUPING_VALUES, DATE_PERIODS } from 'interfaces/client';
 import { locale } from 'localization';
+import { DATE_ISO_FORMAT } from 'stream-constants';
 import { getYesterday } from 'utils';
 import type { IOption } from '@platform/ui';
 import { TAGS_ORDER } from './constants';
@@ -59,10 +60,10 @@ export const orderTags = (tags: Array<IOption<string>>): Array<IOption<string>> 
 
 /** Возвращает начальный стейт формы. */
 export const getInitialFilterValues = (): FormState => {
-  const yesterday = getYesterday().format();
+  const yesterday = getYesterday().format(DATE_ISO_FORMAT);
 
   return {
-    grouping: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
+    groupBy: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
     onlyActiveAccounts: true,
     datePeriod: DATE_PERIODS.YESTERDAY,
     dateTo: yesterday,

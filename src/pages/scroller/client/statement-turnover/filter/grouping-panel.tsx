@@ -41,16 +41,16 @@ export const GroupingPanel = () => {
   } = useContext(TurnoverScrollerContext);
 
   const {
-    values: { grouping },
+    values: { groupBy },
   } = useFormState<FormState>();
 
-  const groupingReport = useMemo(() => (isLoading ? '' : computeGroupingReport(accounts, grouping)), [accounts, grouping, isLoading]);
+  const groupingReport = useMemo(() => (isLoading ? '' : computeGroupingReport(accounts, groupBy)), [accounts, groupBy, isLoading]);
 
   return (
     <Box className={css.groupingPanelWrapper}>
       <Box className={cn(css.important, css.groupingLeftColumn)}>
         {/* Результаты группировки. */}
-        <Typography.TextBold>{getGroupingInfoLabel(grouping)}</Typography.TextBold>
+        <Typography.TextBold>{getGroupingInfoLabel(groupBy)}</Typography.TextBold>
         <Gap.SM />
         <Typography.Text>{groupingReport}</Typography.Text>
       </Box>

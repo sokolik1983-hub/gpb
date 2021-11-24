@@ -55,7 +55,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
     filterPanel: { values: filterFormValue },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const { grouping } = filterFormValue;
+  const { groupBy } = filterFormValue;
 
   const { handleScrollButtonClick, ScrollIcon, handleScroll, isScrollButtonVisible, setScrolledElementRef } = useScrollButton();
 
@@ -68,12 +68,12 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
 
             const { key: groupingRowKey } = groupingRow.getRowProps();
 
-            const { isExpandButtonVisible, visibleRows } = getVisibleRows(groupingRow, grouping);
+            const { isExpandButtonVisible, visibleRows } = getVisibleRows(groupingRow, groupBy);
 
             return (
               <>
                 {/* Группирующая строка. */}
-                {grouping !== GROUPING_VALUES.NO_GROUPING && <GroupingRow key={groupingRowKey} groupingRow={groupingRow} />}
+                {groupBy !== GROUPING_VALUES.NO_GROUPING && <GroupingRow key={groupingRowKey} groupingRow={groupingRow} />}
 
                 {/* Строки с информаций по счетам. */}
                 {visibleRows?.map(accountInfoRow => {

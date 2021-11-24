@@ -43,16 +43,16 @@ export const TurnoversTable: FC = () => {
     turnovers: { accounts = [] },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const { grouping } = filterFormValue;
+  const { groupBy } = filterFormValue;
 
-  const columns = useMemo(() => getColumns(grouping), [grouping]);
+  const columns = useMemo(() => getColumns(groupBy), [groupBy]);
 
   const initialState = useMemo(
     () => ({
       sortBy: sorting,
-      hiddenColumns: getHiddenColumns(grouping),
+      hiddenColumns: getHiddenColumns(groupBy),
     }),
-    [sorting, grouping]
+    [sorting, groupBy]
   );
 
   const {

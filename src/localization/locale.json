@@ -118,17 +118,17 @@
     "ru": "Счета не найдены"
   },
   "moneyString.unsigned": {
-    "@amount": "string",
+    "@amount": "number",
     "@currencyCode": "string",
     "ru": "{amount, money} {currencyCode}"
   },
   "moneyString.negative": {
-    "@amount": "string",
+    "@amount": "number",
     "@currencyCode": "string",
     "ru": "-{amount, money} {currencyCode}"
   },
   "moneyString.positive": {
-    "@amount": "string",
+    "@amount": "number",
     "@currencyCode": "string",
     "ru": "+{amount, money} {currencyCode}"
   },

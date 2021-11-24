@@ -316,17 +316,17 @@ export default {
 		 * @ru
 		 * {amount, money} {currencyCode}
 		 */
-		unsigned: (p: { amount: string; currencyCode: string }) => t('moneyString.unsigned', p),
+		unsigned: (p: { amount: number; currencyCode: string }) => t('moneyString.unsigned', p),
 		/**
 		 * @ru
 		 * -{amount, money} {currencyCode}
 		 */
-		negative: (p: { amount: string; currencyCode: string }) => t('moneyString.negative', p),
+		negative: (p: { amount: number; currencyCode: string }) => t('moneyString.negative', p),
 		/**
 		 * @ru
 		 * +{amount, money} {currencyCode}
 		 */
-		positive: (p: { amount: string; currencyCode: string }) => t('moneyString.positive', p),
+		positive: (p: { amount: number; currencyCode: string }) => t('moneyString.positive', p),
 	},
 	admin: {
 		form: {

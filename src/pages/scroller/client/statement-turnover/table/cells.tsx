@@ -4,7 +4,6 @@ import type { IGroupedAccounts, IGroupInfo, IAccountTurnoversInfo } from 'interf
 import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
-import { ACCOUNT_TYPE_LABELS } from 'stream-constants';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
@@ -42,14 +41,14 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
     filterPanel: { values: filterFormValue },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const { grouping } = filterFormValue;
+  const { groupBy } = filterFormValue;
 
   // Если ячейка была вызвана для отрисовки группирующей строки.
   if (isGroupingRow(value)) {
     const { groupingType, currencyData: { currencyName, currencyCode } = {} } = value;
 
     // А группирующая строка "По валютам" рендерится с помощью ячейки таблицы.
-    if (groupingType === GROUPING_TYPE.CURRENCIES && grouping === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
+    if (groupingType === GROUPING_TYPE.CURRENCIES && groupBy === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
       return <Typography.TextBold fill={'FAINT'}>{currencyName ?? currencyCode}</Typography.TextBold>;
     }
 
@@ -61,7 +60,7 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
   const { accountNumber, accountType, accountName } = value;
 
   const accountDescriptionSuffix = accountName ? `• ${accountName}` : '';
-  const accountDescription = `${ACCOUNT_TYPE_LABELS[accountType]} ${accountDescriptionSuffix}`;
+  const accountDescription = `${accountType} ${accountDescriptionSuffix}`;
 
   return (
     <>
@@ -77,9 +76,10 @@ AccountNumberCell.displayName = 'AccountNumberCell';
 
 /** Ячейка "Входящий баланс". */
 export const IncomingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
-  const { incomingBalance = '', currencyData: { currencyCode = '' } = {} } = value;
+  const { incomingBalance, currencyData: { currencyCode } = {} } = value;
 
-  const amount = locale.moneyString.unsigned({ amount: incomingBalance, currencyCode });
+  // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
+  const amount = locale.moneyString.unsigned({ amount: incomingBalance!, currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -102,9 +102,10 @@ IncomingBalanceCell.displayName = 'IncomingBalanceCell';
 
 /** Ячейка "Расход". */
 export const OutcomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
-  const { outcome = '', currencyData: { currencyCode = '' } = {} } = value;
+  const { outcome, currencyData: { currencyCode } = {} } = value;
 
-  const amount = locale.moneyString.negative({ amount: outcome, currencyCode });
+  // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
+  const amount = locale.moneyString.negative({ amount: outcome!, currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -131,9 +132,10 @@ OutcomeCell.displayName = 'OutcomeCell';
 
 /** Ячейка "Приход". */
 export const IncomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
-  const { income = '', currencyData: { currencyCode = '' } = {} } = value;
+  const { income, currencyData: { currencyCode } = {} } = value;
 
-  const amount = locale.moneyString.positive({ amount: income, currencyCode });
+  // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
+  const amount = locale.moneyString.positive({ amount: income!, currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -160,9 +162,10 @@ IncomeCell.displayName = 'IncomeCell';
 
 /** Ячейка "Исходящий остаток". */
 export const OutgoingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
-  const { outgoingBalance = '', currencyData: { currencyCode = '' } = {} } = value;
+  const { outgoingBalance, currencyData: { currencyCode } = {} } = value;
 
-  const amount = locale.moneyString.unsigned({ amount: outgoingBalance, currencyCode });
+  // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
+  const amount = locale.moneyString.unsigned({ amount: outgoingBalance!, currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {

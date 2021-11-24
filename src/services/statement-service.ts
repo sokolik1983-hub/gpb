@@ -4,12 +4,11 @@ import type {
   IGetTurnoversResponseDto,
   IGetTurnoversRequestDto,
 } from 'interfaces/client';
-import { getMockedDataByGrouping } from 'mocks';
-import { totals } from 'mocks/turnover/totals';
+import { request } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/client';
-import { request } from '@platform/services/client';
 
-const STATEMENT_BASE_URL = '/api/statement-client';
+const BASE_URL = '/api/statement-client';
+const STATEMENT_URL = `${BASE_URL}/statement`;
 
 /**
  * Сервис выписок клиента.
@@ -22,17 +21,13 @@ export const statementService = {
     request<IServerDataResp<IGetDatePeriodResponseDto>>({
       method: 'POST',
       data: { data },
-      url: `${STATEMENT_BASE_URL}/calculate-period`,
+      url: `${STATEMENT_URL}/support/calculate-period`,
     }).then(result => result.data.data),
   /** Возвращает обороты по счетам. */
-  // TODO: Заглкшка удалить при подключении рестов.
   getTurnovers: (data: IGetTurnoversRequestDto): Promise<IGetTurnoversResponseDto> =>
-    new Promise<IGetTurnoversResponseDto>(resolve => {
-      setTimeout(() => {
-        resolve({
-          accounts: getMockedDataByGrouping(data.grouping),
-          totals,
-        });
-      }, 500);
-    }),
+    request<IServerDataResp<IGetTurnoversResponseDto>>({
+      method: 'POST',
+      data: { data },
+      url: `${STATEMENT_URL}/get-turnovers`,
+    }).then(result => result.data.data),
 };

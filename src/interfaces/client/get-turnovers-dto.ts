@@ -1,6 +1,3 @@
-import type { SORT_DIRECTION } from '@platform/services';
-import type { ACCOUNT_TYPE as ACCOUNT_TYPES } from '@platform/services/client';
-
 /** Значения для группировки записей в скроллере. Выбираются в селекте фильтра. */
 export enum GROUPING_VALUES {
   /** Без группировки. */
@@ -45,13 +42,13 @@ export interface IGetTurnoversRequestDto {
     onlyActiveAccounts: boolean;
   };
   /** Группировка записей. */
-  grouping: GROUPING_VALUES;
+  groupBy: GROUPING_VALUES;
   /** Параметры сортировки. */
   sort: {
     /** Имя поля по которому происходит сортировка. */
     field: string;
     /** Порядок сортировки. */
-    direction: SORT_DIRECTION;
+    direction: string;
   };
 }
 
@@ -60,19 +57,19 @@ export interface ICurrencyTotalInfo {
   /** Буквенный код валюты. */
   currencyCode: string;
   /** Входящий остаток. */
-  incomingBalance: string;
+  incomingBalance: number;
   /** Расход. */
-  outcome: string;
+  outcome: number;
   /** Приход. */
-  income: string;
+  income: number;
   /** Исходящий остаток. */
-  outgoingBalance: string;
+  outgoingBalance: number;
 }
 
 /** Информация о группировке. В талице скроллера отображается как группирующая строка. */
 export interface IGroupInfo {
   /** Тип счёта. */
-  accountType?: ACCOUNT_TYPES;
+  accountType?: string;
   /** Наименование филиала организации. */
   branchName?: string;
   /** Данные о валюте. */
@@ -85,15 +82,15 @@ export interface IGroupInfo {
   /** Тип группировки (тип группирующей строки в таблице скроллера). */
   groupingType: GROUPING_TYPE;
   /** Приход. */
-  income?: string;
+  income?: number;
   /** Входящий остаток. */
-  incomingBalance?: string;
+  incomingBalance?: number;
   /** Наименование организации. */
   organizationName?: string;
   /** Расход. */
-  outcome?: string;
+  outcome?: number;
   /** Исходящий остаток. */
-  outgoingBalance?: string;
+  outgoingBalance?: number;
 }
 
 /** Информация об оборотах по счёту. В таблице скролера отображается как строка с данными (subRow). */
@@ -105,7 +102,7 @@ export interface IAccountTurnoversInfo {
   /** Имя счёта. */
   accountName: string;
   /** Тип аккаунта. */
-  accountType: ACCOUNT_TYPES;
+  accountType: string;
   /** Наименование подразделения организации. */
   branchName: string;
   /** Данные о валюте. */
@@ -116,15 +113,15 @@ export interface IAccountTurnoversInfo {
     currencyCode?: string;
   };
   /** Приход. */
-  income: string;
+  income: number;
   /** Входящий остаток. */
-  incomingBalance: string;
+  incomingBalance: number;
   /** Наименование организации. */
   organizationName: string;
   /** Расход. */
-  outcome: string;
+  outcome: number;
   /** Исходящий остаток. */
-  outgoingBalance: string;
+  outgoingBalance: number;
 }
 
 /**
@@ -145,7 +142,7 @@ export interface IGroupedAccounts {
 /** ДТО ответа на запрос оборотов. */
 export interface IGetTurnoversResponseDto {
   /** Суммарные остатки и обороты по валютам. */
-  totals: ICurrencyTotalInfo[];
+  total: ICurrencyTotalInfo[];
   /** Блоки сгруппированных счетов. */
   accounts: IGroupedAccounts[];
 }

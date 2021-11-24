@@ -3,7 +3,6 @@ import React from 'react';
 import type { IGroupedAccounts, IGroupInfo } from 'interfaces/client';
 import { GROUPING_TYPE } from 'interfaces/client';
 import type { Row } from 'react-table';
-import { ACCOUNT_TYPE_LABELS } from 'stream-constants';
 import { Box, Typography } from '@platform/ui';
 import css from './styles.scss';
 
@@ -21,7 +20,7 @@ export const getGroupingTitle = (groupInfo: IGroupInfo): string => {
     case GROUPING_TYPE.BRANCHES:
       return branchName;
     case GROUPING_TYPE.ACCOUNT_TYPE:
-      return ACCOUNT_TYPE_LABELS[accountType];
+      return accountType;
     default:
       return '';
   }

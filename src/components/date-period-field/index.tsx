@@ -5,6 +5,7 @@ import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interf
 import { DATE_PERIODS } from 'interfaces/client';
 import { locale } from 'localization';
 import { statementService } from 'services/statement-service';
+import { DATE_ISO_FORMAT } from 'stream-constants';
 import { noop, getYesterday } from 'utils';
 import { to } from '@platform/core';
 import { dateTime } from '@platform/tools/date-time';
@@ -57,13 +58,13 @@ export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetchi
 
         return;
       case DATE_PERIODS.TODAY:
-        date = dateTime().format();
+        date = dateTime().format(DATE_ISO_FORMAT);
 
         onSuccessFetching({ dateTo: date, dateFrom: date });
 
         return;
       case DATE_PERIODS.YESTERDAY:
-        date = getYesterday().format();
+        date = getYesterday().format(DATE_ISO_FORMAT);
 
         onSuccessFetching({ dateTo: date, dateFrom: date });
 
