@@ -38,7 +38,8 @@ const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick, disabled
 Tag.displayName = 'Tag';
 
 /** Свойства компонента TagsPanelView. */
-interface ITagsPanelViewProps {
+// eslint-disable-next-line @typescript-eslint/ban-types
+interface ITagsPanelViewProps<T extends object = Record<string, unknown>> {
   /** Теги. */
   tags: IOption[];
   /** Обработчик удаления тегов. */
@@ -56,11 +57,18 @@ interface ITagsPanelViewProps {
    * @param key - Имя поля в стейте формы.
    * @param values - Стейт формы.
    */
-  tagValueFormatter(key: string, values: Record<string, unknown>): unknown;
+  tagValueFormatter(key: string, values: T): unknown;
 }
 
 /** Панель тегов фильтра. */
-export const TagsPanelView: React.FC<ITagsPanelViewProps> = ({ tags, onRemoveTags, onRemoveTag, onTagClick, tagValueFormatter }) => {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export const TagsPanelView = <T extends object = Record<string, unknown>>({
+  tags,
+  onRemoveTags,
+  onRemoveTag,
+  onTagClick,
+  tagValueFormatter,
+}: ITagsPanelViewProps<T>) => {
   const { getState, reset, change } = useForm();
 
   const { values } = getState();

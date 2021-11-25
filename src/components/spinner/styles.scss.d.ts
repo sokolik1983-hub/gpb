@@ -5,16 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'dateDelimiter': string;
-    'filterWrapper': string;
-    'groupingLeftColumn': string;
-    'groupingPanelWrapper': string;
-    'groupingRightColumn': string;
-    'important': string;
-    'totalSpinnerWrapper': string;
-    'totalsCell': string;
-    'totalsRow': string;
-    'totalsWrapper': string;
+    'rotating': string;
+    'spinner': string;
   }
 }
 

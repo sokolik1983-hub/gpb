@@ -3,6 +3,7 @@ import React, { useMemo, useEffect } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useForm } from 'react-final-form';
+import { noop } from 'utils';
 import { byLabel } from '@platform/services';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { IOption } from '@platform/ui';
@@ -17,11 +18,11 @@ export interface IAccountsFieldProps {
   /** Выбранные организации, по которым надо отфильтровать счета. */
   selectedOrganizations: string[];
   /** Обработчик изменения значения поля. */
-  onChange: ChangeFieldHandler<string[]>;
+  onChange?: ChangeFieldHandler<string[]>;
 }
 
 /** Селект выбора счетов. */
-export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, selectedOrganizations, onChange }) => {
+export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, selectedOrganizations, onChange = noop }) => {
   const { change, getFieldState } = useForm();
 
   // Вспомогательные структуры. Вычисляются один раз.
@@ -92,7 +93,10 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, selecte
       filtredOptions.some(({ value: accountFromOption }) => accountFromOption === selectedAccount)
     );
 
-    change(name, newValue);
+    // Если значение не изменилось то ссылка не меняется.
+    if (newValue.length !== value.length) {
+      change(name, newValue);
+    }
   }, [selectedOrganizations, filtredOptions, change, name, getFieldState]);
 
   useEffect(() => {

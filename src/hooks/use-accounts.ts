@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useQuery } from 'react-query';
 import { accountService } from 'services';
-import { hideLoader, showLoader } from '@platform/services';
 
 const DEFAULT_ACCOUNTS = [];
 
@@ -11,15 +9,8 @@ export const useAccounts = () => {
   const { data: accounts = DEFAULT_ACCOUNTS, isFetching, isError: isAccountsError } = useQuery<IGetAccountsResponseDto[]>({
     queryKey: ['@eco/statement', 'accounts'],
     queryFn: () => accountService.getAccounts(),
+    retry: false,
   });
-
-  useEffect(() => {
-    if (isFetching) {
-      showLoader();
-    } else {
-      hideLoader();
-    }
-  }, [isFetching]);
 
   return { accounts, isAccountsError, isAccountsFetching: isFetching };
 };

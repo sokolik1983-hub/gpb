@@ -60,22 +60,12 @@ export const FilterPanel = () => {
                 <Horizon>
                   <Box className={Adjust.getPadClass([null, 'X2S', null, null])}>
                     {/* Дата от. */}
-                    <Fields.Date
-                      extraSmall
-                      disabled={datePeriod !== DATE_PERIODS.SELECT_PERIOD}
-                      name={FORM_FIELDS.DATE_FROM}
-                      onChange={submit}
-                    />
+                    <Fields.Date extraSmall disabled={datePeriod !== DATE_PERIODS.SELECT_PERIOD} name={FORM_FIELDS.DATE_FROM} />
                   </Box>
                   <Typography.Text className={css.dateDelimiter}>–</Typography.Text>
                   <Box className={Adjust.getPadClass([null, null, null, 'X2S'])}>
                     {/* Дата по. */}
-                    <Fields.Date
-                      extraSmall
-                      disabled={datePeriod !== DATE_PERIODS.SELECT_PERIOD}
-                      name={FORM_FIELDS.DATE_TO}
-                      onChange={submit}
-                    />
+                    <Fields.Date extraSmall disabled={datePeriod !== DATE_PERIODS.SELECT_PERIOD} name={FORM_FIELDS.DATE_TO} />
                   </Box>
                 </Horizon>
               </Adjust>
@@ -89,13 +79,13 @@ export const FilterPanel = () => {
             <Pattern.Span size={6}>
               <Adjust pad={[null, 'XS', null, null]}>
                 {/* Выбор счетов. */}
-                <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} selectedOrganizations={organizations} onChange={submit} />
+                <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} selectedOrganizations={organizations} />
               </Adjust>
             </Pattern.Span>
             <Pattern.Span size={6}>
               <Adjust pad={[null, null, null, 'XS']}>
                 {/* Выбор организаций. */}
-                <OrganizationsField accounts={accounts} name={FORM_FIELDS.ORGANIZATIONS} onChange={submit} />
+                <OrganizationsField accounts={accounts} name={FORM_FIELDS.ORGANIZATIONS} />
               </Adjust>
             </Pattern.Span>
           </Pattern>

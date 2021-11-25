@@ -5,9 +5,10 @@ import type { IOption } from '@platform/ui';
  * (В платформе не определён возвращаемый тип, приходится переопределять в стриме,
  * поэтому неудачные имена).
  */
-export interface IFilterPanel {
+// eslint-disable-next-line @typescript-eslint/ban-types
+export interface IFilterPanel<T extends object = Record<string, unknown>> {
   /** Значения формы фильтра. */
-  values: Record<string, unknown>;
+  values: T;
   /** Если true - то фильтр открыт. */
   opened: boolean;
   /** Закрывает фильтр. */

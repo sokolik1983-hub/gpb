@@ -96,7 +96,7 @@ export const TagsPanel = () => {
   return (
     <>
       <Gap.SM />
-      <TagsPanelView
+      <TagsPanelView<FormState>
         tagValueFormatter={tagValueFormatter}
         tags={preparedTags}
         onRemoveTag={onRemoveTag}

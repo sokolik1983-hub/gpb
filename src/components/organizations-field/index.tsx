@@ -3,6 +3,7 @@ import React, { useMemo, useEffect } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useForm } from 'react-final-form';
+import { noop } from 'utils';
 import { byLabel } from '@platform/services';
 import type { IOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -14,11 +15,11 @@ export interface IOrganizationsFieldProps {
   /** Счета и организации для отображения в селекте. */
   accounts: IGetAccountsResponseDto[];
   /** Обработчик изменения значения поля. */
-  onChange: ChangeFieldHandler<string[]>;
+  onChange?: ChangeFieldHandler<string[]>;
 }
 
 /** Селект выбора организации. */
-export const OrganizationsField: FC<IOrganizationsFieldProps> = ({ name, accounts, onChange }) => {
+export const OrganizationsField: FC<IOrganizationsFieldProps> = ({ name, accounts, onChange = noop }) => {
   const { change } = useForm();
 
   const options = useMemo(() => {

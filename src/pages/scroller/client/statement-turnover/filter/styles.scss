@@ -26,3 +26,34 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.totalsWrapper {
+  position: relative;
+  padding: 16px 32px 12px 32px;
+}
+
+.totalsRow {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.totalsCell {
+  display: flex;
+  justify-content: flex-end;
+  width: 224px;
+  padding: 0 16px;
+  &:first-child {
+    padding-left: 8px;
+  }
+  &:last-child {
+    padding-right: 8px;
+  }
+}
+
+.totalSpinnerWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 68px; // Высота когда в таблице одна запись.
+}
