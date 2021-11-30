@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import type { IGroupedAccounts } from 'interfaces/client';
 import type { HeaderGroup } from 'react-table';
-import { Box, ServiceIcons, WithClickable, Typography } from '@platform/ui';
+import { Box, ServiceIcons, WithClickable, Typography, Horizon } from '@platform/ui';
 import { COLUMN_NAMES } from './constatnts';
 import css from './styles.scss';
 
@@ -29,21 +29,17 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
 
             const sortByToggleProps = column.getSortByToggleProps();
 
-            // Удаляется дефолтный title, (он)
+            // Удаляется дефолтный title, (если его не удалить, то он отображается при наведении).
             sortByToggleProps.title = undefined;
 
-            const columnAlign =
-              column.id === COLUMN_NAMES.ORGANIZATION_NAME || column.id === COLUMN_NAMES.ACCOUNT_NUMBER ? 'LEFT' : 'RIGHT';
+            const isRightAlign = column.id !== COLUMN_NAMES.ORGANIZATION_NAME && column.id !== COLUMN_NAMES.ACCOUNT_NUMBER;
 
             return (
               <Box key={columnKey} {...restHeaderProps} className={css.headerCell}>
                 <WithClickable>
                   {(ref, { hovered }) => (
-                    <Box ref={ref} {...sortByToggleProps} className={css.headerCellContentWrapper}>
-                      {/* Текстовое содержимое заголовка таблицы. */}
-                      <Typography.TextBold align={columnAlign} className={css.headerText}>
-                        {column.render('Header')}
-                      </Typography.TextBold>
+                    <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
+                      {isRightAlign && <Horizon.Spacer />}
 
                       {/* Стрелка показывающая сортировку. */}
                       {column.canSort && (column.isSorted || hovered) && (
@@ -51,7 +47,10 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
                           <SortIcon fill={column.isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />
                         </Box>
                       )}
-                    </Box>
+
+                      {/* Текстовое содержимое заголовка таблицы. */}
+                      <Typography.TextBold>{column.render('Header')}</Typography.TextBold>
+                    </Horizon>
                   )}
                 </WithClickable>
 

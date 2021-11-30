@@ -2,9 +2,7 @@ import { GROUPING_VALUES, DATE_PERIODS } from 'interfaces/client';
 import { locale } from 'localization';
 import { DATE_ISO_FORMAT } from 'stream-constants';
 import { getYesterday } from 'utils';
-import type { IOption } from '@platform/ui';
-import { TAGS_ORDER } from './constants';
-import type { FormState } from './interfaces';
+import type { IFormState } from './interfaces';
 
 /**
  * Возвращает локаль для, отображения информации по результатам группировки.
@@ -28,38 +26,8 @@ export const getGroupingInfoLabel = (grouping: GROUPING_VALUES): string => {
   }
 };
 
-/**
- * Фильтрует теги формы фильтрации.
- *
- * @param tags - Тэги для фильтрации.
- */
-export const filerTags = (tags: Array<IOption<string>>): Array<IOption<string>> => tags.filter(tag => tag.label);
-
-/**
- * Упорядочивает тети формы фильтрации (в частности чтобы тэг "дата по" не располагался перед тегом "дата от").
- *
- * @param tags - Тэги которые надо упорядочить.
- */
-export const orderTags = (tags: Array<IOption<string>>): Array<IOption<string>> => {
-  const tagsByTagValue = tags.reduce<Record<string, IOption<string>>>((acc, tag) => {
-    acc[tag.value] = tag;
-
-    return acc;
-  }, {});
-
-  const orderedTags: Array<IOption<string>> = [];
-
-  TAGS_ORDER.forEach(tagValue => {
-    if (tagsByTagValue[tagValue]) {
-      orderedTags.push(tagsByTagValue[tagValue]);
-    }
-  });
-
-  return orderedTags;
-};
-
 /** Возвращает начальный стейт формы. */
-export const getInitialFilterValues = (): FormState => {
+export const getInitialFilterValues = (): IFormState => {
   const yesterday = getYesterday().format(DATE_ISO_FORMAT);
 
   return {
@@ -68,7 +36,6 @@ export const getInitialFilterValues = (): FormState => {
     datePeriod: DATE_PERIODS.YESTERDAY,
     dateTo: yesterday,
     dateFrom: yesterday,
-    organizations: [],
     accounts: [],
   };
 };

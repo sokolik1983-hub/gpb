@@ -3,10 +3,10 @@ import { locale } from 'localization';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
 import type { IOption } from '@platform/ui';
-import type { FormState } from './interfaces';
+import type { IFormState } from './interfaces';
 
 /** Возвращает имя поля формы. Улучшает типизацию. */
-export const getPath = pathGenerator<FormState>();
+export const getPath = pathGenerator<IFormState>();
 
 /** Поля формы фильтра. */
 export const FORM_FIELDS = {
@@ -22,25 +22,19 @@ export const FORM_FIELDS = {
   GROUP_BY: getPath('groupBy'),
   /** Только активные счета. */
   ONLY_ACTIVE_ACCOUNTS: getPath('onlyActiveAccounts'),
-  /** Выбранные организации. */
-  ORGANIZATIONS: getPath('organizations'),
 };
 
-// Сгенерированные фильтры не будут использоваться, поэтому используется пустой объект, чтобы избезать ошибку типизации.
 /** Значения полей и условия фильтрации для useFilter. */
-export const fields: Record<string, IFilterField> = {};
+export const fields: Record<string, IFilterField> = {
+  // Сгенерированные фильтры не будут использоваться, поэтому используется пустой объект,
+  // чтобы избежать ошибку TS при сборке.
+};
 
 /** Лейблы тегов полей фильтра. */
-export const tagLabels = {
-  // Здесь должны быть только те поля теги для которых нужно отображать на панели тегов.
-  [FORM_FIELDS.DATE_FROM]: locale.turnoverScroller.filter.tags.dateFrom,
-  [FORM_FIELDS.DATE_TO]: locale.turnoverScroller.filter.tags.dateTo,
-  [FORM_FIELDS.ACCOUNTS]: locale.turnoverScroller.filter.tags.accounts,
-  [FORM_FIELDS.ORGANIZATIONS]: locale.turnoverScroller.filter.tags.organizations,
+export const labels = {
+  // На скроллере не используются теги, параметр передаётся только,
+  // чтобы избежать ошибку TS при сборке.
 };
-
-/** Определяет порядок следования тегов на панели тэгов. */
-export const TAGS_ORDER = [FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO, FORM_FIELDS.ACCOUNTS, FORM_FIELDS.ORGANIZATIONS];
 
 /** Опции селекта выбора группировки. */
 export const GROUPING_OPTIONS: Array<IOption<GROUPING_VALUES>> = [

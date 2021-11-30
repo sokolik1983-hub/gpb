@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { ScrollerHeader } from 'components';
+import { ScrollerHeader, ScrollerPageLayout } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
-import { FatalErrorContent, MainLayout, ScrollerPageLayout, useFilter } from '@platform/services/client';
-import { fields, tagLabels, Filter } from './filter';
-import type { FormState } from './filter/interfaces';
+import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { fields, labels, Filter } from './filter';
+import type { IFormState } from './filter/interfaces';
 import { useTurnovers } from './hooks';
 import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
@@ -25,11 +25,11 @@ export const StatementTurnoverScrollerPage = () => {
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
   // endregion
 
-  const { filterPanel, tagsPanel } = useFilter({ fields, labels: tagLabels });
+  const { filterPanel } = useFilter({ fields, labels });
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
-  const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<FormState>;
+  const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
   const headerProps = useTurnoverScrollerHeaderProps([
     /* TODO: При реализации действия передавать выбранные в фильтре счета. */
@@ -48,7 +48,6 @@ export const StatementTurnoverScrollerPage = () => {
       setIsLoading,
       filterPanel: properlyTypedFilterPanel,
       accounts,
-      tagsPanel,
       sorting,
       setSorting,
       turnovers,
@@ -63,7 +62,6 @@ export const StatementTurnoverScrollerPage = () => {
       isTurnoversError,
       isTurnoversFetching,
       sorting,
-      tagsPanel,
       turnovers,
     ]
   );
@@ -79,13 +77,7 @@ export const StatementTurnoverScrollerPage = () => {
   return (
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout
-          categoryTabsProps={tabsProps}
-          isLoading={false}
-          mainLayout={React.Fragment}
-          navigationLine={<ScrollerHeader {...headerProps} />}
-          pageTitle=""
-        >
+        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={false} navigationLine={<ScrollerHeader {...headerProps} />}>
           <Filter />
           <TurnoversTable />
         </ScrollerPageLayout>

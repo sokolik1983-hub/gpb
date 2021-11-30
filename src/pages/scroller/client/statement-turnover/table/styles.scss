@@ -47,20 +47,7 @@
   @extend .cell;
 
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
   user-select: none;
-}
-
-.headerCellContentWrapper {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.headerText {
-  flex-grow: 1;
 }
 
 .headerColumnDelimiter {
@@ -87,7 +74,7 @@
 
 .sortIconWrapper {
   height: 16px;
-  margin-left: 4px;
+  margin-right: 4px;
 }
 
 .toggleButton {
