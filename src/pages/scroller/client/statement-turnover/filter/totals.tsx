@@ -21,7 +21,7 @@ export const Totals: FC = () => {
     return null;
   }
 
-  if (isLoading) {
+  if (isLoading && total.length === 0) {
     return (
       <Box className={css.totalSpinnerWrapper}>
         <Spinner />
