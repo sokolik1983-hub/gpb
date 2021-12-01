@@ -4,7 +4,7 @@ import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/client';
 import { GROUPING_VALUES } from 'interfaces/client';
 import type { TableBodyProps, Row } from 'react-table';
-import { Box, LayoutScrollComponent } from '@platform/ui';
+import { Box, LayoutScrollComponent, Gap } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { AccountInfoRow } from './account-row';
@@ -92,6 +92,8 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
             );
           })}
         </Box>
+        <Gap.X2L />
+        <Gap.X2L />
       </LayoutScrollComponent>
 
       {/* Кнопка прокрутки таблицы. */}

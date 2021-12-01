@@ -1,9 +1,9 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel, Sorting } from 'interfaces';
+import type { IFilterPanel, Sorting } from 'interfaces';
 import type { IGetAccountsResponseDto, IGetTurnoversResponseDto } from 'interfaces/client';
 import { GROUPING_VALUES, DATE_PERIODS } from 'interfaces/client';
 import { noop } from 'utils';
-import type { FormState } from './filter/interfaces';
+import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constatnts';
 
 /** Состояние фильтров по умолчанию. */
@@ -20,9 +20,7 @@ export interface ITurnoverScrollerContext {
   /** Устанавливает флаг ожидания выполнения запроса. */
   setIsLoading(value: boolean): void;
   /** Свойства панели фильтрации. */
-  filterPanel: IFilterPanel<FormState>;
-  /** Свойства тегов. */
-  tagsPanel: ITagsPanel;
+  filterPanel: IFilterPanel<IFormState>;
   /** Счета пользователя, для использования в селекте выбора счёта. */
   accounts: IGetAccountsResponseDto[];
   /** Сортировка. */
@@ -46,12 +44,6 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
     total: [],
     accounts: [],
   },
-  tagsPanel: {
-    tags: [],
-    onRemoveAllTags: noop,
-    onRemoveTag: noop,
-    onClick: noop,
-  },
   filterPanel: {
     values: {
       accounts: [],
@@ -60,7 +52,6 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
       datePeriod: DATE_PERIODS.YESTERDAY,
       dateTo: '',
       dateFrom: '',
-      organizations: [],
     },
     onClose: noop,
     onOk: noop,

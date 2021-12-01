@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import type { Sorting } from 'interfaces';
 import type { IGetTurnoversRequestDto, IGetTurnoversResponseDto } from 'interfaces/client';
-import type { FormState } from 'pages/scroller/client/statement-turnover/filter/interfaces';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
 import { SORT_DIRECTION } from '@platform/core';
+import type { IFormState } from '../filter/interfaces';
 
 const DEFAULT_TURNOVERS: IGetTurnoversResponseDto = {
   total: [],
@@ -27,7 +27,7 @@ const convertTableSortingToDto = (sorting: Sorting): IGetTurnoversRequestDto['so
  * @param filterValues - Значения фильтров.
  * @param sorting - Значение сортировки.
  */
-export const useTurnovers = (filterValues: FormState, sorting: Sorting) => {
+export const useTurnovers = (filterValues: IFormState, sorting: Sorting) => {
   const { accounts, onlyActiveAccounts, dateTo, dateFrom, groupBy } = filterValues;
 
   const requestDto: IGetTurnoversRequestDto = useMemo(

@@ -1,7 +1,7 @@
 import type { DATE_PERIODS, GROUPING_VALUES } from 'interfaces/client';
 
 /** Стейт формы фильтрации. */
-export interface FormState {
+export interface IFormState {
   /** Начало периода.  */
   dateFrom?: string;
   /** Конец периода. */
@@ -14,6 +14,4 @@ export interface FormState {
   onlyActiveAccounts: boolean;
   /** Временной период. */
   datePeriod: DATE_PERIODS;
-  /** Выбранные организации. */
-  organizations: string[];
 }

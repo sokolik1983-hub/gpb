@@ -7,7 +7,7 @@ import { useFormState } from 'react-final-form';
 import { Typography, Gap, Box, Fields } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS, GROUPING_OPTIONS } from './constants';
-import type { FormState } from './interfaces';
+import type { IFormState } from './interfaces';
 import css from './styles.scss';
 import { getGroupingInfoLabel } from './utils';
 
@@ -42,7 +42,7 @@ export const GroupingPanel = () => {
 
   const {
     values: { groupBy },
-  } = useFormState<FormState>();
+  } = useFormState<IFormState>();
 
   const groupingReport = useMemo(() => (isLoading ? '' : computeGroupingReport(accounts, groupBy)), [accounts, groupBy, isLoading]);
 
@@ -58,6 +58,7 @@ export const GroupingPanel = () => {
         {/* Выбор фильтрации по типу активности счёта. */}
         <Fields.Checkbox
           extraSmall
+          dimension={'SM'}
           label={locale.turnoverScroller.filter.labels.onlyActiveAccounts}
           name={FORM_FIELDS.ONLY_ACTIVE_ACCOUNTS}
         />
@@ -65,7 +66,9 @@ export const GroupingPanel = () => {
         <Box>
           {/* Выбор группировки. */}
           {/* TODO: Переделать по макету. Там не обычный селект. */}
-          <Fields.Select extraSmall name={FORM_FIELDS.GROUP_BY} options={GROUPING_OPTIONS} />
+          <Box className={css.groupingFieldWrapper}>
+            <Fields.Select extraSmall className={css.groupingField} name={FORM_FIELDS.GROUP_BY} options={GROUPING_OPTIONS} />
+          </Box>
         </Box>
       </Box>
     </Box>

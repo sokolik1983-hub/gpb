@@ -10,11 +10,9 @@ declare namespace StylesScssModule {
     'clickableRow': string;
     'groupingRow': string;
     'headerCell': string;
-    'headerCellContentWrapper': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
     'headerRowWrapper': string;
-    'headerText': string;
     'layoutScrollWrapper': string;
     'placeholderOverlay': string;
     'scrollIconBox': string;

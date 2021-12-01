@@ -61,7 +61,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
   // Группирующие строки рендерятся без колонок, чтобы избежать переноса строки в колонке.
   return (
     <Box {...rowProps} className={css.groupingRow}>
-      <Typography.H3 className="H3">{getGroupingTitle(groupInfo)}</Typography.H3>
+      <Typography.PBold className="H3">{getGroupingTitle(groupInfo)}</Typography.PBold>
     </Box>
   );
 };
