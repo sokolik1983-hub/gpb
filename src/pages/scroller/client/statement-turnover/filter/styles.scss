@@ -57,3 +57,21 @@
   width: 100%;
   height: 68px; // Высота когда в таблице одна запись.
 }
+
+.groupingFieldWrapper {
+  width: 240px;
+  min-width: 240px;
+}
+
+.groupingField {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  & * {
+    font-size: 14px;
+  }
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+}

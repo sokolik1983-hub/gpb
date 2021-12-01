@@ -66,7 +66,9 @@ export const GroupingPanel = () => {
         <Box>
           {/* Выбор группировки. */}
           {/* TODO: Переделать по макету. Там не обычный селект. */}
-          <Fields.Select extraSmall name={FORM_FIELDS.GROUP_BY} options={GROUPING_OPTIONS} />
+          <Box className={css.groupingFieldWrapper}>
+            <Fields.Select extraSmall className={css.groupingField} name={FORM_FIELDS.GROUP_BY} options={GROUPING_OPTIONS} />
+          </Box>
         </Box>
       </Box>
     </Box>

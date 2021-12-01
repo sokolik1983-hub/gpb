@@ -7,6 +7,8 @@ declare namespace StylesScssModule {
   export interface IStylesScss {
     'dateDelimiter': string;
     'filterWrapper': string;
+    'groupingField': string;
+    'groupingFieldWrapper': string;
     'groupingLeftColumn': string;
     'groupingPanelWrapper': string;
     'groupingRightColumn': string;
