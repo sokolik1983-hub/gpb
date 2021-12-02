@@ -18,3 +18,5 @@ export const FilterFormElement: React.FC<IFilterFormElementProps> = ({ label, ch
     {children}
   </FilterLine>
 );
+
+FilterFormElement.displayName = 'FilterFormElement';
