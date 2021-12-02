@@ -1,13 +1,34 @@
 import type { FC } from 'react';
-import React, { useMemo, useEffect } from 'react';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useForm } from 'react-final-form';
 import { noop } from 'utils';
 import { byLabel } from '@platform/services';
 import { formatAccountCode } from '@platform/tools/localization';
-import type { IOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
+import type { IAccountOption } from './account-option';
+import { AccountOption } from './account-option';
+
+/**
+ * Возвращает опцию.
+ *
+ * @param account - Счтёт.
+ */
+const getAccountOption = (account: IGetAccountsResponseDto): IAccountOption => {
+  const {
+    id,
+    accountNumber,
+    bankClient: { shortName, fullName },
+  } = account;
+
+  return {
+    value: id,
+    label: formatAccountCode(accountNumber), // Лейбл тегов выбранных значений
+    accountNumber,
+    orgName: shortName ?? fullName,
+  };
+};
 
 /** Свойства компонента AccountsField. */
 export interface IAccountsFieldProps {
@@ -17,28 +38,40 @@ export interface IAccountsFieldProps {
   accounts: IGetAccountsResponseDto[];
   /** Обработчик изменения значения поля. */
   onChange?: ChangeFieldHandler<string[]>;
+  /** Плейсхолдер. */
+  placeholder?: string;
 }
 
 /** Селект выбора счетов. */
-export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, onChange = noop }) => {
+export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
   const { change, getFieldState } = useForm();
 
   const sortedOptions = useMemo(() => {
-    const options = accounts.reduce<Array<IOption<string>>>((acc, account) => {
-      const { accountNumber, id } = account;
-
-      const option = {
-        label: formatAccountCode(accountNumber),
-        value: id,
-      };
-
-      acc.push(option);
-
-      return acc;
-    }, []);
+    const options = accounts.map(account => getAccountOption(account));
 
     return options.sort(byLabel);
   }, [accounts]);
+
+  const filterFn = useCallback(
+    (searchValue: string) => {
+      if (!searchValue) {
+        return sortedOptions;
+      }
+
+      const filtered = sortedOptions.filter(option => {
+        const { accountNumber, orgName } = option;
+
+        const searchValueLowerCase = searchValue.toLocaleLowerCase();
+
+        return (
+          accountNumber?.toLocaleLowerCase().includes(searchValueLowerCase) || orgName?.toLocaleLowerCase().includes(searchValueLowerCase)
+        );
+      });
+
+      return filtered;
+    },
+    [sortedOptions]
+  );
 
   useEffect(() => {
     // Значение поля получается внутри хука, чтобы избежать циклического рендера
@@ -53,7 +86,18 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, onChang
     }
   }, [accounts, change, getFieldState, name]);
 
-  return <Fields.MultiSelect extraSmall withSearch name={name} options={sortedOptions} onChange={onChange} />;
+  return (
+    <Fields.MultiSelect
+      extraSmall
+      withSearch
+      filterFn={filterFn}
+      name={name}
+      optionTemplate={AccountOption}
+      options={sortedOptions}
+      placeholder={placeholder}
+      onChange={onChange}
+    />
+  );
 };
 
 AccountsField.displayName = 'AccountsField';

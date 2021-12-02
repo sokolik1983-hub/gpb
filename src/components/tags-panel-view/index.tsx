@@ -3,6 +3,7 @@ import React from 'react';
 import cn from 'classnames';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
+import { noop } from 'utils';
 import type { IOption } from '@platform/ui';
 import { Typography, Horizon, Box, Gap, ServiceIcons } from '@platform/ui';
 import css from './styles.scss';
@@ -12,11 +13,11 @@ interface ITagProps extends IOption {
   /** Обработчик удаления тега. */
   onRemoveTag(): void;
   /** Обработчик клика. */
-  onClick(): void;
+  onClick?(): void;
 }
 
 /** Тег фильтра. */
-const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick, disabled }) => {
+const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick = noop, disabled }) => {
   const handleRemoveClick = (e: MouseEvent) => {
     e.stopPropagation();
     onRemoveTag();
@@ -50,7 +51,7 @@ interface ITagsPanelViewProps<T extends object = Record<string, unknown>> {
    */
   onRemoveTag(key: string): void;
   /** Обработчик клика по тегу. */
-  onTagClick(): void;
+  onTagClick?(): void;
   /**
    * Форматирует значения формы фильтрации для отображения в тегах.
    *
@@ -66,21 +67,16 @@ export const TagsPanelView = <T extends object = Record<string, unknown>>({
   tags,
   onRemoveTags,
   onRemoveTag,
-  onTagClick,
+  onTagClick = noop,
   tagValueFormatter,
 }: ITagsPanelViewProps<T>) => {
-  const { getState, reset, change } = useForm();
+  const { getState, change } = useForm();
 
   const { values } = getState();
 
   const handleRemoveTag = (key: string) => () => {
     change(key);
     onRemoveTag(key);
-  };
-
-  const handleRemoveTags = () => {
-    reset();
-    onRemoveTags();
   };
 
   return (
@@ -95,7 +91,7 @@ export const TagsPanelView = <T extends object = Record<string, unknown>>({
           </>
         );
       })}
-      <Box clickable className={cn(css.tag, css.tagBtn)} radius="MAX" onClick={handleRemoveTags}>
+      <Box clickable className={cn(css.tag, css.tagBtn)} radius="MAX" onClick={onRemoveTags}>
         {locale.scroller.tags.labels.resetAll}
       </Box>
     </Box>

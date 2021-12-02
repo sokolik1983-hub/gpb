@@ -60,5 +60,5 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   },
 };
 
-/** Реакт контекст скроллера "Обороты". */
+/** Контекст скроллера "Обороты". */
 export const TurnoverScrollerContext = createContext<ITurnoverScrollerContext>(DEFAULT_CONTEXT_VALUE);
