@@ -1,4 +1,22 @@
 {
+  "client.statementStatuses.new": {
+    "ru": "Запрос сформирован"
+  },
+  "client.statementStatuses.delivered": {
+    "ru": "Отправлен"
+  },
+  "client.statementStatuses.detailsValid": {
+    "ru": "Доставлен"
+  },
+  "client.statementStatuses.received": {
+    "ru": "Доставлен"
+  },
+  "client.statementStatuses.executed": {
+    "ru": "Исполнен"
+  },
+  "client.statementStatuses.denied": {
+    "ru": "Отклонен"
+  },
   "scroller.tags.labels.resetAll": {
     "ru": "Сбросить всё"
   },
@@ -10,6 +28,54 @@
   },
   "scroller.navTabs.labels.history": {
     "ru": "История запросов"
+  },
+  "scroller.filter.buttons.expand": {
+    "ru":  "Показать фильтры"
+  },
+  "scroller.filter.buttons.collapse": {
+    "ru":  "Скрыть фильтры"
+  },
+  "scroller.filter.buttons.applyFilters": {
+    "ru":  "Применить фильтры"
+  },
+  "scroller.filter.buttons.reset": {
+    "ru":  "Сбросить"
+  },
+  "historyScroller.filter.placeholders.accounts": {
+    "ru": "Счета"
+  },
+  "historyScroller.filter.labels.date": {
+    "ru": "Дата запроса"
+  },
+  "historyScroller.filter.labels.organization": {
+    "ru": "Организация"
+  },
+  "historyScroller.filter.labels.status": {
+    "ru": "Статус"
+  },
+  "historyScroller.filter.labels.signaturePresence": {
+    "ru": "Электронная  \n подпись"
+  },
+  "historyScroller.filter.labels.datePeriod": {
+    "ru": "Период"
+  },
+  "historyScroller.tags.labels.organization": {
+    "ru": "Организация:"
+  },
+  "historyScroller.tags.labels.status": {
+    "ru": "Статус:"
+  },
+  "historyScroller.tags.labels.signaturePresence": {
+    "ru": "Электронная подпись:"
+  },
+  "historyScroller.tags.labels.datePeriod": {
+    "ru": "Период:"
+  },
+  "historyScroller.tags.values.signaturePresence.yes": {
+    "ru": "Есть"
+  },
+  "historyScroller.tags.values.signaturePresence.no": {
+    "ru": "Нет"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
@@ -155,5 +221,8 @@
   },
   "accountType.labels.participant": {
     "ru": "Счёт участника закупок"
+  },
+  "form.labels.selectAll": {
+    "ru": "Все"
   }
 }

@@ -1,9 +1,9 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { DatePeriodField, AccountsField } from 'components';
+import { useDateRangeRestriction } from 'hooks';
 import type { IGetDatePeriodResponseDto } from 'interfaces/client';
 import { DATE_PERIODS } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
-import { dateTime } from '@platform/tools/date-time';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -44,27 +44,12 @@ export const FilterPanel = () => {
     change(FORM_FIELDS.DATE_PERIOD, DATE_PERIODS.SELECT_PERIOD);
   };
 
-  useEffect(() => {
-    // Если введённое значение "Дата по" меньше "Дата с" то устанавливает "Дата по" в значение "Дата с"
-    if (dateFrom && dateTo && dateTime(dateTo).isBefore(dateFrom, 'day')) {
-      change(FORM_FIELDS.DATE_TO, dateFrom);
-    }
-    // dateFrom не включён в зависимости т.к. нужно, чтобы срабатывал только при изменении dateTo.
-    // Через onChange сделать не получилось потому, что при вызове change() внутри обработчика onChange,
-    // стейт формы и компонента рассинхронизируются.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [change, dateTo]);
-
-  useEffect(() => {
-    // Если "Дата с" больше "Дата по" то устанавливает "Дата c" в значение "Дата по"
-    if (dateFrom && dateTo && dateTime(dateFrom).isAfter(dateTo, 'day')) {
-      change(FORM_FIELDS.DATE_FROM, dateTo);
-    }
-    // dateTo не включён в зависимости т.к. нужно, чтобы срабатывал только при изменении dateTo.
-    // Через onChange сделать не получилось потому, что при вызове change() внутри обработчика onChange,
-    // стейт формы и компонента рассинхронизируются.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [change, dateFrom]);
+  useDateRangeRestriction({
+    dateFromName: FORM_FIELDS.DATE_FROM,
+    dateToName: FORM_FIELDS.DATE_TO,
+    dateFrom,
+    dateTo,
+  });
 
   return (
     <Pattern>

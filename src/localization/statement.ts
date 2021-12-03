@@ -5,6 +5,70 @@ import { translate } from "@platform/tools/localization";
 export const t = (key: string, params?: any) => translate('statement', key, params);
 
 export default {
+	client: {
+		statementStatuses: {
+			/**
+			 * @ru
+			 * Запрос сформирован
+			 */
+			get new() {
+				return t('client.statementStatuses.new');
+			},
+			/**
+			 * @ru
+			 * Отправлен
+			 */
+			get delivered() {
+				return t('client.statementStatuses.delivered');
+			},
+			/**
+			 * @ru
+			 * Доставлен
+			 */
+			get detailsValid() {
+				return t('client.statementStatuses.detailsValid');
+			},
+			/**
+			 * @ru
+			 * Доставлен
+			 */
+			get received() {
+				return t('client.statementStatuses.received');
+			},
+			/**
+			 * @ru
+			 * Исполнен
+			 */
+			get executed() {
+				return t('client.statementStatuses.executed');
+			},
+			/**
+			 * @ru
+			 * Отклонен
+			 */
+			get denied() {
+				return t('client.statementStatuses.denied');
+			},
+		},
+		scroller: {
+			/**
+			 * @ru
+			 * Выписки
+			 */
+			get title() {
+				return t('client.scroller.title');
+			},
+		},
+		form: {
+			/**
+			 * @ru
+			 * Клиентская форма
+			 */
+			get title() {
+				return t('client.form.title');
+			},
+		},
+	},
 	scroller: {
 		tags: {
 			labels: {
@@ -35,24 +99,137 @@ export default {
 				},
 			},
 		},
-	},
-	client: {
-		scroller: {
-			/**
-			 * @ru
-			 * Выписки
-			 */
-			get title() {
-				return t('client.scroller.title');
+		filter: {
+			buttons: {
+				/**
+				 * @ru
+				 * Показать фильтры
+				 */
+				get expand() {
+					return t('scroller.filter.buttons.expand');
+				},
+				/**
+				 * @ru
+				 * Скрыть фильтры
+				 */
+				get collapse() {
+					return t('scroller.filter.buttons.collapse');
+				},
+				/**
+				 * @ru
+				 * Применить фильтры
+				 */
+				get applyFilters() {
+					return t('scroller.filter.buttons.applyFilters');
+				},
+				/**
+				 * @ru
+				 * Сбросить
+				 */
+				get reset() {
+					return t('scroller.filter.buttons.reset');
+				},
 			},
 		},
-		form: {
-			/**
-			 * @ru
-			 * Клиентская форма
-			 */
-			get title() {
-				return t('client.form.title');
+	},
+	historyScroller: {
+		filter: {
+			placeholders: {
+				/**
+				 * @ru
+				 * Счета
+				 */
+				get accounts() {
+					return t('historyScroller.filter.placeholders.accounts');
+				},
+			},
+			labels: {
+				/**
+				 * @ru
+				 * Дата запроса
+				 */
+				get date() {
+					return t('historyScroller.filter.labels.date');
+				},
+				/**
+				 * @ru
+				 * Организация
+				 */
+				get organization() {
+					return t('historyScroller.filter.labels.organization');
+				},
+				/**
+				 * @ru
+				 * Статус
+				 */
+				get status() {
+					return t('historyScroller.filter.labels.status');
+				},
+				/**
+				 * @ru
+				 * Электронная
+				 *  подпись
+				 */
+				get signaturePresence() {
+					return t('historyScroller.filter.labels.signaturePresence');
+				},
+				/**
+				 * @ru
+				 * Период
+				 */
+				get datePeriod() {
+					return t('historyScroller.filter.labels.datePeriod');
+				},
+			},
+		},
+		tags: {
+			labels: {
+				/**
+				 * @ru
+				 * Организация:
+				 */
+				get organization() {
+					return t('historyScroller.tags.labels.organization');
+				},
+				/**
+				 * @ru
+				 * Статус:
+				 */
+				get status() {
+					return t('historyScroller.tags.labels.status');
+				},
+				/**
+				 * @ru
+				 * Электронная подпись:
+				 */
+				get signaturePresence() {
+					return t('historyScroller.tags.labels.signaturePresence');
+				},
+				/**
+				 * @ru
+				 * Период:
+				 */
+				get datePeriod() {
+					return t('historyScroller.tags.labels.datePeriod');
+				},
+			},
+			values: {
+				signaturePresence: {
+					/**
+					 * @ru
+					 * Есть
+					 */
+					get yes() {
+						return t('historyScroller.tags.values.signaturePresence.yes');
+					},
+					/**
+					 * @ru
+					 * Нет
+					 */
+					get no() {
+						return t('historyScroller.tags.values.signaturePresence.no');
+					},
+				},
 			},
 		},
 	},
@@ -388,6 +565,17 @@ export default {
 			 */
 			get participant() {
 				return t('accountType.labels.participant');
+			},
+		},
+	},
+	form: {
+		labels: {
+			/**
+			 * @ru
+			 * Все
+			 */
+			get selectAll() {
+				return t('form.labels.selectAll');
 			},
 		},
 	},
