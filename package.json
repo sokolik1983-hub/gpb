@@ -46,7 +46,7 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "8.95.0",
+    "@platform/services": "9.0.0",
     "@types/react-table": "7.7.8"
   },
   "dependencies": {
