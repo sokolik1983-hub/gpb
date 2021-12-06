@@ -1,9 +1,9 @@
 /** Значения для группировки записей в скроллере. Выбираются в селекте фильтра. */
 export enum GROUPING_VALUES {
   /** Без группировки. */
-  NO_GROUPING = 'NO_GROUPING',
+  NO_GROUPING = 'NONE',
   /** По организациям и валютам. */
-  ORGANIZATIONS_AND_CURRENCIES = 'ORG_CURRENCY',
+  ORGANIZATIONS_AND_CURRENCIES = 'ORG_AND_CURRENCY',
   /** По организациям. */
   ORGANIZATIONS = 'ORG',
   /** По валютам. */
@@ -17,7 +17,7 @@ export enum GROUPING_VALUES {
 /** Типы группирующих записей. */
 export enum GROUPING_TYPE {
   /** Без группировки. */
-  NO_GROUPING = 'NO_GROUPING',
+  NO_GROUPING = 'NONE',
   /** По организации. */
   ORGANIZATIONS = 'ORG',
   /** По валюте. */
