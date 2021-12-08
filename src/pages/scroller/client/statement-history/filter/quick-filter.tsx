@@ -19,11 +19,10 @@ export const QuickFilter: FC = () => {
 
   const { selectedAccounts, dateFrom, dateTo } = values;
 
-  const { accounts } = useContext(HistoryScrollerContext);
-
   const {
-    filterPanel: { onOk },
+    filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters },
+    accounts,
   } = useContext(HistoryScrollerContext);
 
   useEffect(() => {
@@ -32,7 +31,9 @@ export const QuickFilter: FC = () => {
 
     // В хуке useFilter, после обновления стейта,
     // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    expandAdditionalFilters();
+    if (opened) {
+      expandAdditionalFilters();
+    }
 
     // values не включён в массив зависимостей хука т.к запрос на сервер при изменении значения фильтра
     // необходимо делать только при изменении полей в быстрых фильтрах.

@@ -42,4 +42,4 @@ export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply }) => {
   );
 };
 
-FilterFooter.displayName = 'Footer';
+FilterFooter.displayName = 'FilterFooter';

@@ -1,8 +1,8 @@
+import type { DATE_PERIODS } from 'interfaces';
 import { STATEMENT_STATUSES } from 'interfaces';
-import type { DATE_PERIODS } from 'interfaces/client';
 import { locale } from 'localization';
 import { EMPTY_VALUE, DATE_PERIOD_OPTIONS as COMMON_DATE_PERIOD_OPTIONS } from 'stream-constants';
-import { STATUS_LABELS } from 'stream-constants/client/statuses';
+import { STATUS_LABELS } from 'stream-constants/client';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
 import { filterFields, byLabel } from '@platform/services';

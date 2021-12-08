@@ -1,4 +1,5 @@
-import { GROUPING_VALUES, DATE_PERIODS } from 'interfaces/client';
+import { DATE_PERIODS } from 'interfaces';
+import { GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import { DATE_ISO_FORMAT } from 'stream-constants';
 import { getYesterday } from 'utils';

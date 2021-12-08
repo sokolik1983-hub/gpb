@@ -66,7 +66,7 @@ export const StatementTurnoverScrollerPage = () => {
     ]
   );
 
-  if (hasError || isAccountsError) {
+  if (hasError || isAccountsError || isTurnoversError) {
     return (
       <MainLayout>
         <FatalErrorContent />

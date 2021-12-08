@@ -232,6 +232,201 @@ export default {
 				},
 			},
 		},
+		headers: {
+			/**
+			 * @ru
+			 * Дата запроса
+			 */
+			get createdAt() {
+				return t('historyScroller.headers.createdAt');
+			},
+			/**
+			 * @ru
+			 * Счёт
+			 */
+			get accountNumber() {
+				return t('historyScroller.headers.accountNumber');
+			},
+			/**
+			 * @ru
+			 * Период
+			 */
+			get period() {
+				return t('historyScroller.headers.period');
+			},
+			/**
+			 * @ru
+			 * Формат
+			 */
+			get statementFormat() {
+				return t('historyScroller.headers.statementFormat');
+			},
+			/**
+			 * @ru
+			 * Статус
+			 */
+			get status() {
+				return t('historyScroller.headers.status');
+			},
+		},
+		table: {
+			/**
+			 * @ru
+			 * Запросы
+			 */
+			get total() {
+				return t('historyScroller.table.total');
+			},
+			/**
+			 * @ru
+			 * {exists} из {total}
+			 */
+			totalValue: (p: { total: number; exists: number }) => t('historyScroller.table.totalValue', p),
+			/**
+			 * @ru
+			 * У вас пока не было запросов выписки
+			 */
+			get placeholder() {
+				return t('historyScroller.table.placeholder');
+			},
+			/**
+			 * @ru
+			 * Все счета всех организаций
+			 */
+			get allAccounts() {
+				return t('historyScroller.table.allAccounts');
+			},
+			/**
+			 * @ru
+			 * +{value}
+			 */
+			prefixedByPlus: (p: { value: number }) => t('historyScroller.table.prefixedByPlus', p),
+			/**
+			 * @ru
+			 * {dateFrom}–{dateTo}
+			 */
+			separatedByDashes: (p: { dateFrom: string; dateTo: string }) => t('historyScroller.table.separatedByDashes', p),
+		},
+		period: {
+			labels: {
+				/**
+				 * @ru
+				 * За период
+				 */
+				get selectPeriod() {
+					return t('historyScroller.period.labels.selectPeriod');
+				},
+				/**
+				 * @ru
+				 * За вчера
+				 */
+				get yesterday() {
+					return t('historyScroller.period.labels.yesterday');
+				},
+				/**
+				 * @ru
+				 * За сегодня
+				 */
+				get today() {
+					return t('historyScroller.period.labels.today');
+				},
+				/**
+				 * @ru
+				 * За последние 3 дня
+				 */
+				get last3Days() {
+					return t('historyScroller.period.labels.last3Days');
+				},
+				/**
+				 * @ru
+				 * За текущий месяц
+				 */
+				get currentMonth() {
+					return t('historyScroller.period.labels.currentMonth');
+				},
+				/**
+				 * @ru
+				 * За прошлый месяц
+				 */
+				get lastMonth() {
+					return t('historyScroller.period.labels.lastMonth');
+				},
+				/**
+				 * @ru
+				 * За предыдущий квартал
+				 */
+				get previousQuarter() {
+					return t('historyScroller.period.labels.previousQuarter');
+				},
+			},
+		},
+		statementFormat: {
+			labels: {
+				/**
+				 * @ru
+				 * На экране
+				 */
+				get onScreen() {
+					return t('historyScroller.statementFormat.labels.onScreen');
+				},
+				/**
+				 * @ru
+				 * 1С
+				 */
+				get c1() {
+					return t('historyScroller.statementFormat.labels.c1');
+				},
+				/**
+				 * @ru
+				 * TXT
+				 */
+				get txt() {
+					return t('historyScroller.statementFormat.labels.txt');
+				},
+				/**
+				 * @ru
+				 * PDF
+				 */
+				get pdf() {
+					return t('historyScroller.statementFormat.labels.pdf');
+				},
+				/**
+				 * @ru
+				 * RTF
+				 */
+				get rtf() {
+					return t('historyScroller.statementFormat.labels.rtf');
+				},
+				/**
+				 * @ru
+				 * EXCEL
+				 */
+				get excel() {
+					return t('historyScroller.statementFormat.labels.excel');
+				},
+				/**
+				 * @ru
+				 * XPS
+				 */
+				get xps() {
+					return t('historyScroller.statementFormat.labels.xps');
+				},
+				/**
+				 * @ru
+				 * MT940
+				 */
+				get mt940() {
+					return t('historyScroller.statementFormat.labels.mt940');
+				},
+				/**
+				 * @ru
+				 * Multicash
+				 */
+				get multicash() {
+					return t('historyScroller.statementFormat.labels.multicash');
+				},
+			},
+		},
 	},
 	turnoverScroller: {
 		filter: {

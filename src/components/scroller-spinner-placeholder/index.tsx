@@ -11,4 +11,4 @@ export const ScrollerSpinnerPlaceholder: FC = () => (
   </Box>
 );
 
-ScrollerSpinnerPlaceholder.displayName = 'ScrollerSpinner';
+ScrollerSpinnerPlaceholder.displayName = 'ScrollerSpinnerPlaceholder';

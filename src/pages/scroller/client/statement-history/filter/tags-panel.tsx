@@ -3,7 +3,7 @@ import { TagsPanelView } from 'components';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
-import { STATUS_LABELS } from 'stream-constants/client/statuses';
+import { STATUS_LABELS } from 'stream-constants/client';
 import { orderTags } from 'utils';
 import { Gap } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
@@ -34,7 +34,7 @@ export const TagsPanel = () => {
   const { values } = useFormState<IFormState>();
 
   const {
-    filterPanel: { onOk },
+    filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
   } = useContext(HistoryScrollerContext);
 
@@ -63,16 +63,22 @@ export const TagsPanel = () => {
 
     restart(newValues);
     onOk(newValues);
+
     // В хуке useFilter, после обновления стейта,
     // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    expandAdditionalFilters();
+    if (opened) {
+      expandAdditionalFilters();
+    }
   };
 
   const handleRemoveTag = (name: string) => {
     onRemoveTag(name);
+
     // В хуке useFilter, после удаления тега форма закрывается,
     // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    expandAdditionalFilters();
+    if (opened) {
+      expandAdditionalFilters();
+    }
   };
 
   if (preparedTags.length === 0) {

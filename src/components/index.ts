@@ -5,3 +5,5 @@ export * from './accounts-field';
 export * from './filter-layout';
 export * from './filter-form-element';
 export * from './scroller-page-layout';
+export * from './pop-up';
+export * from './scroller-placeholder';

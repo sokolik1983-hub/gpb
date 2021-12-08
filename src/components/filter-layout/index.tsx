@@ -25,7 +25,7 @@ export interface IFilterProps {
 }
 
 /** Лэйаут фильтров скроллера. */
-export const FilterLayout: React.FC<IFilterProps> = ({
+export const FilterLayout: FC<IFilterProps> = ({
   quickFilter: QuickFilter,
   filterState,
   tagsState,
@@ -100,8 +100,4 @@ export const FilterLayout: React.FC<IFilterProps> = ({
   );
 };
 
-FilterLayout.displayName = 'Filter';
-
-export const ScrollerFilter: FC = () => <div />;
-
-ScrollerFilter.displayName = 'ScrollerFilter';
+FilterLayout.displayName = 'FilterLayout';

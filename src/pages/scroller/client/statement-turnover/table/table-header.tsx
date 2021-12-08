@@ -3,7 +3,7 @@ import React from 'react';
 import type { IGroupedAccounts } from 'interfaces/client';
 import type { HeaderGroup } from 'react-table';
 import { Box, ServiceIcons, WithClickable, Typography, Horizon } from '@platform/ui';
-import { COLUMN_NAMES } from './constatnts';
+import { COLUMN_NAMES } from './constants';
 import css from './styles.scss';
 
 /** Свойства компонента TableHeader. */

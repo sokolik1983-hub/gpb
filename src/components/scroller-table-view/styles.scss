@@ -1,0 +1,80 @@
+.tableWrapper {
+  position: relative;
+  height: 100%;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.tableBody {
+  padding: 0 8px;
+}
+
+.headerRowWrapper {
+  padding: 0 32px;
+}
+
+.headerRow {
+  border-bottom: 1px solid #e3e5ec;
+}
+
+.borderedRow {
+  border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
+}
+
+.clickableRow {
+  cursor: pointer;
+}
+
+.cell {
+  padding: 12px 16px;
+  &:first-child {
+    padding-left: 8px;
+  }
+  &:last-child {
+    padding-right: 8px;
+  }
+}
+
+.headerCell {
+  @extend .cell;
+
+  position: relative;
+  user-select: none;
+}
+
+.sortIconWrapper {
+  height: 16px;
+  margin-left: 4px;
+}
+
+.headerColumnDelimiter {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  background-color: #b8bdce;
+}
+
+.scrollIconBox {
+  position: absolute;
+  right: 50px;
+  bottom: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.layoutScrollWrapper {
+  position: relative;
+  flex: 1 1 0;
+  padding: 0 24px;
+}

@@ -1,8 +1,12 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel } from 'interfaces';
-import type { IGetAccountsResponseDto } from 'interfaces/client';
+import type { IFilterPanel, ITagsPanel, Sorting } from 'interfaces';
+import type { IGetAccountsResponseDto, IStatementHistoryRow } from 'interfaces/client';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
+import { COLUMN_NAMES } from './table/constants';
+
+/** Состояние сортровки по умолчанию. */
+export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.CREATED_AT, desc: false }];
 
 /** Контекст скроллера "История запросов". */
 export interface IHistoryScrollerContext {
@@ -20,6 +24,14 @@ export interface IHistoryScrollerContext {
   tagsPanel: ITagsPanel;
   /** Счета пользователя, для использования в селекте выбора счёта. */
   accounts: IGetAccountsResponseDto[];
+  /** Выписки. Строки скроллера. */
+  statements: IStatementHistoryRow[];
+  /** Общее количество выписок, подходящих под условия фильтрации. */
+  totalStatementsAmount: number;
+  /** Сортировка. */
+  sorting?: Sorting;
+  /** Установить сортировку. */
+  setSorting(value: Sorting): void;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -50,6 +62,10 @@ const DEFAULT_CONTEXT_VALUE: IHistoryScrollerContext = {
     onClear: noop,
     opened: false,
   },
+  statements: [],
+  totalStatementsAmount: 0,
+  sorting: DEFAULT_SORTING,
+  setSorting: noop,
 };
 
 /** Контекст скроллера "История запросов". */
