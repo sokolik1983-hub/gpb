@@ -9,3 +9,5 @@ export const COMMON_STREAM_URL = {
   /** [Выписки] История запросов. */
   STATEMENT_HISTORY: '/statement/history',
 };
+
+export * from './statuses';

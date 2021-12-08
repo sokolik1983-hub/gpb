@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
+import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
-import { DATE_PERIODS } from 'interfaces/client';
 import { statementService } from 'services/statement-service';
 import { DATE_ISO_FORMAT, DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { noop, getYesterday } from 'utils';

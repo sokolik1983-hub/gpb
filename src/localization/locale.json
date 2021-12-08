@@ -77,6 +77,92 @@
   "historyScroller.tags.values.signaturePresence.no": {
     "ru": "Нет"
   },
+  "historyScroller.headers.createdAt": {
+    "ru": "Дата запроса"
+  },
+  "historyScroller.headers.accountNumber": {
+    "ru": "Счёт"
+  },
+  "historyScroller.headers.period": {
+    "ru": "Период"
+  },
+  "historyScroller.headers.statementFormat": {
+    "ru": "Формат"
+  },
+  "historyScroller.headers.status": {
+    "ru": "Статус"
+  },
+  "historyScroller.table.total": {
+    "ru": "Запросы"
+  },
+  "historyScroller.table.totalValue": {
+    "@total": "number",
+    "@exists": "number",
+    "ru": "{exists} из {total}"
+  },
+  "historyScroller.table.placeholder": {
+    "ru": "У вас пока не было запросов выписки"
+  },
+  "historyScroller.table.allAccounts": {
+    "ru": "Все счета всех организаций"
+  },
+  "historyScroller.table.prefixedByPlus": {
+    "@value": "number",
+    "ru": "+{value}"
+  },
+  "historyScroller.table.separatedByDashes": {
+    "@dateFrom": "string",
+    "@dateTo": "string",
+    "ru": "{dateFrom}–{dateTo}"
+  },
+  "historyScroller.period.labels.selectPeriod": {
+    "ru": "За период"
+  },
+  "historyScroller.period.labels.yesterday": {
+    "ru": "За вчера"
+  },
+  "historyScroller.period.labels.today": {
+    "ru": "За сегодня"
+  },
+  "historyScroller.period.labels.last3Days": {
+    "ru": "За последние 3 дня"
+  },
+  "historyScroller.period.labels.currentMonth": {
+    "ru": "За текущий месяц"
+  },
+  "historyScroller.period.labels.lastMonth": {
+    "ru": "За прошлый месяц"
+  },
+  "historyScroller.period.labels.previousQuarter": {
+    "ru": "За предыдущий квартал"
+  },
+  "historyScroller.statementFormat.labels.onScreen": {
+    "ru": "На экране"
+  },
+  "historyScroller.statementFormat.labels.c1": {
+    "ru": "1С"
+  },
+  "historyScroller.statementFormat.labels.txt": {
+    "ru": "TXT"
+  },
+  "historyScroller.statementFormat.labels.pdf": {
+    "ru": "PDF"
+  },
+  "historyScroller.statementFormat.labels.rtf": {
+    "ru": "RTF"
+  },
+  "historyScroller.statementFormat.labels.excel": {
+    "ru": "EXCEL"
+  },
+  "historyScroller.statementFormat.labels.xps": {
+    "ru": "XPS"
+  },
+  "historyScroller.statementFormat.labels.mt940": {
+    "ru": "MT940"
+  },
+  "historyScroller.statementFormat.labels.multicash": {
+    "ru": "Multicash"
+  },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
   },

@@ -1,3 +1,6 @@
+import type { Sorting } from 'interfaces';
+import { SORT_DIRECTION } from '@platform/core';
+import type { IMetaData } from '@platform/services';
 import type { IOption } from '@platform/ui';
 
 /**
@@ -23,3 +26,15 @@ export const orderTags = (tags: Array<IOption<string>>, tagsOrder: string[]): Ar
 
   return orderedTags;
 };
+
+/**
+ * Преобразует стейт сортировки таблицы, в форму подходящую для запроса на сервер.
+ *
+ * @param sorting - Стейт сортировки таблицы.
+ */
+export const convertTableSortingToMetaData = (sorting: Sorting): IMetaData['sort'] =>
+  sorting.reduce((acc, item) => {
+    acc[item.id] = item.desc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
+
+    return acc;
+  }, {});

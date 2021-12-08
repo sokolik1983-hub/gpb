@@ -1,5 +1,4 @@
-import type { STATEMENT_STATUSES } from 'interfaces';
-import type { DATE_PERIODS } from 'interfaces/client';
+import type { STATEMENT_STATUSES, DATE_PERIODS } from 'interfaces';
 import type { EMPTY_VALUE } from 'stream-constants';
 
 /** Стейт формы фильтрации. */

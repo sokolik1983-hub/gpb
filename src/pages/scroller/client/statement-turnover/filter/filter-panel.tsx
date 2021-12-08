@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { DatePeriodField, AccountsField } from 'components';
 import { useDateRangeRestriction } from 'hooks';
+import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/client';
-import { DATE_PERIODS } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';

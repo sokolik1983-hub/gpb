@@ -3,7 +3,7 @@ import { GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
 import { AccountNumberCell, OrganizationCell, IncomingBalanceCell, OutcomeCell, IncomeCell, OutgoingBalanceCell } from './cells';
-import { COLUMN_NAMES } from './constatnts';
+import { COLUMN_NAMES } from './constants';
 import { isGroupedAccounts } from './utils';
 
 /**

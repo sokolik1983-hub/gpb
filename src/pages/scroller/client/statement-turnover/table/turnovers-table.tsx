@@ -8,7 +8,7 @@ import { Box } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { getColumns } from './columns';
-import { COLUMN_NAMES } from './constatnts';
+import { COLUMN_NAMES } from './constants';
 import { Placeholder } from './placeholder';
 import css from './styles.scss';
 import { TableBody } from './table-body';

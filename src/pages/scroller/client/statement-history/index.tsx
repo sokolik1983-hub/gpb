@@ -1,16 +1,17 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
-import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
-import type { IFilterPanel } from 'interfaces';
-import { AdditionalFilter } from 'pages/scroller/client/statement-history/filter/additional-filter';
-import { TagsPanel } from 'pages/scroller/client/statement-history/filter/tags-panel';
-import type { IHistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
-import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
+import type { IFilterPanel, Sorting } from 'interfaces';
+import { Table } from 'pages/scroller/client/statement-history/table';
 import { useFilter, FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
 import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
+import { AdditionalFilter } from './filter/additional-filter';
+import { TagsPanel } from './filter/tags-panel';
+import type { IHistoryScrollerContext } from './history-scroller-context';
+import { HistoryScrollerContext, DEFAULT_SORTING } from './history-scroller-context';
+import { useGetStatementList } from './hooks';
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -23,9 +24,10 @@ export const StatementHistoryScrollerPage = () => {
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
   // endregion
 
-  const { filterPanel, tagsPanel } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
+  const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
@@ -38,31 +40,43 @@ export const StatementHistoryScrollerPage = () => {
   // Вызывается один раз.
   const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
 
+  const {
+    response: { data: statements, total: totalStatementsAmount },
+    isStatementsError,
+    isStatementsFetching,
+  } = useGetStatementList({ filters: filterValues, formValues: properlyTypedFilterPanel.values, sorting });
+
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
-      hasError: hasError || isAccountsError,
+      hasError: hasError || isAccountsError || isStatementsError,
       setHasError,
-      isLoading: isLoading || isAccountsFetching,
+      isLoading: isLoading || isAccountsFetching || isStatementsFetching,
       setIsLoading,
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
       accounts,
+      statements,
+      totalStatementsAmount,
+      sorting,
+      setSorting,
     }),
-    [accounts, hasError, isAccountsError, isAccountsFetching, isLoading, properlyTypedFilterPanel, tagsPanel]
+    [
+      accounts,
+      hasError,
+      isAccountsError,
+      isAccountsFetching,
+      isLoading,
+      isStatementsError,
+      isStatementsFetching,
+      properlyTypedFilterPanel,
+      sorting,
+      statements,
+      tagsPanel,
+      totalStatementsAmount,
+    ]
   );
 
-  // TODO: Хук для отладки UI. При реализации таблицы скроллера убрать.
-  useEffect(() => {
-    setIsLoading(true);
-    void new Promise(resolve => {
-      setTimeout(() => {
-        setIsLoading(false);
-        resolve('');
-      }, 500);
-    });
-  }, [filterPanel.values]);
-
-  if (hasError || isAccountsError) {
+  if (hasError || isAccountsError || isStatementsError) {
     return (
       <MainLayout>
         <FatalErrorContent />
@@ -81,8 +95,7 @@ export const StatementHistoryScrollerPage = () => {
             tagsPanel={TagsPanel}
             tagsState={tagsPanel}
           />
-          {/* TODO: лоадер для разработки. Удалить при разработке таблицы скроллера. */}
-          {isLoading && <ScrollerSpinnerPlaceholder />}
+          <Table />
         </ScrollerPageLayout>
       </MainLayout>
     </HistoryScrollerContext.Provider>

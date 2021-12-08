@@ -1,12 +1,13 @@
 import { createContext } from 'react';
 import type { IFilterPanel, Sorting } from 'interfaces';
+import { DATE_PERIODS } from 'interfaces';
 import type { IGetAccountsResponseDto, IGetTurnoversResponseDto } from 'interfaces/client';
-import { GROUPING_VALUES, DATE_PERIODS } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/client';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
-import { COLUMN_NAMES } from './table/constatnts';
+import { COLUMN_NAMES } from './table/constants';
 
-/** Состояние фильтров по умолчанию. */
+/** Состояние сортировки по умолчанию. */
 export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.INCOME, desc: true }];
 
 /** Контекст скроллера "Обороты". */
