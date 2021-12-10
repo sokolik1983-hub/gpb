@@ -1,5 +1,6 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel, Sorting } from 'interfaces';
+import { PAGE_SIZES } from 'components/pagination';
+import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
 import type { IGetAccountsResponseDto, IStatementHistoryRow } from 'interfaces/client';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
@@ -7,6 +8,12 @@ import { COLUMN_NAMES } from './table/constants';
 
 /** Состояние сортровки по умолчанию. */
 export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.CREATED_AT, desc: false }];
+
+/** Состояние пагинации по умолчанию. */
+export const DEFAULT_PAGINATION: IPagination = {
+  pageSize: PAGE_SIZES.PER_25,
+  pageIndex: 0,
+};
 
 /** Контекст скроллера "История запросов". */
 export interface IHistoryScrollerContext {
@@ -32,6 +39,10 @@ export interface IHistoryScrollerContext {
   sorting?: Sorting;
   /** Установить сортировку. */
   setSorting(value: Sorting): void;
+  /** Стейт пагинации. */
+  pagination: IPagination;
+  /** Устанавливает стейт пагинации. */
+  setPagination(value: IPagination): void;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -49,13 +60,13 @@ const DEFAULT_CONTEXT_VALUE: IHistoryScrollerContext = {
   },
   filterPanel: {
     values: {
-      date: '',
+      createdAt: '',
       dateFrom: '',
       dateTo: '',
-      selectedAccounts: [],
-      datePeriod: '',
+      accountIds: [],
+      periodType: '',
       status: '',
-      signaturePresence: false,
+      signed: false,
     },
     onClose: noop,
     onOk: noop,
@@ -66,6 +77,8 @@ const DEFAULT_CONTEXT_VALUE: IHistoryScrollerContext = {
   totalStatementsAmount: 0,
   sorting: DEFAULT_SORTING,
   setSorting: noop,
+  pagination: DEFAULT_PAGINATION,
+  setPagination: noop,
 };
 
 /** Контекст скроллера "История запросов". */

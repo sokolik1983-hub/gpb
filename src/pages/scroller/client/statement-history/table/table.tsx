@@ -3,7 +3,7 @@ import React, { useContext, useMemo, useEffect } from 'react';
 import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
-import { useTable, useSortBy, useResizeColumns, useBlockLayout } from 'react-table';
+import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination } from 'react-table';
 import { Horizon, Typography, Gap } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
@@ -11,13 +11,16 @@ import css from './styles.scss';
 
 /** Таблица скроллера истории запросов. */
 export const Table: FC = () => {
-  const { statements, isLoading, totalStatementsAmount, sorting, setSorting } = useContext(HistoryScrollerContext);
+  const { statements, isLoading, totalStatementsAmount, sorting, setSorting, pagination, setPagination } = useContext(
+    HistoryScrollerContext
+  );
 
   const initialState = useMemo(
     () => ({
       sortBy: sorting,
+      ...pagination,
     }),
-    [sorting]
+    [sorting, pagination]
   );
 
   const tableInstance = useTable<IStatementHistoryRow>(
@@ -26,22 +29,31 @@ export const Table: FC = () => {
       columns,
       disableMultiSort: true,
       disableSortRemove: true,
+      manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
+      pageCount: Math.ceil(totalStatementsAmount / pagination.pageSize),
       initialState,
     },
     useSortBy,
+    usePagination,
     useResizeColumns,
     useBlockLayout
   );
 
   const {
-    state: { sortBy },
+    state: { sortBy, pageIndex, pageSize },
   } = tableInstance;
 
   useEffect(() => {
     setSorting(sortBy);
   }, [setSorting, sortBy]);
+
+  const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
+
+  useEffect(() => {
+    setPagination(newPaginationState);
+  }, [setPagination, newPaginationState]);
 
   return (
     <>

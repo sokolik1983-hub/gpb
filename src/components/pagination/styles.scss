@@ -1,0 +1,17 @@
+.paginationWrapper {
+  padding: 0 8px;
+  line-height: 32px;
+}
+
+.nextPageIcon {
+  vertical-align: middle;
+}
+
+.paginationItem {
+  cursor: pointer;
+  user-select: none;
+}
+
+.currentPaginationItem {
+  cursor: default;
+}

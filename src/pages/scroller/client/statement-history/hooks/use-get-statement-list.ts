@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import type { Sorting } from 'interfaces';
+import type { Sorting, IPagination } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
-import { convertTableSortingToMetaData } from 'utils';
+import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
 import type { ICollectionResponse } from '@platform/services';
 import type { IMetaData } from '@platform/services/client';
 import type { IFormState } from '../filter';
@@ -20,19 +20,24 @@ interface IUseGetStatementListArgs {
   formValues: IFormState;
   /** Состояние сортировки таблицы. */
   sorting: Sorting;
+  /** Состояние пагинации. */
+  pagination: IPagination;
 }
 
 /** Возвращает данные для отображения в скроллере истории запросов выписок. */
-export const useGetStatementList = ({ filters, formValues, sorting }: IUseGetStatementListArgs) => {
-  // @ts-expect-error: TODO добавить значения для пагинации, при реализации пагинации
-  const requestDto: IMetaData = useMemo(() => ({ filters, sort: convertTableSortingToMetaData(sorting) }), [filters, sorting]);
+export const useGetStatementList = ({ filters, formValues, sorting, pagination }: IUseGetStatementListArgs) => {
+  const requestDto: IMetaData = useMemo(
+    () => ({ filters, sort: convertTableSortingToMetaData(sorting), ...convertTablePaginationToMetaData(pagination) }),
+    [filters, sorting, pagination]
+  );
 
   const { data = DEFAULT_RESPONSE, isFetching: isStatementsFetching, isError: isStatementsError } = useQuery<
     ICollectionResponse<IStatementHistoryRow>
   >({
     queryKey: ['@eco/statement', 'history', requestDto],
     queryFn: () => statementService.getStatementList(requestDto),
-    enabled: Boolean(formValues?.selectedAccounts?.length),
+    enabled: Boolean(formValues?.accountIds?.length),
+    keepPreviousData: true,
     retry: false,
   });
 

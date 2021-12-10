@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { TagsPanelView } from 'components';
-import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { STATUS_LABELS } from 'stream-constants/client';
@@ -42,21 +41,18 @@ export const TagsPanel = () => {
     const value = formValues[name];
 
     switch (name) {
-      case FORM_FIELDS.DATE_PERIOD:
+      case FORM_FIELDS.PERIOD_TYPE:
         return DATE_PERIOD_OPTIONS.find(item => item.value === value)?.label;
       case FORM_FIELDS.STATUS:
         return STATUS_LABELS[value];
-      case FORM_FIELDS.SIGNATURE_PRESENCE:
-        return locale.historyScroller.tags.values.signaturePresence.yes;
+      case FORM_FIELDS.SIGNED:
+        return '';
       default:
         return value;
     }
   };
 
-  const preparedTags = orderTags(tags, FIELDS_WITH_TAGS).filter(
-    // Для чекбоксов, в значении false теги не отображаются.
-    tag => values[tag.value] !== false
-  );
+  const preparedTags = orderTags(tags, FIELDS_WITH_TAGS).filter(tag => Boolean(values[tag.value]));
 
   const resetFilters = () => {
     const newValues = getValuesAfterResetTags(values, FIELDS_WITH_TAGS);

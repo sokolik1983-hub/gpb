@@ -22,7 +22,7 @@ const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>((
   return (
     <TypographyElement inline line={'NOWRAP'}>
       {item}
-      {additionalAmount && (
+      {additionalAmount !== 0 && (
         <>
           {', '}
           <TypographyElement inline fill={'ACCENT'} innerRef={ref}>

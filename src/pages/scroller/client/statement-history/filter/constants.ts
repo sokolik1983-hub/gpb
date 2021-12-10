@@ -6,6 +6,7 @@ import { STATUS_LABELS } from 'stream-constants/client';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
 import { filterFields, byLabel } from '@platform/services';
+import { dateWithEndOfDay, dateWithStartOfDay } from '@platform/tools/date-time';
 import type { IOption } from '@platform/ui';
 import type { IFormState } from './interfaces';
 
@@ -14,57 +15,69 @@ export const getPath = pathGenerator<IFormState>();
 
 /** Поля формы фильтра. */
 export const FORM_FIELDS = {
-  /** */
-  DATE: getPath('date'),
+  /** Дата создания запроса. */
+  CREATED_AT: getPath('createdAt'),
   /** Дата с.  */
   DATE_FROM: getPath('dateFrom'),
   /** Дата по. */
   DATE_TO: getPath('dateTo'),
   /** Счета. */
-  SELECTED_ACCOUNTS: getPath('selectedAccounts'),
+  ACCOUNT_IDS: getPath('accountIds'),
   /** Временной период. */
-  DATE_PERIOD: getPath('datePeriod'),
+  PERIOD_TYPE: getPath('periodType'),
   /** Статус. */
   STATUS: getPath('status'),
   /** Наличие ЭП. */
-  SIGNATURE_PRESENCE: getPath('signaturePresence'),
+  SIGNED: getPath('signed'),
+};
+
+/**
+ * Отображает статусы выбираемые в селекте фильтра статусов,
+ * на массивы статусов соответствующие этим статусам.
+ */
+const STATUSES_BY_SELECTED_STATUS = {
+  [STATEMENT_STATUSES.NEW]: [STATEMENT_STATUSES.NEW],
+  [STATEMENT_STATUSES.DELIVERED]: [STATEMENT_STATUSES.DELIVERED, STATEMENT_STATUSES.DETAILS_VALID],
+  [STATEMENT_STATUSES.RECEIVED]: [STATEMENT_STATUSES.RECEIVED],
+  [STATEMENT_STATUSES.EXECUTED]: [STATEMENT_STATUSES.EXECUTED],
+  [STATEMENT_STATUSES.DENIED]: [STATEMENT_STATUSES.EXECUTED],
 };
 
 /** Значения полей и условия фильтрации для useFilter. */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.DATE_FROM]: filterFields.ge('', FORM_FIELDS.DATE),
-  [FORM_FIELDS.DATE_TO]: filterFields.le('', FORM_FIELDS.DATE),
-  [FORM_FIELDS.SELECTED_ACCOUNTS]: filterFields.in([], FORM_FIELDS.SELECTED_ACCOUNTS),
-  [FORM_FIELDS.DATE_PERIOD]: filterFields.eq('', FORM_FIELDS.DATE_PERIOD),
-  [FORM_FIELDS.STATUS]: filterFields.eq('', FORM_FIELDS.STATUS),
-  [FORM_FIELDS.SIGNATURE_PRESENCE]: filterFields.eq(false, FORM_FIELDS.SIGNATURE_PRESENCE),
+  [FORM_FIELDS.DATE_FROM]: filterFields.ge('', FORM_FIELDS.CREATED_AT, value => dateWithStartOfDay(value as string)),
+  [FORM_FIELDS.DATE_TO]: filterFields.le('', FORM_FIELDS.CREATED_AT, value => dateWithEndOfDay(value as string)),
+  [FORM_FIELDS.ACCOUNT_IDS]: filterFields.in([], FORM_FIELDS.ACCOUNT_IDS),
+  [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq('', FORM_FIELDS.PERIOD_TYPE),
+  [FORM_FIELDS.STATUS]: filterFields.in([], FORM_FIELDS.STATUS, (value): STATEMENT_STATUSES[] => {
+    // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
+    const selectedStatus = value as keyof typeof STATUSES_BY_SELECTED_STATUS | typeof EMPTY_VALUE;
+
+    return selectedStatus === EMPTY_VALUE ? [] : STATUSES_BY_SELECTED_STATUS[selectedStatus];
+  }),
+  [FORM_FIELDS.SIGNED]: filterFields.eq(false, FORM_FIELDS.SIGNED),
 };
 
 /** Лейблы тегов полей фильтра. */
 export const tagLabels = {
   // Здесь должны быть только те поля теги для которых нужно отображать на панели тегов.
-  [FORM_FIELDS.DATE_PERIOD]: locale.historyScroller.tags.labels.datePeriod,
+  [FORM_FIELDS.PERIOD_TYPE]: locale.historyScroller.tags.labels.datePeriod,
   [FORM_FIELDS.STATUS]: locale.historyScroller.tags.labels.status,
-  [FORM_FIELDS.SIGNATURE_PRESENCE]: locale.historyScroller.tags.labels.signaturePresence,
+  [FORM_FIELDS.SIGNED]: locale.historyScroller.tags.labels.signaturePresence,
 };
 
 /**
  * Определяет теги для каких полей будут отображаться,
  * порядок следования тегов в массиве определяет порядок следования тэгов в UI.
  */
-export const FIELDS_WITH_TAGS = [FORM_FIELDS.DATE_PERIOD, FORM_FIELDS.STATUS, FORM_FIELDS.SIGNATURE_PRESENCE];
+export const FIELDS_WITH_TAGS = [FORM_FIELDS.PERIOD_TYPE, FORM_FIELDS.STATUS, FORM_FIELDS.SIGNED];
 
-/** Опции селекта выбора статуса. */
+/** Отсортированные опции фильтра статусов. */
 export const STATUS_OPTIONS: Array<IOption<STATEMENT_STATUSES | typeof EMPTY_VALUE>> = [
   { value: EMPTY_VALUE, label: locale.form.labels.selectAll },
-  ...[
-    { value: STATEMENT_STATUSES.NEW, label: STATUS_LABELS.NEW },
-    { value: STATEMENT_STATUSES.DELIVERED, label: STATUS_LABELS.DELIVERED },
-    { value: STATEMENT_STATUSES.DETAILS_VALID, label: STATUS_LABELS.DETAILS_VALID },
-    { value: STATEMENT_STATUSES.RECEIVED, label: STATUS_LABELS.RECEIVED },
-    { value: STATEMENT_STATUSES.EXECUTED, label: STATUS_LABELS.EXECUTED },
-    { value: STATEMENT_STATUSES.DENIED, label: STATUS_LABELS.DENIED },
-  ].sort(byLabel),
+  ...(Object.keys(STATUSES_BY_SELECTED_STATUS) as Array<keyof typeof STATUSES_BY_SELECTED_STATUS>)
+    .map(item => ({ label: STATUS_LABELS[item], value: item }))
+    .sort(byLabel),
 ];
 
 /** Опции селекта выбора периода. */

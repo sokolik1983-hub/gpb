@@ -1,4 +1,4 @@
-import type { Sorting } from 'interfaces';
+import type { Sorting, IPagination } from 'interfaces';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IMetaData } from '@platform/services';
 import type { IOption } from '@platform/ui';
@@ -38,3 +38,15 @@ export const convertTableSortingToMetaData = (sorting: Sorting): IMetaData['sort
 
     return acc;
   }, {});
+
+/**
+ * Преобразует стейт пагинации таблицы, в форму подходящую для запроса на сервер.
+ *
+ * @param param - Стейт пагинации таблицы.
+ * @param param.pageSize - Количество записей на странице.
+ * @param param.pageIndex - Номер текущей страницы. Нумерация начинается с нуля.
+ */
+export const convertTablePaginationToMetaData = ({ pageSize, pageIndex }: IPagination): Pick<IMetaData, 'offset' | 'pageSize'> => ({
+  pageSize,
+  offset: pageSize * pageIndex,
+});

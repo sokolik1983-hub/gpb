@@ -41,6 +41,9 @@
   "scroller.filter.buttons.reset": {
     "ru":  "Сбросить"
   },
+  "scroller.pagination.displayBy": {
+    "ru":  "Отображать по:"
+  },
   "historyScroller.filter.placeholders.accounts": {
     "ru": "Счета"
   },
@@ -57,7 +60,7 @@
     "ru": "Электронная  \n подпись"
   },
   "historyScroller.filter.labels.datePeriod": {
-    "ru": "Период"
+    "ru": "Тип периода"
   },
   "historyScroller.tags.labels.organization": {
     "ru": "Организация:"
@@ -66,16 +69,10 @@
     "ru": "Статус:"
   },
   "historyScroller.tags.labels.signaturePresence": {
-    "ru": "Электронная подпись:"
+    "ru": "Есть электронная подпись"
   },
   "historyScroller.tags.labels.datePeriod": {
-    "ru": "Период:"
-  },
-  "historyScroller.tags.values.signaturePresence.yes": {
-    "ru": "Есть"
-  },
-  "historyScroller.tags.values.signaturePresence.no": {
-    "ru": "Нет"
+    "ru": "Тип периода:"
   },
   "historyScroller.headers.createdAt": {
     "ru": "Дата запроса"

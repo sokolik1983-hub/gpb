@@ -37,6 +37,13 @@ export const FilterLayout: FC<IFilterProps> = ({
 
   const { onClick: expandAdditionalFilter } = tagsState;
 
+  const handleApply = useCallback(
+    formValues => {
+      onOk(formValues);
+    },
+    [onOk]
+  );
+
   const handleToggleClick = useCallback(() => {
     if (opened) {
       closeAdditionalFilters();
@@ -44,13 +51,6 @@ export const FilterLayout: FC<IFilterProps> = ({
       expandAdditionalFilter();
     }
   }, [opened, closeAdditionalFilters, expandAdditionalFilter]);
-
-  const handleApply = useCallback(
-    formValues => {
-      onOk(formValues);
-    },
-    [onOk]
-  );
 
   const handleReset = useCallback(() => {
     onClear();

@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
-import type { IFilterPanel, Sorting } from 'interfaces';
+import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { useFilter, FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
@@ -10,7 +10,7 @@ import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
 import { TagsPanel } from './filter/tags-panel';
 import type { IHistoryScrollerContext } from './history-scroller-context';
-import { HistoryScrollerContext, DEFAULT_SORTING } from './history-scroller-context';
+import { HistoryScrollerContext, DEFAULT_SORTING, DEFAULT_PAGINATION } from './history-scroller-context';
 import { useGetStatementList } from './hooks';
 
 /**
@@ -25,6 +25,7 @@ export const StatementHistoryScrollerPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
+  const [pagination, setPagination] = useState<IPagination>(DEFAULT_PAGINATION);
   // endregion
 
   const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
@@ -44,7 +45,7 @@ export const StatementHistoryScrollerPage = () => {
     response: { data: statements, total: totalStatementsAmount },
     isStatementsError,
     isStatementsFetching,
-  } = useGetStatementList({ filters: filterValues, formValues: properlyTypedFilterPanel.values, sorting });
+  } = useGetStatementList({ filters: filterValues, formValues: properlyTypedFilterPanel.values, sorting, pagination });
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
@@ -59,6 +60,8 @@ export const StatementHistoryScrollerPage = () => {
       totalStatementsAmount,
       sorting,
       setSorting,
+      pagination,
+      setPagination,
     }),
     [
       accounts,
@@ -68,6 +71,7 @@ export const StatementHistoryScrollerPage = () => {
       isLoading,
       isStatementsError,
       isStatementsFetching,
+      pagination,
       properlyTypedFilterPanel,
       sorting,
       statements,

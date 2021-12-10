@@ -12,13 +12,13 @@ export const AdditionalFilter: FC = () => (
       <Pattern.Span size={6}>
         <FilterFormElement label={locale.historyScroller.filter.labels.datePeriod}>
           {/* Выбор периода. */}
-          <Fields.Select extraSmall name={FORM_FIELDS.DATE_PERIOD} options={DATE_PERIOD_OPTIONS} />
+          <Fields.Select extraSmall name={FORM_FIELDS.PERIOD_TYPE} options={DATE_PERIOD_OPTIONS} />
         </FilterFormElement>
       </Pattern.Span>
       <Pattern.Span size={6}>
         <FilterFormElement label={locale.historyScroller.filter.labels.signaturePresence}>
           {/* Выбор статуса. */}
-          <Fields.Checkbox extraSmall name={FORM_FIELDS.SIGNATURE_PRESENCE} />
+          <Fields.Checkbox extraSmall name={FORM_FIELDS.SIGNED} />
         </FilterFormElement>
       </Pattern.Span>
     </Pattern>
