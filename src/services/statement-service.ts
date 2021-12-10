@@ -5,9 +5,8 @@ import type {
   IGetTurnoversRequestDto,
   IStatementHistoryRow,
 } from 'interfaces/client';
-import { statementHistoryResponce } from 'mocks';
 import type { ICollectionResponse } from '@platform/services';
-import { request } from '@platform/services';
+import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
 
 const BASE_URL = '/api/statement-client';
@@ -34,15 +33,13 @@ export const statementService = {
       url: `${STATEMENT_URL}/get-turnovers`,
     }).then(result => result.data.data),
   /** Возвращает список выписок для скроллера истории запросов. */
-  // TODO: заглушка. Удалить при подключени реста
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<IStatementHistoryRow>> =>
-    new Promise<ICollectionResponse<IStatementHistoryRow>>(resolve => {
-      setTimeout(() => {
-        resolve({
-          data: statementHistoryResponce,
-          total: 100,
-        });
-      }, 500);
-    }),
+    request({
+      url: `${STATEMENT_URL}/get-page`,
+      method: 'POST',
+      data: metadataToRequestParams(metaData),
+    }).then(res => ({
+      data: res.data.data.page,
+      total: res.data.data.size,
+    })),
 };

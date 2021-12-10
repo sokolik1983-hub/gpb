@@ -5,21 +5,10 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'borderedRow': string;
-    'cell': string;
-    'clickableRow': string;
-    'headerCell': string;
-    'headerColumnDelimiter': string;
-    'headerRow': string;
-    'headerRowWrapper': string;
-    'layoutScrollWrapper': string;
-    'overlaying': string;
-    'scrollIconBox': string;
-    'sortIconWrapper': string;
-    'table': string;
-    'tableBody': string;
-    'tableBodyOverlay': string;
-    'tableWrapper': string;
+    'currentPaginationItem': string;
+    'nextPageIcon': string;
+    'paginationItem': string;
+    'paginationWrapper': string;
   }
 }
 

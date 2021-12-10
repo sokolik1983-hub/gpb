@@ -4,17 +4,17 @@ import type { EMPTY_VALUE } from 'stream-constants';
 /** Стейт формы фильтрации. */
 export interface IFormState {
   /** Дата. */
-  date: string;
+  createdAt: string;
   /** Дата с. */
   dateFrom?: string;
   /** Дата по. */
   dateTo?: string;
   /** Счета. */
-  selectedAccounts: string[];
+  accountIds: string[];
   /** Временной период. */
-  datePeriod: DATE_PERIODS | typeof EMPTY_VALUE;
+  periodType: DATE_PERIODS | typeof EMPTY_VALUE;
   /** Статус. */
   status: STATEMENT_STATUSES | typeof EMPTY_VALUE;
   /** Наличие ЭП. */
-  signaturePresence: boolean;
+  signed: boolean;
 }

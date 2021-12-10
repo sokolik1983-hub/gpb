@@ -131,6 +131,15 @@ export default {
 				},
 			},
 		},
+		pagination: {
+			/**
+			 * @ru
+			 * Отображать по:
+			 */
+			get displayBy() {
+				return t('scroller.pagination.displayBy');
+			},
+		},
 	},
 	historyScroller: {
 		filter: {
@@ -175,7 +184,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Период
+				 * Тип периода
 				 */
 				get datePeriod() {
 					return t('historyScroller.filter.labels.datePeriod');
@@ -200,35 +209,17 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Электронная подпись:
+				 * Есть электронная подпись
 				 */
 				get signaturePresence() {
 					return t('historyScroller.tags.labels.signaturePresence');
 				},
 				/**
 				 * @ru
-				 * Период:
+				 * Тип периода:
 				 */
 				get datePeriod() {
 					return t('historyScroller.tags.labels.datePeriod');
-				},
-			},
-			values: {
-				signaturePresence: {
-					/**
-					 * @ru
-					 * Есть
-					 */
-					get yes() {
-						return t('historyScroller.tags.values.signaturePresence.yes');
-					},
-					/**
-					 * @ru
-					 * Нет
-					 */
-					get no() {
-						return t('historyScroller.tags.values.signaturePresence.no');
-					},
 				},
 			},
 		},

@@ -26,16 +26,16 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   isLoading,
   placeholderLabel,
 }: IScrollerTableViewProps<Row>) => {
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } = tableInstance;
+  const { getTableProps, headerGroups, rows } = tableInstance;
 
   let tableContent: React.ReactNode;
 
   if (!isLoading && rows.length === 0) {
     tableContent = <ScrollerPlaceholder label={placeholderLabel} />;
-  } else if (isLoading) {
+  } else if (isLoading && rows.length === 0) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
-    tableContent = <TableBody prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />;
+    tableContent = <TableBody isLoading={isLoading} tableInstance={tableInstance} />;
   }
 
   return (

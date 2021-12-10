@@ -12,9 +12,9 @@ export const COLUMN_NAMES = {
   // Запрашиваемые счета.
   ACCOUNT_NUMBER: 'accountNumber',
   // Тип периода.
-  PERIOD_TYPE: 'periodType',
+  PERIOD_TYPE: 'statementOptions.periodType',
   // Формат выписки.
-  STATEMENT_FORMAT: 'statementFormat',
+  STATEMENT_FORMAT: 'requestOptions.format',
   // Формат выписки.
   STATUS: 'status',
 } as const;

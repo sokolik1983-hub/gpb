@@ -17,7 +17,7 @@ import css from './styles.scss';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<IFormState>();
 
-  const { selectedAccounts, dateFrom, dateTo } = values;
+  const { accountIds, dateFrom, dateTo } = values;
 
   const {
     filterPanel: { onOk, opened },
@@ -39,7 +39,7 @@ export const QuickFilter: FC = () => {
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, selectedAccounts, dateFrom, dateTo]);
+  }, [onOk, accountIds, dateFrom, dateTo]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены счета.
@@ -78,7 +78,7 @@ export const QuickFilter: FC = () => {
         {/* Выбор счетов. */}
         <AccountsField
           accounts={accounts}
-          name={FORM_FIELDS.SELECTED_ACCOUNTS}
+          name={FORM_FIELDS.ACCOUNT_IDS}
           placeholder={locale.historyScroller.filter.placeholders.accounts}
         />
       </Pattern.Span>
