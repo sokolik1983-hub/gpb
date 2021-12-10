@@ -13,12 +13,10 @@ declare namespace StylesScssModule {
     'headerRow': string;
     'headerRowWrapper': string;
     'layoutScrollWrapper': string;
-    'overlaying': string;
     'scrollIconBox': string;
     'sortIconWrapper': string;
     'table': string;
     'tableBody': string;
-    'tableBodyOverlay': string;
     'tableWrapper': string;
   }
 }

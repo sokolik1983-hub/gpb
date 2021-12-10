@@ -16,6 +16,7 @@ declare namespace StylesScssModule {
     'totalSpinnerWrapper': string;
     'totalsCell': string;
     'totalsRow': string;
+    'totalsRowWrapper': string;
     'totalsWrapper': string;
   }
 }

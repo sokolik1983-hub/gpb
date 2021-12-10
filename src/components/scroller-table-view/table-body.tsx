@@ -1,11 +1,11 @@
 import type { FC } from 'react';
 import React from 'react';
-import { PAGE_SIZES } from 'components/pagination';
-import { Pagination } from 'components/pagination/pagination';
-import { TableRow } from 'components/scroller-table-view/row';
 import { useScrollButton } from 'hooks/use-scroll-button';
 import type { TableBodyProps, TableInstance } from 'react-table';
 import { Box, LayoutScroll, ROLE } from '@platform/ui';
+import { PAGE_SIZES, Pagination } from '../pagination';
+import { ScrollerLoadingOverlay } from '../scroller-loading-overlay';
+import { TableRow } from '../scroller-table-view/row';
 import css from './styles.scss';
 
 /** Свойства компонента TableBody. */
@@ -39,7 +39,7 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading }) => 
 
             return <TableRow key={accountInfoRowKey} row={row} />;
           })}
-          {isLoading && <Box className={css.tableBodyOverlay} />}
+          {isLoading && <ScrollerLoadingOverlay />}
         </Box>
         {pageCount * pageSize > PAGE_SIZES.PER_25 && <Pagination tableInstance={tableInstance} />}
       </LayoutScroll>

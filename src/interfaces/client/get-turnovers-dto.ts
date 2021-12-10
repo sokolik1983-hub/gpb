@@ -73,12 +73,10 @@ export interface IGroupInfo {
   /** Наименование филиала организации. */
   branchName?: string;
   /** Данные о валюте. */
-  currencyData?: {
-    /** Наименование валюты. */
-    currencyName?: string;
-    /** Буквенный код валюты. */
-    currencyCode?: string;
-  };
+  /** Наименование валюты. */
+  currencyName?: string;
+  /** Буквенный код валюты. */
+  currencyCode?: string;
   /** Тип группировки (тип группирующей строки в таблице скроллера). */
   groupingType: GROUPING_TYPE;
   /** Приход. */
@@ -105,13 +103,10 @@ export interface IAccountTurnoversInfo {
   accountType: string;
   /** Наименование подразделения организации. */
   branchName: string;
-  /** Данные о валюте. */
-  currencyData: {
-    /** Наименование валюты. */
-    currencyName?: string;
-    /** Буквенный код валюты. */
-    currencyCode?: string;
-  };
+  /** Наименование валюты. */
+  currencyName?: string;
+  /** Буквенный код валюты. */
+  currencyCode?: string;
   /** Приход. */
   income: number;
   /** Входящий остаток. */
