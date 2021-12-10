@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import type { Sorting, IPagination } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
@@ -26,10 +25,7 @@ interface IUseGetStatementListArgs {
 
 /** Возвращает данные для отображения в скроллере истории запросов выписок. */
 export const useGetStatementList = ({ filters, formValues, sorting, pagination }: IUseGetStatementListArgs) => {
-  const requestDto: IMetaData = useMemo(
-    () => ({ filters, sort: convertTableSortingToMetaData(sorting), ...convertTablePaginationToMetaData(pagination) }),
-    [filters, sorting, pagination]
-  );
+  const requestDto: IMetaData = { filters, sort: convertTableSortingToMetaData(sorting), ...convertTablePaginationToMetaData(pagination) };
 
   const { data = DEFAULT_RESPONSE, isFetching: isStatementsFetching, isError: isStatementsError } = useQuery<
     ICollectionResponse<IStatementHistoryRow>
@@ -37,6 +33,7 @@ export const useGetStatementList = ({ filters, formValues, sorting, pagination }
     queryKey: ['@eco/statement', 'history', requestDto],
     queryFn: () => statementService.getStatementList(requestDto),
     enabled: Boolean(formValues?.accountIds?.length),
+    cacheTime: 0,
     keepPreviousData: true,
     retry: false,
   });

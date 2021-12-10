@@ -7,3 +7,4 @@ export * from './filter-form-element';
 export * from './scroller-page-layout';
 export * from './pop-up';
 export * from './scroller-placeholder';
+export * from './scroller-loading-overlay';

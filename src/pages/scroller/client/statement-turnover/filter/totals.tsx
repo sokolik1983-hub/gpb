@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { Spinner } from 'components/spinner';
+import { ScrollerLoadingOverlay } from 'components';
 import { locale } from 'localization';
 import { TurnoverScrollerContext } from 'pages/scroller/client/statement-turnover/turnover-scroller-context';
 import { Box, useToggle, Typography, Gap } from '@platform/ui';
@@ -17,16 +17,8 @@ export const Totals: FC = () => {
 
   const visibleTotals = isAllTotalVisible ? total : total.slice(0, 2);
 
-  if (!isLoading && total.length === 0) {
+  if (total.length === 0) {
     return null;
-  }
-
-  if (isLoading && total.length === 0) {
-    return (
-      <Box className={css.totalSpinnerWrapper}>
-        <Spinner />
-      </Box>
-    );
   }
 
   return (
@@ -56,26 +48,29 @@ export const Totals: FC = () => {
       </Box>
 
       {/* Строки таблицы */}
-      {visibleTotals.map(({ income, currencyCode, outcome, outgoingBalance, incomingBalance }) => (
-        <Box key={currencyCode} className={css.totalsRow}>
-          <Box className={css.totalsCell}>
-            <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: incomingBalance, currencyCode })}</Typography.Text>
+      <Box className={css.totalsRowWrapper}>
+        {visibleTotals.map(({ income, currencyCode, outcome, outgoingBalance, incomingBalance }) => (
+          <Box key={currencyCode} className={css.totalsRow}>
+            <Box className={css.totalsCell}>
+              <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: incomingBalance, currencyCode })}</Typography.Text>
+            </Box>
+            <Box className={css.totalsCell}>
+              <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
+                {locale.moneyString.negative({ amount: outcome, currencyCode })}
+              </Typography.Text>
+            </Box>
+            <Box className={css.totalsCell}>
+              <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
+                {locale.moneyString.positive({ amount: income, currencyCode })}
+              </Typography.Text>
+            </Box>
+            <Box className={css.totalsCell}>
+              <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: outgoingBalance, currencyCode })}</Typography.Text>
+            </Box>
           </Box>
-          <Box className={css.totalsCell}>
-            <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
-              {locale.moneyString.negative({ amount: outcome, currencyCode })}
-            </Typography.Text>
-          </Box>
-          <Box className={css.totalsCell}>
-            <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
-              {locale.moneyString.positive({ amount: income, currencyCode })}
-            </Typography.Text>
-          </Box>
-          <Box className={css.totalsCell}>
-            <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: outgoingBalance, currencyCode })}</Typography.Text>
-          </Box>
-        </Box>
-      ))}
+        ))}
+        {isLoading && <ScrollerLoadingOverlay />}
+      </Box>
 
       {/* Кнопка управления видимостью строк. */}
       {total.length > 2 && (

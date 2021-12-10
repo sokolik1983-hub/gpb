@@ -5,8 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'rotating': string;
-    'spinner': string;
+    'overlaying': string;
+    'tableBodyOverlay': string;
   }
 }
 
