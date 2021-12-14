@@ -25,7 +25,11 @@ interface IUseGetStatementListArgs {
 
 /** Возвращает данные для отображения в скроллере истории запросов выписок. */
 export const useGetStatementList = ({ filters, formValues, sorting, pagination }: IUseGetStatementListArgs) => {
-  const requestDto: IMetaData = { filters, sort: convertTableSortingToMetaData(sorting), ...convertTablePaginationToMetaData(pagination) };
+  const requestDto: IMetaData = {
+    filters,
+    sort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
+    ...convertTablePaginationToMetaData(pagination),
+  };
 
   const { data = DEFAULT_RESPONSE, isFetching: isStatementsFetching, isError: isStatementsError } = useQuery<
     ICollectionResponse<IStatementHistoryRow>

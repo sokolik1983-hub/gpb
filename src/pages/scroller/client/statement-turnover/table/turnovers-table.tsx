@@ -68,7 +68,6 @@ export const TurnoversTable: FC = () => {
       columns,
       getSubRows,
       disableMultiSort: false,
-      disableSortRemove: true,
       manualSortBy: true,
       expandSubRows: false,
       initialState,

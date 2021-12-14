@@ -37,7 +37,7 @@ export const useTurnovers = (filterValues: IFormState, sorting: Sorting) => {
       dateFrom,
       accountsIds: accounts,
     },
-    sort: convertTableSortingToDto(sorting),
+    sort: sorting.length > 0 ? convertTableSortingToDto(sorting) : undefined,
   };
 
   const { data = DEFAULT_TURNOVERS, isFetching: isTurnoversFetching, isError: isTurnoversError } = useQuery<IGetTurnoversResponseDto>({

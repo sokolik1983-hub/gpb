@@ -28,7 +28,6 @@ export const Table: FC = () => {
       data: statements,
       columns,
       disableMultiSort: true,
-      disableSortRemove: true,
       manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
