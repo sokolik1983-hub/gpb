@@ -66,8 +66,8 @@ export const Period: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> =
       break;
     default:
       dateText = locale.historyScroller.table.separatedByDashes({
-        dateTo: formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT }),
-        dateFrom: formatDateTime(periodEnd, { keepLocalTime: true, format: DATE_FORMAT }),
+        dateTo: formatDateTime(periodEnd, { keepLocalTime: true, format: DATE_FORMAT }),
+        dateFrom: formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT }),
       });
       break;
   }
