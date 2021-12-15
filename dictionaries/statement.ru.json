@@ -69,7 +69,7 @@
   "turnoverScroller.filter.tags.dateTo": "Дата до:",
   "turnoverScroller.filter.tags.accounts": "Счёт:",
   "turnoverScroller.filter.tags.organizations": "Организация:",
-  "turnoverScroller.filter.labels.onlyActiveAccounts": "Только активные счета",
+  "turnoverScroller.filter.labels.onlyActiveAccounts": "Только действующие счета",
   "turnoverScroller.filter.grouping.noGrouping": "Без группировки",
   "turnoverScroller.filter.grouping.organizationsAndCurrencies": "По организациям и валютам",
   "turnoverScroller.filter.grouping.organizations": "По организациям",

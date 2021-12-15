@@ -555,7 +555,7 @@ export default {
 			labels: {
 				/**
 				 * @ru
-				 * Только активные счета
+				 * Только действующие счета
 				 */
 				get onlyActiveAccounts() {
 					return t('turnoverScroller.filter.labels.onlyActiveAccounts');
