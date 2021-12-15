@@ -30,12 +30,12 @@ CreatedAtCell.displayName = 'CreatedAtCell';
 
 /** Информация по счёту и по организации. */
 export const AccountNumber: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
-  const { accountIds, accountNumbers, organizationNames } = value;
+  const { accountsIds, accountNumbers, organizationNames } = value;
   const { accounts } = useContext(HistoryScrollerContext);
 
   const formattedAccounts = useMemo(() => accountNumbers.map(item => formatAccountCode(item)), [accountNumbers]);
 
-  if (accountIds.length === accounts.length) {
+  if (accountsIds.length === accounts.length) {
     return <Typography.Text>{locale.historyScroller.table.allAccounts}</Typography.Text>;
   }
 

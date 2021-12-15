@@ -7,7 +7,7 @@ export interface IStatementHistoryRow {
   /** Дата запроса. */
   createdAt: string;
   /** ID счетов. */
-  accountIds: string[];
+  accountsIds: string[];
   /** Номера счетов. */
   accountNumbers: string[];
   /** Наименование организаций. */
