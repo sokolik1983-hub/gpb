@@ -141,6 +141,108 @@ export default {
 			},
 		},
 	},
+	transactionsScroller: {
+		/**
+		 * @ru
+		 * Выписка c {dateFrom} по {dateTo}
+		 */
+		title: (p: { dateFrom: string; dateTo: string }) => t('transactionsScroller.title', p),
+		placeholder: {
+			/**
+			 * @ru
+			 * Поиск по таблице
+			 */
+			get tableSearch() {
+				return t('transactionsScroller.placeholder.tableSearch');
+			},
+			/**
+			 * @ru
+			 * Сумма от
+			 */
+			get amountFrom() {
+				return t('transactionsScroller.placeholder.amountFrom');
+			},
+			/**
+			 * @ru
+			 * Сумма по
+			 */
+			get amountTo() {
+				return t('transactionsScroller.placeholder.amountTo');
+			},
+		},
+		labels: {
+			/**
+			 * @ru
+			 * Номер документа
+			 */
+			get docNumber() {
+				return t('transactionsScroller.labels.docNumber');
+			},
+			/**
+			 * @ru
+			 * Дата платежа
+			 */
+			get date() {
+				return t('transactionsScroller.labels.date');
+			},
+			/**
+			 * @ru
+			 * Операция
+			 */
+			get transactionType() {
+				return t('transactionsScroller.labels.transactionType');
+			},
+			/**
+			 * @ru
+			 * Контрагент
+			 */
+			get counterparty() {
+				return t('transactionsScroller.labels.counterparty');
+			},
+			/**
+			 * @ru
+			 * ИНН: {inn}
+			 */
+			counterpartyInn: (p: { inn: string }) => t('transactionsScroller.labels.counterpartyInn', p),
+		},
+		tags: {
+			/**
+			 * @ru
+			 * Номер документа:
+			 */
+			get docNumber() {
+				return t('transactionsScroller.tags.docNumber');
+			},
+			/**
+			 * @ru
+			 * Дата запроса c:
+			 */
+			get dateFrom() {
+				return t('transactionsScroller.tags.dateFrom');
+			},
+			/**
+			 * @ru
+			 * Дата запроса по:
+			 */
+			get dateTo() {
+				return t('transactionsScroller.tags.dateTo');
+			},
+			/**
+			 * @ru
+			 * Операция:
+			 */
+			get transactionType() {
+				return t('transactionsScroller.tags.transactionType');
+			},
+			/**
+			 * @ru
+			 * Контрагент:
+			 */
+			get counterparty() {
+				return t('transactionsScroller.tags.counterparty');
+			},
+		},
+	},
 	historyScroller: {
 		filter: {
 			placeholders: {
@@ -176,8 +278,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Электронная
-				 *  подпись
+				 * Электронная подпись
 				 */
 				get signaturePresence() {
 					return t('historyScroller.filter.labels.signaturePresence');
@@ -762,6 +863,33 @@ export default {
 			 */
 			get selectAll() {
 				return t('form.labels.selectAll');
+			},
+		},
+		placeholder: {
+			/**
+			 * @ru
+			 * дд.мм.гггг
+			 */
+			get date() {
+				return t('form.placeholder.date');
+			},
+		},
+	},
+	transactionType: {
+		labels: {
+			/**
+			 * @ru
+			 * Поступления
+			 */
+			get income() {
+				return t('transactionType.labels.income');
+			},
+			/**
+			 * @ru
+			 * Списания
+			 */
+			get outcome() {
+				return t('transactionType.labels.outcome');
 			},
 		},
 	},

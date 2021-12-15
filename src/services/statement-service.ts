@@ -4,7 +4,9 @@ import type {
   IGetTurnoversResponseDto,
   IGetTurnoversRequestDto,
   IStatementHistoryRow,
+  IGetCounterpartiesResponseDto,
 } from 'interfaces/client';
+import { counterparty } from 'mocks/counterparty';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -42,4 +44,14 @@ export const statementService = {
       data: res.data.data.page,
       total: res.data.data.size,
     })),
+  /** Возвращает список контрагентов. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getCounterparties(statementId: string): Promise<IGetCounterpartiesResponseDto[]> {
+    // TODO: Заглушка удалить при подключении реста
+    return new Promise(resolve => {
+      setTimeout(() => {
+        resolve(counterparty);
+      }, 300);
+    });
+  },
 };

@@ -8,6 +8,8 @@ export const COMMON_STREAM_URL = {
   STATEMENT_TURNOVER: '/statement/turnover',
   /** [Выписки] История запросов. */
   STATEMENT_HISTORY: '/statement/history',
+  /** [Выписки] Проводки. */
+  STATEMENT_TRANSACTIONS: '/statement/transactions',
 };
 
 export * from './statuses';
