@@ -44,7 +44,7 @@ export interface IGetTurnoversRequestDto {
   /** Группировка записей. */
   groupBy: GROUPING_VALUES;
   /** Параметры сортировки. */
-  sort: {
+  sort?: {
     /** Имя поля по которому происходит сортировка. */
     field: string;
     /** Порядок сортировки. */

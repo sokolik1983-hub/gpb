@@ -5,10 +5,6 @@ import type { IGetAccountsResponseDto, IGetTurnoversResponseDto } from 'interfac
 import { GROUPING_VALUES } from 'interfaces/client';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
-import { COLUMN_NAMES } from './table/constants';
-
-/** Состояние сортировки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.INCOME, desc: true }];
 
 /** Контекст скроллера "Обороты". */
 export interface ITurnoverScrollerContext {
@@ -39,7 +35,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   isLoading: false,
   setIsLoading: noop,
   accounts: [],
-  sorting: DEFAULT_SORTING,
+  sorting: [],
   setSorting: noop,
   turnovers: {
     total: [],
