@@ -9,7 +9,7 @@ import type { IFormState } from './filter/interfaces';
 import { useTurnovers } from './hooks';
 import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
-import { TurnoverScrollerContext, DEFAULT_SORTING } from './turnover-scroller-context';
+import { TurnoverScrollerContext } from './turnover-scroller-context';
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -22,7 +22,7 @@ export const StatementTurnoverScrollerPage = () => {
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
+  const [sorting, setSorting] = useState<Sorting>([]);
   // endregion
 
   const { filterPanel } = useFilter({ fields, labels });

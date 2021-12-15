@@ -6,9 +6,6 @@ import { GROUPING_VALUES } from 'interfaces/client';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
 
-/** Состояние сортировки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [];
-
 /** Контекст скроллера "Обороты". */
 export interface ITurnoverScrollerContext {
   /** Ошибка сетевого запроса. */
@@ -38,7 +35,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   isLoading: false,
   setIsLoading: noop,
   accounts: [],
-  sorting: DEFAULT_SORTING,
+  sorting: [],
   setSorting: noop,
   turnovers: {
     total: [],
