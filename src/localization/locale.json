@@ -44,8 +44,53 @@
   "scroller.pagination.displayBy": {
     "ru":  "Отображать по:"
   },
+  "transactionsScroller.title": {
+    "@dateFrom": "string",
+    "@dateTo": "string",
+    "ru": "Выписка c {dateFrom} по {dateTo}"
+  },
   "historyScroller.filter.placeholders.accounts": {
     "ru": "Счета"
+  },
+  "transactionsScroller.placeholder.tableSearch": {
+    "ru": "Поиск по таблице"
+  },
+  "transactionsScroller.placeholder.amountFrom": {
+    "ru": "Сумма от"
+  },
+  "transactionsScroller.placeholder.amountTo": {
+    "ru": "Сумма по"
+  },
+  "transactionsScroller.labels.docNumber": {
+    "ru": "Номер документа"
+  },
+  "transactionsScroller.labels.date": {
+    "ru": "Дата платежа"
+  },
+  "transactionsScroller.labels.transactionType": {
+    "ru": "Операция"
+  },
+  "transactionsScroller.labels.counterparty": {
+    "ru": "Контрагент"
+  },
+  "transactionsScroller.labels.counterpartyInn": {
+    "@inn": "string",
+    "ru": "ИНН: {inn}"
+  },
+  "transactionsScroller.tags.docNumber": {
+    "ru": "Номер документа:"
+  },
+  "transactionsScroller.tags.dateFrom": {
+    "ru": "Дата запроса c:"
+  },
+  "transactionsScroller.tags.dateTo": {
+    "ru": "Дата запроса по:"
+  },
+  "transactionsScroller.tags.transactionType": {
+    "ru": "Операция:"
+  },
+  "transactionsScroller.tags.counterparty": {
+    "ru": "Контрагент:"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
@@ -57,7 +102,7 @@
     "ru": "Статус"
   },
   "historyScroller.filter.labels.signaturePresence": {
-    "ru": "Электронная  \n подпись"
+    "ru": "Электронная подпись"
   },
   "historyScroller.filter.labels.datePeriod": {
     "ru": "Тип периода"
@@ -307,5 +352,14 @@
   },
   "form.labels.selectAll": {
     "ru": "Все"
+  },
+  "form.placeholder.date": {
+    "ru": "дд.мм.гггг"
+  },
+  "transactionType.labels.income": {
+    "ru": "Поступления"
+  },
+  "transactionType.labels.outcome": {
+    "ru": "Списания"
   }
 }

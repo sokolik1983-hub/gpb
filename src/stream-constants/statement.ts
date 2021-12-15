@@ -1,4 +1,4 @@
-import { DATE_PERIODS, STATEMENT_FORMATS } from 'interfaces';
+import { DATE_PERIODS, STATEMENT_FORMATS, TRANSACTION_TYPES } from 'interfaces';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 
@@ -37,4 +37,10 @@ export const STATEMENT_FORMAT_LABELS = {
   [STATEMENT_FORMATS.XPS]: locale.historyScroller.statementFormat.labels.xps,
   [STATEMENT_FORMATS.MT_940]: locale.historyScroller.statementFormat.labels.mt940,
   [STATEMENT_FORMATS.MULTICASH]: locale.historyScroller.statementFormat.labels.multicash,
+};
+
+/** Лейблы типов операции. */
+export const TRANSACTION_TYPE_LABELS = {
+  [TRANSACTION_TYPES.INCOME]: locale.transactionType.labels.income,
+  [TRANSACTION_TYPES.OUTCOME]: locale.transactionType.labels.outcome,
 };
