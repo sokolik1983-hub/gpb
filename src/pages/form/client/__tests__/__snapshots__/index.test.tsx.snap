@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`ClientFormPage renders 1`] = `
-<t>
-  Клиентская форма
-</t>
-`;

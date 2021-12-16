@@ -34,9 +34,7 @@ export const StatementHistoryScrollerPage = () => {
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
-  const headerProps = useTurnoverScrollerHeaderProps([
-    /* TODO: Передавать выбранные в фильтре счета. */
-  ]);
+  const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
   const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
