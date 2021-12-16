@@ -6,6 +6,8 @@ import type {
   IStatementHistoryRow,
   IGetCounterpartiesResponseDto,
 } from 'interfaces/client';
+import type { ILatestStatementDto } from 'interfaces/client/latest-statement-dto';
+import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
 import { counterparty } from 'mocks/counterparty';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
@@ -54,4 +56,16 @@ export const statementService = {
       }, 300);
     });
   },
+  /** Создать запрос выписки. */
+  createStatement: (data: IRequestStatementDto): Promise<IRequestStatementDto> =>
+    request({
+      url: `${STATEMENT_URL}/statement`,
+      method: 'POST',
+      data,
+    }).then(r => r.data.data),
+  /** Найти последний запрос выписки у текущего пользователя. */
+  findLatest: (): Promise<ILatestStatementDto> =>
+    request({
+      url: `${STATEMENT_URL}/find-latest`,
+    }).then(r => r.data.data),
 };

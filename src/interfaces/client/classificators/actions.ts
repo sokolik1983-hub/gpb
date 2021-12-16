@@ -1,0 +1,6 @@
+export enum ACTIONS {
+  DOWNLOAD = 'DOWNLOAD',
+  SEND_TO_EMAIL = 'SEND_TO_EMAIL',
+  PRINT = 'PRINT',
+  VIEW = 'VIEW',
+}

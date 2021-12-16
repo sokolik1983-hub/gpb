@@ -874,6 +874,62 @@ export default {
 				return t('form.placeholder.date');
 			},
 		},
+		newRequestStatement: {
+			/**
+			 * @ru
+			 * Запрос выписки
+			 */
+			get title() {
+				return t('form.newRequestStatement.title');
+			},
+		},
+		buttons: {
+			download: {
+				/**
+				 * @ru
+				 * Скачать
+				 */
+				get label() {
+					return t('form.buttons.download.label');
+				},
+			},
+			sendToEmail: {
+				/**
+				 * @ru
+				 * Отправить на почту
+				 */
+				get label() {
+					return t('form.buttons.sendToEmail.label');
+				},
+			},
+			show: {
+				/**
+				 * @ru
+				 * Показать на экране
+				 */
+				get label() {
+					return t('form.buttons.show.label');
+				},
+			},
+			print: {
+				/**
+				 * @ru
+				 * Печать
+				 */
+				get label() {
+					return t('form.buttons.print.label');
+				},
+			},
+			cancel: {
+				/**
+				 * @ru
+				 * Отменить
+				 */
+				get label() {
+					return t('form.buttons.cancel.label');
+				},
+			},
+		},
 	},
 	transactionType: {
 		labels: {
@@ -890,6 +946,208 @@ export default {
 			 */
 			get outcome() {
 				return t('transactionType.labels.outcome');
+			},
+		},
+	},
+	common: {
+		period: {
+			/**
+			 * @ru
+			 * Период
+			 */
+			get label() {
+				return t('common.period.label');
+			},
+		},
+		accounts: {
+			/**
+			 * @ru
+			 * Счёт
+			 */
+			get label() {
+				return t('common.accounts.label');
+			},
+		},
+		operations: {
+			/**
+			 * @ru
+			 * Операции
+			 */
+			get label() {
+				return t('common.operations.label');
+			},
+			/**
+			 * @ru
+			 * Все
+			 */
+			get ALL() {
+				return t('common.operations.ALL');
+			},
+			/**
+			 * @ru
+			 * Поступления
+			 */
+			get INCOME() {
+				return t('common.operations.INCOME');
+			},
+			/**
+			 * @ru
+			 * Списания
+			 */
+			get OUTCOME() {
+				return t('common.operations.OUTCOME');
+			},
+		},
+		fileFormat: {
+			/**
+			 * @ru
+			 * Формат файла
+			 */
+			get label() {
+				return t('common.fileFormat.label');
+			},
+			/**
+			 * @ru
+			 * 1С
+			 */
+			get C1() {
+				return t('common.fileFormat.C1');
+			},
+			/**
+			 * @ru
+			 * Текст
+			 */
+			get TXT() {
+				return t('common.fileFormat.TXT');
+			},
+			/**
+			 * @ru
+			 * PDF
+			 */
+			get PDF() {
+				return t('common.fileFormat.PDF');
+			},
+			/**
+			 * @ru
+			 * Excel
+			 */
+			get EXCEL() {
+				return t('common.fileFormat.EXCEL');
+			},
+		},
+		creationParams: {
+			/**
+			 * @ru
+			 * Параметры
+			 */
+			get label() {
+				return t('common.creationParams.label');
+			},
+			/**
+			 * @ru
+			 * Отдельным файлом по каждому счёту
+			 */
+			get separateAccountsFiles() {
+				return t('common.creationParams.separateAccountsFiles');
+			},
+			/**
+			 * @ru
+			 * Скрыть нулевые обороты
+			 */
+			get hideEmptyTurnovers() {
+				return t('common.creationParams.hideEmptyTurnovers');
+			},
+			/**
+			 * @ru
+			 * С электронной подписью банка в формате PDF
+			 */
+			get withSign() {
+				return t('common.creationParams.withSign');
+			},
+			/**
+			 * @ru
+			 * С комплектом документов
+			 */
+			get withDocumentsSet() {
+				return t('common.creationParams.withDocumentsSet');
+			},
+		},
+		documentsSetParams: {
+			/**
+			 * @ru
+			 * Комплект документов
+			 */
+			get label() {
+				return t('common.documentsSetParams.label');
+			},
+			/**
+			 * @ru
+			 * Отдельными файлами
+			 */
+			get separateDocumentsFiles() {
+				return t('common.documentsSetParams.separateDocumentsFiles');
+			},
+			/**
+			 * @ru
+			 * Только документы выписки
+			 */
+			get onlyRequestStatementDocuments() {
+				return t('common.documentsSetParams.onlyRequestStatementDocuments');
+			},
+		},
+		debitParams: {
+			/**
+			 * @ru
+			 * Дебетовые
+			 */
+			get label() {
+				return t('common.debitParams.label');
+			},
+			/**
+			 * @ru
+			 * Документы выписки
+			 */
+			get includeStatements() {
+				return t('common.debitParams.includeStatements');
+			},
+			/**
+			 * @ru
+			 * Документы основания
+			 */
+			get includeOrders() {
+				return t('common.debitParams.includeOrders');
+			},
+		},
+		creditParams: {
+			/**
+			 * @ru
+			 * Кредитные
+			 */
+			get label() {
+				return t('common.creditParams.label');
+			},
+			/**
+			 * @ru
+			 * Документы выписки
+			 */
+			get includeStatements() {
+				return t('common.creditParams.includeStatements');
+			},
+			/**
+			 * @ru
+			 * Документы основания
+			 */
+			get includeOrders() {
+				return t('common.creditParams.includeOrders');
+			},
+		},
+		email: {
+			/**
+			 * @ru
+			 * Адрес электронной почты
+			 */
+			get label() {
+				return t('common.email.label');
 			},
 		},
 	},

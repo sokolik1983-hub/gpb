@@ -1,5 +1,5 @@
 import React from 'react';
-import { ClientFormPage } from 'pages/form/client';
+import { RequestStatementForm } from 'pages/form/client';
 import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-history';
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
@@ -26,5 +26,5 @@ export const routes = [
     component={StatementTransactionScrollerPage}
     path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/:statementId`}
   />,
-  <Route key="statement-client-form" component={ClientFormPage} path={`${COMMON_STREAM_URL.STATEMENT}/:id`} />,
+  <Route key="statement-client-form" component={RequestStatementForm} path={`${COMMON_STREAM_URL.STATEMENT}/:id`} />,
 ];

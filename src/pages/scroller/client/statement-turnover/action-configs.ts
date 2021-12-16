@@ -1,11 +1,11 @@
-import { createStatementAction } from 'actions/client';
+import { newStatement } from 'actions/client';
 import { locale } from 'localization';
 import type { IActionWithAuth } from '@platform/services';
 import { Icons } from '@platform/ui';
 
-/** Функция запроса выписки. */
+/** Функция создания нового запроса выписки. */
 export const CREATE_STATEMENT: IActionWithAuth = {
-  action: createStatementAction,
+  action: newStatement,
   authorities: [],
   label: locale.action.labels.createStatement,
   name: 'CREATE_STATEMENT',

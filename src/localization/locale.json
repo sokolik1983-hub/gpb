@@ -361,5 +361,101 @@
   },
   "transactionType.labels.outcome": {
     "ru": "Списания"
+  },
+  "form.newRequestStatement.title": {
+    "ru": "Запрос выписки"
+  },
+  "common.period.label": {
+    "ru": "Период"
+  },
+  "common.accounts.label": {
+    "ru": "Счёт"
+  },
+  "common.operations.label": {
+    "ru": "Операции"
+  },
+  "common.operations.ALL": {
+    "ru": "Все"
+  },
+  "common.operations.INCOME": {
+    "ru": "Поступления"
+  },
+  "common.operations.OUTCOME": {
+    "ru": "Списания"
+  },
+  "common.fileFormat.label": {
+    "ru": "Формат файла"
+  },
+  "common.fileFormat.C1": {
+    "ru": "1С"
+  },
+  "common.fileFormat.TXT": {
+    "ru": "Текст"
+  },
+  "common.fileFormat.PDF": {
+    "ru": "PDF"
+  },
+  "common.fileFormat.EXCEL": {
+    "ru": "Excel"
+  },
+  "common.creationParams.label": {
+    "ru": "Параметры"
+  },
+  "common.creationParams.separateAccountsFiles": {
+    "ru": "Отдельным файлом по каждому счёту"
+  },
+  "common.creationParams.hideEmptyTurnovers": {
+    "ru": "Скрыть нулевые обороты"
+  },
+  "common.creationParams.withSign": {
+    "ru": "С электронной подписью банка в формате PDF"
+  },
+  "common.creationParams.withDocumentsSet": {
+    "ru": "С комплектом документов"
+  },
+  "common.documentsSetParams.label": {
+    "ru": "Комплект документов"
+  },
+  "common.documentsSetParams.separateDocumentsFiles": {
+    "ru": "Отдельными файлами"
+  },
+  "common.documentsSetParams.onlyRequestStatementDocuments": {
+    "ru": "Только документы выписки"
+  },
+  "common.debitParams.label": {
+    "ru": "Дебетовые"
+  },
+  "common.debitParams.includeStatements": {
+    "ru": "Документы выписки"
+  },
+  "common.debitParams.includeOrders": {
+    "ru": "Документы основания"
+  },
+  "common.creditParams.label": {
+    "ru": "Кредитные"
+  },
+  "common.creditParams.includeStatements": {
+    "ru": "Документы выписки"
+  },
+  "common.creditParams.includeOrders": {
+    "ru": "Документы основания"
+  },
+  "common.email.label": {
+    "ru": "Адрес электронной почты"
+  },
+  "form.buttons.download.label": {
+    "ru": "Скачать"
+  },
+  "form.buttons.sendToEmail.label": {
+    "ru": "Отправить на почту"
+  },
+  "form.buttons.show.label": {
+    "ru": "Показать на экране"
+  },
+  "form.buttons.print.label": {
+    "ru": "Печать"
+  },
+  "form.buttons.cancel.label": {
+    "ru": "Отменить"
   }
 }

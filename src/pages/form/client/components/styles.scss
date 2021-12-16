@@ -1,0 +1,31 @@
+.periodType {
+  width: 200px;
+}
+
+.date {
+  width: 148px;
+}
+
+.accounts {
+  width: 100%;
+}
+
+.email {
+  width: 532px;
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 718px;
+
+  &Label {
+    width: 162px;
+  }
+
+  &Children {
+    width: 100%;
+  }
+}
