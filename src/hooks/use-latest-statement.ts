@@ -6,7 +6,7 @@ import { statementService } from 'services';
 export const useLatestStatement = () => {
   const { data: latestStatement } = useQuery<ILatestStatementDto>({
     queryKey: ['@eco/statement', 'latest-statement'],
-    queryFn: () => statementService.findLatest(),
+    queryFn: statementService.findLatest,
     retry: false,
   });
 
