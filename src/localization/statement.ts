@@ -182,8 +182,8 @@ export default {
 			 * @ru
 			 * Дата платежа
 			 */
-			get date() {
-				return t('transactionsScroller.labels.date');
+			get paymentDate() {
+				return t('transactionsScroller.labels.paymentDate');
 			},
 			/**
 			 * @ru
@@ -204,6 +204,75 @@ export default {
 			 * ИНН: {inn}
 			 */
 			counterpartyInn: (p: { inn: string }) => t('transactionsScroller.labels.counterpartyInn', p),
+			/**
+			 * @ru
+			 * № {documentNumber}
+			 */
+			documentNumber: (p: { documentNumber: string }) => t('transactionsScroller.labels.documentNumber', p),
+			/**
+			 * @ru
+			 * от {date}
+			 */
+			documentDate: (p: { date: string }) => t('transactionsScroller.labels.documentDate', p),
+			/**
+			 * @ru
+			 * Счет
+			 */
+			get accountNumber() {
+				return t('transactionsScroller.labels.accountNumber');
+			},
+			/**
+			 * @ru
+			 * Организация
+			 */
+			get organizationName() {
+				return t('transactionsScroller.labels.organizationName');
+			},
+			/**
+			 * @ru
+			 * Входящий остаток
+			 */
+			get incomingBalance() {
+				return t('transactionsScroller.labels.incomingBalance');
+			},
+			/**
+			 * @ru
+			 * {amount} списаний
+			 */
+			outcomeTransactions: (p: { amount: number }) => t('transactionsScroller.labels.outcomeTransactions', p),
+			/**
+			 * @ru
+			 * {amount} поступлений
+			 */
+			incomeTransactions: (p: { amount: number }) => t('transactionsScroller.labels.incomeTransactions', p),
+			/**
+			 * @ru
+			 * Исходящий остаток
+			 */
+			get outgoingBalance() {
+				return t('transactionsScroller.labels.outgoingBalance');
+			},
+		},
+		table: {
+			/**
+			 * @ru
+			 * Проводок не найдено
+			 */
+			get placeholder() {
+				return t('transactionsScroller.table.placeholder');
+			},
+			/**
+			 * @ru
+			 * Операций:
+			 */
+			get total() {
+				return t('transactionsScroller.table.total');
+			},
+			/**
+			 * @ru
+			 * {exists} из {total}
+			 */
+			totalValue: (p: { total: number; exists: number }) => t('transactionsScroller.table.totalValue', p),
 		},
 		tags: {
 			/**
@@ -240,6 +309,82 @@ export default {
 			 */
 			get counterparty() {
 				return t('transactionsScroller.tags.counterparty');
+			},
+		},
+		headers: {
+			/**
+			 * @ru
+			 * Дата опер.
+			 */
+			get operationDate() {
+				return t('transactionsScroller.headers.operationDate');
+			},
+			/**
+			 * @ru
+			 * Документ
+			 */
+			get documentInfo() {
+				return t('transactionsScroller.headers.documentInfo');
+			},
+			/**
+			 * @ru
+			 * Контрагент
+			 */
+			get counterparty() {
+				return t('transactionsScroller.headers.counterparty');
+			},
+			/**
+			 * @ru
+			 * Списания
+			 */
+			get outcome() {
+				return t('transactionsScroller.headers.outcome');
+			},
+			/**
+			 * @ru
+			 * Поступления
+			 */
+			get income() {
+				return t('transactionsScroller.headers.income');
+			},
+			/**
+			 * @ru
+			 * Назначение
+			 */
+			get purpose() {
+				return t('transactionsScroller.headers.purpose');
+			},
+		},
+		footer: {
+			/**
+			 * @ru
+			 * Выбрано:
+			 */
+			get selected() {
+				return t('transactionsScroller.footer.selected');
+			},
+			/**
+			 * @ru
+			 * Поступления:
+			 */
+			get income() {
+				return t('transactionsScroller.footer.income');
+			},
+			/**
+			 * @ru
+			 * Списания:
+			 */
+			get outcome() {
+				return t('transactionsScroller.footer.outcome');
+			},
+		},
+		footerAction: {
+			/**
+			 * @ru
+			 * Экспорт
+			 */
+			get export() {
+				return t('transactionsScroller.footerAction.export');
 			},
 		},
 	},
@@ -780,17 +925,17 @@ export default {
 		 * @ru
 		 * {amount, money} {currencyCode}
 		 */
-		unsigned: (p: { amount: number; currencyCode: string }) => t('moneyString.unsigned', p),
+		unsigned: (p: { amount: string; currencyCode: string }) => t('moneyString.unsigned', p),
 		/**
 		 * @ru
 		 * -{amount, money} {currencyCode}
 		 */
-		negative: (p: { amount: number; currencyCode: string }) => t('moneyString.negative', p),
+		negative: (p: { amount: string; currencyCode: string }) => t('moneyString.negative', p),
 		/**
 		 * @ru
 		 * +{amount, money} {currencyCode}
 		 */
-		positive: (p: { amount: number; currencyCode: string }) => t('moneyString.positive', p),
+		positive: (p: { amount: string; currencyCode: string }) => t('moneyString.positive', p),
 	},
 	admin: {
 		form: {
@@ -1148,6 +1293,17 @@ export default {
 			 */
 			get label() {
 				return t('common.email.label');
+			},
+		},
+	},
+	table: {
+		header: {
+			/**
+			 * @ru
+			 * Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»
+			 */
+			get sortInfo() {
+				return t('table.header.sortInfo');
 			},
 		},
 	},

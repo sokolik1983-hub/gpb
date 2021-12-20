@@ -4,6 +4,7 @@ import cn from 'classnames';
 import type { Row } from 'react-table';
 import { Box, WithClickable } from '@platform/ui';
 import css from './styles.scss';
+import { SELECT_COLUMN_ID } from './use-checkbox-column';
 
 /** Свойства компонента TableRow. */
 export interface ITableRowProps {
@@ -22,8 +23,10 @@ export const TableRow: FC<ITableRowProps> = ({ row }) => {
           {row.cells.map(cell => {
             const { key: cellKey, ...cellProps } = cell.getCellProps();
 
+            const isCondensedColumn = cell.column.id === SELECT_COLUMN_ID;
+
             return (
-              <Box key={cellKey} {...cellProps} className={css.cell}>
+              <Box key={cellKey} {...cellProps} className={isCondensedColumn ? css.condensedCell : css.headerCell}>
                 {cell.render('Cell')}
               </Box>
             );

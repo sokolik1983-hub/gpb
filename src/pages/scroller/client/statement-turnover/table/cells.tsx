@@ -79,7 +79,7 @@ export const IncomingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
   const { incomingBalance, currencyCode } = value;
 
   // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
-  const amount = locale.moneyString.unsigned({ amount: incomingBalance!, currencyCode: currencyCode! });
+  const amount = locale.moneyString.unsigned({ amount: String(incomingBalance!), currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -105,7 +105,7 @@ export const OutcomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo |
   const { outcome, currencyCode } = value;
 
   // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
-  const amount = locale.moneyString.negative({ amount: outcome!, currencyCode: currencyCode! });
+  const amount = locale.moneyString.negative({ amount: String(outcome!), currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -135,7 +135,7 @@ export const IncomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | 
   const { income, currencyCode } = value;
 
   // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
-  const amount = locale.moneyString.positive({ amount: income!, currencyCode: currencyCode! });
+  const amount = locale.moneyString.positive({ amount: String(income!), currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
@@ -165,7 +165,7 @@ export const OutgoingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
   const { outgoingBalance, currencyCode } = value;
 
   // Non-null assertion используется потому, что ячейка вызывается только для тех строк, в которых определены значения
-  const amount = locale.moneyString.unsigned({ amount: outgoingBalance!, currencyCode: currencyCode! });
+  const amount = locale.moneyString.unsigned({ amount: String(outgoingBalance!), currencyCode: currencyCode! });
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {

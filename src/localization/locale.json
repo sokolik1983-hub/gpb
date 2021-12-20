@@ -64,7 +64,7 @@
   "transactionsScroller.labels.docNumber": {
     "ru": "Номер документа"
   },
-  "transactionsScroller.labels.date": {
+  "transactionsScroller.labels.paymentDate": {
     "ru": "Дата платежа"
   },
   "transactionsScroller.labels.transactionType": {
@@ -76,6 +76,9 @@
   "transactionsScroller.labels.counterpartyInn": {
     "@inn": "string",
     "ru": "ИНН: {inn}"
+  },
+  "transactionsScroller.table.placeholder": {
+    "ru": "Проводок не найдено"
   },
   "transactionsScroller.tags.docNumber": {
     "ru": "Номер документа:"
@@ -91,6 +94,72 @@
   },
   "transactionsScroller.tags.counterparty": {
     "ru": "Контрагент:"
+  },
+  "transactionsScroller.table.total": {
+    "ru": "Операций:"
+  },
+  "transactionsScroller.table.totalValue": {
+    "@total": "number",
+    "@exists": "number",
+    "ru": "{exists} из {total}"
+  },
+  "transactionsScroller.headers.operationDate": {
+    "ru": "Дата опер."
+  },
+  "transactionsScroller.headers.documentInfo": {
+    "ru": "Документ"
+  },
+  "transactionsScroller.headers.counterparty": {
+    "ru": "Контрагент"
+  },
+  "transactionsScroller.headers.outcome": {
+    "ru": "Списания"
+  },
+  "transactionsScroller.headers.income": {
+    "ru": "Поступления"
+  },
+  "transactionsScroller.headers.purpose": {
+    "ru": "Назначение"
+  },
+  "transactionsScroller.labels.documentNumber": {
+    "@documentNumber": "string",
+    "ru": "№ {documentNumber}"
+  },
+  "transactionsScroller.labels.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "transactionsScroller.labels.accountNumber": {
+    "ru": "Счет"
+  },
+  "transactionsScroller.labels.organizationName": {
+    "ru": "Организация"
+  },
+  "transactionsScroller.labels.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "transactionsScroller.labels.outcomeTransactions": {
+    "@amount": "number",
+    "ru": "{amount} списаний"
+  },
+  "transactionsScroller.labels.incomeTransactions": {
+    "@amount": "number",
+    "ru": "{amount} поступлений"
+  },
+  "transactionsScroller.labels.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "transactionsScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "transactionsScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "transactionsScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "transactionsScroller.footerAction.export": {
+    "ru": "Экспорт"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
@@ -312,17 +381,17 @@
     "ru": "Счета не найдены"
   },
   "moneyString.unsigned": {
-    "@amount": "number",
+    "@amount": "string",
     "@currencyCode": "string",
     "ru": "{amount, money} {currencyCode}"
   },
   "moneyString.negative": {
-    "@amount": "number",
+    "@amount": "string",
     "@currencyCode": "string",
     "ru": "-{amount, money} {currencyCode}"
   },
   "moneyString.positive": {
-    "@amount": "number",
+    "@amount": "string",
     "@currencyCode": "string",
     "ru": "+{amount, money} {currencyCode}"
   },
@@ -457,5 +526,8 @@
   },
   "form.buttons.cancel.label": {
     "ru": "Отменить"
+  },
+  "table.header.sortInfo": {
+    "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
   }
 }

@@ -1,8 +1,14 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
+import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
+import type { IGetCounterpartiesResponseDto, IStatementTransactionRow } from 'interfaces/client';
+import type { IStatement } from 'interfaces/client/statement';
+import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
+import { COLUMN_NAMES } from './table/constants';
+
+/** Состояние сортровки по умолчанию. */
+export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.OPERATION_DATE, desc: true }];
 
 /** Контекст скроллера "Проводки". */
 export interface ITransactionScrollerContext {
@@ -20,6 +26,24 @@ export interface ITransactionScrollerContext {
   tagsPanel: ITagsPanel;
   /** Контрагенты. */
   counterparties: IGetCounterpartiesResponseDto[];
+  /** Сортировка. */
+  sorting?: Sorting;
+  /** Установить сортировку. */
+  setSorting(value: Sorting): void;
+  /** Стейт пагинации. */
+  pagination: IPagination;
+  /** Устанавливает стейт пагинации. */
+  setPagination(value: IPagination): void;
+  /** Проводки для отображения в скроллере проводок. */
+  transactions: IStatementTransactionRow[];
+  /** Общее количество проводок, удовлетворяющих условиям фильтрации. */
+  totalTransactionsAmount: number;
+  /** Выписка, информация по которой отображается в скроллере. */
+  statement?: IStatement;
+  /** Выбранные строки в таблице скроллера. */
+  selectedRows: IStatementTransactionRow[];
+  /** Устанавливает выбранные строки в таблице скроллера. */
+  setSelectedRows(value: IStatementTransactionRow[]): void;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -42,7 +66,15 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
     opened: false,
   },
   counterparties: [],
+  sorting: DEFAULT_SORTING,
+  setSorting: noop,
+  pagination: DEFAULT_PAGINATION,
+  setPagination: noop,
+  transactions: [],
+  totalTransactionsAmount: 0,
+  selectedRows: [],
+  setSelectedRows: noop,
 };
 
-/** Контекст скроллера "История запросов". */
+/** Контекст скроллера "Проводки". */
 export const TransactionScrollerContext = createContext<ITransactionScrollerContext>(DEFAULT_CONTEXT_VALUE);

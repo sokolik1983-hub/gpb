@@ -52,20 +52,24 @@ export const Totals: FC = () => {
         {visibleTotals.map(({ income, currencyCode, outcome, outgoingBalance, incomingBalance }) => (
           <Box key={currencyCode} className={css.totalsRow}>
             <Box className={css.totalsCell}>
-              <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: incomingBalance, currencyCode })}</Typography.Text>
+              <Typography.Text align={'RIGHT'}>
+                {locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}
+              </Typography.Text>
             </Box>
             <Box className={css.totalsCell}>
               <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
-                {locale.moneyString.negative({ amount: outcome, currencyCode })}
+                {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
               </Typography.Text>
             </Box>
             <Box className={css.totalsCell}>
               <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
-                {locale.moneyString.positive({ amount: income, currencyCode })}
+                {locale.moneyString.positive({ amount: String(income), currencyCode })}
               </Typography.Text>
             </Box>
             <Box className={css.totalsCell}>
-              <Typography.Text align={'RIGHT'}>{locale.moneyString.unsigned({ amount: outgoingBalance, currencyCode })}</Typography.Text>
+              <Typography.Text align={'RIGHT'}>
+                {locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}
+              </Typography.Text>
             </Box>
           </Box>
         ))}

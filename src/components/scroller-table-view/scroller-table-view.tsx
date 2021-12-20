@@ -26,7 +26,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   isLoading,
   placeholderLabel,
 }: IScrollerTableViewProps<Row>) => {
-  const { getTableProps, headerGroups, rows } = tableInstance;
+  const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
 
   let tableContent: React.ReactNode;
 
@@ -41,7 +41,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   return (
     <Box className={css.tableWrapper}>
       <Box {...getTableProps()} className={css.table}>
-        <TableHeader headerGroups={headerGroups} />
+        <TableHeader disableMultiSort={disableMultiSort} headerGroups={headerGroups} />
         {tableContent}
       </Box>
     </Box>
