@@ -75,7 +75,7 @@ export const StatementTurnoverScrollerPage = () => {
   return (
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={false} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
           <Filter />
           <TurnoversTable />
         </ScrollerPageLayout>

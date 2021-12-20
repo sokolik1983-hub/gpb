@@ -8,6 +8,7 @@ declare namespace StylesScssModule {
     'borderedRow': string;
     'cell': string;
     'clickableRow': string;
+    'condensedCell': string;
     'headerCell': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
@@ -15,6 +16,7 @@ declare namespace StylesScssModule {
     'layoutScrollWrapper': string;
     'scrollIconBox': string;
     'sortIconWrapper': string;
+    'sortIndex': string;
     'table': string;
     'tableBody': string;
     'tableWrapper': string;

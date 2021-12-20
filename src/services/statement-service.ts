@@ -5,10 +5,14 @@ import type {
   IGetTurnoversRequestDto,
   IStatementHistoryRow,
   IGetCounterpartiesResponseDto,
+  IStatementTransactionRow,
 } from 'interfaces/client';
 import type { ILatestStatementDto } from 'interfaces/client/latest-statement-dto';
 import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
+import type { IStatement } from 'interfaces/client/statement';
 import { counterparty } from 'mocks/counterparty';
+import { statement } from 'mocks/statement';
+import { transactions } from 'mocks/transactions';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -56,6 +60,31 @@ export const statementService = {
       }, 300);
     });
   },
+  /** Возвращает список проводок. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getTransactionList: (metaData: IMetaData): Promise<ICollectionResponse<IStatementTransactionRow>> =>
+    // TODO: Заглушка удалить при подключении реста
+    new Promise(resolve => {
+      setTimeout(() => {
+        const { pageSize, offset } = metaData;
+
+        const out = transactions.slice(offset, offset + pageSize);
+
+        resolve({
+          data: out,
+          total: transactions.length,
+        });
+      }, 500);
+    }),
+  /** Возвращает выписку. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getStatement: (statementId: string): Promise<IStatement> =>
+    // TODO: Заглушка удалить при подключении реста
+    new Promise(resolve => {
+      setTimeout(() => {
+        resolve(statement);
+      }, 0);
+    }),
   /** Создать запрос выписки. */
   createStatement: (data: IRequestStatementDto): Promise<IRequestStatementDto> =>
     request({

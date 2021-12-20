@@ -36,7 +36,7 @@ export const AdditionalFilter: FC = () => {
       </Pattern.Span>
 
       <Pattern.Span size={6}>
-        <FilterFormElement label={locale.historyScroller.filter.labels.date}>
+        <FilterFormElement label={locale.transactionsScroller.labels.paymentDate}>
           <Horizon>
             <Box className={css.fieldWrapper}>
               {/* Дата платежа с. */}

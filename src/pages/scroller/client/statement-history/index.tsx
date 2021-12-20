@@ -4,13 +4,14 @@ import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
 import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
+import { DEFAULT_PAGINATION } from 'stream-constants';
 import { useFilter, FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
 import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
 import { TagsPanel } from './filter/tags-panel';
 import type { IHistoryScrollerContext } from './history-scroller-context';
-import { HistoryScrollerContext, DEFAULT_SORTING, DEFAULT_PAGINATION } from './history-scroller-context';
+import { HistoryScrollerContext, DEFAULT_SORTING } from './history-scroller-context';
 import { useGetStatementList } from './hooks';
 
 /**
@@ -89,7 +90,7 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={false} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             additionalFilter={AdditionalFilter}
             filterState={filterPanel}

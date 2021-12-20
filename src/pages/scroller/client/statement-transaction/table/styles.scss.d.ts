@@ -5,8 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'fieldWrapper': string;
-    'statementInfoWrapper': string;
+    'footer': string;
+    'totalWrapper': string;
   }
 }
 

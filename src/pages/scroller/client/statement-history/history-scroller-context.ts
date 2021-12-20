@@ -1,19 +1,13 @@
 import { createContext } from 'react';
-import { PAGE_SIZES } from 'components/pagination';
 import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
 import type { IGetAccountsResponseDto, IStatementHistoryRow } from 'interfaces/client';
+import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
 
 /** Состояние сортровки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.CREATED_AT, desc: false }];
-
-/** Состояние пагинации по умолчанию. */
-export const DEFAULT_PAGINATION: IPagination = {
-  pageSize: PAGE_SIZES.PER_25,
-  pageIndex: 0,
-};
+export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.CREATED_AT, desc: true }];
 
 /** Контекст скроллера "История запросов". */
 export interface IHistoryScrollerContext {

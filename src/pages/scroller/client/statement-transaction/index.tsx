@@ -1,13 +1,16 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerPageLayout, ScrollerHeader, FilterLayout } from 'components';
-import type { IFilterPanel } from 'interfaces';
+import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
+import type { IStatementTransactionRow } from 'interfaces/client';
+import { DEFAULT_PAGINATION } from 'stream-constants';
 import { useFilter } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
-import { tagLabels, STORAGE_KEY, QuickFilter, AdditionalFilter, TagsPanel, fields } from './filter';
-import { useGetCounterparties, useScrollerHeaderProps } from './hooks';
+import { tagLabels, STORAGE_KEY, QuickFilter, AdditionalFilter, TagsPanel, fields, StatementInfo } from './filter';
+import { useGetCounterparties, useGetStatement, useGetTransactionsList, useScrollerHeaderProps } from './hooks';
+import { Footer, Table } from './table';
 import type { ITransactionScrollerContext } from './transaction-scroller-context';
-import { TransactionScrollerContext } from './transaction-scroller-context';
+import { DEFAULT_SORTING, TransactionScrollerContext } from './transaction-scroller-context';
 
 /**
  * Страница скроллера: [Выписки_ЗВ] ЭФ Клиента "Журнал проводок".
@@ -18,36 +21,72 @@ export const StatementTransactionScrollerPage = () => {
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
+  const [pagination, setPagination] = useState<IPagination>(DEFAULT_PAGINATION);
+  const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
   // endregion
 
   // Вызывается один раз.
   const { counterparties, isCounterpartiesFetching, isCounterpartiesError } = useGetCounterparties();
 
-  const headerProps = useScrollerHeaderProps(
-    /* TODO: передавать реальные параметры при подключениирестов. */
-    { dateFrom: '2021-11-01', dateTo: '2021-11-30' }
-  );
+  const { statement, isStatementError, isStatementFetching } = useGetStatement();
 
-  const { filterPanel, tagsPanel } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
+  const headerProps = useScrollerHeaderProps({ dateFrom: statement?.dateStart ?? '', dateTo: statement?.dateEnd ?? '' });
+
+  const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
+  const {
+    response: { data: transactions, total: totalTransactionsAmount },
+    isTransactionsError,
+    isTransactionsFetching,
+  } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
+
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
-      hasError: hasError || isCounterpartiesError,
+      hasError: hasError || isCounterpartiesError || isTransactionsError || isStatementError,
       setHasError,
-      isLoading: isLoading || isCounterpartiesFetching,
+      isLoading: isLoading || isCounterpartiesFetching || isTransactionsFetching || isStatementFetching,
       setIsLoading,
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
       counterparties,
+      sorting,
+      setSorting,
+      pagination,
+      setPagination,
+      transactions,
+      totalTransactionsAmount,
+      statement,
+      selectedRows,
+      setSelectedRows,
     }),
-    [counterparties, hasError, isCounterpartiesError, isCounterpartiesFetching, isLoading, properlyTypedFilterPanel, tagsPanel]
+    [
+      selectedRows,
+      setSelectedRows,
+      hasError,
+      isCounterpartiesError,
+      isTransactionsError,
+      isStatementError,
+      isLoading,
+      isCounterpartiesFetching,
+      isTransactionsFetching,
+      isStatementFetching,
+      properlyTypedFilterPanel,
+      tagsPanel,
+      counterparties,
+      sorting,
+      pagination,
+      transactions,
+      totalTransactionsAmount,
+      statement,
+    ]
   );
 
-  if (hasError || isCounterpartiesError) {
+  if (contextValue.hasError) {
     return (
       <MainLayout>
         <FatalErrorContent />
@@ -58,7 +97,7 @@ export const StatementTransactionScrollerPage = () => {
   return (
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout isLoading={false} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             additionalFilter={AdditionalFilter}
             filterState={filterPanel}
@@ -66,6 +105,9 @@ export const StatementTransactionScrollerPage = () => {
             tagsPanel={TagsPanel}
             tagsState={tagsPanel}
           />
+          <StatementInfo />
+          <Table />
+          {selectedRows.length > 0 && <Footer />}
         </ScrollerPageLayout>
       </MainLayout>
     </TransactionScrollerContext.Provider>
