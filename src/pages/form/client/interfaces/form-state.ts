@@ -36,16 +36,28 @@ export interface IFormState {
   email: string;
 }
 
-export const getDefaultFormState = (latestStatement?: ILatestStatementDto): IFormState => ({
-  accountIds: latestStatement?.accountsIds || [],
+export const defaultFormState: IFormState = {
+  accountIds: [],
   creationParams: [],
   creditParams: [],
-  dateFrom: latestStatement?.periodStart || '',
-  dateTo: latestStatement?.periodEnd || '',
   debitParams: [],
   documentsSetParams: [],
   email: '',
-  fileFormat: latestStatement?.statementFormat || FORMAT.PDF,
+  dateFrom: '',
+  dateTo: '',
+  fileFormat: FORMAT.PDF,
   operation: OPERATION.ALL,
-  periodType: latestStatement?.periodType || DATE_PERIODS.YESTERDAY,
-});
+  periodType: DATE_PERIODS.YESTERDAY,
+};
+
+export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFormState => {
+  const latestFormState: Partial<IFormState> = {
+    accountIds: latestStatement?.accountsIds,
+    dateFrom: latestStatement?.periodStart,
+    dateTo: latestStatement?.periodEnd,
+    fileFormat: latestStatement?.statementFormat,
+    periodType: latestStatement?.periodType,
+  };
+
+  return { ...latestFormState, ...defaultFormState };
+};

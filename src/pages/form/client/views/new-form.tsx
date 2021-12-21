@@ -8,7 +8,7 @@ import { FileFormats } from 'pages/form/client/components/file-formats';
 import { Footer } from 'pages/form/client/components/footer';
 import { Operations } from 'pages/form/client/components/operations';
 import { Period } from 'pages/form/client/components/period';
-import { getDefaultFormState } from 'pages/form/client/interfaces/form-state';
+import { getInitialFormState } from 'pages/form/client/interfaces/form-state';
 import { Form } from 'react-final-form';
 import { asyncNoop, noop } from 'utils';
 import { Box } from '@platform/ui';
@@ -19,7 +19,7 @@ export const NewForm: React.FC = () => {
   const validate = asyncNoop;
 
   const { latestStatement } = useLatestStatement();
-  const defaultFormState = getDefaultFormState(latestStatement);
+  const defaultFormState = getInitialFormState(latestStatement);
 
   return (
     <Box className={css.form} fill={'FAINT'}>
