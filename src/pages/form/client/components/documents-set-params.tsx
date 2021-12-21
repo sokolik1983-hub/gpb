@@ -5,12 +5,11 @@ import { DebitParams } from 'pages/form/client/components/debit-params';
 import { Row } from 'pages/form/client/components/row';
 import { useDocumentsSetParams } from 'pages/form/client/hooks/use-documents-set-params';
 import { useDocumentsSetParamsVisible } from 'pages/form/client/hooks/use-documents-set-params-visible';
-import { defaultDocumentsSetParamsOptions } from 'pages/form/client/interfaces/documents-set-params';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Box, Fields, Gap, Horizon, Typography } from '@platform/ui';
 
 export const DocumentsSetParams: React.FC = () => {
-  const [value, options] = useDocumentsSetParams(defaultDocumentsSetParamsOptions);
+  const [value, options] = useDocumentsSetParams();
   const visible = useDocumentsSetParamsVisible();
 
   return visible ? (

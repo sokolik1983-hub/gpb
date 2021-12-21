@@ -1,26 +1,22 @@
 import { locale } from 'localization';
 
-export const SEPARATE_ACCOUNTS_FILES = 'separateAccountsFiles';
-export const WITH_SIGN = 'withSign';
-export const WITH_DOCUMENTS_SET = 'withDocumentsSet';
-
 /** Параметры при создании запроса на выписку. */
-export interface ICreationParams {
+export enum CREATION_PARAMS {
   /** Отдельный файл по каждому счёту. */
-  separateAccountsFiles: boolean;
+  SEPARATE_ACCOUNTS_FILES = 'separateAccountsFiles',
   /** Скрыть нулевые обороты. */
-  hideEmptyTurnovers: boolean;
+  HIDE_EMPTY_TURNOVERS = 'hideEmptyTurnovers',
   /** С электронной подписью банка в формате PDF. */
-  withSign: boolean;
+  WITH_SIGN = 'withSign',
   /** С комплектом документов. */
-  withDocumentsSet: boolean;
+  WITH_DOCUMENTS_SET = 'withDocumentsSet',
 }
 
-export const defaultCreationParamsValue: ICreationParams = {
-  hideEmptyTurnovers: false,
-  separateAccountsFiles: false,
-  withDocumentsSet: false,
-  withSign: false,
+export const defaultCreationParamsValue = {
+  [CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES]: false,
+  [CREATION_PARAMS.HIDE_EMPTY_TURNOVERS]: false,
+  [CREATION_PARAMS.WITH_SIGN]: false,
+  [CREATION_PARAMS.WITH_DOCUMENTS_SET]: false,
 };
 
 export const defaultCreationParamsOptions = Object.keys(defaultCreationParamsValue).map(x => ({

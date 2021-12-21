@@ -1,18 +1,16 @@
 import { locale } from 'localization';
 
-export const SEPARATE_DOCUMENTS_FILES = 'separateDocumentsFiles';
-export const ONLY_REQUEST_STATEMENT_DOCUMENTS = 'onlyRequestStatementDocuments';
-
-export interface IDocumentsSetParams {
+/** Параметры комплекта документов. */
+export enum DOCUMENTS_SET_PARAMS {
   /** Отдельными файлами. */
-  separateDocumentsFiles: boolean;
+  SEPARATE_DOCUMENTS_FILES = 'separateDocumentsFiles',
   /** Только документы выписки. */
-  onlyRequestStatementDocuments: boolean;
+  ONLY_REQUEST_STATEMENT_DOCUMENTS = 'onlyRequestStatementDocuments',
 }
 
-export const defaultDocumentsSetParamsValue: IDocumentsSetParams = {
-  separateDocumentsFiles: false,
-  onlyRequestStatementDocuments: false,
+export const defaultDocumentsSetParamsValue = {
+  [DOCUMENTS_SET_PARAMS.SEPARATE_DOCUMENTS_FILES]: false,
+  [DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS]: false,
 };
 
 export const defaultDocumentsSetParamsOptions = Object.keys(defaultDocumentsSetParamsValue).map(x => ({

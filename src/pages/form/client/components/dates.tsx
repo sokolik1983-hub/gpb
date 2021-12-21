@@ -2,20 +2,19 @@ import React, { useEffect } from 'react';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
 import { Dash } from 'pages/form/client/components/dash';
+import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
-import { useForm } from 'react-final-form';
-import { useFormValues } from 'utils/hooks/use-form-values';
+import { useForm, useFormState } from 'react-final-form';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 
 export const Dates: React.FC = () => {
   const { change } = useForm();
-  const values = useFormValues();
+  const { values } = useFormState<IFormState>();
 
   useEffect(() => {
     change(FORM_FIELDS.PERIOD_TYPE, DATE_PERIODS.SELECT_PERIOD);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values.dateFrom, values.dateTo]);
+  }, [change, values.dateFrom, values.dateTo]);
 
   useDateRangeRestriction({
     dateFromName: FORM_FIELDS.DATE_FROM,

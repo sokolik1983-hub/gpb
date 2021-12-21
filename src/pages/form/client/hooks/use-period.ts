@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/client';
+import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
-import { useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
 import { DATE_ISO_FORMAT } from 'stream-constants';
 import { getYesterday } from 'utils';
-import { useFormValues } from 'utils/hooks/use-form-values';
 import { dateTime } from '@platform/tools/date-time';
 
 export const usePeriod = () => {
   const { batch, change } = useForm();
-  const values = useFormValues();
+  const { values } = useFormState<IFormState>();
 
   const { data: period, refetch } = useQuery<IGetDatePeriodResponseDto>({
     queryKey: ['@eco/statement', 'period'],
@@ -52,14 +52,12 @@ export const usePeriod = () => {
     }
 
     void refetch();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values.periodType]);
+  }, [batch, change, refetch, values.periodType]);
 
   useEffect(() => {
     batch(() => {
       change(FORM_FIELDS.DATE_FROM, period?.dateFrom);
       change(FORM_FIELDS.DATE_TO, period?.dateTo);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [period?.dateFrom, period?.dateTo]);
+  }, [batch, change, period?.dateFrom, period?.dateTo]);
 };

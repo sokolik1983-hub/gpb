@@ -1,18 +1,18 @@
 import { locale } from 'localization';
 
-export interface IDebitParams {
-  /** Документы выписки. */
-  includeStatements: boolean;
-  /** Документы основания. */
-  includeOrders: boolean;
+export enum DEBIT_PARAMS {
+  /** Дебетовые документы выписки. */
+  INCLUDE_STATEMENTS = 'includeStatements',
+  /** Дебетовые документы основания. */
+  INCLUDE_ORDERS = 'includeOrders',
 }
 
-export const defaultDebitParamsValue: IDebitParams = {
-  includeStatements: false,
-  includeOrders: false,
+export const defaultDebitParamsValue = {
+  [DEBIT_PARAMS.INCLUDE_STATEMENTS]: false,
+  [DEBIT_PARAMS.INCLUDE_ORDERS]: false,
 };
 
-export const debitParamsOptions = Object.keys(defaultDebitParamsValue).map(x => ({
+export const defaultDebitParamsOptions = Object.keys(defaultDebitParamsValue).map(x => ({
   label: locale.common.debitParams[x],
   value: x,
 }));
