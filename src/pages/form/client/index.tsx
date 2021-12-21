@@ -1,6 +1,5 @@
 import React from 'react';
 import { locale } from 'localization';
-import { FormProvider } from 'pages/form/client/form-provider';
 import { NewForm } from 'pages/form/client/views/new-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { MainLayout, useRedirect } from '@platform/services/client';
@@ -18,15 +17,13 @@ export const RequestStatementForm: React.FC = () => {
   ];
 
   return (
-    <FormProvider>
-      <MainLayout>
-        <LayoutDocument breadcrumbs={breadcrumbs} header={locale.form.newRequestStatement.title} onHomeClick={goHome}>
-          <LayoutScroll autoHeight autoHeightMax="calc(100vh - 58px - 64px)">
-            <NewForm />
-          </LayoutScroll>
-        </LayoutDocument>
-      </MainLayout>
-    </FormProvider>
+    <MainLayout>
+      <LayoutDocument breadcrumbs={breadcrumbs} header={locale.form.newRequestStatement.title} onHomeClick={goHome}>
+        <LayoutScroll autoHeight autoHeightMax="calc(100vh - 58px - 64px)">
+          <NewForm />
+        </LayoutScroll>
+      </LayoutDocument>
+    </MainLayout>
   );
 };
 

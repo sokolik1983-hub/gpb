@@ -8,6 +8,7 @@ import { FileFormats } from 'pages/form/client/components/file-formats';
 import { Footer } from 'pages/form/client/components/footer';
 import { Operations } from 'pages/form/client/components/operations';
 import { Period } from 'pages/form/client/components/period';
+import { FormProvider } from 'pages/form/client/form-provider';
 import { getInitialFormState } from 'pages/form/client/interfaces/form-state';
 import { Form } from 'react-final-form';
 import { asyncNoop, noop } from 'utils';
@@ -27,7 +28,7 @@ export const NewForm: React.FC = () => {
         <Form
           initialValues={defaultFormState}
           render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
+            <FormProvider onSubmit={handleSubmit}>
               <Period />
               <Accounts />
               <FileFormats />
@@ -35,7 +36,7 @@ export const NewForm: React.FC = () => {
               <CreationParams />
               <DocumentsSetParams />
               <Email />
-            </form>
+            </FormProvider>
           )}
           validate={validate}
           onSubmit={onOk}

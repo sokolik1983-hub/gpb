@@ -1,9 +1,10 @@
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { defaultCreationParamsOptions, CREATION_PARAMS } from 'pages/form/client/interfaces/creation-params';
 import { CREDIT_PARAMS } from 'pages/form/client/interfaces/credit-params';
 import { DEBIT_PARAMS } from 'pages/form/client/interfaces/debit-params';
 import { DOCUMENTS_SET_PARAMS } from 'pages/form/client/interfaces/documents-set-params';
+import { FormContext } from 'pages/form/client/interfaces/form-context';
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { useForm } from 'react-final-form';
@@ -11,9 +12,9 @@ import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [string[], ICheckboxOption[]] => {
+  const { withSign, onlyRequestsStatement } = useContext(FormContext);
   const { batch, change, getState } = useForm<IFormState>();
   const formState = getState();
-
   const { values } = formState;
 
   const options = useRef<ICheckboxOption[]>([]);
@@ -22,7 +23,6 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
     const isPdf = values.fileFormat === FORMAT.PDF;
-    const withSign = values.creationParams.includes(CREATION_PARAMS.WITH_SIGN);
 
     if (withSign) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -53,9 +53,7 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
       return acc;
     }, []);
-  }, [values.accountIds, values.fileFormat, values.creationParams, change, batch]);
-
-  const onlyRequestsStatement = values.documentsSetParams.includes(DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS);
+  }, [change, values.accountIds.length, values.fileFormat, withSign]);
 
   useEffect(() => {
     if (onlyRequestsStatement) {
