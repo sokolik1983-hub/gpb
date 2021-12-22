@@ -3,7 +3,12 @@ import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 
-export const createStatement: IActionConfig<typeof context, IRequestStatementDto> = {
+/**
+ * Функция запроса выписки.
+ *
+ * Https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639.
+ */
+export const createRequestStatement: IActionConfig<typeof context, IRequestStatementDto> = {
   action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader }) => async ([data]: IRequestStatementDto[]) => {
     showLoader();
 

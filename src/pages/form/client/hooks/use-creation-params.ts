@@ -30,12 +30,8 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
       change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, [DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS]);
     }
 
-    if (hasMoreThenOneAccounts) {
+    if (hasMoreThenOneAccounts && !value.current.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)) {
       value.current.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
-    }
-
-    if (isPdf) {
-      value.current.push(CREATION_PARAMS.WITH_SIGN);
     }
 
     options.current = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
@@ -60,10 +56,10 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
       batch(() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_ORDERS]);
+        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS]);
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_ORDERS]);
+        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS]);
       });
     }
   }, [batch, change, onlyRequestsStatement]);
