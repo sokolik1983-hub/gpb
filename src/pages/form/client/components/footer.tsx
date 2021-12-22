@@ -5,6 +5,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip } from '@platform/ui';
 
+/** Компонент футера. */
 export const Footer: React.FC = () => {
   const { submit } = useForm();
   const { values } = useFormState<IFormState>();

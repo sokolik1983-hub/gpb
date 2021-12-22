@@ -6,6 +6,7 @@ import { pathGenerator } from '@platform/core';
 
 const getPath = pathGenerator<IFormState>();
 
+/** Поля на форме. */
 export const FORM_FIELDS = {
   PERIOD_TYPE: getPath('periodType'),
   DATE_FROM: getPath('dateFrom'),
@@ -36,6 +37,7 @@ export interface IFormState {
   email: string;
 }
 
+/** Начальное значение состояния формы. */
 export const defaultFormState: IFormState = {
   accountIds: [],
   creationParams: [],
@@ -50,6 +52,7 @@ export const defaultFormState: IFormState = {
   periodType: DATE_PERIODS.YESTERDAY,
 };
 
+/** Функция возвращающая начальное значение состояния формы. */
 export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFormState => {
   const latestFormState: Partial<IFormState> = {
     accountIds: latestStatement?.accountsIds,

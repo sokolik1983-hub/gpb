@@ -8,6 +8,7 @@ import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import type { ICheckboxOption } from '@platform/ui';
 
+/** Хук с бизнес-логикой для компонента "Формат файла выписки". */
 export const useFileFormats = (): [ICheckboxOption[]] => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();

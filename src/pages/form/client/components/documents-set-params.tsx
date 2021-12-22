@@ -8,6 +8,7 @@ import { useDocumentsSetParamsVisible } from 'pages/form/client/hooks/use-docume
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Box, Fields, Gap, Horizon, Typography } from '@platform/ui';
 
+/** Компонент параметров комплекта документов. */
 export const DocumentsSetParams: React.FC = () => {
   const [value, options] = useDocumentsSetParams();
   const visible = useDocumentsSetParamsVisible();

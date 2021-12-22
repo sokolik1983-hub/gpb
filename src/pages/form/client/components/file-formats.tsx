@@ -5,6 +5,7 @@ import { useFileFormats } from 'pages/form/client/hooks/use-file-formats';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Fields } from '@platform/ui';
 
+/** Компонент выбора формата файла. */
 export const FileFormats: React.FC = () => {
   const [options] = useFileFormats();
 

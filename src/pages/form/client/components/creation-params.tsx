@@ -5,6 +5,7 @@ import { useCreationParams } from 'pages/form/client/hooks/use-creation-params';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Fields } from '@platform/ui';
 
+/** Компонент параметров создания выписки. */
 export const CreationParams: React.FC = () => {
   const [value, options] = useCreationParams();
 

@@ -6,10 +6,8 @@ import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
-import { DATE_ISO_FORMAT } from 'stream-constants';
-import { getYesterday } from 'utils';
-import { dateTime } from '@platform/tools/date-time';
 
+/** Хук с бизнес-логикой для компонента "Период формирования выписки". */
 export const usePeriod = () => {
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
@@ -26,28 +24,6 @@ export const usePeriod = () => {
 
   useEffect(() => {
     if (values.periodType === DATE_PERIODS.SELECT_PERIOD) {
-      return;
-    }
-
-    if (values.periodType === DATE_PERIODS.TODAY) {
-      const today = dateTime().format(DATE_ISO_FORMAT);
-
-      batch(() => {
-        change(FORM_FIELDS.DATE_FROM, today);
-        change(FORM_FIELDS.DATE_TO, today);
-      });
-
-      return;
-    }
-
-    if (values.periodType === DATE_PERIODS.YESTERDAY) {
-      const yesterday = getYesterday().format(DATE_ISO_FORMAT);
-
-      batch(() => {
-        change(FORM_FIELDS.DATE_FROM, yesterday);
-        change(FORM_FIELDS.DATE_TO, yesterday);
-      });
-
       return;
     }
 

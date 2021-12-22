@@ -5,6 +5,7 @@ import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 
+/** Компонент ввода электронной почты. */
 export const Email: React.FC = () => (
   <Row label={locale.common.email.label}>
     <Box className={css.email}>

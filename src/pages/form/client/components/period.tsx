@@ -5,6 +5,7 @@ import { PeriodType } from 'pages/form/client/components/period-type';
 import { Row } from 'pages/form/client/components/row';
 import { Gap } from '@platform/ui';
 
+/** Компонент задания периода (именованный период + даты). */
 export const Period: React.FC = () => {
   const isOneTimeStatementType = true;
 

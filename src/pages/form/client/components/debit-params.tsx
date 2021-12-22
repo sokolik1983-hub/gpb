@@ -3,6 +3,7 @@ import { useDebitParams } from 'pages/form/client/hooks/use-debit-params';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Fields } from '@platform/ui';
 
+/** Компонент дебетового комплекта документов. */
 export const DebitParams: React.FC = () => {
   const [options] = useDebitParams();
 

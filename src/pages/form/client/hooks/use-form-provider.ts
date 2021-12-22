@@ -7,6 +7,7 @@ import { defaultFormContextValue } from 'pages/form/client/interfaces/form-conte
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { useFormState } from 'react-final-form';
 
+/** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
 export const useFormProvider = () => {
   const value = useRef<IFormContext>(defaultFormContextValue);
   const { values } = useFormState<IFormState>();

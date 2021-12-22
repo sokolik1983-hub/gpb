@@ -8,13 +8,13 @@ import { dialog } from '@platform/ui';
 export const context = {
   ...createContext(),
   service: statementService,
-  showAwaitingForm: () =>
-    new Promise<void>((resolve, reject) =>
+  showAwaitingForm: (id: string) =>
+    new Promise((resolve, reject) =>
       dialog.show(
         'awaitingForm',
         AwaitingForm,
         {
-          onSuccess: resolve,
+          id,
         },
         () => reject(true)
       )

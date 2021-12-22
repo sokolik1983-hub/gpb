@@ -5,6 +5,7 @@ import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 
+/** Компонент задания типа периода (именованного периода). */
 export const PeriodType: React.FC = () => {
   usePeriod();
 

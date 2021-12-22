@@ -21,6 +21,7 @@ import { asyncNoop } from 'utils';
 import { Box, LoaderOverlay } from '@platform/ui';
 import css from './styles.scss';
 
+/** Функция для преобразования значений формы в ДТО запроса выписки. */
 const mapFormToDto = (values: IFormState): IRequestStatementDto => ({
   accountsIds: values.accountIds,
   action: ACTIONS.VIEW,
@@ -45,6 +46,7 @@ const mapFormToDto = (values: IFormState): IRequestStatementDto => ({
   type: TYPE.ONETIME,
 });
 
+/** ЭФ создания запроса на выписку. */
 export const NewForm: React.FC = () => {
   const validate = asyncNoop;
 

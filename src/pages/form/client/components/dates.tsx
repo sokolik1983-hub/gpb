@@ -8,6 +8,7 @@ import { useForm, useFormState } from 'react-final-form';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 
+/** Компонент выбора дат. */
 export const Dates: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();

@@ -1,6 +1,6 @@
 import { locale } from 'localization';
 
-/** Параметры при создании запроса на выписку. */
+/** Параметры создания запроса на выписку. */
 export enum CREATION_PARAMS {
   /** Отдельный файл по каждому счёту. */
   SEPARATE_ACCOUNTS_FILES = 'separateAccountsFiles',
@@ -12,6 +12,7 @@ export enum CREATION_PARAMS {
   WITH_DOCUMENTS_SET = 'withDocumentsSet',
 }
 
+/** Начальные значения параметров создания запроса выписки. */
 export const defaultCreationParamsValue = {
   [CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES]: false,
   [CREATION_PARAMS.HIDE_EMPTY_TURNOVERS]: false,
@@ -19,6 +20,7 @@ export const defaultCreationParamsValue = {
   [CREATION_PARAMS.WITH_DOCUMENTS_SET]: false,
 };
 
+/** Начальные значения опций создания запроса выписки. */
 export const defaultCreationParamsOptions = Object.keys(defaultCreationParamsValue).map(x => ({
   label: locale.common.creationParams[x],
   value: x,

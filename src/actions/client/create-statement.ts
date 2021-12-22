@@ -1,4 +1,3 @@
-import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
@@ -8,14 +7,12 @@ import type { context } from './executor';
  *
  * Https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639.
  */
-export const createStatement: IActionConfig<typeof context, IRequestStatementDto> = {
-  action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader, showAwaitingForm }) => async ([
-    doc,
-  ]: IRequestStatementDto[]) => {
+export const createStatement: IActionConfig<typeof context, string> = {
+  action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader, showAwaitingForm }) => async ([doc]) => {
     showLoader();
 
     // создание нового запроса выписки
-    const [statement, cancel] = await to(service.createStatement(doc));
+    const [id, cancel] = await to(service.createStatement(doc));
 
     hideLoader();
 
@@ -27,7 +24,7 @@ export const createStatement: IActionConfig<typeof context, IRequestStatementDto
     }
 
     // ожидание формирования выписки
-    const [_, close] = await to(showAwaitingForm());
+    const [_, close] = await to(showAwaitingForm(id!));
 
     if (close) {
       addFailed();
@@ -36,7 +33,7 @@ export const createStatement: IActionConfig<typeof context, IRequestStatementDto
       return;
     }
 
-    addSucceeded(statement!);
+    addSucceeded(id!);
 
     done();
   },

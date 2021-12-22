@@ -7,6 +7,7 @@ import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
 
+/** Компонент счета. */
 export const Accounts: React.FC = () => {
   const { accounts } = useAccounts();
 

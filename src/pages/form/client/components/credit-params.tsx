@@ -3,6 +3,7 @@ import { useCreditParams } from 'pages/form/client/hooks/use-credit-params';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { Fields } from '@platform/ui';
 
+/** Компонент кредитного комплекта документов. */
 export const CreditParams: React.FC = () => {
   const [options] = useCreditParams();
 

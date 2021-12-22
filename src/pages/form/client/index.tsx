@@ -6,6 +6,7 @@ import { MainLayout, useRedirect } from '@platform/services/client';
 import type { IBreadcrumb } from '@platform/ui';
 import { LayoutDocument, LayoutScroll } from '@platform/ui';
 
+/** ЭФ запроса выписки. */
 export const RequestStatementForm: React.FC = () => {
   const goHome = useRedirect(COMMON_STREAM_URL.MAINPAGE);
   const goToScroller = useRedirect(COMMON_STREAM_URL.STATEMENT_TURNOVER);
