@@ -88,9 +88,9 @@ export const statementService = {
   /** Создать запрос выписки. */
   createStatement: (data: IRequestStatementDto): Promise<IRequestStatementDto> =>
     request({
-      url: `${STATEMENT_URL}/statement`,
+      url: `${STATEMENT_URL}`,
       method: 'POST',
-      data,
+      data: { data },
     }).then(r => r.data.data),
   /** Найти последний запрос выписки у текущего пользователя. */
   findLatest: (): Promise<ILatestStatementDto> =>

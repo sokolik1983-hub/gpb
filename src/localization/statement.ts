@@ -1075,6 +1075,15 @@ export default {
 				},
 			},
 		},
+		tooltip: {
+			/**
+			 * @ru
+			 * Доступно при выборе одного счета
+			 */
+			get hasOneAccount() {
+				return t('form.tooltip.hasOneAccount');
+			},
+		},
 	},
 	transactionType: {
 		labels: {
@@ -1305,6 +1314,29 @@ export default {
 			get sortInfo() {
 				return t('table.header.sortInfo');
 			},
+		},
+	},
+	awaitingForm: {
+		/**
+		 * @ru
+		 * Формируем выписку
+		 */
+		get title() {
+			return t('awaitingForm.title');
+		},
+		/**
+		 * @ru
+		 * Обычно выписка формируется менее двух минут.
+		 */
+		get content() {
+			return t('awaitingForm.content');
+		},
+		/**
+		 * @ru
+		 * Отменить формирование
+		 */
+		get cancelRequestButton() {
+			return t('awaitingForm.cancelRequestButton');
 		},
 	},
 };

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { executor } from 'actions/client';
+import { executor } from 'actions/client/executor';
 import type { IScrollerHeaderProps } from 'components';
 import { locale } from 'localization';
 import { HEADER_ACTIONS } from 'pages/scroller/client/statement-turnover/action-configs';
@@ -17,7 +17,7 @@ export const useTurnoverScrollerHeaderProps = (): IScrollerHeaderProps => {
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActionButtons(getAvailableActions(HEADER_ACTIONS), executor, []), [getAvailableActions]);
+  const actions = useMemo(() => getActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[]]), [getAvailableActions]);
 
   return {
     onHomeClick: redirectToMainPage,

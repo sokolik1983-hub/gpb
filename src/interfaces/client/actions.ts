@@ -1,4 +1,4 @@
-import type { context } from 'actions/client';
+import type { context } from 'actions/client/executor';
 import type { TransfomedAction } from '@platform/core';
 import type { IActionWebInfo } from '@platform/services/client';
 

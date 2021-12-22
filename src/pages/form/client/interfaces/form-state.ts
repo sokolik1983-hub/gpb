@@ -1,7 +1,7 @@
 import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
-import { OPERATION } from 'pages/form/client/interfaces/operation';
+import { OPERATIONS } from 'interfaces/client/classificators/operations';
 import { pathGenerator } from '@platform/core';
 
 const getPath = pathGenerator<IFormState>();
@@ -28,7 +28,7 @@ export interface IFormState {
   dateTo: string;
   accountIds: string[];
   fileFormat: FORMAT;
-  operation: OPERATION;
+  operation: OPERATIONS;
   creationParams: string[];
   documentsSetParams: string[];
   debitParams: string[];
@@ -46,7 +46,7 @@ export const defaultFormState: IFormState = {
   dateFrom: '',
   dateTo: '',
   fileFormat: FORMAT.PDF,
-  operation: OPERATION.ALL,
+  operation: OPERATIONS.ALL,
   periodType: DATE_PERIODS.YESTERDAY,
 };
 
@@ -59,5 +59,5 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
     periodType: latestStatement?.periodType,
   };
 
-  return { ...latestFormState, ...defaultFormState };
+  return { ...defaultFormState, ...latestFormState };
 };

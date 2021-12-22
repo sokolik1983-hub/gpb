@@ -8,11 +8,12 @@ import type { ICreationParamsDto } from 'interfaces/client/creation-params-dto';
 
 /** Создание запроса выписки. */
 export interface IRequestStatementDto {
+  id?: string;
+  createdAt?: string;
   accountsIds: string[];
   action: ACTIONS;
   creationParams: ICreationParamsDto;
   creationType: CREATION_TYPE;
-  createdAt: string;
   dateFrom: string;
   dateTo: string;
   email: string;
