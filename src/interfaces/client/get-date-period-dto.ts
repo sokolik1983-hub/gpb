@@ -3,7 +3,7 @@ import type { DATE_PERIODS } from 'interfaces';
 /** ДТО запроса периода. */
 export interface IGetDatePeriodRequestDto {
   /** Тип периода. */
-  periodType: Exclude<DATE_PERIODS, DATE_PERIODS.SELECT_PERIOD | DATE_PERIODS.TODAY | DATE_PERIODS.YESTERDAY>;
+  periodType: Exclude<DATE_PERIODS, DATE_PERIODS.SELECT_PERIOD>;
 }
 
 /** ДТО ответа запроса периода. */

@@ -1,13 +1,12 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
 import { statementService } from 'services/statement-service';
-import { DATE_ISO_FORMAT, DATE_PERIOD_OPTIONS } from 'stream-constants';
-import { noop, getYesterday } from 'utils';
+import { DATE_PERIOD_OPTIONS } from 'stream-constants';
+import { noop } from 'utils';
 import { to } from '@platform/core';
-import { dateTime } from '@platform/tools/date-time';
 import { Fields } from '@platform/ui';
 
 /** Свойства компонента DatePeriodField. */
@@ -37,31 +36,19 @@ export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetchi
   };
 
   const handleOnChange: ChangeFieldHandler<DATE_PERIODS> = ({ value: period }) => {
-    let date: string;
+    if (period === DATE_PERIODS.SELECT_PERIOD) {
+      onSuccessFetching();
 
-    switch (period) {
-      case DATE_PERIODS.SELECT_PERIOD:
-        onSuccessFetching();
-
-        return;
-      case DATE_PERIODS.TODAY:
-        date = dateTime().format(DATE_ISO_FORMAT);
-
-        onSuccessFetching({ dateTo: date, dateFrom: date });
-
-        return;
-      case DATE_PERIODS.YESTERDAY:
-        date = getYesterday().format(DATE_ISO_FORMAT);
-
-        onSuccessFetching({ dateTo: date, dateFrom: date });
-
-        return;
-      default:
-        void getPeriod(period);
-
-        break;
+      return;
     }
+
+    void getPeriod(period);
   };
+
+  useEffect(() => {
+    void getPeriod(DATE_PERIODS.YESTERDAY);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <Fields.Select extraSmall name={name} options={DATE_PERIOD_OPTIONS} onChange={handleOnChange} />;
 };
