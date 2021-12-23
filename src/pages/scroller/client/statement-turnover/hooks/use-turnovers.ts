@@ -43,7 +43,7 @@ export const useTurnovers = (filterValues: IFormState, sorting: Sorting) => {
   const { data = DEFAULT_TURNOVERS, isFetching: isTurnoversFetching, isError: isTurnoversError } = useQuery<IGetTurnoversResponseDto>({
     queryKey: ['@eco/statement', 'turnovers', requestDto],
     queryFn: () => statementService.getTurnovers(requestDto),
-    enabled: Boolean(requestDto.filter.accountsIds?.length && dateTo && dateFrom),
+    enabled: Boolean(dateTo && dateFrom),
     keepPreviousData: true,
     cacheTime: 0,
     retry: false,

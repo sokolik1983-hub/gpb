@@ -3,6 +3,7 @@ import { DatePeriodField, AccountsField } from 'components';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/client';
+import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
@@ -88,7 +89,11 @@ export const FilterPanel = () => {
       <Pattern.Span size={6}>
         <Adjust pad={[null, 'XS', null, 'XS']}>
           {/* Выбор счетов. */}
-          <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} />
+          <AccountsField
+            accounts={accounts}
+            name={FORM_FIELDS.ACCOUNTS}
+            placeholder={locale.historyScroller.filter.placeholders.accounts}
+          />
         </Adjust>
       </Pattern.Span>
     </Pattern>
