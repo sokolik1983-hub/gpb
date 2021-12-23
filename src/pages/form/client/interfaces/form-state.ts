@@ -1,11 +1,12 @@
 import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
-import { OPERATION } from 'pages/form/client/interfaces/operation';
+import { OPERATIONS } from 'interfaces/client/classificators/operations';
 import { pathGenerator } from '@platform/core';
 
 const getPath = pathGenerator<IFormState>();
 
+/** Поля на форме. */
 export const FORM_FIELDS = {
   PERIOD_TYPE: getPath('periodType'),
   DATE_FROM: getPath('dateFrom'),
@@ -28,7 +29,7 @@ export interface IFormState {
   dateTo: string;
   accountIds: string[];
   fileFormat: FORMAT;
-  operation: OPERATION;
+  operation: OPERATIONS;
   creationParams: string[];
   documentsSetParams: string[];
   debitParams: string[];
@@ -36,16 +37,30 @@ export interface IFormState {
   email: string;
 }
 
-export const getDefaultFormState = (latestStatement?: ILatestStatementDto): IFormState => ({
-  accountIds: latestStatement?.accountsIds || [],
+/** Начальное значение состояния формы. */
+export const defaultFormState: IFormState = {
+  accountIds: [],
   creationParams: [],
   creditParams: [],
-  dateFrom: latestStatement?.periodStart || '',
-  dateTo: latestStatement?.periodEnd || '',
   debitParams: [],
   documentsSetParams: [],
   email: '',
-  fileFormat: latestStatement?.statementFormat || FORMAT.PDF,
-  operation: OPERATION.ALL,
-  periodType: latestStatement?.periodType || DATE_PERIODS.YESTERDAY,
-});
+  dateFrom: '',
+  dateTo: '',
+  fileFormat: FORMAT.PDF,
+  operation: OPERATIONS.ALL,
+  periodType: DATE_PERIODS.YESTERDAY,
+};
+
+/** Функция возвращающая начальное значение состояния формы. */
+export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFormState => {
+  const latestFormState: Partial<IFormState> = {
+    accountIds: latestStatement?.accountsIds,
+    dateFrom: latestStatement?.periodStart,
+    dateTo: latestStatement?.periodEnd,
+    fileFormat: latestStatement?.statementFormat,
+    periodType: latestStatement?.periodType,
+  };
+
+  return { ...defaultFormState, ...latestFormState };
+};

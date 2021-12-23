@@ -1,13 +1,19 @@
 import React from 'react';
-import { fileFormatOptions } from 'pages/form/client/interfaces/file-format';
+import { locale } from 'localization';
+import { Row } from 'pages/form/client/components/row';
+import { useFileFormats } from 'pages/form/client/hooks/use-file-formats';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
-import { noop } from 'utils';
 import { Fields } from '@platform/ui';
 
+/** Компонент выбора формата файла. */
 export const FileFormats: React.FC = () => {
-  const handleChangeFileFormat = noop;
+  const [options] = useFileFormats();
 
-  return <Fields.SwitchBar extraSmall name={FORM_FIELDS.FILE_FORMAT} options={fileFormatOptions} onChange={handleChangeFileFormat} />;
+  return (
+    <Row label={locale.common.fileFormat.label}>
+      <Fields.SwitchBar extraSmall name={FORM_FIELDS.FILE_FORMAT} options={options} />
+    </Row>
+  );
 };
 
 FileFormats.displayName = 'FileFormats';

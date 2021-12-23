@@ -1,10 +1,18 @@
-import React, { createContext } from 'react';
-import type { IFormContext } from 'pages/form/client/interfaces/form-context';
+import type { FormEventHandler } from 'react';
+import React, { useMemo } from 'react';
+import { useFormProvider } from 'pages/form/client/hooks/use-form-provider';
+import { FormContext } from 'pages/form/client/interfaces/form-context';
 
-const defaultValue: IFormContext = {};
+/** Свойства провайдера формы. */
+export interface IFormProviderProps {
+  onSubmit: FormEventHandler<HTMLFormElement>;
+}
 
-const FormContext = createContext<IFormContext>({});
+/** Провайдер формы. Компонент для хранения и обработки общих данных на форме (дополнительно заворачивает содержимое в тэг form). */
+export const FormProvider: React.FC<IFormProviderProps> = ({ children, onSubmit }) => {
+  const value = useFormProvider();
 
-export const FormProvider: React.FC = ({ children }) => <FormContext.Provider value={defaultValue}>{children}</FormContext.Provider>;
+  return <FormContext.Provider value={useMemo(() => value, [value])}>{<form onSubmit={onSubmit}>{children}</form>}</FormContext.Provider>;
+};
 
 FormProvider.displayName = 'FormProvider';

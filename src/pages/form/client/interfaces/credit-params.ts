@@ -1,18 +1,21 @@
 import { locale } from 'localization';
 
-export interface ICreditParams {
-  /** Документы выписки. */
-  includeStatements: boolean;
-  /** Документы основания. */
-  includeOrders: boolean;
+/** Кредитные параметры создания выписки. */
+export enum CREDIT_PARAMS {
+  /** Кредитовые документы выписки. */
+  INCLUDE_STATEMENTS = 'includeStatements',
+  /** Кредитовые документы основания. */
+  INCLUDE_ORDERS = 'includeOrders',
 }
 
-export const defaultCreditParamsValue: ICreditParams = {
-  includeStatements: false,
-  includeOrders: false,
+/** Начальные значения кредитных параметров создания выписки. */
+export const defaultCreditParamsValue = {
+  [CREDIT_PARAMS.INCLUDE_STATEMENTS]: false,
+  [CREDIT_PARAMS.INCLUDE_ORDERS]: false,
 };
 
-export const creditParamsOptions = Object.keys(defaultCreditParamsValue).map(x => ({
+/** Начальные значения кредитных опций создания выписки. */
+export const defaultCreditParamsOptions = Object.keys(defaultCreditParamsValue).map(x => ({
   label: locale.common.creditParams[x],
   value: x,
 }));

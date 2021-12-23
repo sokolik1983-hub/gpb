@@ -1,16 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 import { FORMAT } from 'interfaces/client/classificators/format';
-import { SEPARATE_ACCOUNTS_FILES, WITH_DOCUMENTS_SET, WITH_SIGN } from 'pages/form/client/interfaces/creation-params';
+import { defaultCreationParamsOptions, CREATION_PARAMS } from 'pages/form/client/interfaces/creation-params';
+import { CREDIT_PARAMS } from 'pages/form/client/interfaces/credit-params';
+import { DEBIT_PARAMS } from 'pages/form/client/interfaces/debit-params';
+import { DOCUMENTS_SET_PARAMS } from 'pages/form/client/interfaces/documents-set-params';
+import { FormContext } from 'pages/form/client/interfaces/form-context';
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import { useForm } from 'react-final-form';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
-export const useCreationParams = (defaultOptions: ICheckboxOption[]): [string[], ICheckboxOption[]] => {
-  const { change, getState } = useForm<IFormState>();
+export const useCreationParams = (): [string[], ICheckboxOption[]] => {
+  const { withSign, onlyRequestsStatement } = useContext(FormContext);
+  const { batch, change, getState } = useForm<IFormState>();
   const formState = getState();
-
   const { values } = formState;
 
   const options = useRef<ICheckboxOption[]>([]);
@@ -20,26 +24,23 @@ export const useCreationParams = (defaultOptions: ICheckboxOption[]): [string[],
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
     const isPdf = values.fileFormat === FORMAT.PDF;
 
-    if (hasMoreThenOneAccounts) {
-      value.current.push(SEPARATE_ACCOUNTS_FILES);
+    if (withSign) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, [DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS]);
     }
 
-    if (isPdf) {
-      value.current.push(WITH_SIGN);
+    if (hasMoreThenOneAccounts && !value.current.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)) {
+      value.current.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // FIXME разобраться с типизацией позднее
-    change(FORM_FIELDS.CREATION_PARAMS, value.current);
-
-    options.current = defaultOptions.reduce<ICheckboxOption[]>((acc, x) => {
+    options.current = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
-        case SEPARATE_ACCOUNTS_FILES:
+        case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           acc.push({ ...x, disabled: !hasMoreThenOneAccounts });
           break;
-        case WITH_DOCUMENTS_SET:
-        case WITH_SIGN:
+        case CREATION_PARAMS.WITH_DOCUMENTS_SET:
+        case CREATION_PARAMS.WITH_SIGN:
           acc.push({ ...x, disabled: !isPdf });
           break;
         default:
@@ -48,8 +49,20 @@ export const useCreationParams = (defaultOptions: ICheckboxOption[]): [string[],
 
       return acc;
     }, []);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values.accountIds, values.fileFormat]);
+  }, [change, values.accountIds.length, values.fileFormat, withSign]);
+
+  useEffect(() => {
+    if (onlyRequestsStatement) {
+      batch(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS]);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS]);
+      });
+    }
+  }, [batch, change, onlyRequestsStatement]);
 
   return [value.current, options.current];
 };

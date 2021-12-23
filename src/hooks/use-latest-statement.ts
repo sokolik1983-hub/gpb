@@ -4,11 +4,11 @@ import { statementService } from 'services';
 
 /** Возвращает последнюю выписку у текущего пользователя. */
 export const useLatestStatement = () => {
-  const { data: latestStatement } = useQuery<ILatestStatementDto>({
+  const { data: latestStatement, isLoading } = useQuery<ILatestStatementDto>({
     queryKey: ['@eco/statement', 'latest-statement'],
-    queryFn: () => statementService.findLatest(),
+    queryFn: statementService.findLatest,
     retry: false,
   });
 
-  return { latestStatement };
+  return { latestStatement, isLoading };
 };

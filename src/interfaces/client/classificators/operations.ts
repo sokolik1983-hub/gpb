@@ -1,4 +1,4 @@
-/** Операции. */
+/** Операции выписки. */
 export enum OPERATIONS {
   ALL = 'ALL',
   INCOME = 'INCOME',

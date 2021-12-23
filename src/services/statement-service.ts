@@ -1,3 +1,4 @@
+import type { STATEMENT_STATUSES } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
@@ -86,15 +87,22 @@ export const statementService = {
       }, 0);
     }),
   /** Создать запрос выписки. */
-  createStatement: (data: IRequestStatementDto): Promise<IRequestStatementDto> =>
+  createStatement: (data: IRequestStatementDto): Promise<string> =>
     request({
-      url: `${STATEMENT_URL}/statement`,
+      url: `${STATEMENT_URL}`,
       method: 'POST',
-      data,
+      data: { data },
     }).then(r => r.data.data),
   /** Найти последний запрос выписки у текущего пользователя. */
   findLatest: (): Promise<ILatestStatementDto> =>
     request({
       url: `${STATEMENT_URL}/find-latest`,
+    }).then(r => r.data.data),
+  /** Получить статус Запроса выписки. */
+  getStatus: (id: string): Promise<{ status: STATEMENT_STATUSES }> =>
+    request({
+      url: `${STATEMENT_URL}/get-status`,
+      method: 'POST',
+      data: { data: { id } },
     }).then(r => r.data.data),
 };

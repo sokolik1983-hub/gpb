@@ -1,24 +1,39 @@
-import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 
-export const createStatement: IActionConfig<typeof context, IRequestStatementDto> = {
-  action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader }) => async ([data]: IRequestStatementDto[]) => {
+/**
+ * Функция запроса выписки.
+ *
+ * Https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639.
+ */
+export const createStatement: IActionConfig<typeof context, string> = {
+  action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader, showAwaitingForm }) => async ([doc]) => {
     showLoader();
 
-    const [resp, err] = await to(service.createStatement(data));
+    // создание нового запроса выписки
+    const [id, cancel] = await to(service.createStatement(doc));
 
     hideLoader();
 
-    if (err) {
-      addFailed(err);
+    if (cancel) {
       fatal();
+      done();
+
+      return;
     }
 
-    if (resp) {
-      addSucceeded(resp);
+    // ожидание формирования выписки
+    const [_, close] = await to(showAwaitingForm(id!));
+
+    if (close) {
+      addFailed();
+      done();
+
+      return;
     }
+
+    addSucceeded(id!);
 
     done();
   },

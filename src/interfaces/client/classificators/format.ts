@@ -1,6 +1,6 @@
-/** Форматы файлов. */
+/** Форматы файлов выписки. */
 export enum FORMAT {
-  C1 = '1C',
+  C1 = 'C1',
   TXT = 'TXT',
   PDF = 'PDF',
   RTF = 'RTF',

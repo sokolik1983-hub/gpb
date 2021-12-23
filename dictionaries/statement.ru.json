@@ -170,5 +170,9 @@
   "form.buttons.show.label": "Показать на экране",
   "form.buttons.print.label": "Печать",
   "form.buttons.cancel.label": "Отменить",
-  "table.header.sortInfo": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
+  "table.header.sortInfo": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»",
+  "form.tooltip.hasOneAccount": "Доступно при выборе одного счета",
+  "awaitingForm.title": "Формируем выписку",
+  "awaitingForm.content": "Обычно выписка формируется менее двух минут.",
+  "awaitingForm.cancelRequestButton": "Отменить формирование"
 }
