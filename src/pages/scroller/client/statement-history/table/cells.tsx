@@ -7,7 +7,7 @@ import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/
 import type { CellProps } from 'react-table';
 import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants';
 import { STATUS_LABELS, STATUS_COLOR } from 'stream-constants/client';
-import { DATE_FORMAT } from '@platform/services';
+import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, Box, Horizon, Status as StatusMarker } from '@platform/ui';
@@ -16,7 +16,7 @@ import css from './styles.scss';
 
 /** Дата и время создания запроса выписки. */
 export const CreatedAtCell: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
-  const [date, time] = formatDateTime(value.createdAt, { keepLocalTime: true }).split(' ');
+  const [date, time] = formatDateTime(value.createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
 
   return (
     <>

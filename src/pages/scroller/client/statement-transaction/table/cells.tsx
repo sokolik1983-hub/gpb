@@ -42,7 +42,13 @@ export const CounterpartyInfo: FC<Cell> = ({ value }) => {
 
   return (
     <>
-      <Typography.Text>{counterpartyName}</Typography.Text>
+      <WithInfoTooltip text={counterpartyName}>
+        {ref => (
+          <Typography.Text inline innerRef={ref} line={'COLLAPSE'}>
+            {counterpartyName}
+          </Typography.Text>
+        )}
+      </WithInfoTooltip>
       <Typography.SmallText>{formatAccountCode(counterpartyAccountNumber)}</Typography.SmallText>
     </>
   );

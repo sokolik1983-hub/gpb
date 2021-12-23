@@ -5,7 +5,7 @@ import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography } from '@platform/ui';
+import { Typography, WithInfoTooltip } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { isGroupingRow } from './utils';
@@ -29,7 +29,15 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
   } else {
     const { organizationName } = value;
 
-    return <Typography.SmallText>{organizationName}</Typography.SmallText>;
+    return (
+      <WithInfoTooltip text={organizationName}>
+        {ref => (
+          <Typography.SmallText innerRef={ref} line={'COLLAPSE'}>
+            {organizationName}
+          </Typography.SmallText>
+        )}
+      </WithInfoTooltip>
+    );
   }
 };
 
@@ -65,9 +73,13 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
   return (
     <>
       <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
-      <Typography.SmallText fill={'FAINT'} line={'COLLAPSE'}>
-        {accountDescription}
-      </Typography.SmallText>
+      <WithInfoTooltip text={accountDescription}>
+        {ref => (
+          <Typography.SmallText fill={'FAINT'} innerRef={ref} line={'COLLAPSE'}>
+            {accountDescription}
+          </Typography.SmallText>
+        )}
+      </WithInfoTooltip>
     </>
   );
 };

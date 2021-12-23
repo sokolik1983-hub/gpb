@@ -3,7 +3,7 @@ import React from 'react';
 import type { IGroupedAccounts, IGroupInfo } from 'interfaces/client';
 import { GROUPING_TYPE } from 'interfaces/client';
 import type { Row } from 'react-table';
-import { Box, Typography } from '@platform/ui';
+import { Box, Typography, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
 
 /**
@@ -58,10 +58,18 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
     );
   }
 
+  const groupingTitle = getGroupingTitle(groupInfo);
+
   // Группирующие строки рендерятся без колонок, чтобы избежать переноса строки в колонке.
   return (
     <Box {...rowProps} className={css.groupingRow}>
-      <Typography.PBold className="H3">{getGroupingTitle(groupInfo)}</Typography.PBold>
+      <WithInfoTooltip text={groupingTitle}>
+        {tooltipRef => (
+          <Typography.PBold inline className="H3" innerRef={tooltipRef} line={'COLLAPSE'}>
+            {groupingTitle}
+          </Typography.PBold>
+        )}
+      </WithInfoTooltip>
     </Box>
   );
 };

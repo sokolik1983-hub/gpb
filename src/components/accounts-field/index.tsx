@@ -3,8 +3,7 @@ import React, { useMemo, useEffect, useCallback } from 'react';
 import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useForm } from 'react-final-form';
-import { noop } from 'utils';
-import { byLabel } from '@platform/services';
+import { noop, compareStrings } from 'utils';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Fields } from '@platform/ui';
 import type { IAccountOption } from './account-option';
@@ -46,11 +45,10 @@ export interface IAccountsFieldProps {
 export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
   const { change, getFieldState } = useForm();
 
-  const sortedOptions = useMemo(() => {
-    const options = accounts.map(account => getAccountOption(account));
-
-    return options.sort(byLabel);
-  }, [accounts]);
+  const sortedOptions = useMemo(
+    () => accounts.map(account => getAccountOption(account)).sort((a, b) => compareStrings(a.orgName, b.orgName)),
+    [accounts]
+  );
 
   const filterFn = useCallback(
     (searchValue: string) => {

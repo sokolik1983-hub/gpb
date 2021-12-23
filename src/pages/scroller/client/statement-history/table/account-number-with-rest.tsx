@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import { PopUp } from 'components';
 import { locale } from 'localization';
-import { Typography, LayoutScrollComponent, Box } from '@platform/ui';
+import { Typography, LayoutScrollComponent, Box, Horizon, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ItemWitAmount. */
@@ -20,8 +20,14 @@ const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>((
   const TypographyElement = small ? Typography.SmallText : Typography.Text;
 
   return (
-    <TypographyElement inline line={'NOWRAP'}>
-      {item}
+    <Horizon>
+      <WithInfoTooltip text={item}>
+        {tooltipRef => (
+          <TypographyElement inline innerRef={tooltipRef} line={'COLLAPSE'}>
+            {item}
+          </TypographyElement>
+        )}
+      </WithInfoTooltip>
       {additionalAmount !== 0 && (
         <>
           {', '}
@@ -30,7 +36,7 @@ const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>((
           </TypographyElement>
         </>
       )}
-    </TypographyElement>
+    </Horizon>
   );
 });
 
@@ -52,7 +58,13 @@ const AdditionalItems: FC<IAdditionalItemsProps> = ({ items }) => {
     <Box className={css.accountsPopUp} fill={'BASE'} radius={'XS'} shadow={'LG'}>
       <LayoutScrollComponent autoHeight autoHeightMax={120} autoHide={false}>
         {items.map(item => (
-          <Typography.Text key={item}>{item}</Typography.Text>
+          <WithInfoTooltip key={item} text={item}>
+            {tooltipRef => (
+              <Typography.Text inline innerRef={tooltipRef} line={'COLLAPSE'}>
+                {item}
+              </Typography.Text>
+            )}
+          </WithInfoTooltip>
         ))}
       </LayoutScrollComponent>
     </Box>

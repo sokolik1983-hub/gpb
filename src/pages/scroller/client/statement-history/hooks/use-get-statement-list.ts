@@ -5,7 +5,6 @@ import { statementService } from 'services';
 import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
 import type { ICollectionResponse } from '@platform/services';
 import type { IMetaData } from '@platform/services/client';
-import type { IFormState } from '../filter';
 
 const DEFAULT_RESPONSE = {
   data: [],
@@ -15,8 +14,6 @@ const DEFAULT_RESPONSE = {
 interface IUseGetStatementListArgs {
   /** Обработанные значения фильтров отправляемых на сервер. */
   filters: IMetaData['filters'];
-  /** Значения формы фильтрации. */
-  formValues: IFormState;
   /** Состояние сортировки таблицы. */
   sorting: Sorting;
   /** Состояние пагинации. */
@@ -24,7 +21,7 @@ interface IUseGetStatementListArgs {
 }
 
 /** Возвращает данные для отображения в скроллере истории запросов выписок. */
-export const useGetStatementList = ({ filters, formValues, sorting, pagination }: IUseGetStatementListArgs) => {
+export const useGetStatementList = ({ filters, sorting, pagination }: IUseGetStatementListArgs) => {
   const requestDto: IMetaData = {
     filters,
     sort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
@@ -36,7 +33,7 @@ export const useGetStatementList = ({ filters, formValues, sorting, pagination }
   >({
     queryKey: ['@eco/statement', 'history', requestDto],
     queryFn: () => statementService.getStatementList(requestDto),
-    enabled: Boolean(formValues?.accountIds?.length),
+    enabled: true,
     cacheTime: 0,
     keepPreviousData: true,
     retry: false,
