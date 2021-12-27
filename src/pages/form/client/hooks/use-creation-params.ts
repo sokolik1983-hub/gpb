@@ -3,7 +3,6 @@ import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS, defaultCreationParamsOptions } from 'pages/form/client/interfaces/creation-params';
 import { CREDIT_PARAMS } from 'pages/form/client/interfaces/credit-params';
 import { DEBIT_PARAMS } from 'pages/form/client/interfaces/debit-params';
-import { DOCUMENTS_SET_PARAMS } from 'pages/form/client/interfaces/documents-set-params';
 import { FormContext } from 'pages/form/client/interfaces/form-context';
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
@@ -25,17 +24,9 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
     const isPdf = values.fileFormat === FORMAT.PDF;
 
     if (withSign) {
-      const params = values.documentsSetParams;
-
-      params.push(DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS);
-
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
-      change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, params);
-    }
-
-    if (hasMoreThenOneAccounts && !value.current.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)) {
-      value.current.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+      change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
     }
 
     options.current = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
@@ -64,10 +55,19 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
       return acc;
     }, []);
-  }, [change, values.accountIds.length, values.documentsSetParams, values.fileFormat, withSign]);
+  }, [change, values.accountIds.length, values.fileFormat, withSign]);
 
   useEffect(() => {
-    if (onlyRequestsStatement) {
+    if (withSign) {
+      batch(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS, CREDIT_PARAMS.INCLUDE_ORDERS]);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS, DEBIT_PARAMS.INCLUDE_ORDERS]);
+      });
+    } else if (onlyRequestsStatement) {
       batch(() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
@@ -76,8 +76,17 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
         // @ts-ignore
         change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS]);
       });
+    } else if (!onlyRequestsStatement && !withSign) {
+      batch(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_ORDERS]);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_ORDERS]);
+      });
     }
-  }, [batch, change, onlyRequestsStatement]);
+  }, [batch, change, onlyRequestsStatement, withSign]);
 
   return [value.current, options.current];
 };
