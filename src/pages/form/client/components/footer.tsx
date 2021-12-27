@@ -18,10 +18,6 @@ export const Footer: React.FC = () => {
         {locale.form.buttons.download.label}
       </PrimaryButton>
       <Gap />
-      <RegularButton extraSmall dimension="SM">
-        {locale.form.buttons.sendToEmail.label}
-      </RegularButton>
-      <Gap />
       {hasOneAccount ? (
         <RegularButton extraSmall dimension="SM" onClick={submit}>
           {locale.form.buttons.show.label}

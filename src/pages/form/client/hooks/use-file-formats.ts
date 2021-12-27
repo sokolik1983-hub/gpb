@@ -23,7 +23,6 @@ export const useFileFormats = (): [ICheckboxOption[]] => {
       change(FORM_FIELDS.CREATION_PARAMS, params);
     }
 
-    // change(FORM_FIELDS.FILE_FORMAT, values.fileFormat)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [change, isPdf]);
 

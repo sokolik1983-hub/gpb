@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
 import { Dash } from 'pages/form/client/components/dash';
@@ -12,8 +12,17 @@ import css from './styles.scss';
 export const Dates: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
+  const prevDates = useRef<{ dateFrom: string; dateTo: string }>();
 
   useEffect(() => {
+    const periodTypeWasChanged = values.dateFrom !== prevDates.current?.dateFrom && values.dateTo !== prevDates.current?.dateTo;
+
+    prevDates.current = { dateFrom: values.dateFrom, dateTo: values.dateTo };
+
+    if (periodTypeWasChanged) {
+      return;
+    }
+
     change(FORM_FIELDS.PERIOD_TYPE, DATE_PERIODS.SELECT_PERIOD);
   }, [change, values.dateFrom, values.dateTo]);
 
