@@ -62,5 +62,5 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
     periodType: latestStatement?.periodType,
   };
 
-  return { ...defaultFormState, ...latestFormState };
+  return { ...latestFormState, ...defaultFormState };
 };
