@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback } from 'react';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
 import { Dash } from 'pages/form/client/components/dash';
@@ -12,19 +12,8 @@ import css from './styles.scss';
 export const Dates: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
-  const prevDates = useRef<{ dateFrom: string; dateTo: string }>();
 
-  useEffect(() => {
-    const periodTypeWasChanged = values.dateFrom !== prevDates.current?.dateFrom && values.dateTo !== prevDates.current?.dateTo;
-
-    prevDates.current = { dateFrom: values.dateFrom, dateTo: values.dateTo };
-
-    if (periodTypeWasChanged) {
-      return;
-    }
-
-    change(FORM_FIELDS.PERIOD_TYPE, DATE_PERIODS.SELECT_PERIOD);
-  }, [change, values.dateFrom, values.dateTo]);
+  const onDateChange = useCallback(() => change(FORM_FIELDS.PERIOD_TYPE, DATE_PERIODS.SELECT_PERIOD), [change]);
 
   useDateRangeRestriction({
     dateFromName: FORM_FIELDS.DATE_FROM,
@@ -36,11 +25,11 @@ export const Dates: React.FC = () => {
   return (
     <>
       <Box className={css.date}>
-        <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} />
+        <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} onChange={onDateChange} />
       </Box>
       <Dash />
       <Box className={css.date}>
-        <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} />
+        <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} onChange={onDateChange} />
       </Box>
     </>
   );
