@@ -15,7 +15,6 @@
   "scroller.filter.buttons.reset": "Сбросить",
   "scroller.pagination.displayBy": "Отображать по:",
   "transactionsScroller.title": "Выписка c {dateFrom} по {dateTo}",
-  "historyScroller.filter.placeholders.accounts": "Счета",
   "transactionsScroller.placeholder.tableSearch": "Поиск по таблице",
   "transactionsScroller.placeholder.amountFrom": "Сумма от",
   "transactionsScroller.placeholder.amountTo": "Сумма по",
@@ -55,6 +54,7 @@
   "historyScroller.filter.labels.status": "Статус",
   "historyScroller.filter.labels.signaturePresence": "Электронная подпись",
   "historyScroller.filter.labels.datePeriod": "Тип периода",
+  "historyScroller.filter.placeholders.accounts": "Все счета",
   "historyScroller.tags.labels.organization": "Организация:",
   "historyScroller.tags.labels.status": "Статус:",
   "historyScroller.tags.labels.signaturePresence": "Есть электронная подпись",
@@ -70,6 +70,8 @@
   "historyScroller.table.allAccounts": "Все счета всех организаций",
   "historyScroller.table.prefixedByPlus": "+{value}",
   "historyScroller.table.separatedByDashes": "{dateFrom}–{dateTo}",
+  "historyScroller.action.exportStatement": "Экспорт",
+  "historyScroller.action.repeatStatement": "Повторить выписку",
   "historyScroller.period.labels.selectPeriod": "За период",
   "historyScroller.period.labels.yesterday": "За вчера",
   "historyScroller.period.labels.today": "За сегодня",
@@ -174,5 +176,8 @@
   "form.tooltip.hasOneAccount": "Доступно при выборе одного счета",
   "awaitingForm.title": "Формируем выписку",
   "awaitingForm.content": "Обычно выписка формируется менее двух минут.",
-  "awaitingForm.cancelRequestButton": "Отменить формирование"
+  "awaitingForm.cancelRequestButton": "Отменить формирование",
+  "errors.progressErrorHeader": "Ошибка",
+  "errors.progressError": "Не удалось выполнить операцию",
+  "errors.statementDenied": "Произошла ошибка формирования выписки: {message}"
 }

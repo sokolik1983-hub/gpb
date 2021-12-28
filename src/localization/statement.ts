@@ -390,15 +390,6 @@ export default {
 	},
 	historyScroller: {
 		filter: {
-			placeholders: {
-				/**
-				 * @ru
-				 * Счета
-				 */
-				get accounts() {
-					return t('historyScroller.filter.placeholders.accounts');
-				},
-			},
 			labels: {
 				/**
 				 * @ru
@@ -434,6 +425,15 @@ export default {
 				 */
 				get datePeriod() {
 					return t('historyScroller.filter.labels.datePeriod');
+				},
+			},
+			placeholders: {
+				/**
+				 * @ru
+				 * Все счета
+				 */
+				get accounts() {
+					return t('historyScroller.filter.placeholders.accounts');
 				},
 			},
 		},
@@ -543,6 +543,22 @@ export default {
 			 * {dateFrom}–{dateTo}
 			 */
 			separatedByDashes: (p: { dateFrom: string; dateTo: string }) => t('historyScroller.table.separatedByDashes', p),
+		},
+		action: {
+			/**
+			 * @ru
+			 * Экспорт
+			 */
+			get exportStatement() {
+				return t('historyScroller.action.exportStatement');
+			},
+			/**
+			 * @ru
+			 * Повторить выписку
+			 */
+			get repeatStatement() {
+				return t('historyScroller.action.repeatStatement');
+			},
 		},
 		period: {
 			labels: {
@@ -1338,5 +1354,26 @@ export default {
 		get cancelRequestButton() {
 			return t('awaitingForm.cancelRequestButton');
 		},
+	},
+	errors: {
+		/**
+		 * @ru
+		 * Ошибка
+		 */
+		get progressErrorHeader() {
+			return t('errors.progressErrorHeader');
+		},
+		/**
+		 * @ru
+		 * Не удалось выполнить операцию
+		 */
+		get progressError() {
+			return t('errors.progressError');
+		},
+		/**
+		 * @ru
+		 * Произошла ошибка формирования выписки: {message}
+		 */
+		statementDenied: (p: { message: string }) => t('errors.statementDenied', p),
 	},
 };

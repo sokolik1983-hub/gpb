@@ -1,3 +1,5 @@
+import { locale } from 'localization';
+import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
@@ -8,34 +10,28 @@ import type { context } from './executor';
  * Https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639.
  */
 export const createStatement: IActionConfig<typeof context, string> = {
-  action: ({ done, fatal, addSucceeded, addFailed }, { service, showLoader, hideLoader, showAwaitingForm }) => async ([doc]) => {
+  action: ({ done, fatal, addSucceeded }, { service, showLoader, hideLoader }) => async ([doc]) => {
     showLoader();
 
-    // создание нового запроса выписки
-    const [id, cancel] = await to(service.createStatement(doc));
+    const [id, err] = await to(service.createStatement(doc));
 
     hideLoader();
 
-    if (cancel) {
-      fatal();
-      done();
-
-      return;
-    }
+    fatal(err);
 
     // ожидание формирования выписки
     const [_, close] = await to(showAwaitingForm(id!));
 
     if (close) {
-      addFailed();
       done();
-
-      return;
     }
 
     addSucceeded(id!);
 
     done();
+  },
+  fatalHandler({ showError }) {
+    showError(locale.errors.progressErrorHeader, locale.errors.progressError);
   },
   guardians: [],
 };
