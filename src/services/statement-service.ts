@@ -102,11 +102,16 @@ export const statementService = {
       method: 'POST',
       data: { data },
     }).then(r => r.data.data),
-  /** Найти последний запрос выписки у текущего пользователя. */
-  findLatest: (): Promise<ILatestStatementDto> =>
-    request({
+  /** Получить сущность "Запрос выписки". */
+  getStatementRequest: (id: string): Promise<IServerDataResp<ILatestStatementDto>> =>
+    request<IServerDataResp<ILatestStatementDto>>({
+      url: `${STATEMENT_REQUEST_URL}/${id}`,
+    }).then(r => r.data),
+  /** Получить последний запрос выписки у текущего пользователя. */
+  getLatestStatementRequest: (): Promise<IServerDataResp<ILatestStatementDto>> =>
+    request<IServerDataResp<ILatestStatementDto>>({
       url: `${STATEMENT_REQUEST_URL}/find-latest`,
-    }).then(r => r.data.data),
+    }).then(r => r.data),
   /** Получить статус Запроса выписки. */
   getStatus: (id: string): Promise<{ status: STATEMENT_STATUSES }> =>
     request({

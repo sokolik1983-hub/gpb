@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo } from 'react';
+import React, { useContext, useMemo, Fragment } from 'react';
+import { executor } from 'actions/client';
 import { DATE_PERIODS, STATEMENT_ACTION_TYPES } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -7,10 +8,13 @@ import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/
 import type { CellProps } from 'react-table';
 import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants';
 import { STATUS_LABELS, STATUS_COLOR } from 'stream-constants/client';
+import { getActionButtons } from '@platform/core';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
+import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, Box, Horizon, Status as StatusMarker } from '@platform/ui';
+import { Typography, Box, Horizon, Status as StatusMarker, Gap } from '@platform/ui';
+import { ROW_ACTIONS } from '../action-configs';
 import { AccountNumberWithRest } from './account-number-with-rest';
 import css from './styles.scss';
 
@@ -108,3 +112,31 @@ export const Status: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> =
 };
 
 Status.displayName = 'Status';
+
+/** Действия со строкой. */
+export const Actions: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+  const { getAvailableActions } = useAuth();
+
+  const actions = useMemo(
+    () => getActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]).filter(action => !action.disabled),
+    [getAvailableActions, value]
+  );
+
+  return (
+    <Horizon align="TOP">
+      <Horizon.Spacer />
+      {actions.map((action, index) => {
+        const { icon: Icon, onClick, name } = action;
+
+        return (
+          <Fragment key={name}>
+            {index !== 0 && <Gap.LG />}
+            <Icon clickable fill={'FAINT'} scale={'MD'} onClick={onClick} />
+          </Fragment>
+        );
+      })}
+    </Horizon>
+  );
+};
+
+Actions.displayName = 'Actions';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { createStatement, getExecutor } from 'actions/client';
-import { useLatestStatement } from 'hooks/use-latest-statement';
+import { useCreationType } from 'hooks';
+import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
 import type { IRequestStatementDto } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client/classificators/actions';
 import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
@@ -21,13 +22,14 @@ import { getInitialFormState } from 'pages/form/client/interfaces/form-state';
 import { Form } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { asyncNoop } from 'utils';
+import { NotFoundContent } from '@platform/services';
 import { Box, LoaderOverlay } from '@platform/ui';
 import css from './styles.scss';
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
-const mapFormToDto = (values: IFormState, action = ACTIONS.VIEW): IRequestStatementDto => ({
+const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): IRequestStatementDto => ({
   accountsIds: values.accountIds,
-  action,
+  action: ACTIONS.VIEW,
   creationParams: {
     includeCreditOrders: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
     includeCreditStatements: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
@@ -35,7 +37,7 @@ const mapFormToDto = (values: IFormState, action = ACTIONS.VIEW): IRequestStatem
     includeDebitStatements: values.creditParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
     separateDocumentsFiles: values.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
   },
-  creationType: CREATION_TYPE.NEW,
+  creationType,
   dateFrom: values.dateFrom,
   dateTo: values.dateTo,
   email: values.email,
@@ -52,24 +54,29 @@ const mapFormToDto = (values: IFormState, action = ACTIONS.VIEW): IRequestStatem
 /** ЭФ создания запроса на выписку. */
 export const NewForm: React.FC = () => {
   const validate = asyncNoop;
+  const creationType = useCreationType();
 
-  const { latestStatement, isLoading } = useLatestStatement();
+  const { initialStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
 
-  if (isLoading) {
+  if (isInitialLoading) {
     return <LoaderOverlay opened />;
   }
 
-  const defaultFormState = getInitialFormState(latestStatement);
+  if (isInitialError) {
+    return <NotFoundContent />;
+  }
+
+  const initialFormState = getInitialFormState(initialStatementRequest);
 
   const executor = getExecutor();
   const executeCreateStatementAction = (values: IFormState) => {
-    void executor.execute(createStatement, [mapFormToDto(values)]);
+    void executor.execute(createStatement, [mapFormToDto(values, creationType)]);
   };
 
   return (
     <Box className={css.form} fill={'FAINT'}>
       <Form
-        initialValues={defaultFormState}
+        initialValues={initialFormState}
         render={({ handleSubmit }) => (
           <FormProvider onSubmit={handleSubmit}>
             <Period />

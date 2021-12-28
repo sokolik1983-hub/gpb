@@ -49,9 +49,6 @@
     "@dateTo": "string",
     "ru": "Выписка c {dateFrom} по {dateTo}"
   },
-  "historyScroller.filter.placeholders.accounts": {
-    "ru": "Счета"
-  },
   "transactionsScroller.placeholder.tableSearch": {
     "ru": "Поиск по таблице"
   },
@@ -176,6 +173,9 @@
   "historyScroller.filter.labels.datePeriod": {
     "ru": "Тип периода"
   },
+  "historyScroller.filter.placeholders.accounts": {
+    "ru": "Все счета"
+  },
   "historyScroller.tags.labels.organization": {
     "ru": "Организация:"
   },
@@ -225,6 +225,12 @@
     "@dateFrom": "string",
     "@dateTo": "string",
     "ru": "{dateFrom}–{dateTo}"
+  },
+  "historyScroller.action.exportStatement": {
+    "ru": "Экспорт"
+  },
+  "historyScroller.action.repeatStatement": {
+    "ru": "Повторить выписку"
   },
   "historyScroller.period.labels.selectPeriod": {
     "ru": "За период"
@@ -541,5 +547,15 @@
   },
   "awaitingForm.cancelRequestButton": {
     "ru": "Отменить формирование"
+  },
+  "errors.progressErrorHeader": {
+    "ru": "Ошибка"
+  },
+  "errors.progressError": {
+    "ru": "Не удалось выполнить операцию"
+  },
+  "errors.statementDenied": {
+    "@message": "string",
+    "ru": "Произошла ошибка формирования выписки: {message}"
   }
 }

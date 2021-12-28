@@ -17,4 +17,6 @@ export const COLUMN_NAMES = {
   STATEMENT_FORMAT: 'requestOptions.format',
   // Формат выписки.
   STATUS: 'status',
+  // Колонка с действиями
+  ACTIONS: 'ACTIONS',
 } as const;

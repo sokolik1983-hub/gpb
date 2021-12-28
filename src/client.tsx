@@ -4,6 +4,7 @@ import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-hi
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
 import { Route } from 'react-router-dom';
+import { ID_URL_PARAMETER } from 'stream-constants';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 
 export const routes = [
@@ -26,5 +27,5 @@ export const routes = [
     component={StatementTransactionScrollerPage}
     path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/:statementId`}
   />,
-  <Route key="statement-client-form" component={RequestStatementForm} path={`${COMMON_STREAM_URL.STATEMENT}/:id`} />,
+  <Route key="statement-client-form" exact component={RequestStatementForm} path={`${COMMON_STREAM_URL.STATEMENT}/${ID_URL_PARAMETER}`} />,
 ];

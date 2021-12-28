@@ -1,7 +1,7 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
-import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status } from './cells';
+import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
 /**
@@ -40,13 +40,22 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     id: COLUMN_NAMES.STATEMENT_FORMAT,
     accessor,
     Cell: StatementFormat,
-    width: 259,
+    width: 200,
   },
   {
     Header: locale.historyScroller.headers.status,
     id: COLUMN_NAMES.STATUS,
     accessor,
     Cell: Status,
-    width: 257,
+    width: 232,
+    disableResizing: true,
+  },
+  {
+    id: COLUMN_NAMES.ACTIONS,
+    accessor,
+    Cell: Actions,
+    disableResizing: true,
+    disableSortBy: true,
+    width: 84,
   },
 ];
