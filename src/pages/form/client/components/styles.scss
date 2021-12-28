@@ -2,8 +2,12 @@
   width: 200px;
 }
 
+.periodTypeWrapper {
+  width: 195px;
+}
+
 .date {
-  width: 148px;
+  flex-grow: 1;
 }
 
 .accounts {
@@ -16,7 +20,7 @@
 
 .row {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   width: 100%;
   max-width: 718px;
@@ -27,5 +31,6 @@
 
   &Children {
     width: 100%;
+    //line-height: 32px; // Значение равно высоте текстовых полей формы;
   }
 }
