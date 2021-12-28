@@ -3,7 +3,7 @@ import { locale } from 'localization';
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
-import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip } from '@platform/ui';
+import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box } from '@platform/ui';
 
 /** Компонент футера. */
 export const Footer: React.FC = () => {
@@ -25,9 +25,12 @@ export const Footer: React.FC = () => {
       ) : (
         <WithInfoTooltip extraSmall text={locale.form.tooltip.hasOneAccount}>
           {ref => (
-            <RegularButton ref={ref} extraSmall dimension="SM">
-              {locale.form.buttons.show.label}
-            </RegularButton>
+            // Без обёртки тултип не показывается, когда кнопка задизейблена.
+            <Box ref={ref}>
+              <RegularButton disabled extraSmall dimension="SM">
+                {locale.form.buttons.show.label}
+              </RegularButton>
+            </Box>
           )}
         </WithInfoTooltip>
       )}

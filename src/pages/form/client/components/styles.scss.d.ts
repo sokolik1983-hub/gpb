@@ -9,6 +9,7 @@ declare namespace StylesScssModule {
     'date': string;
     'email': string;
     'periodType': string;
+    'periodTypeWrapper': string;
     'row': string;
     'rowChildren': string;
     'rowLabel': string;
