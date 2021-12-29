@@ -9,3 +9,4 @@ export * from './get-counterparty-dto';
 export * from './statement-transaction-row';
 export * from './form-router-state';
 export * from './classificators';
+export * from './get-status-dto';

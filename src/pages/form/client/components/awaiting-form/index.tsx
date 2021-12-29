@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import { executor } from 'actions/client/executor';
 import { gotoTransactionsScroller } from 'actions/client/goto-transactions-scroller';
 import { STATEMENT_STATUSES } from 'interfaces';
-import type { ILatestStatementDto } from 'interfaces/client';
+import type { IGetStatusResponceDto } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client';
 import { locale } from 'localization';
 import { statementService } from 'services';
-import { polling, POLLING_WAS_STOPPED_BY_USER } from 'utils';
+import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'utils';
 import { to } from '@platform/core';
 import type { IServerDataResp } from '@platform/services';
 import type { IButtonAction } from '@platform/ui';
@@ -28,9 +28,9 @@ export interface IAwaitingFormProps {
  * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440121}
  */
 export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
-  const job = () => statementService.getStatementRequest(id);
+  const job = () => statementService.getStatus(id);
 
-  const checker = (result: IServerDataResp<ILatestStatementDto>): boolean => {
+  const checker = (result: IServerDataResp<IGetStatusResponceDto>): boolean => {
     const {
       data: { status },
     } = result;
@@ -62,22 +62,35 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
      * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639}
      */
     const performEffect = async () => {
-      const [resp, fatalError] = await to(checkStatus());
+      const [statusResp, fatalStatusError] = await to(checkStatus());
 
-      const { data: statementRequest, error: statementRequestError } = resp ?? {};
+      const { data: statusResponseDto, error: statusError } = statusResp ?? {};
 
-      if (fatalError && fatalError === POLLING_WAS_STOPPED_BY_USER) {
+      if (fatalStatusError && fatalStatusError === POLLING_WAS_STOPPED_BY_USER) {
         return;
       }
 
-      if (statementRequestError || fatalError) {
+      if (statusError || fatalStatusError) {
         closeAwaitingForm();
-        dialog.showAlert(locale.errors.progressError, { header: locale.errors.progressErrorHeader });
+        showCommonErrorMessage();
 
         return;
       }
 
-      const { status, commentForClient = '', action } = statementRequest!;
+      const { status } = statusResponseDto!;
+
+      const [statementRequestResp, fatalStatementRequestErr] = await to(statementService.getStatementRequest(id));
+
+      const { data: statementRequest, error: statementRequestError } = statementRequestResp ?? {};
+
+      if (fatalStatementRequestErr || statementRequestError) {
+        closeAwaitingForm();
+        showCommonErrorMessage();
+
+        return;
+      }
+
+      const { commentForClient = '', action } = statementRequest!;
 
       if (status === STATEMENT_STATUSES.DENIED) {
         closeAwaitingForm();
@@ -92,14 +105,13 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       switch (action) {
         case ACTIONS.VIEW:
-          void executor.execute(gotoTransactionsScroller, [statementRequest]);
-
-          return;
-        // TODO: По мере добавления новых действий разделять кейсы
         case ACTIONS.PRINT:
         case ACTIONS.DOWNLOAD:
         case ACTIONS.SEND_TO_EMAIL:
         default:
+          // TODO: переделать. Временное решение т.к. бек перестал передавать action, пока не понятно где будем фиксить, на фронте или на беке.
+          void executor.execute(gotoTransactionsScroller, [statementRequest]);
+
           return;
       }
     };
