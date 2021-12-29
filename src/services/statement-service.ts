@@ -1,4 +1,3 @@
-import type { STATEMENT_STATUSES } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
@@ -7,6 +6,7 @@ import type {
   IStatementHistoryRow,
   IGetCounterpartiesResponseDto,
   IStatementTransactionRow,
+  IGetStatusResponceDto,
 } from 'interfaces/client';
 import type { ILatestStatementDto } from 'interfaces/client/latest-statement-dto';
 import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
@@ -113,10 +113,10 @@ export const statementService = {
       url: `${STATEMENT_REQUEST_URL}/find-latest`,
     }).then(r => r.data),
   /** Получить статус Запроса выписки. */
-  getStatus: (id: string): Promise<{ status: STATEMENT_STATUSES }> =>
-    request({
+  getStatus: (id: string): Promise<IServerDataResp<IGetStatusResponceDto>> =>
+    request<IServerDataResp<IGetStatusResponceDto>>({
       url: `${STATEMENT_REQUEST_URL}/get-status`,
       method: 'POST',
       data: { data: { id } },
-    }).then(r => r.data.data),
+    }).then(r => r.data),
 };
