@@ -1,5 +1,5 @@
-import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
+import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
@@ -30,8 +30,6 @@ export const createStatement: IActionConfig<typeof context, string> = {
 
     done();
   },
-  fatalHandler({ showError }) {
-    showError(locale.errors.progressErrorHeader, locale.errors.progressError);
-  },
+  fatalHandler,
   guardians: [],
 };

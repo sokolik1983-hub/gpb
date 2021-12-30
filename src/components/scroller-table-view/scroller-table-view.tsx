@@ -15,6 +15,8 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
   isLoading: boolean;
   /** Лейбл плейсхолдера. */
   placeholderLabel: string;
+  /** Обработчик клика по строке. */
+  onDoubleClick?(row: Row): void;
 }
 
 /**
@@ -25,6 +27,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   tableInstance,
   isLoading,
   placeholderLabel,
+  onDoubleClick,
 }: IScrollerTableViewProps<Row>) => {
   const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
 
@@ -35,7 +38,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   } else if (isLoading && rows.length === 0) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
-    tableContent = <TableBody isLoading={isLoading} tableInstance={tableInstance} />;
+    tableContent = <TableBody isLoading={isLoading} tableInstance={tableInstance} onDoubleClick={onDoubleClick} />;
   }
 
   return (

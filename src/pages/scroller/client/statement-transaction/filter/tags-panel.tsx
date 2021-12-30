@@ -2,10 +2,11 @@ import React, { useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components';
 import { useForm, useFormState } from 'react-final-form';
 import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
-import { orderTags } from 'utils';
+import { orderTags, stringifyCounterparty } from 'utils';
 import { DATE_FORMAT } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { Gap } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FIELDS_WITH_TAGS, FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
@@ -31,16 +32,16 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 export const TagsPanel = () => {
   const { restart } = useForm();
 
-  const { counterparties } = useContext(TransactionScrollerContext);
+  const { counterparties } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   const { values } = useFormState<IFormState>();
 
   const counterpartyNameById = useMemo(
     () =>
       counterparties.reduce((acc, item) => {
-        const { id, name } = item;
+        const { name } = item;
 
-        acc[id] = name;
+        acc[stringifyCounterparty(item)] = name;
 
         return acc;
       }, {}),
@@ -50,7 +51,7 @@ export const TagsPanel = () => {
   const {
     filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
-  } = useContext(TransactionScrollerContext);
+  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   const tagValueFormatter = (name: string, formValues: IFormState) => {
     const value = formValues[name];

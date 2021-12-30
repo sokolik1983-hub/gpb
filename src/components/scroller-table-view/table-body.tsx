@@ -14,10 +14,12 @@ export interface ITableBodyProps extends TableBodyProps {
   tableInstance: TableInstance<Record<string, any>>;
   /** Если true - то идёт процесс запроса данных, для отображения в таблице. */
   isLoading: boolean;
+  /** Обработчик клика по строке. */
+  onDoubleClick?(row: Record<string, any>): void;
 }
 
 /** Тело таблицы. */
-export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading }) => {
+export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick }) => {
   const {
     getTableBodyProps,
     rows,
@@ -37,7 +39,7 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading }) => 
 
             const { key: accountInfoRowKey } = row.getRowProps();
 
-            return <TableRow key={accountInfoRowKey} row={row} />;
+            return <TableRow key={accountInfoRowKey} row={row} onDoubleClick={onDoubleClick} />;
           })}
           {isLoading && <ScrollerLoadingOverlay />}
         </Box>

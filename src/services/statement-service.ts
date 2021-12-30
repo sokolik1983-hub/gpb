@@ -6,14 +6,12 @@ import type {
   IStatementHistoryRow,
   IGetCounterpartiesResponseDto,
   IStatementTransactionRow,
+  ILatestStatementDto,
+  IRequestStatementDto,
+  IStatementSummaryInfo,
+  IStatement,
   IGetStatusResponceDto,
 } from 'interfaces/client';
-import type { ILatestStatementDto } from 'interfaces/client/latest-statement-dto';
-import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
-import type { IStatement } from 'interfaces/client/statement';
-import { counterparty } from 'mocks/counterparty';
-import { statement } from 'mocks/statement';
-import { transactions } from 'mocks/transactions';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -61,40 +59,30 @@ export const statementService = {
       total: res.data.data.size,
     })),
   /** Возвращает список контрагентов. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getCounterparties(statementId: string): Promise<IGetCounterpartiesResponseDto[]> {
-    // TODO: Заглушка удалить при подключении реста
-    return new Promise(resolve => {
-      setTimeout(() => {
-        resolve(counterparty);
-      }, 300);
-    });
-  },
+  getCounterparties: (id: string): Promise<IGetCounterpartiesResponseDto[]> =>
+    request<IServerDataResp<IGetCounterpartiesResponseDto[]>>({
+      url: `${STATEMENT_URL}/get-counterparties/${id}`,
+    }).then(r => r.data.data),
   /** Возвращает список проводок. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTransactionList: (metaData: IMetaData): Promise<ICollectionResponse<IStatementTransactionRow>> =>
-    // TODO: Заглушка удалить при подключении реста
-    new Promise(resolve => {
-      setTimeout(() => {
-        const { pageSize, offset } = metaData;
-
-        const out = transactions.slice(offset, offset + pageSize);
-
-        resolve({
-          data: out,
-          total: transactions.length,
-        });
-      }, 500);
-    }),
-  /** Возвращает выписку. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getStatement: (statementId: string): Promise<IStatement> =>
-    // TODO: Заглушка удалить при подключении реста
-    new Promise(resolve => {
-      setTimeout(() => {
-        resolve(statement);
-      }, 0);
-    }),
+  getTransactionList: (metaData: IMetaData, statementId: string): Promise<ICollectionResponse<IStatementTransactionRow>> =>
+    request({
+      url: `${STATEMENT_URL}/get-accounting-entry`,
+      method: 'POST',
+      data: { ...metadataToRequestParams(metaData), statementId },
+    }).then(res => ({
+      data: res.data.data.page,
+      total: res.data.data.size,
+    })),
+  /** Возвращает сводную информацию по выписке. */
+  getStatementSummaryInfo: (id: string): Promise<IStatementSummaryInfo> =>
+    request<IServerDataResp<IStatementSummaryInfo>>({
+      url: `${STATEMENT_URL}/summary/${id}`,
+    }).then(r => r.data.data),
+  /** Возвращает выписку по id запроса выписки. */
+  getStatementByStatementRequestId: (id: string): Promise<IServerDataResp<IStatement>> =>
+    request<IServerDataResp<IStatement>>({
+      url: `${STATEMENT_URL}/by-statement-request-id/${id}`,
+    }).then(r => r.data),
   /** Создать запрос выписки. */
   createStatement: (data: IRequestStatementDto): Promise<string> =>
     request({

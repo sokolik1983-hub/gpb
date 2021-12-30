@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useEffect } from 'react';
+import React, { useContext, useMemo, useEffect, useCallback } from 'react';
+import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
 import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -40,6 +41,10 @@ export const Table: FC = () => {
     useBlockLayout
   );
 
+  const handleDoubleClick = useCallback((row: IStatementHistoryRow) => {
+    void executor.execute(gotoTransactionsScrollerByStatementRequest, [row]);
+  }, []);
+
   const {
     state: { sortBy, pageIndex, pageSize },
   } = tableInstance;
@@ -67,7 +72,12 @@ export const Table: FC = () => {
       </Horizon>
       <Gap.LG />
       {/* Таблица. */}
-      <ScrollerTableView isLoading={isLoading} placeholderLabel={locale.historyScroller.table.placeholder} tableInstance={tableInstance} />
+      <ScrollerTableView
+        isLoading={isLoading}
+        placeholderLabel={locale.historyScroller.table.placeholder}
+        tableInstance={tableInstance}
+        onDoubleClick={handleDoubleClick}
+      />
     </>
   );
 };

@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { Pattern, Fields, Typography, Gap, Horizon, Box } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
@@ -15,13 +16,13 @@ import css from './styles.scss';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<IFormState>();
 
-  const { amountFrom, amountTo, tableSearch } = values;
+  const { amountFrom, amountTo, queryString } = values;
 
   const {
     filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters },
     counterparties,
-  } = useContext(TransactionScrollerContext);
+  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
@@ -37,7 +38,7 @@ export const QuickFilter: FC = () => {
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, amountFrom, amountTo, tableSearch]);
+  }, [onOk, amountFrom, amountTo, queryString]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены все доп. данные.
@@ -57,14 +58,14 @@ export const QuickFilter: FC = () => {
         <Horizon>
           <Box className={css.fieldWrapper}>
             {/* Сумма от. */}
-            <Fields.Text extraSmall name={FORM_FIELDS.AMOUNT_FROM} placeholder={locale.transactionsScroller.placeholder.amountFrom} />
+            <Fields.Number extraSmall name={FORM_FIELDS.AMOUNT_FROM} placeholder={locale.transactionsScroller.placeholder.amountFrom} />
           </Box>
           <Gap.X2S />
           <Typography.Text>–</Typography.Text>
           <Gap.X2S />
           <Box className={css.fieldWrapper}>
             {/* Сумма по. */}
-            <Fields.Text extraSmall name={FORM_FIELDS.AMOUNT_TO} placeholder={locale.transactionsScroller.placeholder.amountTo} />
+            <Fields.Number extraSmall name={FORM_FIELDS.AMOUNT_TO} placeholder={locale.transactionsScroller.placeholder.amountTo} />
           </Box>
         </Horizon>
       </Pattern.Span>

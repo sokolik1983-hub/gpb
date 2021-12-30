@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useCallback } from 'react';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
+import { stringifyCounterparty } from 'utils';
 import type { IOptionTemplateProps, IOption } from '@platform/ui';
 import { Fields, Box, Option, Typography } from '@platform/ui';
 
@@ -40,10 +41,10 @@ CounterpartyOption.displayName = 'CounterpartyOption';
  * @param counterparty - Контрагент.
  */
 const getCounterpartyOption = (counterparty: IGetCounterpartiesResponseDto): ICounterpartyOption => {
-  const { id, inn, name } = counterparty;
+  const { inn, name } = counterparty;
 
   return {
-    value: id,
+    value: stringifyCounterparty(counterparty),
     label: name, // Значение будет отображаться в лейбле тега выбранного значения.
     inn,
   };

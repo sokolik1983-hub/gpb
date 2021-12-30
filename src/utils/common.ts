@@ -1,5 +1,5 @@
 import { locale } from 'localization';
-import { dateTime } from '@platform/tools/date-time';
+import type { IBaseContext } from '@platform/services';
 import { dialog } from '@platform/ui';
 
 /** Типизированная noop-функция. */
@@ -7,9 +7,6 @@ export const noop = <T = unknown>() => (({} as unknown) as T);
 
 /** Асинхронная noop-функция. */
 export const asyncNoop = <T = unknown>() => Promise.resolve(noop<T>());
-
-/** Возвращает дату вчерашнего дня. */
-export const getYesterday = () => dateTime().subtract(1, 'day');
 
 /**
  * Используется в предикате для Array.sort, для сортировки строк по возрастанию.
@@ -27,6 +24,11 @@ export const compareStrings = (a: string, b: string): -1 | 0 | 1 => {
   }
 
   return 0;
+};
+
+/** Стандартный обработчик фатальной ошибки. */
+export const fatalHandler = ({ showError }: IBaseContext) => {
+  showError(locale.errors.progressErrorHeader, locale.errors.progressError);
 };
 
 /**
