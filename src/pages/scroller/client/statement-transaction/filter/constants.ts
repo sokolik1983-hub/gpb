@@ -1,8 +1,11 @@
 import { TRANSACTION_TYPES } from 'interfaces';
+import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
+import { parseCounterparty } from 'utils';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
+import { filterFields } from '@platform/services';
 import type { IOption } from '@platform/ui';
 import type { IFormState } from './interfaces';
 
@@ -12,7 +15,7 @@ export const getPath = pathGenerator<IFormState>();
 /** Поля формы фильтра. */
 export const FORM_FIELDS = {
   /** Поиск по таблице. */
-  TABLE_SEARCH: getPath('tableSearch'),
+  TABLE_SEARCH: getPath('queryString'),
   /** Сумма. */
   AMOUNT: 'amount',
   /** Сумма от. */
@@ -20,11 +23,11 @@ export const FORM_FIELDS = {
   /** Сумма по. */
   AMOUNT_TO: getPath('amountTo'),
   /** Контрагент. */
-  COUNTERPARTY: getPath('counterparty'),
+  COUNTERPARTY: getPath('counterparties'),
   /** Номер документа. */
-  DOC_NUMBER: getPath('docNumber'),
+  DOC_NUMBER: getPath('documentNumber'),
   /** Дата платежа. */
-  PAYMENT_DATE: 'paymentDate',
+  PAYMENT_DATE: 'entryDate',
   /** Дата платежа с. */
   PAYMENT_DATE_FROM: getPath('paymentDateFrom'),
   /** Дата платежа по. */
@@ -35,7 +38,19 @@ export const FORM_FIELDS = {
 
 /** Значения полей и условия фильтрации для useFilter. */
 export const fields: Record<string, IFilterField> = {
-  // TODO: описать фильтры при подключении реста.
+  [FORM_FIELDS.TABLE_SEARCH]: filterFields.contains('', FORM_FIELDS.TABLE_SEARCH),
+  [FORM_FIELDS.AMOUNT_FROM]: filterFields.ge('', FORM_FIELDS.AMOUNT),
+  [FORM_FIELDS.AMOUNT_TO]: filterFields.le('', FORM_FIELDS.AMOUNT),
+  [FORM_FIELDS.PAYMENT_DATE_FROM]: filterFields.ge('', FORM_FIELDS.PAYMENT_DATE),
+  [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le('', FORM_FIELDS.PAYMENT_DATE),
+  [FORM_FIELDS.DOC_NUMBER]: filterFields.eq('', FORM_FIELDS.DOC_NUMBER),
+  [FORM_FIELDS.TRANSACTION_TYPE]: filterFields.eq('', FORM_FIELDS.TRANSACTION_TYPE),
+  [FORM_FIELDS.COUNTERPARTY]: filterFields.in([], FORM_FIELDS.COUNTERPARTY, (value): IGetCounterpartiesResponseDto[] => {
+    // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
+    const selectedCounterparties = value as string[];
+
+    return selectedCounterparties.map(item => parseCounterparty(item));
+  }),
 };
 
 /** Лейблы тегов полей фильтра. */

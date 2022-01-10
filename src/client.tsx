@@ -25,7 +25,7 @@ export const routes = [
     key="client-statement-transactions-scroller"
     exact
     component={StatementTransactionScrollerPage}
-    path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/:statementId`}
+    path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/${ID_URL_PARAMETER}`}
   />,
   <Route key="statement-client-form" exact component={RequestStatementForm} path={`${COMMON_STREAM_URL.STATEMENT}/${ID_URL_PARAMETER}`} />,
 ];

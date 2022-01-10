@@ -1,4 +1,4 @@
-import type { DATE_PERIODS, STATEMENT_STATUSES } from 'interfaces';
+import type { DATE_PERIODS, STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import type { ACTIONS } from 'interfaces/client/classificators/actions';
 import type { FORMAT } from 'interfaces/client/classificators/format';
 
@@ -26,7 +26,7 @@ export interface ILatestStatementDto {
   /** Формат выписки. */
   statementFormat: FORMAT;
   /** Статус запроса выписки. */
-  status: STATEMENT_STATUSES;
+  status: STATEMENT_REQUEST_STATUSES;
   /** Комментарий для клиента. */
   commentForClient?: string;
 }

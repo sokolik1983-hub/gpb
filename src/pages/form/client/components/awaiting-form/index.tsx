@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { executor } from 'actions/client/executor';
-import { gotoTransactionsScroller } from 'actions/client/goto-transactions-scroller';
-import { STATEMENT_STATUSES } from 'interfaces';
+import { gotoTransactionsScrollerByStatementRequest } from 'actions/client/goto-transactions-scroller-by-statement-request';
+import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import type { IGetStatusResponceDto } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client';
 import { locale } from 'localization';
@@ -35,7 +35,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
       data: { status },
     } = result;
 
-    return [STATEMENT_STATUSES.DENIED, STATEMENT_STATUSES.EXECUTED].includes(status);
+    return [STATEMENT_REQUEST_STATUSES.DENIED, STATEMENT_REQUEST_STATUSES.EXECUTED].includes(status);
   };
 
   const { pollingFunc: checkStatus, stopPolling: stopCheckStatus } = polling(job, checker, 2000);
@@ -92,7 +92,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       const { commentForClient = '', action } = statementRequest!;
 
-      if (status === STATEMENT_STATUSES.DENIED) {
+      if (status === STATEMENT_REQUEST_STATUSES.DENIED) {
         closeAwaitingForm();
         dialog.showAlert(locale.errors.statementDenied({ message: commentForClient }), {
           header: locale.errors.progressErrorHeader,
@@ -110,7 +110,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         case ACTIONS.SEND_TO_EMAIL:
         default:
           // TODO: переделать. Временное решение т.к. бек перестал передавать action, пока не понятно где будем фиксить, на фронте или на беке.
-          void executor.execute(gotoTransactionsScroller, [statementRequest]);
+          await executor.execute(gotoTransactionsScrollerByStatementRequest, [statementRequest]);
 
           return;
       }

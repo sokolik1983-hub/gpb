@@ -1,4 +1,5 @@
 import type { Sorting, IPagination } from 'interfaces';
+import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IMetaData } from '@platform/services';
 import type { IOption } from '@platform/ui';
@@ -50,3 +51,26 @@ export const convertTablePaginationToMetaData = ({ pageSize, pageIndex }: IPagin
   pageSize,
   offset: pageSize * pageIndex,
 });
+
+/**
+ * Сериализует сущность контрагента. Это нужно потому, что у контр агента нет идентификатора.
+ * Преобразование в массив используется чтобы, гарантировать порядок полей.
+ *
+ * @param counterparty - Контрагент.
+ */
+export const stringifyCounterparty = (counterparty: IGetCounterpartiesResponseDto): string => {
+  const { inn, name } = counterparty;
+
+  return JSON.stringify([inn, name]);
+};
+
+/**
+ * Восстанавливает контрагента из сериализованного значения.
+ *
+ * @param stringifiedCounterparty - Сериализованый контрагент.
+ */
+export const parseCounterparty = (stringifiedCounterparty: string): IGetCounterpartiesResponseDto => {
+  const [inn, name] = JSON.parse(stringifiedCounterparty);
+
+  return { inn, name };
+};

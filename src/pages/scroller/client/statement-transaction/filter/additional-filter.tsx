@@ -5,6 +5,7 @@ import { useDateRangeRestriction } from 'hooks';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { Pattern, Fields, Horizon, Box, Typography, Gap } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FORM_FIELDS, TRANSACTION_TYPE_OPTIONS } from './constants';
 import { CounterpartyField } from './counterparty-field';
@@ -17,7 +18,7 @@ export const AdditionalFilter: FC = () => {
 
   const { paymentDateFrom, paymentDateTo } = values;
 
-  const { counterparties } = useContext(TransactionScrollerContext);
+  const { counterparties } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   useDateRangeRestriction({
     dateFromName: FORM_FIELDS.PAYMENT_DATE_FROM,
@@ -31,7 +32,7 @@ export const AdditionalFilter: FC = () => {
       <Pattern.Span size={6}>
         <FilterFormElement label={locale.transactionsScroller.labels.docNumber}>
           {/* Выбор периода. */}
-          <Fields.Text extraSmall name={FORM_FIELDS.DOC_NUMBER} />
+          <Fields.Number extraSmall name={FORM_FIELDS.DOC_NUMBER} />
         </FilterFormElement>
       </Pattern.Span>
 

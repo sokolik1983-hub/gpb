@@ -1,4 +1,4 @@
-import type { STATEMENT_STATUSES, DATE_PERIODS } from 'interfaces';
+import type { STATEMENT_REQUEST_STATUSES, DATE_PERIODS } from 'interfaces';
 import type { EMPTY_VALUE } from 'stream-constants';
 
 /** Стейт формы фильтрации. */
@@ -14,7 +14,7 @@ export interface IFormState {
   /** Временной период. */
   periodType: DATE_PERIODS | typeof EMPTY_VALUE;
   /** Статус. */
-  status: STATEMENT_STATUSES | typeof EMPTY_VALUE;
+  status: STATEMENT_REQUEST_STATUSES | typeof EMPTY_VALUE;
   /** Наличие ЭП. */
   signed: boolean;
 }

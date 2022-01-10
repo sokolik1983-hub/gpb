@@ -3,14 +3,15 @@ import React, { useContext } from 'react';
 import { locale } from 'localization';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Box, Pattern, Typography, Gap, WithInfoTooltip } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Общая информация по выписке. */
 export const StatementInfo: FC = () => {
-  const { statement } = useContext(TransactionScrollerContext);
+  const { statementSummaryInfo } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
-  if (!statement) {
+  if (!statementSummaryInfo) {
     return null;
   }
 
@@ -19,11 +20,12 @@ export const StatementInfo: FC = () => {
     organizationName,
     incomingBalance,
     outcome,
-    outcomeTransactions,
-    incomeTransactions,
+    income,
+    outcomeAccountEntryCount,
+    incomeAccountEntryCount,
     outgoingBalance,
     currencyCode,
-  } = statement;
+  } = statementSummaryInfo;
 
   return (
     <Box className={css.statementInfoWrapper}>
@@ -52,15 +54,15 @@ export const StatementInfo: FC = () => {
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>
-            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomeTransactions })}
+            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomeAccountEntryCount })}
           </Typography.Text>
           <Typography.Text fill={'CRITIC'}>{locale.moneyString.negative({ amount: String(outcome), currencyCode })}</Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>
-            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomeTransactions })}
+            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomeAccountEntryCount })}
           </Typography.Text>
-          <Typography.Text fill={'SUCCESS'}>{locale.moneyString.positive({ amount: String(outcome), currencyCode })}</Typography.Text>
+          <Typography.Text fill={'SUCCESS'}>{locale.moneyString.positive({ amount: String(income), currencyCode })}</Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.outgoingBalance}</Typography.Text>

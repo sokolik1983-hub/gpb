@@ -3,17 +3,18 @@ import React, { useContext, useMemo, useEffect } from 'react';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
-import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination, useRowSelect } from 'react-table';
 import { Horizon, Typography, Gap, Box } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
+import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { columns } from './columns';
 import css from './styles.scss';
 
 /** Таблица скроллера проводок. */
 export const Table: FC = () => {
-  const { transactions, isLoading, totalTransactionsAmount, sorting, setSorting, pagination, setPagination, setSelectedRows } = useContext(
-    TransactionScrollerContext
-  );
+  const { transactions, isLoading, totalTransactionsAmount, sorting, setSorting, pagination, setPagination, setSelectedRows } = useContext<
+    ITransactionScrollerContext
+  >(TransactionScrollerContext);
 
   const initialState = useMemo(
     () => ({
@@ -32,6 +33,7 @@ export const Table: FC = () => {
       expandSubRows: false,
       pageCount: Math.ceil(totalTransactionsAmount / pagination.pageSize),
       initialState,
+      maxMultiSortColCount: 2,
     },
     useSortBy,
     usePagination,

@@ -8,15 +8,15 @@
  */
 export const COLUMN_NAMES = {
   // Дата и время запроса.
-  OPERATION_DATE: 'operationDate',
+  OPERATION_DATE: 'entryDate',
   // Информация о документе.
-  DOCUMENT_INFO: 'documentInfo',
+  DOCUMENT_INFO: 'documentNumber',
   // Информация о контрагенте.
-  COUNTERPARTY_INFO: 'counterpartyInfo',
+  COUNTERPARTY_INFO: 'payeeName',
   // Списания.
   OUTCOME: 'outcome',
   // Поступления.
   INCOME: 'income',
   // Назначение платежа.
-  PURPOSE: 'purpose',
+  PURPOSE: 'paymentPurpose',
 } as const;

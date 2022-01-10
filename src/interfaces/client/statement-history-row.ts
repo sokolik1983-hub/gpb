@@ -1,4 +1,4 @@
-import type { STATEMENT_STATUSES, DATE_PERIODS, STATEMENT_FORMATS, STATEMENT_ACTION_TYPES } from 'interfaces';
+import type { STATEMENT_REQUEST_STATUSES, DATE_PERIODS, STATEMENT_FORMATS, STATEMENT_ACTION_TYPES } from 'interfaces';
 
 /** Строка скроллера истории запросов выписок. */
 export interface IStatementHistoryRow {
@@ -17,7 +17,7 @@ export interface IStatementHistoryRow {
   /** Формат выписки. */
   statementFormat: STATEMENT_FORMATS;
   /** Статус запроса выписки. */
-  status: STATEMENT_STATUSES;
+  status: STATEMENT_REQUEST_STATUSES;
   /** Тип действия. */
   action: STATEMENT_ACTION_TYPES;
   /** "Дата с" которая запрашивалась в выписке. */

@@ -2,14 +2,17 @@ import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
 import cn from 'classnames';
 import { locale } from 'localization';
-import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { bigNumber } from '@platform/tools/big-number';
 import { Typography, Box, Adjust, Horizon, Gap } from '@platform/ui';
+import type { ITransactionScrollerContext } from '../transaction-scroller-context';
+import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Суммарная информация о выбранных строках таблицы. */
 export const Footer: FC = () => {
-  const { selectedRows, statement: { currencyCode = '' } = {} } = useContext(TransactionScrollerContext);
+  const { selectedRows, statementSummaryInfo: { currencyCode = '' } = {} } = useContext<ITransactionScrollerContext>(
+    TransactionScrollerContext
+  );
 
   const totalIncome = useMemo(() => selectedRows.reduce((acc, item) => acc.plus(item.income ?? 0), bigNumber(0)).toString(), [
     selectedRows,

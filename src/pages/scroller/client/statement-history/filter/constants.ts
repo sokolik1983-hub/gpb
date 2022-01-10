@@ -1,5 +1,5 @@
 import type { DATE_PERIODS } from 'interfaces';
-import { STATEMENT_STATUSES } from 'interfaces';
+import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import { locale } from 'localization';
 import { EMPTY_VALUE, DATE_PERIOD_OPTIONS as COMMON_DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { STATUS_LABELS } from 'stream-constants/client';
@@ -36,11 +36,11 @@ export const FORM_FIELDS = {
  * на массивы статусов соответствующие этим статусам.
  */
 const STATUSES_BY_SELECTED_STATUS = {
-  [STATEMENT_STATUSES.NEW]: [STATEMENT_STATUSES.NEW],
-  [STATEMENT_STATUSES.RECEIVED]: [STATEMENT_STATUSES.RECEIVED, STATEMENT_STATUSES.DETAILS_VALID],
-  [STATEMENT_STATUSES.DELIVERED]: [STATEMENT_STATUSES.DELIVERED],
-  [STATEMENT_STATUSES.EXECUTED]: [STATEMENT_STATUSES.EXECUTED],
-  [STATEMENT_STATUSES.DENIED]: [STATEMENT_STATUSES.DENIED],
+  [STATEMENT_REQUEST_STATUSES.NEW]: [STATEMENT_REQUEST_STATUSES.NEW],
+  [STATEMENT_REQUEST_STATUSES.RECEIVED]: [STATEMENT_REQUEST_STATUSES.RECEIVED, STATEMENT_REQUEST_STATUSES.DETAILS_VALID],
+  [STATEMENT_REQUEST_STATUSES.DELIVERED]: [STATEMENT_REQUEST_STATUSES.DELIVERED],
+  [STATEMENT_REQUEST_STATUSES.EXECUTED]: [STATEMENT_REQUEST_STATUSES.EXECUTED],
+  [STATEMENT_REQUEST_STATUSES.DENIED]: [STATEMENT_REQUEST_STATUSES.DENIED],
 };
 
 /** Значения полей и условия фильтрации для useFilter. */
@@ -49,7 +49,7 @@ export const fields: Record<string, IFilterField> = {
   [FORM_FIELDS.DATE_TO]: filterFields.le('', FORM_FIELDS.CREATED_AT, value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.ACCOUNT_IDS]: filterFields.in([], FORM_FIELDS.ACCOUNT_IDS),
   [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq('', FORM_FIELDS.PERIOD_TYPE),
-  [FORM_FIELDS.STATUS]: filterFields.in([], FORM_FIELDS.STATUS, (value): STATEMENT_STATUSES[] => {
+  [FORM_FIELDS.STATUS]: filterFields.in([], FORM_FIELDS.STATUS, (value): STATEMENT_REQUEST_STATUSES[] => {
     // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
     const selectedStatus = value as keyof typeof STATUSES_BY_SELECTED_STATUS | typeof EMPTY_VALUE;
 
@@ -73,7 +73,7 @@ export const tagLabels = {
 export const FIELDS_WITH_TAGS = [FORM_FIELDS.PERIOD_TYPE, FORM_FIELDS.STATUS, FORM_FIELDS.SIGNED];
 
 /** Отсортированные опции фильтра статусов. */
-export const STATUS_OPTIONS: Array<IOption<STATEMENT_STATUSES | typeof EMPTY_VALUE>> = [
+export const STATUS_OPTIONS: Array<IOption<STATEMENT_REQUEST_STATUSES | typeof EMPTY_VALUE>> = [
   { value: EMPTY_VALUE, label: locale.form.labels.selectAll },
   ...(Object.keys(STATUSES_BY_SELECTED_STATUS) as Array<keyof typeof STATUSES_BY_SELECTED_STATUS>)
     .map(item => ({ label: STATUS_LABELS[item], value: item }))

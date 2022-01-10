@@ -1,5 +1,7 @@
 /** Строка скроллера проводок. */
 export interface IStatementTransactionRow {
+  /** Идентификатор проводки. */
+  id: string;
   /** Дата операции. */
   operationDate: string;
   /** Номер проводки. */

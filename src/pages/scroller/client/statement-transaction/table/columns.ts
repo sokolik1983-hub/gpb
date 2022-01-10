@@ -40,6 +40,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Outcome,
     width: 239,
+    disableSortBy: true,
   },
   {
     Header: locale.transactionsScroller.headers.income,
@@ -47,6 +48,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Income,
     width: 239,
+    disableSortBy: true,
   },
   {
     Header: locale.transactionsScroller.headers.purpose,
