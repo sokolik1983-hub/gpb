@@ -8,3 +8,4 @@ export * from './scroller-page-layout';
 export * from './pop-up';
 export * from './scroller-placeholder';
 export * from './scroller-loading-overlay';
+export * from './sticky-rows';

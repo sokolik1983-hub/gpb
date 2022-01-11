@@ -5,24 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'borderedRow': string;
-    'cell': string;
-    'clickableRow': string;
-    'collapsedRow': string;
-    'groupingRow': string;
-    'headerCell': string;
-    'headerColumnDelimiter': string;
-    'headerRow': string;
-    'headerRowWrapper': string;
-    'layoutScrollWrapper': string;
-    'placeholderOverlay': string;
-    'portal': string;
-    'scrollIconBox': string;
-    'sortIconWrapper': string;
-    'table': string;
-    'tableBody': string;
-    'tableWrapper': string;
-    'toggleButton': string;
+    'notStuckRow': string;
+    'stuckRow': string;
     'zLayerContainer': string;
     'zLayerControl': string;
     'zLayerFix': string;

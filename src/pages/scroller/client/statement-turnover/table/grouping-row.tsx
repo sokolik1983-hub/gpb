@@ -34,18 +34,20 @@ export interface IGroupingRowProps {
 
 /** Группирующая строка таблицы Оборотов. */
 export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
-  const { groupInfo } = groupingRow.original;
+  const { original, getRowProps, cells } = groupingRow;
+
+  const { groupInfo } = original;
 
   const { groupingType } = groupInfo;
 
-  const { key, ...rowProps } = groupingRow.getRowProps();
+  const { key, ...rowProps } = getRowProps();
 
   // Группирующая строка, для значения группировки "по валютам",
   // отображается в таблице, так же как строки с данными по счётам.
   if (groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
       <Box {...rowProps} className={css.borderedRow}>
-        {groupingRow.cells.map(cell => {
+        {cells.map(cell => {
           const { key: cellKey, ...cellProps } = cell.getCellProps();
 
           return (

@@ -1,8 +1,10 @@
 import type { FC } from 'react';
-import React, { useContext } from 'react';
+import React, { useContext, useRef, useEffect } from 'react';
+import { StickyRowsContext, StickyRow } from 'components';
 import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/client';
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/client';
+import type Scrollbars from 'react-custom-scrollbars';
 import type { TableBodyProps, Row } from 'react-table';
 import { Box, LayoutScrollComponent, Gap, ROLE } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
@@ -55,25 +57,65 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
     filterPanel: { values: filterFormValue },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
+  const { setScrollPosition, setScrollbars, scrollbars, portalRef } = useContext(StickyRowsContext);
+
+  const scrolledElementRef = useRef<Scrollbars>();
+
   const { groupBy } = filterFormValue;
 
-  const { handleScrollButtonClick, ScrollIcon, handleScroll, isScrollButtonVisible, setScrolledElementRef } = useScrollButton();
+  const {
+    handleScrollButtonClick,
+    ScrollIcon,
+    handleScroll: handleScrollFromScrollButton,
+    isScrollButtonVisible,
+    setScrolledElementRef: setScrolledElementRefFromScrollButton,
+  } = useScrollButton();
+
+  const setScrolledElementRef = ref => {
+    scrolledElementRef.current = ref;
+    setScrolledElementRefFromScrollButton(ref);
+  };
+
+  const handleScroll = (e: React.UIEvent<HTMLDivElement>) => {
+    handleScrollFromScrollButton(e);
+    setScrollPosition(e.currentTarget.scrollTop);
+  };
+
+  useEffect(() => {
+    if (scrolledElementRef.current) {
+      setScrollbars(scrolledElementRef.current);
+    }
+  }, [setScrollbars]);
 
   return (
     <Box className={css.layoutScrollWrapper}>
       <LayoutScrollComponent innerRef={setScrolledElementRef} onScroll={handleScroll}>
+        {/* Элемент внутри которого будут рендерится сроки в состоянии стики. */}
+        <div ref={portalRef} className={css.portal} style={{ top: scrollbars?.getScrollTop() }} />
         <Box {...tableBodyProps} className={css.tableBody}>
           {rows.map(groupingRow => {
             prepareRow(groupingRow);
 
-            const { key: groupingRowKey } = groupingRow.getRowProps();
+            const {
+              original: { groupInfo: { groupingType } = {} },
+              getRowProps,
+            } = groupingRow;
+
+            const { key: groupingRowKey } = getRowProps();
 
             const { isExpandButtonVisible, visibleRows } = getVisibleRows(groupingRow, groupBy);
 
             return (
               <>
                 {/* Группирующая строка. */}
-                {groupBy !== GROUPING_VALUES.NO_GROUPING && <GroupingRow key={groupingRowKey} groupingRow={groupingRow} />}
+                {groupBy !== GROUPING_VALUES.NO_GROUPING && (
+                  <StickyRow
+                    key={groupingRowKey}
+                    secondLevelRow={groupBy === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES && groupingType === GROUPING_TYPE.CURRENCIES}
+                  >
+                    <GroupingRow groupingRow={groupingRow} />
+                  </StickyRow>
+                )}
 
                 {/* Строки с информаций по счетам. */}
                 {visibleRows?.map(accountInfoRow => {
