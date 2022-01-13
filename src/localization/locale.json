@@ -554,6 +554,64 @@
   "awaitingForm.cancelRequestButton": {
     "ru": "Отменить формирование"
   },
+  "transactionCard.header.debit": {
+    "ru": "Документ по сисанию средств"
+  },
+  "transactionCard.header.credit": {
+    "ru": "Документ по поступлению средств"
+  },
+  "transactionCard.subHeader": {
+    "@documentName": "string",
+    "@number": "string",
+    "@date": "string",
+    "ru": "{documentName} № {number} от {date}"
+  },
+  "transactionCard.tabs.requisites": {
+    "ru": "Реквизиты"
+  },
+  "transactionCard.tabs.attachments": {
+    "ru": "Приложения"
+  },
+  "transactionCard.buttons.export": {
+    "ru": "Скачать"
+  },
+  "transactionCard.buttons.sendToEmail": {
+    "ru": "Отправить на почту"
+  },
+  "transactionCard.labels.amount": {
+    "ru": "Сумма"
+  },
+  "transactionCard.labels.payer": {
+    "ru": "Плательщик"
+  },
+  "transactionCard.labels.receiver": {
+    "ru": "Получатель"
+  },
+  "transactionCard.labels.paymentPurpose": {
+    "ru": "Назначение платежа"
+  },
+  "transactionCard.labels.operationDate": {
+    "ru": "Дата операции"
+  },
+  "transactionCard.labels.agentAccountNumber": {
+    "ru": "Расчетный счет"
+  },
+  "transactionCard.labels.bankName": {
+    "ru": "Банк"
+  },
+  "transactionCard.values.agentBic": {
+    "@bic": "string",
+    "ru": "БИК: {bic}"
+  },
+  "transactionCard.values.agentBankCrrAccounts": {
+    "@account": "string",
+    "ru": "Корр. счет: {account}"
+  },
+  "transactionCard.values.agentInfo": {
+    "@orgName": "string",
+    "@inn": "string",
+    "ru": "{orgName}, ИНН {inn}"
+  },
   "errors.progressErrorHeader": {
     "ru": "Ошибка"
   },

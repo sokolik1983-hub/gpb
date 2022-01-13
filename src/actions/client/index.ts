@@ -5,3 +5,4 @@ export * from './export-statement';
 export * from './repeat-statement';
 export * from './goto-transactions-scroller';
 export * from './goto-transactions-scroller-by-statement-request';
+export * from './view-transaction';

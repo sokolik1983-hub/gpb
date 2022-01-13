@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useEffect } from 'react';
+import React, { useContext, useMemo, useEffect, useCallback } from 'react';
+import { executor, viewTransaction } from 'actions/client';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -54,6 +55,10 @@ export const Table: FC = () => {
 
   const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
 
+  const handleDoubleClick = useCallback((row: IStatementTransactionRow) => {
+    void executor.execute(viewTransaction, [row]);
+  }, []);
+
   useEffect(() => {
     setPagination(newPaginationState);
   }, [setPagination, newPaginationState]);
@@ -80,6 +85,7 @@ export const Table: FC = () => {
         isLoading={isLoading}
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         tableInstance={tableInstance}
+        onDoubleClick={handleDoubleClick}
       />
     </>
   );

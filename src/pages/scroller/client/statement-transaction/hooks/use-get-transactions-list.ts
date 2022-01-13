@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import type { Sorting, IPagination, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
@@ -27,20 +28,22 @@ interface IUseGetStatementListArgs {
 export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGetStatementListArgs) => {
   const { id } = useParams<IUrlParams>();
 
-  const requestDto: IMetaData = useDebounce(
-    {
+  const requestDto: IMetaData = useMemo(
+    () => ({
       filters,
-      multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
+      sort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
       ...convertTablePaginationToMetaData(pagination),
-    },
-    300
+    }),
+    [filters, pagination, sorting]
   );
+
+  const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);
 
   const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError } = useQuery<
     ICollectionResponse<IStatementTransactionRow>
   >({
-    queryKey: ['@eco/statement', 'transactions', requestDto],
-    queryFn: () => statementService.getTransactionList(requestDto, id),
+    queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
+    queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
     keepPreviousData: true,
     retry: false,
