@@ -90,7 +90,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         return;
       }
 
-      const { commentForClient = '', action } = statementRequest!;
+      const { commentForClient = '', statementActionDto } = statementRequest!;
 
       if (status === STATEMENT_REQUEST_STATUSES.DENIED) {
         closeAwaitingForm();
@@ -103,15 +103,15 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       closeAwaitingForm();
 
-      switch (action) {
+      switch (statementActionDto) {
         case ACTIONS.VIEW:
+          await executor.execute(gotoTransactionsScrollerByStatementRequest, [statementRequest]);
+
+          return;
         case ACTIONS.PRINT:
         case ACTIONS.DOWNLOAD:
         case ACTIONS.SEND_TO_EMAIL:
         default:
-          // TODO: переделать. Временное решение т.к. бек перестал передавать action, пока не понятно где будем фиксить, на фронте или на беке.
-          await executor.execute(gotoTransactionsScrollerByStatementRequest, [statementRequest]);
-
           return;
       }
     };

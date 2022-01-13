@@ -12,7 +12,7 @@ export interface ILatestStatementDto {
   /** ID счетов. */
   accountsIds: string[];
   /** Тип действия. */
-  action: ACTIONS;
+  statementActionDto: ACTIONS;
   /** Дата запроса. */
   createdAt: string;
   /** Наименование организаций. */

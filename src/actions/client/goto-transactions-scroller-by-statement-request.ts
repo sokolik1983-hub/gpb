@@ -22,7 +22,6 @@ export const gotoTransactionsScrollerByStatementRequest: IActionConfig<typeof co
 
     done();
   },
-  failedHandler: fatalHandler,
   fatalHandler,
   guardians: [singleAction],
 };

@@ -33,11 +33,13 @@ export const createStatement: IActionConfig<typeof context, string> = {
 
     showLoader();
 
-    const [id, err] = await to(service.createStatement(doc));
+    const [res, err] = await to(service.createStatement(doc));
 
     hideLoader();
 
-    fatal(err);
+    const { data: id, error } = res ?? {};
+
+    fatal(err || error);
 
     // ожидание формирования выписки
     const [_, close] = await to(showAwaitingForm(id!));
