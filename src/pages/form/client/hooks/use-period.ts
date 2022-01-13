@@ -31,9 +31,11 @@ export const usePeriod = () => {
   }, [batch, change, refetch, values.periodType]);
 
   useEffect(() => {
-    batch(() => {
-      change(FORM_FIELDS.DATE_FROM, period?.dateFrom);
-      change(FORM_FIELDS.DATE_TO, period?.dateTo);
-    });
-  }, [batch, change, period?.dateFrom, period?.dateTo]);
+    if (period) {
+      batch(() => {
+        change(FORM_FIELDS.DATE_FROM, period.dateFrom);
+        change(FORM_FIELDS.DATE_TO, period.dateTo);
+      });
+    }
+  }, [batch, change, period]);
 };

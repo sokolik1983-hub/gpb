@@ -2,6 +2,7 @@ import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { OPERATIONS } from 'interfaces/client/classificators/operations';
+import { locale } from 'localization';
 import { pathGenerator } from '@platform/core';
 
 const getPath = pathGenerator<IFormState>();
@@ -67,4 +68,14 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
   }
 
   return { ...defaultFormState, ...latestFormState };
+};
+
+/** Лейблы полей формы создания "Запроса выписки". */
+export const FORM_FIELD_LABELS = {
+  [FORM_FIELDS.PERIOD_TYPE]: locale.common.period.label,
+  [FORM_FIELDS.DATE_FROM]: locale.common.periodStart.label,
+  [FORM_FIELDS.DATE_TO]: locale.common.periodEnd.label,
+  [FORM_FIELDS.ACCOUNTS]: locale.common.accounts.label,
+  [FORM_FIELDS.FILE_FORMAT]: locale.common.fileFormat.label,
+  [FORM_FIELDS.OPERATION]: locale.common.operations.label,
 };

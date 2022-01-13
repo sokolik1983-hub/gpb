@@ -2,7 +2,7 @@ import React from 'react';
 import { createStatement, getExecutor } from 'actions/client';
 import { useCreationType } from 'hooks';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
-import type { IRequestStatementDto } from 'interfaces/client';
+import type { ICreateRequestStatementDto } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client/classificators/actions';
 import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import { TYPE } from 'interfaces/client/classificators/type';
@@ -18,16 +18,16 @@ import { CREATION_PARAMS } from 'pages/form/client/interfaces/creation-params';
 import { CREDIT_PARAMS } from 'pages/form/client/interfaces/credit-params';
 import { DEBIT_PARAMS } from 'pages/form/client/interfaces/debit-params';
 import type { IFormState } from 'pages/form/client/interfaces/form-state';
-import { getInitialFormState } from 'pages/form/client/interfaces/form-state';
+import { FORM_FIELD_LABELS, getInitialFormState } from 'pages/form/client/interfaces/form-state';
 import { Form } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { asyncNoop } from 'utils';
 import { NotFoundContent } from '@platform/services';
-import { Box, LoaderOverlay } from '@platform/ui';
+import { Box, LoaderOverlay, Pattern, FormValidation } from '@platform/ui';
+import { validateForm } from '../views/validate-form';
 import css from './styles.scss';
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
-const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): IRequestStatementDto => ({
+const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICreateRequestStatementDto => ({
   accountsIds: values.accountIds,
   action: ACTIONS.VIEW,
   creationParams: {
@@ -53,7 +53,6 @@ const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): IRe
 
 /** ЭФ создания запроса на выписку. */
 export const NewForm: React.FC = () => {
-  const validate = asyncNoop;
   const creationType = useCreationType();
 
   const { initialStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
@@ -79,16 +78,24 @@ export const NewForm: React.FC = () => {
         initialValues={initialFormState}
         render={({ handleSubmit }) => (
           <FormProvider onSubmit={handleSubmit}>
-            <Period />
-            <Accounts />
-            <Operations />
-            <FileFormats />
-            <CreationParams />
-            <DocumentsSetParams />
-            <Footer />
+            <Pattern>
+              <Pattern.Span size={7}>
+                <Period />
+                <Accounts />
+                <Operations />
+                <FileFormats />
+                <CreationParams />
+                <DocumentsSetParams />
+                <Footer />
+              </Pattern.Span>
+              <Pattern.Span size={2} />
+              <Pattern.Span size={3}>
+                <FormValidation fieldLabels={FORM_FIELD_LABELS} />
+              </Pattern.Span>
+            </Pattern>
           </FormProvider>
         )}
-        validate={validate}
+        validate={validateForm}
         onSubmit={executeCreateStatementAction}
       />
     </Box>

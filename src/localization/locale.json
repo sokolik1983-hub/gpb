@@ -30,19 +30,19 @@
     "ru": "История запросов"
   },
   "scroller.filter.buttons.expand": {
-    "ru":  "Показать фильтры"
+    "ru": "Показать фильтры"
   },
   "scroller.filter.buttons.collapse": {
-    "ru":  "Скрыть фильтры"
+    "ru": "Скрыть фильтры"
   },
   "scroller.filter.buttons.applyFilters": {
-    "ru":  "Применить фильтры"
+    "ru": "Применить фильтры"
   },
   "scroller.filter.buttons.reset": {
-    "ru":  "Сбросить"
+    "ru": "Сбросить"
   },
   "scroller.pagination.displayBy": {
-    "ru":  "Отображать по:"
+    "ru": "Отображать по:"
   },
   "transactionsScroller.title": {
     "@dateFrom": "string",
@@ -443,6 +443,12 @@
   "common.period.label": {
     "ru": "Период"
   },
+  "common.periodStart.label": {
+    "ru": "Начало периода"
+  },
+  "common.periodEnd.label": {
+    "ru": "Конец периода"
+  },
   "common.accounts.label": {
     "ru": "Счёт"
   },
@@ -557,5 +563,24 @@
   "errors.statementDenied": {
     "@message": "string",
     "ru": "Произошла ошибка формирования выписки: {message}"
+  },
+  "errors.emptyField": {
+    "@fieldName": "str",
+    "ru": "Реквизит \"{fieldName}\" является обязательным для заполнения, не может быть пустым"
+  },
+  "errors.emailFormat": {
+    "ru": "Адрес электронной почты содержит недопустимые символы или имеет неправильный формат"
+  },
+  "errors.emailLengthExceeded": {
+    "ru": "Адрес электронной почты не должен быть более 100 символов"
+  },
+  "errors.emailRequired": {
+    "ru": "Для отправки выписки на почту необходимо заполнить адрес электронной почты"
+  },
+  "errors.periodStart.tomorrowRestriction": {
+    "ru": "Дата начала периода не может быть больше текущей даты"
+  },
+  "errors.periodEnd.tomorrowRestriction": {
+    "ru": "Дата окончания периода не может быть больше текущей даты"
   }
 }

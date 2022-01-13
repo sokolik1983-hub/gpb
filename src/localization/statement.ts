@@ -1129,6 +1129,24 @@ export default {
 				return t('common.period.label');
 			},
 		},
+		periodStart: {
+			/**
+			 * @ru
+			 * Начало периода
+			 */
+			get label() {
+				return t('common.periodStart.label');
+			},
+		},
+		periodEnd: {
+			/**
+			 * @ru
+			 * Конец периода
+			 */
+			get label() {
+				return t('common.periodEnd.label');
+			},
+		},
 		accounts: {
 			/**
 			 * @ru
@@ -1375,5 +1393,49 @@ export default {
 		 * Произошла ошибка формирования выписки: {message}
 		 */
 		statementDenied: (p: { message: string }) => t('errors.statementDenied', p),
+		/**
+		 * @ru
+		 * Реквизит "{fieldName}" является обязательным для заполнения, не может быть пустым
+		 */
+		emptyField: (p: { fieldName: string }) => t('errors.emptyField', p),
+		/**
+		 * @ru
+		 * Адрес электронной почты содержит недопустимые символы или имеет неправильный формат
+		 */
+		get emailFormat() {
+			return t('errors.emailFormat');
+		},
+		/**
+		 * @ru
+		 * Адрес электронной почты не должен быть более 100 символов
+		 */
+		get emailLengthExceeded() {
+			return t('errors.emailLengthExceeded');
+		},
+		/**
+		 * @ru
+		 * Для отправки выписки на почту необходимо заполнить адрес электронной почты
+		 */
+		get emailRequired() {
+			return t('errors.emailRequired');
+		},
+		periodStart: {
+			/**
+			 * @ru
+			 * Дата начала периода не может быть больше текущей даты
+			 */
+			get tomorrowRestriction() {
+				return t('errors.periodStart.tomorrowRestriction');
+			},
+		},
+		periodEnd: {
+			/**
+			 * @ru
+			 * Дата окончания периода не может быть больше текущей даты
+			 */
+			get tomorrowRestriction() {
+				return t('errors.periodEnd.tomorrowRestriction');
+			},
+		},
 	},
 };
