@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext, useRef, useEffect } from 'react';
+import React, { useContext, useRef } from 'react';
 import { StickyRowsContext, StickyRow } from 'components';
 import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/client';
@@ -57,7 +57,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
     filterPanel: { values: filterFormValue },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const { setScrollPosition, setScrollbars, scrollbars, portalRef } = useContext(StickyRowsContext);
+  const { setScrollPosition, portalRef } = useContext(StickyRowsContext);
 
   const scrolledElementRef = useRef<Scrollbars>();
 
@@ -81,17 +81,11 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
     setScrollPosition(e.currentTarget.scrollTop);
   };
 
-  useEffect(() => {
-    if (scrolledElementRef.current) {
-      setScrollbars(scrolledElementRef.current);
-    }
-  }, [setScrollbars]);
-
   return (
     <Box className={css.layoutScrollWrapper}>
       <LayoutScrollComponent innerRef={setScrolledElementRef} onScroll={handleScroll}>
         {/* Элемент внутри которого будут рендерится сроки в состоянии стики. */}
-        <div ref={portalRef} className={css.portal} style={{ top: scrollbars?.getScrollTop() }} />
+        <div ref={portalRef} className={css.portal} style={{ top: scrolledElementRef.current?.getScrollTop() }} />
         <Box {...tableBodyProps} className={css.tableBody}>
           {rows.map(groupingRow => {
             prepareRow(groupingRow);

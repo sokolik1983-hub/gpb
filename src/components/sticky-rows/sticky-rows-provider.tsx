@@ -1,6 +1,5 @@
 import type { FC, RefObject } from 'react';
 import React, { useRef, useState, useMemo } from 'react';
-import type Scrollbars from 'react-custom-scrollbars';
 import type { IStickyRowsContext } from './sticky-rows-context';
 import { StickyRowsContext } from './sticky-rows-context';
 
@@ -10,7 +9,6 @@ export const StickyRowsProvider: FC = ({ children }) => {
 
   const [firstLevelRows, setFirstLevelRows] = useState<Array<RefObject<HTMLDivElement>>>([]);
   const [secondLevelRows, setSecondLevelRows] = useState<Array<RefObject<HTMLDivElement>>>([]);
-  const [scrollbars, setScrollbars] = useState<Scrollbars>();
 
   const [scrollPosition, setScrollPosition] = useState<number>(0);
 
@@ -27,10 +25,8 @@ export const StickyRowsProvider: FC = ({ children }) => {
       setFirstLevelRows,
       secondLevelRows,
       setSecondLevelRows,
-      scrollbars,
-      setScrollbars,
     }),
-    [secondLevelRows, portal, firstLevelRows, scrollPosition, scrollbars]
+    [secondLevelRows, portal, firstLevelRows, scrollPosition]
   );
 
   return <StickyRowsContext.Provider value={value}>{children}</StickyRowsContext.Provider>;
