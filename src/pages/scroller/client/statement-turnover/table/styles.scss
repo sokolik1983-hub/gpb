@@ -1,3 +1,5 @@
+@import '~@platform/ui/dist/streams/ui/common';
+
 .tableWrapper {
   position: relative;
   height: 100%;
@@ -23,9 +25,11 @@
 
 .groupingRow {
   padding: 24px 8px 12px;
+  background-color: #fff;
 }
 
 .borderedRow {
+  background-color: #fff;
   border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
 }
 
@@ -63,6 +67,7 @@
   position: absolute;
   right: 50px;
   bottom: 17px;
+  z-index: getIndex(control);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -93,4 +98,18 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.collapsedRow {
+  position: static;
+}
+
+.portal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: getIndex(specific_element_accent);
+  padding: 0 8px;
+  background-color: #fff;
 }

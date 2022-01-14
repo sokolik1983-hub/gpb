@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext, useEffect, useMemo } from 'react';
+import { StickyRowsProvider } from 'components';
 import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
 import type { IGroupedAccounts } from 'interfaces/client';
 import { GROUPING_VALUES } from 'interfaces/client';
@@ -91,7 +92,14 @@ export const TurnoversTable: FC = () => {
   } else if (isLoading) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
-    tableContent = <TableBody prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />;
+    tableContent = (
+      // key используется, чтобы размонтировать компонент, когда приходят данные для новой страницы.
+      // Это нужно для того, чтобы сбросить стейт, контекста.
+      // Если этого не делать, то массивы рефов на строки таблицы скроллера, будут содержать старые или дублирующмеся элементы.
+      <StickyRowsProvider key={String(isLoading)}>
+        <TableBody prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />
+      </StickyRowsProvider>
+    );
   }
 
   return (

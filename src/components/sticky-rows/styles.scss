@@ -1,0 +1,10 @@
+@import '~@platform/ui/dist/streams/ui/common';
+
+.notStuckRow {
+  position: relative;
+  z-index: getIndex(specific_element_accent);
+}
+
+.stuckRow {
+  position: static;
+}
