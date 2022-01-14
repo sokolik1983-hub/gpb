@@ -15,7 +15,7 @@ import { DEFAULT_SORTING, TransactionScrollerContext } from './transaction-scrol
 /**
  * Страница скроллера: [Выписки_ЗВ] ЭФ Клиента "Журнал проводок".
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=286756666}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=286756666
  */
 export const StatementTransactionScrollerPage = () => {
   // region элементы стейта контекста скроллера.

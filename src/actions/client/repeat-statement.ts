@@ -8,7 +8,7 @@ import type { context } from './executor';
 /**
  * Повторный запрос выписки. [Выписки_ЗВ] Клиент: Функция запроса выписки.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639
  */
 export const repeatStatement: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done }, { router }) => async ([doc]: [IBaseEntity]) => {

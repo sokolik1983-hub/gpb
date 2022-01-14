@@ -21,7 +21,7 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
-    const isPdf = values.fileFormat === FORMAT.PDF;
+    const isPdf = values.format === FORMAT.PDF;
 
     if (withSign) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -55,7 +55,7 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
       return acc;
     }, []);
-  }, [change, values.accountIds.length, values.fileFormat, withSign]);
+  }, [change, values.accountIds.length, values.format, withSign]);
 
   useEffect(() => {
     if (withSign) {

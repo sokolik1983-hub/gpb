@@ -1,7 +1,7 @@
 /**
  * Операции выписки.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28677623}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28677623
  */
 export enum OPERATIONS {
   /** Все. */

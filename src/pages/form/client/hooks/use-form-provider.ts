@@ -16,11 +16,11 @@ export const useFormProvider = () => {
     const newValue: IFormContext = {
       onlyRequestsStatement: values.documentsSetParams.includes(DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS),
       withSign: values.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
-      isPdf: values.fileFormat === FORMAT.PDF,
+      isPdf: values.format === FORMAT.PDF,
     };
 
     value.current = newValue;
-  }, [values.creationParams, values.documentsSetParams, values.fileFormat]);
+  }, [values.creationParams, values.documentsSetParams, values.format]);
 
   return value.current;
 };

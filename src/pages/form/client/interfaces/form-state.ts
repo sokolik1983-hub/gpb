@@ -13,8 +13,8 @@ export const FORM_FIELDS = {
   DATE_FROM: getPath('dateFrom'),
   DATE_TO: getPath('dateTo'),
   ACCOUNTS: getPath('accountIds'),
-  FILE_FORMAT: getPath('fileFormat'),
-  OPERATION: getPath('operation'),
+  FILE_FORMAT: getPath('format'),
+  OPERATION: getPath('operations'),
   CREATION_PARAMS: getPath('creationParams'),
   DOCUMENTS_SET_PARAMS: getPath('documentsSetParams'),
   DEBIT_PARAMS: getPath('debitParams'),
@@ -29,8 +29,8 @@ export interface IFormState {
   dateFrom: string;
   dateTo: string;
   accountIds: string[];
-  fileFormat: FORMAT;
-  operation: OPERATIONS;
+  format: FORMAT;
+  operations: OPERATIONS;
   creationParams: string[];
   documentsSetParams: string[];
   debitParams: string[];
@@ -48,8 +48,8 @@ export const defaultFormState: IFormState = {
   email: '',
   dateFrom: '',
   dateTo: '',
-  fileFormat: FORMAT.PDF,
-  operation: OPERATIONS.ALL,
+  format: FORMAT.PDF,
+  operations: OPERATIONS.ALL,
   periodType: DATE_PERIODS.YESTERDAY,
 };
 
@@ -59,7 +59,7 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
     accountIds: latestStatement?.accountsIds,
     dateFrom: latestStatement?.periodStart,
     dateTo: latestStatement?.periodEnd,
-    fileFormat: latestStatement?.statementFormat,
+    format: latestStatement?.statementFormat,
     periodType: latestStatement?.periodType,
   };
 

@@ -31,7 +31,7 @@ const STATEMENT_REQUEST_URL = `${STATEMENT_URL}/request`;
 /**
  * Сервис выписок клиента.
  *
- * @see {@link http://api-gateway.sandbox.gboteam.ru/statement-client/swagger-ui.html}
+ * @see http://api-gateway.sandbox.gboteam.ru/statement-client/swagger-ui.html
  */
 export const statementService = {
   /** Возвращает временной период. */

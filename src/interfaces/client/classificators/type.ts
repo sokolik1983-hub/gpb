@@ -1,7 +1,7 @@
 /**
  * Тип запроса выписки.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440654}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440654
  */
 export enum TYPE {
   /** Разовый запрос. */

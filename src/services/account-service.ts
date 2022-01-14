@@ -8,7 +8,7 @@ const ACCOUNTS_BASE_URL = getAccountUrl();
 /**
  * Сервис счетов клиента.
  *
- * @see {@link http://api-gateway.sandbox.gboteam.ru/client-dictionary/swagger-ui.html}
+ * @see http://api-gateway.sandbox.gboteam.ru/client-dictionary/swagger-ui.html
  */
 export const accountService = {
   /** Возвращает счета пользователя для формирования выписок. */

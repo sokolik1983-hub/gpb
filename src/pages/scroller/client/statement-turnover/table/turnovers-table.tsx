@@ -26,7 +26,7 @@ const getHiddenColumns = (grouping: GROUPING_VALUES) =>
 /**
  * Определяет путь до подстрок.
  *
- * @see {@link https://react-table.tanstack.com/docs/api/useTable}
+ * @see https://react-table.tanstack.com/docs/api/useTable
  */
 const getSubRows = (row: IGroupedAccounts) =>
   // any используется потому, что типы в react-table написаны так, что предполагается

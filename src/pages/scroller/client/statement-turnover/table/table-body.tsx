@@ -44,7 +44,7 @@ export interface ITableBodyProps extends TableBodyProps {
   /**
    * Метод, который необходимо вызывать перед рендерингом строки.
    *
-   * @see {@link https://react-table.tanstack.com/docs/api/useTable#instance-properties}
+   * @see https://react-table.tanstack.com/docs/api/useTable#instance-properties
    */
   prepareRow(row: Row<IGroupedAccounts>): void;
   /** Строки таблицы. */

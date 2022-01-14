@@ -11,7 +11,7 @@ import type { context } from './executor';
 /**
  * Функция запроса выписки.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639
  */
 export const createStatement: IActionConfig<typeof context, string> = {
   action: ({ done, fatal, addSucceeded }, { service, showLoader, showError, hideLoader }) => async ([doc]: [

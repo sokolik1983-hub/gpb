@@ -25,7 +25,7 @@ export interface IAwaitingFormProps {
  * ЭФ Клиента "Выписка формируется".
  * Ожидает перехода запроса выписки в окончательные статусы.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440121}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440121
  */
 export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
   const job = () => statementService.getStatus(id);
@@ -59,7 +59,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
     /**
      * Выполняет шаги 4,5,6 создания запроса выписки.
      *
-     * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639}
+     * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639
      */
     const performEffect = async () => {
       const [statusResp, fatalStatusError] = await to(checkStatus());
