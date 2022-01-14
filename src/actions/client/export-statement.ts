@@ -1,5 +1,5 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
-import type { IRequestStatementDto } from 'interfaces/client/request-statement-dto';
+import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 
@@ -8,7 +8,7 @@ import type { context } from './executor';
  *
  * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637}
  */
-export const exportStatement: IActionConfig<typeof context, IRequestStatementDto> = {
+export const exportStatement: IActionConfig<typeof context, ICreateRequestStatementDto> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   action: () => async ([data]: IStatementHistoryRow[]) =>
     // TODO: Сделать реализацию по готовности реста.

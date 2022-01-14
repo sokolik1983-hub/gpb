@@ -1,4 +1,4 @@
-export * from './request-statement-dto';
+export * from './create-request-statement-dto';
 export * from './latest-statement-dto';
 export * from './get-date-period-dto';
 export * from './get-turnovers-dto';

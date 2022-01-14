@@ -7,7 +7,7 @@ import type {
   IGetCounterpartiesResponseDto,
   IStatementTransactionRow,
   ILatestStatementDto,
-  IRequestStatementDto,
+  ICreateRequestStatementDto,
   IStatementSummaryInfo,
   IStatement,
   IGetStatusResponceDto,
@@ -84,7 +84,7 @@ export const statementService = {
       url: `${STATEMENT_URL}/by-statement-request-id/${id}`,
     }).then(r => r.data),
   /** Создать запрос выписки. */
-  createStatement: (data: IRequestStatementDto): Promise<string> =>
+  createStatement: (data: ICreateRequestStatementDto): Promise<string> =>
     request({
       url: `${STATEMENT_REQUEST_URL}`,
       method: 'POST',

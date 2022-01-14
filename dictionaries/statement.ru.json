@@ -142,6 +142,8 @@
   "transactionType.labels.outcome": "Списания",
   "form.newRequestStatement.title": "Запрос выписки",
   "common.period.label": "Период",
+  "common.periodStart.label": "Начало периода",
+  "common.periodEnd.label": "Конец периода",
   "common.accounts.label": "Счёт",
   "common.operations.label": "Операции",
   "common.operations.ALL": "Все",
@@ -179,5 +181,11 @@
   "awaitingForm.cancelRequestButton": "Отменить формирование",
   "errors.progressErrorHeader": "Ошибка",
   "errors.progressError": "Не удалось выполнить операцию",
-  "errors.statementDenied": "Произошла ошибка формирования выписки: {message}"
+  "errors.statementDenied": "Произошла ошибка формирования выписки: {message}",
+  "errors.emptyField": "Реквизит \"{fieldName}\" является обязательным для заполнения, не может быть пустым",
+  "errors.emailFormat": "Адрес электронной почты содержит недопустимые символы или имеет неправильный формат",
+  "errors.emailLengthExceeded": "Адрес электронной почты не должен быть более 100 символов",
+  "errors.emailRequired": "Для отправки выписки на почту необходимо заполнить адрес электронной почты",
+  "errors.periodStart.tomorrowRestriction": "Дата начала периода не может быть больше текущей даты",
+  "errors.periodEnd.tomorrowRestriction": "Дата окончания периода не может быть больше текущей даты"
 }
