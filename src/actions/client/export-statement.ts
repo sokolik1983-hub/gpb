@@ -6,7 +6,7 @@ import type { context } from './executor';
 /**
  * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки или документа.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
 export const exportStatement: IActionConfig<typeof context, ICreateRequestStatementDto> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

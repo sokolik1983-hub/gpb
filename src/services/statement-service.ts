@@ -7,10 +7,10 @@ import type {
   IGetCounterpartiesResponseDto,
   IStatementTransactionRow,
   ILatestStatementDto,
-  ICreateRequestStatementDto,
   IStatementSummaryInfo,
   IStatement,
   IGetStatusResponceDto,
+  ICreateRequestStatementDto,
 } from 'interfaces/client';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
@@ -31,7 +31,7 @@ const STATEMENT_REQUEST_URL = `${STATEMENT_URL}/request`;
 /**
  * Сервис выписок клиента.
  *
- * @see {@link http://api-gateway.sandbox.gboteam.ru/statement-client/swagger-ui.html}
+ * @see http://api-gateway.sandbox.gboteam.ru/statement-client/swagger-ui.html
  */
 export const statementService = {
   /** Возвращает временной период. */
@@ -84,12 +84,12 @@ export const statementService = {
       url: `${STATEMENT_URL}/by-statement-request-id/${id}`,
     }).then(r => r.data),
   /** Создать запрос выписки. */
-  createStatement: (data: ICreateRequestStatementDto): Promise<string> =>
-    request({
+  createStatement: (data: ICreateRequestStatementDto): Promise<IServerDataResp<string>> =>
+    request<IServerDataResp<string>>({
       url: `${STATEMENT_REQUEST_URL}`,
       method: 'POST',
       data: { data },
-    }).then(r => r.data.data),
+    }).then(r => r.data),
   /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string): Promise<IServerDataResp<ILatestStatementDto>> =>
     request<IServerDataResp<ILatestStatementDto>>({

@@ -14,7 +14,7 @@ import { TurnoverScrollerContext } from './turnover-scroller-context';
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309
  */
 export const StatementTurnoverScrollerPage = () => {
   const tabsProps = useScrollerTabsProps();

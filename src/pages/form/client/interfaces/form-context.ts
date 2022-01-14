@@ -18,7 +18,7 @@ export interface IFormContext {
 export const defaultFormContextValue: IFormContext = {
   onlyRequestsStatement: defaultFormState.documentsSetParams.includes(DOCUMENTS_SET_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS),
   withSign: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
-  isPdf: defaultFormState.fileFormat === FORMAT.PDF,
+  isPdf: defaultFormState.format === FORMAT.PDF,
 };
 
 /** Экземпляр контекста формы. */

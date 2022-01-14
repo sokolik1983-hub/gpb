@@ -20,7 +20,7 @@ type FieldsToValidate = Pick<
 /**
  * Схема валидации ДТО создания сущности "Запрос выписки".
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=32247549}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32247549
  */
 export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = object({
   email: string()

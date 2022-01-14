@@ -11,7 +11,7 @@ import type { context } from './executor';
 /**
  * Функция запроса выписки.
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639
  */
 export const createStatement: IActionConfig<typeof context, string> = {
   action: ({ done, fatal, addSucceeded }, { service, showLoader, showError, hideLoader }) => async ([doc]: [
@@ -33,11 +33,13 @@ export const createStatement: IActionConfig<typeof context, string> = {
 
     showLoader();
 
-    const [id, err] = await to(service.createStatement(doc));
+    const [res, err] = await to(service.createStatement(doc));
 
     hideLoader();
 
-    fatal(err);
+    const { data: id, error } = res ?? {};
+
+    fatal(err || error);
 
     // ожидание формирования выписки
     const [_, close] = await to(showAwaitingForm(id!));

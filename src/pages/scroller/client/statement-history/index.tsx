@@ -17,7 +17,7 @@ import { useGetStatementList } from './hooks';
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
  *
- * @see {@link https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309}
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309
  */
 export const StatementHistoryScrollerPage = () => {
   const tabsProps = useScrollerTabsProps();

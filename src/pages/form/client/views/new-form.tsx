@@ -41,9 +41,9 @@ const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICr
   dateFrom: values.dateFrom,
   dateTo: values.dateTo,
   email: values.email,
-  operations: values.operation,
+  operations: values.operations,
   periodType: values.periodType,
-  format: values.fileFormat,
+  format: values.format,
   hideEmptyTurnovers: values.creationParams.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS),
   separateAccountsFiles: values.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
   sign: values.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
@@ -69,6 +69,7 @@ export const NewForm: React.FC = () => {
 
   const executor = getExecutor();
   const executeCreateStatementAction = (values: IFormState) => {
+    console.log(`new-form.tsx ||`, `executeCreateStatementAction ||`, `values`, values);
     void executor.execute(createStatement, [mapFormToDto(values, creationType)]);
   };
 
