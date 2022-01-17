@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import type { ITransaction } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { AttachmentsTab } from 'pages/scroller/client/statement-transaction/transaction-cardr/attachments-tab';
 import { RequisitesTab } from 'pages/scroller/client/statement-transaction/transaction-cardr/requisites-tab';
@@ -14,7 +14,7 @@ import css from './styles.scss';
 /** Свойства компонента TransactionCard. */
 export interface ITransactionCardProps {
   /** Проводка. */
-  transaction: ITransaction;
+  transaction: IGetTransactionCardResponseDto;
   /** Обработчик закрытия диалога. */
   onClose(): void;
 }
@@ -27,9 +27,9 @@ export interface ITransactionCardProps {
 export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClose }) => {
   const [tab, setTab] = useState<TABS>(TABS.REQUISITES);
 
-  const { isDebit, number, documentName, date } = transaction;
+  const { debit, documentNumber, documentName, entryDate } = transaction;
 
-  const header = isDebit ? locale.transactionCard.header.debit : locale.transactionCard.header.credit;
+  const header = debit ? locale.transactionCard.header.debit : locale.transactionCard.header.credit;
 
   return (
     <DialogTemplate
@@ -41,8 +41,8 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClos
           <Typography.P>
             {locale.transactionCard.subHeader({
               documentName,
-              number,
-              date: formatDateTime(date, { keepLocalTime: true, format: DATE_FORMAT }),
+              number: documentNumber,
+              date: formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT }),
             })}
           </Typography.P>
           <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
@@ -67,7 +67,7 @@ TransactionCard.displayName = 'TransactionCard';
  *
  * @param transaction - Проводка.
  */
-export const showTransactionCard = (transaction: ITransaction) =>
+export const showTransactionCard = (transaction: IGetTransactionCardResponseDto) =>
   new Promise((resolve, reject) =>
     dialog.show(
       'transactionCard',

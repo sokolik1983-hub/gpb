@@ -1,55 +1,57 @@
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client/classificators';
 
-/** Проводка. */
-export interface ITransaction {
-  // TODO: Уточнить ДТО после готовности рестов
+/** Документ вложения. */
+export interface IAppendixDocument {
+  /** Наименование документа. */
+  documentName: string;
+  /** Тип документа. */
+  documentTypeDto: TRANSACTION_ATTACHMENT_TYPES;
+}
+
+/** Приложение к карточке проводки. */
+export interface IAppendixDto {
+  /** Документы выписки и основания. */
+  documents?: IAppendixDocument[];
+}
+
+/** Агент (плательщик/получатель) операции списание и поступление. */
+export interface IAgent {
+  /** Расчётный счёт агента. */
+  account: string;
+  /** БИК банка получателя. */
+  bankBic: string;
+  /** Наименование банка получателя. */
+  bankName: string;
+  /** Корреспондентский счёт банка получателя. */
+  corrAccount: string;
+  /** ИНН получателя. */
+  inn: string;
+  /** Наименование получателя. */
+  name: string;
+}
+
+/** Ответ на запрос проводки. */
+export interface IGetTransactionCardResponseDto {
   /** Идентификатор проводки. */
   id: string;
   /** Признак дебетования. */
-  isDebit: boolean;
+  debit: boolean;
   /** Наименование типа документа. */
   documentName: string;
   /** Номер документа. */
-  number: string;
+  documentNumber: string;
   /** Дата документа. */
-  date: string;
+  entryDate: string;
   /** Сумма. */
   amount: number;
   /** Код валюты. */
   currencyCode: string;
-  /** Наименование плательщика. */
-  payerOrgName: string;
-  /** ИНН плательщика. */
-  payerInn: string;
-  /** Номер счета плательщика. */
-  payerAccountNumber: string;
-  /** Наименование банка плательщика. */
-  payerBankName: string;
-  /** БИК банка плательщика. */
-  payerBankBic: string;
-  /** Номер счета банка плательщика (корреспондентский счёт Банка плательщика). */
-  payerBankCorrAccount: string;
-  /** Наименование получателя. */
-  receiverOrgName: string;
-  /** ИНН получателя. */
-  receiverInn: string;
-  /** Номер счета получателя. */
-  receiverAccountNumber: string;
-  /** Наименование банка получателя. */
-  receiverBankName: string;
-  /** БИК банка получателя. */
-  receiverBankBic: string;
-  /** Номер счета банка получателя (корреспондентский счёт Банка получателя). */
-  receiverBankCorrAccount: string;
+  /** Плательщик. */
+  payerDto: IAgent;
+  /** Плательщик. */
+  payeeDto: IAgent;
   /** Назначение платежа. */
   paymentPurpose: string;
-  /** Приложения. */
-  attachments?: Array<{
-    /** Наименование документа. */
-    name: string;
-    /** Размер документа. */
-    size: string;
-    /** Тип документа. */
-    documentType: TRANSACTION_ATTACHMENT_TYPES;
-  }>;
+  /** Приложение к карточке проводки. */
+  appendixDto?: IAppendixDto;
 }
