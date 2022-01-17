@@ -10,16 +10,18 @@ import type {
   IStatementSummaryInfo,
   IStatement,
   IGetStatusResponceDto,
-  ITransaction,
+  IGetTransactionCardResponseDto,
   ICreateRequestStatementDto,
 } from 'interfaces/client';
-import { transaction } from 'mocks/transaction';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
 
 /** Базовый URL сервиса "Выписки". */
 const BASE_URL = '/api/statement-client';
+
+/** Базовый URL для рестов сущности "Проводка". */
+const TRANSACTION_URL = `${BASE_URL}/entry`;
 
 /** Базовый URL для рестов сущности "Выписки". */
 const STATEMENT_URL = `${BASE_URL}/statement`;
@@ -110,11 +112,8 @@ export const statementService = {
       data: { data: { id } },
     }).then(r => r.data),
   /** Возвращает проводку. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTransaction: (id: string): Promise<IServerDataResp<ITransaction>> =>
-    new Promise<IServerDataResp<ITransaction>>(resolve => {
-      setTimeout(() => {
-        resolve({ data: transaction });
-      }, 200);
-    }),
+  getTransaction: (id: string): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
+    request<IServerDataResp<IGetTransactionCardResponseDto>>({
+      url: `${TRANSACTION_URL}/${id}`,
+    }).then(r => r.data),
 };

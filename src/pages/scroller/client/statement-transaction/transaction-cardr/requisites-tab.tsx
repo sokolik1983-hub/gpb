@@ -1,18 +1,14 @@
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
-import type { ITransaction } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
-import {
-  getPayerOptions,
-  getReceiverOptions,
-  getPaymentPurposeOptions,
-} from 'pages/scroller/client/statement-transaction/transaction-cardr/utils';
+import { getAgentOptions, getPaymentPurposeOptions } from 'pages/scroller/client/statement-transaction/transaction-cardr/utils';
 import { Confirmation, Gap, Horizon, Typography } from '@platform/ui';
 
 /** Свойства компонента RequisitesTab. */
 export interface IRequisitesTabProps {
   /** Проводка. */
-  transaction: ITransaction;
+  transaction: IGetTransactionCardResponseDto;
 }
 
 /**
@@ -21,15 +17,15 @@ export interface IRequisitesTabProps {
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
 export const RequisitesTab: FC<IRequisitesTabProps> = ({ transaction }) => {
-  const { amount, currencyCode } = transaction;
+  const { amount, currencyCode, payerDto, payeeDto } = transaction;
 
   const options = useMemo(
     () => ({
-      payer: getPayerOptions(transaction),
-      receiver: getReceiverOptions(transaction),
+      payer: getAgentOptions(payerDto),
+      payee: getAgentOptions(payeeDto),
       paymentPurpose: getPaymentPurposeOptions(transaction),
     }),
-    [transaction]
+    [payeeDto, payerDto, transaction]
   );
 
   return (
@@ -50,7 +46,7 @@ export const RequisitesTab: FC<IRequisitesTabProps> = ({ transaction }) => {
       <Gap />
       <Confirmation multiline options={options.payer} />
       <Gap.XL />
-      <Confirmation multiline options={options.receiver} />
+      <Confirmation multiline options={options.payee} />
       <Gap.XL />
       <Confirmation multiline options={options.paymentPurpose} />
     </>

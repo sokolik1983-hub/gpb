@@ -600,17 +600,17 @@
     "ru": "Банк"
   },
   "transactionCard.values.agentBic": {
-    "@bic": "string",
-    "ru": "БИК: {bic}"
+    "@bankBic": "string",
+    "ru": "БИК: {bankBic}"
   },
   "transactionCard.values.agentBankCrrAccounts": {
     "@account": "string",
     "ru": "Корр. счет: {account}"
   },
   "transactionCard.values.agentInfo": {
-    "@orgName": "string",
+    "@name": "string",
     "@inn": "string",
-    "ru": "{orgName}, ИНН {inn}"
+    "ru": "{name}, ИНН {inn}"
   },
   "errors.progressErrorHeader": {
     "ru": "Ошибка"

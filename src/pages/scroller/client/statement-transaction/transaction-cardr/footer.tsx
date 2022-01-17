@@ -1,13 +1,13 @@
 import type { FC } from 'react';
 import React from 'react';
-import type { ITransaction } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { Horizon, Gap, PrimaryButton, RegularButton, Adjust } from '@platform/ui';
 
 /** Свойства компонента Footer. */
 export interface IFooterProps {
   /** Проводка. */
-  transaction: ITransaction;
+  transaction: IGetTransactionCardResponseDto;
 }
 
 /**

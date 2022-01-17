@@ -1481,9 +1481,9 @@ export default {
 		values: {
 			/**
 			 * @ru
-			 * БИК: {bic}
+			 * БИК: {bankBic}
 			 */
-			agentBic: (p: { bic: string }) => t('transactionCard.values.agentBic', p),
+			agentBic: (p: { bankBic: string }) => t('transactionCard.values.agentBic', p),
 			/**
 			 * @ru
 			 * Корр. счет: {account}
@@ -1491,9 +1491,9 @@ export default {
 			agentBankCrrAccounts: (p: { account: string }) => t('transactionCard.values.agentBankCrrAccounts', p),
 			/**
 			 * @ru
-			 * {orgName}, ИНН {inn}
+			 * {name}, ИНН {inn}
 			 */
-			agentInfo: (p: { orgName: string; inn: string }) => t('transactionCard.values.agentInfo', p),
+			agentInfo: (p: { name: string; inn: string }) => t('transactionCard.values.agentInfo', p),
 		},
 	},
 	errors: {
