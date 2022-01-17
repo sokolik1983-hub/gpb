@@ -10,8 +10,10 @@ import type {
   IStatementSummaryInfo,
   IStatement,
   IGetStatusResponceDto,
+  ITransaction,
   ICreateRequestStatementDto,
 } from 'interfaces/client';
+import { transaction } from 'mocks/transaction';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -107,4 +109,12 @@ export const statementService = {
       method: 'POST',
       data: { data: { id } },
     }).then(r => r.data),
+  /** Возвращает проводку. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getTransaction: (id: string): Promise<IServerDataResp<ITransaction>> =>
+    new Promise<IServerDataResp<ITransaction>>(resolve => {
+      setTimeout(() => {
+        resolve({ data: transaction });
+      }, 200);
+    }),
 };

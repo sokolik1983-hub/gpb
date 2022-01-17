@@ -1373,6 +1373,129 @@ export default {
 			return t('awaitingForm.cancelRequestButton');
 		},
 	},
+	transactionCard: {
+		header: {
+			/**
+			 * @ru
+			 * Документ по сисанию средств
+			 */
+			get debit() {
+				return t('transactionCard.header.debit');
+			},
+			/**
+			 * @ru
+			 * Документ по поступлению средств
+			 */
+			get credit() {
+				return t('transactionCard.header.credit');
+			},
+		},
+		/**
+		 * @ru
+		 * {documentName} № {number} от {date}
+		 */
+		subHeader: (p: { documentName: string; number: string; date: string }) => t('transactionCard.subHeader', p),
+		tabs: {
+			/**
+			 * @ru
+			 * Реквизиты
+			 */
+			get requisites() {
+				return t('transactionCard.tabs.requisites');
+			},
+			/**
+			 * @ru
+			 * Приложения
+			 */
+			get attachments() {
+				return t('transactionCard.tabs.attachments');
+			},
+		},
+		buttons: {
+			/**
+			 * @ru
+			 * Скачать
+			 */
+			get export() {
+				return t('transactionCard.buttons.export');
+			},
+			/**
+			 * @ru
+			 * Отправить на почту
+			 */
+			get sendToEmail() {
+				return t('transactionCard.buttons.sendToEmail');
+			},
+		},
+		labels: {
+			/**
+			 * @ru
+			 * Сумма
+			 */
+			get amount() {
+				return t('transactionCard.labels.amount');
+			},
+			/**
+			 * @ru
+			 * Плательщик
+			 */
+			get payer() {
+				return t('transactionCard.labels.payer');
+			},
+			/**
+			 * @ru
+			 * Получатель
+			 */
+			get receiver() {
+				return t('transactionCard.labels.receiver');
+			},
+			/**
+			 * @ru
+			 * Назначение платежа
+			 */
+			get paymentPurpose() {
+				return t('transactionCard.labels.paymentPurpose');
+			},
+			/**
+			 * @ru
+			 * Дата операции
+			 */
+			get operationDate() {
+				return t('transactionCard.labels.operationDate');
+			},
+			/**
+			 * @ru
+			 * Расчетный счет
+			 */
+			get agentAccountNumber() {
+				return t('transactionCard.labels.agentAccountNumber');
+			},
+			/**
+			 * @ru
+			 * Банк
+			 */
+			get bankName() {
+				return t('transactionCard.labels.bankName');
+			},
+		},
+		values: {
+			/**
+			 * @ru
+			 * БИК: {bic}
+			 */
+			agentBic: (p: { bic: string }) => t('transactionCard.values.agentBic', p),
+			/**
+			 * @ru
+			 * Корр. счет: {account}
+			 */
+			agentBankCrrAccounts: (p: { account: string }) => t('transactionCard.values.agentBankCrrAccounts', p),
+			/**
+			 * @ru
+			 * {orgName}, ИНН {inn}
+			 */
+			agentInfo: (p: { orgName: string; inn: string }) => t('transactionCard.values.agentInfo', p),
+		},
+	},
 	errors: {
 		/**
 		 * @ru
