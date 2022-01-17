@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useCallback } from 'react';
+import React from 'react';
 import type { ITransaction } from 'interfaces/client';
 import { Pattern, Typography, Gap, Line, Box, Adjust, Horizon, Icons } from '@platform/ui';
 
@@ -17,10 +17,6 @@ export interface IAttachmentsTabProps {
 export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction }) => {
   const { attachments = [] } = transaction;
 
-  const handleDownload = useCallback(() => {}, []);
-
-  const handlePrint = useCallback(() => {}, []);
-
   return (
     <>
       {attachments.map(({ name, size }) => (
@@ -37,9 +33,9 @@ export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction }) => {
               <Pattern.Span size={2}>
                 <Horizon>
                   <Horizon.Spacer />
-                  <Icons.Download clickable fill={'FAINT'} scale={'MD'} onClick={handleDownload} />
+                  <Icons.Download clickable fill={'FAINT'} scale={'MD'} />
                   <Gap />
-                  <Icons.PrintFile clickable fill={'FAINT'} scale={'MD'} onClick={handlePrint} />
+                  <Icons.PrintFile clickable fill={'FAINT'} scale={'MD'} />
                 </Horizon>
               </Pattern.Span>
             </Pattern>

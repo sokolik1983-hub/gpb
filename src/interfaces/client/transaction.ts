@@ -17,7 +17,6 @@ export interface ITransaction {
   amount: number;
   /** Код валюты. */
   currencyCode: string;
-
   /** Наименование плательщика. */
   payerOrgName: string;
   /** ИНН плательщика. */

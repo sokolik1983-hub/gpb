@@ -18,11 +18,13 @@ export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
 
     hideLoader();
 
-    const { data: transaction, error } = res ?? {};
+    fatal(err);
 
-    fatal(err || error);
+    const { data: transaction, error } = res!;
 
-    void showTransactionCard(transaction!);
+    fatal(error);
+
+    void showTransactionCard(transaction);
 
     done();
   },
