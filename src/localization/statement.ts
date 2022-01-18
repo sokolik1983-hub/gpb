@@ -1384,7 +1384,7 @@ export default {
 		header: {
 			/**
 			 * @ru
-			 * Документ по сисанию средств
+			 * Документ по списанию средств
 			 */
 			get debit() {
 				return t('transactionCard.header.debit');

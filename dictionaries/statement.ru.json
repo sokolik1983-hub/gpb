@@ -180,7 +180,7 @@
   "awaitingForm.title": "Формируем выписку",
   "awaitingForm.content": "Обычно выписка формируется менее двух минут.",
   "awaitingForm.cancelRequestButton": "Отменить формирование",
-  "transactionCard.header.debit": "Документ по сисанию средств",
+  "transactionCard.header.debit": "Документ по списанию средств",
   "transactionCard.header.credit": "Документ по поступлению средств",
   "transactionCard.subHeader": "{documentName} № {number} от {date}",
   "transactionCard.tabs.requisites": "Реквизиты",

@@ -21,8 +21,8 @@ export const RequisitesTab: FC<IRequisitesTabProps> = ({ transaction }) => {
 
   const options = useMemo(
     () => ({
-      payer: getAgentOptions(payerDto),
-      payee: getAgentOptions(payeeDto),
+      payer: getAgentOptions(payerDto, locale.transactionCard.labels.payer),
+      payee: getAgentOptions(payeeDto, locale.transactionCard.labels.receiver),
       paymentPurpose: getPaymentPurposeOptions(transaction),
     }),
     [payeeDto, payerDto, transaction]
