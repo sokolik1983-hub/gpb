@@ -247,6 +247,13 @@ export default {
 			incomeTransactions: (p: { amount: number }) => t('transactionsScroller.labels.incomeTransactions', p),
 			/**
 			 * @ru
+			 * Показать только выбранные
+			 */
+			get showOnlySelectedRows() {
+				return t('transactionsScroller.labels.showOnlySelectedRows');
+			},
+			/**
+			 * @ru
 			 * Исходящий остаток
 			 */
 			get outgoingBalance() {

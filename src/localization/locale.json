@@ -143,6 +143,9 @@
     "@amount": "number",
     "ru": "{amount} поступлений"
   },
+  "transactionsScroller.labels.showOnlySelectedRows": {
+    "ru": "Показать только выбранные"
+  },
   "transactionsScroller.labels.outgoingBalance": {
     "ru": "Исходящий остаток"
   },
