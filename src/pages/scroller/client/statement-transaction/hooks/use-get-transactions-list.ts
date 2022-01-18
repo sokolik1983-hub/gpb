@@ -31,7 +31,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
-      sort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
+      multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
       ...convertTablePaginationToMetaData(pagination),
     }),
     [filters, pagination, sorting]

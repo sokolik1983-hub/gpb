@@ -56,5 +56,6 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Purpose,
     width: 251,
+    disableSortBy: true,
   },
 ];
