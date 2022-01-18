@@ -44,6 +44,7 @@
   "transactionsScroller.labels.incomingBalance": "Входящий остаток",
   "transactionsScroller.labels.outcomeTransactions": "{amount} списаний",
   "transactionsScroller.labels.incomeTransactions": "{amount} поступлений",
+  "transactionsScroller.labels.showOnlySelectedRows": "Показать только выбранные",
   "transactionsScroller.labels.outgoingBalance": "Исходящий остаток",
   "transactionsScroller.footer.selected": "Выбрано:",
   "transactionsScroller.footer.income": "Поступления:",

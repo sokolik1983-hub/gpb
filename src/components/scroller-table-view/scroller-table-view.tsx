@@ -17,6 +17,8 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
   placeholderLabel: string;
   /** Обработчик клика по строке. */
   onDoubleClick?(row: Row): void;
+  /** Если true - то отображаются только выбранные строки. */
+  isVisibleOnlySelectedRows?: boolean;
 }
 
 /**
@@ -28,6 +30,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   isLoading,
   placeholderLabel,
   onDoubleClick,
+  isVisibleOnlySelectedRows,
 }: IScrollerTableViewProps<Row>) => {
   const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
 
@@ -38,7 +41,14 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   } else if (isLoading && rows.length === 0) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
-    tableContent = <TableBody isLoading={isLoading} tableInstance={tableInstance} onDoubleClick={onDoubleClick} />;
+    tableContent = (
+      <TableBody
+        isLoading={isLoading}
+        isVisibleOnlySelectedRows={isVisibleOnlySelectedRows}
+        tableInstance={tableInstance}
+        onDoubleClick={onDoubleClick}
+      />
+    );
   }
 
   return (

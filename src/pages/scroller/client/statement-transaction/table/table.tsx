@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useMemo, useEffect, useCallback } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination, useRowSelect } from 'react-table';
-import { Horizon, Typography, Gap, Box } from '@platform/ui';
+import { Horizon, Typography, Gap, Box, Checkbox } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { columns } from './columns';
@@ -13,9 +13,19 @@ import css from './styles.scss';
 
 /** Таблица скроллера проводок. */
 export const Table: FC = () => {
-  const { transactions, isLoading, totalTransactionsAmount, sorting, setSorting, pagination, setPagination, setSelectedRows } = useContext<
-    ITransactionScrollerContext
-  >(TransactionScrollerContext);
+  const {
+    transactions,
+    isLoading,
+    totalTransactionsAmount,
+    sorting,
+    setSorting,
+    pagination,
+    setPagination,
+    setSelectedRows,
+    selectedRows,
+  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+
+  const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
 
   const initialState = useMemo(
     () => ({
@@ -65,6 +75,10 @@ export const Table: FC = () => {
 
   useEffect(() => {
     setSelectedRows(selectedFlatRows.map(row => row.original));
+
+    if (selectedFlatRows.length === 0) {
+      setIsVisibleOnlySelectedRows(false);
+    }
   }, [selectedFlatRows, setSelectedRows]);
 
   return (
@@ -77,12 +91,23 @@ export const Table: FC = () => {
           <Typography.Text>
             {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, exists: transactions.length })}
           </Typography.Text>
+          <Horizon.Spacer />
+          {selectedRows.length > 0 && (
+            <Checkbox
+              extraSmall
+              dimension="SM"
+              label={locale.transactionsScroller.labels.showOnlySelectedRows}
+              value={isVisibleOnlySelectedRows}
+              onChange={() => setIsVisibleOnlySelectedRows(!isVisibleOnlySelectedRows)}
+            />
+          )}
         </Horizon>
         <Gap.SM />
       </Box>
       {/* Таблица. */}
       <ScrollerTableView
         isLoading={isLoading}
+        isVisibleOnlySelectedRows={isVisibleOnlySelectedRows && selectedRows.length > 0}
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         tableInstance={tableInstance}
         onDoubleClick={handleDoubleClick}

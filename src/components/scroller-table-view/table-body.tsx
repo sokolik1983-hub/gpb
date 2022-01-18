@@ -16,10 +16,12 @@ export interface ITableBodyProps extends TableBodyProps {
   isLoading: boolean;
   /** Обработчик клика по строке. */
   onDoubleClick?(row: Record<string, any>): void;
+  /** Если true - то отображаются только выбранные строки. */
+  isVisibleOnlySelectedRows?: boolean;
 }
 
 /** Тело таблицы. */
-export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick }) => {
+export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick, isVisibleOnlySelectedRows }) => {
   const {
     getTableBodyProps,
     rows,
@@ -37,9 +39,13 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDou
           {rows.map(row => {
             prepareRow(row);
 
-            const { key: accountInfoRowKey } = row.getRowProps();
+            const { getRowProps, isSelected } = row;
 
-            return <TableRow key={accountInfoRowKey} row={row} onDoubleClick={onDoubleClick} />;
+            const { key: accountInfoRowKey } = getRowProps();
+
+            const isRowVisible = isVisibleOnlySelectedRows ? isSelected : true;
+
+            return isRowVisible && <TableRow key={accountInfoRowKey} row={row} onDoubleClick={onDoubleClick} />;
           })}
           {isLoading && <ScrollerLoadingOverlay />}
         </Box>
