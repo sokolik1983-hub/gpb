@@ -29,7 +29,7 @@ export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = obje
     .when(getPath('action'), { is: action => action === ACTIONS.SEND_TO_EMAIL, then: string().required(locale.errors.emailRequired) }),
   periodType: mixed<DATE_PERIODS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE])),
   dateFrom: string()
-    .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_TO]))
+    .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_FROM]))
     .test('lessThanTomorrow', locale.errors.periodStart.tomorrowRestriction, isLessThanTomorrow),
   dateTo: string()
     .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_TO]))
