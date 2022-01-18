@@ -385,6 +385,22 @@ export default {
 				return t('transactionsScroller.footer.outcome');
 			},
 		},
+		headerAction: {
+			/**
+			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionsScroller.headerAction.print');
+			},
+			/**
+			 * @ru
+			 * Экспорт
+			 */
+			get export() {
+				return t('transactionsScroller.headerAction.export');
+			},
+		},
 		footerAction: {
 			/**
 			 * @ru
@@ -392,6 +408,13 @@ export default {
 			 */
 			get export() {
 				return t('transactionsScroller.footerAction.export');
+			},
+			/**
+			 * @ru
+			 * Еще
+			 */
+			get more() {
+				return t('transactionsScroller.footerAction.more');
 			},
 		},
 	},
@@ -1428,10 +1451,10 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Отправить на почту
+			 * Еще
 			 */
-			get sendToEmail() {
-				return t('transactionCard.buttons.sendToEmail');
+			get more() {
+				return t('transactionCard.buttons.more');
 			},
 		},
 		labels: {
