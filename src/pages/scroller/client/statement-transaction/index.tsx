@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerPageLayout, ScrollerHeader, FilterLayout } from 'components';
-import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
+import type { IFilterPanel, Sorting, IPagination, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
+import { useParams } from 'react-router-dom';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { useFilter } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
@@ -26,6 +27,8 @@ export const StatementTransactionScrollerPage = () => {
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
   // endregion
 
+  const { id } = useParams<IUrlParams>();
+
   // Вызывается один раз.
   const { counterparties, isCounterpartiesFetching, isCounterpartiesError } = useGetCounterparties();
 
@@ -35,7 +38,7 @@ export const StatementTransactionScrollerPage = () => {
 
   const headerProps = useScrollerHeaderProps({ dateFrom, dateTo });
 
-  const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
+  const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: `${STORAGE_KEY}-${id}` });
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".

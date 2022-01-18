@@ -58,11 +58,7 @@ CounterpartyInfo.displayName = 'CounterpartyInfo';
 
 /** Списания. */
 export const Outcome: FC<Cell> = ({ value }) => {
-  const { outcome, currencyCode } = value;
-
-  if (typeof outcome !== 'number') {
-    return null;
-  }
+  const { outcome = 0, currencyCode } = value;
 
   return (
     <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
@@ -75,11 +71,7 @@ Outcome.displayName = 'Outcome';
 
 /** Поступления. */
 export const Income: FC<Cell> = ({ value }) => {
-  const { income, currencyCode } = value;
-
-  if (typeof income !== 'number') {
-    return null;
-  }
+  const { income = 0, currencyCode } = value;
 
   return (
     <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
