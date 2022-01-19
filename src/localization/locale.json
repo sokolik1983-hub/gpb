@@ -97,8 +97,8 @@
   },
   "transactionsScroller.table.totalValue": {
     "@total": "number",
-    "@exists": "number",
-    "ru": "{exists} из {total}"
+    "@totalByFilters": "number",
+    "ru": "{totalByFilters} из {total}"
   },
   "transactionsScroller.headers.operationDate": {
     "ru": "Дата опер."

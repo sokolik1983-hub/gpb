@@ -16,6 +16,7 @@ export const Table: FC = () => {
   const {
     transactions,
     isLoading,
+    transactionsAmountByFilter,
     totalTransactionsAmount,
     sorting,
     setSorting,
@@ -42,7 +43,7 @@ export const Table: FC = () => {
       manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
-      pageCount: Math.ceil(totalTransactionsAmount / pagination.pageSize),
+      pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
       initialState,
       maxMultiSortColCount: 2,
     },
@@ -89,7 +90,7 @@ export const Table: FC = () => {
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
           <Typography.Text>
-            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, exists: transactions.length })}
+            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: transactionsAmountByFilter })}
           </Typography.Text>
           <Horizon.Spacer />
           {selectedRows.length > 0 && (

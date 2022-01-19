@@ -1,17 +1,17 @@
 import { useMemo } from 'react';
-import type { Sorting, IPagination, IUrlParams } from 'interfaces';
+import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';
 import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
-import type { ICollectionResponse } from '@platform/services';
 import type { IMetaData } from '@platform/services/client';
 import { useDebounce } from '@platform/ui';
 
-const DEFAULT_RESPONSE = {
+const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = {
   data: [],
   total: 0,
+  totalCount: 0,
 };
 
 /** Параметр хука useGetStatementList. */
@@ -40,7 +40,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);
 
   const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError } = useQuery<
-    ICollectionResponse<IStatementTransactionRow>
+    IExpandedCollectionResponse<IStatementTransactionRow>
   >({
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
     queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),

@@ -27,7 +27,7 @@ export interface ITransactionCardProps {
 export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClose }) => {
   const [tab, setTab] = useState<TABS>(TABS.REQUISITES);
 
-  const { debit, documentNumber, documentName, entryDate } = transaction;
+  const { debit, documentNumber, documentName, documentDate } = transaction;
 
   const header = debit ? locale.transactionCard.header.debit : locale.transactionCard.header.credit;
 
@@ -42,7 +42,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClos
             {locale.transactionCard.subHeader({
               documentName,
               number: documentNumber,
-              date: formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT }),
+              date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
             })}
           </Typography.P>
           <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />

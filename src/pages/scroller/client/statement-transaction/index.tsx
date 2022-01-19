@@ -42,7 +42,7 @@ export const StatementTransactionScrollerPage = () => {
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
   const {
-    response: { data: transactions, total: totalTransactionsAmount },
+    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount },
     isTransactionsError,
     isTransactionsFetching,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
@@ -61,6 +61,7 @@ export const StatementTransactionScrollerPage = () => {
       pagination,
       setPagination,
       transactions,
+      transactionsAmountByFilter,
       totalTransactionsAmount,
       statementSummaryInfo,
       selectedRows,
@@ -81,6 +82,7 @@ export const StatementTransactionScrollerPage = () => {
       sorting,
       pagination,
       transactions,
+      transactionsAmountByFilter,
       totalTransactionsAmount,
       statementSummaryInfo,
       selectedRows,

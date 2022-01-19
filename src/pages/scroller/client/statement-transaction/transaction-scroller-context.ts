@@ -36,6 +36,8 @@ export interface ITransactionScrollerContext {
   /** Проводки для отображения в скроллере проводок. */
   transactions: IStatementTransactionRow[];
   /** Общее количество проводок, удовлетворяющих условиям фильтрации. */
+  transactionsAmountByFilter: number;
+  /** Общее количество проводок, без учёта фильтрации. */
   totalTransactionsAmount: number;
   /** Сводная информация по выписке. */
   statementSummaryInfo?: IStatementSummaryInfo;
@@ -70,6 +72,7 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   pagination: DEFAULT_PAGINATION,
   setPagination: noop,
   transactions: [],
+  transactionsAmountByFilter: 0,
   totalTransactionsAmount: 0,
   selectedRows: [],
   setSelectedRows: noop,
