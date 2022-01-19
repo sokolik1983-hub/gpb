@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from 'react';
 import cn from 'classnames';
 import { locale } from 'localization';
 import { bigNumber } from '@platform/tools/big-number';
-import { Typography, Box, Adjust, Horizon, Gap } from '@platform/ui';
+import { Typography, Box, Horizon, Gap, RegularButton, PrimaryButton, ServiceIcons, ACTIONS } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
@@ -23,7 +23,7 @@ export const Footer: FC = () => {
   ]);
 
   return (
-    <Box className={cn(css.footer, Adjust.getPadClass(['MD', 'X2L']))} fill={'BASE'}>
+    <Box className={cn(css.footer)} fill={'BASE'}>
       <Horizon>
         {/* Выбрано */}
         <Typography.P>{locale.transactionsScroller.footer.selected}</Typography.P>
@@ -39,7 +39,14 @@ export const Footer: FC = () => {
         <Typography.P>{locale.transactionsScroller.footer.income}</Typography.P>
         <Gap.XS />
         <Typography.PBold>{locale.moneyString.unsigned({ amount: totalIncome, currencyCode })}</Typography.PBold>
-        <Gap.XL />
+        <Horizon.Spacer />
+        <PrimaryButton extraSmall dimension="SM">
+          {locale.transactionsScroller.footerAction.export}
+        </PrimaryButton>
+        <Gap />
+        <RegularButton extraSmall data-action={ACTIONS.MORE} dimension="SM" icon={ServiceIcons.ActionMenuHorizontal} rounding={'ROUND'}>
+          {locale.transactionsScroller.footerAction.more}
+        </RegularButton>
       </Horizon>
     </Box>
   );

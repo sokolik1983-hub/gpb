@@ -11,14 +11,15 @@ import { Typography, Box } from '@platform/ui';
  * Возвращает информацию об агенте проводки.
  *
  * @param agent - Агент операции (плательщик/получатель).
+ * @param title - Заголовок блока.
  */
-export const getAgentOptions = (agent: IAgent): IConfirmationOption[] => {
+export const getAgentOptions = (agent: IAgent, title: string): IConfirmationOption[] => {
   const { inn, name, account, bankBic, bankName, corrAccount } = agent;
 
   return [
     {
       value: locale.transactionCard.values.agentInfo({ inn, name }),
-      label: <Typography.PBold fill={'FAINT'}>{locale.transactionCard.labels.payer}</Typography.PBold>,
+      label: <Typography.PBold fill={'FAINT'}>{title}</Typography.PBold>,
     },
     { label: locale.transactionCard.labels.agentAccountNumber, value: formatAccountCode(account) },
     {

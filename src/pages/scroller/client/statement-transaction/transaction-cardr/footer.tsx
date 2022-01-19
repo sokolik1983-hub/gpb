@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React from 'react';
 import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
-import { Horizon, Gap, PrimaryButton, RegularButton, Adjust } from '@platform/ui';
+import { Horizon, Gap, PrimaryButton, RegularButton, Adjust, ServiceIcons, ACTIONS } from '@platform/ui';
 
 /** Свойства компонента Footer. */
 export interface IFooterProps {
@@ -21,8 +21,8 @@ export const Footer: FC<IFooterProps> = () => (
       {locale.transactionCard.buttons.export}
     </PrimaryButton>
     <Gap />
-    <RegularButton extraSmall dimension="SM">
-      {locale.transactionCard.buttons.sendToEmail}
+    <RegularButton extraSmall data-action={ACTIONS.MORE} dimension="SM" icon={ServiceIcons.ActionMenuHorizontal} rounding={'ROUND'}>
+      {locale.transactionCard.buttons.more}
     </RegularButton>
   </Horizon>
 );
