@@ -40,8 +40,10 @@ export interface IGetTransactionCardResponseDto {
   documentName: string;
   /** Номер документа. */
   documentNumber: string;
-  /** Дата документа. */
+  /** Дата операции. */
   entryDate: string;
+  /** Дата документа. */
+  documentDate: string;
   /** Сумма. */
   amount: number;
   /** Код валюты. */

@@ -277,9 +277,9 @@ export default {
 			},
 			/**
 			 * @ru
-			 * {exists} из {total}
+			 * {totalByFilters} из {total}
 			 */
-			totalValue: (p: { total: number; exists: number }) => t('transactionsScroller.table.totalValue', p),
+			totalValue: (p: { total: number; totalByFilters: number }) => t('transactionsScroller.table.totalValue', p),
 		},
 		tags: {
 			/**

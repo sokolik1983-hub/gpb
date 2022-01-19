@@ -1,3 +1,4 @@
+import type { IExpandedScrollerResponceDto, IExpandedCollectionResponse, IScrollerResponceDto } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
@@ -54,7 +55,7 @@ export const statementService = {
     }).then(result => result.data.data),
   /** Возвращает список выписок для скроллера истории запросов. */
   getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<IStatementHistoryRow>> =>
-    request({
+    request<IServerDataResp<IScrollerResponceDto<IStatementHistoryRow>>>({
       url: `${STATEMENT_REQUEST_URL}/get-page`,
       method: 'POST',
       data: metadataToRequestParams(metaData),
@@ -68,15 +69,25 @@ export const statementService = {
       url: `${STATEMENT_URL}/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список проводок. */
-  getTransactionList: (metaData: IMetaData, statementId: string): Promise<ICollectionResponse<IStatementTransactionRow>> =>
-    request({
+  getTransactionList: (metaData: IMetaData, statementId: string): Promise<IExpandedCollectionResponse<IStatementTransactionRow>> =>
+    request<IServerDataResp<IExpandedScrollerResponceDto<IStatementTransactionRow>>>({
       url: `${STATEMENT_URL}/get-accounting-entry`,
       method: 'POST',
       data: { ...metadataToRequestParams(metaData), statementId },
-    }).then(res => ({
-      data: res.data.data.page,
-      total: res.data.data.size,
-    })),
+    }).then(res => {
+      const {
+        data: {
+          totalCount,
+          page: { page, size },
+        },
+      } = res.data;
+
+      return {
+        data: page,
+        total: size,
+        totalCount,
+      };
+    }),
   /** Возвращает сводную информацию по выписке. */
   getStatementSummaryInfo: (id: string): Promise<IStatementSummaryInfo> =>
     request<IServerDataResp<IStatementSummaryInfo>>({
