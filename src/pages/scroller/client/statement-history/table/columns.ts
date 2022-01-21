@@ -1,6 +1,7 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
+import { addMaxWidthField } from 'utils';
 import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
@@ -12,14 +13,13 @@ import { COLUMN_NAMES } from './constants';
 const accessor = (row: IStatementHistoryRow): IStatementHistoryRow => row;
 
 /** Конфигурация колонок таблицы. */
-export const columns: Array<Column<IStatementHistoryRow>> = [
+export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
   {
     Header: locale.historyScroller.headers.createdAt,
     id: COLUMN_NAMES.CREATED_AT,
     accessor,
     Cell: CreatedAtCell,
     width: 156,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.historyScroller.headers.accountNumber,
@@ -27,7 +27,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     accessor,
     Cell: AccountNumber,
     width: 390,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     disableSortBy: true,
   },
   {
@@ -36,7 +35,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     accessor,
     Cell: Period,
     width: 268,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.historyScroller.headers.statementFormat,
@@ -44,7 +42,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     accessor,
     Cell: StatementFormat,
     width: 200,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.historyScroller.headers.status,
@@ -52,7 +49,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     accessor,
     Cell: Status,
     width: 232,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     disableResizing: true,
   },
   {
@@ -62,6 +58,5 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     disableResizing: true,
     disableSortBy: true,
     width: 84,
-    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
-];
+]);

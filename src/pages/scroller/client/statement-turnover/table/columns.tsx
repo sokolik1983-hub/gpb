@@ -2,6 +2,7 @@ import type { IAccountTurnoversInfo, IGroupedAccounts, IGroupInfo } from 'interf
 import { GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
+import { addMaxWidthField } from 'utils';
 import { AccountNumberCell, OrganizationCell, IncomingBalanceCell, OutcomeCell, IncomeCell, OutgoingBalanceCell } from './cells';
 import { COLUMN_NAMES } from './constants';
 import { isGroupedAccounts } from './utils';
@@ -27,7 +28,7 @@ const accessor = (row: IAccountTurnoversInfo | IGroupedAccounts): IAccountTurnov
 export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAccounts>> => {
   const isOrganizationColumnVisible = ![GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES, GROUPING_VALUES.ORGANIZATIONS].includes(grouping);
 
-  return [
+  return addMaxWidthField([
     {
       Header: locale.turnoverScroller.headers.organization,
       id: COLUMN_NAMES.ORGANIZATION_NAME,
@@ -35,7 +36,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: OrganizationCell,
       disableSortBy: true,
       width: 204,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
     {
       Header: locale.turnoverScroller.headers.accountNumber,
@@ -44,7 +44,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: AccountNumberCell,
       disableSortBy: true,
       width: isOrganizationColumnVisible ? 266 : 432,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
     {
       Header: locale.turnoverScroller.headers.incomingBalance,
@@ -53,7 +52,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: IncomingBalanceCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 229 : 224,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
     {
       Header: locale.turnoverScroller.headers.outcome,
@@ -62,7 +60,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: OutcomeCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 200 : 224,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
     {
       Header: locale.turnoverScroller.headers.income,
@@ -71,7 +68,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: IncomeCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 200 : 224,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
     {
       Header: locale.turnoverScroller.headers.outgoingBalance,
@@ -80,7 +76,6 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: OutgoingBalanceCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 229 : 224,
-      maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     },
-  ];
+  ]);
 };

@@ -6,8 +6,6 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'footer': string;
-    'purposeOneLine': string;
-    'purposeTwoLine': string;
     'totalWrapper': string;
   }
 }

@@ -1,14 +1,13 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import clamp from 'clamp-js-main';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
-import { IS_SUPPORTS_LINE_CLAMP } from 'stream-constants';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, WithInfoTooltip } from '@platform/ui';
-import css from './styles.scss';
 
 /** Свойства ячейки. */
 type Cell = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
@@ -96,11 +95,36 @@ Income.displayName = 'Income';
 export const Purpose: FC<Cell> = ({ value }) => {
   const { purpose } = value;
 
+  const [isShouldShowTooltip, setIShouldShowTooltip] = useState<boolean>(false);
+
+  const clampedElementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (clampedElementRef.current) {
+      clamp(clampedElementRef.current, { clamp: 2, useNativeClamp: false });
+
+      const textContent = clampedElementRef.current.innerText;
+
+      /** Если текст оканчивается на символ '…', то значит он был усечён, и надо отображать тултип. */
+      if (textContent.match(/…$/)) {
+        setIShouldShowTooltip(true);
+      }
+    }
+  }, []);
+
   return (
     <WithInfoTooltip text={purpose}>
       {ref => (
         <Typography.SmallText innerRef={ref}>
-          <div className={IS_SUPPORTS_LINE_CLAMP ? css.purposeTwoLine : css.purposeOneLine}>{purpose}</div>
+          {/*
+            Компонент WithInfoTooltip всегда отображает тултип при наведении,
+            если в нём нет элемента со стилем "text-overflow: ellipsis" (поэтому передаётся undefined).
+            А если такой элемент есть, то отображает только если содержимое не помещается в элемент,
+            т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
+          */}
+          <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis' }}>
+            {purpose}
+          </div>
         </Typography.SmallText>
       )}
     </WithInfoTooltip>
