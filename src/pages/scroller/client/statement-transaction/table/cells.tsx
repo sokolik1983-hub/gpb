@@ -3,10 +3,12 @@ import React from 'react';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
+import { IS_SUPPORTS_LINE_CLAMP } from 'stream-constants';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, WithInfoTooltip } from '@platform/ui';
+import css from './styles.scss';
 
 /** Свойства ячейки. */
 type Cell = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
@@ -97,8 +99,8 @@ export const Purpose: FC<Cell> = ({ value }) => {
   return (
     <WithInfoTooltip text={purpose}>
       {ref => (
-        <Typography.SmallText innerRef={ref} line={'COLLAPSE'}>
-          {purpose}
+        <Typography.SmallText innerRef={ref}>
+          <div className={IS_SUPPORTS_LINE_CLAMP ? css.purposeTwoLine : css.purposeOneLine}>{purpose}</div>
         </Typography.SmallText>
       )}
     </WithInfoTooltip>
