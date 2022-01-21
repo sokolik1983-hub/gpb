@@ -66,7 +66,7 @@ export const FilterLayout: FC<IFilterProps> = ({
     <Form
       initialValues={initialValues}
       render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
+        <form className={css.wrapper} onSubmit={handleSubmit}>
           <Box className={css.filterWrapper}>
             <Pattern>
               <Pattern.Span size={10}>

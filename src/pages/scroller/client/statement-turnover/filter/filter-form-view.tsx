@@ -21,7 +21,7 @@ export const FilterFormView: FC<FormRenderProps<IFormState>> = ({ values }) => {
   }, [onOk, values]);
 
   return (
-    <Box>
+    <Box className={css.wrapper}>
       <Box className={css.filterWrapper}>
         <FilterPanel />
       </Box>

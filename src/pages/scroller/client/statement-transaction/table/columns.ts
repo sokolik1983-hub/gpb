@@ -19,6 +19,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: OperationDate,
     width: 160,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.transactionsScroller.headers.documentInfo,
@@ -26,6 +27,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: DocumentInfo,
     width: 148,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.transactionsScroller.headers.counterparty,
@@ -33,6 +35,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: CounterpartyInfo,
     width: 259,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
   },
   {
     Header: locale.transactionsScroller.headers.outcome,
@@ -40,6 +43,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Outcome,
     width: 239,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     disableSortBy: true,
   },
   {
@@ -48,6 +52,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Income,
     width: 239,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     disableSortBy: true,
   },
   {
@@ -56,6 +61,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     accessor,
     Cell: Purpose,
     width: 251,
+    maxWidth: Number.POSITIVE_INFINITY, // Без этой строки react-table в IE рассчитывает ширину колонки как "NaNpx"
     disableSortBy: true,
   },
 ];
