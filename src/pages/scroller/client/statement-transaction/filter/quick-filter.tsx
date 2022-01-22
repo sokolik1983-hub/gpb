@@ -58,14 +58,24 @@ export const QuickFilter: FC = () => {
         <Horizon>
           <Box className={css.fieldWrapper}>
             {/* Сумма от. */}
-            <Fields.Number extraSmall name={FORM_FIELDS.AMOUNT_FROM} placeholder={locale.transactionsScroller.placeholder.amountFrom} />
+            <Fields.Money
+              extraSmall
+              moneySuffix={''}
+              name={FORM_FIELDS.AMOUNT_FROM}
+              placeholder={locale.transactionsScroller.placeholder.amountFrom}
+            />
           </Box>
           <Gap.X2S />
           <Typography.Text>–</Typography.Text>
           <Gap.X2S />
           <Box className={css.fieldWrapper}>
             {/* Сумма по. */}
-            <Fields.Number extraSmall name={FORM_FIELDS.AMOUNT_TO} placeholder={locale.transactionsScroller.placeholder.amountTo} />
+            <Fields.Money
+              extraSmall
+              moneySuffix={''}
+              name={FORM_FIELDS.AMOUNT_TO}
+              placeholder={locale.transactionsScroller.placeholder.amountTo}
+            />
           </Box>
         </Horizon>
       </Pattern.Span>

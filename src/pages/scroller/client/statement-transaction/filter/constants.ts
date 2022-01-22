@@ -39,8 +39,8 @@ export const FORM_FIELDS = {
 /** Значения полей и условия фильтрации для useFilter. */
 export const fields: Record<string, IFilterField> = {
   [FORM_FIELDS.TABLE_SEARCH]: filterFields.contains('', FORM_FIELDS.TABLE_SEARCH),
-  [FORM_FIELDS.AMOUNT_FROM]: filterFields.ge('', FORM_FIELDS.AMOUNT),
-  [FORM_FIELDS.AMOUNT_TO]: filterFields.le('', FORM_FIELDS.AMOUNT),
+  [FORM_FIELDS.AMOUNT_FROM]: filterFields.ge('', FORM_FIELDS.AMOUNT, (value): number => Number(value)),
+  [FORM_FIELDS.AMOUNT_TO]: filterFields.le('', FORM_FIELDS.AMOUNT, (value): number => Number(value)),
   [FORM_FIELDS.PAYMENT_DATE_FROM]: filterFields.ge('', FORM_FIELDS.PAYMENT_DATE),
   [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le('', FORM_FIELDS.PAYMENT_DATE),
   [FORM_FIELDS.DOC_NUMBER]: filterFields.eq('', FORM_FIELDS.DOC_NUMBER),
