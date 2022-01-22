@@ -28,8 +28,12 @@
   background-color: #fff;
 }
 
-.borderedRow {
+.groupingRowByAccount {
   background-color: #fff;
+  border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
+}
+
+.borderedRow {
   border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
 }
 

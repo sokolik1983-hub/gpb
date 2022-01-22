@@ -10,6 +10,7 @@ declare namespace StylesScssModule {
     'clickableRow': string;
     'collapsedRow': string;
     'groupingRow': string;
+    'groupingRowByAccount': string;
     'headerCell': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
