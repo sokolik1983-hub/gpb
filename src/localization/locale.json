@@ -75,7 +75,7 @@
     "ru": "ИНН: {inn}"
   },
   "transactionsScroller.table.placeholder": {
-    "ru": "Проводок не найдено"
+    "ru": "Документы не найдены"
   },
   "transactionsScroller.tags.docNumber": {
     "ru": "Номер документа:"
@@ -224,7 +224,7 @@
     "ru": "{exists} из {total}"
   },
   "historyScroller.table.placeholder": {
-    "ru": "У вас пока не было запросов выписки"
+    "ru": "Запросы не найдены"
   },
   "historyScroller.table.allAccounts": {
     "ru": "Все счета всех организаций"
