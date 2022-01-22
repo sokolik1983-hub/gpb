@@ -1,6 +1,6 @@
 import type { DATE_PERIODS } from 'interfaces';
-import type { ICreateRequestStatementDto, FORMAT, OPERATIONS } from 'interfaces/client';
-import { TYPE, ACTIONS } from 'interfaces/client';
+import type { ICreateRequestStatementDto, OPERATIONS } from 'interfaces/client';
+import { ACTIONS } from 'interfaces/client';
 import { locale } from 'localization';
 import { FORM_FIELD_LABELS, FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import type { SchemaOf } from 'yup';
@@ -12,10 +12,7 @@ import { getEmptyFieldErrorMessage, isLessThanTomorrow } from './validation';
 export const getPath = pathGenerator<ICreateRequestStatementDto>();
 
 /** Поля которые необходимо валидировать при создании "Запроса выписки". */
-type FieldsToValidate = Pick<
-  ICreateRequestStatementDto,
-  'accountsIds' | 'dateFrom' | 'dateTo' | 'email' | 'format' | 'operations' | 'periodType'
->;
+type FieldsToValidate = Pick<ICreateRequestStatementDto, 'accountsIds' | 'dateFrom' | 'dateTo' | 'email' | 'operations' | 'periodType'>;
 
 /**
  * Схема валидации ДТО создания сущности "Запрос выписки".
@@ -35,9 +32,5 @@ export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = obje
     .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_TO]))
     .test('lessThanTomorrow', locale.errors.periodEnd.tomorrowRestriction, isLessThanTomorrow),
   accountsIds: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS])),
-  format: mixed<FORMAT>().when(getPath('type'), {
-    is: creationType => creationType !== TYPE.HIDDEN_VIEW,
-    then: string().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.FILE_FORMAT])),
-  }),
   operations: mixed<OPERATIONS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.OPERATION])),
 });

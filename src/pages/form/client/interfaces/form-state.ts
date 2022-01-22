@@ -59,7 +59,7 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
     accountIds: latestStatement?.accountsIds,
     dateFrom: latestStatement?.periodStart,
     dateTo: latestStatement?.periodEnd,
-    format: latestStatement?.statementFormat,
+    format: latestStatement?.statementFormat ?? FORMAT.PDF,
     periodType: latestStatement?.periodType,
   };
 
