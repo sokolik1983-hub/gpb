@@ -53,7 +53,12 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
                       {canSort && (isSorted || hovered) && (
                         <WithInfoTooltip extraSmall text={locale.table.header.sortInfo}>
                           {tooltipRef => (
-                            <Box ref={tooltipRef} className={css.sortIconWrapper}>
+                            // textOverflow: "ellipsis" добавляется чтобы убрать тултип.
+                            <Box
+                              ref={tooltipRef}
+                              className={css.sortIconWrapper}
+                              style={{ textOverflow: disableMultiSort ? 'ellipsis' : undefined }}
+                            >
                               <SortIcon fill={isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />
                               {!disableMultiSort && Boolean(sortIndex) && (
                                 <Typography.SmallText inline className={css.sortIndex} fill={'ACCENT'}>

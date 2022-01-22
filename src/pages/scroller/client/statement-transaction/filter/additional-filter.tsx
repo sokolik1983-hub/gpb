@@ -31,7 +31,7 @@ export const AdditionalFilter: FC = () => {
     <Pattern gap={'XL'}>
       <Pattern.Span size={6}>
         <FilterFormElement label={locale.transactionsScroller.labels.docNumber}>
-          {/* Выбор периода. */}
+          {/* Номер документа. */}
           <Fields.Number extraSmall name={FORM_FIELDS.DOC_NUMBER} />
         </FilterFormElement>
       </Pattern.Span>

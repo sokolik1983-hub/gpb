@@ -1,54 +1,50 @@
 import type { FC } from 'react';
 import React from 'react';
-import { PopUp } from 'components';
 import { locale } from 'localization';
 import { Typography, LayoutScrollComponent, Box, Horizon, WithInfoTooltip } from '@platform/ui';
+import { PopUp } from '../pop-up';
 import css from './styles.scss';
 
 /** Свойства компонента ItemWitAmount. */
 interface IItemWitAmountProps {
-  /** Номер счёта или организация. */
+  /** Элемент для отображения. */
   item: string;
   /** Количество счетов или организаций не отображаемых в строке скроллера. */
   additionalAmount: number;
-  /** Если true - то для рендера используется Typography.SmallText иначе Typography.Text. */
-  small?: boolean;
+  /** Компонент, которым будет рендерится элемент. */
+  component: typeof Typography[keyof typeof Typography];
 }
 
-/** Номер счёта или наименование организации, с количеством неотображаемых элементов. */
-const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>(({ item, additionalAmount, small = false }, ref) => {
-  const TypographyElement = small ? Typography.SmallText : Typography.Text;
-
-  return (
-    <Horizon>
-      <WithInfoTooltip text={item}>
-        {tooltipRef => (
-          <TypographyElement innerRef={tooltipRef} line={'COLLAPSE'}>
-            {item}
-          </TypographyElement>
-        )}
-      </WithInfoTooltip>
-      {additionalAmount !== 0 && (
-        <>
-          {', '}
-          <TypographyElement inline fill={'ACCENT'} innerRef={ref}>
-            {locale.historyScroller.table.prefixedByPlus({ value: additionalAmount })}
-          </TypographyElement>
-        </>
+/** Наименование, с количеством неотображаемых элементов. */
+const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>(({ item, additionalAmount, component: Component }, ref) => (
+  <Horizon>
+    <WithInfoTooltip text={item}>
+      {tooltipRef => (
+        <Component innerRef={tooltipRef} line={'COLLAPSE'}>
+          {item}
+        </Component>
       )}
-    </Horizon>
-  );
-});
+    </WithInfoTooltip>
+    {additionalAmount !== 0 && (
+      <>
+        {', '}
+        <Component inline fill={'ACCENT'} innerRef={ref}>
+          {locale.historyScroller.table.prefixedByPlus({ value: additionalAmount })}
+        </Component>
+      </>
+    )}
+  </Horizon>
+));
 
 ItemWitAmount.displayName = 'ItemWitAmount';
 
-/** Свойства компонента AccountNumbers. */
+/** Свойства компонента AdditionalItems. */
 interface IAdditionalItemsProps {
   /** Элементы для отображения. */
   items: string[];
 }
 
-/** Дополнительные элементы (номера счетов или организации) отображаемые во всплывающем окне. */
+/** Дополнительные элементы отображаемые во всплывающем окне. */
 const AdditionalItems: FC<IAdditionalItemsProps> = ({ items }) => {
   if (items.length === 0) {
     return null;
@@ -73,28 +69,30 @@ const AdditionalItems: FC<IAdditionalItemsProps> = ({ items }) => {
 
 AdditionalItems.displayName = 'AdditionalItems';
 
-/** Свойства компонента AccountNumber. */
-export interface IAccountNumberProps {
+/** Свойства компонента ItemWithRestInPopUp. */
+export interface IItemWithRestInPopUpProps {
   /** Элементы для отображения. */
   items: string[];
   /** Если true - то для рендера используется Typography.SmallText иначе Typography.Text. */
   small?: boolean;
+  /** Компонент, которым будет рендерится элемент. */
+  component: typeof Typography[keyof typeof Typography];
 }
 
 /**
- * Номер счёта или наименование организации,
+ * Отображает элемент (текст),
  * с количеством дополнительных элементов, отображаемых во всплывающем окне,
  * По наведению на количество дополнительных элементов открывается всплывающее окно.
  */
-export const AccountNumberWithRest: FC<IAccountNumberProps> = ({ items, small }) => {
+export const ItemWithRestInPopUp: FC<IItemWithRestInPopUpProps> = ({ items, component }) => {
   const [firstItem, ...restItems] = items;
 
   return (
     <PopUp>
-      {ref => <ItemWitAmount ref={ref} additionalAmount={restItems.length} item={firstItem} small={small} />}
+      {ref => <ItemWitAmount ref={ref} additionalAmount={restItems.length} component={component} item={firstItem} />}
       <AdditionalItems items={restItems} />
     </PopUp>
   );
 };
 
-AccountNumberWithRest.displayName = 'AccountNumberWithRest';
+ItemWithRestInPopUp.displayName = 'ItemWithRestInPopUp';
