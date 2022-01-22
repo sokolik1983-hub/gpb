@@ -23,7 +23,7 @@ const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>((
     <Horizon>
       <WithInfoTooltip text={item}>
         {tooltipRef => (
-          <TypographyElement inline innerRef={tooltipRef} line={'COLLAPSE'}>
+          <TypographyElement innerRef={tooltipRef} line={'COLLAPSE'}>
             {item}
           </TypographyElement>
         )}
@@ -60,7 +60,7 @@ const AdditionalItems: FC<IAdditionalItemsProps> = ({ items }) => {
         {items.map(item => (
           <WithInfoTooltip key={item} text={item}>
             {tooltipRef => (
-              <Typography.Text inline innerRef={tooltipRef} line={'COLLAPSE'}>
+              <Typography.Text innerRef={tooltipRef} line={'COLLAPSE'}>
                 {item}
               </Typography.Text>
             )}

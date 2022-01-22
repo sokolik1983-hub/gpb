@@ -67,7 +67,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
     <Box {...rowProps} className={css.groupingRow}>
       <WithInfoTooltip text={groupingTitle}>
         {tooltipRef => (
-          <Typography.PBold inline className="H3" innerRef={tooltipRef} line={'COLLAPSE'}>
+          <Typography.PBold className="H3" innerRef={tooltipRef} line={'COLLAPSE'}>
             {groupingTitle}
           </Typography.PBold>
         )}

@@ -39,7 +39,7 @@ export const StatementInfo: FC = () => {
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
           <WithInfoTooltip text={organizationName}>
             {ref => (
-              <Typography.Text inline innerRef={ref} line={'COLLAPSE'}>
+              <Typography.Text innerRef={ref} line={'COLLAPSE'}>
                 {organizationName}
               </Typography.Text>
             )}
