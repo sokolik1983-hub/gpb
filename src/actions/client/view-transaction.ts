@@ -1,5 +1,5 @@
 import { showTransactionCard } from 'components/transaction-card';
-import { fatalHandler } from 'utils';
+import { fatalHandler, getUserDeviceInfo } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { IBaseEntity } from '@platform/services/client';
@@ -14,7 +14,9 @@ export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: [IBaseEntity]) => {
     showLoader();
 
-    const [res, err] = await to(service.getTransaction(doc.id));
+    const userDeviceInfo = await getUserDeviceInfo();
+
+    const [res, err] = await to(service.getTransaction({ accountingEntryId: doc.id, userDeviceInfo }));
 
     hideLoader();
 
