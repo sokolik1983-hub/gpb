@@ -1,6 +1,7 @@
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
+import { addMaxWidthField } from 'utils';
 import { OperationDate, DocumentInfo, CounterpartyInfo, Outcome, Income, Purpose } from './cells';
 import { COLUMN_NAMES } from './constants';
 
@@ -12,7 +13,7 @@ import { COLUMN_NAMES } from './constants';
 const accessor = (row: IStatementTransactionRow): IStatementTransactionRow => row;
 
 /** Конфигурация колонок таблицы. */
-export const columns: Array<Column<IStatementTransactionRow>> = [
+export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField([
   {
     Header: locale.transactionsScroller.headers.operationDate,
     id: COLUMN_NAMES.OPERATION_DATE,
@@ -58,4 +59,4 @@ export const columns: Array<Column<IStatementTransactionRow>> = [
     width: 251,
     disableSortBy: true,
   },
-];
+]);

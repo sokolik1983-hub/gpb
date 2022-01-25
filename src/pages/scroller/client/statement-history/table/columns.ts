@@ -1,6 +1,7 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
+import { addMaxWidthField } from 'utils';
 import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
@@ -12,7 +13,7 @@ import { COLUMN_NAMES } from './constants';
 const accessor = (row: IStatementHistoryRow): IStatementHistoryRow => row;
 
 /** Конфигурация колонок таблицы. */
-export const columns: Array<Column<IStatementHistoryRow>> = [
+export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
   {
     Header: locale.historyScroller.headers.createdAt,
     id: COLUMN_NAMES.CREATED_AT,
@@ -58,4 +59,4 @@ export const columns: Array<Column<IStatementHistoryRow>> = [
     disableSortBy: true,
     width: 84,
   },
-];
+]);

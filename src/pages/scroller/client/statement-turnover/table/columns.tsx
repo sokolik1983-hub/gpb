@@ -2,6 +2,7 @@ import type { IAccountTurnoversInfo, IGroupedAccounts, IGroupInfo } from 'interf
 import { GROUPING_VALUES } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
+import { addMaxWidthField } from 'utils';
 import { AccountNumberCell, OrganizationCell, IncomingBalanceCell, OutcomeCell, IncomeCell, OutgoingBalanceCell } from './cells';
 import { COLUMN_NAMES } from './constants';
 import { isGroupedAccounts } from './utils';
@@ -27,7 +28,7 @@ const accessor = (row: IAccountTurnoversInfo | IGroupedAccounts): IAccountTurnov
 export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAccounts>> => {
   const isOrganizationColumnVisible = ![GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES, GROUPING_VALUES.ORGANIZATIONS].includes(grouping);
 
-  return [
+  return addMaxWidthField([
     {
       Header: locale.turnoverScroller.headers.organization,
       id: COLUMN_NAMES.ORGANIZATION_NAME,
@@ -76,5 +77,5 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 229 : 224,
     },
-  ];
+  ]);
 };

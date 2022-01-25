@@ -1,5 +1,6 @@
 import type { Sorting, IPagination } from 'interfaces';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
+import type { Column } from 'react-table';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IMetaData } from '@platform/services';
 import type { IOption } from '@platform/ui';
@@ -74,3 +75,16 @@ export const parseCounterparty = (stringifiedCounterparty: string): IGetCounterp
 
   return { inn, name };
 };
+
+/**
+ * Добавляет поле maxWidth в конфиг колонки таблицы.
+ * Если этого не делать, то react-table в IE рассчитывает ширину колонки как "NaNpx".
+ *
+ * @param columns - Конфиги колонок таблицы.
+ * @returns - Конфиги колонок таблицы с дефолтными полями.
+ */
+export const addMaxWidthField = <T extends Record<string, any>>(columns: Array<Column<T>>): Array<Column<T>> =>
+  columns.map(column => ({
+    maxWidth: Number.POSITIVE_INFINITY,
+    ...column,
+  }));

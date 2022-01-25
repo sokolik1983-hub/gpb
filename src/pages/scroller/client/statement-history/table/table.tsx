@@ -5,7 +5,7 @@ import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination } from 'react-table';
-import { Horizon, Typography, Gap } from '@platform/ui';
+import { Horizon, Typography, Gap, Box } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
 import css from './styles.scss';
@@ -61,16 +61,18 @@ export const Table: FC = () => {
 
   return (
     <>
-      <Gap.SM />
-      {/* Общая информация о количестве записей. */}
-      <Horizon className={css.totalWrapper}>
-        <Typography.TextBold>{locale.historyScroller.table.total}</Typography.TextBold>
+      <Box className={css.totalWrapper}>
         <Gap.SM />
-        <Typography.Text>
-          {locale.historyScroller.table.totalValue({ total: totalStatementsAmount, exists: statements.length })}
-        </Typography.Text>
-      </Horizon>
-      <Gap.LG />
+        <Horizon>
+          {/* Общая информация о количестве записей. */}
+          <Typography.TextBold>{locale.historyScroller.table.total}</Typography.TextBold>
+          <Gap.SM />
+          <Typography.Text>
+            {locale.historyScroller.table.totalValue({ total: totalStatementsAmount, exists: statements.length })}
+          </Typography.Text>
+        </Horizon>
+        <Gap.LG />
+      </Box>
       {/* Таблица. */}
       <ScrollerTableView
         isLoading={isLoading}

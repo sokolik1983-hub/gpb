@@ -5,12 +5,6 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'additionalFilterWrapper': string;
-    'filterWrapper': string;
-    'footerWrapper': string;
-    'toggleButton': string;
-    'toggleButtonWrapper': string;
-    'toggleIcon': string;
     'wrapper': string;
   }
 }

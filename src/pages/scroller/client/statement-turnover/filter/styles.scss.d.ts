@@ -6,6 +6,7 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'dateDelimiter': string;
+    'dateFieldWrapper': string;
     'filterWrapper': string;
     'groupingField': string;
     'groupingFieldWrapper': string;
@@ -18,6 +19,7 @@ declare namespace StylesScssModule {
     'totalsRow': string;
     'totalsRowWrapper': string;
     'totalsWrapper': string;
+    'wrapper': string;
   }
 }
 

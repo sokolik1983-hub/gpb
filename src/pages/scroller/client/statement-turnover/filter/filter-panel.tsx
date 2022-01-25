@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import cn from 'classnames';
 import { DatePeriodField, AccountsField } from 'components';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
@@ -71,12 +72,12 @@ export const FilterPanel = () => {
             <Pattern.Span size={7}>
               <Adjust pad={[null, null, null, 'X2S']}>
                 <Horizon>
-                  <Box className={Adjust.getPadClass([null, 'X2S', null, null])}>
+                  <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, 'X2S', null, null]))}>
                     {/* Дата от. */}
                     <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} onChange={handleDateChange} />
                   </Box>
                   <Typography.Text className={css.dateDelimiter}>–</Typography.Text>
-                  <Box className={Adjust.getPadClass([null, null, null, 'X2S'])}>
+                  <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, null, null, 'X2S']))}>
                     {/* Дата по. */}
                     <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} onChange={handleDateChange} />
                   </Box>
