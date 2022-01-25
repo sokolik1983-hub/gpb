@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
 import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
@@ -43,18 +43,12 @@ export const Table: FC = () => {
   }, []);
 
   const {
-    state: { sortBy, pageIndex, pageSize },
+    state: { sortBy },
   } = tableInstance;
 
   useEffect(() => {
     setSorting(sortBy);
   }, [setSorting, sortBy]);
-
-  const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
-
-  useEffect(() => {
-    setPagination(newPaginationState);
-  }, [setPagination, newPaginationState]);
 
   return (
     <>

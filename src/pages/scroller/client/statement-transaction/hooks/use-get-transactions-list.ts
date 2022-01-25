@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { usePrevious } from 'hooks';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
@@ -23,33 +22,19 @@ interface IUseGetStatementListArgs {
   sorting: Sorting;
   /** Состояние пагинации. */
   pagination: IPagination;
-  /** Устанавливает пагинацию. */
-  setPagination(value: IPagination): void;
 }
 
 /** Возвращает данные для отображения в скроллере проводок. */
-export const useGetTransactionsList = ({ filters, sorting, pagination, setPagination }: IUseGetStatementListArgs) => {
+export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGetStatementListArgs) => {
   const { id } = useParams<IUrlParams>();
-
-  const previousFilters = usePrevious(filters) ?? filters;
-
-  const paginationToReset = useMemo(() => ({ pageIndex: 0, pageSize: pagination.pageSize }), [pagination.pageSize]);
-
-  // Если значения фильтров изменились, то надо сбросить пагинацию на начало.
-  const newPagination = previousFilters === filters ? pagination : paginationToReset;
-
-  // Сброс пагинации если надо.
-  if (newPagination !== pagination) {
-    setPagination(newPagination);
-  }
 
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
       multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
-      ...convertTablePaginationToMetaData(newPagination),
+      ...convertTablePaginationToMetaData(pagination),
     }),
-    [filters, newPagination, sorting]
+    [filters, pagination, sorting]
   );
 
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);

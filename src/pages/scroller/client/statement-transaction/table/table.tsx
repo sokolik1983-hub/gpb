@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useState, useContext, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -53,23 +53,17 @@ export const Table: FC = () => {
   );
 
   const {
-    state: { sortBy, pageIndex, pageSize },
+    state: { sortBy },
     selectedFlatRows,
   } = tableInstance;
-
-  useEffect(() => {
-    setSorting(sortBy);
-  }, [setSorting, sortBy]);
-
-  const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
 
   const handleDoubleClick = useCallback((row: IStatementTransactionRow) => {
     void executor.execute(viewTransaction, [row]);
   }, []);
 
   useEffect(() => {
-    setPagination(newPaginationState);
-  }, [setPagination, newPaginationState]);
+    setSorting(sortBy);
+  }, [setSorting, sortBy]);
 
   useEffect(() => {
     setSelectedRows(selectedFlatRows.map(row => row.original));

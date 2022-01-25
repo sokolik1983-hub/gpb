@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useRestPagination } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
 import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
@@ -40,11 +40,13 @@ export const StatementHistoryScrollerPage = () => {
   // Вызывается один раз.
   const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
 
+  const newPagination = useRestPagination({ filterValues, pagination, setPagination });
+
   const {
     response: { data: statements, total: totalStatementsAmount },
     isStatementsError,
     isStatementsFetching,
-  } = useGetStatementList({ filters: filterValues, sorting, pagination, setPagination });
+  } = useGetStatementList({ filters: filterValues, sorting, pagination: newPagination });
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
