@@ -36,7 +36,7 @@ export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
             const isCondensedColumn = cell.column.id === SELECT_COLUMN_ID;
 
             return (
-              <Box key={cellKey} {...cellProps} className={isCondensedColumn ? css.condensedCell : css.headerCell}>
+              <Box key={cellKey} {...cellProps} className={isCondensedColumn ? css.condensedCell : css.cell}>
                 {cell.render('Cell')}
               </Box>
             );

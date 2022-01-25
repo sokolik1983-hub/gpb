@@ -263,7 +263,7 @@ export default {
 		table: {
 			/**
 			 * @ru
-			 * Проводок не найдено
+			 * Документы не найдены
 			 */
 			get placeholder() {
 				return t('transactionsScroller.table.placeholder');
@@ -551,7 +551,7 @@ export default {
 			totalValue: (p: { total: number; exists: number }) => t('historyScroller.table.totalValue', p),
 			/**
 			 * @ru
-			 * У вас пока не было запросов выписки
+			 * Запросы не найдены
 			 */
 			get placeholder() {
 				return t('historyScroller.table.placeholder');

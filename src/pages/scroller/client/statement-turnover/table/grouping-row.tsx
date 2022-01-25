@@ -46,7 +46,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
   // отображается в таблице, так же как строки с данными по счётам.
   if (groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Box {...rowProps} className={css.borderedRow}>
+      <Box {...rowProps} className={css.groupingRowByAccount}>
         {cells.map(cell => {
           const { key: cellKey, ...cellProps } = cell.getCellProps();
 
@@ -67,7 +67,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
     <Box {...rowProps} className={css.groupingRow}>
       <WithInfoTooltip text={groupingTitle}>
         {tooltipRef => (
-          <Typography.PBold inline className="H3" innerRef={tooltipRef} line={'COLLAPSE'}>
+          <Typography.PBold className="H3" innerRef={tooltipRef} line={'COLLAPSE'}>
             {groupingTitle}
           </Typography.PBold>
         )}

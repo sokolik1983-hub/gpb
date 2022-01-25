@@ -5,8 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'status': string;
-    'totalWrapper': string;
+    'accountsPopUp': string;
   }
 }
 

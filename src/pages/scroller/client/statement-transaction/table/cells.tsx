@@ -28,7 +28,7 @@ export const DocumentInfo: FC<Cell> = ({ value }) => {
 
   return (
     <>
-      <Typography.Text>{locale.transactionsScroller.labels.documentNumber({ documentNumber })}</Typography.Text>
+      <Typography.Text line={'COLLAPSE'}>{locale.transactionsScroller.labels.documentNumber({ documentNumber })}</Typography.Text>
       <Typography.SmallText>{locale.transactionsScroller.labels.documentDate({ date: formattedDate })}</Typography.SmallText>
     </>
   );
@@ -44,7 +44,7 @@ export const CounterpartyInfo: FC<Cell> = ({ value }) => {
     <>
       <WithInfoTooltip text={counterpartyName}>
         {ref => (
-          <Typography.Text inline innerRef={ref} line={'COLLAPSE'}>
+          <Typography.Text innerRef={ref} line={'COLLAPSE'}>
             {counterpartyName}
           </Typography.Text>
         )}

@@ -37,18 +37,18 @@ export const TagsPanel = () => {
     tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
   } = useContext(HistoryScrollerContext);
 
-  const tagValueFormatter = (name: string, formValues: IFormState) => {
+  const tagValueFormatter = (name: keyof IFormState, formValues: IFormState): string[] | string => {
     const value = formValues[name];
 
     switch (name) {
       case FORM_FIELDS.PERIOD_TYPE:
-        return DATE_PERIOD_OPTIONS.find(item => item.value === value)?.label;
+        return DATE_PERIOD_OPTIONS.find(item => item.value === value)!.label;
       case FORM_FIELDS.STATUS:
-        return STATUS_LABELS[value];
+        return STATUS_LABELS[value as string];
       case FORM_FIELDS.SIGNED:
         return '';
       default:
-        return value;
+        return value as string[] | string;
     }
   };
 
@@ -84,7 +84,7 @@ export const TagsPanel = () => {
   return (
     <>
       <Gap.SM />
-      <TagsPanelView<IFormState>
+      <TagsPanelView
         tagValueFormatter={tagValueFormatter}
         tags={preparedTags}
         onRemoveTag={handleRemoveTag}

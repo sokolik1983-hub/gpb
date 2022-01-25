@@ -53,19 +53,19 @@ export const TagsPanel = () => {
     tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
-  const tagValueFormatter = (name: string, formValues: IFormState) => {
+  const tagValueFormatter = (name: keyof IFormState, formValues: IFormState): string[] | string => {
     const value = formValues[name];
 
     switch (name) {
       case FORM_FIELDS.PAYMENT_DATE_FROM:
       case FORM_FIELDS.PAYMENT_DATE_TO:
-        return formatDateTime(value, { keepLocalTime: true, format: DATE_FORMAT });
+        return formatDateTime(value as string, { keepLocalTime: true, format: DATE_FORMAT });
       case FORM_FIELDS.TRANSACTION_TYPE:
-        return TRANSACTION_TYPE_LABELS[value];
+        return TRANSACTION_TYPE_LABELS[value as string];
       case FORM_FIELDS.COUNTERPARTY:
-        return value.length > 1 ? value.length : counterpartyNameById[value[0]];
+        return (value as string[]).map(item => counterpartyNameById[item]);
       default:
-        return value;
+        return value!;
     }
   };
 
@@ -109,7 +109,7 @@ export const TagsPanel = () => {
   return (
     <>
       <Gap.SM />
-      <TagsPanelView<IFormState>
+      <TagsPanelView
         tagValueFormatter={tagValueFormatter}
         tags={preparedTags}
         onRemoveTag={handleRemoveTag}

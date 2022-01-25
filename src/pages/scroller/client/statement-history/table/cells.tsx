@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo, Fragment } from 'react';
 import { executor } from 'actions/client';
+import { ItemWithRestInPopUp } from 'components';
 import { DATE_PERIODS, STATEMENT_ACTION_TYPES } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -15,7 +16,6 @@ import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, Box, Horizon, Status as StatusMarker, Gap } from '@platform/ui';
 import { ROW_ACTIONS } from '../action-configs';
-import { AccountNumberWithRest } from './account-number-with-rest';
 import css from './styles.scss';
 
 /** Дата и время создания запроса выписки. */
@@ -46,10 +46,10 @@ export const AccountNumber: FC<CellProps<IStatementHistoryRow, IStatementHistory
   return (
     <>
       <Box>
-        <AccountNumberWithRest items={formattedAccounts} />
+        <ItemWithRestInPopUp component={Typography.Text} items={formattedAccounts} />
       </Box>
       <Box>
-        <AccountNumberWithRest small items={organizationNames} />
+        <ItemWithRestInPopUp component={Typography.SmallText} items={organizationNames} />
       </Box>
     </>
   );
