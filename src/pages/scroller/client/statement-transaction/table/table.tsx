@@ -28,14 +28,6 @@ export const Table: FC = () => {
 
   const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
 
-  const initialState = useMemo(
-    () => ({
-      sortBy: sorting,
-      ...pagination,
-    }),
-    [sorting, pagination]
-  );
-
   const tableInstance = useTable<IStatementTransactionRow>(
     {
       data: transactions,
@@ -44,7 +36,12 @@ export const Table: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
-      initialState,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
+      initialState: {
+        sortBy: sorting,
+        ...pagination,
+      },
       maxMultiSortColCount: 2,
     },
     useSortBy,
@@ -110,6 +107,7 @@ export const Table: FC = () => {
         isLoading={isLoading}
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows && selectedRows.length > 0}
         placeholderLabel={locale.transactionsScroller.table.placeholder}
+        setPagination={setPagination}
         tableInstance={tableInstance}
         onDoubleClick={handleDoubleClick}
       />

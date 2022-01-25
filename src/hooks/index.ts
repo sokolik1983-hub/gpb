@@ -5,3 +5,4 @@ export * from './use-scroll-button';
 export * from './use-scroller-tabs-props';
 export * from './use-turnover-scroller-header-props';
 export * from './use-creation-type';
+export * from './use-previous';

@@ -44,7 +44,7 @@ export const StatementHistoryScrollerPage = () => {
     response: { data: statements, total: totalStatementsAmount },
     isStatementsError,
     isStatementsFetching,
-  } = useGetStatementList({ filters: filterValues, sorting, pagination });
+  } = useGetStatementList({ filters: filterValues, sorting, pagination, setPagination });
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({

@@ -48,7 +48,7 @@ export const StatementTransactionScrollerPage = () => {
     response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount },
     isTransactionsError,
     isTransactionsFetching,
-  } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
+  } = useGetTransactionsList({ filters: filterValues, sorting, pagination, setPagination });
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({

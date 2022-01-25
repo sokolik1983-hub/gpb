@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { usePrevious } from 'hooks';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
@@ -22,19 +23,33 @@ interface IUseGetStatementListArgs {
   sorting: Sorting;
   /** Состояние пагинации. */
   pagination: IPagination;
+  /** Устанавливает пагинацию. */
+  setPagination(value: IPagination): void;
 }
 
 /** Возвращает данные для отображения в скроллере проводок. */
-export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGetStatementListArgs) => {
+export const useGetTransactionsList = ({ filters, sorting, pagination, setPagination }: IUseGetStatementListArgs) => {
   const { id } = useParams<IUrlParams>();
+
+  const previousFilters = usePrevious(filters) ?? filters;
+
+  const paginationToReset = useMemo(() => ({ pageIndex: 0, pageSize: pagination.pageSize }), [pagination.pageSize]);
+
+  // Если значения фильтров изменились, то надо сбросить пагинацию на начало.
+  const newPagination = previousFilters === filters ? pagination : paginationToReset;
+
+  // Сброс пагинации если надо.
+  if (newPagination !== pagination) {
+    setPagination(newPagination);
+  }
 
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
       multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
-      ...convertTablePaginationToMetaData(pagination),
+      ...convertTablePaginationToMetaData(newPagination),
     }),
-    [filters, pagination, sorting]
+    [filters, newPagination, sorting]
   );
 
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);
@@ -45,6 +60,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
     queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
+    enabled: true,
     keepPreviousData: true,
     retry: false,
   });

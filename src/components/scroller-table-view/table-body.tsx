@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
 import { useScrollButton } from 'hooks/use-scroll-button';
+import type { IPagination } from 'interfaces';
 import type { TableBodyProps, TableInstance } from 'react-table';
 import { Box, LayoutScroll, ROLE, Gap } from '@platform/ui';
 import { PAGE_SIZES, Pagination } from '../pagination';
@@ -18,10 +19,12 @@ export interface ITableBodyProps extends TableBodyProps {
   onDoubleClick?(row: Record<string, any>): void;
   /** Если true - то отображаются только выбранные строки. */
   isVisibleOnlySelectedRows?: boolean;
+  /** Устанавливает пагинацию. */
+  setPagination(value: IPagination): void;
 }
 
 /** Тело таблицы. */
-export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick, isVisibleOnlySelectedRows }) => {
+export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick, isVisibleOnlySelectedRows, setPagination }) => {
   const {
     getTableBodyProps,
     rows,
@@ -49,7 +52,7 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDou
           })}
           {isLoading && <ScrollerLoadingOverlay />}
         </Box>
-        {pageCount * pageSize > PAGE_SIZES.PER_25 && <Pagination tableInstance={tableInstance} />}
+        {pageCount * pageSize > PAGE_SIZES.PER_25 && <Pagination setPagination={setPagination} tableInstance={tableInstance} />}
         <Gap.X2L />
       </LayoutScroll>
 

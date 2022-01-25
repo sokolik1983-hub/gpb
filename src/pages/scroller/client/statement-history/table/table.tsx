@@ -16,14 +16,6 @@ export const Table: FC = () => {
     HistoryScrollerContext
   );
 
-  const initialState = useMemo(
-    () => ({
-      sortBy: sorting,
-      ...pagination,
-    }),
-    [sorting, pagination]
-  );
-
   const tableInstance = useTable<IStatementHistoryRow>(
     {
       data: statements,
@@ -33,7 +25,12 @@ export const Table: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       pageCount: Math.ceil(totalStatementsAmount / pagination.pageSize),
-      initialState,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
+      initialState: {
+        sortBy: sorting,
+        ...pagination,
+      },
     },
     useSortBy,
     usePagination,
@@ -77,6 +74,7 @@ export const Table: FC = () => {
       <ScrollerTableView
         isLoading={isLoading}
         placeholderLabel={locale.historyScroller.table.placeholder}
+        setPagination={setPagination}
         tableInstance={tableInstance}
         onDoubleClick={handleDoubleClick}
       />

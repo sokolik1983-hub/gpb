@@ -1,4 +1,5 @@
 import React from 'react';
+import type { IPagination } from 'interfaces';
 import { locale } from 'localization';
 import type { TableInstance } from 'react-table';
 import { Pattern, Horizon, Gap, Typography, Select, Box } from '@platform/ui';
@@ -17,16 +18,19 @@ const COUNT_OPTIONS = [
 interface IPaginationProps {
   /** Экземпляр таблицы. */
   tableInstance: TableInstance<Record<string, any>>;
+  /** Устанавливает пагинацию. */
+  setPagination(value: IPagination): void;
 }
 
 /** Пагинация скроллера. */
-export const Pagination: React.FC<IPaginationProps> = ({ tableInstance }) => {
+export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagination }) => {
   const {
     pageCount,
-    gotoPage,
     setPageSize,
     state: { pageSize, pageIndex },
   } = tableInstance;
+
+  const gotoPage = (newPageIndex: number) => setPagination({ pageSize, pageIndex: newPageIndex });
 
   return (
     <Box className={css.paginationWrapper}>
