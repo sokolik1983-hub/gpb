@@ -46,9 +46,9 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "9.33.1",
-    "@types/react-table": "7.7.8",
-    "@types/react-lines-ellipsis": "^0.15.1"
+    "@platform/services": "9.34.1",
+    "@types/react-lines-ellipsis": "^0.15.1",
+    "@types/react-table": "7.7.8"
   },
   "dependencies": {
     "react-lines-ellipsis": "^0.15.0",
