@@ -47,11 +47,11 @@
   },
   "devDependencies": {
     "@platform/services": "9.34.1",
-    "@types/react-lines-ellipsis": "^0.15.1",
-    "@types/react-table": "7.7.8"
+    "@types/react-table": "7.7.8",
+    "@types/clamp-js-main": "0.11.2"
   },
   "dependencies": {
-    "react-lines-ellipsis": "^0.15.0",
+    "clamp-js-main": "0.11.6",
     "react-table": "7.7.0"
   }
 }
