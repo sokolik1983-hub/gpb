@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useEffect, useCallback } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
 import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
@@ -16,14 +16,6 @@ export const Table: FC = () => {
     HistoryScrollerContext
   );
 
-  const initialState = useMemo(
-    () => ({
-      sortBy: sorting,
-      ...pagination,
-    }),
-    [sorting, pagination]
-  );
-
   const tableInstance = useTable<IStatementHistoryRow>(
     {
       data: statements,
@@ -33,7 +25,12 @@ export const Table: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       pageCount: Math.ceil(totalStatementsAmount / pagination.pageSize),
-      initialState,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
+      initialState: {
+        sortBy: sorting,
+        ...pagination,
+      },
     },
     useSortBy,
     usePagination,
@@ -46,18 +43,12 @@ export const Table: FC = () => {
   }, []);
 
   const {
-    state: { sortBy, pageIndex, pageSize },
+    state: { sortBy },
   } = tableInstance;
 
   useEffect(() => {
     setSorting(sortBy);
   }, [setSorting, sortBy]);
-
-  const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
-
-  useEffect(() => {
-    setPagination(newPaginationState);
-  }, [setPagination, newPaginationState]);
 
   return (
     <>
@@ -77,6 +68,7 @@ export const Table: FC = () => {
       <ScrollerTableView
         isLoading={isLoading}
         placeholderLabel={locale.historyScroller.table.placeholder}
+        setPagination={setPagination}
         tableInstance={tableInstance}
         onDoubleClick={handleDoubleClick}
       />

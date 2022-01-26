@@ -27,9 +27,17 @@ export const DocumentInfo: FC<Cell> = ({ value }) => {
 
   const formattedDate = formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT });
 
+  const formattedDocumentNumber = locale.transactionsScroller.labels.documentNumber({ documentNumber });
+
   return (
     <>
-      <Typography.Text line={'COLLAPSE'}>{locale.transactionsScroller.labels.documentNumber({ documentNumber })}</Typography.Text>
+      <WithInfoTooltip text={formattedDocumentNumber}>
+        {ref => (
+          <Typography.Text innerRef={ref} line={'COLLAPSE'}>
+            {formattedDocumentNumber}
+          </Typography.Text>
+        )}
+      </WithInfoTooltip>
       <Typography.SmallText>{locale.transactionsScroller.labels.documentDate({ date: formattedDate })}</Typography.SmallText>
     </>
   );

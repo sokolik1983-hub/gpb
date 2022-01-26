@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerPageLayout, ScrollerHeader, FilterLayout } from 'components';
+import { useRestPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IPagination, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useParams } from 'react-router-dom';
@@ -44,11 +45,13 @@ export const StatementTransactionScrollerPage = () => {
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
+  const newPagination = useRestPagination({ filterValues, pagination, setPagination });
+
   const {
     response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount },
     isTransactionsError,
     isTransactionsFetching,
-  } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
+  } = useGetTransactionsList({ filters: filterValues, sorting, pagination: newPagination });
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({

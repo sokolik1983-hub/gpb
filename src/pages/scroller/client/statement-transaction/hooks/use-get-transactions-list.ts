@@ -45,6 +45,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
     queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
+    enabled: true,
     keepPreviousData: true,
     retry: false,
   });
