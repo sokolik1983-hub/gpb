@@ -1,3 +1,10 @@
+# [1.1.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.0...v1.1.0) (2022-01-26)
+
+
+### Features
+
+* bump version [skip ci] ([7fbc93f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7fbc93f54cf5afff64ede621a5700bb8ea8cec3c))
+
 # 1.0.0 (2022-01-26)
 
 
