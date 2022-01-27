@@ -3,10 +3,12 @@ import { executor } from 'actions/client';
 import type { IScrollerHeaderProps } from 'components';
 import { locale } from 'localization';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getActionButtons } from '@platform/core';
+import { getActiveActionButtons } from 'utils';
 import { useRedirect, DATE_FORMAT } from '@platform/services';
+import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { HEADER_ACTIONS } from '../action-configs';
+
 /** Возвращает свойства для заголовка скроллера.
  *
  * @param statement - Выписка проводки которой отображаются в скроллере.
@@ -19,7 +21,9 @@ export const useScrollerHeaderProps = (statement: { dateFrom: string; dateTo: st
   const redirectToMainPage = useRedirect(COMMON_STREAM_URL.MAINPAGE);
   const redirectToTurnovers = useRedirect(COMMON_STREAM_URL.STATEMENT_TURNOVER);
 
-  const actions = useMemo(() => getActionButtons(HEADER_ACTIONS, executor, [{}]), []);
+  const { getAvailableActions } = useAuth();
+
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [{}]), [getAvailableActions]);
 
   return {
     onHomeClick: redirectToMainPage,

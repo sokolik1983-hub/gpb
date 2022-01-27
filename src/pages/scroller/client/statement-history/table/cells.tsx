@@ -9,7 +9,7 @@ import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/
 import type { CellProps } from 'react-table';
 import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants';
 import { STATUS_LABELS, STATUS_COLOR } from 'stream-constants/client';
-import { getActionButtons } from '@platform/core';
+import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
@@ -117,10 +117,10 @@ Status.displayName = 'Status';
 export const Actions: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(
-    () => getActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]).filter(action => !action.disabled),
-    [getAvailableActions, value]
-  );
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]), [
+    getAvailableActions,
+    value,
+  ]);
 
   return (
     <Horizon align="TOP">

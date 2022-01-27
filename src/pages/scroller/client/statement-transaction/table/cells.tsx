@@ -1,13 +1,18 @@
 import type { FC } from 'react';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { executor } from 'actions/client/executor';
 import clamp from 'clamp-js-main';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
+import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
+import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, WithInfoTooltip } from '@platform/ui';
+import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS } from '@platform/ui';
+import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
+import css from './styles.scss';
 
 /** Свойства ячейки. */
 type Cell = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
@@ -140,3 +145,31 @@ export const Purpose: FC<Cell> = ({ value }) => {
 };
 
 Purpose.displayName = 'Purpose';
+
+/** Действия со строкой. */
+export const Actions: FC<Cell> = ({ value }) => {
+  const { getAvailableActions } = useAuth();
+
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [value]), [
+    getAvailableActions,
+    value,
+  ]);
+
+  if (actions.length === 0) {
+    return null;
+  }
+
+  return (
+    <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
+      {(ref, _, toggleOpen) => (
+        <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
+          <Box className={css.actionsIconWrapper}>
+            <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+          </Box>
+        </Box>
+      )}
+    </WithDropDown>
+  );
+};
+
+Actions.displayName = 'Actions';

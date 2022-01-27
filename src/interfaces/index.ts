@@ -10,3 +10,4 @@ export * from './commont';
 export * from './statement-statuses';
 export * from './actions';
 export * from './services';
+export * from './table';
