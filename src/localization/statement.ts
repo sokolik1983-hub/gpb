@@ -411,10 +411,33 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionsScroller.footerAction.print');
+			},
+			/**
+			 * @ru
 			 * Еще
 			 */
 			get more() {
 				return t('transactionsScroller.footerAction.more');
+			},
+		},
+		rowAction: {
+			/**
+			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionsScroller.rowAction.print');
+			},
+			/**
+			 * @ru
+			 * Скачать документ основания
+			 */
+			get export() {
+				return t('transactionsScroller.rowAction.export');
 			},
 		},
 	},
@@ -1448,6 +1471,13 @@ export default {
 			 */
 			get export() {
 				return t('transactionCard.buttons.export');
+			},
+			/**
+			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionCard.buttons.print');
 			},
 			/**
 			 * @ru

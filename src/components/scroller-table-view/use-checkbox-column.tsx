@@ -1,5 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
 import React from 'react';
+import { COLUMN_PADDING_TYPES } from 'interfaces';
 import type { HeaderProps, CellProps, Hooks } from 'react-table';
 import { Checkbox } from '@platform/ui';
 
@@ -53,6 +54,7 @@ export const useCheckboxColumn = <T extends Record<string, any>>(hooks: Hooks<T>
       disableResizing: true,
       Header,
       Cell,
+      paddingType: COLUMN_PADDING_TYPES.RIGHT_REDUCED,
     },
     ...columns,
   ]);

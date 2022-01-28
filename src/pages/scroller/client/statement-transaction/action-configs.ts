@@ -1,12 +1,12 @@
 import { noopAction } from 'actions/common';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { locale } from 'localization';
-import { Icons, RegularButton, ServiceIcons } from '@platform/ui';
+import { Icons, ServiceIcons, BUTTON } from '@platform/ui';
 
-/** Экспорт выписки. */
+// Заглушка для конфига действия экспорта.
 const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
   icon: Icons.Download,
-  label: locale.transactionsScroller.headerAction.export,
+  label: '',
   action: noopAction,
   name: 'EXPORT_STATEMENT',
   authorities: [
@@ -14,17 +14,44 @@ const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
   ],
 };
 
-/** Печать выписки. */
+// Заглушка для конфига действия печати.
 const PRINT_STATEMENT: IExtendedIActionWithAuth = {
   icon: ServiceIcons.Refresh,
-  label: locale.transactionsScroller.headerAction.print,
+  label: '',
   action: noopAction,
   name: 'PRINT_STATEMENT',
-  buttonType: RegularButton,
+  buttonType: BUTTON.REGULAR,
   authorities: [
     /* TODO: добавить когда будет готова ролевая. */
   ],
 };
 
-/** Действия строки скроллера. */
-export const HEADER_ACTIONS = [PRINT_STATEMENT, EXPORT_STATEMENT];
+/** Действия заголовка скроллера. */
+export const HEADER_ACTIONS = [
+  { ...PRINT_STATEMENT, label: locale.transactionsScroller.headerAction.print },
+  { ...EXPORT_STATEMENT, label: locale.transactionsScroller.headerAction.export },
+];
+
+/** Действия в футере скроллера. */
+export const FOOTER_ACTIONS = [{ ...EXPORT_STATEMENT, label: locale.transactionsScroller.footerAction.export }];
+
+/* Действия футера скроллера в выпадающем списке. */
+export const FOOTER_DROPDOWN_ACTIONS = [{ ...PRINT_STATEMENT, label: locale.transactionsScroller.footerAction.print }];
+
+/** Действия строки скроллера в выпадающем списке. */
+export const ROW_DROPDOWN_ACTIONS = [
+  { ...EXPORT_STATEMENT, label: locale.transactionsScroller.rowAction.export },
+  { ...PRINT_STATEMENT, label: locale.transactionsScroller.rowAction.print },
+];
+
+/** Действия в строке вкладки "Вложения" карточки проводки. */
+export const CARD_ROW_ACTIONS = [
+  { ...EXPORT_STATEMENT, icon: Icons.Download },
+  { ...PRINT_STATEMENT, icon: Icons.PrintFile },
+];
+
+/** Действия футера карточки проводки. */
+export const CARD_FOOTER_ACTIONS = [{ ...EXPORT_STATEMENT, label: locale.transactionCard.buttons.export }];
+
+/** Действия футера карточки проводки в выпадающем списке. */
+export const CARD_FOOTER_DROPDOWN_ACTIONS = [{ ...PRINT_STATEMENT, label: locale.transactionCard.buttons.print }];

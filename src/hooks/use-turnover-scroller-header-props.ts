@@ -4,7 +4,7 @@ import type { IScrollerHeaderProps } from 'components';
 import { locale } from 'localization';
 import { HEADER_ACTIONS } from 'pages/scroller/client/statement-turnover/action-configs';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getActionButtons } from '@platform/core';
+import { getActiveActionButtons } from 'utils';
 import { useRedirect } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 
@@ -17,7 +17,7 @@ export const useTurnoverScrollerHeaderProps = (): IScrollerHeaderProps => {
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[]]), [getAvailableActions]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[]]), [getAvailableActions]);
 
   return {
     onHomeClick: redirectToMainPage,

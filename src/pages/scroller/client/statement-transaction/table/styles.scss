@@ -7,3 +7,24 @@
   padding: 16px 32px;
   box-shadow: 0 -4px 48px rgba(38, 44, 64, 0.12);
 }
+
+.actionsRowButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 30px;
+  height: 16px;
+}
+
+.actionsIconWrapper {
+  width: 30px;
+  height: 30px;
+}
+
+.rowDropdownActions {
+  min-width: 292px;
+}
+
+.footerDropdownActions {
+  min-width: 176px;
+}

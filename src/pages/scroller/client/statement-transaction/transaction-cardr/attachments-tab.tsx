@@ -1,7 +1,11 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { useMemo } from 'react';
+import { executor } from 'actions/client/executor';
 import type { IGetTransactionCardResponseDto } from 'interfaces/client';
-import { Typography, Gap, Line, Adjust, Horizon, Icons } from '@platform/ui';
+import { CARD_ROW_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
+import { getActiveActionButtons } from 'utils';
+import { useAuth } from '@platform/services/client';
+import { Typography, Gap, Line, Adjust, Horizon } from '@platform/ui';
 
 /** Свойства компонента AttachmentsTab. */
 export interface IAttachmentsTabProps {
@@ -17,6 +21,10 @@ export interface IAttachmentsTabProps {
 export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction }) => {
   const { appendixDto: { documents = [] } = {} } = transaction;
 
+  const { getAvailableActions } = useAuth();
+
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, []), [getAvailableActions]);
+
   return (
     <>
       {documents.map(({ documentName }) => (
@@ -25,9 +33,12 @@ export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction }) => {
           <Horizon className={Adjust.getPadClass([null, 'XS'])}>
             <Typography.Text>{documentName}</Typography.Text>
             <Horizon.Spacer />
-            <Icons.Download clickable fill={'FAINT'} scale={'MD'} />
-            <Gap />
-            <Icons.PrintFile clickable fill={'FAINT'} scale={'MD'} />
+            {actions.map(({ icon: Icon, onClick, name }) => (
+              <>
+                <Gap />
+                <Icon clickable data-action={name} data-name={name} fill={'FAINT'} scale={'MD'} onClick={onClick} />
+              </>
+            ))}
           </Horizon>
           <Gap.SM />
           <Line fill="FAINT" />

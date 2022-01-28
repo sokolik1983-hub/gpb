@@ -19,4 +19,6 @@ export const COLUMN_NAMES = {
   INCOME: 'income',
   // Назначение платежа.
   PURPOSE: 'paymentPurpose',
+  // Действия.
+  ACTIONS: 'ACTIONS',
 } as const;

@@ -4,7 +4,7 @@ import cn from 'classnames';
 import type { Row } from 'react-table';
 import { Box, WithClickable } from '@platform/ui';
 import css from './styles.scss';
-import { SELECT_COLUMN_ID } from './use-checkbox-column';
+import { getCellPaddingClass } from './utils';
 
 /** Свойства компонента TableRow. */
 export interface ITableRowProps {
@@ -31,13 +31,13 @@ export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
           onDoubleClick={() => onDoubleClick?.(original)}
         >
           {cells.map(cell => {
-            const { key: cellKey, ...cellProps } = cell.getCellProps();
+            const { getCellProps, column, render } = cell;
 
-            const isCondensedColumn = cell.column.id === SELECT_COLUMN_ID;
+            const { key: cellKey, ...cellProps } = getCellProps();
 
             return (
-              <Box key={cellKey} {...cellProps} className={isCondensedColumn ? css.condensedCell : css.cell}>
-                {cell.render('Cell')}
+              <Box key={cellKey} {...cellProps} className={cn(getCellPaddingClass(column.paddingType))}>
+                {render('Cell')}
               </Box>
             );
           })}

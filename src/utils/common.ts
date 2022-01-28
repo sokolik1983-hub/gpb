@@ -1,4 +1,7 @@
+import type { IExtendedActionWebInfo } from 'interfaces';
 import { locale } from 'localization';
+import type { IExecuter } from '@platform/core';
+import { getActionButtons } from '@platform/core';
 import type { IBaseContext } from '@platform/services';
 import { dialog } from '@platform/ui';
 
@@ -40,3 +43,14 @@ export const fatalHandler = ({ showError }: IBaseContext) => {
 export const showCommonErrorMessage = () => {
   dialog.showAlert(locale.errors.progressError, { header: locale.errors.progressErrorHeader });
 };
+
+/**
+ * Возвращает только активные конфиги кнопок (оставляет только с disabled: true). Типизация с any как в платформе.
+ *
+ * @param actions - Массив экшн конфигов.
+ * @param executor - Экзекутор, которым будут исполнены экшны.
+ * @param params - Аргументы, которые получит экшн.
+ * @returns Массив трансформированных экшнов.
+ */
+export const getActiveActionButtons = (actions: IExtendedActionWebInfo[], executor: IExecuter<any>, params: any[]) =>
+  getActionButtons(actions, executor, params).filter(item => !item.disabled);

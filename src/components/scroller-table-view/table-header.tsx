@@ -1,10 +1,11 @@
 import type { FC } from 'react';
 import React from 'react';
+import cn from 'classnames';
+import { getCellPaddingClass } from 'components/scroller-table-view/utils';
 import { locale } from 'localization';
 import type { HeaderGroup } from 'react-table';
 import { Box, ServiceIcons, WithClickable, Typography, Horizon, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
-import { SELECT_COLUMN_ID } from './use-checkbox-column';
 
 /** Свойства компонента TableHeader. */
 export interface ITableHeaderProps {
@@ -23,7 +24,17 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
       return (
         <Box key={headerGroupKey} {...restHeaderGroupKey} className={css.headerRow}>
           {headerGroup.headers.map((column, index) => {
-            const { getHeaderProps, sortedIndex, isSortedDesc, id, canSort, isSorted, render, canResize, getResizerProps } = column;
+            const {
+              getHeaderProps,
+              sortedIndex,
+              isSortedDesc,
+              canSort,
+              isSorted,
+              render,
+              canResize,
+              getResizerProps,
+              paddingType,
+            } = column;
 
             const { key: columnKey, ...restHeaderProps } = getHeaderProps();
 
@@ -33,8 +44,6 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
 
             const sortByToggleProps = column.getSortByToggleProps();
 
-            const isCondensedColumn = id === SELECT_COLUMN_ID;
-
             // Удаляется дефолтный title, (если его не удалить, то он отображается при наведении).
             sortByToggleProps.title = undefined;
 
@@ -42,7 +51,7 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
             const sortIndex = sortedIndex + 1;
 
             return (
-              <Box key={columnKey} {...restHeaderProps} className={isCondensedColumn ? css.condensedCell : css.headerCell}>
+              <Box key={columnKey} {...restHeaderProps} className={cn(getCellPaddingClass(paddingType), css.headerCell)}>
                 <WithClickable>
                   {(ref, { hovered }) => (
                     <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>

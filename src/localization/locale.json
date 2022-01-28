@@ -167,8 +167,17 @@
   "transactionsScroller.footerAction.export": {
     "ru": "Экспорт"
   },
+  "transactionsScroller.footerAction.print": {
+    "ru": "Печать"
+  },
   "transactionsScroller.footerAction.more": {
     "ru": "Еще"
+  },
+  "transactionsScroller.rowAction.print": {
+    "ru": "Печать"
+  },
+  "transactionsScroller.rowAction.export": {
+    "ru": "Скачать документ основания"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
@@ -586,6 +595,9 @@
   },
   "transactionCard.buttons.export": {
     "ru": "Скачать"
+  },
+  "transactionCard.buttons.print": {
+    "ru": "Печать"
   },
   "transactionCard.buttons.more": {
     "ru": "Еще"

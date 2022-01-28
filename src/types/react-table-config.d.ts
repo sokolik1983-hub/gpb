@@ -48,6 +48,7 @@ import {
   UseSortByOptions,
   UseSortByState
 } from 'react-table'
+import { COLUMN_PADDING_TYPES } from 'interfaces';
 
 declare module 'react-table' {
   // take this file as-is, or comment out the sections that don't apply to your plugin configuration
@@ -101,7 +102,10 @@ declare module 'react-table' {
       UseGlobalFiltersColumnOptions<D>,
       UseGroupByColumnOptions<D>,
       UseResizeColumnsColumnOptions<D>,
-      UseSortByColumnOptions<D> {}
+      UseSortByColumnOptions<D> {
+    /** Тип горизонтальных отступов колонки таблицы. */
+    paddingType?: COLUMN_PADDING_TYPES;
+  }
 
   export interface TableSortByToggleProps {
     title?: string;

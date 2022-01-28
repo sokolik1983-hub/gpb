@@ -42,14 +42,28 @@
   &:last-child {
     padding-right: 8px;
   }
-  .condensedCell + & {
-    padding-left: 8px;
-  }
+}
+
+.leftReducedCell {
+  @extend .cell;
+
+  padding-left: 8px;
+}
+
+.rightReducedCell {
+  @extend .cell;
+
+  padding-right: 8px;
+}
+
+.bothReducedCell {
+  @extend .cell;
+
+  padding-right: 8px;
+  padding-left: 8px;
 }
 
 .headerCell {
-  @extend .cell;
-
   position: relative;
   user-select: none;
 }
