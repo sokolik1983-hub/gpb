@@ -664,5 +664,35 @@
   },
   "errors.periodEnd.tomorrowRestriction": {
     "ru": "Дата окончания периода не может быть больше текущей даты"
+  },
+  "exportParamsDialog.buttons.download.label": {
+    "ru": "Скачать"
+  },
+  "exportParamsDialog.buttons.sendToEmail.label": {
+    "ru": "Отправить на почту"
+  },
+  "exportParamsDialog.buttons.print.label": {
+    "ru": "Печать"
+  },
+  "exportParamsDialog.exportStatement.label": {
+    "ru": "Экспорт выписки"
+  },
+  "exportParamsDialog.printStatement.label": {
+    "ru": "Печать выписки"
+  },
+  "exportParamsDialog.creationParams.label": {
+    "ru": "Дополнительно печатать"
+  },
+  "exportParamsDialog.print.creationParams.separateAccountsFiles": {
+    "ru": "Отдельным файлом по каждому счёту"
+  },
+  "exportParamsDialog.print.creationParams.withDocumentsSet": {
+    "ru": "С комплектом документов"
+  },
+  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": {
+    "ru": "Нулевые обороты"
+  },
+  "exportParamsDialog.print.creationParams.withSign": {
+    "ru": "С электронной подписью банка"
   }
 }

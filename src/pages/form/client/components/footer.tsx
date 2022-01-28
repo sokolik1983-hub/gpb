@@ -1,6 +1,6 @@
 import React from 'react';
+import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
-import type { IFormState } from 'pages/form/client/interfaces/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box } from '@platform/ui';

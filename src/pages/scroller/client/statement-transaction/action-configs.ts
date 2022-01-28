@@ -1,4 +1,5 @@
-import { noopAction } from 'actions/common';
+import { getExportStatement, getPrintStatement } from 'actions/client';
+import { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { locale } from 'localization';
 import { Icons, ServiceIcons, BUTTON } from '@platform/ui';
@@ -7,7 +8,7 @@ import { Icons, ServiceIcons, BUTTON } from '@platform/ui';
 const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
   icon: Icons.Download,
   label: '',
-  action: noopAction,
+  action: getExportStatement(EXPORT_PARAMS_USE_CASES.ONE),,
   name: 'EXPORT_STATEMENT',
   authorities: [
     /* TODO: добавить когда будет готова ролевая. */
@@ -18,7 +19,7 @@ const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
 const PRINT_STATEMENT: IExtendedIActionWithAuth = {
   icon: ServiceIcons.Refresh,
   label: '',
-  action: noopAction,
+  action: getPrintStatement(EXPORT_PARAMS_USE_CASES.TWO),,
   name: 'PRINT_STATEMENT',
   buttonType: BUTTON.REGULAR,
   authorities: [

@@ -8,13 +8,13 @@ import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 
 /**
- * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки или документа.
+ * [Выписки_ЗВ] Клиент: Функция печати документа.
  *
- * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440703
  */
-export const getExportStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, ICreateRequestStatementDto> => ({
+export const getPrintStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, ICreateRequestStatementDto> => ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  action: ({ done }) => async ([doc]: IStatementHistoryRow[]) => {
+  action: ({ done }) => async ([data]: IStatementHistoryRow[]) => {
     const [_, close] = await to(showStatementParamsDialog(useCase));
 
     if (close) {

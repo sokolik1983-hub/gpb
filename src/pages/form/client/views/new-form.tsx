@@ -1,24 +1,24 @@
 import React from 'react';
 import { createStatement, getExecutor } from 'actions/client';
+import { Accounts } from 'components/form/accounts';
+import { CreationParams } from 'components/form/creation-params';
+import { DetailDocumentsParams } from 'components/form/detail-documents-params';
+import { FileFormats } from 'components/form/file-formats';
+import { Operations } from 'components/form/operations';
+import { Period } from 'components/form/period';
 import { useCreationType } from 'hooks';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
 import type { ICreateRequestStatementDto } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client/classificators/actions';
 import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import { TYPE } from 'interfaces/client/classificators/type';
-import { Accounts } from 'pages/form/client/components/accounts';
-import { CreationParams } from 'pages/form/client/components/creation-params';
-import { DocumentsSetParams } from 'pages/form/client/components/documents-set-params';
-import { FileFormats } from 'pages/form/client/components/file-formats';
+import { CREATION_PARAMS } from 'interfaces/form/creation-params';
+import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
+import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
+import type { IFormState } from 'interfaces/form/form-state';
+import { FORM_FIELD_LABELS, getInitialFormState } from 'interfaces/form/form-state';
 import { Footer } from 'pages/form/client/components/footer';
-import { Operations } from 'pages/form/client/components/operations';
-import { Period } from 'pages/form/client/components/period';
 import { FormProvider } from 'pages/form/client/form-provider';
-import { CREATION_PARAMS } from 'pages/form/client/interfaces/creation-params';
-import { CREDIT_PARAMS } from 'pages/form/client/interfaces/credit-params';
-import { DEBIT_PARAMS } from 'pages/form/client/interfaces/debit-params';
-import type { IFormState } from 'pages/form/client/interfaces/form-state';
-import { FORM_FIELD_LABELS, getInitialFormState } from 'pages/form/client/interfaces/form-state';
 import { Form } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { NotFoundContent } from '@platform/services';
@@ -69,7 +69,6 @@ export const NewForm: React.FC = () => {
 
   const executor = getExecutor();
   const executeCreateStatementAction = (values: IFormState) => {
-    console.log(`new-form.tsx ||`, `executeCreateStatementAction ||`, `values`, values);
     void executor.execute(createStatement, [mapFormToDto(values, creationType)]);
   };
 
@@ -86,7 +85,7 @@ export const NewForm: React.FC = () => {
                 <Operations />
                 <FileFormats />
                 <CreationParams />
-                <DocumentsSetParams />
+                <DetailDocumentsParams />
                 <Footer />
               </Pattern.Span>
               <Pattern.Span size={2} />
