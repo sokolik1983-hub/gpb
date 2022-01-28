@@ -3,6 +3,10 @@ import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { OPERATIONS } from 'interfaces/client/classificators/operations';
+import { CREATION_PARAMS } from 'interfaces/form/creation-params';
+import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
+import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
+import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { locale } from 'localization';
 
 /** Состояние формы запроса на выписку. */
@@ -37,19 +41,66 @@ export const defaultFormState: IFormState = {
   periodType: DATE_PERIODS.YESTERDAY,
 };
 
+/** Функция для преобразования ДТО ответа для последний выписки в значения формы. */
+export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
+  const creditParams: string[] = [];
+  const debitParams: string[] = [];
+  const creationParams: string[] = [];
+  const documentsSetParams: string[] = [];
+
+  if (dto.documentOptionsDto.includeCreditOrders) {
+    creditParams.push(CREDIT_PARAMS.INCLUDE_ORDERS);
+  }
+
+  if (dto.documentOptionsDto.includeCreditStatements) {
+    creditParams.push(CREDIT_PARAMS.INCLUDE_STATEMENTS);
+  }
+
+  if (dto.documentOptionsDto.includeDebitOrders) {
+    debitParams.push(DEBIT_PARAMS.INCLUDE_ORDERS);
+  }
+
+  if (dto.documentOptionsDto.includeDebitStatements) {
+    debitParams.push(DEBIT_PARAMS.INCLUDE_STATEMENTS);
+  }
+
+  if (dto.separateAccountsFiles) {
+    creationParams.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+  }
+
+  if (dto.hideEmptyTurnovers) {
+    creationParams.push(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
+  }
+
+  if (dto.signNeeded) {
+    creationParams.push(CREATION_PARAMS.WITH_SIGN);
+  }
+
+  if (dto.documentOptionsDto.separateDocumentsFiles) {
+    documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
+  }
+
+  return {
+    accountIds: dto.accountsIds,
+    dateFrom: dto.periodStart,
+    dateTo: dto.periodEnd,
+    format: dto.statementFormat,
+    periodType: dto.periodType,
+    creationParams,
+    creditParams,
+    debitParams,
+    documentsSetParams,
+  };
+};
+
 /** Функция возвращающая начальное значение состояния формы. */
 export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFormState => {
   if (!latestStatement) {
-    return { ...defaultFormState };
+    return defaultFormState;
   }
 
-  const latestFormState: Partial<IFormState> = {
-    accountIds: latestStatement.accountsIds,
-    dateFrom: latestStatement.periodStart,
-    dateTo: latestStatement.periodEnd,
-    format: latestStatement.statementFormat,
-    periodType: latestStatement.periodType,
-  };
+  // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
+  const latestFormState: Partial<IFormState> = mapDtoToForm(latestStatement);
 
   return { ...defaultFormState, ...latestFormState };
 };

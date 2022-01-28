@@ -5,6 +5,7 @@ import { FormContext } from 'interfaces/form/form-context';
 import { locale } from 'localization';
 import { Adjust, Gap, Horizon, PrimaryButton, RegularButton } from '@platform/ui';
 
+/** Подвал с кнопками на ЭФ параметров экспорта.  */
 export const Footer: React.FC = () => {
   const { useCase } = useContext<IFormContext>(FormContext);
   const isDownloadButtonShow = downloadButtonShowCases.includes(useCase!);

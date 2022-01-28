@@ -22,14 +22,18 @@ const ACTIONS_CONTAINER_POSITION = [CONTAINER_POSITION.TOP, CONTAINER_POSITION.B
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const Footer: FC<IFooterProps> = () => {
+export const Footer: FC<IFooterProps> = ({ transaction }) => {
   const { getAvailableActions } = useAuth();
 
-  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_ACTIONS), executor, []), [getAvailableActions]);
-
-  const dropDownActions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, []), [
+  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_ACTIONS), executor, [transaction]), [
     getAvailableActions,
+    transaction,
   ]);
+
+  const dropDownActions = useMemo(
+    () => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [transaction]),
+    [getAvailableActions, transaction]
+  );
 
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>

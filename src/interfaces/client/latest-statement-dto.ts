@@ -1,10 +1,10 @@
 import type { DATE_PERIODS, STATEMENT_REQUEST_STATUSES } from 'interfaces';
+import type { OPERATIONS } from 'interfaces/client/classificators';
 import type { ACTIONS } from 'interfaces/client/classificators/actions';
 import type { FORMAT } from 'interfaces/client/classificators/format';
 
 /** DTO для поиска последнего запроса выписки у текущего пользователя. */
 export interface ILatestStatementDto {
-  // TODO: После обновления реста посмотреть можно ли по смыслу переименовать в IStatementRequest (сущьность "Запрос выписки"), и плюс удалить повторяющиеся классификаторы из папки interfaces (н-р. ACTIONS и STATEMENT_ACTION_TYPES).
   /** Идентификатор запроса выписки. */
   id: string;
   /** Номера счетов. */
@@ -29,4 +29,25 @@ export interface ILatestStatementDto {
   status: STATEMENT_REQUEST_STATUSES;
   /** Комментарий для клиента. */
   commentForClient?: string;
+  /** Параметры формирования комплекта документов. */
+  documentOptionsDto: {
+    /** Кредитовые документы основания. */
+    includeCreditOrders: boolean;
+    /** Кредитовые документы выписки. */
+    includeCreditStatements: boolean;
+    /** Дебетовые документы основания. */
+    includeDebitOrders: boolean;
+    /** Дебетовые документы выписки. */
+    includeDebitStatements: boolean;
+    /** Документы отдельными файлами. */
+    separateDocumentsFiles: boolean;
+  };
+  /** Отдельный файл по каждому счету. */
+  separateAccountsFiles: boolean;
+  /** Признак того, необходимо ли подписывать выписку. */
+  signNeeded: boolean;
+  /** Операции. */
+  statementOperationDto: OPERATIONS;
+  /** Скрыть нулевые обороты. */
+  hideEmptyTurnovers: boolean;
 }

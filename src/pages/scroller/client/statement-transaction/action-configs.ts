@@ -54,7 +54,7 @@ export const FOOTER_DROPDOWN_ACTIONS = [
 
 /** Действия строки скроллера в выпадающем списке. */
 export const ROW_DROPDOWN_ACTIONS = [
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), label: locale.transactionsScroller.rowAction.export },
+  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), label: locale.transactionsScroller.rowAction.export },
   { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SEVEN), label: locale.transactionsScroller.rowAction.print },
 ];
 
@@ -66,10 +66,10 @@ export const CARD_ROW_ACTIONS = [
 
 /** Действия футера карточки проводки. */
 export const CARD_FOOTER_ACTIONS = [
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.TEN), label: locale.transactionCard.buttons.export },
+  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.TEN), label: locale.transactionCard.buttons.export },
 ];
 
 /** Действия футера карточки проводки в выпадающем списке. */
 export const CARD_FOOTER_DROPDOWN_ACTIONS = [
-  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.NINE), label: locale.transactionCard.buttons.print },
+  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.NINE), label: locale.transactionCard.buttons.print },
 ];
