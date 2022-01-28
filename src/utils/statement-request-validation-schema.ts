@@ -1,8 +1,8 @@
 import type { DATE_PERIODS } from 'interfaces';
 import type { ICreateRequestStatementDto, OPERATIONS } from 'interfaces/client';
 import { ACTIONS } from 'interfaces/client';
+import { FORM_FIELD_LABELS, FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
-import { FORM_FIELD_LABELS, FORM_FIELDS } from 'pages/form/client/interfaces/form-state';
 import type { SchemaOf } from 'yup';
 import { object, string, array, mixed } from 'yup';
 import { pathGenerator } from '@platform/core';

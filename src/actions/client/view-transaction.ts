@@ -1,4 +1,4 @@
-import { showTransactionCard } from 'pages/scroller/client/statement-transaction/transaction-cardr';
+import { showTransactionCard } from 'components/transaction-card';
 import { fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
