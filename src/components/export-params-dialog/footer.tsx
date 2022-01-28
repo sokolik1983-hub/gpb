@@ -35,4 +35,4 @@ export const Footer: React.FC = () => {
   );
 };
 
-FormContext.displayName = 'FormContext';
+Footer.displayName = 'Footer';

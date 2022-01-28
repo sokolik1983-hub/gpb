@@ -3,10 +3,10 @@ import React, { useMemo } from 'react';
 import { executor } from 'actions/client/executor';
 import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
+import { CARD_FOOTER_ACTIONS, CARD_FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { getActiveActionButtons } from 'utils';
 import { useAuth } from '@platform/services/client';
 import { Horizon, Gap, PrimaryButton, RegularButton, Adjust, ServiceIcons, ACTIONS, WithDropDown, CONTAINER_POSITION } from '@platform/ui';
-import { CARD_FOOTER_DROPDOWN_ACTIONS, CARD_FOOTER_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства компонента Footer. */

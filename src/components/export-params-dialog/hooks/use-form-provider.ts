@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
@@ -10,7 +10,7 @@ import { useFormState } from 'react-final-form';
 
 /** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
 export const useFormProvider = (useCase: EXPORT_PARAMS_USE_CASES) => {
-  const value = useRef<IFormContext>({ useCase, ...defaultFormContextValue });
+  const [value, setValue] = useState<IFormContext>({ useCase, ...defaultFormContextValue });
   const { values } = useFormState<IFormState>();
 
   useEffect(() => {
@@ -21,8 +21,8 @@ export const useFormProvider = (useCase: EXPORT_PARAMS_USE_CASES) => {
       useCase,
     };
 
-    value.current = newValue;
+    setValue(newValue);
   }, [useCase, values.creationParams, values.documentsSetParams, values.format]);
 
-  return value.current;
+  return value;
 };
