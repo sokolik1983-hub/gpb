@@ -3,7 +3,7 @@ import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/st
 import type { IStatementHistoryRow } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
 import { fatalHandler } from 'utils';
-import { singleAction, to } from '@platform/core';
+import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 
@@ -21,8 +21,9 @@ export const getExportStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionCon
       done();
     }
 
+    // TODO добавить вызов экспорта по готовности BE
+
     done();
   },
   fatalHandler,
-  guardians: [singleAction],
 });

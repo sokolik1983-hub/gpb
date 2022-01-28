@@ -15,7 +15,7 @@ import { locale } from 'localization';
 import { Form } from 'react-final-form';
 import { noop } from 'utils';
 import type { IButtonAction } from '@platform/ui';
-import { Box, BUTTON, dialog, DialogTemplate } from '@platform/ui';
+import { BUTTON, dialog, DialogTemplate } from '@platform/ui';
 import { FormProvider } from './form-provider';
 import type { EXPORT_PARAMS_USE_CASES } from './statemet-params-use-cases';
 
@@ -28,7 +28,6 @@ export interface IExportParamsDialogProps {
 }
 
 /** Компонент "ЭФ параметров выписки и документов". */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ useCase, onClose }) => {
   const initialFormState = getInitialFormState();
   const isExport = exportCases.includes(useCase);
@@ -69,40 +68,19 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ useCase
       extraSmall
       actions={actions}
       content={
-        <Box fill={'BASE'}>
-          <Form
-            initialValues={initialFormState}
-            render={({ handleSubmit }) => (
-              <FormProvider useCase={useCase} onSubmit={handleSubmit}>
-                {isFileFormatsShow && (
-                  <>
-                    <FileFormats />
-                    <Box />
-                  </>
-                )}
-                {isCreationParamsShow && (
-                  <>
-                    <CreationParams />
-                    <Box />
-                  </>
-                )}
-                {isDetailDocumentsParamsShow && (
-                  <>
-                    <DetailDocumentsParams />
-                    <Box />
-                  </>
-                )}
-                {isEmailShow && (
-                  <>
-                    <Email />
-                    <Box />
-                  </>
-                )}
-              </FormProvider>
-            )}
-            onSubmit={noop}
-          />
-        </Box>
+        <Form
+          initialValues={initialFormState}
+          render={({ handleSubmit }) => (
+            <FormProvider useCase={useCase} onSubmit={handleSubmit}>
+              {isFileFormatsShow && <FileFormats />}
+              {isCreationParamsShow && <CreationParams />}
+              {isDetailDocumentsParamsShow && <DetailDocumentsParams />}
+              {isEmailShow && <Email />}
+            </FormProvider>
+          )}
+          // TODO после готовности BE реализовать onSubmit правильно
+          onSubmit={noop}
+        />
       }
       header={isExport ? locale.exportParamsDialog.exportStatement.label : locale.exportParamsDialog.printStatement.label}
       onClose={onClose}
