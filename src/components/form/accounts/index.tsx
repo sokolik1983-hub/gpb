@@ -22,9 +22,11 @@ export const Accounts: React.FC = () => {
     let params = values.creationParams;
 
     if (hasMoreThenOneAccounts) {
-      params = params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+      if (!params.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)) {
+        params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+      }
     } else {
-      params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+      params = params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
     }
 
     change(FORM_FIELDS.CREATION_PARAMS, params);
