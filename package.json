@@ -47,8 +47,8 @@
   },
   "devDependencies": {
     "@platform/services": "9.34.1",
-    "@types/react-table": "7.7.8",
-    "@types/clamp-js-main": "0.11.2"
+    "@types/clamp-js-main": "0.11.2",
+    "@types/react-table": "7.7.8"
   },
   "dependencies": {
     "clamp-js-main": "0.11.6",
