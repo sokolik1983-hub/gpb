@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
@@ -9,7 +9,7 @@ import { useFormState } from 'react-final-form';
 
 /** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
 export const useFormProvider = () => {
-  const [value, setValue] = useState<IFormContext>(defaultFormContextValue);
+  const value = useRef<IFormContext>(defaultFormContextValue);
   const { values } = useFormState<IFormState>();
 
   useEffect(() => {
@@ -19,8 +19,8 @@ export const useFormProvider = () => {
       isPdf: values.format === FORMAT.PDF,
     };
 
-    setValue(newValue);
-  }, [value, values.creationParams, values.documentsSetParams, values.format]);
+    value.current = newValue;
+  }, [values.creationParams, values.documentsSetParams, values.format]);
 
-  return value;
+  return value.current;
 };
