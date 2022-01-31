@@ -1,4 +1,6 @@
 import React from 'react';
+import { ACTIONS } from 'interfaces/client/classificators';
+import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
@@ -7,19 +9,19 @@ import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box } from
 
 /** Компонент футера. */
 export const Footer: React.FC = () => {
-  const { submit } = useForm();
+  const { change } = useForm();
   const { values } = useFormState<IFormState>();
   const { goBack } = useHistory();
   const hasOneAccount = values.accountIds.length === 1;
 
   return (
     <Horizon>
-      <PrimaryButton extraSmall dimension="SM">
+      <PrimaryButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.DOWNLOAD)}>
         {locale.form.buttons.download.label}
       </PrimaryButton>
       <Gap />
       {hasOneAccount ? (
-        <RegularButton extraSmall dimension="SM" onClick={submit}>
+        <RegularButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.VIEW)}>
           {locale.form.buttons.show.label}
         </RegularButton>
       ) : (
@@ -35,7 +37,7 @@ export const Footer: React.FC = () => {
         </WithInfoTooltip>
       )}
       <Gap />
-      <RegularButton extraSmall dimension="SM">
+      <RegularButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.PRINT)}>
         {locale.form.buttons.print.label}
       </RegularButton>
       <Gap />

@@ -1,4 +1,4 @@
-import type { IExpandedScrollerResponceDto, IExpandedCollectionResponse, IScrollerResponceDto } from 'interfaces';
+import type { IExpandedScrollerResponceDto, IExpandedCollectionResponse, IScrollerResponceDto, IExportResponse } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
@@ -126,5 +126,10 @@ export const statementService = {
   getTransaction: (id: string): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
     request<IServerDataResp<IGetTransactionCardResponseDto>>({
       url: `${TRANSACTION_URL}/${id}`,
+    }).then(r => r.data),
+  /** Возвращает файл по id запроса выписки. */
+  exportStatement: (id: string): Promise<IServerDataResp<IExportResponse>> =>
+    request<IServerDataResp<IExportResponse>>({
+      url: `${STATEMENT_URL}/attachment/${id}`,
     }).then(r => r.data),
 };

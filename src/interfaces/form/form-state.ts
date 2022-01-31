@@ -1,6 +1,7 @@
 import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto } from 'interfaces/client';
+import type { ACTIONS } from 'interfaces/client/classificators';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { OPERATIONS } from 'interfaces/client/classificators/operations';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
@@ -24,6 +25,8 @@ export interface IFormState {
   creditParams: string[];
   email: string;
   useCase?: EXPORT_PARAMS_USE_CASES;
+  /** Действие. */
+  action?: ACTIONS;
 }
 
 /** Начальное значение состояния формы. */
@@ -118,6 +121,7 @@ export const FORM_FIELDS = {
   DEBIT_PARAMS: 'debitParams',
   CREDIT_PARAMS: 'creditParams',
   EMAIL: 'email',
+  ACTION: 'action',
 };
 
 /** Метки полей формы создания "Запроса выписки". */

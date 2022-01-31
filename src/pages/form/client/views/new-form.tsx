@@ -9,7 +9,6 @@ import { Period } from 'components/form/period';
 import { useCreationType } from 'hooks';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
 import type { ICreateRequestStatementDto } from 'interfaces/client';
-import { ACTIONS } from 'interfaces/client/classificators/actions';
 import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import { TYPE } from 'interfaces/client/classificators/type';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
@@ -29,7 +28,7 @@ import css from './styles.scss';
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
 const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICreateRequestStatementDto => ({
   accountsIds: values.accountIds,
-  action: ACTIONS.VIEW,
+  action: values.action!,
   creationParams: {
     includeCreditOrders: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
     includeCreditStatements: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
