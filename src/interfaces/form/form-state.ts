@@ -89,6 +89,7 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
     dateTo: dto.periodEnd,
     format: dto.statementFormat,
     periodType: dto.periodType,
+    operations: dto.statementOperationDto,
     creationParams,
     creditParams,
     debitParams,
@@ -103,9 +104,9 @@ export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFor
   }
 
   // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
-  const latestFormState: Partial<IFormState> = mapDtoToForm(latestStatement);
+  const formState: Partial<IFormState> = mapDtoToForm(latestStatement);
 
-  return { ...defaultFormState, ...latestFormState };
+  return { ...defaultFormState, ...formState };
 };
 
 /** Поля на форме. */

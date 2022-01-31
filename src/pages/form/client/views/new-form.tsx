@@ -68,7 +68,9 @@ export const NewForm: React.FC = () => {
 
   const executor = getExecutor();
   const executeCreateStatementAction = (values: IFormState) => {
-    void executor.execute(createStatement, [mapFormToDto(values, creationType)]);
+    const dto = mapFormToDto(values, creationType);
+
+    void executor.execute(createStatement, [dto]);
   };
 
   return (
