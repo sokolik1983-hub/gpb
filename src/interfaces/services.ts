@@ -21,3 +21,13 @@ export interface IExpandedCollectionResponse<T> extends ICollectionResponse<T> {
   /** Общее количество элементов, без учёта фильтрации. */
   totalCount: number;
 }
+
+/** ДТО ответа на запрос файла. */
+export interface IExportResponse {
+  /** Имя файла. */
+  fileName: string;
+  /** MIME-тип файла. */
+  mimeType: string;
+  /** Содержимое файла. */
+  content: string;
+}
