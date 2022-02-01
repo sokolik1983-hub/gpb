@@ -9,3 +9,11 @@ export enum COLUMN_PADDING_TYPES {
   /** Обычный паддинг. */
   REGULAR = 'REGULAR',
 }
+
+/** Выравнивание в заголовке колонки таблицы. */
+export enum HEADER_ALIGN {
+  /** Слева. */
+  LEFT = 'LEFT',
+  /** Справа. */
+  RIGHT = 'RIGHT',
+}

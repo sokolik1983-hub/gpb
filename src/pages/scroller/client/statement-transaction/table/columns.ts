@@ -1,4 +1,4 @@
-import { COLUMN_PADDING_TYPES } from 'interfaces';
+import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
@@ -44,6 +44,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     Cell: Outcome,
     width: 239,
     disableSortBy: true,
+    headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
     Header: locale.transactionsScroller.headers.income,
@@ -52,6 +53,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     Cell: Income,
     width: 239,
     disableSortBy: true,
+    headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
     Header: locale.transactionsScroller.headers.purpose,
