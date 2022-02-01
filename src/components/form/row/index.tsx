@@ -1,23 +1,23 @@
 import React from 'react';
-import { Box, Gap, Horizon, Typography } from '@platform/ui';
+import type { IHorizonProps } from '@platform/ui';
+import { Gap, Horizon, Typography } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента "Row". */
 export interface IRowProps {
   /** Название строки формы. */
   label: string;
+  /** Выравнивание. */
+  align?: IHorizonProps['align'];
 }
 
 /** Компонент строки формы. */
-export const Row: React.FC<IRowProps> = ({ label, children }) => (
+export const Row: React.FC<IRowProps> = ({ label, children, align }) => (
   <>
-    <Box className={css.row}>
+    <Horizon align={align}>
       <Typography.Text className={css.rowLabel}>{label}</Typography.Text>
-      <Gap />
-      <Box className={css.rowChildren}>
-        <Horizon>{children}</Horizon>
-      </Box>
-    </Box>
+      {children}
+    </Horizon>
     <Gap.XL />
   </>
 );

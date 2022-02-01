@@ -14,7 +14,7 @@ export const DetailDocumentsParams: React.FC = () => {
   const visible = useDetailDocumentsParamsVisible();
 
   return visible ? (
-    <Row label={locale.common.documentsSetParams.label}>
+    <Row align={'TOP'} label={locale.common.documentsSetParams.label}>
       <Box>
         <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DOCUMENTS_SET_PARAMS} options={options} value={value} />
         <Gap />

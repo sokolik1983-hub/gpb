@@ -2,7 +2,7 @@ import React from 'react';
 import { Dates } from 'components/form/dates';
 import { Row } from 'components/form/row';
 import { FORM_FIELDS, FORM_FIELD_LABELS } from 'interfaces/form/form-state';
-import { Gap, Box } from '@platform/ui';
+import { Gap, Box, Horizon } from '@platform/ui';
 import { PeriodType } from './period-type';
 import css from './styles.scss';
 
@@ -12,11 +12,13 @@ export const Period: React.FC = () => {
 
   return isOneTimeStatementType ? (
     <Row label={FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE]}>
-      <Box className={css.periodTypeWrapper}>
-        <PeriodType />
-      </Box>
-      <Gap />
-      <Dates />
+      <Horizon>
+        <Box className={css.periodTypeWrapper}>
+          <PeriodType />
+        </Box>
+        <Gap />
+        <Dates />
+      </Horizon>
     </Row>
   ) : null;
 };

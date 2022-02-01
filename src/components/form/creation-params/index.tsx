@@ -27,7 +27,7 @@ export const CreationParams: React.FC = () => {
   }, []);
 
   return (
-    <Row label={isExportOrDefault ? locale.common.creationParams.label : locale.exportParamsDialog.creationParams.label}>
+    <Row align={'TOP'} label={isExportOrDefault ? locale.common.creationParams.label : locale.exportParamsDialog.creationParams.label}>
       <Fields.CheckboxGroup
         extraSmall
         columns={12}
