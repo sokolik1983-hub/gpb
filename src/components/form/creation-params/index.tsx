@@ -16,7 +16,7 @@ import { useCreationParams } from './use-creation-params';
 export const CreationParams: React.FC = () => {
   const { change } = useForm();
   const { useCase } = useContext<IFormContext>(FormContext);
-  const isExport = exportCases.includes(useCase!);
+  const isExportOrDefault = !useCase || exportCases.includes(useCase);
   const [value, options] = useCreationParams();
   const { values } = useFormState<IFormState>();
 
@@ -36,7 +36,7 @@ export const CreationParams: React.FC = () => {
   }, []);
 
   return (
-    <Row label={isExport ? locale.common.creationParams.label : locale.exportParamsDialog.creationParams.label}>
+    <Row label={isExportOrDefault ? locale.common.creationParams.label : locale.exportParamsDialog.creationParams.label}>
       <Fields.CheckboxGroup
         extraSmall
         columns={12}

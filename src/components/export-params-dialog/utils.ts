@@ -13,13 +13,7 @@ export const exportCases = [
 ];
 
 /** Набор случаев, при которых показываем компонент выбора формата файла. */
-export const fileFormatShowCases = [
-  EXPORT_PARAMS_USE_CASES.ONE,
-  EXPORT_PARAMS_USE_CASES.THREE,
-  EXPORT_PARAMS_USE_CASES.SEVEN,
-  EXPORT_PARAMS_USE_CASES.TEN,
-  EXPORT_PARAMS_USE_CASES.TWELVE,
-];
+export const fileFormatShowCases = [EXPORT_PARAMS_USE_CASES.ONE];
 
 /** Набор случаев, при которых показываем флаг "Скрыть нулевые обороты". */
 export const hideEmptyTurnoversCheckboxShowCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
