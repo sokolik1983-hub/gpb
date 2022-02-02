@@ -1,16 +1,4 @@
-.row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 718px;
-
-  &Label {
-    min-width: 162px;
-  }
-
-  &Children {
-    width: 100%;
-    //line-height: 32px; // Значение равно высоте текстовых полей формы;
-  }
+.rowLabel {
+  flex: 0 0 162px;
+  margin-right: 26px;
 }

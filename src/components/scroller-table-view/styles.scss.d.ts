@@ -19,6 +19,8 @@ declare namespace StylesScssModule {
     'rightReducedCell': string;
     'scrollIconBox': string;
     'sortIconWrapper': string;
+    'sortIconWrapperLeft': string;
+    'sortIconWrapperRight': string;
     'sortIndex': string;
     'table': string;
     'tableBody': string;

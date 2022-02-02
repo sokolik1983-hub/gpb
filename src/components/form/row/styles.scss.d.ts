@@ -5,8 +5,6 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'row': string;
-    'rowChildren': string;
     'rowLabel': string;
   }
 }
