@@ -1,3 +1,4 @@
+import { exportGuardian } from 'actions/guardians/export-guardian';
 import { showStatementParamsDialog } from 'components/export-params-dialog';
 import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import { hideExportParamsDialogCases } from 'components/export-params-dialog/utils';
@@ -32,5 +33,6 @@ export const getExportStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionCon
 
     done();
   },
+  guardians: [exportGuardian],
   fatalHandler,
 });
