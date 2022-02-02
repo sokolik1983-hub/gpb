@@ -75,3 +75,11 @@ export const sendToEmailButtonShowCases = [EXPORT_PARAMS_USE_CASES.FIVE, EXPORT_
 
 /** Набор случаев, при которых показываем кнопку "Печать". */
 export const printButtonShowCases = [EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOUR, EXPORT_PARAMS_USE_CASES.SIX];
+
+/** Набор случаев, при которых НЕ отображаем ЭФ настроек экспорта. */
+export const hideExportParamsDialogCases = [
+  EXPORT_PARAMS_USE_CASES.NINE,
+  EXPORT_PARAMS_USE_CASES.TEN,
+  EXPORT_PARAMS_USE_CASES.TWELVE,
+  EXPORT_PARAMS_USE_CASES.THIRTEEN,
+];
