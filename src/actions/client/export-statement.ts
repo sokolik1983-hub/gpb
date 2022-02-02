@@ -1,6 +1,6 @@
-import { exportGuardian } from 'actions/guardians/export-guardian';
+import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
 import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
+import { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import { hideExportParamsDialogCases } from 'components/export-params-dialog/utils';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
@@ -8,6 +8,15 @@ import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
+
+/** Вернуть набор гардов для экспорта выписки. */
+const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
+  if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
+    return [rowHistoryExportGuardian];
+  }
+
+  return [];
+};
 
 /**
  * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки или документа.
@@ -33,6 +42,6 @@ export const getExportStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionCon
 
     done();
   },
-  guardians: [exportGuardian],
+  guardians: getGuardians(useCase),
   fatalHandler,
 });
