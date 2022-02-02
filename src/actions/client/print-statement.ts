@@ -1,5 +1,6 @@
 import { showStatementParamsDialog } from 'components/export-params-dialog';
 import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
+import { hideExportParamsDialogCases } from 'components/export-params-dialog/utils';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
 import { fatalHandler } from 'utils';
@@ -14,11 +15,19 @@ import type { context } from './executor';
  */
 export const getPrintStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, ICreateRequestStatementDto> => ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  action: ({ done }) => async ([data]: IStatementHistoryRow[]) => {
+  action: ({ done }) => async (docs: IStatementHistoryRow[]) => {
+    if (hideExportParamsDialogCases.includes(useCase)) {
+      done();
+
+      return;
+    }
+
     const [_, close] = await to(showStatementParamsDialog(useCase));
 
     if (close) {
       done();
+
+      return;
     }
 
     // TODO добавить вызов печати по готовности BE

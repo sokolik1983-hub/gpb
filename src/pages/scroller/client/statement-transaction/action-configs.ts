@@ -54,8 +54,8 @@ export const FOOTER_DROPDOWN_ACTIONS = [
 
 /** Действия строки скроллера в выпадающем списке. */
 export const ROW_DROPDOWN_ACTIONS = [
-  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), label: locale.transactionsScroller.rowAction.export },
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SEVEN), label: locale.transactionsScroller.rowAction.print },
+  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.SEVEN), label: locale.transactionsScroller.rowAction.export },
+  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), label: locale.transactionsScroller.rowAction.print },
 ];
 
 /** Действия в строке вкладки "Вложения" карточки проводки. */

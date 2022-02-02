@@ -83,6 +83,12 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
     documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
   }
 
+  const hasDocumentSet = creditParams.length > 0 || debitParams.length > 0 || documentsSetParams.length > 0;
+
+  if (hasDocumentSet) {
+    creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
+  }
+
   return {
     accountIds: dto.accountsIds,
     dateFrom: dto.periodStart,

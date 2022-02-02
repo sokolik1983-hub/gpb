@@ -13,13 +13,7 @@ export const exportCases = [
 ];
 
 /** Набор случаев, при которых показываем компонент выбора формата файла. */
-export const fileFormatShowCases = [
-  EXPORT_PARAMS_USE_CASES.ONE,
-  EXPORT_PARAMS_USE_CASES.THREE,
-  EXPORT_PARAMS_USE_CASES.SEVEN,
-  EXPORT_PARAMS_USE_CASES.TEN,
-  EXPORT_PARAMS_USE_CASES.TWELVE,
-];
+export const fileFormatShowCases = [EXPORT_PARAMS_USE_CASES.ONE];
 
 /** Набор случаев, при которых показываем флаг "Скрыть нулевые обороты". */
 export const hideEmptyTurnoversCheckboxShowCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
@@ -81,3 +75,11 @@ export const sendToEmailButtonShowCases = [EXPORT_PARAMS_USE_CASES.FIVE, EXPORT_
 
 /** Набор случаев, при которых показываем кнопку "Печать". */
 export const printButtonShowCases = [EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOUR, EXPORT_PARAMS_USE_CASES.SIX];
+
+/** Набор случаев, при которых НЕ отображаем ЭФ настроек экспорта. */
+export const hideExportParamsDialogCases = [
+  EXPORT_PARAMS_USE_CASES.NINE,
+  EXPORT_PARAMS_USE_CASES.TEN,
+  EXPORT_PARAMS_USE_CASES.TWELVE,
+  EXPORT_PARAMS_USE_CASES.THIRTEEN,
+];
