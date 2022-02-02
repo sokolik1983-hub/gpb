@@ -10,15 +10,14 @@ import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
 import { FormContext } from 'interfaces/form/form-context';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
-import { useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [string[], ICheckboxOption[]] => {
   const { withSign, onlyRequestsStatement, useCase, isPdf } = useContext(FormContext);
-  const { batch, change, getState } = useForm<IFormState>();
-  const formState = getState();
-  const { values } = formState;
+  const { batch, change } = useForm();
+  const { values } = useFormState<IFormState>();
 
   const options = useRef<ICheckboxOption[]>([]);
   const value = useRef<string[]>([]);
