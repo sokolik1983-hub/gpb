@@ -6,7 +6,7 @@ import type { IStatementHistoryRow } from 'interfaces/client';
  *
  * @throws Error.
  */
-export const exportGuardian = ([doc]: [IStatementHistoryRow]) => {
+export const rowHistoryExportGuardian = ([doc]: [IStatementHistoryRow]) => {
   if (doc.action === STATEMENT_ACTION_TYPES.VIEW || doc.status !== STATEMENT_REQUEST_STATUSES.EXECUTED) {
     throw new Error('UNAVAILABLE_EXPORT_DOCUMENT');
   }
