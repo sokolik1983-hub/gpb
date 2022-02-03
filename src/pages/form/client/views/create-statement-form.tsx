@@ -51,7 +51,7 @@ const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICr
 });
 
 /** ЭФ создания запроса на выписку. */
-export const NewForm: React.FC = () => {
+export const CreateStatementForm: React.FC = () => {
   const creationType = useCreationType();
 
   const { initialStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
@@ -103,4 +103,4 @@ export const NewForm: React.FC = () => {
   );
 };
 
-NewForm.displayName = 'NewForm';
+CreateStatementForm.displayName = 'CreateStatementForm';
