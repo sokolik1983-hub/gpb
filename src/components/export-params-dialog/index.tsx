@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import {
   creationParamsShowCases,
   detailDocumentsParamsShowCases,
-  emailShowCases,
   exportCases,
   fileFormatShowCases,
 } from 'components/export-params-dialog/utils';
@@ -54,9 +53,10 @@ const PRINT = {
 export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ useCase, onClose }) => {
   const initialFormState = getInitialFormState();
   const isExport = exportCases.includes(useCase);
-  const isEmailShow = emailShowCases.includes(useCase);
   // TODO: для MVP принудительно скрываем, после - восстанавливаем
+  // const isEmailShow = emailShowCases.includes(useCase);
   // const isSendToEmailButtonShow = sendToEmailButtonShowCases.includes(useCase!);
+  const isEmailShow = false;
   const isSendToEmailButtonShow = false;
   const isFileFormatsShow = fileFormatShowCases.includes(useCase);
   const isCreationParamsShow = creationParamsShowCases.includes(useCase);
