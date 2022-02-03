@@ -46,14 +46,14 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
-          if ((!useCase && isPdf) || (useCase && withDocumentsSetCheckboxShow)) {
+          if (isPdf && (!useCase || (useCase && withDocumentsSetCheckboxShow))) {
             acc.push({ ...x, disabled: withSign });
           }
 
           break;
         }
         case CREATION_PARAMS.WITH_SIGN: {
-          if ((!useCase && isPdf) || (useCase && withEsignCheckboxShow)) {
+          if (isPdf && (!useCase || (useCase && withEsignCheckboxShow))) {
             acc.push(x);
           }
 

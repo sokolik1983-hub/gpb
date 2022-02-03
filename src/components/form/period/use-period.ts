@@ -12,7 +12,7 @@ export const usePeriod = () => {
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
-  const { data: period, refetch } = useQuery<IGetDatePeriodResponseDto>({
+  const { refetch } = useQuery<IGetDatePeriodResponseDto>({
     queryKey: ['@eco/statement', 'period'],
     queryFn: () =>
       statementService.getDatePeriod({
@@ -27,15 +27,17 @@ export const usePeriod = () => {
       return;
     }
 
-    void refetch();
-  }, [batch, change, refetch, values.periodType]);
+    const getPeriod = async () => {
+      const { data: period } = await refetch();
 
-  useEffect(() => {
-    if (period) {
-      batch(() => {
-        change(FORM_FIELDS.DATE_FROM, period.dateFrom);
-        change(FORM_FIELDS.DATE_TO, period.dateTo);
-      });
-    }
-  }, [batch, change, period]);
+      if (period) {
+        batch(() => {
+          change(FORM_FIELDS.DATE_FROM, period.dateFrom);
+          change(FORM_FIELDS.DATE_TO, period.dateTo);
+        });
+      }
+    };
+
+    void getPeriod();
+  }, [batch, change, refetch, values.periodType]);
 };
