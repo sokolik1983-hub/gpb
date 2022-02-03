@@ -38,7 +38,7 @@ export const Table: FC = () => {
     useBlockLayout
   );
 
-  const handleDoubleClick = useCallback((row: IStatementHistoryRow) => {
+  const handleClick = useCallback((row: IStatementHistoryRow) => {
     void executor.execute(gotoTransactionsScrollerByStatementRequest, [row]);
   }, []);
 
@@ -70,7 +70,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.historyScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
-        onDoubleClick={handleDoubleClick}
+        onClick={handleClick}
       />
     </>
   );

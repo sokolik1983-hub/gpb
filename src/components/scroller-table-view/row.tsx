@@ -11,11 +11,11 @@ export interface ITableRowProps {
   /** Строка с оборотами по счёту. */
   row: Row<Record<string, any>>;
   /** Обработчик клика по строке. */
-  onDoubleClick?(row: Record<string, any>): void;
+  onClick?(row: Record<string, any>): void;
 }
 
 /** Строка с информацией по счёту в таблице Оборотов. */
-export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
+export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
   const { getRowProps, original, cells } = row;
 
   const { key, ...rowProps } = getRowProps();
@@ -28,7 +28,7 @@ export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
           {...rowProps}
           className={cn(css.clickableRow, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
-          onDoubleClick={() => onDoubleClick?.(original)}
+          onClick={() => onClick?.(original)}
         >
           {cells.map(cell => {
             const { getCellProps, column, render } = cell;

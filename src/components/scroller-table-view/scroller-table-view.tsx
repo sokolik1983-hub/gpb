@@ -17,7 +17,7 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
   /** Лейбл плейсхолдера. */
   placeholderLabel: string;
   /** Обработчик клика по строке. */
-  onDoubleClick?(row: Row): void;
+  onClick?(row: Row): void;
   /** Если true - то отображаются только выбранные строки. */
   isVisibleOnlySelectedRows?: boolean;
   /** Устанавливает пагинацию. */
@@ -32,7 +32,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   tableInstance,
   isLoading,
   placeholderLabel,
-  onDoubleClick,
+  onClick,
   isVisibleOnlySelectedRows,
   setPagination,
 }: IScrollerTableViewProps<Row>) => {
@@ -51,7 +51,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows}
         setPagination={setPagination}
         tableInstance={tableInstance}
-        onDoubleClick={onDoubleClick}
+        onClick={onClick}
       />
     );
   }
