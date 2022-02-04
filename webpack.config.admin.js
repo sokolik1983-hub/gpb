@@ -1,1 +1,1 @@
-module.exports = require('@platform/services/stream-webpack')('statement', 'admin', { distFolder: 'admin' });
+module.exports = require('@platform/services/stream-webpack')('account-statement', 'admin', { distFolder: 'admin' });
