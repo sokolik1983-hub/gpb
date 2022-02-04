@@ -1,3 +1,5 @@
+## [1.0.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.1...v1.0.2) (2022-02-04)
+
 ## [1.0.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.0...v1.0.1) (2022-01-26)
 
 
