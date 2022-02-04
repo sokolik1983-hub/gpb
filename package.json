@@ -1,6 +1,6 @@
 {
-  "name": "@eco/statement",
-  "version": "1.0.1",
+  "name": "@eco/account-statement",
+  "version": "1.1.0",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -11,7 +11,7 @@
     "stylelint": "stylelint src/**/*.{scss,tsx} --aei",
     "stylelint:fix": "npm run stylelint -- --fix",
     "lint": "npm run eslint && npm run stylelint",
-    "locale": "localization -a statement -s ./src/localization/locale.json -o ./dictionaries/ -t ./src/localization/ -l ru",
+    "locale": "localization -a account-statement -s ./src/localization/locale.json -o ./dictionaries/ -t ./src/localization/ -l ru",
     "build": "cross-env NODE_ENV=production webpack --progress",
     "build:client": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.client.js",
     "build:admin": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.admin.js",
