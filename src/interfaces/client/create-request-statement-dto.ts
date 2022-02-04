@@ -1,4 +1,4 @@
-import type { DATE_PERIODS } from 'interfaces';
+import type { DATE_PERIODS, IUserDeviceInfo } from 'interfaces';
 import type { ACTIONS } from 'interfaces/client/classificators/actions';
 import type { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import type { FORMAT } from 'interfaces/client/classificators/format';
@@ -38,4 +38,6 @@ export interface ICreateRequestStatementDto {
   sourcePage: string;
   /** Тип запроса выписки. */
   type: TYPE;
+  /** Данные устройства пользователя. */
+  userDeviceInfo?: IUserDeviceInfo;
 }
