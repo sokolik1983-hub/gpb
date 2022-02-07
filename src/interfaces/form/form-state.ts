@@ -104,15 +104,23 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
 };
 
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = (latestStatement?: ILatestStatementDto): IFormState => {
+export const getInitialFormState = (latestStatement?: ILatestStatementDto): Partial<IFormState> => {
   if (!latestStatement) {
     return defaultFormState;
   }
 
   // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
-  const formState: Partial<IFormState> = mapDtoToForm(latestStatement);
+  const formState = mapDtoToForm(latestStatement);
 
-  return { ...defaultFormState, ...formState };
+  const form = Object.keys(defaultFormState).reduce((acc, key) => {
+    if (!acc[key]) {
+      acc[key] = defaultFormState[key];
+    }
+
+    return acc;
+  }, formState);
+
+  return form;
 };
 
 /** Поля на форме. */
