@@ -19,17 +19,20 @@ export const Accounts: React.FC = () => {
   const onAccountsChange = ({ value }: { value: string[] }) => {
     const hasMoreThenOneAccounts = value.length > 1;
 
-    let params = values.creationParams;
+    const params = [...values.creationParams];
+
+    // хранение состояния формы / работа с ним будет упрощена в https://jira.gboteam.ru/browse/GBO-21669
 
     if (hasMoreThenOneAccounts) {
       if (!params.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)) {
-        params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+        change(FORM_FIELDS.CREATION_PARAMS, [params, CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES]);
       }
     } else {
-      params = params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+      change(
+        FORM_FIELDS.CREATION_PARAMS,
+        params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)
+      );
     }
-
-    change(FORM_FIELDS.CREATION_PARAMS, params);
   };
 
   return (

@@ -14,6 +14,7 @@ import { TYPE } from 'interfaces/client/classificators/type';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
+import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import type { IFormState } from 'interfaces/form/form-state';
 import { FORM_FIELD_LABELS, getInitialFormState } from 'interfaces/form/form-state';
 import { Footer } from 'pages/form/client/components/footer';
@@ -34,7 +35,7 @@ const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICr
     includeCreditStatements: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
     includeDebitOrders: values.creditParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
     includeDebitStatements: values.creditParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
-    separateDocumentsFiles: values.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
+    separateDocumentsFiles: values.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES),
   },
   creationType,
   dateFrom: values.dateFrom,
