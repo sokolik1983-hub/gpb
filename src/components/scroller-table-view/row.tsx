@@ -14,7 +14,9 @@ export interface ITableRowProps {
   onClick?(row: Record<string, any>): void;
 }
 
+/** Событие клика по строке скроллера. */
 interface IRowEvent extends React.SyntheticEvent<HTMLElement, MouseEvent> {
+  /** Полная остановка обработки клика, включая текущий элемент. */
   stopImmediatePropagation?(): void;
 }
 
