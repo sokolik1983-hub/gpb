@@ -14,12 +14,6 @@ export interface ITableRowProps {
   onClick?(row: Record<string, any>): void;
 }
 
-/** Событие клика по строке скроллера. */
-interface IRowEvent extends React.SyntheticEvent<HTMLElement, MouseEvent> {
-  /** Полная остановка обработки клика, включая текущий элемент. */
-  stopImmediatePropagation?(): void;
-}
-
 /** Строка с информацией по счёту в таблице Оборотов. */
 export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
   const { getRowProps, original, cells } = row;
@@ -27,15 +21,13 @@ export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
   const { key, ...rowProps } = getRowProps();
 
   const handleClick = useCallback(
-    (event: IRowEvent) => {
+    event => {
       const target = event.target as HTMLElement;
       const parentNode = target.parentNode as Element;
 
       if (target.nodeName.toLowerCase() === 'div' && parentNode.getAttribute('role') !== ROLE.MENUITEM) {
         onClick?.(original);
       }
-
-      event.stopImmediatePropagation?.();
     },
     [onClick, original]
   );
