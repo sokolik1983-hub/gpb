@@ -57,7 +57,7 @@ export const Table: FC = () => {
     selectedFlatRows,
   } = tableInstance;
 
-  const handleDoubleClick = useCallback((row: IStatementTransactionRow) => {
+  const handleClick = useCallback((row: IStatementTransactionRow) => {
     void executor.execute(viewTransaction, [row]);
   }, []);
 
@@ -103,7 +103,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
-        onDoubleClick={handleDoubleClick}
+        onClick={handleClick}
       />
     </>
   );

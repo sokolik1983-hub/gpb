@@ -53,7 +53,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     [dateFrom, datePeriod, dateTo, original.accountId]
   );
 
-  const handleDoubleCLick = useCallback(async () => {
+  const handleClick = useCallback(async () => {
     await executor.execute(createStatement, [requestDto]);
   }, [requestDto]);
 
@@ -65,7 +65,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
           {...rowProps}
           className={cn(css.clickableRow, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
-          onDoubleClick={handleDoubleCLick}
+          onClick={handleClick}
         >
           {cells.map(cell => {
             const { key: cellKey, ...cellProps } = cell.getCellProps();

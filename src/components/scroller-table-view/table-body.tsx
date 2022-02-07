@@ -16,7 +16,7 @@ export interface ITableBodyProps extends TableBodyProps {
   /** Если true - то идёт процесс запроса данных, для отображения в таблице. */
   isLoading: boolean;
   /** Обработчик клика по строке. */
-  onDoubleClick?(row: Record<string, any>): void;
+  onClick?(row: Record<string, any>): void;
   /** Если true - то отображаются только выбранные строки. */
   isVisibleOnlySelectedRows?: boolean;
   /** Устанавливает пагинацию. */
@@ -24,7 +24,7 @@ export interface ITableBodyProps extends TableBodyProps {
 }
 
 /** Тело таблицы. */
-export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDoubleClick, isVisibleOnlySelectedRows, setPagination }) => {
+export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onClick, isVisibleOnlySelectedRows, setPagination }) => {
   const {
     getTableBodyProps,
     rows,
@@ -48,7 +48,7 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onDou
 
             const isRowVisible = isVisibleOnlySelectedRows ? isSelected : true;
 
-            return isRowVisible && <TableRow key={accountInfoRowKey} row={row} onDoubleClick={onDoubleClick} />;
+            return isRowVisible && <TableRow key={accountInfoRowKey} row={row} onClick={onClick} />;
           })}
           {isLoading && <ScrollerLoadingOverlay />}
         </Box>
