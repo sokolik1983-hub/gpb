@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import {
   creationParamsShowCases,
   esignCheckboxShowCases,
@@ -14,13 +14,12 @@ import { useForm, useFormState } from 'react-final-form';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
-export const useCreationParams = (): [string[], ICheckboxOption[]] => {
+export const useCreationParams = (): [ICheckboxOption[]] => {
   const { withSign, onlyRequestsStatement, useCase, isPdf } = useContext(FormContext);
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
-  const options = useRef<ICheckboxOption[]>([]);
-  const value = useRef<string[]>([]);
+  const [options, setOptions] = useState<ICheckboxOption[]>([]);
 
   const isHideEmptyTurnoversCheckboxShow = hideEmptyTurnoversCheckboxShowCases.includes(useCase!);
   const withEsignCheckboxShow = esignCheckboxShowCases.includes(useCase!);
@@ -37,7 +36,7 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
     const defaultCreationParamsOptions = getDefaultCreationParamsOptions(useCase);
 
-    options.current = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
+    const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase) {
@@ -73,6 +72,8 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
 
       return acc;
     }, []);
+
+    setOptions(newOptions);
   }, [
     change,
     isHideEmptyTurnoversCheckboxShow,
@@ -115,5 +116,5 @@ export const useCreationParams = (): [string[], ICheckboxOption[]] => {
     }
   }, [batch, change, onlyRequestsStatement, withSign]);
 
-  return [value.current, options.current];
+  return [options];
 };
