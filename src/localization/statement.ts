@@ -1669,15 +1669,6 @@ export default {
 				return t('exportParamsDialog.printStatement.label');
 			},
 		},
-		creationParams: {
-			/**
-			 * @ru
-			 * Дополнительно печатать
-			 */
-			get label() {
-				return t('exportParamsDialog.creationParams.label');
-			},
-		},
 		print: {
 			creationParams: {
 				/**

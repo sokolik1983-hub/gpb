@@ -680,9 +680,6 @@
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"
   },
-  "exportParamsDialog.creationParams.label": {
-    "ru": "Дополнительно печатать"
-  },
   "exportParamsDialog.print.creationParams.separateAccountsFiles": {
     "ru": "Отдельным файлом по каждому счёту"
   },
