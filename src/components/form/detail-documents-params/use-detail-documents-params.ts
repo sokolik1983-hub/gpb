@@ -6,14 +6,13 @@ import { useForm } from 'react-final-form';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Детальные параметры комплекта документов". */
-export const useDetailDocumentsParams = (): [string[], ICheckboxOption[]] => {
+export const useDetailDocumentsParams = (): [ICheckboxOption[]] => {
   const { withSign } = useContext(FormContext);
   const { getState } = useForm<IFormState>();
   const formState = getState();
   const { values } = formState;
 
   const options = useRef<ICheckboxOption[]>([]);
-  const value = useRef<string[]>([]);
 
   useEffect(() => {
     options.current = defaultDocumentsSetParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
@@ -23,5 +22,5 @@ export const useDetailDocumentsParams = (): [string[], ICheckboxOption[]] => {
     }, []);
   }, [values.creationParams, withSign]);
 
-  return [value.current, options.current];
+  return [options.current];
 };

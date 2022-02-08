@@ -10,13 +10,13 @@ import { useDetailDocumentsParamsVisible } from './use-detail-documents-params-v
 
 /** Компонент параметров комплекта документов. */
 export const DetailDocumentsParams: React.FC = () => {
-  const [value, options] = useDetailDocumentsParams();
+  const [options] = useDetailDocumentsParams();
   const visible = useDetailDocumentsParamsVisible();
 
   return visible ? (
     <Row align={'TOP'} label={locale.common.documentsSetParams.label}>
       <Box>
-        <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DOCUMENTS_SET_PARAMS} options={options} value={value} />
+        <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DOCUMENTS_SET_PARAMS} options={options} />
         <Gap />
         <Horizon>
           <Box>
