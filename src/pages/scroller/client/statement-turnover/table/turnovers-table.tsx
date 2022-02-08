@@ -37,23 +37,21 @@ const getSubRows = (row: IGroupedAccounts) =>
 /** Таблица оборотов ОСВ. */
 export const TurnoversTable: FC = () => {
   const {
-    filterPanel: { values: filterFormValue },
     setSorting,
     sorting,
     isLoading,
+    groupByForRender,
     turnovers: { accounts = [] },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const { groupBy } = filterFormValue;
-
-  const columns = useMemo(() => getColumns(groupBy), [groupBy]);
+  const columns = useMemo(() => getColumns(groupByForRender), [groupByForRender]);
 
   const initialState = useMemo(
     () => ({
       sortBy: sorting,
-      hiddenColumns: getHiddenColumns(groupBy),
+      hiddenColumns: getHiddenColumns(groupByForRender),
     }),
-    [sorting, groupBy]
+    [sorting, groupByForRender]
   );
 
   const {
@@ -89,7 +87,7 @@ export const TurnoversTable: FC = () => {
 
   if (!isLoading && accounts.length === 0) {
     tableContent = <Placeholder />;
-  } else if (isLoading) {
+  } else if (isLoading && rows.length === 0) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
     tableContent = (

@@ -45,18 +45,14 @@ OrganizationCell.displayName = 'OrganizationCell';
 
 /** Ячейка "Номер счёта". */
 export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
-  const {
-    filterPanel: { values: filterFormValue },
-  } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
-
-  const { groupBy } = filterFormValue;
+  const { groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
   // Если ячейка была вызвана для отрисовки группирующей строки.
   if (isGroupingRow(value)) {
     const { groupingType, currencyName, currencyCode } = value;
 
     // А группирующая строка "По валютам" рендерится с помощью ячейки таблицы.
-    if (groupingType === GROUPING_TYPE.CURRENCIES && groupBy === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
+    if (groupingType === GROUPING_TYPE.CURRENCIES && groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
       return <Typography.TextBold fill={'FAINT'}>{currencyName ?? currencyCode}</Typography.TextBold>;
     }
 
