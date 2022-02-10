@@ -18,8 +18,11 @@ import { Typography, Box, Horizon, Status as StatusMarker, Gap } from '@platform
 import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
+/** Свойства ячеек таблицы истории. */
+export type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
+
 /** Дата и время создания запроса выписки. */
-export const CreatedAtCell: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
   const [date, time] = formatDateTime(value.createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
 
   return (
@@ -33,7 +36,7 @@ export const CreatedAtCell: FC<CellProps<IStatementHistoryRow, IStatementHistory
 CreatedAtCell.displayName = 'CreatedAtCell';
 
 /** Информация по счёту и по организации. */
-export const AccountNumber: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const AccountNumber: FC<HistoryCellProps> = ({ value }) => {
   const { accountsIds, accountNumbers, organizationNames } = value;
   const { accounts } = useContext(HistoryScrollerContext);
 
@@ -58,7 +61,7 @@ export const AccountNumber: FC<CellProps<IStatementHistoryRow, IStatementHistory
 AccountNumber.displayName = 'AccountNumber';
 
 /** Тип периода. */
-export const Period: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const Period: FC<HistoryCellProps> = ({ value }) => {
   const { periodType, periodStart, periodEnd } = value;
 
   let dateText: string;
@@ -87,7 +90,7 @@ export const Period: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> =
 Period.displayName = 'Period';
 
 /** Формат запроса выписки. */
-export const StatementFormat: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const StatementFormat: FC<HistoryCellProps> = ({ value }) => {
   const { statementFormat, action } = value;
 
   if (action === STATEMENT_ACTION_TYPES.VIEW) {
@@ -100,7 +103,7 @@ export const StatementFormat: FC<CellProps<IStatementHistoryRow, IStatementHisto
 StatementFormat.displayName = 'StatementFormat';
 
 /** Статус запроса выписки. */
-export const Status: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const Status: FC<HistoryCellProps> = ({ value }) => {
   const { status } = value;
 
   return (
@@ -114,7 +117,7 @@ export const Status: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> =
 Status.displayName = 'Status';
 
 /** Действия со строкой. */
-export const Actions: FC<CellProps<IStatementHistoryRow, IStatementHistoryRow>> = ({ value }) => {
+export const Actions: FC<HistoryCellProps> = ({ value }) => {
   const { getAvailableActions } = useAuth();
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]), [
