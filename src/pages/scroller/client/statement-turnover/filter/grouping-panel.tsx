@@ -3,11 +3,9 @@ import cn from 'classnames';
 import type { IGroupedAccounts } from 'interfaces/client';
 import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/client';
 import { locale } from 'localization';
-import { useFormState } from 'react-final-form';
 import { Typography, Gap, Box, Fields } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS, GROUPING_OPTIONS } from './constants';
-import type { IFormState } from './interfaces';
 import css from './styles.scss';
 import { getGroupingInfoLabel } from './utils';
 
@@ -37,20 +35,16 @@ export const computeGroupingReport = (data: IGroupedAccounts[], grouping: GROUPI
 export const GroupingPanel = () => {
   const {
     turnovers: { accounts },
-    isLoading,
+    groupByForRender,
   } = useContext(TurnoverScrollerContext);
 
-  const {
-    values: { groupBy },
-  } = useFormState<IFormState>();
-
-  const groupingReport = useMemo(() => (isLoading ? '' : computeGroupingReport(accounts, groupBy)), [accounts, groupBy, isLoading]);
+  const groupingReport = useMemo(() => computeGroupingReport(accounts, groupByForRender), [accounts, groupByForRender]);
 
   return (
     <Box className={css.groupingPanelWrapper}>
       <Box className={cn(css.important, css.groupingLeftColumn)}>
         {/* Результаты группировки. */}
-        <Typography.TextBold>{getGroupingInfoLabel(groupBy)}</Typography.TextBold>
+        <Typography.TextBold>{getGroupingInfoLabel(groupByForRender)}</Typography.TextBold>
         <Gap.SM />
         <Typography.Text>{groupingReport}</Typography.Text>
       </Box>

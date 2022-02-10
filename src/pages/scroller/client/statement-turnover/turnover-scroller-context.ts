@@ -26,6 +26,8 @@ export interface ITurnoverScrollerContext {
   setSorting?(value: Sorting): void;
   /** Данны для отображения в таблице оборотов. */
   turnovers: IGetTurnoversResponseDto;
+  /** Значение группировки с которым рендерится таблица. */
+  groupByForRender: GROUPING_VALUES;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -55,6 +57,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
     onClear: noop,
     opened: false,
   },
+  groupByForRender: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
 };
 
 /** Контекст скроллера "Обороты". */

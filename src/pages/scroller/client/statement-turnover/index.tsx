@@ -6,7 +6,7 @@ import type { Sorting, IFilterPanel } from 'interfaces';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
-import { useTurnovers } from './hooks';
+import { useGroupByForRender, useTurnovers } from './hooks';
 import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
 import { TurnoverScrollerContext } from './turnover-scroller-context';
@@ -38,6 +38,8 @@ export const StatementTurnoverScrollerPage = () => {
 
   const { turnovers, isTurnoversError, isTurnoversFetching } = useTurnovers(properlyTypedFilterPanel.values, sorting);
 
+  const groupByForRender = useGroupByForRender(properlyTypedFilterPanel.values.groupBy, isTurnoversFetching);
+
   const contextValue: ITurnoverScrollerContext = useMemo(
     () => ({
       hasError: hasError || isTurnoversError || isAccountsError,
@@ -49,6 +51,7 @@ export const StatementTurnoverScrollerPage = () => {
       sorting,
       setSorting,
       turnovers,
+      groupByForRender,
     }),
     [
       properlyTypedFilterPanel,
@@ -61,6 +64,7 @@ export const StatementTurnoverScrollerPage = () => {
       isTurnoversFetching,
       sorting,
       turnovers,
+      groupByForRender,
     ]
   );
 
