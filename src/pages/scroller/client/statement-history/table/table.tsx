@@ -39,7 +39,9 @@ export const Table: FC = () => {
   );
 
   const handleClick = useCallback((row: IStatementHistoryRow) => {
-    void executor.execute(gotoTransactionsScrollerByStatementRequest, [row]);
+    if (row.accountsIds.length === 1) {
+      void executor.execute(gotoTransactionsScrollerByStatementRequest, [row]);
+    }
   }, []);
 
   const {

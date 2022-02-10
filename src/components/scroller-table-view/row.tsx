@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useCallback } from 'react';
 import cn from 'classnames';
 import type { Row } from 'react-table';
-import { Box, ROLE, WithClickable } from '@platform/ui';
+import { Box, WithClickable } from '@platform/ui';
 import css from './styles.scss';
 import { getCellPaddingClass } from './utils';
 
@@ -20,17 +20,7 @@ export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
 
   const { key, ...rowProps } = getRowProps();
 
-  const handleClick = useCallback(
-    event => {
-      const target = event.target as HTMLElement;
-      const parentNode = target.parentNode as Element;
-
-      if (target.nodeName.toLowerCase() === 'div' && parentNode.getAttribute('role') !== ROLE.MENUITEM) {
-        onClick?.(original);
-      }
-    },
-    [onClick, original]
-  );
+  const handleClick = useCallback(() => onClick?.(original), [onClick, original]);
 
   return (
     <WithClickable>

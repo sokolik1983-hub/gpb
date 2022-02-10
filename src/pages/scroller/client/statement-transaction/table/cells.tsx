@@ -15,10 +15,10 @@ import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-type Cell = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+export type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
-export const OperationDate: FC<Cell> = ({ value }) => {
+export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
   const { operationDate } = value;
 
   return <Typography.Text>{formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}</Typography.Text>;
@@ -27,7 +27,7 @@ export const OperationDate: FC<Cell> = ({ value }) => {
 OperationDate.displayName = 'OperationDate';
 
 /** Информация о документе. */
-export const DocumentInfo: FC<Cell> = ({ value }) => {
+export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
   const { documentDate, documentNumber } = value;
 
   const formattedDate = formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT });
@@ -51,7 +51,7 @@ export const DocumentInfo: FC<Cell> = ({ value }) => {
 DocumentInfo.displayName = 'DocumentInfo';
 
 /** Информация о контрагенте. */
-export const CounterpartyInfo: FC<Cell> = ({ value }) => {
+export const CounterpartyInfo: FC<TransactionCellProps> = ({ value }) => {
   const { counterpartyName, counterpartyAccountNumber } = value;
 
   return (
@@ -71,7 +71,7 @@ export const CounterpartyInfo: FC<Cell> = ({ value }) => {
 CounterpartyInfo.displayName = 'CounterpartyInfo';
 
 /** Списания. */
-export const Outcome: FC<Cell> = ({ value }) => {
+export const Outcome: FC<TransactionCellProps> = ({ value }) => {
   const { outcome, currencyCode } = value;
 
   if (typeof outcome !== 'number') {
@@ -88,7 +88,7 @@ export const Outcome: FC<Cell> = ({ value }) => {
 Outcome.displayName = 'Outcome';
 
 /** Поступления. */
-export const Income: FC<Cell> = ({ value }) => {
+export const Income: FC<TransactionCellProps> = ({ value }) => {
   const { income, currencyCode } = value;
 
   if (typeof income !== 'number') {
@@ -105,7 +105,7 @@ export const Income: FC<Cell> = ({ value }) => {
 Income.displayName = 'Income';
 
 /** Назначение платежа. */
-export const Purpose: FC<Cell> = ({ value }) => {
+export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   const { purpose } = value;
 
   const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
@@ -147,7 +147,7 @@ export const Purpose: FC<Cell> = ({ value }) => {
 Purpose.displayName = 'Purpose';
 
 /** Действия со строкой. */
-export const Actions: FC<Cell> = ({ value }) => {
+export const Actions: FC<TransactionCellProps> = ({ value }) => {
   const { getAvailableActions } = useAuth();
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [value]), [

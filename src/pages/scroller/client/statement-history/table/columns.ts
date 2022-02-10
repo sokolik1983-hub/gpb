@@ -1,7 +1,9 @@
+import { withStopPropagation } from 'hocs';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
 import { addMaxWidthField } from 'utils';
+import type { HistoryCellProps } from './cells';
 import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
@@ -54,7 +56,7 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
   {
     id: COLUMN_NAMES.ACTIONS,
     accessor,
-    Cell: Actions,
+    Cell: withStopPropagation<HistoryCellProps>(Actions),
     disableResizing: true,
     disableSortBy: true,
     width: 84,

@@ -1,8 +1,10 @@
+import { withStopPropagation } from 'hocs';
 import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
 import { addMaxWidthField } from 'utils';
+import type { TransactionCellProps } from './cells';
 import { OperationDate, DocumentInfo, CounterpartyInfo, Outcome, Income, Purpose, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
@@ -68,7 +70,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
   {
     id: COLUMN_NAMES.ACTIONS,
     accessor,
-    Cell: Actions,
+    Cell: withStopPropagation<TransactionCellProps>(Actions),
     width: 46,
     disableSortBy: true,
     disableResizing: true,
