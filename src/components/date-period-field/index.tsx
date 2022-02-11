@@ -1,12 +1,12 @@
 import type { FC } from 'react';
 import React, { useEffect } from 'react';
-import type { ChangeFieldHandler } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
 import { statementService } from 'services/statement-service';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { noop } from 'utils';
 import { to } from '@platform/core';
+import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
 /** Свойства компонента DatePeriodField. */
@@ -35,7 +35,7 @@ export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetchi
     }
   };
 
-  const handleOnChange: ChangeFieldHandler<DATE_PERIODS> = ({ value: period }) => {
+  const handleOnChange: OnChangeType<DATE_PERIODS> = ({ value: period }) => {
     if (period === DATE_PERIODS.SELECT_PERIOD) {
       onSuccessFetching();
 
