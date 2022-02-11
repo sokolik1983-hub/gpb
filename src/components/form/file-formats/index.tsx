@@ -7,6 +7,7 @@ import type { IFormState } from 'interfaces/form/form-state';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
+import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
 /** Компонент выбора формата файла. */
@@ -14,7 +15,7 @@ export const FileFormats: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
 
-  const onFileFormatChange = useCallback(
+  const onFileFormatChange: OnChangeType<FORMAT> = useCallback(
     e => {
       const isPdf = e.value === FORMAT.PDF;
 

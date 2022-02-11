@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import React, { useMemo, useEffect, useCallback } from 'react';
-import type { ChangeFieldHandler } from 'interfaces';
 import type { IGetAccountsResponseDto } from 'interfaces/client';
 import { useForm } from 'react-final-form';
 import { noop, compareStrings } from 'utils';
 import { formatAccountCode } from '@platform/tools/localization';
+import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 import type { IAccountOption } from './account-option';
 import { AccountOption } from './account-option';
@@ -36,7 +36,7 @@ export interface IAccountsFieldProps {
   /** Счета. */
   accounts: IGetAccountsResponseDto[];
   /** Обработчик изменения значения поля. */
-  onChange?: ChangeFieldHandler<string[]>;
+  onChange?: OnChangeType<string[]>;
   /** Плейсхолдер. */
   placeholder?: string;
 }
