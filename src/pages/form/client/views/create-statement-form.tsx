@@ -33,8 +33,8 @@ const mapFormToDto = (values: IFormState, creationType = CREATION_TYPE.NEW): ICr
   creationParams: {
     includeCreditOrders: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
     includeCreditStatements: values.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
-    includeDebitOrders: values.creditParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
-    includeDebitStatements: values.creditParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
+    includeDebitOrders: values.debitParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
+    includeDebitStatements: values.debitParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
     separateDocumentsFiles: values.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES),
   },
   creationType,

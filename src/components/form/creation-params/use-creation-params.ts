@@ -15,7 +15,7 @@ import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [ICheckboxOption[]] => {
-  const { withSign, onlyRequestsStatement, useCase, isPdf } = useContext(FormContext);
+  const { withSign, withDocumentsSet, onlyRequestsStatement, useCase, isPdf } = useContext(FormContext);
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -29,8 +29,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
 
     if (withSign) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
     }
 
@@ -86,35 +84,27 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
   ]);
 
   useEffect(() => {
+    if (!withDocumentsSet) {
+      return;
+    }
+
     if (withSign) {
       batch(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS, CREDIT_PARAMS.INCLUDE_ORDERS]);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS, DEBIT_PARAMS.INCLUDE_ORDERS]);
       });
     } else if (onlyRequestsStatement) {
       batch(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS]);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS]);
       });
     } else if (!onlyRequestsStatement && !withSign) {
       batch(() => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_ORDERS]);
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
         change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_ORDERS]);
       });
     }
-  }, [batch, change, onlyRequestsStatement, withSign]);
+  }, [batch, change, onlyRequestsStatement, withSign, withDocumentsSet]);
 
   return [options];
 };

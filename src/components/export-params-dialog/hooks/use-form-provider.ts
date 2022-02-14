@@ -17,6 +17,7 @@ export const useFormProvider = (useCase: EXPORT_PARAMS_USE_CASES) => {
     const newValue: IFormContext = {
       onlyRequestsStatement: values.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS),
       withSign: values.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
+      withDocumentsSet: values.creationParams.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET),
       isPdf: values.format === FORMAT.PDF,
       useCase,
     };
