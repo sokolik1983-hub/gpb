@@ -1,8 +1,11 @@
+import { withStopPropagation } from 'hocs';
+import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
 import { addMaxWidthField } from 'utils';
-import { OperationDate, DocumentInfo, CounterpartyInfo, Outcome, Income, Purpose } from './cells';
+import type { TransactionCellProps } from './cells';
+import { OperationDate, DocumentInfo, CounterpartyInfo, Outcome, Income, Purpose, Actions } from './cells';
 import { COLUMN_NAMES } from './constants';
 
 /**
@@ -20,6 +23,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     accessor,
     Cell: OperationDate,
     width: 160,
+    paddingType: COLUMN_PADDING_TYPES.LEFT_REDUCED,
   },
   {
     Header: locale.transactionsScroller.headers.documentInfo,
@@ -42,6 +46,7 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     Cell: Outcome,
     width: 239,
     disableSortBy: true,
+    headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
     Header: locale.transactionsScroller.headers.income,
@@ -50,13 +55,25 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     Cell: Income,
     width: 239,
     disableSortBy: true,
+    headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
     Header: locale.transactionsScroller.headers.purpose,
     id: COLUMN_NAMES.PURPOSE,
     accessor,
     Cell: Purpose,
-    width: 251,
+    width: 205,
     disableSortBy: true,
+    disableResizing: true,
+    paddingType: COLUMN_PADDING_TYPES.RIGHT_REDUCED,
+  },
+  {
+    id: COLUMN_NAMES.ACTIONS,
+    accessor,
+    Cell: withStopPropagation<TransactionCellProps>(Actions),
+    width: 46,
+    disableSortBy: true,
+    disableResizing: true,
+    paddingType: COLUMN_PADDING_TYPES.LEFT_REDUCED,
   },
 ]);

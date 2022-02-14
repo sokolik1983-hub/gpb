@@ -1,10 +1,12 @@
 import type { FC } from 'react';
 import React from 'react';
-import { locale } from 'localization';
+import cn from 'classnames';
+import { getCellPaddingClass } from 'components/scroller-table-view/utils';
+import { HEADER_ALIGN } from 'interfaces';
 import type { HeaderGroup } from 'react-table';
-import { Box, ServiceIcons, WithClickable, Typography, Horizon, WithInfoTooltip } from '@platform/ui';
+import { Box, WithClickable, Typography, Horizon } from '@platform/ui';
+import { SortArrow } from './sort-arrow';
 import css from './styles.scss';
-import { SELECT_COLUMN_ID } from './use-checkbox-column';
 
 /** Свойства компонента TableHeader. */
 export interface ITableHeaderProps {
@@ -23,54 +25,51 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
       return (
         <Box key={headerGroupKey} {...restHeaderGroupKey} className={css.headerRow}>
           {headerGroup.headers.map((column, index) => {
-            const { getHeaderProps, sortedIndex, isSortedDesc, id, canSort, isSorted, render, canResize, getResizerProps } = column;
+            const {
+              getHeaderProps,
+              canSort,
+              isSorted,
+              render,
+              canResize,
+              getResizerProps,
+              paddingType,
+              headerAlign = HEADER_ALIGN.LEFT,
+            } = column;
 
             const { key: columnKey, ...restHeaderProps } = getHeaderProps();
-
-            const SortIcon = isSortedDesc ? ServiceIcons.ArrowDown : ServiceIcons.ArrowUp;
 
             const isLastColumn = index === headerGroup.headers.length - 1;
 
             const sortByToggleProps = column.getSortByToggleProps();
 
-            const isCondensedColumn = id === SELECT_COLUMN_ID;
-
             // Удаляется дефолтный title, (если его не удалить, то он отображается при наведении).
             sortByToggleProps.title = undefined;
 
-            // Индексы сортировки начинаются с нуля, если сортировка не задана то индекс равен -1
-            const sortIndex = sortedIndex + 1;
+            // Если выравнивание заголовка по левому краю, то стрелка расположена справа.
+            const isSortArrowRight = headerAlign === HEADER_ALIGN.LEFT;
 
             return (
-              <Box key={columnKey} {...restHeaderProps} className={isCondensedColumn ? css.condensedCell : css.headerCell}>
+              <Box key={columnKey} {...restHeaderProps} className={cn(getCellPaddingClass(paddingType), css.headerCell)}>
                 <WithClickable>
                   {(ref, { hovered }) => (
                     <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
+                      {/* Стрелка показывающая сортировку. */}
+
+                      {!isSortArrowRight && <Horizon.Spacer />}
+
+                      {!isSortArrowRight && canSort && (isSorted || hovered) && (
+                        <SortArrow column={column} disableMultiSort={disableMultiSort} />
+                      )}
+
                       {/* Текстовое содержимое заголовка таблицы. */}
                       <Typography.TextBold>{render('Header')}</Typography.TextBold>
 
                       {/* Стрелка показывающая сортировку. */}
-                      {canSort && (isSorted || hovered) && (
-                        <WithInfoTooltip extraSmall text={locale.table.header.sortInfo}>
-                          {tooltipRef => (
-                            // textOverflow: "ellipsis" добавляется чтобы убрать тултип.
-                            <Box
-                              ref={tooltipRef}
-                              className={css.sortIconWrapper}
-                              style={{ textOverflow: disableMultiSort ? 'ellipsis' : undefined }}
-                            >
-                              <SortIcon fill={isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />
-                              {!disableMultiSort && Boolean(sortIndex) && (
-                                <Typography.SmallText inline className={css.sortIndex} fill={'ACCENT'}>
-                                  {sortIndex}
-                                </Typography.SmallText>
-                              )}
-                            </Box>
-                          )}
-                        </WithInfoTooltip>
+                      {isSortArrowRight && canSort && (isSorted || hovered) && (
+                        <SortArrow column={column} disableMultiSort={disableMultiSort} />
                       )}
 
-                      <Horizon.Spacer />
+                      {isSortArrowRight && <Horizon.Spacer />}
                     </Horizon>
                   )}
                 </WithClickable>

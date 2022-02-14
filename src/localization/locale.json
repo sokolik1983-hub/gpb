@@ -167,8 +167,17 @@
   "transactionsScroller.footerAction.export": {
     "ru": "Экспорт"
   },
+  "transactionsScroller.footerAction.print": {
+    "ru": "Печать"
+  },
   "transactionsScroller.footerAction.more": {
     "ru": "Еще"
+  },
+  "transactionsScroller.rowAction.print": {
+    "ru": "Печать"
+  },
+  "transactionsScroller.rowAction.export": {
+    "ru": "Скачать документ основания"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
@@ -587,6 +596,9 @@
   "transactionCard.buttons.export": {
     "ru": "Скачать"
   },
+  "transactionCard.buttons.print": {
+    "ru": "Печать"
+  },
   "transactionCard.buttons.more": {
     "ru": "Еще"
   },
@@ -652,5 +664,32 @@
   },
   "errors.periodEnd.tomorrowRestriction": {
     "ru": "Дата окончания периода не может быть больше текущей даты"
+  },
+  "exportParamsDialog.buttons.download.label": {
+    "ru": "Скачать"
+  },
+  "exportParamsDialog.buttons.sendToEmail.label": {
+    "ru": "Отправить на почту"
+  },
+  "exportParamsDialog.buttons.print.label": {
+    "ru": "Печать"
+  },
+  "exportParamsDialog.exportStatement.label": {
+    "ru": "Экспорт выписки"
+  },
+  "exportParamsDialog.printStatement.label": {
+    "ru": "Печать выписки"
+  },
+  "exportParamsDialog.print.creationParams.separateAccountsFiles": {
+    "ru": "Отдельным файлом по каждому счёту"
+  },
+  "exportParamsDialog.print.creationParams.withDocumentsSet": {
+    "ru": "С комплектом документов"
+  },
+  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": {
+    "ru": "Нулевые обороты"
+  },
+  "exportParamsDialog.print.creationParams.withSign": {
+    "ru": "С электронной подписью банка"
   }
 }

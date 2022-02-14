@@ -1,24 +1,26 @@
 import type { FC } from 'react';
-import React from 'react';
+import React, { useCallback } from 'react';
 import cn from 'classnames';
 import type { Row } from 'react-table';
 import { Box, WithClickable } from '@platform/ui';
 import css from './styles.scss';
-import { SELECT_COLUMN_ID } from './use-checkbox-column';
+import { getCellPaddingClass } from './utils';
 
 /** Свойства компонента TableRow. */
 export interface ITableRowProps {
   /** Строка с оборотами по счёту. */
   row: Row<Record<string, any>>;
   /** Обработчик клика по строке. */
-  onDoubleClick?(row: Record<string, any>): void;
+  onClick?(row: Record<string, any>): void;
 }
 
 /** Строка с информацией по счёту в таблице Оборотов. */
-export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
+export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
   const { getRowProps, original, cells } = row;
 
   const { key, ...rowProps } = getRowProps();
+
+  const handleClick = useCallback(() => onClick?.(original), [onClick, original]);
 
   return (
     <WithClickable>
@@ -28,16 +30,16 @@ export const TableRow: FC<ITableRowProps> = ({ row, onDoubleClick }) => {
           {...rowProps}
           className={cn(css.clickableRow, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
-          onDoubleClick={() => onDoubleClick?.(original)}
+          onClick={handleClick}
         >
           {cells.map(cell => {
-            const { key: cellKey, ...cellProps } = cell.getCellProps();
+            const { getCellProps, column, render } = cell;
 
-            const isCondensedColumn = cell.column.id === SELECT_COLUMN_ID;
+            const { key: cellKey, ...cellProps } = getCellProps();
 
             return (
-              <Box key={cellKey} {...cellProps} className={isCondensedColumn ? css.condensedCell : css.cell}>
-                {cell.render('Cell')}
+              <Box key={cellKey} {...cellProps} className={cn(getCellPaddingClass(column.paddingType))}>
+                {render('Cell')}
               </Box>
             );
           })}

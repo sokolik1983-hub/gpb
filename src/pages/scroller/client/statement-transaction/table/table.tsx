@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useState, useContext, useMemo, useEffect, useCallback } from 'react';
+import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -28,14 +28,6 @@ export const Table: FC = () => {
 
   const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
 
-  const initialState = useMemo(
-    () => ({
-      sortBy: sorting,
-      ...pagination,
-    }),
-    [sorting, pagination]
-  );
-
   const tableInstance = useTable<IStatementTransactionRow>(
     {
       data: transactions,
@@ -44,7 +36,12 @@ export const Table: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
-      initialState,
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+      useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
+      initialState: {
+        sortBy: sorting,
+        ...pagination,
+      },
       maxMultiSortColCount: 2,
     },
     useSortBy,
@@ -56,23 +53,17 @@ export const Table: FC = () => {
   );
 
   const {
-    state: { sortBy, pageIndex, pageSize },
+    state: { sortBy },
     selectedFlatRows,
   } = tableInstance;
 
-  useEffect(() => {
-    setSorting(sortBy);
-  }, [setSorting, sortBy]);
-
-  const newPaginationState = useMemo(() => ({ pageIndex, pageSize }), [pageSize, pageIndex]);
-
-  const handleDoubleClick = useCallback((row: IStatementTransactionRow) => {
+  const handleClick = useCallback((row: IStatementTransactionRow) => {
     void executor.execute(viewTransaction, [row]);
   }, []);
 
   useEffect(() => {
-    setPagination(newPaginationState);
-  }, [setPagination, newPaginationState]);
+    setSorting(sortBy);
+  }, [setSorting, sortBy]);
 
   useEffect(() => {
     setSelectedRows(selectedFlatRows.map(row => row.original));
@@ -110,8 +101,9 @@ export const Table: FC = () => {
         isLoading={isLoading}
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows && selectedRows.length > 0}
         placeholderLabel={locale.transactionsScroller.table.placeholder}
+        setPagination={setPagination}
         tableInstance={tableInstance}
-        onDoubleClick={handleDoubleClick}
+        onClick={handleClick}
       />
     </>
   );

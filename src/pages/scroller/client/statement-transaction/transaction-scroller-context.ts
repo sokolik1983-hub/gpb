@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
-import type { IGetCounterpartiesResponseDto, IStatementTransactionRow, IStatementSummaryInfo } from 'interfaces/client';
+import type { IGetCounterpartiesResponseDto, IStatementTransactionRow, IStatementSummaryInfoResponseDto } from 'interfaces/client';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
@@ -40,7 +40,7 @@ export interface ITransactionScrollerContext {
   /** Общее количество проводок, без учёта фильтрации. */
   totalTransactionsAmount: number;
   /** Сводная информация по выписке. */
-  statementSummaryInfo?: IStatementSummaryInfo;
+  statementSummaryInfo?: IStatementSummaryInfoResponseDto;
   /** Выбранные строки в таблице скроллера. */
   selectedRows: IStatementTransactionRow[];
   /** Устанавливает выбранные строки в таблице скроллера. */

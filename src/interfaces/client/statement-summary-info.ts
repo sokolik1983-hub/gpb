@@ -1,5 +1,15 @@
+import type { IUserDeviceInfo } from '../user-device-info';
+
+/** ДТО запроса сводной информации по выписке. */
+export interface IStatementSummaryInfoRequestDto {
+  /** Идентификатор выписки. */
+  statementId: string;
+  /** Данные устройства пользователя. */
+  userDeviceInfo: IUserDeviceInfo;
+}
+
 /** Сводная информация по выписке. */
-export interface IStatementSummaryInfo {
+export interface IStatementSummaryInfoResponseDto {
   /** Дата начала периода, по которому формируется выписка. */
   dateFrom: string;
   /** Дата окончания периода, по которому формируется выписка. */

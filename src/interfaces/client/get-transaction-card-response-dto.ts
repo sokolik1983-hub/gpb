@@ -1,4 +1,13 @@
+import type { IUserDeviceInfo } from 'interfaces';
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client/classificators';
+
+/** ДТО запроса информации по проводке. */
+export interface IGetTransactionCardRequestDto {
+  /** Идентификатор Проводки. */
+  accountingEntryId: string;
+  /** Данные устройства пользователя. */
+  userDeviceInfo: IUserDeviceInfo;
+}
 
 /** Документ вложения. */
 export interface IAppendixDocument {

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { downloadStatementById } from 'actions/client/download-statement-by-id';
 import { executor } from 'actions/client/executor';
 import { gotoTransactionsScrollerByStatementRequest } from 'actions/client/goto-transactions-scroller-by-statement-request';
 import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
@@ -108,8 +109,11 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
           await executor.execute(gotoTransactionsScrollerByStatementRequest, [statementRequest]);
 
           return;
-        case ACTIONS.PRINT:
         case ACTIONS.DOWNLOAD:
+          await executor.execute(downloadStatementById, [statementRequest]);
+
+          return;
+        case ACTIONS.PRINT:
         case ACTIONS.SEND_TO_EMAIL:
         default:
           return;

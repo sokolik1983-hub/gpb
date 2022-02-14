@@ -1,4 +1,10 @@
-import type { IExpandedScrollerResponceDto, IExpandedCollectionResponse, IScrollerResponceDto } from 'interfaces';
+import type {
+  IExpandedScrollerResponceDto,
+  IExpandedCollectionResponse,
+  IScrollerResponceDto,
+  FieldsRequired,
+  IExportResponse,
+} from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
@@ -8,11 +14,13 @@ import type {
   IGetCounterpartiesResponseDto,
   IStatementTransactionRow,
   ILatestStatementDto,
-  IStatementSummaryInfo,
+  IStatementSummaryInfoResponseDto,
   IStatement,
   IGetStatusResponceDto,
   IGetTransactionCardResponseDto,
   ICreateRequestStatementDto,
+  IStatementSummaryInfoRequestDto,
+  IGetTransactionCardRequestDto,
 } from 'interfaces/client';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
@@ -89,9 +97,11 @@ export const statementService = {
       };
     }),
   /** Возвращает сводную информацию по выписке. */
-  getStatementSummaryInfo: (id: string): Promise<IStatementSummaryInfo> =>
-    request<IServerDataResp<IStatementSummaryInfo>>({
-      url: `${STATEMENT_URL}/summary/${id}`,
+  getStatementSummaryInfo: (data: IStatementSummaryInfoRequestDto): Promise<IStatementSummaryInfoResponseDto> =>
+    request<IServerDataResp<IStatementSummaryInfoResponseDto>>({
+      method: 'POST',
+      url: `${STATEMENT_URL}/summary`,
+      data,
     }).then(r => r.data.data),
   /** Возвращает выписку по id запроса выписки. */
   getStatementByStatementRequestId: (id: string): Promise<IServerDataResp<IStatement>> =>
@@ -99,7 +109,7 @@ export const statementService = {
       url: `${STATEMENT_URL}/by-statement-request-id/${id}`,
     }).then(r => r.data),
   /** Создать запрос выписки. */
-  createStatement: (data: ICreateRequestStatementDto): Promise<IServerDataResp<string>> =>
+  createStatement: (data: FieldsRequired<ICreateRequestStatementDto, 'userDeviceInfo'>): Promise<IServerDataResp<string>> =>
     request<IServerDataResp<string>>({
       url: `${STATEMENT_REQUEST_URL}`,
       method: 'POST',
@@ -123,8 +133,15 @@ export const statementService = {
       data: { data: { id } },
     }).then(r => r.data),
   /** Возвращает проводку. */
-  getTransaction: (id: string): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
+  getTransaction: (data: IGetTransactionCardRequestDto): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
     request<IServerDataResp<IGetTransactionCardResponseDto>>({
-      url: `${TRANSACTION_URL}/${id}`,
+      method: 'POST',
+      data,
+      url: `${TRANSACTION_URL}`,
+    }).then(r => r.data),
+  /** Возвращает файл по id запроса выписки. */
+  exportStatement: (id: string): Promise<IServerDataResp<IExportResponse>> =>
+    request<IServerDataResp<IExportResponse>>({
+      url: `${STATEMENT_URL}/attachment/${id}`,
     }).then(r => r.data),
 };

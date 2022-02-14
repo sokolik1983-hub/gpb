@@ -1,7 +1,7 @@
 import type { FormEventHandler } from 'react';
 import React, { useMemo } from 'react';
-import { useFormProvider } from 'pages/form/client/hooks/use-form-provider';
-import { FormContext } from 'pages/form/client/interfaces/form-context';
+import { FormContext } from 'interfaces/form/form-context';
+import { useFormProvider } from './hooks/use-form-provider';
 
 /** Свойства провайдера формы. */
 export interface IFormProviderProps {

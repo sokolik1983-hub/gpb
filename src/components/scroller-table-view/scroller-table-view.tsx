@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollerPlaceholder } from 'components/scroller-placeholder';
 import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
+import type { IPagination } from 'interfaces';
 import type { TableInstance } from 'react-table';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
@@ -16,9 +17,11 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
   /** Лейбл плейсхолдера. */
   placeholderLabel: string;
   /** Обработчик клика по строке. */
-  onDoubleClick?(row: Row): void;
+  onClick?(row: Row): void;
   /** Если true - то отображаются только выбранные строки. */
   isVisibleOnlySelectedRows?: boolean;
+  /** Устанавливает пагинацию. */
+  setPagination(value: IPagination): void;
 }
 
 /**
@@ -29,8 +32,9 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   tableInstance,
   isLoading,
   placeholderLabel,
-  onDoubleClick,
+  onClick,
   isVisibleOnlySelectedRows,
+  setPagination,
 }: IScrollerTableViewProps<Row>) => {
   const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
 
@@ -45,8 +49,9 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
       <TableBody
         isLoading={isLoading}
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows}
+        setPagination={setPagination}
         tableInstance={tableInstance}
-        onDoubleClick={onDoubleClick}
+        onClick={onClick}
       />
     );
   }

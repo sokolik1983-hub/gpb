@@ -1,19 +1,24 @@
 import type { FC } from 'react';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { executor } from 'actions/client/executor';
+import clamp from 'clamp-js-main';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
-import LinesEllipsis from 'react-lines-ellipsis';
 import type { CellProps } from 'react-table';
+import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
+import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, WithInfoTooltip } from '@platform/ui';
+import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS } from '@platform/ui';
+import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
+import css from './styles.scss';
 
 /** Свойства ячейки. */
-type Cell = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+export type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
-export const OperationDate: FC<Cell> = ({ value }) => {
+export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
   const { operationDate } = value;
 
   return <Typography.Text>{formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}</Typography.Text>;
@@ -22,14 +27,22 @@ export const OperationDate: FC<Cell> = ({ value }) => {
 OperationDate.displayName = 'OperationDate';
 
 /** Информация о документе. */
-export const DocumentInfo: FC<Cell> = ({ value }) => {
+export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
   const { documentDate, documentNumber } = value;
 
   const formattedDate = formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT });
 
+  const formattedDocumentNumber = locale.transactionsScroller.labels.documentNumber({ documentNumber });
+
   return (
     <>
-      <Typography.Text line={'COLLAPSE'}>{locale.transactionsScroller.labels.documentNumber({ documentNumber })}</Typography.Text>
+      <WithInfoTooltip text={formattedDocumentNumber}>
+        {ref => (
+          <Typography.Text innerRef={ref} line={'COLLAPSE'}>
+            {formattedDocumentNumber}
+          </Typography.Text>
+        )}
+      </WithInfoTooltip>
       <Typography.SmallText>{locale.transactionsScroller.labels.documentDate({ date: formattedDate })}</Typography.SmallText>
     </>
   );
@@ -38,7 +51,7 @@ export const DocumentInfo: FC<Cell> = ({ value }) => {
 DocumentInfo.displayName = 'DocumentInfo';
 
 /** Информация о контрагенте. */
-export const CounterpartyInfo: FC<Cell> = ({ value }) => {
+export const CounterpartyInfo: FC<TransactionCellProps> = ({ value }) => {
   const { counterpartyName, counterpartyAccountNumber } = value;
 
   return (
@@ -58,7 +71,7 @@ export const CounterpartyInfo: FC<Cell> = ({ value }) => {
 CounterpartyInfo.displayName = 'CounterpartyInfo';
 
 /** Списания. */
-export const Outcome: FC<Cell> = ({ value }) => {
+export const Outcome: FC<TransactionCellProps> = ({ value }) => {
   const { outcome, currencyCode } = value;
 
   if (typeof outcome !== 'number') {
@@ -75,7 +88,7 @@ export const Outcome: FC<Cell> = ({ value }) => {
 Outcome.displayName = 'Outcome';
 
 /** Поступления. */
-export const Income: FC<Cell> = ({ value }) => {
+export const Income: FC<TransactionCellProps> = ({ value }) => {
   const { income, currencyCode } = value;
 
   if (typeof income !== 'number') {
@@ -92,28 +105,39 @@ export const Income: FC<Cell> = ({ value }) => {
 Income.displayName = 'Income';
 
 /** Назначение платежа. */
-export const Purpose: FC<Cell> = ({ value }) => {
+export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   const { purpose } = value;
 
-  const [isShouldShowTooltip, setIShouldShowTooltip] = useState<boolean>(false);
+  const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
 
-  const handleReflow = rleState => {
-    setIShouldShowTooltip(rleState.clamped);
-  };
+  const clampedElementRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (clampedElementRef.current) {
+      clamp(clampedElementRef.current, { clamp: 2, useNativeClamp: false });
+
+      const textContent = clampedElementRef.current.innerText;
+
+      /** Если текст оканчивается на символ '…', то значит он был усечён, и надо отображать тултип. */
+      if (textContent.match(/…$/)) {
+        setIsShouldShowTooltip(true);
+      }
+    }
+  }, []);
 
   return (
     <WithInfoTooltip text={purpose}>
       {ref => (
         <Typography.SmallText innerRef={ref}>
-          <LinesEllipsis trimRight basedOn="letters" ellipsis="…" maxLine="2" text={purpose} onReflow={handleReflow} />
-
           {/*
-            Компонент WithInfoTooltip всегда отображает тултип при наведении на элемент,
+            Компонент WithInfoTooltip всегда отображает тултип при наведении,
             если в нём нет элемента со стилем "text-overflow: ellipsis" (поэтому передаётся undefined).
             А если такой элемент есть, то отображает только если содержимое не помещается в элемент,
-            а т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
+            т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
           */}
-          <div style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis' }} />
+          <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis' }}>
+            {purpose}
+          </div>
         </Typography.SmallText>
       )}
     </WithInfoTooltip>
@@ -121,3 +145,31 @@ export const Purpose: FC<Cell> = ({ value }) => {
 };
 
 Purpose.displayName = 'Purpose';
+
+/** Действия со строкой. */
+export const Actions: FC<TransactionCellProps> = ({ value }) => {
+  const { getAvailableActions } = useAuth();
+
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [value]), [
+    getAvailableActions,
+    value,
+  ]);
+
+  if (actions.length === 0) {
+    return null;
+  }
+
+  return (
+    <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
+      {(ref, _, toggleOpen) => (
+        <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
+          <Box className={css.actionsIconWrapper}>
+            <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+          </Box>
+        </Box>
+      )}
+    </WithDropDown>
+  );
+};
+
+Actions.displayName = 'Actions';

@@ -2,7 +2,7 @@ import type { ICreateRequestStatementDto } from 'interfaces/client';
 import { TYPE } from 'interfaces/client';
 import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
-import { fatalHandler, statementRequestValidationSchema } from 'utils';
+import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils';
 import type { ValidationError } from 'yup';
 import { to, singleAction } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
@@ -33,7 +33,9 @@ export const createStatement: IActionConfig<typeof context, string> = {
 
     showLoader();
 
-    const [res, err] = await to(service.createStatement(doc));
+    const userDeviceInfo = await getUserDeviceInfo();
+
+    const [res, err] = await to(service.createStatement({ ...doc, userDeviceInfo }));
 
     hideLoader();
 

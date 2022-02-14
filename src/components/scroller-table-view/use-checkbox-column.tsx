@@ -1,5 +1,7 @@
 import type { FC, ChangeEvent } from 'react';
 import React from 'react';
+import { withStopPropagation } from 'hocs';
+import { COLUMN_PADDING_TYPES } from 'interfaces';
 import type { HeaderProps, CellProps, Hooks } from 'react-table';
 import { Checkbox } from '@platform/ui';
 
@@ -20,8 +22,10 @@ const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSele
 
 Header.displayName = 'Header';
 
+type CheckboxCellProps = CellProps<Record<string, any>>;
+
 /** Ячейка с чекбоксом. */
-const Cell: FC<CellProps<Record<string, any>>> = ({ row }) => {
+const Cell: FC<CheckboxCellProps> = ({ row }) => {
   const { checked, indeterminate, onChange } = row.getToggleRowSelectedProps();
 
   return (
@@ -52,7 +56,8 @@ export const useCheckboxColumn = <T extends Record<string, any>>(hooks: Hooks<T>
       disableSortBy: true,
       disableResizing: true,
       Header,
-      Cell,
+      Cell: withStopPropagation<CheckboxCellProps>(Cell),
+      paddingType: COLUMN_PADDING_TYPES.RIGHT_REDUCED,
     },
     ...columns,
   ]);

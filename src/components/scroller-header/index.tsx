@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ExtendedTransfomedAction } from 'interfaces';
 import type { IBreadcrumbsProps } from '@platform/ui';
-import { Box, Gap, Breadcrumbs, PrimaryButton, Horizon } from '@platform/ui';
+import { Box, Gap, Breadcrumbs, PrimaryButton, Horizon, BUTTON, RegularButton } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ScrollerHeader. */
@@ -16,12 +16,12 @@ export const ScrollerHeader: React.FC<IScrollerHeaderProps> = ({ actions, ...bre
     <Breadcrumbs {...breadcrumbsProps}>
       <Horizon>
         {actions.map(({ label, onClick, name, disabled, buttonType }) => {
-          const Button = buttonType ?? PrimaryButton;
+          const Button = buttonType === BUTTON.REGULAR ? RegularButton : PrimaryButton;
 
           return (
             <React.Fragment key={name}>
               <Gap />
-              <Button extraSmall dimension="SM" disabled={disabled} onClick={onClick}>
+              <Button extraSmall data-action={name} data-name={name} dimension="SM" disabled={disabled} onClick={onClick}>
                 {label}
               </Button>
             </React.Fragment>

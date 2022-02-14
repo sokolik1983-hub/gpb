@@ -411,10 +411,33 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionsScroller.footerAction.print');
+			},
+			/**
+			 * @ru
 			 * Еще
 			 */
 			get more() {
 				return t('transactionsScroller.footerAction.more');
+			},
+		},
+		rowAction: {
+			/**
+			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionsScroller.rowAction.print');
+			},
+			/**
+			 * @ru
+			 * Скачать документ основания
+			 */
+			get export() {
+				return t('transactionsScroller.rowAction.export');
 			},
 		},
 	},
@@ -1451,6 +1474,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Печать
+			 */
+			get print() {
+				return t('transactionCard.buttons.print');
+			},
+			/**
+			 * @ru
 			 * Еще
 			 */
 			get more() {
@@ -1588,6 +1618,87 @@ export default {
 			 */
 			get tomorrowRestriction() {
 				return t('errors.periodEnd.tomorrowRestriction');
+			},
+		},
+	},
+	exportParamsDialog: {
+		buttons: {
+			download: {
+				/**
+				 * @ru
+				 * Скачать
+				 */
+				get label() {
+					return t('exportParamsDialog.buttons.download.label');
+				},
+			},
+			sendToEmail: {
+				/**
+				 * @ru
+				 * Отправить на почту
+				 */
+				get label() {
+					return t('exportParamsDialog.buttons.sendToEmail.label');
+				},
+			},
+			print: {
+				/**
+				 * @ru
+				 * Печать
+				 */
+				get label() {
+					return t('exportParamsDialog.buttons.print.label');
+				},
+			},
+		},
+		exportStatement: {
+			/**
+			 * @ru
+			 * Экспорт выписки
+			 */
+			get label() {
+				return t('exportParamsDialog.exportStatement.label');
+			},
+		},
+		printStatement: {
+			/**
+			 * @ru
+			 * Печать выписки
+			 */
+			get label() {
+				return t('exportParamsDialog.printStatement.label');
+			},
+		},
+		print: {
+			creationParams: {
+				/**
+				 * @ru
+				 * Отдельным файлом по каждому счёту
+				 */
+				get separateAccountsFiles() {
+					return t('exportParamsDialog.print.creationParams.separateAccountsFiles');
+				},
+				/**
+				 * @ru
+				 * С комплектом документов
+				 */
+				get withDocumentsSet() {
+					return t('exportParamsDialog.print.creationParams.withDocumentsSet');
+				},
+				/**
+				 * @ru
+				 * Нулевые обороты
+				 */
+				get hideEmptyTurnovers() {
+					return t('exportParamsDialog.print.creationParams.hideEmptyTurnovers');
+				},
+				/**
+				 * @ru
+				 * С электронной подписью банка
+				 */
+				get withSign() {
+					return t('exportParamsDialog.print.creationParams.withSign');
+				},
 			},
 		},
 	},

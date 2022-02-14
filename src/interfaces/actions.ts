@@ -1,16 +1,18 @@
 import type { TransfomedAction } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
 import type { IActionWebInfo } from '@platform/services/client';
-import type { PrimaryButton, RegularButton } from '@platform/ui';
+import type { BUTTON } from '@platform/ui';
 
 /** Дополнительные поля конфигурации действий. */
 export interface ActionConfigExtension {
-  /** Компонент, которым может быть, если требуется, отрендерена кнопка, выполняющая действие. */
-  buttonType?: typeof PrimaryButton | typeof RegularButton;
+  /** Тип кнопки, которым может быть, если требуется, отрендерена кнопка, выполняющая действие. */
+  buttonType?: BUTTON;
 }
 
 /** Расширенный конфиг действия. */
-export interface IExtendedActionWebInfo<TContext, TResult> extends IActionWebInfo<TContext, TResult>, ActionConfigExtension {}
+export interface IExtendedActionWebInfo<TContext = unknown, TResult = unknown>
+  extends IActionWebInfo<TContext, TResult>,
+    ActionConfigExtension {}
 
 /** Расширенный конфиг действия с авторизацией. */
 export interface IExtendedIActionWithAuth extends IActionWithAuth, ActionConfigExtension {}

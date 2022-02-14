@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext, useRef } from 'react';
-import { StickyRowsContext, StickyRow } from 'components';
+import { StickyRowsContext, StickyRow, ScrollerLoadingOverlay } from 'components';
 import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/client';
 import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/client';
@@ -18,7 +18,7 @@ import { ToggleRowsVisibilityButton } from './toggle-rows-visibility-button';
  * Возвращает видимые строки и флаг управляющий видимостью кнопки.
  *
  * @param groupingRow - Блок со сгруппированными счетами.
- * @param grouping - Группировку выбранную в фильтре скроллера.
+ * @param grouping - Группировка выбранная в фильтре скроллера.
  */
 const getVisibleRows = (groupingRow: Row<IGroupedAccounts>, grouping: GROUPING_VALUES) => {
   const isExpandButtonVisible = Boolean(
@@ -53,15 +53,11 @@ export interface ITableBodyProps extends TableBodyProps {
 
 /** Тело таблицы. */
 export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyProps }) => {
-  const {
-    filterPanel: { values: filterFormValue },
-  } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
+  const { isLoading, groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
   const { setScrollPosition, portalRef } = useContext(StickyRowsContext);
 
   const scrolledElementRef = useRef<Scrollbars>();
-
-  const { groupBy } = filterFormValue;
 
   const {
     handleScrollButtonClick,
@@ -97,15 +93,17 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
 
             const { key: groupingRowKey } = getRowProps();
 
-            const { isExpandButtonVisible, visibleRows } = getVisibleRows(groupingRow, groupBy);
+            const { isExpandButtonVisible, visibleRows } = getVisibleRows(groupingRow, groupByForRender);
 
             return (
               <>
                 {/* Группирующая строка. */}
-                {groupBy !== GROUPING_VALUES.NO_GROUPING && (
+                {groupByForRender !== GROUPING_VALUES.NO_GROUPING && (
                   <StickyRow
                     key={groupingRowKey}
-                    secondLevelRow={groupBy === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES && groupingType === GROUPING_TYPE.CURRENCIES}
+                    secondLevelRow={
+                      groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES && groupingType === GROUPING_TYPE.CURRENCIES
+                    }
                   >
                     <GroupingRow groupingRow={groupingRow} />
                   </StickyRow>
@@ -127,6 +125,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
               </>
             );
           })}
+          {isLoading && <ScrollerLoadingOverlay />}
         </Box>
         <Gap.X2L />
         <Gap.X2L />
