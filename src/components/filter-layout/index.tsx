@@ -5,7 +5,7 @@ import { ToggleButton } from 'components/filter-layout/toggle-button';
 import type { ValidationErrors } from 'final-form';
 import type { IFilterPanel, ITagsPanel } from 'interfaces';
 import { Form } from 'react-final-form';
-import { Box, Line, Horizon, Pattern } from '@platform/ui';
+import { Box, Line, Horizon, Pattern, ROLE } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента FilterLayout. */
@@ -83,7 +83,7 @@ export const FilterLayout: FC<IFilterProps> = ({
           </Box>
           <Line fill="FAINT" />
           {opened && (
-            <Box>
+            <Box aria-expanded={opened} data-name={'additionalFilter'} role={ROLE.PANEL}>
               <Box className={css.additionalFilterWrapper}>
                 <AdditionalFilter />
               </Box>

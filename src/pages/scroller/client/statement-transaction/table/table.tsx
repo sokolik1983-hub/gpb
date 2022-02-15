@@ -80,7 +80,7 @@ export const Table: FC = () => {
         <Horizon className={css.totalWrapper}>
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
-          <Typography.Text>
+          <Typography.Text data-field={'total'}>
             {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: transactionsAmountByFilter })}
           </Typography.Text>
           <Horizon.Spacer />

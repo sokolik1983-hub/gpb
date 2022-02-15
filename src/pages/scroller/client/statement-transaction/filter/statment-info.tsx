@@ -50,23 +50,31 @@ export const StatementInfo: FC = () => {
       <Pattern gap={'X2L'}>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.incomingBalance}</Typography.Text>
-          <Typography.Text>{locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}</Typography.Text>
+          <Typography.Text data-field={'statementSummaryInfo.incomingBalance'}>
+            {locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}
+          </Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text fill={'FAINT'}>
+          <Typography.Text data-field={'statementSummaryInfo.outcomeAccountEntryCount'} fill={'FAINT'}>
             {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomeAccountEntryCount })}
           </Typography.Text>
-          <Typography.Text fill={'CRITIC'}>{locale.moneyString.negative({ amount: String(outcome), currencyCode })}</Typography.Text>
+          <Typography.Text data-field={'statementSummaryInfo.outcome'} fill={'CRITIC'}>
+            {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
+          </Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text fill={'FAINT'}>
+          <Typography.Text data-field={'statementSummaryInfo.incomeAccountEntryCount'} fill={'FAINT'}>
             {locale.transactionsScroller.labels.incomeTransactions({ amount: incomeAccountEntryCount })}
           </Typography.Text>
-          <Typography.Text fill={'SUCCESS'}>{locale.moneyString.positive({ amount: String(income), currencyCode })}</Typography.Text>
+          <Typography.Text data-field={'statementSummaryInfo.income'} fill={'SUCCESS'}>
+            {locale.moneyString.positive({ amount: String(income), currencyCode })}
+          </Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.outgoingBalance}</Typography.Text>
-          <Typography.Text>{locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}</Typography.Text>
+          <Typography.Text data-field={'statementSummaryInfo.outgoingBalance'}>
+            {locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}
+          </Typography.Text>
         </Pattern.Span>
       </Pattern>
       <Gap.XL />

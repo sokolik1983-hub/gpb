@@ -1,6 +1,6 @@
 import React from 'react';
 import { locale } from 'localization';
-import { Horizon, Box, Gap, Typography, ServiceIcons } from '@platform/ui';
+import { Horizon, Box, Gap, Typography, ServiceIcons, ROLE, ACTIONS } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ToggleButton. */
@@ -16,7 +16,14 @@ export const ToggleButton: React.FC<IToggleProps> = ({ onClick, isOpen }) => {
   const Icon = isOpen ? ServiceIcons.ChevronUp : ServiceIcons.ChevronDown;
 
   return (
-    <Box clickable className={css.toggleButton} onClick={onClick}>
+    <Box
+      clickable
+      className={css.toggleButton}
+      data-action={ACTIONS.OPEN}
+      data-name={'additionalFilter'}
+      role={ROLE.BUTTON}
+      onClick={onClick}
+    >
       <Horizon>
         <Box border={'FAINT'} className={css.toggleIcon} fill={'BASE'} radius={'MAX'}>
           <Icon fill={'ACCENT'} scale={'SM'} />

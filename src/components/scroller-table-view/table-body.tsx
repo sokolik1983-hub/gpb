@@ -38,7 +38,7 @@ export const TableBody: FC<ITableBodyProps> = ({ tableInstance, isLoading, onCli
   return (
     <Box className={css.layoutScrollWrapper}>
       <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
-        <Box {...getTableBodyProps()} className={css.tableBody}>
+        <Box role={ROLE.GRID} {...getTableBodyProps()} className={css.tableBody}>
           {rows.map(row => {
             prepareRow(row);
 

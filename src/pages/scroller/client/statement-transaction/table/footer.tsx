@@ -40,17 +40,17 @@ export const Footer: FC = () => {
         {/* Выбрано */}
         <Typography.P>{locale.transactionsScroller.footer.selected}</Typography.P>
         <Gap.XS />
-        <Typography.PBold>{selectedRows.length}</Typography.PBold>
+        <Typography.PBold data-field={'selectedRows.length'}>{selectedRows.length}</Typography.PBold>
         <Gap.XL />
         {/* Списания */}
         <Typography.P>{locale.transactionsScroller.footer.outcome}</Typography.P>
         <Gap.XS />
-        <Typography.PBold>{locale.moneyString.unsigned({ amount: totalOutcome, currencyCode })}</Typography.PBold>
+        <Typography.PBold data-field={'outcome'}>{locale.moneyString.unsigned({ amount: totalOutcome, currencyCode })}</Typography.PBold>
         <Gap.XL />
         {/* Поступления */}
         <Typography.P>{locale.transactionsScroller.footer.income}</Typography.P>
         <Gap.XS />
-        <Typography.PBold>{locale.moneyString.unsigned({ amount: totalIncome, currencyCode })}</Typography.PBold>
+        <Typography.PBold data-field={'income'}>{locale.moneyString.unsigned({ amount: totalIncome, currencyCode })}</Typography.PBold>
         <Horizon.Spacer />
         {action && (
           <PrimaryButton extraSmall data-action={action.name} data-name={action.name} dimension="SM" onClick={action.onClick}>
