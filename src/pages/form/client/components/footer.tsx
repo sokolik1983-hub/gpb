@@ -5,7 +5,7 @@ import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
-import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box } from '@platform/ui';
+import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box, ACTIONS as DATA_ACTIONS } from '@platform/ui';
 
 /** Компонент футера. */
 export const Footer: React.FC = () => {
@@ -16,12 +16,24 @@ export const Footer: React.FC = () => {
 
   return (
     <Horizon>
-      <PrimaryButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.DOWNLOAD)}>
+      <PrimaryButton
+        extraSmall
+        data-action={DATA_ACTIONS.UPLOAD}
+        dimension="SM"
+        type={'submit'}
+        onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.DOWNLOAD)}
+      >
         {locale.form.buttons.download.label}
       </PrimaryButton>
       <Gap />
       {hasOneAccount ? (
-        <RegularButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.VIEW)}>
+        <RegularButton
+          extraSmall
+          data-action={DATA_ACTIONS.SUBMIT}
+          dimension="SM"
+          type={'submit'}
+          onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.VIEW)}
+        >
           {locale.form.buttons.show.label}
         </RegularButton>
       ) : (
@@ -37,11 +49,17 @@ export const Footer: React.FC = () => {
         </WithInfoTooltip>
       )}
       <Gap />
-      <RegularButton extraSmall dimension="SM" type={'submit'} onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.PRINT)}>
+      <RegularButton
+        extraSmall
+        data-action={DATA_ACTIONS.SUBMIT}
+        dimension="SM"
+        type={'submit'}
+        onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.PRINT)}
+      >
         {locale.form.buttons.print.label}
       </RegularButton>
       <Gap />
-      <RegularButton extraSmall dimension="SM" onClick={goBack}>
+      <RegularButton extraSmall data-action={DATA_ACTIONS.BACK} dimension="SM" onClick={goBack}>
         {locale.form.buttons.cancel.label}
       </RegularButton>
     </Horizon>

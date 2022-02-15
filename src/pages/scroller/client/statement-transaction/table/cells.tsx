@@ -21,7 +21,11 @@ export type TransactionCellProps = CellProps<IStatementTransactionRow, IStatemen
 export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
   const { operationDate } = value;
 
-  return <Typography.Text>{formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}</Typography.Text>;
+  return (
+    <Typography.Text data-field={'operationDate'}>
+      {formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}
+    </Typography.Text>
+  );
 };
 
 OperationDate.displayName = 'OperationDate';
@@ -38,12 +42,14 @@ export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
     <>
       <WithInfoTooltip text={formattedDocumentNumber}>
         {ref => (
-          <Typography.Text innerRef={ref} line={'COLLAPSE'}>
+          <Typography.Text data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
             {formattedDocumentNumber}
           </Typography.Text>
         )}
       </WithInfoTooltip>
-      <Typography.SmallText>{locale.transactionsScroller.labels.documentDate({ date: formattedDate })}</Typography.SmallText>
+      <Typography.SmallText data-field={'documentDate'}>
+        {locale.transactionsScroller.labels.documentDate({ date: formattedDate })}
+      </Typography.SmallText>
     </>
   );
 };

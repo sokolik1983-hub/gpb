@@ -4,7 +4,8 @@ import cn from 'classnames';
 import { getCellPaddingClass } from 'components/scroller-table-view/utils';
 import { HEADER_ALIGN } from 'interfaces';
 import type { HeaderGroup } from 'react-table';
-import { Box, WithClickable, Typography, Horizon } from '@platform/ui';
+import { SORT_DIRECTION } from '@platform/services';
+import { Box, WithClickable, Typography, Horizon, ROLE, ACTIONS } from '@platform/ui';
 import { SortArrow } from './sort-arrow';
 import css from './styles.scss';
 
@@ -23,7 +24,7 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
       const { key: headerGroupKey, ...restHeaderGroupKey } = headerGroup.getHeaderGroupProps();
 
       return (
-        <Box key={headerGroupKey} {...restHeaderGroupKey} className={css.headerRow}>
+        <Box key={headerGroupKey} role={ROLE.GRID_HEADER} {...restHeaderGroupKey} className={css.headerRow}>
           {headerGroup.headers.map((column, index) => {
             const {
               getHeaderProps,
@@ -34,9 +35,11 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
               getResizerProps,
               paddingType,
               headerAlign = HEADER_ALIGN.LEFT,
+              id,
+              isSortedDesc,
             } = column;
 
-            const { key: columnKey, ...restHeaderProps } = getHeaderProps();
+            const { key: columnKey, ...restHeaderProps } = getHeaderProps({ role: ROLE.COLUMNHEADER });
 
             const isLastColumn = index === headerGroup.headers.length - 1;
 
@@ -49,10 +52,17 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups, disableMultiS
             const isSortArrowRight = headerAlign === HEADER_ALIGN.LEFT;
 
             return (
-              <Box key={columnKey} {...restHeaderProps} className={cn(getCellPaddingClass(paddingType), css.headerCell)}>
+              <Box key={columnKey} data-name={id} {...restHeaderProps} className={cn(getCellPaddingClass(paddingType), css.headerCell)}>
                 <WithClickable>
                   {(ref, { hovered }) => (
-                    <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
+                    <Horizon
+                      ref={ref}
+                      data-action={ACTIONS.SORT_DIRECTION}
+                      data-direction={isSortedDesc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC}
+                      role={ROLE.BUTTON}
+                      {...sortByToggleProps}
+                      align={'CENTER'}
+                    >
                       {/* Стрелка показывающая сортировку. */}
 
                       {!isSortArrowRight && <Horizon.Spacer />}

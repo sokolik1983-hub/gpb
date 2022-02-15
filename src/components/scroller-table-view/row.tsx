@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useCallback } from 'react';
 import cn from 'classnames';
 import type { Row } from 'react-table';
-import { Box, WithClickable } from '@platform/ui';
+import { Box, WithClickable, ROLE } from '@platform/ui';
 import css from './styles.scss';
 import { getCellPaddingClass } from './utils';
 
@@ -18,7 +18,7 @@ export interface ITableRowProps {
 export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
   const { getRowProps, original, cells } = row;
 
-  const { key, ...rowProps } = getRowProps();
+  const { key, ...rowProps } = getRowProps({ role: ROLE.ROW });
 
   const handleClick = useCallback(() => onClick?.(original), [onClick, original]);
 
@@ -35,7 +35,7 @@ export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
           {cells.map(cell => {
             const { getCellProps, column, render } = cell;
 
-            const { key: cellKey, ...cellProps } = getCellProps();
+            const { key: cellKey, ...cellProps } = getCellProps({ role: ROLE.COLUMN });
 
             return (
               <Box key={cellKey} {...cellProps} className={cn(getCellPaddingClass(column.paddingType))}>

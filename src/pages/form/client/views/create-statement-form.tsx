@@ -22,7 +22,7 @@ import { FormProvider } from 'pages/form/client/form-provider';
 import { Form } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { NotFoundContent } from '@platform/services';
-import { Box, LoaderOverlay, Pattern, FormValidation } from '@platform/ui';
+import { Box, LoaderOverlay, Pattern, FormValidation, DATA_TYPE } from '@platform/ui';
 import { validateForm } from '../views/validate-form';
 import css from './styles.scss';
 
@@ -58,7 +58,7 @@ export const CreateStatementForm: React.FC = () => {
   const { initialStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
 
   if (isInitialLoading) {
-    return <LoaderOverlay opened />;
+    return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
   }
 
   if (isInitialError) {

@@ -6,7 +6,7 @@ import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfac
 import { TYPE, CREATION_TYPE, ACTIONS, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { Box, WithClickable } from '@platform/ui';
+import { Box, WithClickable, ROLE } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import css from './styles.scss';
@@ -65,10 +65,11 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
           {...rowProps}
           className={cn(css.clickableRow, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
+          role={ROLE.ROW}
           onClick={handleClick}
         >
           {cells.map(cell => {
-            const { key: cellKey, ...cellProps } = cell.getCellProps();
+            const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });
 
             return (
               <Box key={cellKey} {...cellProps} className={css.cell}>

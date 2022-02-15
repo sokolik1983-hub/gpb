@@ -14,7 +14,7 @@ import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, Box, Horizon, Status as StatusMarker, Gap } from '@platform/ui';
+import { Typography, Box, Horizon, Status as StatusMarker, Gap, ROLE } from '@platform/ui';
 import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
@@ -27,8 +27,8 @@ export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
 
   return (
     <>
-      <Typography.Text>{date}</Typography.Text>
-      <Typography.SmallText>{time}</Typography.SmallText>
+      <Typography.Text data-field={'createdAtDate'}>{date}</Typography.Text>
+      <Typography.SmallText data-field={'createdAtTime'}>{time}</Typography.SmallText>
     </>
   );
 };
@@ -81,8 +81,8 @@ export const Period: FC<HistoryCellProps> = ({ value }) => {
 
   return (
     <>
-      <Typography.Text>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.Text>
-      <Typography.SmallText>{dateText}</Typography.SmallText>
+      <Typography.Text data-field={'periodType'}>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.Text>
+      <Typography.SmallText data-field={'dateText'}>{dateText}</Typography.SmallText>
     </>
   );
 };
@@ -97,7 +97,7 @@ export const StatementFormat: FC<HistoryCellProps> = ({ value }) => {
     return <Typography.Text>{locale.historyScroller.statementFormat.labels.onScreen}</Typography.Text>;
   }
 
-  return <Typography.Text>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.Text>;
+  return <Typography.Text data-field={'statementFormat'}>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.Text>;
 };
 
 StatementFormat.displayName = 'StatementFormat';
@@ -109,7 +109,9 @@ export const Status: FC<HistoryCellProps> = ({ value }) => {
   return (
     <Horizon align="TOP">
       <StatusMarker className={css.status} type={STATUS_COLOR[status]} />
-      <Typography.Text line="BREAK">{STATUS_LABELS[status]}</Typography.Text>
+      <Typography.Text data-field={'status'} line="BREAK">
+        {STATUS_LABELS[status]}
+      </Typography.Text>
     </Horizon>
   );
 };
@@ -134,7 +136,7 @@ export const Actions: FC<HistoryCellProps> = ({ value }) => {
         return (
           <Fragment key={name}>
             {index !== 0 && <Gap.LG />}
-            <Icon clickable fill={'FAINT'} scale={'MD'} onClick={onClick} />
+            <Icon clickable fill={'FAINT'} role={ROLE.BUTTON} scale={'MD'} onClick={onClick} />
           </Fragment>
         );
       })}

@@ -32,7 +32,7 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
     return (
       <WithInfoTooltip text={organizationName}>
         {ref => (
-          <Typography.SmallText innerRef={ref} line={'COLLAPSE'}>
+          <Typography.SmallText data-field={'organizationName'} innerRef={ref} line={'COLLAPSE'}>
             {organizationName}
           </Typography.SmallText>
         )}
@@ -53,7 +53,11 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
 
     // А группирующая строка "По валютам" рендерится с помощью ячейки таблицы.
     if (groupingType === GROUPING_TYPE.CURRENCIES && groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
-      return <Typography.TextBold fill={'FAINT'}>{currencyName ?? currencyCode}</Typography.TextBold>;
+      return (
+        <Typography.TextBold data-field={'currencyNameOrCurrencyCode'} fill={'FAINT'}>
+          {currencyName ?? currencyCode}
+        </Typography.TextBold>
+      );
     }
 
     // Группирующая строка для группировки "по организациям" рендерится без ячеек таблицы,
@@ -71,7 +75,7 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
       <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
       <WithInfoTooltip text={accountDescription}>
         {ref => (
-          <Typography.SmallText fill={'FAINT'} innerRef={ref} line={'COLLAPSE'}>
+          <Typography.SmallText data-field={'accountDescription'} fill={'FAINT'} innerRef={ref} line={'COLLAPSE'}>
             {accountDescription}
           </Typography.SmallText>
         )}
@@ -91,13 +95,17 @@ export const IncomingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
-    return <Typography.Text align={'RIGHT'}>{amount}</Typography.Text>;
+    return (
+      <Typography.Text align={'RIGHT'} data-field={'incomingBalance'}>
+        {amount}
+      </Typography.Text>
+    );
     // Правило отключено потому, что нельзя сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} fill={'FAINT'}>
+      <Typography.TextBold align={'RIGHT'} data-field={'incomingBalance'} fill={'FAINT'}>
         {amount}
       </Typography.TextBold>
     );
@@ -118,7 +126,7 @@ export const OutcomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo |
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
+      <Typography.Text align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
         {amount}
       </Typography.Text>
     );
@@ -127,7 +135,7 @@ export const OutcomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo |
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} fill={'CRITIC'}>
+      <Typography.TextBold align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
         {amount}
       </Typography.TextBold>
     );
@@ -148,7 +156,7 @@ export const IncomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
+      <Typography.Text align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
         {amount}
       </Typography.Text>
     );
@@ -157,7 +165,7 @@ export const IncomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | 
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} fill={'SUCCESS'}>
+      <Typography.TextBold align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
         {amount}
       </Typography.TextBold>
     );
@@ -177,13 +185,17 @@ export const OutgoingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
-    return <Typography.Text align={'RIGHT'}>{amount}</Typography.Text>;
+    return (
+      <Typography.Text align={'RIGHT'} data-field={'outgoingBalance'}>
+        {amount}
+      </Typography.Text>
+    );
     // Правило отключено потому, что нельзя сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} fill={'FAINT'}>
+      <Typography.TextBold align={'RIGHT'} data-field={'outgoingBalance'} fill={'FAINT'}>
         {amount}
       </Typography.TextBold>
     );
