@@ -9,3 +9,6 @@ export const ID_URL_PARAMETER = ':id';
 
 /** Значение параметра урла, при котором форма открывается для создания нового запроса на выписку. */
 export const NEW_ENTITY_ID = 'new';
+
+/** Наименование стрима. */
+export const ECO_STATEMENT = '@eco/statement';
