@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
-import { Gap, Horizon, PrimaryButton, RegularButton, Box } from '@platform/ui';
+import { Gap, Horizon, PrimaryButton, RegularButton, Box, ACTIONS } from '@platform/ui';
 import css from './styles.scss';
 
 /** Интерфейс футера фильтра. */
@@ -29,12 +29,12 @@ export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply }) => {
   return (
     <Box className={css.footerWrapper}>
       <Horizon>
-        <PrimaryButton extraSmall dimension="SM" disabled={submitting} onClick={handleApply}>
+        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={submitting} onClick={handleApply}>
           {locale.scroller.filter.buttons.applyFilters}
         </PrimaryButton>
         <Gap />
 
-        <RegularButton extraSmall dimension="SM" disabled={submitting} onClick={handleCancel}>
+        <RegularButton extraSmall data-action={ACTIONS.CANCEL} dimension="SM" disabled={submitting} onClick={handleCancel}>
           {locale.scroller.filter.buttons.reset}
         </RegularButton>
       </Horizon>

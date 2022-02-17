@@ -4,7 +4,7 @@ import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
-import { dialog, DialogTemplate, Box, Gap, Typography, Tabs, LayoutScroll } from '@platform/ui';
+import { dialog, DialogTemplate, Box, Gap, Typography, Tabs, LayoutScroll, DATA_TYPE } from '@platform/ui';
 import { AttachmentsTab } from './attachments-tab';
 import { TAB_OPTIONS, TABS } from './constants';
 import { Footer } from './footer';
@@ -54,6 +54,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClos
           <Footer transaction={transaction} />
         </Box>
       }
+      dataType={DATA_TYPE.CONFIRMATION}
       header={''}
       onClose={onClose}
     />

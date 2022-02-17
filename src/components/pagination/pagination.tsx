@@ -41,7 +41,7 @@ export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagin
             <Horizon>
               <Typography.P line="NOWRAP">{locale.scroller.pagination.displayBy}</Typography.P>
               <Gap.XS />
-              <Select extraSmall options={COUNT_OPTIONS} value={pageSize} width="auto" onChange={setPageSize} />
+              <Select extraSmall name="pageCount" options={COUNT_OPTIONS} value={pageSize} width="auto" onChange={setPageSize} />
             </Horizon>
           </Horizon>
         </Pattern.Span>

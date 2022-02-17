@@ -13,7 +13,7 @@ import { getInitialFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { Form } from 'react-final-form';
 import { noop } from 'utils';
-import { BUTTON, dialog, DialogTemplate } from '@platform/ui';
+import { BUTTON, dialog, DialogTemplate, DATA_TYPE } from '@platform/ui';
 import { FormProvider } from './form-provider';
 import type { EXPORT_PARAMS_USE_CASES } from './statemet-params-use-cases';
 
@@ -95,6 +95,7 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ useCase
           onSubmit={noop}
         />
       }
+      dataType={DATA_TYPE.CONFIRMATION}
       header={isExport ? locale.exportParamsDialog.exportStatement.label : locale.exportParamsDialog.printStatement.label}
       onClose={onClose}
     />

@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
     <Horizon>
       <PrimaryButton
         extraSmall
-        data-action={DATA_ACTIONS.UPLOAD}
+        dataAction={DATA_ACTIONS.UPLOAD}
         dimension="SM"
         type={'submit'}
         onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.DOWNLOAD)}
