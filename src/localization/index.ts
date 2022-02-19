@@ -1,1 +1,1 @@
-export { default as locale, t as translate } from './statement';
+export { default as locale, t as translate } from './account-statement';
