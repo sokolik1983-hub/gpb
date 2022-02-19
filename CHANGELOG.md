@@ -1,3 +1,10 @@
+## [1.1.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.1...v1.1.2) (2022-02-19)
+
+
+### Bug Fixes
+
+* **gitflow:** Обновлена платформа ([6430f86](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6430f86b6cb85c39b6fa89d82fc031b6fb1cbf31))
+
 ## [1.1.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.0...v1.1.1) (2022-02-14)
 
 
