@@ -3,7 +3,7 @@ import { downloadButtonShowCases, printButtonShowCases } from 'components/export
 import type { IFormContext } from 'interfaces/form/form-context';
 import { FormContext } from 'interfaces/form/form-context';
 import { locale } from 'localization';
-import { Adjust, Gap, Horizon, PrimaryButton, RegularButton } from '@platform/ui';
+import { Adjust, Gap, Horizon, PrimaryButton, RegularButton, ACTIONS } from '@platform/ui';
 
 // TODO: в рамках ТехДолга переделать футер с использованием actions из DialogTemplate
 
@@ -19,12 +19,12 @@ export const Footer: React.FC = () => {
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>
       {isDownloadButtonShow && (
-        <PrimaryButton extraSmall dimension="SM">
+        <PrimaryButton extraSmall dataAction={ACTIONS.UPLOAD} dimension="SM">
           {locale.exportParamsDialog.buttons.download.label}
         </PrimaryButton>
       )}
       {isPrintButtonShow && (
-        <PrimaryButton extraSmall dimension="SM">
+        <PrimaryButton extraSmall dataAction={ACTIONS.PRINT} dimension="SM">
           {locale.exportParamsDialog.buttons.print.label}
         </PrimaryButton>
       )}

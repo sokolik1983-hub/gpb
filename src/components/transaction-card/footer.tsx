@@ -39,7 +39,7 @@ export const Footer: FC<IFooterProps> = ({ transaction }) => {
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>
       {action && (
         <>
-          <PrimaryButton extraSmall data-action={action.name} data-name={action.name} dimension="SM" onClick={action.onClick}>
+          <PrimaryButton extraSmall data-name={action.name} dataAction={action.name} dimension="SM" onClick={action.onClick}>
             {action.label}
           </PrimaryButton>
           <Gap />

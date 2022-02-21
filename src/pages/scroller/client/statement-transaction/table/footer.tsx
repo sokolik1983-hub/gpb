@@ -53,7 +53,7 @@ export const Footer: FC = () => {
         <Typography.PBold data-field={'income'}>{locale.moneyString.unsigned({ amount: totalIncome, currencyCode })}</Typography.PBold>
         <Horizon.Spacer />
         {action && (
-          <PrimaryButton extraSmall data-action={action.name} data-name={action.name} dimension="SM" onClick={action.onClick}>
+          <PrimaryButton extraSmall data-name={action.name} dataAction={action.name} dimension="SM" onClick={action.onClick}>
             {action.label}
           </PrimaryButton>
         )}

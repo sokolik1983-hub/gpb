@@ -11,7 +11,7 @@ import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'ut
 import { to } from '@platform/core';
 import type { IServerDataResp } from '@platform/services';
 import type { IButtonAction } from '@platform/ui';
-import { Box, BUTTON, DialogTemplate, Gap, ServiceIcons, Typography, dialog } from '@platform/ui';
+import { Box, BUTTON, DialogTemplate, Gap, ServiceIcons, Typography, dialog, DATA_TYPE } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента AwaitingForm. */
@@ -130,6 +130,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         extraSmall
         actions={actions}
         content={<Typography.P>{locale.awaitingForm.content}</Typography.P>}
+        dataType={DATA_TYPE.CONFIRMATION}
         header={
           <>
             <ServiceIcons.ServiceProgress fill={'FAINT'} scale={'XL'} />
