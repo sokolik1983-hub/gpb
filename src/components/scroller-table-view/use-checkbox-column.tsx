@@ -4,6 +4,7 @@ import { withStopPropagation } from 'hocs';
 import { COLUMN_PADDING_TYPES } from 'interfaces';
 import type { HeaderProps, CellProps, Hooks } from 'react-table';
 import { Checkbox } from '@platform/ui';
+import { FIELD_NAMES } from './constants';
 
 /** Компонент заголовка колонки с чекбоксами. */
 const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSelectedProps }) => {
@@ -14,6 +15,7 @@ const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSele
       extraSmall
       dimension="SM"
       indeterminate={indeterminate}
+      name={FIELD_NAMES.HEADER_CHECKBOX}
       value={checked}
       onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
     />
@@ -33,6 +35,7 @@ const Cell: FC<CheckboxCellProps> = ({ row }) => {
       extraSmall
       dimension="SM"
       indeterminate={indeterminate}
+      name={FIELD_NAMES.CELL_CHECKBOX}
       value={checked}
       onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
     />
