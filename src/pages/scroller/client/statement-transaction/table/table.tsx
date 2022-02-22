@@ -9,6 +9,7 @@ import { Horizon, Typography, Gap, Box, Checkbox } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { columns } from './columns';
+import { ONLY_SELECTED_ROWS_CKECKBOX } from './constants';
 import css from './styles.scss';
 
 /** Таблица скроллера проводок. */
@@ -89,6 +90,7 @@ export const Table: FC = () => {
               extraSmall
               dimension="SM"
               label={locale.transactionsScroller.labels.showOnlySelectedRows}
+              name={ONLY_SELECTED_ROWS_CKECKBOX}
               value={isVisibleOnlySelectedRows}
               onChange={() => setIsVisibleOnlySelectedRows(!isVisibleOnlySelectedRows)}
             />
