@@ -10,3 +10,4 @@ export * from './scroller-placeholder';
 export * from './scroller-loading-overlay';
 export * from './sticky-rows';
 export * from './item-with-rest-in-pop-up';
+export * from './input-with-history';

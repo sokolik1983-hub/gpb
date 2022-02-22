@@ -7,6 +7,7 @@ import type { ITransactionScrollerContext } from '../transaction-scroller-contex
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
+import { SearchField } from './search-field';
 import css from './styles.scss';
 
 /**
@@ -51,7 +52,7 @@ export const QuickFilter: FC = () => {
       <Pattern.Span size={5}>
         <Horizon>
           {/* Поиск по таблице. */}
-          <Fields.Text extraSmall name={FORM_FIELDS.TABLE_SEARCH} placeholder={locale.transactionsScroller.placeholder.tableSearch} />
+          <SearchField />
         </Horizon>
       </Pattern.Span>
       <Pattern.Span size={6}>
