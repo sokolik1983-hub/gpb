@@ -1,3 +1,25 @@
+# [2.0.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.2...v2.0.0-release.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* **gitflow:** Миграция на gitflow ([6f3dae9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6f3dae98514a608097b3c49db85558600b8bcdbd))
+* **визард:** GBO-21707 доработки ЭФ создания запроса на выписку ([47490cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/47490cfec6e2b626fe09afe23fae918e0ec5c911))
+
+
+### Features
+
+* bump version [skip ci] ([dabe907](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dabe9071f88b188fd23d494f2a741baea072f7fe))
+* GBO-18233 добавлены атрибуты для АТ ([26d9013](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/26d9013382ce9d48a98181f7c7953b27e18562e7))
+* GBO-21738 добавлены атрибуты АТ ([4026d7e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4026d7e07137bca79089bdb4eef2c2d82c688f2a))
+* GBO-21738 добавлены недостающие атрибуты АТ ([0004871](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0004871671b1636b69c7a7a80f40f194bcc094b2))
+* GBO-21809 реализован компонент "Поиск по таблице" ([c4f1231](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c4f1231e3d6d1df5a5a2c624239312dae72d747c))
+
+
+### BREAKING CHANGES
+
+* **gitflow:** Обновлена платформа
+
 ## [1.1.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.1...v1.1.2) (2022-02-19)
 
 
