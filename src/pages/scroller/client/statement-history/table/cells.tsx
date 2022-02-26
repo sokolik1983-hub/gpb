@@ -2,8 +2,9 @@ import type { FC } from 'react';
 import React, { useContext, useMemo, Fragment } from 'react';
 import { executor } from 'actions/client';
 import { ItemWithRestInPopUp } from 'components';
-import { DATE_PERIODS, STATEMENT_ACTION_TYPES } from 'interfaces';
+import { DATE_PERIODS } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
 import type { CellProps } from 'react-table';
@@ -22,8 +23,9 @@ import css from './styles.scss';
 export type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
 
 /** Дата и время создания запроса выписки. */
-export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
-  const [date, time] = formatDateTime(value.createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
+export const CreatedAtCell: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { createdAt } = doc;
+  const [date, time] = formatDateTime(createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
 
   return (
     <>
@@ -36,8 +38,8 @@ export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
 CreatedAtCell.displayName = 'CreatedAtCell';
 
 /** Информация по счёту и по организации. */
-export const AccountNumber: FC<HistoryCellProps> = ({ value }) => {
-  const { accountsIds, accountNumbers, organizationNames } = value;
+export const AccountNumber: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { accountsIds, accountNumbers, organizationNames } = doc;
   const { accounts } = useContext(HistoryScrollerContext);
 
   const formattedAccounts = useMemo(() => accountNumbers.map(item => formatAccountCode(item)), [accountNumbers]);
@@ -61,8 +63,8 @@ export const AccountNumber: FC<HistoryCellProps> = ({ value }) => {
 AccountNumber.displayName = 'AccountNumber';
 
 /** Тип периода. */
-export const Period: FC<HistoryCellProps> = ({ value }) => {
-  const { periodType, periodStart, periodEnd } = value;
+export const Period: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { periodType, periodStart, periodEnd } = doc;
 
   let dateText: string;
 
@@ -90,10 +92,10 @@ export const Period: FC<HistoryCellProps> = ({ value }) => {
 Period.displayName = 'Period';
 
 /** Формат запроса выписки. */
-export const StatementFormat: FC<HistoryCellProps> = ({ value }) => {
-  const { statementFormat, action } = value;
+export const StatementFormat: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { statementFormat, action } = doc;
 
-  if (action === STATEMENT_ACTION_TYPES.VIEW) {
+  if (action === ACTION.VIEW) {
     return <Typography.Text>{locale.historyScroller.statementFormat.labels.onScreen}</Typography.Text>;
   }
 
@@ -103,8 +105,8 @@ export const StatementFormat: FC<HistoryCellProps> = ({ value }) => {
 StatementFormat.displayName = 'StatementFormat';
 
 /** Статус запроса выписки. */
-export const Status: FC<HistoryCellProps> = ({ value }) => {
-  const { status } = value;
+export const Status: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { status } = doc;
 
   return (
     <Horizon align="TOP">
@@ -119,12 +121,11 @@ export const Status: FC<HistoryCellProps> = ({ value }) => {
 Status.displayName = 'Status';
 
 /** Действия со строкой. */
-export const Actions: FC<HistoryCellProps> = ({ value }) => {
+export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
-
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc], doc.id, doc.statementFormat]), [
     getAvailableActions,
-    value,
+    doc,
   ]);
 
   return (

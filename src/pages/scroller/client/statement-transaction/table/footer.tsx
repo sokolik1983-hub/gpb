@@ -2,7 +2,9 @@ import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
 import { executor } from 'actions/client';
 import cn from 'classnames';
+import type { IUrlParams } from 'interfaces';
 import { locale } from 'localization';
+import { useParams } from 'react-router-dom';
 import { getActiveActionButtons } from 'utils';
 import { useAuth } from '@platform/services/client';
 import { bigNumber } from '@platform/tools/big-number';
@@ -14,24 +16,26 @@ import css from './styles.scss';
 
 /** Суммарная информация о выбранных строках таблицы. */
 export const Footer: FC = () => {
-  const { selectedRows, statementSummaryInfo: { currencyCode = '' } = {} } = useContext<ITransactionScrollerContext>(
+  const { selectedRows: docs, statementSummaryInfo: { currencyCode = '' } = {} } = useContext<ITransactionScrollerContext>(
     TransactionScrollerContext
   );
 
-  const totalIncome = useMemo(() => selectedRows.reduce((acc, item) => acc.plus(item.income ?? 0), bigNumber(0)).toString(), [
-    selectedRows,
-  ]);
-
-  const totalOutcome = useMemo(() => selectedRows.reduce((acc, item) => acc.plus(item.outcome ?? 0), bigNumber(0)).toString(), [
-    selectedRows,
-  ]);
+  const totalIncome = useMemo(() => docs.reduce((acc, item) => acc.plus(item.income ?? 0), bigNumber(0)).toString(), [docs]);
+  const totalOutcome = useMemo(() => docs.reduce((acc, item) => acc.plus(item.outcome ?? 0), bigNumber(0)).toString(), [docs]);
 
   const { getAvailableActions } = useAuth();
+  const { id } = useParams<IUrlParams>();
 
-  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), executor, []), [getAvailableActions]);
-
-  const dropDownActions = useMemo(() => getActiveActionButtons(getAvailableActions(FOOTER_DROPDOWN_ACTIONS), executor, []), [
+  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), executor, [docs, id]), [
+    docs,
     getAvailableActions,
+    id,
+  ]);
+
+  const dropDownActions = useMemo(() => getActiveActionButtons(getAvailableActions(FOOTER_DROPDOWN_ACTIONS), executor, [docs, id]), [
+    docs,
+    getAvailableActions,
+    id,
   ]);
 
   return (
@@ -40,7 +44,7 @@ export const Footer: FC = () => {
         {/* Выбрано */}
         <Typography.P>{locale.transactionsScroller.footer.selected}</Typography.P>
         <Gap.XS />
-        <Typography.PBold data-field={'selectedRows.length'}>{selectedRows.length}</Typography.PBold>
+        <Typography.PBold data-field={'selectedRows.length'}>{docs.length}</Typography.PBold>
         <Gap.XL />
         {/* Списания */}
         <Typography.P>{locale.transactionsScroller.footer.outcome}</Typography.P>

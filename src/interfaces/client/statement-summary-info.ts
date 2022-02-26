@@ -1,4 +1,4 @@
-import type { IUserDeviceInfo } from '../user-device-info';
+import type { IUserDeviceInfo } from 'interfaces';
 
 /** ДТО запроса сводной информации по выписке. */
 export interface IStatementSummaryInfoRequestDto {

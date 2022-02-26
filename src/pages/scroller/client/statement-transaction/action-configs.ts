@@ -1,7 +1,7 @@
-import { getExportStatement } from 'actions/client/export-statement';
-import { getPrintStatement } from 'actions/client/print-statement';
-import { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
+import { getExportStatementAttachment } from 'actions/client/export-statement-attachement';
+import { getPrintStatementAttachment } from 'actions/client/print-statement-attachement';
 import type { IExtendedIActionWithAuth } from 'interfaces';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { BUTTON, Icons, ServiceIcons } from '@platform/ui';
 
@@ -13,7 +13,7 @@ import { BUTTON, Icons, ServiceIcons } from '@platform/ui';
 const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIActionWithAuth => ({
   icon: Icons.Download,
   label: '',
-  action: getExportStatement(useCase),
+  action: getExportStatementAttachment(useCase),
   name: 'EXPORT_STATEMENT',
   authorities: [
     /* TODO: добавить когда будет готова ролевая. */
@@ -28,7 +28,7 @@ const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIA
 const getPrintStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIActionWithAuth => ({
   icon: ServiceIcons.Refresh,
   label: '',
-  action: getPrintStatement(useCase),
+  action: getPrintStatementAttachment(useCase),
   name: 'PRINT_STATEMENT',
   buttonType: BUTTON.REGULAR,
   authorities: [

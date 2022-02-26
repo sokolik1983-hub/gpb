@@ -1,9 +1,9 @@
 /**
- * Допустимые действия над выпиской.
+ * Допустимое действие над выпиской.
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28677623
  **/
-export enum ACTIONS {
+export enum ACTION {
   /** Скачивание. */
   DOWNLOAD = 'DOWNLOAD',
   /** Отправка на электронную почту. */
