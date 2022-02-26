@@ -15,7 +15,11 @@ export const CreationParams: React.FC = () => {
 
   const onParamsChange: OnChangeType<string[]> = useCallback(
     e => {
-      if (!e.value.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+      const params = e.value;
+
+      if (e.value.includes(CREATION_PARAMS.WITH_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+        change(FORM_FIELDS.CREATION_PARAMS, [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET]);
+      } else if (!params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
         batch(() => {
           change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
           change(FORM_FIELDS.DEBIT_PARAMS, []);
