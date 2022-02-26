@@ -1,6 +1,7 @@
 import { getExportStatementAttachment, repeatStatement } from 'actions/client';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
+import { PRIVILEGE } from 'stream-constants/client';
 import type { IActionWithAuth } from '@platform/services';
 import { Icons, ServiceIcons } from '@platform/ui';
 
@@ -10,9 +11,7 @@ const EXPORT_STATEMENT: IActionWithAuth = {
   label: locale.historyScroller.action.exportStatement,
   action: getExportStatementAttachment(EXPORT_PARAMS_USE_CASES.FOURTEEN),
   name: 'EXPORT_STATEMENT',
-  authorities: [
-    /* TODO: добавить когда будет готова ролевая. */
-  ],
+  authorities: [PRIVILEGE.ATTACHMENT_DOWNLOAD],
 };
 
 /** Повторный запрос выписки. */
@@ -21,9 +20,7 @@ const REPEAT_STATEMENT: IActionWithAuth = {
   label: locale.historyScroller.action.repeatStatement,
   action: repeatStatement,
   name: 'REPEAT_STATEMENT',
-  authorities: [
-    /* TODO: добавить когда будет готова ролевая. */
-  ],
+  authorities: [PRIVILEGE.STATEMENT_REQUEST],
 };
 
 /** Действия строки скроллера. */
