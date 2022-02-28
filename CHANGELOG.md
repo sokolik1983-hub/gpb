@@ -1,3 +1,10 @@
+# [2.0.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.1...v2.0.0-release.2) (2022-02-28)
+
+
+### Bug Fixes
+
+* **визард:** GBO-22072 доработки ЭФ создания запроса выписки ([0fb5e3c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0fb5e3c5ca3fa0d2b9a213abf7de5809e7b88793))
+
 # [2.0.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.2...v2.0.0-release.1) (2022-02-24)
 
 
