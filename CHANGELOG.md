@@ -1,3 +1,10 @@
+# [2.0.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.2...v2.0.0-release.3) (2022-03-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21679 заменен hoc предотвращения событий на компонент для точечного использования ([1ff3433](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1ff343341676286d895958deff5db4dddac4b27f))
+
 # [2.0.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.1...v2.0.0-release.2) (2022-02-28)
 
 
