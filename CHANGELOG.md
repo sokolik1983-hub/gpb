@@ -1,3 +1,10 @@
+# [2.0.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.3...v2.0.0-release.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21690 добавлена проверка на выделение текста при клике по строке таблицы ([f08b300](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f08b3000d7c255739fce9c06c104ddde0cfd98c6))
+
 # [2.0.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.2...v2.0.0-release.3) (2022-03-01)
 
 
