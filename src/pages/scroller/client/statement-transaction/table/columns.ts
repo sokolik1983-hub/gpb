@@ -45,7 +45,6 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     accessor,
     Cell: Outcome,
     width: 239,
-    disableSortBy: true,
     headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
@@ -54,7 +53,6 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     accessor,
     Cell: Income,
     width: 239,
-    disableSortBy: true,
     headerAlign: HEADER_ALIGN.RIGHT,
   },
   {
