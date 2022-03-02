@@ -81,7 +81,7 @@ export const CreateStatementForm: React.FC = () => {
         render={({ handleSubmit }) => (
           <FormProvider onSubmit={handleSubmit}>
             <Pattern>
-              <Pattern.Span size={7}>
+              <Pattern.Span size={8}>
                 <Period />
                 <Accounts />
                 <Operations />
@@ -90,7 +90,7 @@ export const CreateStatementForm: React.FC = () => {
                 <DetailDocumentsParams />
                 <Footer />
               </Pattern.Span>
-              <Pattern.Span size={2} />
+              <Pattern.Span size={1} />
               <Pattern.Span size={3}>
                 <FormValidation fieldLabels={FORM_FIELD_LABELS} />
               </Pattern.Span>
