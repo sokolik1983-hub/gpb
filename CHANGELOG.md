@@ -1,3 +1,10 @@
+# [2.0.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.4...v2.0.0-release.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* GBO-21708 убрано `min_width` у комп-та строки формы `Row`, для сжимания формы относительно окна ([0dc0e5b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0dc0e5b11f909488470a736ed6162ca9da9dd25a))
+
 # [2.0.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.3...v2.0.0-release.4) (2022-03-01)
 
 
