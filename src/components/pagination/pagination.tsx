@@ -26,11 +26,12 @@ interface IPaginationProps {
 export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagination }) => {
   const {
     pageCount,
-    setPageSize,
     state: { pageSize, pageIndex },
   } = tableInstance;
 
   const gotoPage = (newPageIndex: number) => setPagination({ pageSize, pageIndex: newPageIndex });
+
+  const setPageSize = (newPageSize: number) => setPagination({ pageSize: newPageSize, pageIndex });
 
   return (
     <Box className={css.paginationWrapper}>
