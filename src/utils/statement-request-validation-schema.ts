@@ -6,7 +6,7 @@ import { locale } from 'localization';
 import type { SchemaOf } from 'yup';
 import { object, string, array, mixed } from 'yup';
 import { pathGenerator } from '@platform/core';
-import { getEmptyFieldErrorMessage, isLessThanTomorrow } from './validation';
+import { getEmptyFieldErrorMessage, isLessThanTomorrow, isValidDateRange } from './validation';
 
 /** Возвращает путь до поля в объекте. Используется для улучшения типизации. */
 export const getPath = pathGenerator<ICreateRequestStatementDto>();
@@ -27,10 +27,12 @@ export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = obje
   periodType: mixed<DATE_PERIODS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE])),
   dateFrom: string()
     .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_FROM]))
-    .test('lessThanTomorrow', locale.errors.periodStart.tomorrowRestriction, isLessThanTomorrow),
+    .test('lessThanTomorrow', locale.errors.periodStart.tomorrowRestriction, isLessThanTomorrow)
+    .test('moreThanPeriodEnd', locale.errors.periodStart.dateMoreRestriction, isValidDateRange),
   dateTo: string()
     .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_TO]))
-    .test('lessThanTomorrow', locale.errors.periodEnd.tomorrowRestriction, isLessThanTomorrow),
+    .test('lessThanTomorrow', locale.errors.periodEnd.tomorrowRestriction, isLessThanTomorrow)
+    .test('lessThanPeriodStart', locale.errors.periodEnd.dateLessRestriction, isValidDateRange),
   accountsIds: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS])),
   operations: mixed<OPERATIONS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.OPERATION])),
 });
