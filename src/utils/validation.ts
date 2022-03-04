@@ -1,4 +1,6 @@
+import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
+import type { TestFunction } from 'yup/lib/util/createValidation';
 import { dateTime } from '@platform/tools/date-time';
 
 /**
@@ -22,4 +24,41 @@ export const isLessThanTomorrow = (value: string | undefined): boolean => {
   }
 
   return dateTime(value).isSameOrBefore(dateTime(), 'day');
+};
+
+/**
+ * Проверяет валидность диапазона дат:
+ * - чтобы дата начала периода была меньше или равна дате окончания
+ * - чтобы дата окончания периода была больше или равна дате начала.
+ *
+ * @param value - Дата для проверки.
+ * @param context - Контекст валидации функции.
+ * @param context.path - Ключ проверяемого поля даты.
+ * @param context.parent - Объект с текущими значениями формы.
+ */
+export const isValidDateRange: TestFunction<string | undefined> = (value, { path, parent }) => {
+  if (!value) {
+    return true;
+  }
+
+  let valid;
+
+  switch (path) {
+    case FORM_FIELDS.DATE_FROM: {
+      const dateTo = parent?.[FORM_FIELDS.DATE_TO];
+
+      valid = dateTo ? dateTime(value).isSameOrBefore(dateTime(dateTo), 'day') : true;
+      break;
+    }
+    case FORM_FIELDS.DATE_TO: {
+      const dateFrom = parent?.[FORM_FIELDS.DATE_FROM];
+
+      valid = dateFrom ? dateTime(value).isSameOrAfter(dateTime(dateFrom), 'day') : true;
+      break;
+    }
+    default:
+      valid = true;
+  }
+
+  return valid;
 };
