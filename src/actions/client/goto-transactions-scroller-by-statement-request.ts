@@ -14,11 +14,10 @@ export const gotoTransactionsScrollerByStatementRequest: IActionConfig<typeof co
 
     hideLoader();
 
-    const { data, error } = res ?? {};
+    fatal(res?.error);
+    fatal(err);
 
-    fatal(err || error);
-
-    await execute(gotoTransactionsScroller, [data]);
+    await execute(gotoTransactionsScroller, [res?.data]);
 
     done();
   },

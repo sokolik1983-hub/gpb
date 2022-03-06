@@ -1,4 +1,4 @@
-import { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 
 /** Набор случаев для отображения ЭФ в режиме экспорта. */
 export const exportCases = [

@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
-import { downloadStatementById } from 'actions/client/download-statement-by-id';
 import { executor } from 'actions/client/executor';
+import { exportStatement } from 'actions/client/export-statement';
 import { gotoTransactionsScrollerByStatementRequest } from 'actions/client/goto-transactions-scroller-by-statement-request';
+import { printStatement } from 'actions/client/print-statement';
 import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import type { IGetStatusResponceDto } from 'interfaces/client';
-import { ACTIONS } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { statementService } from 'services';
 import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'utils';
@@ -82,7 +83,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       const [statementRequestResp, fatalStatementRequestErr] = await to(statementService.getStatementRequest(id));
 
-      const { data: statementRequest, error: statementRequestError } = statementRequestResp ?? {};
+      const { data: doc, error: statementRequestError } = statementRequestResp ?? {};
 
       if (fatalStatementRequestErr || statementRequestError) {
         closeAwaitingForm();
@@ -91,7 +92,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         return;
       }
 
-      const { commentForClient = '', statementActionDto } = statementRequest!;
+      const { commentForClient = '', statementActionDto } = doc!;
 
       if (status === STATEMENT_REQUEST_STATUSES.DENIED) {
         closeAwaitingForm();
@@ -105,16 +106,19 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
       closeAwaitingForm();
 
       switch (statementActionDto) {
-        case ACTIONS.VIEW:
-          await executor.execute(gotoTransactionsScrollerByStatementRequest, [statementRequest]);
+        case ACTION.VIEW:
+          await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
 
           return;
-        case ACTIONS.DOWNLOAD:
-          await executor.execute(downloadStatementById, [statementRequest]);
+        case ACTION.DOWNLOAD:
+          await executor.execute(exportStatement, [doc]);
 
           return;
-        case ACTIONS.PRINT:
-        case ACTIONS.SEND_TO_EMAIL:
+        case ACTION.PRINT:
+          await executor.execute(printStatement, [doc]);
+
+          return;
+        case ACTION.SEND_TO_EMAIL:
         default:
           return;
       }

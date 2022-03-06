@@ -1,9 +1,4 @@
 import { useContext, useEffect, useState } from 'react';
-import {
-  creationParamsShowCases,
-  esignCheckboxShowCases,
-  hideEmptyTurnoversCheckboxShowCases,
-} from 'components/export-params-dialog/utils';
 import { CREATION_PARAMS, getDefaultCreationParamsOptions } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
@@ -11,6 +6,7 @@ import { FormContext } from 'interfaces/form/form-context';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
+import { creationParamsShowCases, esignCheckboxShowCases, hideEmptyTurnoversCheckboxShowCases } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */

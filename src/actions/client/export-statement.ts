@@ -1,47 +1,31 @@
-import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
-import { showStatementParamsDialog } from 'components/export-params-dialog';
-import { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
-import { hideExportParamsDialogCases } from 'components/export-params-dialog/utils';
-import type { IStatementHistoryRow } from 'interfaces/client';
-import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
 import { fatalHandler } from 'utils';
-import { to } from '@platform/core';
-import type { IActionConfig } from '@platform/services';
+import { singleAction, to } from '@platform/core';
+import type { IActionConfig, IBaseEntity } from '@platform/services';
+import { showFile } from '@platform/services';
 import type { context } from './executor';
 
-/** Вернуть набор гардов для экспорта выписки. */
-const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
-  if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
-    return [rowHistoryExportGuardian];
-  }
-
-  return [];
-};
-
 /**
- * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки или документа.
+ * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки.
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
-export const getExportStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, ICreateRequestStatementDto> => ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  action: ({ done }) => async (docs: IStatementHistoryRow[]) => {
-    if (hideExportParamsDialogCases.includes(useCase)) {
-      done();
+export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
+  action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [IBaseEntity]) => {
+    showLoader();
 
-      return;
-    }
+    const [res, err] = await to(service.exportStatement(doc.id));
 
-    const [_, close] = await to(showStatementParamsDialog(useCase));
+    hideLoader();
 
-    if (close) {
-      done();
-    }
+    fatal(res?.error);
+    fatal(err);
 
-    // TODO добавить вызов экспорта по готовности BE
+    const { content, fileName, mimeType } = res!;
+
+    showFile(content, fileName, mimeType);
 
     done();
   },
-  guardians: getGuardians(useCase),
   fatalHandler,
-});
+  guardians: [singleAction],
+};

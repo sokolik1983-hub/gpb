@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS } from './creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from './detail-document-params';

@@ -1,5 +1,5 @@
-import type { ICreateRequestStatementDto } from 'interfaces/client';
 import { TYPE } from 'interfaces/client';
+import type { ICreateRequestStatementDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
 import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils';
@@ -17,7 +17,7 @@ export const createStatement: IActionConfig<typeof context, string> = {
   action: ({ done, fatal, addSucceeded }, { service, showLoader, showError, hideLoader }) => async ([doc]: [
     ICreateRequestStatementDto
   ]) => {
-    // Если запрос создаётся не через форму, то первая найденная ошибка отображается в диалоге.
+    // если запрос создаётся не через форму, то первая найденная ошибка отображается в диалоге
     if (doc.type === TYPE.HIDDEN_VIEW) {
       const [_, validationError] = (await to(statementRequestValidationSchema.validate(doc, { abortEarly: true }))) as [
         ICreateRequestStatementDto,
@@ -43,7 +43,7 @@ export const createStatement: IActionConfig<typeof context, string> = {
 
     fatal(err || error);
 
-    // ожидание формирования выписки
+    // показываем ЭФ ожидания формирования выписки
     const [_, close] = await to(showAwaitingForm(id!));
 
     if (close) {

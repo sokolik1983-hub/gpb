@@ -3,7 +3,7 @@ import React, { useContext, useMemo, useCallback } from 'react';
 import { executor, createStatement } from 'actions/client';
 import cn from 'classnames';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/client';
-import { TYPE, CREATION_TYPE, ACTIONS, OPERATIONS } from 'interfaces/client';
+import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { getHandlerDependingOnSelection } from 'utils';
@@ -31,7 +31,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
 
   const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
-      action: ACTIONS.VIEW,
+      action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
       creationType: CREATION_TYPE.NEW,
       sourcePage: COMMON_STREAM_URL.STATEMENT_TURNOVER,

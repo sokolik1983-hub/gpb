@@ -38,9 +38,9 @@ export const Table: FC = () => {
     useBlockLayout
   );
 
-  const handleClick = useCallback((row: IStatementHistoryRow) => {
-    if (row.accountsIds.length === 1) {
-      void executor.execute(gotoTransactionsScrollerByStatementRequest, [row]);
+  const handleClick = useCallback((doc: IStatementHistoryRow) => {
+    if (doc.accountsIds.length === 1) {
+      void executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
     }
   }, []);
 

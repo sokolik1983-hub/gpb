@@ -22,12 +22,14 @@ export interface IExpandedCollectionResponse<T> extends ICollectionResponse<T> {
   totalCount: number;
 }
 
-/** ДТО ответа на запрос файла. */
-export interface IExportResponse {
-  /** Имя файла. */
-  fileName: string;
-  /** MIME-тип файла. */
+/** ДТО ответа от метода печати / экспорта выписки или ее документов. */
+export interface IExportStatementResponse {
+  /** MIME-тип. */
   mimeType: string;
-  /** Содержимое файла. */
+  /** Контент в base64. */
   content: string;
+  /** Имя формируемого файла. */
+  fileName: string;
+  /** Информация об ошибке. */
+  error?: string;
 }

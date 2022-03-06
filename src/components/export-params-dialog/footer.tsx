@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { downloadButtonShowCases, printButtonShowCases } from 'components/export-params-dialog/utils';
 import type { IFormContext } from 'interfaces/form/form-context';
 import { FormContext } from 'interfaces/form/form-context';
 import { locale } from 'localization';
+import { downloadButtonShowCases, printButtonShowCases } from 'utils/export-params-dialog';
 import { Adjust, Gap, Horizon, PrimaryButton, RegularButton, ACTIONS } from '@platform/ui';
 
 // TODO: в рамках ТехДолга переделать футер с использованием actions из DialogTemplate

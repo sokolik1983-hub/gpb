@@ -11,7 +11,7 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675633
  */
 export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: [IBaseEntity]) => {
+  action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: IBaseEntity[], statementId: string) => {
     showLoader();
 
     const userDeviceInfo = await getUserDeviceInfo();
@@ -26,7 +26,7 @@ export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
 
     fatal(error);
 
-    void showTransactionCard(transaction);
+    void showTransactionCard(transaction, statementId);
 
     done();
   },

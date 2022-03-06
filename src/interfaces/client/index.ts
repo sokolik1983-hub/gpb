@@ -12,3 +12,4 @@ export * from './statement-summary-info';
 export * from './statement';
 export * from './get-status-dto';
 export * from './get-transaction-card-response-dto';
+export * from './statemet-params-use-cases';

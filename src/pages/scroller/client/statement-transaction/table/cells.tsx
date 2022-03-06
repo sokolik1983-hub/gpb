@@ -3,8 +3,10 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { executor } from 'actions/client/executor';
 import clamp from 'clamp-js-main';
 import { StopPropagation } from 'components/stop-propagation';
+import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
+import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
 import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
@@ -154,12 +156,14 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
 Purpose.displayName = 'Purpose';
 
 /** Действия со строкой. */
-export const Actions: FC<TransactionCellProps> = ({ value }) => {
+export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
+  const { id } = useParams<IUrlParams>();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [value]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [[doc], id]), [
     getAvailableActions,
-    value,
+    doc,
+    id,
   ]);
 
   if (actions.length === 0) {

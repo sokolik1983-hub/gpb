@@ -33,10 +33,11 @@ export const orderTags = (tags: Array<IOption<string>>, tagsOrder: string[]): Ar
  * Преобразует стейт сортировки таблицы, в форму подходящую для запроса на сервер.
  *
  * @param sorting - Стейт сортировки таблицы.
+ * @param sortingMap - Мап свойств сортировки (если id поля отличается от требуемого в запросе).
  */
-export const convertTableSortingToMetaData = (sorting: Sorting): IMetaData['sort'] =>
+export const convertTableSortingToMetaData = (sorting: Sorting, sortingMap?: Record<string, string>): IMetaData['sort'] =>
   sorting.reduce((acc, item) => {
-    acc[item.id] = item.desc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
+    acc[sortingMap?.[item.id] ?? item.id] = item.desc ? SORT_DIRECTION.DESC : SORT_DIRECTION.ASC;
 
     return acc;
   }, {});
