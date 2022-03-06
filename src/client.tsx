@@ -3,29 +3,37 @@ import { RequestStatementForm } from 'pages/form/client';
 import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-history';
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
-import { Route } from 'react-router-dom';
 import { ID_URL_PARAMETER } from 'stream-constants';
-import { COMMON_STREAM_URL } from 'stream-constants/client';
+import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
+import { GuardRoute } from '@platform/services/client';
 
 export const routes = [
-  // TODO: Route заменить на GuardRoute когда будет готова ролевая.
-  <Route
+  <GuardRoute
     key="client-statement-turnover-scroller"
     exact
+    authority={PRIVILEGE.TURNOVER_SUMMARY_VIEW}
     component={StatementTurnoverScrollerPage}
     path={COMMON_STREAM_URL.STATEMENT_TURNOVER}
   />,
-  <Route
+  <GuardRoute
     key="client-statement-history-scroller"
     exact
+    authority={PRIVILEGE.TURNOVER_SUMMARY_VIEW}
     component={StatementHistoryScrollerPage}
     path={COMMON_STREAM_URL.STATEMENT_HISTORY}
   />,
-  <Route
+  <GuardRoute
     key="client-statement-transactions-scroller"
     exact
+    authority={[PRIVILEGE.ACCOUNTING_ENTRY_VIEW, PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW]}
     component={StatementTransactionScrollerPage}
     path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/${ID_URL_PARAMETER}`}
   />,
-  <Route key="statement-client-form" exact component={RequestStatementForm} path={`${COMMON_STREAM_URL.STATEMENT}/${ID_URL_PARAMETER}`} />,
+  <GuardRoute
+    key="statement-client-form"
+    exact
+    authority={PRIVILEGE.STATEMENT_REQUEST}
+    component={RequestStatementForm}
+    path={`${COMMON_STREAM_URL.STATEMENT}/${ID_URL_PARAMETER}`}
+  />,
 ];

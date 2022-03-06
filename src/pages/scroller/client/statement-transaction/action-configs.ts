@@ -3,6 +3,7 @@ import { getPrintStatementAttachment } from 'actions/client/print-statement-atta
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
+import { PRIVILEGE } from 'stream-constants/client';
 import { BUTTON, Icons, ServiceIcons } from '@platform/ui';
 
 /**
@@ -15,9 +16,7 @@ const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIA
   label: '',
   action: getExportStatementAttachment(useCase),
   name: 'EXPORT_STATEMENT',
-  authorities: [
-    /* TODO: добавить когда будет готова ролевая. */
-  ],
+  authorities: [PRIVILEGE.ATTACHMENT_DOWNLOAD],
 });
 
 /**
@@ -31,9 +30,7 @@ const getPrintStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIAc
   action: getPrintStatementAttachment(useCase),
   name: 'PRINT_STATEMENT',
   buttonType: BUTTON.REGULAR,
-  authorities: [
-    /* TODO: добавить когда будет готова ролевая. */
-  ],
+  authorities: [PRIVILEGE.ATTACHMENT_DOWNLOAD],
 });
 
 /** Действия заголовка скроллера. */
