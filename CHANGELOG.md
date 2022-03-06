@@ -1,3 +1,34 @@
+# [2.0.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.2...v2.0.0) (2022-03-06)
+
+
+### Bug Fixes
+
+* **визард, скроллер:** GBO-17730 добавление привилегий для экшонов и форм ([e153ad1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e153ad15915bea3850ae552dae45a4229a1de40e))
+* GBO-22118 изменена логика валидации диапазона дат ([349d255](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/349d2557b68b3405a82e06de72d82c43513cc6af))
+* **gitflow:** Миграция на gitflow ([6f3dae9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6f3dae98514a608097b3c49db85558600b8bcdbd))
+* **скроллер:** GBO-20559 добавлена сортировка по полям "Расход" и "Приход" ([9ff0234](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9ff0234985c2a5cabad8e2038e7e7f05520a62fc))
+* GBO-21708 убрано `min_width` у комп-та строки формы `Row`, для сжимания формы относительно окна ([0dc0e5b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0dc0e5b11f909488470a736ed6162ca9da9dd25a))
+* **визард:** GBO-21707 доработки ЭФ создания запроса на выписку ([47490cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/47490cfec6e2b626fe09afe23fae918e0ec5c911))
+* **визард:** GBO-22072 доработки ЭФ создания запроса выписки ([0fb5e3c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0fb5e3c5ca3fa0d2b9a213abf7de5809e7b88793))
+* **скроллер:** GBO-21679 заменен hoc предотвращения событий на компонент для точечного использования ([1ff3433](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1ff343341676286d895958deff5db4dddac4b27f))
+* **скроллер:** GBO-21690 добавлена проверка на выделение текста при клике по строке таблицы ([f08b300](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f08b3000d7c255739fce9c06c104ddde0cfd98c6))
+* **скроллер:** GBO-22114 исправлен функционал изменения кол-ва отображаемых элементов ([8d75c77](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d75c77dee6ecdd495fa36223715a7490a8900d4))
+
+
+### Features
+
+* **визард:** GBO-17569 реализация печати / экспорта документов выписки на ЭФ ([93eb351](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/93eb351067a58472d08230c051a57e828cb89df9))
+* bump version [skip ci] ([dabe907](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dabe9071f88b188fd23d494f2a741baea072f7fe))
+* GBO-18233 добавлены атрибуты для АТ ([26d9013](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/26d9013382ce9d48a98181f7c7953b27e18562e7))
+* GBO-21738 добавлены атрибуты АТ ([4026d7e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4026d7e07137bca79089bdb4eef2c2d82c688f2a))
+* GBO-21738 добавлены недостающие атрибуты АТ ([0004871](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0004871671b1636b69c7a7a80f40f194bcc094b2))
+* GBO-21809 реализован компонент "Поиск по таблице" ([c4f1231](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c4f1231e3d6d1df5a5a2c624239312dae72d747c))
+
+
+### BREAKING CHANGES
+
+* **gitflow:** Обновлена платформа
+
 # [2.0.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.5...v2.0.0-release.6) (2022-03-06)
 
 
