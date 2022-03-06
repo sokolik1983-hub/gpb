@@ -1,14 +1,8 @@
-import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
 import { DATE_PERIODS } from 'interfaces';
-import type { ILatestStatementDto } from 'interfaces/client';
-import type { ACTIONS } from 'interfaces/client/classificators';
-import { FORMAT } from 'interfaces/client/classificators/format';
-import { OPERATIONS } from 'interfaces/client/classificators/operations';
-import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
-import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
-import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
+import { FORMAT, OPERATIONS } from 'interfaces/client';
+import type { ACTION, ILatestStatementDto } from 'interfaces/client';
 import { locale } from 'localization';
+import { mapDtoToForm } from 'utils/actions';
 
 /** Состояние формы запроса на выписку. */
 export interface IFormState {
@@ -24,9 +18,8 @@ export interface IFormState {
   debitParams: string[];
   creditParams: string[];
   email: string;
-  useCase?: EXPORT_PARAMS_USE_CASES;
   /** Действие. */
-  action?: ACTIONS;
+  action?: ACTION;
 }
 
 /** Начальное значение состояния формы. */
@@ -42,65 +35,6 @@ export const defaultFormState: IFormState = {
   format: FORMAT.PDF,
   operations: OPERATIONS.ALL,
   periodType: DATE_PERIODS.YESTERDAY,
-};
-
-/** Функция для преобразования ДТО ответа для последний выписки в значения формы. */
-export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
-  const creditParams: string[] = [];
-  const debitParams: string[] = [];
-  const creationParams: string[] = [];
-  const documentsSetParams: string[] = [];
-
-  if (dto.documentOptionsDto.includeCreditOrders) {
-    creditParams.push(CREDIT_PARAMS.INCLUDE_ORDERS);
-  }
-
-  if (dto.documentOptionsDto.includeCreditStatements) {
-    creditParams.push(CREDIT_PARAMS.INCLUDE_STATEMENTS);
-  }
-
-  if (dto.documentOptionsDto.includeDebitOrders) {
-    debitParams.push(DEBIT_PARAMS.INCLUDE_ORDERS);
-  }
-
-  if (dto.documentOptionsDto.includeDebitStatements) {
-    debitParams.push(DEBIT_PARAMS.INCLUDE_STATEMENTS);
-  }
-
-  if (dto.separateAccountsFiles) {
-    creationParams.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
-  }
-
-  if (dto.hideEmptyTurnovers) {
-    creationParams.push(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
-  }
-
-  if (dto.signNeeded) {
-    creationParams.push(CREATION_PARAMS.WITH_SIGN);
-  }
-
-  if (dto.documentOptionsDto.separateDocumentsFiles) {
-    documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
-  }
-
-  const hasDocumentSet = creditParams.length > 0 || debitParams.length > 0 || documentsSetParams.length > 0;
-
-  if (hasDocumentSet) {
-    creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
-  }
-
-  return {
-    accountIds: dto.accountsIds,
-    dateFrom: dto.periodStart,
-    dateTo: dto.periodEnd,
-    format: dto.statementFormat,
-    periodType: dto.periodType,
-    operations: dto.statementOperationDto,
-    creationParams,
-    creditParams,
-    debitParams,
-    documentsSetParams,
-  };
 };
 
 /** Функция возвращающая начальное значение состояния формы. */

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ACTIONS } from 'interfaces/client/classificators';
+import { ACTION } from 'interfaces/client/classificators';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
         dataAction={DATA_ACTIONS.UPLOAD}
         dimension="SM"
         type={'submit'}
-        onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.DOWNLOAD)}
+        onClick={() => change(FORM_FIELDS.ACTION, ACTION.DOWNLOAD)}
       >
         {locale.form.buttons.download.label}
       </PrimaryButton>
@@ -32,7 +32,7 @@ export const Footer: React.FC = () => {
           data-action={DATA_ACTIONS.SUBMIT}
           dimension="SM"
           type={'submit'}
-          onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.VIEW)}
+          onClick={() => change(FORM_FIELDS.ACTION, ACTION.VIEW)}
         >
           {locale.form.buttons.show.label}
         </RegularButton>
@@ -54,7 +54,7 @@ export const Footer: React.FC = () => {
         data-action={DATA_ACTIONS.SUBMIT}
         dimension="SM"
         type={'submit'}
-        onClick={() => change(FORM_FIELDS.ACTION, ACTIONS.PRINT)}
+        onClick={() => change(FORM_FIELDS.ACTION, ACTION.PRINT)}
       >
         {locale.form.buttons.print.label}
       </RegularButton>

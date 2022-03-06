@@ -20,28 +20,24 @@ import { DEFAULT_SORTING, TransactionScrollerContext } from './transaction-scrol
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=286756666
  */
 export const StatementTransactionScrollerPage = () => {
-  // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
   const [pagination, setPagination] = useState<IPagination>(DEFAULT_PAGINATION);
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
-  // endregion
 
   const { id } = useParams<IUrlParams>();
 
-  // Вызывается один раз.
+  // вызывается один раз.
   const { counterparties, isCounterpartiesFetching, isCounterpartiesError } = useGetCounterparties();
 
-  const { statementSummaryInfo, isStatementSummaryInfoError, isStatementSummaryInfoFetching } = useGetStatementSummaryInfo();
+  const { statementSummaryInfo: info, isStatementSummaryInfoError, isStatementSummaryInfoFetching } = useGetStatementSummaryInfo();
 
-  const { dateFrom = '', dateTo = '' } = statementSummaryInfo ?? {};
-
-  const headerProps = useScrollerHeaderProps({ dateFrom, dateTo });
+  const headerProps = useScrollerHeaderProps(info);
 
   const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: `${STORAGE_KEY}-${id}` });
 
-  // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
+  // для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
@@ -69,7 +65,7 @@ export const StatementTransactionScrollerPage = () => {
       transactions,
       transactionsAmountByFilter,
       totalTransactionsAmount,
-      statementSummaryInfo,
+      info,
       selectedRows,
       setSelectedRows,
     }),
@@ -90,7 +86,7 @@ export const StatementTransactionScrollerPage = () => {
       transactions,
       transactionsAmountByFilter,
       totalTransactionsAmount,
-      statementSummaryInfo,
+      info,
       selectedRows,
     ]
   );

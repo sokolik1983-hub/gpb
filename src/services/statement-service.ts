@@ -2,8 +2,8 @@ import type {
   IExpandedScrollerResponceDto,
   IExpandedCollectionResponse,
   IScrollerResponceDto,
+  IExportStatementResponse,
   FieldsRequired,
-  IExportResponse,
 } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
@@ -22,6 +22,7 @@ import type {
   IStatementSummaryInfoRequestDto,
   IGetTransactionCardRequestDto,
 } from 'interfaces/client';
+import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -139,9 +140,42 @@ export const statementService = {
       data,
       url: `${TRANSACTION_URL}`,
     }).then(r => r.data),
-  /** Возвращает файл по id запроса выписки. */
-  exportStatement: (id: string): Promise<IServerDataResp<IExportResponse>> =>
-    request<IServerDataResp<IExportResponse>>({
+  /** Возвращает файл для экспорта по Id запроса выписки. */
+  exportStatement: async (id: string): Promise<IExportStatementResponse> => {
+    const { data: resp } = await request({
       url: `${STATEMENT_URL}/attachment/${id}`,
-    }).then(r => r.data),
+    });
+
+    return {
+      mimeType: resp.data.mimeType,
+      fileName: resp.data.fileName,
+      content: resp.data.content,
+    };
+  },
+  /** Возвращает файл для печати по Id запроса выписки. */
+  printStatement: async (id: string): Promise<IExportStatementResponse> => {
+    const { data: resp } = await request({
+      url: `${STATEMENT_URL}/print/${id}`,
+    });
+
+    return {
+      mimeType: resp.data.mimeType,
+      fileName: resp.data.fileName,
+      content: resp.data.content,
+    };
+  },
+  /** Формирует вложения для печати / экспорта. */
+  createAttachment: async (data: ICreateAttachmentRequestDto): Promise<IExportStatementResponse> => {
+    const { data: resp } = await request({
+      url: `${STATEMENT_URL}/create-attachment`,
+      method: 'POST',
+      data,
+    });
+
+    return {
+      mimeType: resp.data.mimeType,
+      fileName: resp.data.fileName,
+      content: resp.data.content,
+    };
+  },
 };

@@ -11,6 +11,8 @@ import { Typography, Gap, Line, Adjust, Horizon } from '@platform/ui';
 export interface IAttachmentsTabProps {
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
+  /** Id запроса на выписку. */
+  statementId: string;
 }
 
 /**
@@ -18,16 +20,20 @@ export interface IAttachmentsTabProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction }) => {
-  const { appendixDto: { documents = [] } = {} } = transaction;
+export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction, statementId }) => {
+  const { appendixDto: { documents: docs = [] } = {} } = transaction;
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, []), [getAvailableActions]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [docs, statementId]), [
+    docs,
+    getAvailableActions,
+    statementId,
+  ]);
 
   return (
     <>
-      {documents.map(({ documentName }) => (
+      {docs.map(({ documentName }) => (
         <React.Fragment key={documentName}>
           <Gap.SM />
           <Horizon className={Adjust.getPadClass([null, 'XS'])}>

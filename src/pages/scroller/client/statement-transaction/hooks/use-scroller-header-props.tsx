@@ -1,7 +1,10 @@
 import { useMemo } from 'react';
 import { executor } from 'actions/client';
 import type { IScrollerHeaderProps } from 'components';
+import type { IUrlParams } from 'interfaces';
+import type { IStatementSummaryInfoResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
+import { useParams } from 'react-router-dom';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { getActiveActionButtons } from 'utils';
 import { useRedirect, DATE_FORMAT } from '@platform/services';
@@ -11,25 +14,23 @@ import { HEADER_ACTIONS } from '../action-configs';
 
 /** Возвращает свойства для заголовка скроллера.
  *
- * @param statement - Выписка проводки которой отображаются в скроллере.
- * @param statement.dateFrom - Дата начала периода запроса выписки.
- * @param statement.dateTo - Дата окончания периода запроса выписки.
+ * @param info - Информация о выписке, проводки которой отображаются в скроллере.
  */
-export const useScrollerHeaderProps = (statement: { dateFrom: string; dateTo: string }): IScrollerHeaderProps => {
-  const { dateFrom, dateTo } = statement;
+export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto): IScrollerHeaderProps => {
+  const { id } = useParams<IUrlParams>();
 
   const redirectToMainPage = useRedirect(COMMON_STREAM_URL.MAINPAGE);
   const redirectToTurnovers = useRedirect(COMMON_STREAM_URL.STATEMENT_TURNOVER);
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [{}]), [getAvailableActions]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
 
   return {
     onHomeClick: redirectToMainPage,
     header: locale.transactionsScroller.title({
-      dateFrom: formatDateTime(dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
-      dateTo: formatDateTime(dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
+      dateFrom: formatDateTime(info?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
+      dateTo: formatDateTime(info?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
     }),
     actions,
     items: [

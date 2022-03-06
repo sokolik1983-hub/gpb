@@ -1,5 +1,5 @@
 import type { DATE_PERIODS, IUserDeviceInfo } from 'interfaces';
-import type { ACTIONS } from 'interfaces/client/classificators/actions';
+import type { ACTION } from 'interfaces/client/classificators/action';
 import type { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import type { FORMAT } from 'interfaces/client/classificators/format';
 import type { OPERATIONS } from 'interfaces/client/classificators/operations';
@@ -11,7 +11,7 @@ export interface ICreateRequestStatementDto {
   /** Идентификаторы счетов. */
   accountsIds: string[];
   /** Действие. */
-  action: ACTIONS;
+  action: ACTION;
   /** Параметры формирования комплекта документов. */
   creationParams: ICreationParamsDto;
   /** Тип создания документа. */

@@ -1,4 +1,5 @@
-import { DATE_PERIODS, STATEMENT_FORMATS, TRANSACTION_TYPES } from 'interfaces';
+import { DATE_PERIODS, TRANSACTION_TYPES } from 'interfaces';
+import { FORMAT } from 'interfaces/client';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 
@@ -29,14 +30,14 @@ export const DATE_PERIOD_SCROLLER_LABELS = {
 
 /** Наименования форматов выписки. */
 export const STATEMENT_FORMAT_LABELS = {
-  [STATEMENT_FORMATS.C_1]: locale.historyScroller.statementFormat.labels.c1,
-  [STATEMENT_FORMATS.TXT]: locale.historyScroller.statementFormat.labels.txt,
-  [STATEMENT_FORMATS.PDF]: locale.historyScroller.statementFormat.labels.pdf,
-  [STATEMENT_FORMATS.RTF]: locale.historyScroller.statementFormat.labels.rtf,
-  [STATEMENT_FORMATS.EXCEL]: locale.historyScroller.statementFormat.labels.excel,
-  [STATEMENT_FORMATS.XPS]: locale.historyScroller.statementFormat.labels.xps,
-  [STATEMENT_FORMATS.MT_940]: locale.historyScroller.statementFormat.labels.mt940,
-  [STATEMENT_FORMATS.MULTICASH]: locale.historyScroller.statementFormat.labels.multicash,
+  [FORMAT.C1]: locale.historyScroller.statementFormat.labels.c1,
+  [FORMAT.TXT]: locale.historyScroller.statementFormat.labels.txt,
+  [FORMAT.PDF]: locale.historyScroller.statementFormat.labels.pdf,
+  [FORMAT.RTF]: locale.historyScroller.statementFormat.labels.rtf,
+  [FORMAT.EXCEL]: locale.historyScroller.statementFormat.labels.excel,
+  [FORMAT.XPS]: locale.historyScroller.statementFormat.labels.xps,
+  [FORMAT.MT940]: locale.historyScroller.statementFormat.labels.mt940,
+  [FORMAT.MULTICASH]: locale.historyScroller.statementFormat.labels.multicash,
 };
 
 /** Лейблы типов операции. */

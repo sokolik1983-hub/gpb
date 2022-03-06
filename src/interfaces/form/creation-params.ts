@@ -1,6 +1,6 @@
-import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
-import { exportCases } from 'components/export-params-dialog/utils';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
+import { exportCases } from 'utils/export-params-dialog';
 
 /** Параметры создания запроса на выписку. */
 export enum CREATION_PARAMS {

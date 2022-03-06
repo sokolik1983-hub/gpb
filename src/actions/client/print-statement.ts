@@ -1,38 +1,31 @@
-import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { EXPORT_PARAMS_USE_CASES } from 'components/export-params-dialog/statemet-params-use-cases';
-import { hideExportParamsDialogCases } from 'components/export-params-dialog/utils';
-import type { IStatementHistoryRow } from 'interfaces/client';
-import type { ICreateRequestStatementDto } from 'interfaces/client/create-request-statement-dto';
 import { fatalHandler } from 'utils';
-import { to } from '@platform/core';
-import type { IActionConfig } from '@platform/services';
+import { singleAction, to } from '@platform/core';
+import type { IActionConfig, IBaseEntity } from '@platform/services';
+import { mimeTypeToExt, printBase64 } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
- * [Выписки_ЗВ] Клиент: Функция печати документа.
+ * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки.
  *
- * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440703
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
-export const getPrintStatement = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, ICreateRequestStatementDto> => ({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  action: ({ done }) => async (docs: IStatementHistoryRow[]) => {
-    if (hideExportParamsDialogCases.includes(useCase)) {
-      done();
+export const printStatement: IActionConfig<typeof context, Promise<void>> = {
+  action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [IBaseEntity]) => {
+    showLoader();
 
-      return;
-    }
+    const [res, err] = await to(service.printStatement(doc.id));
 
-    const [_, close] = await to(showStatementParamsDialog(useCase));
+    hideLoader();
 
-    if (close) {
-      done();
+    fatal(res?.error);
+    fatal(err);
 
-      return;
-    }
+    const { content, mimeType } = res!;
 
-    // TODO добавить вызов печати по готовности BE
+    printBase64(content, mimeTypeToExt(mimeType));
 
     done();
   },
   fatalHandler,
-});
+  guardians: [singleAction],
+};

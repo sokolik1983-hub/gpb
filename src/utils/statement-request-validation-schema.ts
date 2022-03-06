@@ -1,6 +1,6 @@
 import type { DATE_PERIODS } from 'interfaces';
 import type { ICreateRequestStatementDto, OPERATIONS } from 'interfaces/client';
-import { ACTIONS } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { FORM_FIELD_LABELS, FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import type { SchemaOf } from 'yup';
@@ -23,7 +23,7 @@ export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = obje
   email: string()
     .email(locale.errors.emailFormat)
     .max(100, locale.errors.emailLengthExceeded)
-    .when(getPath('action'), { is: action => action === ACTIONS.SEND_TO_EMAIL, then: string().required(locale.errors.emailRequired) }),
+    .when(getPath('action'), { is: action => action === ACTION.SEND_TO_EMAIL, then: string().required(locale.errors.emailRequired) }),
   periodType: mixed<DATE_PERIODS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE])),
   dateFrom: string()
     .required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_FROM]))

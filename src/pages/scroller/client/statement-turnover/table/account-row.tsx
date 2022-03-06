@@ -3,7 +3,7 @@ import React, { useContext, useMemo, useCallback } from 'react';
 import { executor, createStatement } from 'actions/client';
 import cn from 'classnames';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/client';
-import { TYPE, CREATION_TYPE, ACTIONS, OPERATIONS } from 'interfaces/client';
+import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { Box, WithClickable, ROLE } from '@platform/ui';
@@ -28,9 +28,9 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
+  const doc: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
-      action: ACTIONS.VIEW,
+      action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
       creationType: CREATION_TYPE.NEW,
       sourcePage: COMMON_STREAM_URL.STATEMENT_TURNOVER,
@@ -54,8 +54,8 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
   );
 
   const handleClick = useCallback(async () => {
-    await executor.execute(createStatement, [requestDto]);
-  }, [requestDto]);
+    await executor.execute(createStatement, [doc]);
+  }, [doc]);
 
   return (
     <WithClickable>
