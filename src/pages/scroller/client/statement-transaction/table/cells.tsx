@@ -2,8 +2,11 @@ import type { FC } from 'react';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { executor } from 'actions/client/executor';
 import clamp from 'clamp-js-main';
+import { StopPropagation } from 'components/stop-propagation';
+import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
+import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
 import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
@@ -15,13 +18,17 @@ import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-export type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
   const { operationDate } = value;
 
-  return <Typography.Text>{formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}</Typography.Text>;
+  return (
+    <Typography.Text data-field={'operationDate'}>
+      {formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT })}
+    </Typography.Text>
+  );
 };
 
 OperationDate.displayName = 'OperationDate';
@@ -38,12 +45,14 @@ export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
     <>
       <WithInfoTooltip text={formattedDocumentNumber}>
         {ref => (
-          <Typography.Text innerRef={ref} line={'COLLAPSE'}>
+          <Typography.Text data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
             {formattedDocumentNumber}
           </Typography.Text>
         )}
       </WithInfoTooltip>
-      <Typography.SmallText>{locale.transactionsScroller.labels.documentDate({ date: formattedDate })}</Typography.SmallText>
+      <Typography.SmallText data-field={'documentDate'}>
+        {locale.transactionsScroller.labels.documentDate({ date: formattedDate })}
+      </Typography.SmallText>
     </>
   );
 };
@@ -147,12 +156,14 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
 Purpose.displayName = 'Purpose';
 
 /** Действия со строкой. */
-export const Actions: FC<TransactionCellProps> = ({ value }) => {
+export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
+  const { id } = useParams<IUrlParams>();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [value]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_DROPDOWN_ACTIONS), executor, [[doc], id]), [
     getAvailableActions,
-    value,
+    doc,
+    id,
   ]);
 
   if (actions.length === 0) {
@@ -160,15 +171,17 @@ export const Actions: FC<TransactionCellProps> = ({ value }) => {
   }
 
   return (
-    <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
-      {(ref, _, toggleOpen) => (
-        <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
-          <Box className={css.actionsIconWrapper}>
-            <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+    <StopPropagation>
+      <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
+        {(ref, _, toggleOpen) => (
+          <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
+            <Box className={css.actionsIconWrapper}>
+              <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+            </Box>
           </Box>
-        </Box>
-      )}
-    </WithDropDown>
+        )}
+      </WithDropDown>
+    </StopPropagation>
   );
 };
 

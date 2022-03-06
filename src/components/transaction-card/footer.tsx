@@ -13,6 +13,8 @@ import css from './styles.scss';
 export interface IFooterProps {
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
+  /** Id запроса на выписку. */
+  statementId: string;
 }
 
 const ACTIONS_CONTAINER_POSITION = [CONTAINER_POSITION.TOP, CONTAINER_POSITION.BOTTOM];
@@ -22,33 +24,35 @@ const ACTIONS_CONTAINER_POSITION = [CONTAINER_POSITION.TOP, CONTAINER_POSITION.B
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const Footer: FC<IFooterProps> = ({ transaction }) => {
+export const Footer: FC<IFooterProps> = ({ transaction: doc, statementId: id }) => {
   const { getAvailableActions } = useAuth();
 
-  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_ACTIONS), executor, [transaction]), [
+  const [action] = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_ACTIONS), executor, [[doc], id]), [
     getAvailableActions,
-    transaction,
+    doc,
+    id,
   ]);
 
-  const dropDownActions = useMemo(
-    () => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [transaction]),
-    [getAvailableActions, transaction]
-  );
+  const otherActions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], id]), [
+    getAvailableActions,
+    doc,
+    id,
+  ]);
 
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>
       {action && (
         <>
-          <PrimaryButton extraSmall data-action={action.name} data-name={action.name} dimension="SM" onClick={action.onClick}>
+          <PrimaryButton extraSmall data-name={action.name} dataAction={action.name} dimension="SM" onClick={action.onClick}>
             {action.label}
           </PrimaryButton>
           <Gap />
         </>
       )}
-      {dropDownActions.length > 0 && (
+      {otherActions.length > 0 && (
         <WithDropDown
           extraSmall
-          actions={dropDownActions}
+          actions={otherActions}
           className={css.dropdownActions}
           offset={6}
           positioningOrder={ACTIONS_CONTAINER_POSITION}

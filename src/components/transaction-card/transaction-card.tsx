@@ -4,7 +4,7 @@ import type { IGetTransactionCardResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
-import { dialog, DialogTemplate, Box, Gap, Typography, Tabs, LayoutScroll } from '@platform/ui';
+import { dialog, DialogTemplate, Box, Gap, Typography, Tabs, LayoutScroll, DATA_TYPE } from '@platform/ui';
 import { AttachmentsTab } from './attachments-tab';
 import { TAB_OPTIONS, TABS } from './constants';
 import { Footer } from './footer';
@@ -15,6 +15,8 @@ import css from './styles.scss';
 export interface ITransactionCardProps {
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
+  /** Id запроса на выписку. */
+  statementId: string;
   /** Обработчик закрытия диалога. */
   onClose(): void;
 }
@@ -24,10 +26,10 @@ export interface ITransactionCardProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClose }) => {
+export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, statementId, onClose }) => {
   const [tab, setTab] = useState<TABS>(TABS.REQUISITES);
 
-  const { debit, documentNumber, documentName, documentDate } = transaction;
+  const { debit, documentNumber, documentName, documentDate } = doc;
 
   const header = debit ? locale.transactionCard.header.debit : locale.transactionCard.header.credit;
 
@@ -48,12 +50,17 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction, onClos
           <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
           <Box className={css.contentWrapper}>
             <LayoutScroll>
-              {tab === TABS.REQUISITES ? <RequisitesTab transaction={transaction} /> : <AttachmentsTab transaction={transaction} />}
+              {tab === TABS.REQUISITES ? (
+                <RequisitesTab transaction={doc} />
+              ) : (
+                <AttachmentsTab statementId={statementId} transaction={doc} />
+              )}
             </LayoutScroll>
           </Box>
-          <Footer transaction={transaction} />
+          <Footer statementId={statementId} transaction={doc} />
         </Box>
       }
+      dataType={DATA_TYPE.CONFIRMATION}
       header={''}
       onClose={onClose}
     />
@@ -65,15 +72,17 @@ TransactionCard.displayName = 'TransactionCard';
 /**
  * Показывает диалог "Карточка проводки".
  *
- * @param transaction - Проводка.
+ * @param doc - Проводка.
+ * @param statementId Id запроса на выписку.
  */
-export const showTransactionCard = (transaction: IGetTransactionCardResponseDto) =>
+export const showTransactionCard = (doc: IGetTransactionCardResponseDto, statementId: string) =>
   new Promise((resolve, reject) =>
     dialog.show(
       'transactionCard',
       TransactionCard,
       {
-        transaction,
+        transaction: doc,
+        statementId,
       },
       () => reject(true)
     )

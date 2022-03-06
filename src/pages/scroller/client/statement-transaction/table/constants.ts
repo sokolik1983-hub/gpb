@@ -22,3 +22,5 @@ export const COLUMN_NAMES = {
   // Действия.
   ACTIONS: 'ACTIONS',
 } as const;
+
+export const ONLY_SELECTED_ROWS_CKECKBOX = 'onlySelectedRowsCheckbox';

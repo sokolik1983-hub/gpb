@@ -1610,6 +1610,13 @@ export default {
 			get tomorrowRestriction() {
 				return t('errors.periodStart.tomorrowRestriction');
 			},
+			/**
+			 * @ru
+			 * Дата начала периода не может быть больше даты окончания
+			 */
+			get dateMoreRestriction() {
+				return t('errors.periodStart.dateMoreRestriction');
+			},
 		},
 		periodEnd: {
 			/**
@@ -1618,6 +1625,13 @@ export default {
 			 */
 			get tomorrowRestriction() {
 				return t('errors.periodEnd.tomorrowRestriction');
+			},
+			/**
+			 * @ru
+			 * Дата окончания периода не может быть меньше даты начала
+			 */
+			get dateLessRestriction() {
+				return t('errors.periodEnd.dateLessRestriction');
 			},
 		},
 	},

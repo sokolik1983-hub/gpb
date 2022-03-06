@@ -2,13 +2,16 @@ import type { FC } from 'react';
 import React, { useState, useContext, useEffect, useCallback } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import { ScrollerTableView, useCheckboxColumn } from 'components/scroller-table-view';
+import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
+import { useParams } from 'react-router-dom';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination, useRowSelect } from 'react-table';
 import { Horizon, Typography, Gap, Box, Checkbox } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { columns } from './columns';
+import { ONLY_SELECTED_ROWS_CKECKBOX } from './constants';
 import css from './styles.scss';
 
 /** Таблица скроллера проводок. */
@@ -57,9 +60,14 @@ export const Table: FC = () => {
     selectedFlatRows,
   } = tableInstance;
 
-  const handleClick = useCallback((row: IStatementTransactionRow) => {
-    void executor.execute(viewTransaction, [row]);
-  }, []);
+  const { id } = useParams<IUrlParams>();
+
+  const handleClick = useCallback(
+    (doc: IStatementTransactionRow) => {
+      void executor.execute(viewTransaction, [doc], id);
+    },
+    [id]
+  );
 
   useEffect(() => {
     setSorting(sortBy);
@@ -80,7 +88,7 @@ export const Table: FC = () => {
         <Horizon className={css.totalWrapper}>
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
-          <Typography.Text>
+          <Typography.Text data-field={'total'}>
             {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: transactionsAmountByFilter })}
           </Typography.Text>
           <Horizon.Spacer />
@@ -89,6 +97,7 @@ export const Table: FC = () => {
               extraSmall
               dimension="SM"
               label={locale.transactionsScroller.labels.showOnlySelectedRows}
+              name={ONLY_SELECTED_ROWS_CKECKBOX}
               value={isVisibleOnlySelectedRows}
               onChange={() => setIsVisibleOnlySelectedRows(!isVisibleOnlySelectedRows)}
             />

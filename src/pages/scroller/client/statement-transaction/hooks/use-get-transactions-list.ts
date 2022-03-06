@@ -14,6 +14,19 @@ const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = 
   totalCount: 0,
 };
 
+const SORTING_MAP = {
+  /** Дата и время запроса. */
+  entryDate: 'entryDate',
+  /** Информация о документе. */
+  documentNumber: 'documentNumber',
+  /** Информация о контрагенте. */
+  payeeName: 'payeeName',
+  /** Списания. */
+  outcome: 'amountDebit',
+  /** Поступления. */
+  income: 'amountCredit',
+};
+
 /** Параметр хука useGetStatementList. */
 interface IUseGetStatementListArgs {
   /** Обработанные значения фильтров отправляемых на сервер. */
@@ -31,7 +44,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
-      multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
+      multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting, SORTING_MAP) : undefined,
       ...convertTablePaginationToMetaData(pagination),
     }),
     [filters, pagination, sorting]

@@ -1,4 +1,4 @@
-export * from './actions';
+export * from './action';
 export * from './format';
 export * from './creation-type';
 export * from './type';

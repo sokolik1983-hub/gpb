@@ -5,7 +5,7 @@ import { locale } from 'localization';
 import { useForm } from 'react-final-form';
 import { noop } from 'utils';
 import type { IOption } from '@platform/ui';
-import { Typography, Horizon, Box, Gap, ServiceIcons } from '@platform/ui';
+import { Typography, Horizon, Box, Gap, ServiceIcons, ROLE } from '@platform/ui';
 import { ItemWithRestInPopUp } from '../item-with-rest-in-pop-up';
 import css from './styles.scss';
 
@@ -25,7 +25,7 @@ const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick = noop, d
   };
 
   return (
-    <Box clickable className={css.tag} radius="MAX" onClick={onClick}>
+    <Box clickable className={css.tag} radius="MAX" role={ROLE.BUTTON} onClick={onClick}>
       <Horizon align="CENTER">
         <Typography.P line="NOWRAP">{label}</Typography.P>
         <Gap.X2S />
@@ -73,7 +73,7 @@ export const TagsPanelView: FC<ITagsPanelViewProps> = ({ tags, onRemoveTags, onR
   };
 
   return (
-    <Box className={css.tagsWrapper}>
+    <Box className={css.tagsWrapper} data-name={'tags'} role={ROLE.PANEL}>
       {tags.map(({ value: key, label, disabled }) => {
         const value = tagValueFormatter(key, values);
 

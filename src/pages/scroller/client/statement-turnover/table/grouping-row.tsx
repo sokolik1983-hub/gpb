@@ -3,7 +3,7 @@ import React from 'react';
 import type { IGroupedAccounts, IGroupInfo } from 'interfaces/client';
 import { GROUPING_TYPE } from 'interfaces/client';
 import type { Row } from 'react-table';
-import { Box, Typography, WithInfoTooltip } from '@platform/ui';
+import { Box, Typography, WithInfoTooltip, ROLE } from '@platform/ui';
 import css from './styles.scss';
 
 /**
@@ -48,7 +48,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
     return (
       <Box {...rowProps} className={css.groupingRowByAccount}>
         {cells.map(cell => {
-          const { key: cellKey, ...cellProps } = cell.getCellProps();
+          const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });
 
           return (
             <Box key={cellKey} {...cellProps} className={css.cell}>

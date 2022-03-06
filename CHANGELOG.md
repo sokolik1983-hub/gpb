@@ -1,30 +1,87 @@
+# [2.0.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.5...v2.0.0-release.6) (2022-03-06)
+
+
+### Bug Fixes
+
+* **визард, скроллер:** GBO-17730 добавление привилегий для экшонов и форм ([e153ad1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e153ad15915bea3850ae552dae45a4229a1de40e))
+* GBO-22118 изменена логика валидации диапазона дат ([349d255](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/349d2557b68b3405a82e06de72d82c43513cc6af))
+* **скроллер:** GBO-20559 добавлена сортировка по полям "Расход" и "Приход" ([9ff0234](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9ff0234985c2a5cabad8e2038e7e7f05520a62fc))
+* **скроллер:** GBO-22114 исправлен функционал изменения кол-ва отображаемых элементов ([8d75c77](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d75c77dee6ecdd495fa36223715a7490a8900d4))
+
+
+### Features
+
+* **визард:** GBO-17569 реализация печати / экспорта документов выписки на ЭФ ([93eb351](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/93eb351067a58472d08230c051a57e828cb89df9))
+
+# [2.0.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.4...v2.0.0-release.5) (2022-03-02)
+
+
+### Bug Fixes
+
+* GBO-21708 убрано `min_width` у комп-та строки формы `Row`, для сжимания формы относительно окна ([0dc0e5b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0dc0e5b11f909488470a736ed6162ca9da9dd25a))
+
+# [2.0.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.3...v2.0.0-release.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21690 добавлена проверка на выделение текста при клике по строке таблицы ([f08b300](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f08b3000d7c255739fce9c06c104ddde0cfd98c6))
+
+# [2.0.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.2...v2.0.0-release.3) (2022-03-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21679 заменен hoc предотвращения событий на компонент для точечного использования ([1ff3433](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1ff343341676286d895958deff5db4dddac4b27f))
+
+# [2.0.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.1...v2.0.0-release.2) (2022-02-28)
+
+
+### Bug Fixes
+
+* **визард:** GBO-22072 доработки ЭФ создания запроса выписки ([0fb5e3c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0fb5e3c5ca3fa0d2b9a213abf7de5809e7b88793))
+
+# [2.0.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.2...v2.0.0-release.1) (2022-02-24)
+
+
+### Bug Fixes
+
+* **gitflow:** Миграция на gitflow ([6f3dae9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6f3dae98514a608097b3c49db85558600b8bcdbd))
+* **визард:** GBO-21707 доработки ЭФ создания запроса на выписку ([47490cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/47490cfec6e2b626fe09afe23fae918e0ec5c911))
+
+
+### Features
+
+* bump version [skip ci] ([dabe907](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dabe9071f88b188fd23d494f2a741baea072f7fe))
+* GBO-18233 добавлены атрибуты для АТ ([26d9013](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/26d9013382ce9d48a98181f7c7953b27e18562e7))
+* GBO-21738 добавлены атрибуты АТ ([4026d7e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4026d7e07137bca79089bdb4eef2c2d82c688f2a))
+* GBO-21738 добавлены недостающие атрибуты АТ ([0004871](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0004871671b1636b69c7a7a80f40f194bcc094b2))
+* GBO-21809 реализован компонент "Поиск по таблице" ([c4f1231](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c4f1231e3d6d1df5a5a2c624239312dae72d747c))
+
+
+### BREAKING CHANGES
+
+* **gitflow:** Обновлена платформа
+
 ## [1.1.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.1...v1.1.2) (2022-02-19)
 
 
 ### Bug Fixes
 
-* **gitflow:** Обновлена платформа ([6430f86](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6430f86b6cb85c39b6fa89d82fc031b6fb1cbf31))
-
-## [1.1.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.0...v1.1.1) (2022-02-14)
-
-
-### Bug Fixes
-
-* Retrigger ([0a24f20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0a24f205fbecf74d60dfd1d0c2e199cf442f58c2))
-* **build:** GBO-20276 исправления ошибок линтинга / сборки ([ccba287](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ccba287684a8e5870d9e7d7ab58ca69fa852362c))
-* **визард:** GBO-19870 исправление значения флага в зависимости от кол-ва выбранных счетов ([c134782](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c134782e24b6978d8cd2bcac043d5427f9233c25))
-* **визард:** GBO-20172 доработка предзаполнения значений ЭФ ([34dcfed](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/34dcfed43f4169710f27ee92529da41dbc432cac))
-* **визард:** GBO-20172 доработки предзаполнения операций и параметров создания выписки ([5ac9282](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5ac9282078a355f02d7b48413b7d20cccce46d49))
-* **визард:** GBO-21080 скрытие ЭФ настроек экспорта для некоторых случаев ([d8c1aad](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d8c1aad1ac9953e3d34a2b385ebc5fc0293ca367))
-* **визард:** GBO-21090 исправление условий скрытия некоторых компонентов на ЭФ ([ec93dff](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ec93dff535c0cc59141ec4464666722f9c2308fa))
-* **визард:** GBO-21094 доработка условия раскрытия блока параметров выписки ([52ec98e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/52ec98eb7ebbac92b3a7428d97496d80901ede88))
-* **визард:** GBO-21095 доработка ЭФ настроек экспорта ([15a37b7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/15a37b78b55c801d33cab56158f7ea1d9259f33d))
 * **визард:** GBO-21707 доработка сброса дополнительных параметров ([1319ba5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1319ba57387748ea9323094a0d87a02fa404f787))
 * **скроллер:** GBO-21679 добавлено условие проваливания в запрос выписки - по одному счету ([bc26278](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bc26278719f8894b757d82ca1c2b8d6f3bed3c71))
 * GBO-20128 измененена логика формирования параметров формы запроса выписки ([7cd0390](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7cd0390446e49e178503843f46814e1be182d428))
 * GBO-21298 изменен лейбл группы чекбоксов параметров выписки - всегда "Параметры" ([93a77b0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/93a77b0e406d910dffe01a1e0a90b8361f886a2d))
+* **build:** GBO-20276 исправления ошибок линтинга / сборки ([ccba287](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ccba287684a8e5870d9e7d7ab58ca69fa852362c))
+* **визард:** GBO-19870 исправление значения флага в зависимости от кол-ва выбранных счетов ([c134782](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c134782e24b6978d8cd2bcac043d5427f9233c25))
+* **визард:** GBO-20172 доработка предзаполнения значений ЭФ ([34dcfed](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/34dcfed43f4169710f27ee92529da41dbc432cac))
+* **визард:** GBO-20172 доработки предзаполнения операций и параметров создания выписки ([5ac9282](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5ac9282078a355f02d7b48413b7d20cccce46d49))
 * **визард:** GBO-20276 исправление замечаний + учет мест исользования ЭФ ([dd7bf46](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dd7bf46bf44d1f2e99e8387a597cd1dd875879be))
+* **визард:** GBO-21080 скрытие ЭФ настроек экспорта для некоторых случаев ([d8c1aad](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d8c1aad1ac9953e3d34a2b385ebc5fc0293ca367))
+* **визард:** GBO-21090 исправление условий скрытия некоторых компонентов на ЭФ ([ec93dff](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ec93dff535c0cc59141ec4464666722f9c2308fa))
 * **визард:** GBO-21091 исправление ЭФ создания запроса выписки ([cdf9c44](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cdf9c44ae078d0030212a784ca1c413df204cc1a))
+* **визард:** GBO-21094 доработка условия раскрытия блока параметров выписки ([52ec98e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/52ec98eb7ebbac92b3a7428d97496d80901ede88))
+* **визард:** GBO-21095 доработка ЭФ настроек экспорта ([15a37b7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/15a37b78b55c801d33cab56158f7ea1d9259f33d))
 * **визард:** GBO-21096 исправление компонента выбора временного периода ([d398a87](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d398a8702f2adcc52a10f5e88c1760d7d9f69886))
 * **визард:** GBO-21130 доработка верстки диалога настроек ([16a39a1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/16a39a1f9d015f335f70238bb25eab34e7e261fa))
 * **визард:** GBO-21195 доработка метода формирования запроса на BE ([e61bb0c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e61bb0c909065336f3c0b0259b791bc8a9c901e7))
@@ -54,9 +111,7 @@
 * **форма:** GBO-20983 Реализован экспорт с формы создания выписки ([4508356](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/45083561874ef242d9e8af909f79f8ba5c1f8bc5))
 * bump version [skip ci] ([46dcaa4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/46dcaa4251c87e8bb9a582f34ef69474fc842db3))
 
-## [1.0.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.1...v1.0.2) (2022-02-04)
-
-## [1.0.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.0...v1.0.1) (2022-01-26)
+# [1.1.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.0.0...v1.1.0) (2022-01-26)
 
 
 ### Features

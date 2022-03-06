@@ -1,9 +1,10 @@
 import type { FC, ChangeEvent } from 'react';
 import React from 'react';
-import { withStopPropagation } from 'hocs';
+import { StopPropagation } from 'components/stop-propagation';
 import { COLUMN_PADDING_TYPES } from 'interfaces';
 import type { HeaderProps, CellProps, Hooks } from 'react-table';
 import { Checkbox } from '@platform/ui';
+import { FIELD_NAMES } from './constants';
 
 /** Компонент заголовка колонки с чекбоксами. */
 const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSelectedProps }) => {
@@ -14,6 +15,7 @@ const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSele
       extraSmall
       dimension="SM"
       indeterminate={indeterminate}
+      name={FIELD_NAMES.HEADER_CHECKBOX}
       value={checked}
       onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
     />
@@ -29,13 +31,15 @@ const Cell: FC<CheckboxCellProps> = ({ row }) => {
   const { checked, indeterminate, onChange } = row.getToggleRowSelectedProps();
 
   return (
-    <Checkbox
-      extraSmall
-      dimension="SM"
-      indeterminate={indeterminate}
-      value={checked}
-      onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
-    />
+    <StopPropagation>
+      <Checkbox
+        extraSmall
+        dimension="SM"
+        indeterminate={indeterminate}
+        value={checked}
+        onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
+      />
+    </StopPropagation>
   );
 };
 
@@ -56,7 +60,7 @@ export const useCheckboxColumn = <T extends Record<string, any>>(hooks: Hooks<T>
       disableSortBy: true,
       disableResizing: true,
       Header,
-      Cell: withStopPropagation<CheckboxCellProps>(Cell),
+      Cell,
       paddingType: COLUMN_PADDING_TYPES.RIGHT_REDUCED,
     },
     ...columns,

@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 import type { ICategoryTabsProps } from '@platform/ui';
-import { Box, Separator, CategoryTabs, LoaderOverlay } from '@platform/ui';
+import { Box, Separator, CategoryTabs, LoaderOverlay, DATA_TYPE } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ScrollerPageLayout. */
@@ -25,7 +25,7 @@ export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({
     {navigationLine}
     <Separator />
     {isLoading ? (
-      <LoaderOverlay opened={isLoading} />
+      <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={isLoading} />
     ) : (
       <>
         {categoryTabsProps && (

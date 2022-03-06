@@ -2,8 +2,10 @@ import type { FC } from 'react';
 import React, { useContext, useMemo, Fragment } from 'react';
 import { executor } from 'actions/client';
 import { ItemWithRestInPopUp } from 'components';
-import { DATE_PERIODS, STATEMENT_ACTION_TYPES } from 'interfaces';
+import { StopPropagation } from 'components/stop-propagation';
+import { DATE_PERIODS } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
 import type { CellProps } from 'react-table';
@@ -14,21 +16,22 @@ import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, Box, Horizon, Status as StatusMarker, Gap } from '@platform/ui';
+import { Typography, Box, Horizon, Status as StatusMarker, Gap, ROLE } from '@platform/ui';
 import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячеек таблицы истории. */
-export type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
+type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
 
 /** Дата и время создания запроса выписки. */
-export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
-  const [date, time] = formatDateTime(value.createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
+export const CreatedAtCell: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { createdAt } = doc;
+  const [date, time] = formatDateTime(createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
 
   return (
     <>
-      <Typography.Text>{date}</Typography.Text>
-      <Typography.SmallText>{time}</Typography.SmallText>
+      <Typography.Text data-field={'createdAtDate'}>{date}</Typography.Text>
+      <Typography.SmallText data-field={'createdAtTime'}>{time}</Typography.SmallText>
     </>
   );
 };
@@ -36,8 +39,8 @@ export const CreatedAtCell: FC<HistoryCellProps> = ({ value }) => {
 CreatedAtCell.displayName = 'CreatedAtCell';
 
 /** Информация по счёту и по организации. */
-export const AccountNumber: FC<HistoryCellProps> = ({ value }) => {
-  const { accountsIds, accountNumbers, organizationNames } = value;
+export const AccountNumber: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { accountsIds, accountNumbers, organizationNames } = doc;
   const { accounts } = useContext(HistoryScrollerContext);
 
   const formattedAccounts = useMemo(() => accountNumbers.map(item => formatAccountCode(item)), [accountNumbers]);
@@ -61,8 +64,8 @@ export const AccountNumber: FC<HistoryCellProps> = ({ value }) => {
 AccountNumber.displayName = 'AccountNumber';
 
 /** Тип периода. */
-export const Period: FC<HistoryCellProps> = ({ value }) => {
-  const { periodType, periodStart, periodEnd } = value;
+export const Period: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { periodType, periodStart, periodEnd } = doc;
 
   let dateText: string;
 
@@ -81,8 +84,8 @@ export const Period: FC<HistoryCellProps> = ({ value }) => {
 
   return (
     <>
-      <Typography.Text>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.Text>
-      <Typography.SmallText>{dateText}</Typography.SmallText>
+      <Typography.Text data-field={'periodType'}>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.Text>
+      <Typography.SmallText data-field={'dateText'}>{dateText}</Typography.SmallText>
     </>
   );
 };
@@ -90,26 +93,28 @@ export const Period: FC<HistoryCellProps> = ({ value }) => {
 Period.displayName = 'Period';
 
 /** Формат запроса выписки. */
-export const StatementFormat: FC<HistoryCellProps> = ({ value }) => {
-  const { statementFormat, action } = value;
+export const StatementFormat: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { statementFormat, action } = doc;
 
-  if (action === STATEMENT_ACTION_TYPES.VIEW) {
+  if (action === ACTION.VIEW) {
     return <Typography.Text>{locale.historyScroller.statementFormat.labels.onScreen}</Typography.Text>;
   }
 
-  return <Typography.Text>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.Text>;
+  return <Typography.Text data-field={'statementFormat'}>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.Text>;
 };
 
 StatementFormat.displayName = 'StatementFormat';
 
 /** Статус запроса выписки. */
-export const Status: FC<HistoryCellProps> = ({ value }) => {
-  const { status } = value;
+export const Status: FC<HistoryCellProps> = ({ value: doc }) => {
+  const { status } = doc;
 
   return (
     <Horizon align="TOP">
       <StatusMarker className={css.status} type={STATUS_COLOR[status]} />
-      <Typography.Text line="BREAK">{STATUS_LABELS[status]}</Typography.Text>
+      <Typography.Text data-field={'status'} line="BREAK">
+        {STATUS_LABELS[status]}
+      </Typography.Text>
     </Horizon>
   );
 };
@@ -117,12 +122,11 @@ export const Status: FC<HistoryCellProps> = ({ value }) => {
 Status.displayName = 'Status';
 
 /** Действия со строкой. */
-export const Actions: FC<HistoryCellProps> = ({ value }) => {
+export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
-
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value]]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc], doc.id, doc.statementFormat]), [
     getAvailableActions,
-    value,
+    doc,
   ]);
 
   return (
@@ -134,7 +138,9 @@ export const Actions: FC<HistoryCellProps> = ({ value }) => {
         return (
           <Fragment key={name}>
             {index !== 0 && <Gap.LG />}
-            <Icon clickable fill={'FAINT'} scale={'MD'} onClick={onClick} />
+            <StopPropagation>
+              <Icon clickable fill={'FAINT'} role={ROLE.BUTTON} scale={'MD'} onClick={onClick} />
+            </StopPropagation>
           </Fragment>
         );
       })}

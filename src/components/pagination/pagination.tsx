@@ -26,11 +26,12 @@ interface IPaginationProps {
 export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagination }) => {
   const {
     pageCount,
-    setPageSize,
     state: { pageSize, pageIndex },
   } = tableInstance;
 
   const gotoPage = (newPageIndex: number) => setPagination({ pageSize, pageIndex: newPageIndex });
+
+  const setPageSize = (newPageSize: number) => setPagination({ pageSize: newPageSize, pageIndex });
 
   return (
     <Box className={css.paginationWrapper}>
@@ -41,7 +42,7 @@ export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagin
             <Horizon>
               <Typography.P line="NOWRAP">{locale.scroller.pagination.displayBy}</Typography.P>
               <Gap.XS />
-              <Select extraSmall options={COUNT_OPTIONS} value={pageSize} width="auto" onChange={setPageSize} />
+              <Select extraSmall name="pageCount" options={COUNT_OPTIONS} value={pageSize} width="auto" onChange={setPageSize} />
             </Horizon>
           </Horizon>
         </Pattern.Span>

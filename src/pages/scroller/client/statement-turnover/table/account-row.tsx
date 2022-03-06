@@ -3,10 +3,11 @@ import React, { useContext, useMemo, useCallback } from 'react';
 import { executor, createStatement } from 'actions/client';
 import cn from 'classnames';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/client';
-import { TYPE, CREATION_TYPE, ACTIONS, OPERATIONS } from 'interfaces/client';
+import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { Box, WithClickable } from '@platform/ui';
+import { getHandlerDependingOnSelection } from 'utils';
+import { Box, WithClickable, ROLE } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import css from './styles.scss';
@@ -30,7 +31,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
 
   const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
-      action: ACTIONS.VIEW,
+      action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
       creationType: CREATION_TYPE.NEW,
       sourcePage: COMMON_STREAM_URL.STATEMENT_TURNOVER,
@@ -54,7 +55,9 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
   );
 
   const handleClick = useCallback(async () => {
-    await executor.execute(createStatement, [requestDto]);
+    const executeHandler = getHandlerDependingOnSelection(executor.execute);
+
+    await executeHandler(createStatement, [requestDto]);
   }, [requestDto]);
 
   return (
@@ -65,10 +68,11 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
           {...rowProps}
           className={cn(css.clickableRow, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
+          role={ROLE.ROW}
           onClick={handleClick}
         >
           {cells.map(cell => {
-            const { key: cellKey, ...cellProps } = cell.getCellProps();
+            const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });
 
             return (
               <Box key={cellKey} {...cellProps} className={css.cell}>
