@@ -1,3 +1,18 @@
+# [2.0.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.5...v2.0.0-release.6) (2022-03-06)
+
+
+### Bug Fixes
+
+* **визард, скроллер:** GBO-17730 добавление привилегий для экшонов и форм ([e153ad1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e153ad15915bea3850ae552dae45a4229a1de40e))
+* GBO-22118 изменена логика валидации диапазона дат ([349d255](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/349d2557b68b3405a82e06de72d82c43513cc6af))
+* **скроллер:** GBO-20559 добавлена сортировка по полям "Расход" и "Приход" ([9ff0234](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9ff0234985c2a5cabad8e2038e7e7f05520a62fc))
+* **скроллер:** GBO-22114 исправлен функционал изменения кол-ва отображаемых элементов ([8d75c77](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d75c77dee6ecdd495fa36223715a7490a8900d4))
+
+
+### Features
+
+* **визард:** GBO-17569 реализация печати / экспорта документов выписки на ЭФ ([93eb351](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/93eb351067a58472d08230c051a57e828cb89df9))
+
 # [2.0.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0-release.4...v2.0.0-release.5) (2022-03-02)
 
 
