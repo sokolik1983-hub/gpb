@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { executor } from 'actions/client/executor';
 import clamp from 'clamp-js-main';
+import { StopPropagation } from 'components/stop-propagation';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -17,7 +18,7 @@ import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-export type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
@@ -170,15 +171,17 @@ export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
   }
 
   return (
-    <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
-      {(ref, _, toggleOpen) => (
-        <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
-          <Box className={css.actionsIconWrapper}>
-            <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+    <StopPropagation>
+      <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
+        {(ref, _, toggleOpen) => (
+          <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
+            <Box className={css.actionsIconWrapper}>
+              <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
+            </Box>
           </Box>
-        </Box>
-      )}
-    </WithDropDown>
+        )}
+      </WithDropDown>
+    </StopPropagation>
   );
 };
 

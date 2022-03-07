@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React, { useContext, useMemo, Fragment } from 'react';
 import { executor } from 'actions/client';
 import { ItemWithRestInPopUp } from 'components';
+import { StopPropagation } from 'components/stop-propagation';
 import { DATE_PERIODS } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
@@ -20,7 +21,7 @@ import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячеек таблицы истории. */
-export type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
+type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
 
 /** Дата и время создания запроса выписки. */
 export const CreatedAtCell: FC<HistoryCellProps> = ({ value: doc }) => {
@@ -137,7 +138,9 @@ export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
         return (
           <Fragment key={name}>
             {index !== 0 && <Gap.LG />}
-            <Icon clickable fill={'FAINT'} role={ROLE.BUTTON} scale={'MD'} onClick={onClick} />
+            <StopPropagation>
+              <Icon clickable fill={'FAINT'} role={ROLE.BUTTON} scale={'MD'} onClick={onClick} />
+            </StopPropagation>
           </Fragment>
         );
       })}

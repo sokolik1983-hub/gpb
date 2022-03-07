@@ -14,7 +14,7 @@ export interface IRowProps {
 /** Компонент строки формы. */
 export const Row: React.FC<IRowProps> = ({ label, children, align }) => (
   <>
-    <Horizon align={align} className={css.rowWrapper}>
+    <Horizon align={align}>
       <Typography.Text className={css.rowLabel}>{label}</Typography.Text>
       {children}
     </Horizon>

@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React, { useCallback } from 'react';
 import cn from 'classnames';
 import type { Row } from 'react-table';
+import { getHandlerDependingOnSelection } from 'utils';
 import { Box, WithClickable, ROLE } from '@platform/ui';
 import css from './styles.scss';
 import { getCellPaddingClass } from './utils';
@@ -20,7 +21,13 @@ export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
 
   const { key, ...rowProps } = getRowProps({ role: ROLE.ROW });
 
-  const handleClick = useCallback(() => onClick?.(original), [onClick, original]);
+  const handleClick = useCallback(() => {
+    if (onClick) {
+      const clickHandler = getHandlerDependingOnSelection(onClick);
+
+      clickHandler(original);
+    }
+  }, [onClick, original]);
 
   return (
     <WithClickable>

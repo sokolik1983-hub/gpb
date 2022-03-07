@@ -6,7 +6,6 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'rowLabel': string;
-    'rowWrapper': string;
   }
 }
 

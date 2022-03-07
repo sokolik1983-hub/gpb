@@ -6,6 +6,7 @@ import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfac
 import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
+import { getHandlerDependingOnSelection } from 'utils';
 import { Box, WithClickable, ROLE } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -28,7 +29,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const doc: Partial<ICreateRequestStatementDto> = useMemo(
+  const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
       action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
@@ -54,8 +55,10 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
   );
 
   const handleClick = useCallback(async () => {
-    await executor.execute(createStatement, [doc]);
-  }, [doc]);
+    const executeHandler = getHandlerDependingOnSelection(executor.execute);
+
+    await executeHandler(createStatement, [requestDto]);
+  }, [requestDto]);
 
   return (
     <WithClickable>
