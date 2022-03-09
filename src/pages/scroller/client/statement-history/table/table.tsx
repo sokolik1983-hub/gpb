@@ -5,6 +5,8 @@ import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination } from 'react-table';
+import { PRIVILEGE } from 'stream-constants/client';
+import { isFunctionAvailability } from 'utils';
 import { Horizon, Typography, Gap, Box } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
@@ -40,6 +42,11 @@ export const Table: FC = () => {
 
   const handleClick = useCallback((doc: IStatementHistoryRow) => {
     if (doc.accountsIds.length === 1) {
+      // TODO: в дальнейшем заменить на платформенный аналог
+      if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW)) {
+        return;
+      }
+
       void executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
     }
   }, []);
