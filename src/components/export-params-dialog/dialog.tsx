@@ -3,6 +3,7 @@ import { Content } from 'components/export-params-dialog/content';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { IFormState } from 'interfaces/form/form-state';
 import { getInitialFormState } from 'interfaces/form/form-state';
+import { locale } from 'localization';
 import { Form } from 'react-final-form';
 import { dialog } from '@platform/ui';
 import type { IDialogContext } from './dialog-context';
@@ -48,3 +49,14 @@ export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES) =>
   new Promise<IFormState>((resolve, reject) =>
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, onSubmit: resolve }, () => reject(true))
   );
+
+/**
+ * Диалог экспорта неактуальной выписки.
+ *
+ * @param onOk - Функция экспорта неактуальной выписки.
+ */
+export const showExportOutdatedStatementDialog = (onOk: () => void) =>
+  dialog.showConfirmation(locale.exportParamsDialog.exportOutdatedStatement.label, onOk, {
+    cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
+    okButtonText: locale.exportParamsDialog.buttons.ok.label,
+  });

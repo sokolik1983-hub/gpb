@@ -680,8 +680,17 @@
   "exportParamsDialog.buttons.print.label": {
     "ru": "Печать"
   },
+  "exportParamsDialog.buttons.ok.label": {
+    "ru": "Да"
+  },
+  "exportParamsDialog.buttons.cancel.label": {
+    "ru": "Нет"
+  },
   "exportParamsDialog.exportStatement.label": {
     "ru": "Экспорт выписки"
+  },
+  "exportParamsDialog.exportOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
   },
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"

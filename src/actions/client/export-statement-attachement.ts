@@ -1,5 +1,6 @@
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
-import { showStatementParamsDialog } from 'components/export-params-dialog';
+import { showExportOutdatedStatementDialog, showStatementParamsDialog } from 'components/export-params-dialog';
+import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
 import type { FORMAT } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { convertToAttachmentRequest, fatalHandler, getUserDeviceInfo } from 'utils';
@@ -49,22 +50,69 @@ export const getExportStatementAttachment = (useCase: EXPORT_PARAMS_USE_CASES): 
       dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat, formState!);
     }
 
-    showLoader();
+    /** Функция экспорта выписки. */
+    const handleCreateAttachment = async () => {
+      showLoader();
 
-    const [res, err] = await to(service.createAttachment(dto));
+      const [result, error] = await to(service.createAttachment(dto));
 
-    hideLoader();
+      hideLoader();
 
-    fatal(res?.error);
-    fatal(err);
+      fatal(result?.error);
+      fatal(error);
 
-    const { content, mimeType, fileName } = res!;
+      const { content, mimeType, fileName } = result!;
 
-    showFile(content, fileName, mimeType);
+      showFile(content, fileName, mimeType);
 
-    addSucceeded(res);
+      addSucceeded(result);
 
-    done();
+      done();
+    };
+
+    const [doc] = docs;
+
+    /** Функция получения статуса актуальности выписки. */
+    const getStatus = async () => {
+      showLoader();
+
+      const [result, error] = await to(service.getStatementRelevanceStatus(doc.id));
+
+      hideLoader();
+
+      fatal(result?.error);
+      fatal(error);
+
+      const {
+        data: { status },
+      } = result!;
+
+      return status;
+    };
+
+    switch (useCase) {
+      case EXPORT_PARAMS_USE_CASES.FOURTEEN: {
+        const status = await getStatus();
+
+        switch (status) {
+          case STATEMENT_RELEVANCE_STATUS.ACTUAL:
+            await handleCreateAttachment();
+            break;
+          case STATEMENT_RELEVANCE_STATUS.OUTDATED:
+            showExportOutdatedStatementDialog(handleCreateAttachment);
+
+            done();
+            break;
+          default:
+            done();
+        }
+
+        break;
+      }
+      default: {
+        await handleCreateAttachment();
+      }
+    }
   },
   guardians: getGuardians(useCase),
   fatalHandler,
