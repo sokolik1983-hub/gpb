@@ -21,6 +21,7 @@ import type {
   ICreateRequestStatementDto,
   IStatementSummaryInfoRequestDto,
   IGetTransactionCardRequestDto,
+  IGetStatementRelevanceStatus,
 } from 'interfaces/client';
 import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
 import type { ICollectionResponse } from '@platform/services';
@@ -178,4 +179,9 @@ export const statementService = {
       content: resp.data.content,
     };
   },
+  /** Получить статус актуальности выписки. */
+  getStatementRelevanceStatus: (statementRequestId: string): Promise<IServerDataResp<IGetStatementRelevanceStatus>> =>
+    request({
+      url: `${STATEMENT_URL}/get-status/${statementRequestId}`,
+    }).then(r => r.data),
 };

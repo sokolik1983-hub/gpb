@@ -1664,6 +1664,24 @@ export default {
 					return t('exportParamsDialog.buttons.print.label');
 				},
 			},
+			ok: {
+				/**
+				 * @ru
+				 * Да
+				 */
+				get label() {
+					return t('exportParamsDialog.buttons.ok.label');
+				},
+			},
+			cancel: {
+				/**
+				 * @ru
+				 * Нет
+				 */
+				get label() {
+					return t('exportParamsDialog.buttons.cancel.label');
+				},
+			},
 		},
 		exportStatement: {
 			/**
@@ -1672,6 +1690,15 @@ export default {
 			 */
 			get label() {
 				return t('exportParamsDialog.exportStatement.label');
+			},
+		},
+		exportOutdatedStatement: {
+			/**
+			 * @ru
+			 * Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?
+			 */
+			get label() {
+				return t('exportParamsDialog.exportOutdatedStatement.label');
 			},
 		},
 		printStatement: {
