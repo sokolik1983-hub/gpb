@@ -25,7 +25,7 @@ export const routes = [
   <GuardRoute
     key="client-statement-transactions-scroller"
     exact
-    authority={[PRIVILEGE.ACCOUNTING_ENTRY_VIEW, PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW]}
+    authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
     component={StatementTransactionScrollerPage}
     path={`${COMMON_STREAM_URL.STATEMENT_TRANSACTIONS}/${ID_URL_PARAMETER}`}
   />,
