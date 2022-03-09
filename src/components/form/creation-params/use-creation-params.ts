@@ -6,7 +6,12 @@ import { FormContext } from 'interfaces/form/form-context';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
-import { creationParamsShowCases, esignCheckboxShowCases, hideEmptyTurnoversCheckboxShowCases } from 'utils/export-params-dialog';
+import {
+  creationParamsShowCases,
+  getHideEmptyTurnoverCases,
+  getHideEsignCases,
+  getHideSeparateAccountFilesCases,
+} from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
@@ -17,8 +22,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
   const [options, setOptions] = useState<ICheckboxOption[]>([]);
 
-  const isHideEmptyTurnoversCheckboxShow = hideEmptyTurnoversCheckboxShowCases.includes(useCase!);
-  const withEsignCheckboxShow = esignCheckboxShowCases.includes(useCase!);
   const withDocumentsSetCheckboxShow = creationParamsShowCases.includes(useCase!);
 
   useEffect(() => {
@@ -33,7 +36,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
-          if (!useCase) {
+          if (!useCase || (useCase && !getHideSeparateAccountFilesCases(values.action!))) {
             acc.push({ ...x, disabled: !hasMoreThenOneAccounts });
           }
 
@@ -46,14 +49,14 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.WITH_SIGN: {
-          if (isPdf && (!useCase || (useCase && withEsignCheckboxShow))) {
+          if (isPdf && (!useCase || (useCase && !getHideEsignCases(values.action!).includes(useCase)))) {
             acc.push(x);
           }
 
           break;
         }
         case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          if (!useCase || (useCase && isHideEmptyTurnoversCheckboxShow)) {
+          if (!useCase || (useCase && !getHideEmptyTurnoverCases(values.action!))) {
             acc.push(x);
           }
 
@@ -68,16 +71,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     }, []);
 
     setOptions(newOptions);
-  }, [
-    change,
-    isHideEmptyTurnoversCheckboxShow,
-    isPdf,
-    useCase,
-    values.accountIds.length,
-    withDocumentsSetCheckboxShow,
-    withEsignCheckboxShow,
-    withSign,
-  ]);
+  }, [change, isPdf, useCase, values.accountIds.length, values.action, withDocumentsSetCheckboxShow, withSign]);
 
   useEffect(() => {
     if (!withDocumentsSet) {

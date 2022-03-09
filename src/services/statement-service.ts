@@ -2,7 +2,7 @@ import type {
   IExpandedScrollerResponceDto,
   IExpandedCollectionResponse,
   IScrollerResponceDto,
-  IExportStatementResponse,
+  ICreateAttachmentResponse,
   FieldsRequired,
 } from 'interfaces';
 import type {
@@ -142,7 +142,7 @@ export const statementService = {
       url: `${TRANSACTION_URL}`,
     }).then(r => r.data),
   /** Возвращает файл для экспорта по Id запроса выписки. */
-  exportStatement: async (id: string): Promise<IExportStatementResponse> => {
+  exportStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
     const { data: resp } = await request({
       url: `${STATEMENT_URL}/attachment/${id}`,
     });
@@ -154,7 +154,7 @@ export const statementService = {
     };
   },
   /** Возвращает файл для печати по Id запроса выписки. */
-  printStatement: async (id: string): Promise<IExportStatementResponse> => {
+  printStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
     const { data: resp } = await request({
       url: `${STATEMENT_URL}/print/${id}`,
     });
@@ -166,7 +166,7 @@ export const statementService = {
     };
   },
   /** Формирует вложения для печати / экспорта. */
-  createAttachment: async (data: ICreateAttachmentRequestDto): Promise<IExportStatementResponse> => {
+  createAttachment: async (data: ICreateAttachmentRequestDto): Promise<ICreateAttachmentResponse> => {
     const { data: resp } = await request({
       url: `${STATEMENT_URL}/create-attachment`,
       method: 'POST',
