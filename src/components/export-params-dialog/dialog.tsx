@@ -50,13 +50,12 @@ export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES) =>
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, onSubmit: resolve }, () => reject(true))
   );
 
-/**
- * Диалог экспорта неактуальной выписки.
- *
- * @param onOk - Функция экспорта неактуальной выписки.
- */
-export const showExportOutdatedStatementDialog = (onOk: () => void) =>
-  dialog.showConfirmation(locale.exportParamsDialog.exportOutdatedStatement.label, onOk, {
-    cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
-    okButtonText: locale.exportParamsDialog.buttons.ok.label,
-  });
+/** Диалог экспорта неактуальной выписки. */
+export const showExportOutdatedStatementDialog = () =>
+  new Promise<void>((resolve, reject) =>
+    dialog.showConfirmation(locale.exportParamsDialog.exportOutdatedStatement.label, resolve, {
+      cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
+      okButtonText: locale.exportParamsDialog.buttons.ok.label,
+      onClose: () => reject(true),
+    })
+  );

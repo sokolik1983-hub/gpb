@@ -1,10 +1,10 @@
+import { getCreateAttachment } from 'actions/client/create-attachement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
-import { showExportOutdatedStatementDialog, showStatementParamsDialog } from 'components/export-params-dialog';
+import { showExportOutdatedStatementDialog } from 'components/export-params-dialog/dialog';
+import type { ICreateAttachmentResponse } from 'interfaces';
 import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
-import type { FORMAT } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import { convertToAttachmentRequest, fatalHandler, getUserDeviceInfo } from 'utils';
-import { hideExportParamsDialogCases } from 'utils/export-params-dialog';
+import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { showFile } from '@platform/services/client';
@@ -24,95 +24,60 @@ const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
-export const getExportStatementAttachment = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, unknown> => ({
-  action: ({ done, fatal, addSucceeded }, { showLoader, hideLoader, service }) => async (
+export const getExportStatementAttachment = (
+  useCase: EXPORT_PARAMS_USE_CASES
+): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
+  action: ({ done, fatal, addSucceeded, execute }, { service, showLoader, hideLoader }) => async (
     docs: IBaseEntity[],
-    statementId: string,
-    statementFormat?: FORMAT
+    statementId?: string
   ) => {
-    let dto;
+    if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
+      const [doc] = docs;
 
-    if (hideExportParamsDialogCases.includes(useCase)) {
-      const userDeviceInfo = await getUserDeviceInfo();
-
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat);
-    } else {
-      const [formState, close] = await to(showStatementParamsDialog(useCase));
-
-      if (close) {
-        done();
-
-        return;
-      }
-
-      const userDeviceInfo = await getUserDeviceInfo();
-
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat, formState!);
-    }
-
-    /** Функция экспорта выписки. */
-    const handleCreateAttachment = async () => {
       showLoader();
 
-      const [result, error] = await to(service.createAttachment(dto));
+      const [res, err] = await to(service.getStatementRelevanceStatus(doc.id));
 
       hideLoader();
 
-      fatal(result?.error);
-      fatal(error);
+      fatal(res?.error);
+      fatal(err);
 
-      const { content, mimeType, fileName } = result!;
+      const { status } = res!.data;
 
-      showFile(content, fileName, mimeType);
+      if (status === STATEMENT_RELEVANCE_STATUS.OUTDATED) {
+        const [_, cancel] = await to(showExportOutdatedStatementDialog());
 
-      addSucceeded(result);
+        if (cancel) {
+          done();
 
-      done();
-    };
-
-    const [doc] = docs;
-
-    /** Функция получения статуса актуальности выписки. */
-    const getStatus = async () => {
-      showLoader();
-
-      const [result, error] = await to(service.getStatementRelevanceStatus(doc.id));
-
-      hideLoader();
-
-      fatal(result?.error);
-      fatal(error);
-
-      const {
-        data: { status },
-      } = result!;
-
-      return status;
-    };
-
-    switch (useCase) {
-      case EXPORT_PARAMS_USE_CASES.FOURTEEN: {
-        const status = await getStatus();
-
-        switch (status) {
-          case STATEMENT_RELEVANCE_STATUS.ACTUAL:
-            await handleCreateAttachment();
-            break;
-          case STATEMENT_RELEVANCE_STATUS.OUTDATED:
-            showExportOutdatedStatementDialog(handleCreateAttachment);
-
-            done();
-            break;
-          default:
-            done();
+          return;
         }
-
-        break;
-      }
-      default: {
-        await handleCreateAttachment();
       }
     }
+
+    const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD);
+
+    const {
+      succeeded: [data],
+      failed: [error],
+    } = await execute(createAttachment, docs, statementId);
+
+    fatal(error);
+
+    if (!data) {
+      done();
+
+      return;
+    }
+
+    const { content, mimeType, fileName } = data;
+
+    showFile(content, fileName, mimeType);
+
+    addSucceeded();
+
+    done();
   },
   guardians: getGuardians(useCase),
   fatalHandler,

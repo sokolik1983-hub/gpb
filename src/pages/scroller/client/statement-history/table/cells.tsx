@@ -124,10 +124,7 @@ Status.displayName = 'Status';
 /** Действия со строкой. */
 export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc], doc.id, doc.statementFormat]), [
-    getAvailableActions,
-    doc,
-  ]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc]]), [getAvailableActions, doc]);
 
   return (
     <Horizon align="TOP">

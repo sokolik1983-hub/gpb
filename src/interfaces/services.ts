@@ -23,7 +23,7 @@ export interface IExpandedCollectionResponse<T> extends ICollectionResponse<T> {
 }
 
 /** ДТО ответа от метода печати / экспорта выписки или ее документов. */
-export interface IExportStatementResponse {
+export interface ICreateAttachmentResponse {
   /** MIME-тип. */
   mimeType: string;
   /** Контент в base64. */

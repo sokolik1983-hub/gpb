@@ -1,10 +1,9 @@
-import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { EXPORT_PARAMS_USE_CASES, IStatementHistoryRow, IStatementTransactionRow, FORMAT } from 'interfaces/client';
+import { getCreateAttachment } from 'actions/client/create-attachement';
+import type { ICreateAttachmentResponse } from 'interfaces';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
-import { convertToAttachmentRequest, fatalHandler, getUserDeviceInfo } from 'utils';
-import { hideExportParamsDialogCases } from 'utils/export-params-dialog';
-import { to } from '@platform/core';
-import type { IActionConfig } from '@platform/services';
+import { fatalHandler } from 'utils';
+import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { mimeTypeToExt, printBase64 } from '@platform/services/client';
 import type { context } from './executor';
 
@@ -13,46 +12,30 @@ import type { context } from './executor';
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440703
  */
-export const getPrintStatementAttachment = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, unknown> => ({
-  action: ({ done, fatal, addSucceeded }, { showLoader, hideLoader, service }) => async (
-    docs: IStatementHistoryRow[] | IStatementTransactionRow[],
-    statementId: string,
-    statementFormat?: FORMAT
-  ) => {
-    let dto;
+export const getPrintStatementAttachment = (
+  useCase: EXPORT_PARAMS_USE_CASES
+): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
+  action: ({ done, fatal, addSucceeded, execute }) => async (docs: IBaseEntity[], statementId?: string) => {
+    const createAttachment = getCreateAttachment(useCase, ACTION.PRINT);
 
-    if (hideExportParamsDialogCases.includes(useCase)) {
-      const userDeviceInfo = await getUserDeviceInfo();
+    const {
+      succeeded: [data],
+      failed: [error],
+    } = await execute(createAttachment, docs, statementId);
 
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat);
-    } else {
-      const [formState, close] = await to(showStatementParamsDialog(useCase));
+    fatal(error);
 
-      if (close) {
-        done();
+    if (!data) {
+      done();
 
-        return;
-      }
-
-      const userDeviceInfo = await getUserDeviceInfo();
-
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.PRINT, useCase, userDeviceInfo, statementFormat, formState!);
+      return;
     }
 
-    showLoader();
-
-    const [res, err] = await to(service.createAttachment(dto));
-
-    hideLoader();
-
-    fatal(res?.error);
-    fatal(err);
-
-    const { content, mimeType } = res!;
+    const { content, mimeType } = data;
 
     printBase64(content, mimeTypeToExt(mimeType));
 
-    addSucceeded(res);
+    addSucceeded();
 
     done();
   },
