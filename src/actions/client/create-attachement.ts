@@ -2,8 +2,14 @@ import { showStatementParamsDialog } from 'components/export-params-dialog';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT } from 'interfaces/client';
 import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
-import { convertToCreationParams, convertToExtendedCreationParams, fatalHandler, fileFormatShowCases, getUserDeviceInfo } from 'utils';
-import { showExportParamsDialogCases } from 'utils/export-params-dialog';
+import {
+  convertToCreationParams,
+  convertToExtendedCreationParams,
+  fatalHandler,
+  fileFormatShowCases,
+  getUserDeviceInfo,
+  hideExportParamsDialogCases,
+} from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
@@ -23,7 +29,7 @@ export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: AC
     };
     let otherParams: Partial<ICreateAttachmentRequestDto> = {};
 
-    const isShowDialog = showExportParamsDialogCases.includes(useCase);
+    const isShowDialog = !hideExportParamsDialogCases.includes(useCase);
 
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
       const [doc] = docs as IStatementHistoryRow[];
@@ -47,7 +53,7 @@ export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: AC
     }
 
     if (isShowDialog) {
-      const [formState, close] = await to(showStatementParamsDialog(useCase));
+      const [formState, close] = await to(showStatementParamsDialog(useCase, action));
 
       if (close) {
         done();
