@@ -3,6 +3,7 @@ import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-g
 import { showExportOutdatedStatementDialog } from 'components/export-params-dialog/dialog';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
+import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
@@ -29,7 +30,8 @@ export const getExportStatementAttachment = (
 ): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
   action: ({ done, fatal, addSucceeded, execute }, { service, showLoader, hideLoader }) => async (
     docs: IBaseEntity[],
-    statementId?: string
+    statementId?: string,
+    documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
       const [doc] = docs;
@@ -56,7 +58,7 @@ export const getExportStatementAttachment = (
       }
     }
 
-    const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD);
+    const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD, documentType);
 
     const {
       succeeded: [data],

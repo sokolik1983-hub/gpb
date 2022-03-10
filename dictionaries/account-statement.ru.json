@@ -225,6 +225,6 @@
   "exportParamsDialog.printStatement.label": "Печать выписки",
   "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
   "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
-  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Нулевые обороты",
+  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
   "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка"
 }

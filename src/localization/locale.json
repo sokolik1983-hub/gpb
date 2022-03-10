@@ -702,7 +702,7 @@
     "ru": "С комплектом документов"
   },
   "exportParamsDialog.print.creationParams.hideEmptyTurnovers": {
-    "ru": "Нулевые обороты"
+    "ru": "Скрыть нулевые обороты"
   },
   "exportParamsDialog.print.creationParams.withSign": {
     "ru": "С электронной подписью банка"

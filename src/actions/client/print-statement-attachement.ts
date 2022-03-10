@@ -1,6 +1,6 @@
 import { getCreateAttachment } from 'actions/client/create-attachement';
 import type { ICreateAttachmentResponse } from 'interfaces';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
 import { fatalHandler } from 'utils';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
@@ -15,8 +15,12 @@ import type { context } from './executor';
 export const getPrintStatementAttachment = (
   useCase: EXPORT_PARAMS_USE_CASES
 ): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
-  action: ({ done, fatal, addSucceeded, execute }) => async (docs: IBaseEntity[], statementId?: string) => {
-    const createAttachment = getCreateAttachment(useCase, ACTION.PRINT);
+  action: ({ done, fatal, addSucceeded, execute }) => async (
+    docs: IBaseEntity[],
+    statementId?: string,
+    documentType?: TRANSACTION_ATTACHMENT_TYPES
+  ) => {
+    const createAttachment = getCreateAttachment(useCase, ACTION.PRINT, documentType);
 
     const {
       succeeded: [data],
