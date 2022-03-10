@@ -11,18 +11,19 @@ import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
 import { noop } from 'utils';
 import { creationParamsShowCases, detailDocumentsParamsShowCases, exportCases, fileFormatShowCases } from 'utils/export-params-dialog';
-import { BUTTON, DATA_TYPE, DialogTemplate } from '@platform/ui';
+import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
+import css from './styles.scss';
 
 /** Содержимое модального окна ЭФ параметров выписки и документов. */
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
-  const { onClose, useCase } = useContext<IDialogContext>(DialogContext);
-  const isExport = exportCases.includes(useCase);
+  const { onClose, useCase, action } = useContext<IDialogContext>(DialogContext);
+  const isExport = exportCases.includes(useCase!);
   // TODO: для MVP принудительно скрываем, после - восстанавливаем
   const isEmailShow = false;
   const isSendToEmailButtonShow = false;
-  const isFileFormatsShow = fileFormatShowCases.includes(useCase);
-  const isCreationParamsShow = creationParamsShowCases.includes(useCase);
-  const isDetailDocumentsParamsShow = detailDocumentsParamsShowCases.includes(useCase);
+  const isFileFormatsShow = fileFormatShowCases.includes(useCase!);
+  const isCreationParamsShow = creationParamsShowCases.includes(useCase!);
+  const isDetailDocumentsParamsShow = detailDocumentsParamsShowCases.includes(useCase!);
 
   /** Кнопки модального окна. */
   const getActions = useCallback(() => {
@@ -72,11 +73,13 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
       extraSmall
       actions={actions}
       content={
-        <FormProvider onSubmit={handleSubmit}>
-          {isFileFormatsShow && <FileFormats />}
-          {isCreationParamsShow && <CreationParams />}
-          {isDetailDocumentsParamsShow && <DetailDocumentsParams />}
-          {isEmailShow && <Email />}
+        <FormProvider action={action} useCase={useCase} onSubmit={handleSubmit}>
+          <Box className={css.container}>
+            {isFileFormatsShow && <FileFormats />}
+            {isCreationParamsShow && <CreationParams />}
+            {isDetailDocumentsParamsShow && <DetailDocumentsParams />}
+            {isEmailShow && <Email />}
+          </Box>
         </FormProvider>
       }
       dataType={DATA_TYPE.CONFIRMATION}

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import type { IFormContext } from 'interfaces/form/form-context';
-import { FormContext } from 'interfaces/form/form-context';
+import type { IDialogContext } from 'components/export-params-dialog/dialog-context';
+import { DialogContext } from 'components/export-params-dialog/dialog-context';
 import { locale } from 'localization';
 import { downloadButtonShowCases, printButtonShowCases } from 'utils/export-params-dialog';
 import { Adjust, Gap, Horizon, PrimaryButton, RegularButton, ACTIONS } from '@platform/ui';
@@ -9,7 +9,7 @@ import { Adjust, Gap, Horizon, PrimaryButton, RegularButton, ACTIONS } from '@pl
 
 /** Подвал с кнопками на ЭФ параметров экспорта.  */
 export const Footer: React.FC = () => {
-  const { useCase } = useContext<IFormContext>(FormContext);
+  const { useCase } = useContext<IDialogContext>(DialogContext);
   const isDownloadButtonShow = downloadButtonShowCases.includes(useCase!);
   // TODO: для MVP принудительно скрываем, после - восстанавливаем
   // const isSendToEmailButtonShow = sendToEmailButtonShowCases.includes(useCase!);

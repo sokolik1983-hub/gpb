@@ -25,8 +25,8 @@ export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction, statemen
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [docs, statementId]), [
-    docs,
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [transaction, statementId]), [
+    transaction,
     getAvailableActions,
     statementId,
   ]);
