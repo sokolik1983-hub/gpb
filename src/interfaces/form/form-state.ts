@@ -1,8 +1,11 @@
 import { DATE_PERIODS } from 'interfaces';
 import { FORMAT, OPERATIONS } from 'interfaces/client';
-import type { ACTION, ILatestStatementDto } from 'interfaces/client';
+import type { ACTION, ILatestStatementDto, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { CREATION_PARAMS } from 'interfaces/form/creation-params';
+import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { locale } from 'localization';
 import { mapDtoToForm } from 'utils/actions';
+import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 
 /** Состояние формы запроса на выписку. */
 export interface IFormState {
@@ -37,10 +40,28 @@ export const defaultFormState: IFormState = {
   periodType: DATE_PERIODS.YESTERDAY,
 };
 
+/** Конфиг начального состояния формы. */
+export interface IStateConfig {
+  /** Вариант вызова диалога. */
+  useCase?: EXPORT_PARAMS_USE_CASES;
+  /** Предыдущий запрос на выписку. */
+  latestStatement?: ILatestStatementDto;
+}
+
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = (latestStatement?: ILatestStatementDto): Partial<IFormState> => {
+export const getInitialFormState = (config: IStateConfig): Partial<IFormState> => {
+  const { latestStatement, useCase } = config;
+
   if (!latestStatement) {
-    return defaultFormState;
+    const creationParams: string[] = [];
+    const documentsSetParams: string[] = [];
+
+    if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
+      creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
+      documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS);
+    }
+
+    return { ...defaultFormState, creationParams, documentsSetParams };
   }
 
   // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE

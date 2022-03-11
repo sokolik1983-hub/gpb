@@ -1,24 +1,48 @@
-import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/client';
-import { CREATION_TYPE, TYPE } from 'interfaces/client';
+import type { ICreateRequestStatementDto, ILatestStatementDto, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import type { IFormState } from 'interfaces/form/form-state';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
+import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 
 /**
  * Конвертер для преобразования состояния формы в параметры создания выписки.
  *
  * @param formState Состояние формы.
+ * @param useCase Вариант вызова диалога.
+ * @param documentType Тп документа.
  */
-export const convertToCreationParams = (formState: IFormState) => ({
-  includeCreditOrders: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
-  includeCreditStatements: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
-  includeDebitOrders: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
-  includeDebitStatements: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
-  separateDocumentsFiles: formState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES),
-});
+export const convertToCreationParams = (
+  formState: IFormState,
+  useCase?: EXPORT_PARAMS_USE_CASES,
+  documentType?: TRANSACTION_ATTACHMENT_TYPES
+) => {
+  const separateDocumentsFiles = formState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
+
+  if (useCase && documentType && alwaysSendParamCasesFromUI.includes(useCase)) {
+    const generateOrders = documentType === TRANSACTION_ATTACHMENT_TYPES.BASE;
+    const generateStatements = documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT;
+
+    return {
+      includeCreditOrders: generateOrders,
+      includeCreditStatements: generateStatements,
+      includeDebitOrders: generateOrders,
+      includeDebitStatements: generateStatements,
+      separateDocumentsFiles,
+    };
+  }
+
+  return {
+    includeCreditOrders: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
+    includeCreditStatements: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
+    includeDebitOrders: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
+    includeDebitStatements: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
+    separateDocumentsFiles,
+  };
+};
 
 /**
  * Конвертер для преобразования состояния формы в расширенные / дополнительные параметры создания выписки.

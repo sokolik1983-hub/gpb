@@ -7,6 +7,7 @@ import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import {
+  alwaysSendParamCasesFromUI,
   creationParamsShowCases,
   getHideEmptyTurnoverCases,
   getHideEsignCases,
@@ -88,11 +89,16 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       });
     } else if (!onlyRequestsStatement && !withSign) {
       batch(() => {
-        change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_ORDERS]);
-        change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_ORDERS]);
+        if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
+          change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS, CREDIT_PARAMS.INCLUDE_ORDERS]);
+          change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS, DEBIT_PARAMS.INCLUDE_ORDERS]);
+        } else {
+          change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_ORDERS]);
+          change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_ORDERS]);
+        }
       });
     }
-  }, [batch, change, onlyRequestsStatement, withSign, withDocumentsSet]);
+  }, [batch, change, onlyRequestsStatement, useCase, withDocumentsSet, withSign]);
 
   return [options];
 };
