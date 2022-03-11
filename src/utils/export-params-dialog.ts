@@ -57,8 +57,14 @@ export const downloadButtonShowCases = [
 /** Набор случаев, при которых показываем кнопку "Печать". */
 export const printButtonShowCases = [EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOUR, EXPORT_PARAMS_USE_CASES.SIX];
 
-/** Набор случаев, при которых отображаем ЭФ настроек экспорта. */
-export const showExportParamsDialogCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
+/** Набор случаев, при которых НЕ отображаем ЭФ настроек экспорта. */
+export const hideExportParamsDialogCases = [
+  EXPORT_PARAMS_USE_CASES.NINE,
+  EXPORT_PARAMS_USE_CASES.TEN,
+  EXPORT_PARAMS_USE_CASES.TWELVE,
+  EXPORT_PARAMS_USE_CASES.THIRTEEN,
+  EXPORT_PARAMS_USE_CASES.FOURTEEN,
+];
 
 /** Получить набор случаев, при которых скрываем флаг "С электронной подписью Банка в формате PDF". */
 export const getHideEsignCases = (action: ACTION) => {
@@ -79,10 +85,20 @@ export const getHideSeparateAccountFilesCases = (action: ACTION) => {
 };
 
 /** Получить набор случаев, при которых скрываем флаг "Скрыть нулевые обороты"". */
-export const getHideEmptyTurnoverCases = (action: ACTION) => {
-  if (action === ACTION.PRINT) {
-    return [EXPORT_PARAMS_USE_CASES.FOUR, EXPORT_PARAMS_USE_CASES.SIX];
-  }
+export const getHideEmptyTurnoverCases = getHideSeparateAccountFilesCases;
 
-  return [];
-};
+/** Набор случаев, для которых безусловно отправляем параметры комплекта документов для ЭФ. */
+export const alwaysSendParamCasesFromUI = [
+  EXPORT_PARAMS_USE_CASES.THREE,
+  EXPORT_PARAMS_USE_CASES.FOUR,
+  EXPORT_PARAMS_USE_CASES.SIX,
+  EXPORT_PARAMS_USE_CASES.SEVEN,
+];
+
+/** Набор случаев, для которых безусловно отправляем параметры комплекта документов вне ЭФ. */
+export const alwaysSentParamsCasesWithoutUI = [
+  EXPORT_PARAMS_USE_CASES.NINE,
+  EXPORT_PARAMS_USE_CASES.TEN,
+  EXPORT_PARAMS_USE_CASES.TWELVE,
+  EXPORT_PARAMS_USE_CASES.THIRTEEN,
+];

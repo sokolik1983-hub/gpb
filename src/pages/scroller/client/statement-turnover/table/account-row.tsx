@@ -5,8 +5,8 @@ import cn from 'classnames';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/client';
 import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { Row } from 'react-table';
-import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getHandlerDependingOnSelection } from 'utils';
+import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
+import { getHandlerDependingOnSelection, isFunctionAvailability, noop } from 'utils';
 import { Box, WithClickable, ROLE } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -60,16 +60,19 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     await executeHandler(createStatement, [requestDto]);
   }, [requestDto]);
 
+  // TODO: в дальнейшем заменить на платформенный аналог
+  const availabilityOfPrivileges = isFunctionAvailability(PRIVILEGE.STATEMENT_REQUEST);
+
   return (
     <WithClickable>
       {(ref, { hovered }) => (
         <Box
           ref={ref}
           {...rowProps}
-          className={cn(css.clickableRow, css.borderedRow)}
+          className={cn({ [css.clickableRow]: availabilityOfPrivileges }, css.borderedRow)}
           fill={hovered ? 'FAINT' : 'BASE'}
           role={ROLE.ROW}
-          onClick={handleClick}
+          onClick={availabilityOfPrivileges ? handleClick : noop}
         >
           {cells.map(cell => {
             const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Content } from 'components/export-params-dialog/content';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
 import type { IFormState } from 'interfaces/form/form-state';
 import { getInitialFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
@@ -11,6 +11,8 @@ import { DialogContext } from './dialog-context';
 
 /** Свойства ЭФ с параметрами выписки и документов. */
 export interface IExportParamsDialogProps {
+  /** Действие. */
+  action: ACTION;
   /** Вариант вызова диалога. */
   useCase: EXPORT_PARAMS_USE_CASES;
   /** Обработчик закрытия формы. */
@@ -20,8 +22,8 @@ export interface IExportParamsDialogProps {
 }
 
 /** Компонент "ЭФ параметров выписки и документов". */
-export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase }) => {
-  const initialFormState = getInitialFormState();
+export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action }) => {
+  const initialFormState = getInitialFormState({ useCase });
 
   const handleSubmit = (values: IFormState) => {
     onClose();
@@ -32,8 +34,9 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
     () => ({
       onClose,
       useCase,
+      action,
     }),
-    [onClose, useCase]
+    [action, onClose, useCase]
   );
 
   return (
@@ -45,9 +48,9 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
 
 ExportParamsDialog.displayName = 'StatementParamsDialog';
 
-export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES) =>
+export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION) =>
   new Promise<IFormState>((resolve, reject) =>
-    dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, onSubmit: resolve }, () => reject(true))
+    dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve }, () => reject(true))
   );
 
 /** Диалог экспорта неактуальной выписки. */

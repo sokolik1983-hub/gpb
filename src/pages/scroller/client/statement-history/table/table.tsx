@@ -79,6 +79,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.historyScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
+        totalAmount={totalStatementsAmount}
         onClick={handleClick}
       />
     </>

@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS } from './creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from './detail-document-params';
@@ -17,6 +17,8 @@ export interface IFormContext {
   isPdf: boolean;
   /** Вариант вызова диалога. */
   useCase?: EXPORT_PARAMS_USE_CASES;
+  /** Действие. */
+  action?: ACTION;
 }
 
 /** Начальное значение контекста формы. */

@@ -1728,7 +1728,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Нулевые обороты
+				 * Скрыть нулевые обороты
 				 */
 				get hideEmptyTurnovers() {
 					return t('exportParamsDialog.print.creationParams.hideEmptyTurnovers');

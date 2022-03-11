@@ -1,15 +1,26 @@
 import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { IStatementHistoryRow } from 'interfaces/client';
-import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT } from 'interfaces/client';
+import type { IStatementHistoryRow, IGetTransactionCardResponseDto } from 'interfaces/client';
+import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
-import { convertToCreationParams, convertToExtendedCreationParams, fatalHandler, fileFormatShowCases, getUserDeviceInfo } from 'utils';
-import { showExportParamsDialogCases } from 'utils/export-params-dialog';
+import {
+  alwaysSentParamsCasesWithoutUI,
+  convertToCreationParams,
+  convertToExtendedCreationParams,
+  fatalHandler,
+  fileFormatShowCases,
+  getUserDeviceInfo,
+  hideExportParamsDialogCases,
+} from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
 
 /** Вспомогательная функция формирования файла выписки или документа. */
-export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION): IActionConfig<typeof context, unknown> => ({
+export const getCreateAttachment = (
+  useCase: EXPORT_PARAMS_USE_CASES,
+  action: ACTION,
+  documentType?: TRANSACTION_ATTACHMENT_TYPES
+): IActionConfig<typeof context, unknown> => ({
   action: ({ done, fatal, addSucceeded }, { showLoader, hideLoader, service }) => async (docs: IBaseEntity[], statementId?: string) => {
     const isGenerateStatement = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOURTEEN].includes(
       useCase
@@ -23,7 +34,7 @@ export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: AC
     };
     let otherParams: Partial<ICreateAttachmentRequestDto> = {};
 
-    const isShowDialog = showExportParamsDialogCases.includes(useCase);
+    const isShowDialog = !hideExportParamsDialogCases.includes(useCase);
 
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
       const [doc] = docs as IStatementHistoryRow[];
@@ -47,7 +58,7 @@ export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: AC
     }
 
     if (isShowDialog) {
-      const [formState, close] = await to(showStatementParamsDialog(useCase));
+      const [formState, close] = await to(showStatementParamsDialog(useCase, action));
 
       if (close) {
         done();
@@ -59,10 +70,33 @@ export const getCreateAttachment = (useCase: EXPORT_PARAMS_USE_CASES, action: AC
         params.format = formState!.format;
       }
 
-      const baseParams = convertToCreationParams(formState!);
+      const baseParams = convertToCreationParams(formState!, useCase, documentType);
       const { sign, ...extendedParams } = convertToExtendedCreationParams(formState!);
 
       otherParams = { ...baseParams, ...extendedParams, signed: sign };
+    } else if (alwaysSentParamsCasesWithoutUI.includes(useCase)) {
+      let generateOrders;
+      let generateStatements;
+
+      // но формируем вложение с раздела приложений карточки проводки
+      if ([EXPORT_PARAMS_USE_CASES.TWELVE, EXPORT_PARAMS_USE_CASES.THIRTEEN].includes(useCase)) {
+        generateOrders = documentType === TRANSACTION_ATTACHMENT_TYPES.BASE;
+        generateStatements = documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT;
+      } else {
+        // в противном случае принудительно отправляем признак формирования выписок
+        generateStatements = true;
+
+        const [doc] = docs as IGetTransactionCardResponseDto[];
+
+        generateOrders = Boolean(doc.appendixDto?.documents?.find(x => x.documentTypeDto === TRANSACTION_ATTACHMENT_TYPES.STATEMENT));
+      }
+
+      otherParams = {
+        includeCreditOrders: generateOrders,
+        includeCreditStatements: generateStatements,
+        includeDebitOrders: generateOrders,
+        includeDebitStatements: generateStatements,
+      };
     }
 
     showLoader();

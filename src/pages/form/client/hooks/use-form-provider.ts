@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
@@ -8,7 +9,7 @@ import type { IFormState } from 'interfaces/form/form-state';
 import { useFormState } from 'react-final-form';
 
 /** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
-export const useFormProvider = () => {
+export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTION) => {
   const [value, setValue] = useState<IFormContext>(defaultFormContextValue);
   const { values } = useFormState<IFormState>();
 
@@ -18,10 +19,12 @@ export const useFormProvider = () => {
       withSign: values.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
       withDocumentsSet: values.creationParams.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET),
       isPdf: values.format === FORMAT.PDF,
+      useCase,
+      action,
     };
 
     setValue(newValue);
-  }, [values.creationParams, values.documentsSetParams, values.format]);
+  }, [action, useCase, values.creationParams, values.documentsSetParams, values.format]);
 
   return value;
 };
