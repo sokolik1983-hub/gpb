@@ -1,3 +1,14 @@
+# [2.1.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.1...v2.1.0-release.2) (2022-03-11)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22114 поправлена пагинация таблицы `История запросов` ([f998026](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f9980261603ec128c9bdaafe5d9f27e59e4084c6))
+* GBO-22785 доработки формирования вложения в сервисе ([7973925](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7973925f4302840bed2fe8c1bef42321a2e1114b))
+* **скроллер:** GBO-22722 Исправлено: зависимость кликабельности строки скроллера от привилегий ([5c6debb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5c6debb483218b3f1d1e8aa13d43dd58672fe99c))
+* GBO-22785 доработка вызова действий на карточке проводки ([85039a4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/85039a491d6569749374d1546a554518a50d4ff6))
+* GBO-22785 доработки ЭФ параметров выписки ([b5c406b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b5c406bedc7a903f3cee7a8b957117ce42aa7fec))
+
 # [2.1.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0...v2.1.0-release.1) (2022-03-10)
 
 
