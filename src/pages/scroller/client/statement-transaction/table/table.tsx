@@ -112,6 +112,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
+        totalAmount={totalTransactionsAmount}
         onClick={handleClick}
       />
     </>

@@ -22,6 +22,8 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
   isVisibleOnlySelectedRows?: boolean;
   /** Устанавливает пагинацию. */
   setPagination(value: IPagination): void;
+  /** Общее количество записей. */
+  totalAmount: number;
 }
 
 /**
@@ -35,6 +37,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
   onClick,
   isVisibleOnlySelectedRows,
   setPagination,
+  totalAmount,
 }: IScrollerTableViewProps<Row>) => {
   const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
 
@@ -51,6 +54,7 @@ export const ScrollerTableView = <Row extends Record<string, any>>({
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows}
         setPagination={setPagination}
         tableInstance={tableInstance}
+        totalAmount={totalAmount}
         onClick={onClick}
       />
     );
