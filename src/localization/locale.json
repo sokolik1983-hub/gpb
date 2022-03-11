@@ -692,6 +692,9 @@
   "exportParamsDialog.exportOutdatedStatement.label": {
     "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
   },
+  "exportParamsDialog.viewOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?"
+  },
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"
   },

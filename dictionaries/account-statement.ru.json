@@ -222,6 +222,7 @@
   "exportParamsDialog.buttons.cancel.label": "Нет",
   "exportParamsDialog.exportStatement.label": "Экспорт выписки",
   "exportParamsDialog.exportOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?",
+  "exportParamsDialog.viewOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?",
   "exportParamsDialog.printStatement.label": "Печать выписки",
   "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
   "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
