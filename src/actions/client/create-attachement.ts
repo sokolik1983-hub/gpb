@@ -1,8 +1,9 @@
 import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { IStatementHistoryRow } from 'interfaces/client';
+import type { IStatementHistoryRow, IGetTransactionCardResponseDto } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
 import {
+  alwaysSentParamsCasesWithoutUI,
   convertToCreationParams,
   convertToExtendedCreationParams,
   fatalHandler,
@@ -69,16 +70,32 @@ export const getCreateAttachment = (
         params.format = formState!.format;
       }
 
-      const baseParams = convertToCreationParams(formState!);
+      const baseParams = convertToCreationParams(formState!, useCase, documentType);
       const { sign, ...extendedParams } = convertToExtendedCreationParams(formState!);
 
       otherParams = { ...baseParams, ...extendedParams, signed: sign };
-    } else if ([EXPORT_PARAMS_USE_CASES.TWELVE, EXPORT_PARAMS_USE_CASES.THIRTEEN].includes(useCase)) {
+    } else if (alwaysSentParamsCasesWithoutUI.includes(useCase)) {
+      let generateOrders;
+      let generateStatements;
+
+      // но формируем вложение с раздела приложений карточки проводки
+      if ([EXPORT_PARAMS_USE_CASES.TWELVE, EXPORT_PARAMS_USE_CASES.THIRTEEN].includes(useCase)) {
+        generateOrders = documentType === TRANSACTION_ATTACHMENT_TYPES.BASE;
+        generateStatements = documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT;
+      } else {
+        // в противном случае принудительно отправляем признак формирования выписок
+        generateStatements = true;
+
+        const [doc] = docs as IGetTransactionCardResponseDto[];
+
+        generateOrders = Boolean(doc.appendixDto?.documents?.find(x => x.documentTypeDto === TRANSACTION_ATTACHMENT_TYPES.STATEMENT));
+      }
+
       otherParams = {
-        includeCreditOrders: documentType === TRANSACTION_ATTACHMENT_TYPES.BASE,
-        includeCreditStatements: documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT,
-        includeDebitOrders: documentType === TRANSACTION_ATTACHMENT_TYPES.BASE,
-        includeDebitStatements: documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT,
+        includeCreditOrders: generateOrders,
+        includeCreditStatements: generateStatements,
+        includeDebitOrders: generateOrders,
+        includeDebitStatements: generateStatements,
       };
     }
 

@@ -23,7 +23,7 @@ export interface IExportParamsDialogProps {
 
 /** Компонент "ЭФ параметров выписки и документов". */
 export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action }) => {
-  const initialFormState = getInitialFormState();
+  const initialFormState = getInitialFormState({ useCase });
 
   const handleSubmit = (values: IFormState) => {
     onClose();

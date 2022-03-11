@@ -34,7 +34,7 @@ export const CreateStatementForm: React.FC = () => {
     [creationType, executor]
   );
 
-  const { initialStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
+  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
 
   if (isInitialLoading) {
     return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
@@ -44,7 +44,7 @@ export const CreateStatementForm: React.FC = () => {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState(initialStatementRequest);
+  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest });
 
   return (
     <Box className={css.form} fill={'FAINT'}>
