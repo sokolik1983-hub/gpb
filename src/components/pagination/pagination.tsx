@@ -20,10 +20,12 @@ interface IPaginationProps {
   tableInstance: TableInstance<Record<string, any>>;
   /** Устанавливает пагинацию. */
   setPagination(value: IPagination): void;
+  /** Общее количество записей. */
+  totalAmount: number;
 }
 
 /** Пагинация скроллера. */
-export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagination }) => {
+export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagination, totalAmount }) => {
   const {
     pageCount,
     state: { pageSize, pageIndex },
@@ -31,7 +33,11 @@ export const Pagination: React.FC<IPaginationProps> = ({ tableInstance, setPagin
 
   const gotoPage = (newPageIndex: number) => setPagination({ pageSize, pageIndex: newPageIndex });
 
-  const setPageSize = (newPageSize: number) => setPagination({ pageSize: newPageSize, pageIndex });
+  const setPageSize = (newPageSize: number) => {
+    const newPageIndex = Math.floor(totalAmount / newPageSize);
+
+    setPagination({ pageSize: newPageSize, pageIndex: pageIndex > newPageIndex ? newPageIndex : pageIndex });
+  };
 
   return (
     <Box className={css.paginationWrapper}>
