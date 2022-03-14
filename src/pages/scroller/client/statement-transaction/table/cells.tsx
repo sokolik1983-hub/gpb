@@ -1,20 +1,21 @@
 import type { FC } from 'react';
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
 import clamp from 'clamp-js-main';
-import { StopPropagation } from 'components/stop-propagation';
+import { HightlightText, StopPropagation } from 'components';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons, formatToMask } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS } from '@platform/ui';
+import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS, MASK_INPUT_TYPE } from '@platform/ui';
 import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
+import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
@@ -63,16 +64,24 @@ DocumentInfo.displayName = 'DocumentInfo';
 export const CounterpartyInfo: FC<TransactionCellProps> = ({ value }) => {
   const { counterpartyName, counterpartyAccountNumber } = value;
 
+  const { filterPanel } = useContext(TransactionScrollerContext);
+
+  const { queryString } = filterPanel.values;
+
+  const accountMaskValue = formatToMask(queryString, MASK_INPUT_TYPE.ACCOUNT);
+
   return (
     <>
-      <WithInfoTooltip text={counterpartyName}>
+      <WithInfoTooltip extraSmall text={counterpartyName}>
         {ref => (
           <Typography.Text innerRef={ref} line={'COLLAPSE'}>
-            {counterpartyName}
+            <HightlightText searchWords={queryString} textToHightlight={counterpartyName} />
           </Typography.Text>
         )}
       </WithInfoTooltip>
-      <Typography.SmallText>{formatAccountCode(counterpartyAccountNumber)}</Typography.SmallText>
+      <Typography.SmallText>
+        <HightlightText searchWords={accountMaskValue.conformedValue} textToHightlight={formatAccountCode(counterpartyAccountNumber)} />
+      </Typography.SmallText>
     </>
   );
 };
@@ -83,13 +92,22 @@ CounterpartyInfo.displayName = 'CounterpartyInfo';
 export const Outcome: FC<TransactionCellProps> = ({ value }) => {
   const { outcome, currencyCode } = value;
 
+  const { filterPanel } = useContext(TransactionScrollerContext);
+
+  const { queryString } = filterPanel.values;
+
+  const moneyMaskValue = formatToMask(queryString, MASK_INPUT_TYPE.MONEY);
+
   if (typeof outcome !== 'number') {
     return null;
   }
 
   return (
     <Typography.Text align={'RIGHT'} fill={'CRITIC'}>
-      {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
+      <HightlightText
+        searchWords={moneyMaskValue.conformedValue}
+        textToHightlight={locale.moneyString.negative({ amount: String(outcome), currencyCode })}
+      />
     </Typography.Text>
   );
 };
@@ -100,13 +118,17 @@ Outcome.displayName = 'Outcome';
 export const Income: FC<TransactionCellProps> = ({ value }) => {
   const { income, currencyCode } = value;
 
+  const { filterPanel } = useContext(TransactionScrollerContext);
+
+  const { queryString } = filterPanel.values;
+
   if (typeof income !== 'number') {
     return null;
   }
 
   return (
     <Typography.Text align={'RIGHT'} fill={'SUCCESS'}>
-      {locale.moneyString.positive({ amount: String(income), currencyCode })}
+      <HightlightText searchWords={queryString} textToHightlight={locale.moneyString.positive({ amount: String(income), currencyCode })} />
     </Typography.Text>
   );
 };
@@ -116,6 +138,10 @@ Income.displayName = 'Income';
 /** Назначение платежа. */
 export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   const { purpose } = value;
+
+  const { filterPanel } = useContext(TransactionScrollerContext);
+
+  const { queryString } = filterPanel.values;
 
   const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
 
@@ -145,7 +171,7 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
             т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
           */}
           <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis' }}>
-            {purpose}
+            <HightlightText searchWords={queryString} textToHightlight={purpose} />
           </div>
         </Typography.SmallText>
       )}
