@@ -1,3 +1,10 @@
+# [2.1.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.2...v2.1.0-release.3) (2022-03-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22886 добавлена проверка актуальности выписки ([f79cd4e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f79cd4e0bba134cd4696b92b6f52a1a76db29e1b))
+
 # [2.1.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.1...v2.1.0-release.2) (2022-03-11)
 
 
