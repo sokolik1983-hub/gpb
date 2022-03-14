@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Content } from 'components/export-params-dialog/content';
 import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
+import { OUTDATED_STATEMENT_MODE } from 'interfaces/client';
 import type { IFormState } from 'interfaces/form/form-state';
 import { getInitialFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
@@ -53,10 +54,15 @@ export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, acti
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve }, () => reject(true))
   );
 
-/** Диалог экспорта неактуальной выписки. */
-export const showExportOutdatedStatementDialog = () =>
+const LocaleOfOutdatedStatementMode: Record<keyof typeof OUTDATED_STATEMENT_MODE, string> = {
+  [OUTDATED_STATEMENT_MODE.EXPORT]: locale.exportParamsDialog.exportOutdatedStatement.label,
+  [OUTDATED_STATEMENT_MODE.VIEW]: locale.exportParamsDialog.viewOutdatedStatement.label,
+};
+
+/** Диалог про неактуальную выписку. */
+export const showOutdatedStatementDialog = (mode: OUTDATED_STATEMENT_MODE) =>
   new Promise<void>((resolve, reject) =>
-    dialog.showConfirmation(locale.exportParamsDialog.exportOutdatedStatement.label, resolve, {
+    dialog.showConfirmation(LocaleOfOutdatedStatementMode[mode], resolve, {
       cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
       okButtonText: locale.exportParamsDialog.buttons.ok.label,
       onClose: () => reject(true),
