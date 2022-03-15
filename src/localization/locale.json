@@ -546,7 +546,7 @@
     "ru": "Адрес электронной почты"
   },
   "form.buttons.download.label": {
-    "ru": "Скачать"
+    "ru": "Экспорт"
   },
   "form.buttons.sendToEmail.label": {
     "ru": "Отправить на почту"
@@ -594,7 +594,7 @@
     "ru": "Приложения"
   },
   "transactionCard.buttons.export": {
-    "ru": "Скачать"
+    "ru": "Экспортировать"
   },
   "transactionCard.buttons.print": {
     "ru": "Печать"
@@ -672,7 +672,7 @@
     "ru": "Дата окончания периода не может быть меньше даты начала"
   },
   "exportParamsDialog.buttons.download.label": {
-    "ru": "Скачать"
+    "ru": "Экспортировать"
   },
   "exportParamsDialog.buttons.sendToEmail.label": {
     "ru": "Отправить на почту"
@@ -699,7 +699,7 @@
     "ru": "Печать документов"
   },
   "exportParamsDialog.exportOutdatedStatement.label": {
-    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?"
   },
   "exportParamsDialog.print.creationParams.separateAccountsFiles": {
     "ru": "Отдельным файлом по каждому счёту"

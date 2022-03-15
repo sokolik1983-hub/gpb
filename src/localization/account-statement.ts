@@ -388,14 +388,14 @@ export default {
 		headerAction: {
 			/**
 			 * @ru
-			 * Печать
+			 * Печать документов
 			 */
 			get print() {
 				return t('transactionsScroller.headerAction.print');
 			},
 			/**
 			 * @ru
-			 * Экспорт
+			 * Экспорт документов
 			 */
 			get export() {
 				return t('transactionsScroller.headerAction.export');
@@ -404,14 +404,14 @@ export default {
 		footerAction: {
 			/**
 			 * @ru
-			 * Экспорт
+			 * Экспорт документов
 			 */
 			get export() {
 				return t('transactionsScroller.footerAction.export');
 			},
 			/**
 			 * @ru
-			 * Печать
+			 * Печать документов
 			 */
 			get print() {
 				return t('transactionsScroller.footerAction.print');
@@ -427,14 +427,14 @@ export default {
 		rowAction: {
 			/**
 			 * @ru
-			 * Печать
+			 * Печать документа
 			 */
 			get print() {
 				return t('transactionsScroller.rowAction.print');
 			},
 			/**
 			 * @ru
-			 * Скачать документ основания
+			 * Экспорт документа
 			 */
 			get export() {
 				return t('transactionsScroller.rowAction.export');
@@ -1101,7 +1101,7 @@ export default {
 			download: {
 				/**
 				 * @ru
-				 * Скачать
+				 * Экспорт
 				 */
 				get label() {
 					return t('form.buttons.download.label');
@@ -1467,7 +1467,7 @@ export default {
 		buttons: {
 			/**
 			 * @ru
-			 * Скачать
+			 * Экспортировать
 			 */
 			get export() {
 				return t('transactionCard.buttons.export');
@@ -1640,7 +1640,7 @@ export default {
 			download: {
 				/**
 				 * @ru
-				 * Скачать
+				 * Экспортировать
 				 */
 				get label() {
 					return t('exportParamsDialog.buttons.download.label');
@@ -1722,7 +1722,7 @@ export default {
 		exportOutdatedStatement: {
 			/**
 			 * @ru
-			 * Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?
+			 * Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?
 			 */
 			get label() {
 				return t('exportParamsDialog.exportOutdatedStatement.label');
