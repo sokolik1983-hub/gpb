@@ -1,11 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useRestPagination } from 'hooks';
-import { useAccounts } from 'hooks/use-accounts';
-import type { IFilterPanel, Sorting, IPagination } from 'interfaces';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination } from 'hooks';
+import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { DEFAULT_PAGINATION } from 'stream-constants';
-import { useFilter, FatalErrorContent, MainLayout } from '@platform/services/client';
+import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
 import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
@@ -26,10 +25,13 @@ export const StatementHistoryScrollerPage = () => {
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
-  const [pagination, setPagination] = useState<IPagination>(DEFAULT_PAGINATION);
+  const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
+    fields,
+    labels: tagLabels,
+    storageKey: STORAGE_KEY,
+    defaultPagination: DEFAULT_PAGINATION,
+  });
   // endregion
-
-  const { filterPanel, tagsPanel, filterValues } = useFilter({ fields, labels: tagLabels, storageKey: STORAGE_KEY });
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
@@ -40,13 +42,11 @@ export const StatementHistoryScrollerPage = () => {
   // Вызывается один раз.
   const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
 
-  const newPagination = useRestPagination({ filterValues, pagination, setPagination });
-
   const {
     response: { data: statements, total: totalStatementsAmount },
     isStatementsError,
     isStatementsFetching,
-  } = useGetStatementList({ filters: filterValues, sorting, pagination: newPagination });
+  } = useGetStatementList({ filters: filterValues, sorting, pagination });
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
@@ -74,6 +74,7 @@ export const StatementHistoryScrollerPage = () => {
       isStatementsFetching,
       pagination,
       properlyTypedFilterPanel,
+      setPagination,
       sorting,
       statements,
       tagsPanel,
