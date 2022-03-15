@@ -3,31 +3,40 @@ import type { IDialogContext } from 'components/export-params-dialog/dialog-cont
 import { DialogContext } from 'components/export-params-dialog/dialog-context';
 import { CreationParams } from 'components/form/creation-params';
 import { DetailDocumentsParams } from 'components/form/detail-documents-params';
-import { Email } from 'components/form/email';
 import { FileFormats } from 'components/form/file-formats';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
-import { noop } from 'utils';
-import { creationParamsShowCases, detailDocumentsParamsShowCases, exportCases, fileFormatShowCases } from 'utils/export-params-dialog';
+import { exportCases } from 'utils';
 import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
 import css from './styles.scss';
+
+/** Функция получения заголовка ЭФ. */
+const getFormHeaderByUseCase = (useCase: EXPORT_PARAMS_USE_CASES) => {
+  switch (useCase) {
+    case EXPORT_PARAMS_USE_CASES.TWO:
+      return locale.exportParamsDialog.printStatement.label;
+    case EXPORT_PARAMS_USE_CASES.THREE:
+    case EXPORT_PARAMS_USE_CASES.SEVEN:
+      return locale.exportParamsDialog.exportStatementDocuments.label;
+    case EXPORT_PARAMS_USE_CASES.FOUR:
+    case EXPORT_PARAMS_USE_CASES.SIX:
+      return locale.exportParamsDialog.printStatementDocuments.label;
+    default:
+      return locale.exportParamsDialog.exportStatement.label;
+  }
+};
 
 /** Содержимое модального окна ЭФ параметров выписки и документов. */
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
   const { onClose, useCase, action } = useContext<IDialogContext>(DialogContext);
   const isExport = exportCases.includes(useCase!);
-  // TODO: для MVP принудительно скрываем, после - восстанавливаем
-  const isEmailShow = false;
-  const isSendToEmailButtonShow = false;
-  const isFileFormatsShow = fileFormatShowCases.includes(useCase!);
-  const isCreationParamsShow = creationParamsShowCases.includes(useCase!);
-  const isDetailDocumentsParamsShow = detailDocumentsParamsShowCases.includes(useCase!);
 
   /** Кнопки модального окна. */
   const getActions = useCallback(() => {
-    /** Конфиг для экшона экспорта выписки / документов выписки. */
+    // конфиг для экшона экспорта выписки / документов выписки
     const DOWNLOAD = {
       name: 'download',
       label: locale.exportParamsDialog.buttons.download.label,
@@ -36,17 +45,7 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
       extraSmall: true,
     };
 
-    // TODO: для MVP не используется
-    /** Конфиг для экшона отправки выписки / документов выписки на электронную почту. */
-    const SEND_TO_EMAIL = {
-      name: 'sendToEmail',
-      label: locale.exportParamsDialog.buttons.sendToEmail.label,
-      onClick: noop,
-      buttonType: BUTTON.REGULAR,
-      extraSmall: true,
-    };
-
-    /** Конфиг для экшона печати выписки / документов выписки. */
+    // конфиг для экшона печати выписки / документов выписки
     const PRINT = {
       name: 'print',
       label: locale.exportParamsDialog.buttons.print.label,
@@ -56,17 +55,15 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
     };
 
     if (isExport) {
-      if (isSendToEmailButtonShow) {
-        return [DOWNLOAD, SEND_TO_EMAIL];
-      }
-
       return [DOWNLOAD];
     }
 
     return [PRINT];
-  }, [handleSubmit, isExport, isSendToEmailButtonShow]);
+  }, [handleSubmit, isExport]);
 
   const actions = getActions();
+
+  const header = getFormHeaderByUseCase(useCase!);
 
   return (
     <DialogTemplate
@@ -75,15 +72,14 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
       content={
         <FormProvider action={action} useCase={useCase} onSubmit={handleSubmit}>
           <Box className={css.container}>
-            {isFileFormatsShow && <FileFormats />}
-            {isCreationParamsShow && <CreationParams />}
-            {isDetailDocumentsParamsShow && <DetailDocumentsParams />}
-            {isEmailShow && <Email />}
+            <FileFormats />
+            <CreationParams />
+            <DetailDocumentsParams />
           </Box>
         </FormProvider>
       }
       dataType={DATA_TYPE.CONFIRMATION}
-      header={isExport ? locale.exportParamsDialog.exportStatement.label : locale.exportParamsDialog.printStatement.label}
+      header={header}
       onClose={onClose}
     />
   );

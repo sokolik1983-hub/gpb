@@ -689,11 +689,17 @@
   "exportParamsDialog.exportStatement.label": {
     "ru": "Экспорт выписки"
   },
-  "exportParamsDialog.exportOutdatedStatement.label": {
-    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
-  },
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"
+  },
+  "exportParamsDialog.exportStatementDocuments.label": {
+    "ru": "Экспорт документов"
+  },
+  "exportParamsDialog.printStatementDocuments.label": {
+    "ru": "Печать документов"
+  },
+  "exportParamsDialog.exportOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
   },
   "exportParamsDialog.print.creationParams.separateAccountsFiles": {
     "ru": "Отдельным файлом по каждому счёту"

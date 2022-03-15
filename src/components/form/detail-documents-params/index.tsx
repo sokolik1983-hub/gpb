@@ -13,7 +13,11 @@ export const DetailDocumentsParams: React.FC = () => {
   const [options] = useDetailDocumentsParams();
   const visible = useDetailDocumentsParamsVisible();
 
-  return visible ? (
+  if (!visible) {
+    return null;
+  }
+
+  return (
     <Row align={'TOP'} label={locale.common.documentsSetParams.label}>
       <Box>
         <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DOCUMENTS_SET_PARAMS} options={options} />
@@ -32,7 +36,7 @@ export const DetailDocumentsParams: React.FC = () => {
         </Horizon>
       </Box>
     </Row>
-  ) : null;
+  );
 };
 
 DetailDocumentsParams.displayName = 'DetailDocumentsParams';
