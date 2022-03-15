@@ -7,6 +7,8 @@ import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination, useRowSelect } from 'react-table';
+import { PRIVILEGE } from 'stream-constants/client';
+import { isFunctionAvailability } from 'utils';
 import { Horizon, Typography, Gap, Box, Checkbox } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
@@ -64,6 +66,11 @@ export const Table: FC = () => {
 
   const handleClick = useCallback(
     (doc: IStatementTransactionRow) => {
+      // TODO: в дальнейшем заменить на платформенный аналог
+      if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW)) {
+        return;
+      }
+
       void executor.execute(viewTransaction, [doc], id);
     },
     [id]
