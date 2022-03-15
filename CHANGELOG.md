@@ -1,3 +1,10 @@
+# [2.1.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.3...v2.1.0-release.4) (2022-03-15)
+
+
+### Bug Fixes
+
+* Retrigger release ([f3f65b0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f3f65b06cc3473cb5848c19486df6ab7d45fdaa2))
+
 # [2.1.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.2...v2.1.0-release.3) (2022-03-14)
 
 
