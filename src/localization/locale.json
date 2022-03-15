@@ -159,25 +159,25 @@
     "ru": "Списания:"
   },
   "transactionsScroller.headerAction.print": {
-    "ru": "Печать"
+    "ru": "Печать документов"
   },
   "transactionsScroller.headerAction.export": {
-    "ru": "Экспорт"
+    "ru": "Экспорт документов"
   },
   "transactionsScroller.footerAction.export": {
-    "ru": "Экспорт"
+    "ru": "Экспорт документов"
   },
   "transactionsScroller.footerAction.print": {
-    "ru": "Печать"
+    "ru": "Печать документов"
   },
   "transactionsScroller.footerAction.more": {
     "ru": "Еще"
   },
   "transactionsScroller.rowAction.print": {
-    "ru": "Печать"
+    "ru": "Печать документа"
   },
   "transactionsScroller.rowAction.export": {
-    "ru": "Скачать документ основания"
+    "ru": "Экспорт документа"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
