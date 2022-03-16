@@ -28,7 +28,7 @@ export interface IFormState {
 /** Начальное значение состояния формы. */
 export const defaultFormState: IFormState = {
   accountIds: [],
-  creationParams: [],
+  creationParams: [CREATION_PARAMS.WITH_DOCUMENTS_SET, CREATION_PARAMS.HIDE_EMPTY_TURNOVERS],
   creditParams: [],
   debitParams: [],
   documentsSetParams: [],

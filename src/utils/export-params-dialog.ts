@@ -84,9 +84,6 @@ export const getHideSeparateAccountFilesCases = (action: ACTION) => {
   return [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.THREE, EXPORT_PARAMS_USE_CASES.SEVEN];
 };
 
-/** Получить набор случаев, при которых скрываем флаг "Скрыть нулевые обороты"". */
-export const getHideEmptyTurnoverCases = getHideSeparateAccountFilesCases;
-
 /** Набор случаев, для которых безусловно отправляем параметры комплекта документов для ЭФ. */
 export const alwaysSendParamCasesFromUI = [
   EXPORT_PARAMS_USE_CASES.THREE,
@@ -102,3 +99,6 @@ export const alwaysSentParamsCasesWithoutUI = [
   EXPORT_PARAMS_USE_CASES.TWELVE,
   EXPORT_PARAMS_USE_CASES.THIRTEEN,
 ];
+
+/** Набор случаев, для которых показываем флаг "С комплектом документов". */
+export const withDocumentsSetCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];

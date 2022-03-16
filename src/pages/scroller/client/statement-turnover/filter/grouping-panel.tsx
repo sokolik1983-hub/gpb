@@ -2,7 +2,6 @@ import React, { useMemo, useContext } from 'react';
 import cn from 'classnames';
 import type { IGroupedAccounts } from 'interfaces/client';
 import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/client';
-import { locale } from 'localization';
 import { Typography, Gap, Box, Fields } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS, GROUPING_OPTIONS } from './constants';
@@ -49,13 +48,6 @@ export const GroupingPanel = () => {
         <Typography.Text>{groupingReport}</Typography.Text>
       </Box>
       <Box className={cn(css.important, css.groupingRightColumn)}>
-        {/* Выбор фильтрации по типу активности счёта. */}
-        <Fields.Checkbox
-          extraSmall
-          dimension={'SM'}
-          label={locale.turnoverScroller.filter.labels.onlyActiveAccounts}
-          name={FORM_FIELDS.ONLY_ACTIVE_ACCOUNTS}
-        />
         <Gap.XL />
         <Box>
           {/* Выбор группировки. */}

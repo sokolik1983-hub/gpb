@@ -8,10 +8,9 @@ import type { IFormState } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import {
   alwaysSendParamCasesFromUI,
-  creationParamsShowCases,
-  getHideEmptyTurnoverCases,
   getHideEsignCases,
   getHideSeparateAccountFilesCases,
+  withDocumentsSetCases,
 } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
@@ -41,7 +40,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
-          if (isPdf && (!useCase || (useCase && creationParamsShowCases.includes(useCase)))) {
+          if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
             acc.push({ ...x, disabled: withSign });
           }
 
@@ -49,13 +48,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
         }
         case CREATION_PARAMS.WITH_SIGN: {
           if (isPdf && (!useCase || (useCase && !getHideEsignCases(action!).includes(useCase)))) {
-            acc.push(x);
-          }
-
-          break;
-        }
-        case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          if (!useCase || (useCase && !getHideEmptyTurnoverCases(action!).includes(useCase))) {
             acc.push(x);
           }
 
