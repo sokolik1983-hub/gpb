@@ -1,3 +1,10 @@
+# [2.1.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.4...v2.1.0-release.5) (2022-03-16)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21309 отображение тултипа у последнего столбца только слева ([72999ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/72999ee37d014739ae8ad9846183ba2f5ae6caa0))
+
 # [2.1.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.3...v2.1.0-release.4) (2022-03-15)
 
 
