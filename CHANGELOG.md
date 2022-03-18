@@ -1,3 +1,10 @@
+# [2.1.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.5...v2.1.0-release.6) (2022-03-18)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23205 исправление постраничника в журнале проводок ([4ec21b7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4ec21b7a8623fa3cfec08327a3fb91964b80ab85))
+
 # [2.1.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.4...v2.1.0-release.5) (2022-03-16)
 
 

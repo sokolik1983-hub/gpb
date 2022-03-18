@@ -1,6 +1,6 @@
 {
   "name": "@eco/account-statement",
-  "version": "2.1.0-release.5",
+  "version": "2.1.0-release.6",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
