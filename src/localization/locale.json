@@ -680,8 +680,20 @@
   "exportParamsDialog.buttons.print.label": {
     "ru": "Печать"
   },
+  "exportParamsDialog.buttons.ok.label": {
+    "ru": "Да"
+  },
+  "exportParamsDialog.buttons.cancel.label": {
+    "ru": "Нет"
+  },
   "exportParamsDialog.exportStatement.label": {
     "ru": "Экспорт выписки"
+  },
+  "exportParamsDialog.exportOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
+  },
+  "exportParamsDialog.viewOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?"
   },
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"
@@ -693,7 +705,7 @@
     "ru": "С комплектом документов"
   },
   "exportParamsDialog.print.creationParams.hideEmptyTurnovers": {
-    "ru": "Нулевые обороты"
+    "ru": "Скрыть нулевые обороты"
   },
   "exportParamsDialog.print.creationParams.withSign": {
     "ru": "С электронной подписью банка"

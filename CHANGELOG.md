@@ -1,3 +1,56 @@
+# [2.1.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.5...v2.1.0-release.6) (2022-03-18)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23205 исправление постраничника в журнале проводок ([4ec21b7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4ec21b7a8623fa3cfec08327a3fb91964b80ab85))
+
+# [2.1.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.4...v2.1.0-release.5) (2022-03-16)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-21309 отображение тултипа у последнего столбца только слева ([72999ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/72999ee37d014739ae8ad9846183ba2f5ae6caa0))
+
+# [2.1.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.3...v2.1.0-release.4) (2022-03-15)
+
+
+### Bug Fixes
+
+* Retrigger release ([f3f65b0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f3f65b06cc3473cb5848c19486df6ab7d45fdaa2))
+
+# [2.1.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.2...v2.1.0-release.3) (2022-03-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22886 добавлена проверка актуальности выписки ([f79cd4e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f79cd4e0bba134cd4696b92b6f52a1a76db29e1b))
+
+# [2.1.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0-release.1...v2.1.0-release.2) (2022-03-11)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22114 поправлена пагинация таблицы `История запросов` ([f998026](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f9980261603ec128c9bdaafe5d9f27e59e4084c6))
+* GBO-22785 доработки формирования вложения в сервисе ([7973925](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7973925f4302840bed2fe8c1bef42321a2e1114b))
+* **скроллер:** GBO-22722 Исправлено: зависимость кликабельности строки скроллера от привилегий ([5c6debb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5c6debb483218b3f1d1e8aa13d43dd58672fe99c))
+* GBO-22785 доработка вызова действий на карточке проводки ([85039a4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/85039a491d6569749374d1546a554518a50d4ff6))
+* GBO-22785 доработки ЭФ параметров выписки ([b5c406b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b5c406bedc7a903f3cee7a8b957117ce42aa7fec))
+
+# [2.1.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0...v2.1.0-release.1) (2022-03-10)
+
+
+### Bug Fixes
+
+* GBO-22720 кумулятивное исправление дефектов на ЭФ ([11c775d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/11c775df5c55931e3e212d39b1e7b83c7c2cbf40))
+* **скроллер:** GBO-22742 доработки проверок привилегий в скроллере проводок ([1b25f33](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1b25f33c80edddf308ab4c2ac0a046e83510a681))
+* **скроллер:** GBO-22757 исправления скрытия панели с общей информацией о выписке ([9083cc0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9083cc0c1231d4bf237dfe054dbc4bb1d7aaa875))
+
+
+### Features
+
+* GBO-22671 добавлена проверка актуальности выписки перед экспортом ([825c72d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/825c72d7e2a40b5ede0092d683c71f05498ecb8b))
+
 # [2.0.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v1.1.2...v2.0.0) (2022-03-06)
 
 

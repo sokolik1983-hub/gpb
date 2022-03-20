@@ -19,7 +19,6 @@ export const Table: FC = () => {
   const {
     transactions,
     isLoading,
-    transactionsAmountByFilter,
     totalTransactionsAmount,
     sorting,
     setSorting,
@@ -38,7 +37,7 @@ export const Table: FC = () => {
       manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
-      pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
+      pageCount: Math.ceil(totalTransactionsAmount / pagination.pageSize),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
       initialState: {
@@ -89,7 +88,7 @@ export const Table: FC = () => {
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
           <Typography.Text data-field={'total'}>
-            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: transactionsAmountByFilter })}
+            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: pagination.pageSize })}
           </Typography.Text>
           <Horizon.Spacer />
           {selectedRows.length > 0 && (
@@ -112,6 +111,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
+        totalAmount={totalTransactionsAmount}
         onClick={handleClick}
       />
     </>

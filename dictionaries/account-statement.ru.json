@@ -218,10 +218,14 @@
   "exportParamsDialog.buttons.download.label": "Скачать",
   "exportParamsDialog.buttons.sendToEmail.label": "Отправить на почту",
   "exportParamsDialog.buttons.print.label": "Печать",
+  "exportParamsDialog.buttons.ok.label": "Да",
+  "exportParamsDialog.buttons.cancel.label": "Нет",
   "exportParamsDialog.exportStatement.label": "Экспорт выписки",
+  "exportParamsDialog.exportOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?",
+  "exportParamsDialog.viewOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?",
   "exportParamsDialog.printStatement.label": "Печать выписки",
   "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
   "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
-  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Нулевые обороты",
+  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
   "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка"
 }

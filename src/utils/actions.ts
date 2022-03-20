@@ -1,28 +1,48 @@
-import type { IUserDeviceInfo } from 'interfaces';
-import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/client';
-import { ACTION, CREATION_TYPE, FORMAT, TYPE, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
+import type { ICreateRequestStatementDto, ILatestStatementDto, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import type { IFormState } from 'interfaces/form/form-state';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import type { IBaseEntity } from '@platform/services';
-import { fileFormatShowCases, hideExportParamsDialogCases } from './export-params-dialog';
+import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 
 /**
  * Конвертер для преобразования состояния формы в параметры создания выписки.
  *
  * @param formState Состояние формы.
+ * @param useCase Вариант вызова диалога.
+ * @param documentType Тп документа.
  */
-export const convertToCreationParams = (formState: IFormState) => ({
-  includeCreditOrders: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
-  includeCreditStatements: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
-  includeDebitOrders: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
-  includeDebitStatements: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
-  separateDocumentsFiles: formState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES),
-});
+export const convertToCreationParams = (
+  formState: IFormState,
+  useCase?: EXPORT_PARAMS_USE_CASES,
+  documentType?: TRANSACTION_ATTACHMENT_TYPES
+) => {
+  const separateDocumentsFiles = formState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
+
+  if (useCase && documentType && alwaysSendParamCasesFromUI.includes(useCase)) {
+    const generateOrders = documentType === TRANSACTION_ATTACHMENT_TYPES.BASE;
+    const generateStatements = documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT;
+
+    return {
+      includeCreditOrders: generateOrders,
+      includeCreditStatements: generateStatements,
+      includeDebitOrders: generateOrders,
+      includeDebitStatements: generateStatements,
+      separateDocumentsFiles,
+    };
+  }
+
+  return {
+    includeCreditOrders: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_ORDERS),
+    includeCreditStatements: formState.creditParams.includes(CREDIT_PARAMS.INCLUDE_STATEMENTS),
+    includeDebitOrders: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_ORDERS),
+    includeDebitStatements: formState.debitParams.includes(DEBIT_PARAMS.INCLUDE_STATEMENTS),
+    separateDocumentsFiles,
+  };
+};
 
 /**
  * Конвертер для преобразования состояния формы в расширенные / дополнительные параметры создания выписки.
@@ -34,76 +54,6 @@ export const convertToExtendedCreationParams = (formState: IFormState) => ({
   separateAccountsFiles: formState.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
   sign: formState.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
 });
-
-/**
- * Конвертер для преобразования состояния формы и выбранных записей (строк) в параметры создания аттачмента.
- *
- * @param docs Выбранные записи.
- * @param statementId Id текущей выписки.
- * @param action Действие, для которого вызываем создание вложения.
- * @param useCase Вариант вызова ЭФ, для которой формируем параметры.
- * @param userDeviceInfo Данные текущего пользователя.
- * @param statementRequestFormat Формат запроса на выписку.
- * @param formState Состояние формы.
- */
-export const convertToAttachmentRequest = (
-  docs: IBaseEntity[],
-  statementId: string,
-  action: ACTION,
-  useCase: EXPORT_PARAMS_USE_CASES,
-  userDeviceInfo: IUserDeviceInfo,
-  statementRequestFormat?: FORMAT,
-  formState?: IFormState
-): ICreateAttachmentRequestDto => {
-  const isPrint = action === ACTION.PRINT;
-  const isExport = action === ACTION.DOWNLOAD;
-  // В дальнейшем условие расширится с учетом электронный почты
-  const isGenerateStatement = isExport;
-
-  const getFormat = () => {
-    if (isPrint) {
-      return FORMAT.PDF;
-    }
-
-    if (fileFormatShowCases.includes(useCase)) {
-      return formState!.format;
-    }
-
-    if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
-      return statementRequestFormat!;
-    }
-
-    return FORMAT.PDF;
-  };
-
-  const format = getFormat();
-
-  if (hideExportParamsDialogCases.includes(useCase)) {
-    return {
-      action,
-      format,
-      genStatement: isGenerateStatement,
-      statementId,
-      userDeviceInfo,
-    };
-  }
-
-  const { hideEmptyTurnovers, separateAccountsFiles, sign } = convertToExtendedCreationParams(formState!);
-
-  return {
-    accountingEntriesIds: docs.map(el => Number(el.id)),
-    email: formState!.email,
-    action,
-    format,
-    genStatement: isGenerateStatement,
-    ...convertToCreationParams(formState!),
-    hideEmptyTurnovers,
-    separateAccountsFiles,
-    signed: sign,
-    statementId,
-    userDeviceInfo,
-  };
-};
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
 export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE.NEW): ICreateRequestStatementDto => ({

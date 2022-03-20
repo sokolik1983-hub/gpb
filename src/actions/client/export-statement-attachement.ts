@@ -1,13 +1,14 @@
+import { getCreateAttachment } from 'actions/client/create-attachement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
-import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { FORMAT } from 'interfaces/client';
-import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import { convertToAttachmentRequest, fatalHandler, getUserDeviceInfo } from 'utils';
-import { hideExportParamsDialogCases } from 'utils/export-params-dialog';
+import type { ICreateAttachmentResponse } from 'interfaces';
+import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
+import { ACTION, EXPORT_PARAMS_USE_CASES, OUTDATED_STATEMENT_MODE } from 'interfaces/client';
+import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { showFile } from '@platform/services/client';
 import type { context } from './executor';
+import { isContinueActionWithStatement } from './utils';
 
 /** Вернуть набор гардов для экспорта выписки. */
 const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
@@ -23,46 +24,53 @@ const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
-export const getExportStatementAttachment = (useCase: EXPORT_PARAMS_USE_CASES): IActionConfig<typeof context, unknown> => ({
-  action: ({ done, fatal, addSucceeded }, { showLoader, hideLoader, service }) => async (
+export const getExportStatementAttachment = (
+  useCase: EXPORT_PARAMS_USE_CASES
+): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
+  action: ({ done, fatal, addSucceeded, execute }, { service, showLoader, hideLoader }) => async (
     docs: IBaseEntity[],
-    statementId: string,
-    statementFormat?: FORMAT
+    statementId?: string,
+    documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
-    let dto;
+    if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
+      const [doc] = docs;
 
-    if (hideExportParamsDialogCases.includes(useCase)) {
-      const userDeviceInfo = await getUserDeviceInfo();
+      showLoader();
 
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat);
-    } else {
-      const [formState, close] = await to(showStatementParamsDialog(useCase));
+      const [res, err] = await to(service.getStatementRelevanceStatus(doc.id));
 
-      if (close) {
+      hideLoader();
+
+      fatal(res?.error);
+      fatal(err);
+
+      const isContinueAction = await isContinueActionWithStatement(res!.data.status, OUTDATED_STATEMENT_MODE.EXPORT);
+
+      if (!isContinueAction) {
         done();
-
-        return;
       }
-
-      const userDeviceInfo = await getUserDeviceInfo();
-
-      dto = convertToAttachmentRequest(docs, statementId, ACTION.DOWNLOAD, useCase, userDeviceInfo, statementFormat, formState!);
     }
 
-    showLoader();
+    const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD, documentType);
 
-    const [res, err] = await to(service.createAttachment(dto));
+    const {
+      succeeded: [data],
+      failed: [error],
+    } = await execute(createAttachment, docs, statementId);
 
-    hideLoader();
+    fatal(error);
 
-    fatal(res?.error);
-    fatal(err);
+    if (!data) {
+      done();
 
-    const { content, mimeType, fileName } = res!;
+      return;
+    }
+
+    const { content, mimeType, fileName } = data;
 
     showFile(content, fileName, mimeType);
 
-    addSucceeded(res);
+    addSucceeded();
 
     done();
   },

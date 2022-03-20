@@ -10,3 +10,4 @@ export * from './actions';
 export * from './services';
 export * from './user-device-info';
 export * from './table';
+export * from './statement-relevance-statuses';

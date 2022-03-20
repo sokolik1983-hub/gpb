@@ -65,7 +65,7 @@ export const StatementTransactionScrollerPage = () => {
       transactions,
       transactionsAmountByFilter,
       totalTransactionsAmount,
-      info,
+      statementSummaryInfo: info,
       selectedRows,
       setSelectedRows,
     }),
