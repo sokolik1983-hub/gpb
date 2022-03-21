@@ -95,7 +95,10 @@ export const Table: FC = () => {
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
           <Typography.Text data-field={'total'}>
-            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: pagination.pageSize })}
+            {locale.transactionsScroller.table.totalValue({
+              total: totalTransactionsAmount,
+              totalByFilters: Math.min(totalTransactionsAmount, pagination.pageSize),
+            })}
           </Typography.Text>
           <Horizon.Spacer />
           {selectedRows.length > 0 && (
