@@ -1,15 +1,14 @@
 import { getCreateAttachment } from 'actions/client/create-attachement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
-import { showExportOutdatedStatementDialog } from 'components/export-params-dialog/dialog';
 import type { ICreateAttachmentResponse } from 'interfaces';
-import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
-import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { ACTION, EXPORT_PARAMS_USE_CASES, OUTDATED_STATEMENT_MODE } from 'interfaces/client';
 import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { showFile } from '@platform/services/client';
 import type { context } from './executor';
+import { isContinueActionWithStatement } from './utils';
 
 /** Вернуть набор гардов для экспорта выписки. */
 const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
@@ -45,16 +44,10 @@ export const getExportStatementAttachment = (
       fatal(res?.error);
       fatal(err);
 
-      const { status } = res!.data;
+      const isContinueAction = await isContinueActionWithStatement(res!.data.status, OUTDATED_STATEMENT_MODE.EXPORT);
 
-      if (status === STATEMENT_RELEVANCE_STATUS.OUTDATED) {
-        const [_, cancel] = await to(showExportOutdatedStatementDialog());
-
-        if (cancel) {
-          done();
-
-          return;
-        }
+      if (!isContinueAction) {
+        done();
       }
     }
 

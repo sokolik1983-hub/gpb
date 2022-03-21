@@ -14,6 +14,7 @@ import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS, MASK_INPUT_TYPE } from '@platform/ui';
+import { CONTAINER_POSITION } from '@platform/ui/dist-types/floating/container';
 import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
@@ -161,7 +162,10 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   }, []);
 
   return (
-    <WithInfoTooltip text={purpose}>
+    <WithInfoTooltip
+      positioningOrder={[CONTAINER_POSITION.LEFT_END, CONTAINER_POSITION.LEFT_CENTER, CONTAINER_POSITION.LEFT]}
+      text={purpose}
+    >
       {ref => (
         <Typography.SmallText innerRef={ref}>
           {/*

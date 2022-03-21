@@ -1692,6 +1692,15 @@ export default {
 				return t('exportParamsDialog.exportStatement.label');
 			},
 		},
+		viewOutdatedStatement: {
+			/**
+			 * @ru
+			 * Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?
+			 */
+			get label() {
+				return t('exportParamsDialog.viewOutdatedStatement.label');
+			},
+		},
 		printStatement: {
 			/**
 			 * @ru
