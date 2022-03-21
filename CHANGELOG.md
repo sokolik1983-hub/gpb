@@ -1,3 +1,10 @@
+# [2.2.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.1...v2.2.0-release.2) (2022-03-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23205 исправление заголовка для отображения кол-ва проводок ([bac295e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bac295e697c26d5583230ab3c9f4080fa7c80787))
+
 # [2.2.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0...v2.2.0-release.1) (2022-03-21)
 
 
