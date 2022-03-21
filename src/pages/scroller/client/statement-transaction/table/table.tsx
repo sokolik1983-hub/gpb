@@ -21,13 +21,13 @@ export const Table: FC = () => {
   const {
     transactions,
     isLoading,
-    totalTransactionsAmount,
     sorting,
     setSorting,
     pagination,
     setPagination,
     setSelectedRows,
     selectedRows,
+    transactionsAmountByFilter,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
@@ -39,7 +39,7 @@ export const Table: FC = () => {
       manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
-      pageCount: Math.ceil(totalTransactionsAmount / pagination.pageSize),
+      pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
       initialState: {
@@ -96,8 +96,8 @@ export const Table: FC = () => {
           <Gap.SM />
           <Typography.Text data-field={'total'}>
             {locale.transactionsScroller.table.totalValue({
-              total: totalTransactionsAmount,
-              totalByFilters: Math.min(totalTransactionsAmount, pagination.pageSize),
+              total: transactionsAmountByFilter,
+              totalByFilters: Math.min(transactionsAmountByFilter, pagination.pageSize),
             })}
           </Typography.Text>
           <Horizon.Spacer />
@@ -121,7 +121,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
-        totalAmount={totalTransactionsAmount}
+        totalAmount={transactionsAmountByFilter}
         onClick={handleClick}
       />
     </>
