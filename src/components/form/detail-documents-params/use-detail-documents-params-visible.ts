@@ -1,6 +1,6 @@
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import type { IFormState } from 'interfaces/form/form-state';
 import { useFormState } from 'react-final-form';
+import type { IFormState } from 'stream-constants/form';
 
 /** Хук проверки видимости компонента "Детальные параметры комплекта документов". */
 export const useDetailDocumentsParamsVisible = (): boolean => {

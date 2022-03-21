@@ -1,5 +1,5 @@
-import type { IAccountTurnoversInfo, IGroupedAccounts, IGroupInfo } from 'interfaces/client';
-import { GROUPING_VALUES } from 'interfaces/client';
+import type { IAccountTurnoversInfo, IGroupedAccounts, IGroupInfo } from 'interfaces/dto';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
 import { addMaxWidthField } from 'utils';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useEffect } from 'react';
 import { DATE_PERIODS } from 'interfaces';
-import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/client';
+import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/dto';
 import { statementService } from 'services/statement-service';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { noop } from 'utils';

@@ -1,5 +1,5 @@
 import { TYPE } from 'interfaces/client';
-import type { ICreateRequestStatementDto } from 'interfaces/client';
+import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
 import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils';

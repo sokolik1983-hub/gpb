@@ -4,11 +4,10 @@ import { DialogContext } from 'components/export-params-dialog/dialog-context';
 import { Row } from 'components/form/row';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { fileFormatOptions } from 'interfaces/form/file-format';
-import type { IFormState } from 'interfaces/form/form-state';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
+import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
 import { fileFormatShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -19,7 +18,7 @@ export const FileFormats: React.FC = () => {
   const { values } = useFormState<IFormState>();
   const { useCase } = useContext<IDialogContext>(DialogContext);
 
-  const onFileFormatChange: OnChangeType<FORMAT> = useCallback(
+  const onChangeFileFormat: OnChangeType<FORMAT> = useCallback(
     e => {
       const isPdf = e.value === FORMAT.PDF;
 
@@ -40,7 +39,7 @@ export const FileFormats: React.FC = () => {
 
   return (
     <Row label={locale.common.fileFormat.label}>
-      <Fields.SwitchBar extraSmall name={FORM_FIELDS.FILE_FORMAT} options={fileFormatOptions} onChange={onFileFormatChange} />
+      <Fields.SwitchBar extraSmall name={FORM_FIELDS.FILE_FORMAT} options={fileFormatOptions} onChange={onChangeFileFormat} />
     </Row>
   );
 };

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Row } from 'components/form/row';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
-import { operationOptions } from 'interfaces/form/operation';
 import { locale } from 'localization';
+import { FORM_FIELDS, operationOptions } from 'stream-constants/form';
 import { Fields } from '@platform/ui';
 
 /** Компонент выбора допустимой операции. */

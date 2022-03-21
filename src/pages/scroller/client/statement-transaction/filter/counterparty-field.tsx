@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useMemo, useCallback } from 'react';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
+import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { stringifyCounterparty } from 'utils';
 import type { IOptionTemplateProps, IOption } from '@platform/ui';

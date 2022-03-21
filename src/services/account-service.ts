@@ -1,4 +1,4 @@
-import type { IGetAccountsResponseDto } from 'interfaces/client';
+import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { getAccountUrl } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/client';
 import { request } from '@platform/services/client';

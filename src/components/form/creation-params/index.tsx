@@ -1,11 +1,10 @@
 import React, { useCallback, useContext } from 'react';
 import { Row } from 'components/form/row';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import type { IFormContext } from 'interfaces/form/form-context';
-import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
+import type { IFormContext } from 'stream-constants/form';
+import { FormContext, FORM_FIELDS } from 'stream-constants/form';
 import { creationParamsShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -17,7 +16,7 @@ export const CreationParams: React.FC = () => {
   const [options] = useCreationParams();
   const { useCase, isPdf } = useContext<IFormContext>(FormContext);
 
-  const onParamsChange: OnChangeType<string[]> = useCallback(
+  const onChangeParams: OnChangeType<string[]> = useCallback(
     e => {
       const params = e.value;
 
@@ -49,7 +48,7 @@ export const CreationParams: React.FC = () => {
         indent="MD"
         name={FORM_FIELDS.CREATION_PARAMS}
         options={options}
-        onChange={onParamsChange}
+        onChange={onChangeParams}
       />
     </Row>
   );

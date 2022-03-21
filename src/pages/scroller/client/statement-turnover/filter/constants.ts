@@ -1,4 +1,4 @@
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';

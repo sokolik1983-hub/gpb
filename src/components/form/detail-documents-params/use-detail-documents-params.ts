@@ -1,8 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
-import { defaultDocumentsSetParamsOptions } from 'interfaces/form/detail-document-params';
-import { FormContext } from 'interfaces/form/form-context';
-import type { IFormState } from 'interfaces/form/form-state';
 import { useForm } from 'react-final-form';
+import { defaultDocumentsSetParamsOptions, FormContext } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Детальные параметры комплекта документов". */

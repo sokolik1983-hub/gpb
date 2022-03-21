@@ -1,4 +1,4 @@
-import type { IGetAccountsResponseDto } from 'interfaces/client';
+import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { accountService } from 'services';
 

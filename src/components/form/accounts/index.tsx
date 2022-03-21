@@ -3,10 +3,10 @@ import { AccountsField } from 'components';
 import { Row } from 'components/form/row';
 import { useAccounts } from 'hooks/use-accounts';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
-import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
+import { FORM_FIELDS } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
 
@@ -16,7 +16,7 @@ export const Accounts: React.FC = () => {
   const { values } = useFormState<IFormState>();
   const { accounts } = useAccounts();
 
-  const onAccountsChange = ({ value }: { value: string[] }) => {
+  const onChangeAccounts = ({ value }: { value: string[] }) => {
     const params = [...values.creationParams];
 
     // хранение состояния формы / работа с ним будет упрощена в https://jira.gboteam.ru/browse/GBO-21669
@@ -32,7 +32,7 @@ export const Accounts: React.FC = () => {
   return (
     <Row label={locale.common.accounts.label}>
       <Box className={css.accounts}>
-        <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} onChange={onAccountsChange} />
+        <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} onChange={onChangeAccounts} />
       </Box>
     </Row>
   );

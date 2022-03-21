@@ -1,8 +1,7 @@
 import { createContext } from 'react';
 import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
 import { FORMAT } from 'interfaces/client/classificators/format';
-import { CREATION_PARAMS } from './creation-params';
-import { DETAIL_DOCUMENT_PARAMS } from './detail-document-params';
+import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { defaultFormState } from './form-state';
 
 /** Контекст формы. По-сути "шара" с часто используемыми вычисляемыми данными. */

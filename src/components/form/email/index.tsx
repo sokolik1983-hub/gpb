@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row } from 'components/form/row';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
+import { FORM_FIELDS } from 'stream-constants/form';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 

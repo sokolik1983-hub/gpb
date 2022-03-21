@@ -1,5 +1,5 @@
 import { TRANSACTION_TYPES } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
+import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { parseCounterparty } from 'utils';

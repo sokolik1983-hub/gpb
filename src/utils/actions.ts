@@ -1,11 +1,11 @@
-import type { ICreateRequestStatementDto, ILatestStatementDto, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces/client';
-import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
-import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
-import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
-import type { IFormState } from 'interfaces/form/form-state';
+import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/dto';
+import { DETAIL_DOCUMENT_PARAMS, CREATION_PARAMS } from 'interfaces/form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
+import type { IFormState } from 'stream-constants/form';
+import { CREDIT_PARAMS } from 'stream-constants/form/default-credit-params-options';
+import { DEBIT_PARAMS } from 'stream-constants/form/default-debit-params-options';
 import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 
 /**

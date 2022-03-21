@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { DATE_PERIODS } from 'interfaces';
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { Form } from 'react-final-form';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';

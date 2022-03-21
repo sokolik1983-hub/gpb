@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { executor } from 'actions/client';
 import type { IScrollerHeaderProps } from 'components';
 import type { IUrlParams } from 'interfaces';
-import type { IStatementSummaryInfoResponseDto } from 'interfaces/client';
+import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
