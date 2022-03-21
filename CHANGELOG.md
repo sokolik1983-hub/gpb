@@ -1,3 +1,21 @@
+# [2.2.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0...v2.2.0-release.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* **визард:** GBO-22742 исправления проверок доступности функций ([8f9de6a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8f9de6a75c97a7037b434b4d5538e8c5d0507c0c))
+* **скроллер:** GBO-23205 исправлене заголовка для кол-ва отображаемых проводок ([ec41411](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ec4141191091a98ceffe22cb9519bd0bd08cffa0))
+
+
+### Features
+
+* **визард:** GBO-23102 доработка ЭФ параметров выписки и документов ([658a141](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/658a1411decf6ac04f0aadd782d8d4fa13692492))
+* **визард:** GBO-23104 доработка ЭФ создания запроса выписки ([964ce30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/964ce30ccbda5d5a70691da365bccc277c58d8ff))
+* **скроллер:** GBO-23103 корректировка названий для операций печати / экспорта ([90280cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/90280cf39c9f5e69df1d9f14ec2683bb99805d3a))
+* **скроллер:** GBO-23105 скрытие флага "Только действующие счета" ([60bb27c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/60bb27cde2007c0b801d60c2ea074aa6ee4c8242))
+* GBO-20953 переработка пагинации скроллеров ([676b248](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/676b248c75473ca68dbd5c14fd43960675143851))
+* GBO-21804 добавлена подсветка полей скроллера выписок ([3723f78](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3723f78a0ca45473e811529a3935ddc3cd60a775))
+
 # [2.1.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0...v2.1.0) (2022-03-20)
 
 
