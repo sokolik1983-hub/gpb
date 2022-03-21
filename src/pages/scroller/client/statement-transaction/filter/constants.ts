@@ -36,15 +36,24 @@ export const FORM_FIELDS = {
   TRANSACTION_TYPE: getPath('transactionType'),
 };
 
+/** Список дополнительных полей формы фильтра. */
+export const ADDITIONAL_FORM_FIELDS = [
+  FORM_FIELDS.COUNTERPARTY,
+  FORM_FIELDS.DOC_NUMBER,
+  FORM_FIELDS.PAYMENT_DATE_FROM,
+  FORM_FIELDS.PAYMENT_DATE_TO,
+  FORM_FIELDS.TRANSACTION_TYPE,
+];
+
 /** Значения полей и условия фильтрации для useFilter. */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.TABLE_SEARCH]: filterFields.contains('', FORM_FIELDS.TABLE_SEARCH),
-  [FORM_FIELDS.AMOUNT_FROM]: filterFields.ge('', FORM_FIELDS.AMOUNT, (value): number => Number(value)),
-  [FORM_FIELDS.AMOUNT_TO]: filterFields.le('', FORM_FIELDS.AMOUNT, (value): number => Number(value)),
-  [FORM_FIELDS.PAYMENT_DATE_FROM]: filterFields.ge('', FORM_FIELDS.PAYMENT_DATE),
-  [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le('', FORM_FIELDS.PAYMENT_DATE),
-  [FORM_FIELDS.DOC_NUMBER]: filterFields.eq('', FORM_FIELDS.DOC_NUMBER),
-  [FORM_FIELDS.TRANSACTION_TYPE]: filterFields.eq('', FORM_FIELDS.TRANSACTION_TYPE),
+  [FORM_FIELDS.TABLE_SEARCH]: filterFields.contains(EMPTY_VALUE, FORM_FIELDS.TABLE_SEARCH),
+  [FORM_FIELDS.AMOUNT_FROM]: filterFields.ge(EMPTY_VALUE, FORM_FIELDS.AMOUNT, (value): number => Number(value)),
+  [FORM_FIELDS.AMOUNT_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.AMOUNT, (value): number => Number(value)),
+  [FORM_FIELDS.PAYMENT_DATE_FROM]: filterFields.ge(EMPTY_VALUE, FORM_FIELDS.PAYMENT_DATE),
+  [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.PAYMENT_DATE),
+  [FORM_FIELDS.DOC_NUMBER]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.DOC_NUMBER),
+  [FORM_FIELDS.TRANSACTION_TYPE]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.TRANSACTION_TYPE),
   [FORM_FIELDS.COUNTERPARTY]: filterFields.in([], FORM_FIELDS.COUNTERPARTY, (value): IGetCounterpartiesResponseDto[] => {
     // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
     const selectedCounterparties = value as string[];
