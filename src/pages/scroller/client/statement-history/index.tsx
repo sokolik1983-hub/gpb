@@ -6,7 +6,7 @@ import { Table } from 'pages/scroller/client/statement-history/table';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
-import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
+import { QuickFilter, fields, tagLabels, STORAGE_KEY, ADDITIONAL_FORM_FIELDS } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
 import { TagsPanel } from './filter/tags-panel';
 import type { IHistoryScrollerContext } from './history-scroller-context';
@@ -95,10 +95,12 @@ export const StatementHistoryScrollerPage = () => {
       <MainLayout>
         <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
-            additionalFilter={AdditionalFilter}
+            AdditionalFilter={AdditionalFilter}
+            QuickFilter={QuickFilter}
+            TagsPanel={TagsPanel}
+            additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+            filterFields={fields}
             filterState={filterPanel}
-            quickFilter={QuickFilter}
-            tagsPanel={TagsPanel}
             tagsState={tagsPanel}
           />
           <Table />

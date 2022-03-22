@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import type { IFormState } from './filter';
-import { tagLabels, STORAGE_KEY, QuickFilter, AdditionalFilter, TagsPanel, fields, StatementInfo } from './filter';
+import { tagLabels, STORAGE_KEY, QuickFilter, AdditionalFilter, TagsPanel, fields, StatementInfo, ADDITIONAL_FORM_FIELDS } from './filter';
 import { useGetCounterparties, useGetStatementSummaryInfo, useGetTransactionsList, useScrollerHeaderProps } from './hooks';
 import { Footer, Table } from './table';
 import type { ITransactionScrollerContext } from './transaction-scroller-context';
@@ -107,10 +107,12 @@ export const StatementTransactionScrollerPage = () => {
       <MainLayout>
         <ScrollerPageLayout navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
-            additionalFilter={AdditionalFilter}
+            AdditionalFilter={AdditionalFilter}
+            QuickFilter={QuickFilter}
+            TagsPanel={TagsPanel}
+            additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+            filterFields={fields}
             filterState={filterPanel}
-            quickFilter={QuickFilter}
-            tagsPanel={TagsPanel}
             tagsState={tagsPanel}
           />
           <StatementInfo />

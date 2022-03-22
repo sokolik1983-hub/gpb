@@ -1,5 +1,6 @@
 import React, { useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components';
+import type { ITagsPanelProps } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
 import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { orderTags, stringifyCounterparty } from 'utils';
@@ -29,7 +30,7 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 };
 
 /** Панель тегов фильтра. */
-export const TagsPanel = () => {
+export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
   const { restart } = useForm();
 
   const { counterparties } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
@@ -80,7 +81,7 @@ export const TagsPanel = () => {
   });
 
   const resetFilters = () => {
-    const newValues = getValuesAfterResetTags(values, FIELDS_WITH_TAGS);
+    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
 
     restart(newValues);
     onOk(newValues);

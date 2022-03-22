@@ -31,6 +31,9 @@ export const FORM_FIELDS = {
   SIGNED: getPath('signed'),
 };
 
+/** Список дополнительных полей формы фильтра. */
+export const ADDITIONAL_FORM_FIELDS = [FORM_FIELDS.PERIOD_TYPE, FORM_FIELDS.STATUS, FORM_FIELDS.SIGNED];
+
 /**
  * Отображает статусы выбираемые в селекте фильтра статусов,
  * на массивы статусов соответствующие этим статусам.
@@ -45,16 +48,11 @@ const STATUSES_BY_SELECTED_STATUS = {
 
 /** Значения полей и условия фильтрации для useFilter. */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.DATE_FROM]: filterFields.ge('', FORM_FIELDS.CREATED_AT, value => dateWithStartOfDay(value as string)),
-  [FORM_FIELDS.DATE_TO]: filterFields.le('', FORM_FIELDS.CREATED_AT, value => dateWithEndOfDay(value as string)),
+  [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, FORM_FIELDS.CREATED_AT, value => dateWithStartOfDay(value as string)),
+  [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.CREATED_AT, value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.ACCOUNT_IDS]: filterFields.in([], FORM_FIELDS.ACCOUNT_IDS),
-  [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq('', FORM_FIELDS.PERIOD_TYPE),
-  [FORM_FIELDS.STATUS]: filterFields.in([], FORM_FIELDS.STATUS, (value): STATEMENT_REQUEST_STATUSES[] => {
-    // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
-    const selectedStatus = value as keyof typeof STATUSES_BY_SELECTED_STATUS | typeof EMPTY_VALUE;
-
-    return selectedStatus === EMPTY_VALUE ? [] : STATUSES_BY_SELECTED_STATUS[selectedStatus];
-  }),
+  [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.PERIOD_TYPE),
+  [FORM_FIELDS.STATUS]: filterFields.in(EMPTY_VALUE, FORM_FIELDS.STATUS),
   [FORM_FIELDS.SIGNED]: filterFields.eq(false, FORM_FIELDS.SIGNED),
 };
 
