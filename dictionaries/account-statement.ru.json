@@ -30,7 +30,7 @@
   "transactionsScroller.tags.transactionType": "Операция:",
   "transactionsScroller.tags.counterparty": "Контрагент:",
   "transactionsScroller.table.total": "Операций:",
-  "transactionsScroller.table.totalValue": "{totalByFilters} из {total}",
+  "transactionsScroller.table.totalValue": "Операций: {totalByFilters} из {total}",
   "transactionsScroller.headers.operationDate": "Дата опер.",
   "transactionsScroller.headers.documentInfo": "Документ",
   "transactionsScroller.headers.counterparty": "Контрагент",

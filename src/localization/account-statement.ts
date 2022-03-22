@@ -277,7 +277,7 @@ export default {
 			},
 			/**
 			 * @ru
-			 * {totalByFilters} из {total}
+			 * Операций: {totalByFilters} из {total}
 			 */
 			totalValue: (p: { total: number; totalByFilters: number }) => t('transactionsScroller.table.totalValue', p),
 		},

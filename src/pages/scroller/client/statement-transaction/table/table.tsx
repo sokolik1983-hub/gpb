@@ -28,6 +28,7 @@ export const Table: FC = () => {
     setSelectedRows,
     selectedRows,
     transactionsAmountByFilter,
+    totalTransactionsAmount,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
@@ -96,8 +97,8 @@ export const Table: FC = () => {
           <Gap.SM />
           <Typography.Text data-field={'total'}>
             {locale.transactionsScroller.table.totalValue({
-              total: transactionsAmountByFilter,
-              totalByFilters: Math.min(transactionsAmountByFilter, pagination.pageSize),
+              total: totalTransactionsAmount,
+              totalByFilters: transactionsAmountByFilter,
             })}
           </Typography.Text>
           <Horizon.Spacer />
