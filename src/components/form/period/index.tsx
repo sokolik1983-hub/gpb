@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dates } from 'components/form/dates';
 import { Row } from 'components/form/row';
-import { FORM_FIELDS, FORM_FIELD_LABELS } from 'interfaces/form/form-state';
+import { FORM_FIELDS, FORM_FIELD_LABELS } from 'stream-constants/form';
 import { Gap, Box, Horizon } from '@platform/ui';
 import { PeriodType } from './period-type';
 import css from './styles.scss';

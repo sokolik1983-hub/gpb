@@ -1,5 +1,5 @@
 import type { DATE_PERIODS } from 'interfaces';
-import type { GROUPING_VALUES } from 'interfaces/client';
+import type { GROUPING_VALUES } from 'interfaces/dto';
 
 /** Стейт формы фильтрации. */
 export interface IFormState {

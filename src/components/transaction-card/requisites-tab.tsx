@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
-import type { IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { Confirmation, Gap, Horizon, Typography } from '@platform/ui';
 import { getAgentOptions, getPaymentPurposeOptions } from './utils';

@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
-import type { IGetAccountsResponseDto, IGetTurnoversResponseDto } from 'interfaces/client';
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/dto';
+import type { IGetAccountsResponseDto, IGetTurnoversResponseDto } from 'interfaces/dto';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
 

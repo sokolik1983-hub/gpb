@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
 import { executor } from 'actions/client/executor';
-import type { IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { CARD_FOOTER_ACTIONS, CARD_FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { getActiveActionButtons } from 'utils';

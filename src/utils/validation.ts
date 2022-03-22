@@ -1,5 +1,5 @@
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
+import { FORM_FIELDS } from 'stream-constants/form';
 import type { TestFunction } from 'yup/lib/util/createValidation';
 import { dateTime } from '@platform/tools/date-time';
 

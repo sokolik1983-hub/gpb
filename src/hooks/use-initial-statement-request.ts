@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import type { IUrlParams } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
-import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/client';
+import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';

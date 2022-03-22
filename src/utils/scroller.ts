@@ -1,5 +1,5 @@
 import type { Sorting, IPagination } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/client';
+import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import type { Column } from 'react-table';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IMetaData } from '@platform/services';

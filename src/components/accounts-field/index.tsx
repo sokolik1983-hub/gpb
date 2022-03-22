@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useMemo, useEffect, useCallback } from 'react';
-import type { IGetAccountsResponseDto } from 'interfaces/client';
+import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useForm } from 'react-final-form';
 import { noop, compareStrings } from 'utils';
 import { formatAccountCode } from '@platform/tools/localization';

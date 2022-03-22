@@ -1,11 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
-import { CREATION_PARAMS, getDefaultCreationParamsOptions } from 'interfaces/form/creation-params';
-import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
-import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
-import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
-import type { IFormState } from 'interfaces/form/form-state';
+import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
+import { DEBIT_PARAMS, FormContext, FORM_FIELDS, CREDIT_PARAMS } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
+import { getDefaultCreationParamsOptions } from 'utils';
 import {
   alwaysSendParamCasesFromUI,
   getHideEsignCases,

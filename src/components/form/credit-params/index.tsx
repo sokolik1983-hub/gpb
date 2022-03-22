@@ -1,8 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { defaultCreditParamsOptions } from 'interfaces/form/credit-params';
-import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
-import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
+import { FORM_FIELDS, DEBIT_PARAMS, FormContext, defaultCreditParamsOptions } from 'stream-constants/form';
 import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 import { Fields } from '@platform/ui';

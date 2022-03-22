@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { DatePeriodField, AccountsField } from 'components';
 import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
-import type { IGetDatePeriodResponseDto } from 'interfaces/client';
+import type { IGetDatePeriodResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
@@ -42,7 +42,7 @@ export const FilterPanel = () => {
     setIsLoading(false);
   };
 
-  const handleDateChange = () => {
+  const handleChangeDate = () => {
     change(FORM_FIELDS.DATE_PERIOD, DATE_PERIODS.SELECT_PERIOD);
   };
 
@@ -74,12 +74,12 @@ export const FilterPanel = () => {
                 <Horizon>
                   <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, 'X2S', null, null]))}>
                     {/* Дата от. */}
-                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} onChange={handleDateChange} />
+                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} onChange={handleChangeDate} />
                   </Box>
                   <Typography.Text className={css.dateDelimiter}>–</Typography.Text>
                   <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, null, null, 'X2S']))}>
                     {/* Дата по. */}
-                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} onChange={handleDateChange} />
+                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} onChange={handleChangeDate} />
                   </Box>
                 </Horizon>
               </Adjust>

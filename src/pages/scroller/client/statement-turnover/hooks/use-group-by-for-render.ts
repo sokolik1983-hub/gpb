@@ -1,5 +1,5 @@
 import { usePrevious } from 'hooks';
-import type { GROUPING_VALUES } from 'interfaces/client';
+import type { GROUPING_VALUES } from 'interfaces/dto';
 
 /**
  * Возвращает значение группировки, которое будет использована для рендера таблицы скроллера.

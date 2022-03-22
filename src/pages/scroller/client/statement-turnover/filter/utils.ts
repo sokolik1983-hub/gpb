@@ -1,4 +1,4 @@
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 
 /**

@@ -1,5 +1,5 @@
 import type { IUrlParams } from 'interfaces';
-import type { IStatementSummaryInfoResponseDto } from 'interfaces/client';
+import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';

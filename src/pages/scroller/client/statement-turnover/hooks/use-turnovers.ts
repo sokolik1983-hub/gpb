@@ -1,5 +1,5 @@
 import type { Sorting } from 'interfaces';
-import type { IGetTurnoversRequestDto, IGetTurnoversResponseDto } from 'interfaces/client';
+import type { IGetTurnoversRequestDto, IGetTurnoversResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
 import { SORT_DIRECTION } from '@platform/core';

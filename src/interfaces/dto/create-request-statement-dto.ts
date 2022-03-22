@@ -4,7 +4,7 @@ import type { CREATION_TYPE } from 'interfaces/client/classificators/creation-ty
 import type { FORMAT } from 'interfaces/client/classificators/format';
 import type { OPERATIONS } from 'interfaces/client/classificators/operations';
 import type { TYPE } from 'interfaces/client/classificators/type';
-import type { ICreationParamsDto } from 'interfaces/client/creation-params-dto';
+import type { ICreationParamsDto } from './creation-params-dto';
 
 /** ДТО создания сущности "Запрос выписки". */
 export interface ICreateRequestStatementDto {

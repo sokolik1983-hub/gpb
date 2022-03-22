@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
-import type { IGetAccountsResponseDto, IStatementHistoryRow } from 'interfaces/client';
+import type { IStatementHistoryRow } from 'interfaces/client';
+import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';

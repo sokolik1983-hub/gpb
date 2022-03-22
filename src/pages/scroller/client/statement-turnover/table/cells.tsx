@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import type { IGroupedAccounts, IGroupInfo, IAccountTurnoversInfo } from 'interfaces/client';
-import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/client';
+import type { IGroupedAccounts, IGroupInfo, IAccountTurnoversInfo } from 'interfaces/dto';
+import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { formatAccountCode } from '@platform/tools/localization';
