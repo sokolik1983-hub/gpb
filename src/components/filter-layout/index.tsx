@@ -3,16 +3,16 @@ import React, { useRef } from 'react';
 import { Form } from 'react-final-form';
 import { Filter } from './filter';
 import css from './styles.scss';
-import type { IFilterProps } from './types';
+import type { IFilterProperties } from './types';
 
 /** Лэйаут фильтров скроллера. */
-export const FilterLayout: FC<IFilterProps> = ({
+export const FilterLayout: FC<IFilterProperties> = ({
   AdditionalFilter,
   QuickFilter,
   TagsPanel,
   filterState,
   additionalFilterFields,
-  filterField,
+  filterFields,
   tagsState,
   validate,
 }) => {
@@ -33,7 +33,7 @@ export const FilterLayout: FC<IFilterProps> = ({
             QuickFilter={QuickFilter}
             TagsPanel={TagsPanel}
             additionalFilterFields={additionalFilterFields}
-            filterField={filterField}
+            filterFields={filterFields}
             filterState={filterState}
             tagsState={tagsState}
           />

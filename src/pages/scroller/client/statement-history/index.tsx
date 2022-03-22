@@ -99,7 +99,7 @@ export const StatementHistoryScrollerPage = () => {
             QuickFilter={QuickFilter}
             TagsPanel={TagsPanel}
             additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-            filterField={fields}
+            filterFields={fields}
             filterState={filterPanel}
             tagsState={tagsPanel}
           />

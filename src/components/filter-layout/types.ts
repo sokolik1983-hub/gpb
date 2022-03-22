@@ -5,7 +5,7 @@ import type { ITagsPanelProps } from 'interfaces/client';
 import type { IFilterField } from '@platform/services';
 
 /** Пропсы фильтра. */
-export interface IFilterProps {
+export interface IFilterProperties {
   /** Компонент с дополнительными полями фильтрации. */
   AdditionalFilter: React.ComponentType;
   /** Компонент с основными полями фильтрации. */
@@ -15,7 +15,7 @@ export interface IFilterProps {
   /** Дополнительные поля фильтрации. */
   additionalFilterFields: string[];
   /** Значения полей и условия фильтрации. */
-  filterField: Record<string, IFilterField>;
+  filterFields: Record<string, IFilterField>;
   /** Объект, который возвращается платформенным хуком useFilter в поле "filterPanel". */
   filterState: IFilterPanel;
   /** Объект, который возвращается платформенным хуком useFilter в поле "tagsPanel". */
