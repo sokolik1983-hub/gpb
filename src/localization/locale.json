@@ -98,7 +98,7 @@
   "transactionsScroller.table.totalValue": {
     "@total": "number",
     "@totalByFilters": "number",
-    "ru": "{totalByFilters} из {total}"
+    "ru": "Операций: {totalByFilters} из {total}"
   },
   "transactionsScroller.headers.operationDate": {
     "ru": "Дата опер."
