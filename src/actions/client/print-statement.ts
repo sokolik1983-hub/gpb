@@ -1,7 +1,7 @@
-import { fatalHandler } from 'utils';
+import { fatalHandler, printBase64 } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
-import { mimeTypeToExt, printBase64 } from '@platform/services/client';
+import { mimeTypeToExt } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
