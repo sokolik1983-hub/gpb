@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ACTION } from 'interfaces/client/classificators';
+import type { IFormContext } from 'interfaces/form/form-context';
+import { FormContext } from 'interfaces/form/form-context';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
@@ -12,6 +14,8 @@ export const Footer: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
   const { goBack } = useHistory();
+  const { isPdf } = useContext<IFormContext>(FormContext);
+
   const hasOneAccount = values.accountIds.length === 1;
 
   return (
@@ -53,6 +57,7 @@ export const Footer: React.FC = () => {
         extraSmall
         data-action={DATA_ACTIONS.SUBMIT}
         dimension="SM"
+        disabled={!isPdf}
         type={'submit'}
         onClick={() => change(FORM_FIELDS.ACTION, ACTION.PRINT)}
       >
