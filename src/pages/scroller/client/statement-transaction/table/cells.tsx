@@ -39,6 +39,10 @@ OperationDate.displayName = 'OperationDate';
 export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
   const { documentDate, documentNumber } = value;
 
+  const { filterPanel } = useContext(TransactionScrollerContext);
+
+  const { queryString } = filterPanel.values;
+
   const formattedDate = formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT });
 
   const formattedDocumentNumber = locale.transactionsScroller.labels.documentNumber({ documentNumber });
@@ -48,7 +52,7 @@ export const DocumentInfo: FC<TransactionCellProps> = ({ value }) => {
       <WithInfoTooltip text={formattedDocumentNumber}>
         {ref => (
           <Typography.Text data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
-            {formattedDocumentNumber}
+            <HightlightText searchWords={queryString} textToHightlight={formattedDocumentNumber} />
           </Typography.Text>
         )}
       </WithInfoTooltip>
