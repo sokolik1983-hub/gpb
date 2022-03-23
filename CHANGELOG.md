@@ -1,3 +1,10 @@
+# [2.2.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.3...v2.2.0-release.4) (2022-03-23)
+
+
+### Features
+
+* GBO-21804 добавлена подсветка номера документа ([937a76a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/937a76af6b6d3a853c20a5b0970699c35a006281))
+
 # [2.2.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.2...v2.2.0-release.3) (2022-03-22)
 
 
