@@ -1,3 +1,10 @@
+# [2.2.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.4...v2.2.0-release.5) (2022-03-23)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23104 исправление условий видимости блока параметров ([42f6598](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/42f65987d27c874badbe723549fccb181db0cb6f))
+
 # [2.2.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.3...v2.2.0-release.4) (2022-03-23)
 
 
