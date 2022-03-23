@@ -107,6 +107,8 @@ declare module 'react-table' {
     paddingType?: COLUMN_PADDING_TYPES;
     /** Выравнивание в заголовке колонки таблицы. */
     headerAlign?: HEADER_ALIGN;
+    /** Навигация внутри ячейки, используется для аксесабилити таблицы. */
+    innerFocus?: boolean
   }
 
   export interface TableSortByToggleProps {

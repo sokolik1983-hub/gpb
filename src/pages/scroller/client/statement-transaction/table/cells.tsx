@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
 import { HightlightText, StopPropagation } from 'components';
+import type { CellAccessibilityInnerFocusProps } from 'components/scroller-table-view/accessibility';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -13,14 +14,14 @@ import { DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { ServiceIcons, Typography, WithDropDown, WithInfoTooltip, Box, ACTIONS, MASK_INPUT_TYPE } from '@platform/ui';
+import { ACTIONS, Box, MASK_INPUT_TYPE, ROLE, ServiceIcons, Typography, WithDropDown, WithInfoTooltip } from '@platform/ui';
 import { CONTAINER_POSITION } from '@platform/ui/dist-types/floating/container';
 import { ROW_DROPDOWN_ACTIONS } from '../action-configs';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellAccessibilityInnerFocusProps & CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value }) => {
@@ -169,7 +170,7 @@ export const Purpose: FC<TransactionCellProps> = ({ value: { purpose } }) => {
 Purpose.displayName = 'Purpose';
 
 /** Действия со строкой. */
-export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
+export const Actions: FC<TransactionCellProps> = ({ column, getCellAccessibilityInnerFocusProps, row, value: doc }) => {
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 
@@ -187,7 +188,14 @@ export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
     <StopPropagation>
       <WithDropDown extraSmall actions={actions} className={css.rowDropdownActions} offset={6} radius="XS" shadow="LG">
         {(ref, _, toggleOpen) => (
-          <Box ref={ref} className={css.actionsRowButton} data-action={ACTIONS.MORE} onClick={toggleOpen}>
+          <Box
+            ref={ref}
+            className={css.actionsRowButton}
+            data-action={ACTIONS.MORE}
+            role={ROLE.BUTTON}
+            onClick={toggleOpen}
+            {...getCellAccessibilityInnerFocusProps?.(row.index, column.id)}
+          >
             <Box className={css.actionsIconWrapper}>
               <ServiceIcons.ActionMenuHorizontal clickable fill={'FAINT'} scale={30} />
             </Box>

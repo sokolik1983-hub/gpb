@@ -1,87 +1,40 @@
-import type { FC } from 'react';
 import React from 'react';
-import { useScrollButton } from 'hooks/use-scroll-button';
-import type { IPagination } from 'interfaces';
-import type { TableBodyProps, TableInstance } from 'react-table';
-import { Box, LayoutScroll, ROLE, Gap } from '@platform/ui';
-import { PAGE_SIZES, Pagination } from '../pagination';
-import { ScrollerLoadingOverlay } from '../scroller-loading-overlay';
-import { TableRow } from '../scroller-table-view/row';
+import cn from 'classnames';
+import { Row } from 'components/scroller-table-view/row';
+import type { RecordCell } from 'components/scroller-table-view/types';
+import type { TableBodyProps as TableBodyPropsPure, TableInstance } from 'react-table';
 import css from './styles.scss';
 
-/** Свойства компонента TableBody. */
-export interface ITableBodyProps extends TableBodyProps {
+/** Свойства компонента тела таблицы. */
+export interface TableBodyProps extends TableBodyPropsPure {
   /** Экземпляр таблицы. */
-  tableInstance: TableInstance<Record<string, any>>;
-  /** Если true - то идёт процесс запроса данных, для отображения в таблице. */
-  isLoading: boolean;
-  /** Обработчик клика по строке. */
-  onClick?(row: Record<string, any>): void;
-  /** Если true - то отображаются только выбранные строки. */
+  tableInstance: TableInstance<RecordCell>;
+  /** Признак отображения только выбранных строк. */
   isVisibleOnlySelectedRows?: boolean;
-  /** Устанавливает пагинацию. */
-  setPagination(value: IPagination): void;
-  /** Общее количество записей. */
-  totalAmount: number;
+  /** Обработчик клика по строке. */
+  onClick?(row: RecordCell): void;
 }
 
-/** Тело таблицы. */
-export const TableBody: FC<ITableBodyProps> = ({
-  tableInstance,
-  isLoading,
-  onClick,
+/** Компонент тела таблицы. */
+export const TableBody: React.FC<TableBodyProps> = ({
   isVisibleOnlySelectedRows,
-  setPagination,
-  totalAmount,
+  onClick,
+  tableInstance: { getTableBodyProps, rows, prepareRow },
 }) => {
-  const {
-    getTableBodyProps,
-    rows,
-    prepareRow,
-    pageCount,
-    state: { pageSize },
-  } = tableInstance;
-
-  const { handleScrollButtonClick, ScrollIcon, handleScroll, isScrollButtonVisible, setScrolledElementRef } = useScrollButton();
+  const { className, style } = getTableBodyProps();
 
   return (
-    <Box className={css.layoutScrollWrapper}>
-      <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
-        <Box role={ROLE.GRID} {...getTableBodyProps()} className={css.tableBody}>
-          {rows.map(row => {
-            prepareRow(row);
+    <tbody className={cn(className, css.tableBody)} style={style}>
+      {rows.map(row => {
+        prepareRow(row);
 
-            const { getRowProps, isSelected } = row;
+        const { id, isSelected } = row;
 
-            const { key: accountInfoRowKey } = getRowProps();
+        const isRowVisible = isVisibleOnlySelectedRows ? isSelected : true;
 
-            const isRowVisible = isVisibleOnlySelectedRows ? isSelected : true;
-
-            return isRowVisible && <TableRow key={accountInfoRowKey} row={row} onClick={onClick} />;
-          })}
-          {isLoading && <ScrollerLoadingOverlay />}
-        </Box>
-        {pageCount * pageSize > PAGE_SIZES.PER_25 && (
-          <Pagination setPagination={setPagination} tableInstance={tableInstance} totalAmount={totalAmount} />
-        )}
-        <Gap.X2L />
-      </LayoutScroll>
-
-      {/* Кнопка прокрутки таблицы. */}
-      {isScrollButtonVisible && (
-        <Box
-          inverse
-          className={css.scrollIconBox}
-          fill="BASE"
-          radius="MAX"
-          role={ROLE.BUTTON}
-          shadow="MD"
-          onClick={handleScrollButtonClick}
-        >
-          {<ScrollIcon fill={'BASE'} scale={'MD'} />}
-        </Box>
-      )}
-    </Box>
+        return isRowVisible && <Row key={id} {...row} onClick={onClick} />;
+      })}
+    </tbody>
   );
 };
 

@@ -5,7 +5,6 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'borderedRow': string;
     'bothReducedCell': string;
     'cell': string;
     'clickableRow': string;
@@ -13,10 +12,10 @@ declare namespace StylesScssModule {
     'headerCell': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
-    'headerRowWrapper': string;
     'layoutScrollWrapper': string;
     'leftReducedCell': string;
     'rightReducedCell': string;
+    'row': string;
     'scrollIconBox': string;
     'sortIconWrapper': string;
     'sortIconWrapperLeft': string;

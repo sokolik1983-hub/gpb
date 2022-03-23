@@ -1,16 +1,17 @@
 import type { FC } from 'react';
 import React from 'react';
 import cn from 'classnames';
+import type { RecordCell } from 'components/scroller-table-view/types';
 import { HEADER_ALIGN } from 'interfaces';
 import { locale } from 'localization';
-import type { HeaderGroup } from 'react-table';
+import type { ColumnInstance } from 'react-table';
 import { Box, ServiceIcons, Typography, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента SortArrow. */
 export interface ISortArrowProps {
   /** Колонка таблиццы. */
-  column: HeaderGroup<Record<string, any>>;
+  column: ColumnInstance<RecordCell>;
   /** Если true - то мультисортировка отключена. */
   disableMultiSort: boolean;
 }

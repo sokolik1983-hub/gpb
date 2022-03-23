@@ -71,5 +71,6 @@ export const columns: Array<Column<IStatementTransactionRow>> = addMaxWidthField
     disableSortBy: true,
     disableResizing: true,
     paddingType: COLUMN_PADDING_TYPES.LEFT_REDUCED,
+    innerFocus: true,
   },
 ]);
