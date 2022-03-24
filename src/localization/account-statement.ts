@@ -277,7 +277,7 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Операций: {totalByFilters} из {total}
+			 * {totalByFilters} из {total}
 			 */
 			totalValue: (p: { total: number; totalByFilters: number }) => t('transactionsScroller.table.totalValue', p),
 		},
@@ -388,14 +388,14 @@ export default {
 		headerAction: {
 			/**
 			 * @ru
-			 * Печать документов
+			 * Печать выписки
 			 */
 			get print() {
 				return t('transactionsScroller.headerAction.print');
 			},
 			/**
 			 * @ru
-			 * Экспорт документов
+			 * Экспорт выписки
 			 */
 			get export() {
 				return t('transactionsScroller.headerAction.export');

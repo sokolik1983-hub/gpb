@@ -98,7 +98,7 @@
   "transactionsScroller.table.totalValue": {
     "@total": "number",
     "@totalByFilters": "number",
-    "ru": "Операций: {totalByFilters} из {total}"
+    "ru": "{totalByFilters} из {total}"
   },
   "transactionsScroller.headers.operationDate": {
     "ru": "Дата опер."
@@ -159,10 +159,10 @@
     "ru": "Списания:"
   },
   "transactionsScroller.headerAction.print": {
-    "ru": "Печать документов"
+    "ru": "Печать выписки"
   },
   "transactionsScroller.headerAction.export": {
-    "ru": "Экспорт документов"
+    "ru": "Экспорт выписки"
   },
   "transactionsScroller.footerAction.export": {
     "ru": "Экспорт документов"
