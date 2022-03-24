@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
+import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS, getDefaultCreationParamsOptions } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
 import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
+import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import {
   alwaysSendParamCasesFromUI,
@@ -35,7 +36,9 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            acc.push({ ...x, disabled: !hasMoreThenOneAccounts });
+            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.TXT || values.format === FORMAT.EXCEL;
+
+            acc.push({ ...x, disabled });
           }
 
           break;
@@ -62,7 +65,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     }, []);
 
     setOptions(newOptions);
-  }, [action, change, isPdf, useCase, values.accountIds.length, withSign]);
+  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign]);
 
   useEffect(() => {
     if (!withDocumentsSet) {
