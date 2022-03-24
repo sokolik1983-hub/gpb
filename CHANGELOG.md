@@ -1,3 +1,10 @@
+# [2.2.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.7...v2.2.0-release.8) (2022-03-24)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23490 исправление логики отображения флага "Отдельный файл по каждому счету" на ЭФ ([f599f03](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f599f035b26e71936c6f8021645f0cfc62989f70))
+
 # [2.2.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.6...v2.2.0-release.7) (2022-03-24)
 
 
