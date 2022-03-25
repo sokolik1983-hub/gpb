@@ -36,7 +36,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.TXT || values.format === FORMAT.EXCEL;
+            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.EXCEL;
 
             acc.push({ ...x, disabled });
           }

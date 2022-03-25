@@ -21,12 +21,7 @@ export const useSeparateAccountFiles = () => {
       return;
     }
 
-    if (format === FORMAT.TXT) {
-      change(
-        FORM_FIELDS.CREATION_PARAMS,
-        params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)
-      );
-    } else if (format === FORMAT.EXCEL && !hasSeparateAccountsFiles) {
+    if (format === FORMAT.EXCEL && !hasSeparateAccountsFiles) {
       params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
       change(FORM_FIELDS.CREATION_PARAMS, params);
     }
