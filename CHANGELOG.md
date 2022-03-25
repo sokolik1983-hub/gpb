@@ -1,3 +1,10 @@
+# [2.2.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.8...v2.2.0-release.9) (2022-03-25)
+
+
+### Bug Fixes
+
+* GBO-21219 исправления адреса для АПИ счетов и доработка сортировки по умолчанию ([d86171b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d86171b231dabc7453c3d0ad14957c31c04ec786))
+
 # [2.2.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.7...v2.2.0-release.8) (2022-03-24)
 
 
