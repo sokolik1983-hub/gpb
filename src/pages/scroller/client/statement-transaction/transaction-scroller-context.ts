@@ -7,7 +7,11 @@ import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
 
 /** Состояние сортровки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.OPERATION_DATE, desc: true }];
+export const DEFAULT_SORTING: Sorting = [
+  { id: COLUMN_NAMES.OPERATION_DATE, desc: true },
+  { id: COLUMN_NAMES.INCOME, desc: false },
+  { id: COLUMN_NAMES.OUTCOME, desc: false },
+];
 
 /** Контекст скроллера "Проводки". */
 export interface ITransactionScrollerContext {
