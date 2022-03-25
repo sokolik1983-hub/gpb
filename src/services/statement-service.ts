@@ -22,6 +22,7 @@ import type {
   IStatementSummaryInfoRequestDto,
   IGetTransactionCardRequestDto,
   IGetStatementRelevanceStatus,
+  IGetAccountsResponseDto,
 } from 'interfaces/client';
 import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
 import type { ICollectionResponse } from '@platform/services';
@@ -184,4 +185,9 @@ export const statementService = {
     request({
       url: `${STATEMENT_URL}/get-status/${statementRequestId}`,
     }).then(r => r.data),
+  /** Возвращает счета пользователя для формирования выписок. */
+  getAccounts: (): Promise<IGetAccountsResponseDto[]> =>
+    request<IServerDataResp<IGetAccountsResponseDto[]>>({
+      url: `${SUPPORT_STATEMENT_URL}/search-user-account-for-statement`,
+    }).then(result => result.data.data),
 };
