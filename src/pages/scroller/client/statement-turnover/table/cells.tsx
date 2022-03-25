@@ -1,24 +1,42 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
+import cn from 'classnames';
 import type { IGroupedAccounts, IGroupInfo, IAccountTurnoversInfo } from 'interfaces/dto';
 import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, WithInfoTooltip } from '@platform/ui';
+import { Typography, WithInfoTooltip, Horizon, ServiceIcons, Gap, Box } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
+import css from './styles.scss';
 import { isGroupingRow } from './utils';
 
 /** Ячейка "Организация". */
-export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
+export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value, row }) => {
+  const { isExpanded } = row;
+  const { groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
+
+  const Icon = isExpanded ? ServiceIcons.ChevronDown : ServiceIcons.ChevronUp;
+
+  /**
+   * Определяет марджин ячейки строки второго уровня.
+   */
+  const hasSecondLevelMargin = ![GROUPING_VALUES.NO_GROUPING, GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES].includes(groupByForRender);
+
   // Если ячейка была вызвана для отрисовки группирующей строки.
   if (isGroupingRow(value)) {
     const { groupingType, currencyName, currencyCode } = value;
 
     switch (groupingType) {
       case GROUPING_TYPE.CURRENCIES:
-        return <Typography.TextBold fill={'FAINT'}>{currencyName ?? currencyCode}</Typography.TextBold>;
+        return (
+          <Horizon>
+            <Icon fill="FAINT" scale={'MD'} />
+            <Gap.SM />
+            <Typography.Text data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.Text>
+          </Horizon>
+        );
       // Группирующие строки для этих типов группировки, рендерятся без ячеек таблицы,
       // чтобы избежать переноса строки.
       case GROUPING_TYPE.BRANCHES:
@@ -30,13 +48,15 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
     const { organizationName } = value;
 
     return (
-      <WithInfoTooltip text={organizationName}>
-        {ref => (
-          <Typography.SmallText data-field={'organizationName'} innerRef={ref} line={'COLLAPSE'}>
-            {organizationName}
-          </Typography.SmallText>
-        )}
-      </WithInfoTooltip>
+      <Box className={cn({ [css.secondLevelCell]: hasSecondLevelMargin })}>
+        <WithInfoTooltip text={organizationName}>
+          {ref => (
+            <Typography.SmallText data-field={'organizationName'} innerRef={ref} line={'COLLAPSE'}>
+              {organizationName}
+            </Typography.SmallText>
+          )}
+        </WithInfoTooltip>
+      </Box>
     );
   }
 };
@@ -44,8 +64,12 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
 OrganizationCell.displayName = 'OrganizationCell';
 
 /** Ячейка "Номер счёта". */
-export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value }) => {
+export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | IGroupInfo>> = ({ value, row }) => {
   const { groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
+
+  const { isExpanded } = row;
+
+  const Icon = isExpanded ? ServiceIcons.ChevronDown : ServiceIcons.ChevronUp;
 
   // Если ячейка была вызвана для отрисовки группирующей строки.
   if (isGroupingRow(value)) {
@@ -54,9 +78,12 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
     // А группирующая строка "По валютам" рендерится с помощью ячейки таблицы.
     if (groupingType === GROUPING_TYPE.CURRENCIES && groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
       return (
-        <Typography.TextBold data-field={'currencyNameOrCurrencyCode'} fill={'FAINT'}>
-          {currencyName ?? currencyCode}
-        </Typography.TextBold>
+        <Horizon>
+          <Gap.XL />
+          <Icon fill="FAINT" scale={'MD'} />
+          <Gap.SM />
+          <Typography.Text data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.Text>
+        </Horizon>
       );
     }
 
@@ -70,8 +97,18 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
   const accountDescriptionSuffix = accountName ? `• ${accountName}` : '';
   const accountDescription = `${accountType} ${accountDescriptionSuffix}`;
 
+  /**
+   * Определяет марджин ячейки строки второго уровня.
+   */
+  const hasSecondLevelMargin = groupByForRender === GROUPING_VALUES.ORGANIZATIONS;
+
+  /**
+   * Определяет марджин ячейки строки третьего уровня.
+   */
+  const hasThirdLevelMargin = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES;
+
   return (
-    <>
+    <Box className={cn({ [css.thirdLevelCell]: hasThirdLevelMargin, [css.secondLevelCell]: hasSecondLevelMargin })}>
       <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
       <WithInfoTooltip text={accountDescription}>
         {ref => (
@@ -80,7 +117,7 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
           </Typography.SmallText>
         )}
       </WithInfoTooltip>
-    </>
+    </Box>
   );
 };
 

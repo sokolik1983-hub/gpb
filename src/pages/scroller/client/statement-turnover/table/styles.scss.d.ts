@@ -10,7 +10,6 @@ declare namespace StylesScssModule {
     'clickableRow': string;
     'collapsedRow': string;
     'groupingRow': string;
-    'groupingRowByAccount': string;
     'headerCell': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
@@ -19,10 +18,14 @@ declare namespace StylesScssModule {
     'placeholderOverlay': string;
     'portal': string;
     'scrollIconBox': string;
+    'secondLevelCell': string;
+    'secondLevelLine': string;
     'sortIconWrapper': string;
     'table': string;
     'tableBody': string;
     'tableWrapper': string;
+    'thirdLevelCell': string;
+    'thirdLevelLine': string;
     'toggleButton': string;
     'zLayerContainer': string;
     'zLayerControl': string;

@@ -14,3 +14,4 @@ export * from './input-with-history';
 export * from './hightlight-text';
 export * from './stop-propagation';
 export * from './route-error';
+export * from './accordion';

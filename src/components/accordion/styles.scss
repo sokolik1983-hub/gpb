@@ -1,0 +1,9 @@
+.accordion {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.panel {
+  overflow: hidden;
+  transition: height 0.2s;
+}
