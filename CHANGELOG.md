@@ -1,3 +1,10 @@
+# [2.2.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.10...v2.2.0-release.11) (2022-03-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23103 исправления локалей ([f7f87ff](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f7f87ff0e47bcd2aaef005b5269993610928bc9b))
+
 # [2.2.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.9...v2.2.0-release.10) (2022-03-25)
 
 
