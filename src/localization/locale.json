@@ -159,10 +159,10 @@
     "ru": "Списания:"
   },
   "transactionsScroller.headerAction.print": {
-    "ru": "Печать выписки"
+    "ru": "Печать"
   },
   "transactionsScroller.headerAction.export": {
-    "ru": "Экспорт выписки"
+    "ru": "Экспорт"
   },
   "transactionsScroller.footerAction.export": {
     "ru": "Экспорт документов"

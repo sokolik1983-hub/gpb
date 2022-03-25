@@ -388,14 +388,14 @@ export default {
 		headerAction: {
 			/**
 			 * @ru
-			 * Печать выписки
+			 * Печать
 			 */
 			get print() {
 				return t('transactionsScroller.headerAction.print');
 			},
 			/**
 			 * @ru
-			 * Экспорт выписки
+			 * Экспорт
 			 */
 			get export() {
 				return t('transactionsScroller.headerAction.export');
