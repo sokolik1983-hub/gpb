@@ -85,21 +85,32 @@ export const statementService = {
       url: `${STATEMENT_URL}/get-accounting-entry`,
       method: 'POST',
       data: { ...metadataToRequestParams(metaData), statementId },
-    }).then(res => {
-      const {
-        data: {
-          totalCount,
-          page: { page, size },
-        },
-      } = res.data;
+    })
+      .then(res => {
+        const {
+          data: {
+            totalCount,
+            page: { page, size },
+          },
+        } = res.data;
 
-      return {
-        data: page,
-        total: size,
-        totalCount,
-        status: res.status,
-      };
-    }),
+        return {
+          data: page,
+          total: size,
+          totalCount,
+          status: res.status,
+        };
+      })
+      .catch(err => {
+        const { status } = err.response;
+
+        return {
+          data: [],
+          total: 0,
+          totalCount: 0,
+          status,
+        };
+      }),
   /** Возвращает сводную информацию по выписке. */
   getStatementSummaryInfo: (data: IStatementSummaryInfoRequestDto): Promise<IStatementSummaryInfoResponseDto> =>
     request<IServerDataResp<IStatementSummaryInfoResponseDto>>({
