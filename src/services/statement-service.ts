@@ -1,9 +1,9 @@
 import type {
-  IExpandedScrollerResponceDto,
   IExpandedCollectionResponse,
   IScrollerResponceDto,
   ICreateAttachmentResponse,
   FieldsRequired,
+  IExpandedScrollerResponceDto,
 } from 'interfaces';
 import type {
   IGetDatePeriodResponseDto,
@@ -97,6 +97,7 @@ export const statementService = {
         data: page,
         total: size,
         totalCount,
+        status: res.status,
       };
     }),
   /** Возвращает сводную информацию по выписке. */

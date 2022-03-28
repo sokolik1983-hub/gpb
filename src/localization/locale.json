@@ -715,5 +715,8 @@
   },
   "exportParamsDialog.print.creationParams.withSign": {
     "ru": "С электронной подписью банка"
+  },
+  "common.checkAuthority.error": {
+    "ru": "Недостаточно полномочий для выполнения операции"
   }
 }

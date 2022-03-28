@@ -20,6 +20,8 @@ export interface IExpandedScrollerResponceDto<T> {
 export interface IExpandedCollectionResponse<T> extends ICollectionResponse<T> {
   /** Общее количество элементов, без учёта фильтрации. */
   totalCount: number;
+  /** HTTP-статус ответа. */
+  status: number;
 }
 
 /** ДТО ответа от метода печати / экспорта выписки или ее документов. */
