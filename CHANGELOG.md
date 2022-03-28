@@ -1,3 +1,10 @@
+# [2.2.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.12...v2.2.0-release.13) (2022-03-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23635 обработка запроса в случае ошибки ([b7e7b9c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b7e7b9c2b8508a81dd9f23d1e65fd85715900965))
+
 # [2.2.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.11...v2.2.0-release.12) (2022-03-28)
 
 
