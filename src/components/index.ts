@@ -13,3 +13,4 @@ export * from './item-with-rest-in-pop-up';
 export * from './input-with-history';
 export * from './hightlight-text';
 export * from './stop-propagation';
+export * from './route-error';

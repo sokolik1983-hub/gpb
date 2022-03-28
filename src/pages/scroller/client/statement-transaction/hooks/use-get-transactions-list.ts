@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { HTTP_STATUS_CODE } from 'interfaces';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useQuery } from 'react-query';
@@ -12,6 +13,7 @@ const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = 
   data: [],
   total: 0,
   totalCount: 0,
+  status: HTTP_STATUS_CODE.OK,
 };
 
 const SORTING_MAP = {
@@ -63,5 +65,5 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     retry: false,
   });
 
-  return { response: data, isTransactionsFetching, isTransactionsError };
+  return { response: data, isTransactionsFetching, isTransactionsError, status: data.status };
 };

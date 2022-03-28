@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
-import { ScrollerPageLayout, ScrollerHeader, FilterLayout } from 'components';
+import { ScrollerPageLayout, ScrollerHeader, FilterLayout, RouteError } from 'components';
 import { useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
+import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useParams } from 'react-router-dom';
 import { DEFAULT_PAGINATION } from 'stream-constants';
@@ -46,7 +47,7 @@ export const StatementTransactionScrollerPage = () => {
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
   const {
-    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount },
+    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status },
     isTransactionsError,
     isTransactionsFetching,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
@@ -93,6 +94,12 @@ export const StatementTransactionScrollerPage = () => {
       selectedRows,
     ]
   );
+
+  const isStatementForbidden = status === HTTP_STATUS_CODE.FORBIDDEN;
+
+  if (isStatementForbidden) {
+    return <RouteError />;
+  }
 
   if (contextValue.hasError) {
     return (

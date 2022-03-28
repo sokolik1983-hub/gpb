@@ -1391,6 +1391,15 @@ export default {
 				return t('common.email.label');
 			},
 		},
+		checkAuthority: {
+			/**
+			 * @ru
+			 * Недостаточно полномочий для выполнения операции
+			 */
+			get error() {
+				return t('common.checkAuthority.error');
+			},
+		},
 	},
 	table: {
 		header: {
