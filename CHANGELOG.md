@@ -1,3 +1,10 @@
+# [2.2.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.11...v2.2.0-release.12) (2022-03-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23635 доработка ограничения доступа к скроллеру проводок ([f582cbf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f582cbf4981a963c890a36640358a4a30fa34785))
+
 # [2.2.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.10...v2.2.0-release.11) (2022-03-25)
 
 
