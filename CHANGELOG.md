@@ -1,3 +1,11 @@
+# [2.2.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.13...v2.2.0-release.14) (2022-03-29)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23490 доработки для флага "Отдельный файл по каждому счету" ([9cc69b5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9cc69b5d3853a047f7e9eacf136e6b92dff9f742))
+* **скроллер:** GBO-23103 исправление локали ([c583a78](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c583a78b93ec0d92d6ec830b15dbe82af36a7d5b))
+
 # [2.2.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.12...v2.2.0-release.13) (2022-03-28)
 
 
