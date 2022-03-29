@@ -15,7 +15,7 @@ interface IFooterProps {
 /** Футер фильтра скроллера. */
 export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply }) => {
   const { restart } = useForm();
-  const { submitting, values } = useFormState();
+  const { invalid, values } = useFormState();
 
   const handleCancel = useCallback(() => {
     onReset();
@@ -29,12 +29,12 @@ export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply }) => {
   return (
     <Box className={css.footerWrapper}>
       <Horizon>
-        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={submitting} onClick={handleApply}>
+        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={invalid} onClick={handleApply}>
           {locale.scroller.filter.buttons.applyFilters}
         </PrimaryButton>
         <Gap />
 
-        <RegularButton extraSmall data-action={ACTIONS.CANCEL} dimension="SM" disabled={submitting} onClick={handleCancel}>
+        <RegularButton extraSmall data-action={ACTIONS.CANCEL} dimension="SM" disabled={invalid} onClick={handleCancel}>
           {locale.scroller.filter.buttons.reset}
         </RegularButton>
       </Horizon>

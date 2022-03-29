@@ -1,23 +1,18 @@
 import React, { useContext } from 'react';
 import cn from 'classnames';
 import { DatePeriodField, AccountsField } from 'components';
-import { useDateRangeRestriction } from 'hooks';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/client';
 import { locale } from 'localization';
-import { useForm, useFormState } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS } from './constants';
-import type { IFormState } from './interfaces';
 import css from './styles.scss';
 
 /** Фильтры скроллера. */
 export const FilterPanel = () => {
-  const {
-    values: { dateFrom = '', dateTo = '' },
-  } = useFormState<IFormState>();
   const { batch, change, submit } = useForm();
 
   const { setHasError, setIsLoading, accounts } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
@@ -45,13 +40,6 @@ export const FilterPanel = () => {
   const handleDateChange = () => {
     change(FORM_FIELDS.DATE_PERIOD, DATE_PERIODS.SELECT_PERIOD);
   };
-
-  useDateRangeRestriction({
-    dateFromName: FORM_FIELDS.DATE_FROM,
-    dateToName: FORM_FIELDS.DATE_TO,
-    dateFrom,
-    dateTo,
-  });
 
   return (
     <Pattern>
