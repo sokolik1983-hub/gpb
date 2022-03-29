@@ -14,17 +14,30 @@ export const useSeparateAccountFiles = () => {
 
   const hasMoreThenOneAccounts = accountIds.length > 1;
   const hasSeparateAccountsFiles = params.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+  const isExcel = format === FORMAT.EXCEL;
 
   useEffect(() => {
-    // хук работает только в случае выбора нескольких счетов
     if (!hasMoreThenOneAccounts) {
+      if (hasSeparateAccountsFiles) {
+        change(
+          FORM_FIELDS.CREATION_PARAMS,
+          params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)
+        );
+      }
+
       return;
     }
 
-    if (format === FORMAT.EXCEL && !hasSeparateAccountsFiles) {
+    if (isExcel && !hasSeparateAccountsFiles) {
       params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
       change(FORM_FIELDS.CREATION_PARAMS, params);
+    } else if (!isExcel && hasSeparateAccountsFiles) {
+      change(
+        FORM_FIELDS.CREATION_PARAMS,
+        params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)
+      );
     }
+    // триггерим хук либо при выборе счетов, либо на изменение формата
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hasMoreThenOneAccounts, hasSeparateAccountsFiles, format]);
+  }, [hasMoreThenOneAccounts, isExcel]);
 };
