@@ -1476,7 +1476,7 @@ export default {
 		buttons: {
 			/**
 			 * @ru
-			 * Экспортировать
+			 * Экспорт
 			 */
 			get export() {
 				return t('transactionCard.buttons.export');
