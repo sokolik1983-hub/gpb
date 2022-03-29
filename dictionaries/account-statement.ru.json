@@ -191,7 +191,7 @@
   "transactionCard.subHeader": "{documentName} № {number} от {date}",
   "transactionCard.tabs.requisites": "Реквизиты",
   "transactionCard.tabs.attachments": "Приложения",
-  "transactionCard.buttons.export": "Экспортировать",
+  "transactionCard.buttons.export": "Экспорт",
   "transactionCard.buttons.print": "Печать",
   "transactionCard.buttons.more": "Еще",
   "transactionCard.labels.amount": "Сумма",

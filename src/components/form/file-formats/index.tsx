@@ -6,6 +6,7 @@ import { Row } from 'components/form/row';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { fileFormatOptions } from 'interfaces/form/file-format';
+import { FormContext } from 'interfaces/form/form-context';
 import type { IFormState } from 'interfaces/form/form-state';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
@@ -19,6 +20,7 @@ export const FileFormats: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
   const { useCase } = useContext<IDialogContext>(DialogContext);
+  const { withSign } = useContext(FormContext);
 
   // встраиваем реакцию на изменение параметров для флага "Отдельный файл по каждому счету"
   useSeparateAccountFiles();
@@ -29,14 +31,14 @@ export const FileFormats: React.FC = () => {
       const format = e.value;
       const isPdf = format === FORMAT.PDF;
 
-      if (!isPdf) {
+      if (!isPdf && withSign) {
         change(
           FORM_FIELDS.CREATION_PARAMS,
           params.filter(x => x !== CREATION_PARAMS.WITH_SIGN)
         );
       }
     },
-    [change, values.creationParams]
+    [change, values.creationParams, withSign]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));
