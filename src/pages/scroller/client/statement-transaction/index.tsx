@@ -4,15 +4,36 @@ import { useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
+import {
+  AdditionalFilter,
+  FORM_FIELDS,
+  QuickFilter,
+  STORAGE_KEY,
+  StatementInfo,
+  TagsPanel,
+  fields,
+  tagLabels,
+} from 'pages/scroller/client/statement-transaction/filter';
+import type { IFormState } from 'pages/scroller/client/statement-transaction/filter';
+import {
+  useGetCounterparties,
+  useGetStatementSummaryInfo,
+  useGetTransactionsList,
+  useScrollerHeaderProps,
+} from 'pages/scroller/client/statement-transaction/hooks';
+import { Footer, Table } from 'pages/scroller/client/statement-transaction/table';
+import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
+import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { useParams } from 'react-router-dom';
+import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
-import type { IFormState } from './filter';
-import { tagLabels, STORAGE_KEY, QuickFilter, AdditionalFilter, TagsPanel, fields, StatementInfo } from './filter';
-import { useGetCounterparties, useGetStatementSummaryInfo, useGetTransactionsList, useScrollerHeaderProps } from './hooks';
-import { Footer, Table } from './table';
-import type { ITransactionScrollerContext } from './transaction-scroller-context';
-import { DEFAULT_SORTING, TransactionScrollerContext } from './transaction-scroller-context';
+import { validate } from '@platform/validation';
+
+/**
+ * Схема валидации формы фильтра ЭФ "Журнал проводок".
+ */
+const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
 
 /**
  * Страница скроллера: [Выписки_ЗВ] ЭФ Клиента "Журнал проводок".
@@ -119,6 +140,7 @@ export const StatementTransactionScrollerPage = () => {
             quickFilter={QuickFilter}
             tagsPanel={TagsPanel}
             tagsState={tagsPanel}
+            validate={validate(validationSchema)}
           />
           <StatementInfo />
           <Table />

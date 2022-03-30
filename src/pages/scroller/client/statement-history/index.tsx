@@ -3,15 +3,22 @@ import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
+import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
+import { validate } from '@platform/validation';
 import type { IFormState } from './filter';
-import { QuickFilter, fields, tagLabels, STORAGE_KEY } from './filter';
+import { QuickFilter, STORAGE_KEY, FORM_FIELDS, fields, tagLabels } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
 import { TagsPanel } from './filter/tags-panel';
 import type { IHistoryScrollerContext } from './history-scroller-context';
 import { HistoryScrollerContext, DEFAULT_SORTING } from './history-scroller-context';
 import { useGetStatementList } from './hooks';
+
+/**
+ * Схема валидации формы фильтра скроллера "История оборотов".
+ */
+const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -100,6 +107,7 @@ export const StatementHistoryScrollerPage = () => {
             quickFilter={QuickFilter}
             tagsPanel={TagsPanel}
             tagsState={tagsPanel}
+            validate={validate(validationSchema)}
           />
           <Table />
         </ScrollerPageLayout>
