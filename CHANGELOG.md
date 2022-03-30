@@ -1,3 +1,10 @@
+# [2.2.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.16...v2.2.0-release.17) (2022-03-30)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23744 доработки значений фильтров при сбросе ([6ba5081](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6ba50818eee492e408093f8a6651d0f01a2c2aa3))
+
 # [2.2.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.15...v2.2.0-release.16) (2022-03-30)
 
 
