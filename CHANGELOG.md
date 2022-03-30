@@ -1,3 +1,10 @@
+# [2.2.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.15...v2.2.0-release.16) (2022-03-30)
+
+
+### Bug Fixes
+
+* GBO-22118 валидация диапазона дат ([790a981](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/790a981110233ab7b6159fcbaed3ae0dab1dd411))
+
 # [2.2.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.14...v2.2.0-release.15) (2022-03-30)
 
 
