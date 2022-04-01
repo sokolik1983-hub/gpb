@@ -1,3 +1,12 @@
+# [2.2.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.17...v2.2.0-release.18) (2022-04-01)
+
+
+### Bug Fixes
+
+* GBO-23874 исправление обработчика фатальных ошибок ([b5e8d36](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b5e8d36d443a8e61967311dfa8c109188f153317))
+* **визард:** GBO-20113 исправление работы флага "С комплектом документов" ([03526dc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/03526dce1cf0b69da24a0f8954a8d0e43decdbf5))
+* **скроллер:** GBO-23928 исправление отображения названия организации ([3b91b45](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3b91b45e75371b4e96408821f827f7665dda7925))
+
 # [2.2.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.16...v2.2.0-release.17) (2022-03-30)
 
 
