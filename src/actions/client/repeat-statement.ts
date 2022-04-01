@@ -1,6 +1,7 @@
 import type { IFormRouterState } from 'interfaces/client';
 import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
+import { fatalHandler } from 'utils';
 import { singleAction } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
@@ -20,5 +21,6 @@ export const repeatStatement: IActionConfig<typeof context, Promise<void>> = {
 
     return Promise.resolve();
   },
+  fatalHandler,
   guardians: [singleAction],
 };
