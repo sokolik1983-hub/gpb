@@ -156,27 +156,19 @@ export const statementService = {
     }).then(r => r.data),
   /** Возвращает файл для экспорта по Id запроса выписки. */
   exportStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
-    const { data: resp } = await request({
+    const { data } = await request({
       url: `${STATEMENT_URL}/attachment/${id}`,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return data;
   },
   /** Возвращает файл для печати по Id запроса выписки. */
   printStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
-    const { data: resp } = await request({
+    const { data } = await request({
       url: `${STATEMENT_URL}/print/${id}`,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return data;
   },
   /** Формирует вложения для печати / экспорта. */
   createAttachment: async (data: ICreateAttachmentRequestDto): Promise<ICreateAttachmentResponse> => {
@@ -186,11 +178,7 @@ export const statementService = {
       data,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return resp;
   },
   /** Получить статус актуальности выписки. */
   getStatementRelevanceStatus: (statementRequestId: string): Promise<IServerDataResp<IGetStatementRelevanceStatus>> =>

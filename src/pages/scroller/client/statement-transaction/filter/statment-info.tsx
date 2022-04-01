@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useContext } from 'react';
 import { locale } from 'localization';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Box, Pattern, Typography, Gap, WithInfoTooltip } from '@platform/ui';
+import { Box, Pattern, Typography, Gap } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
@@ -37,13 +37,7 @@ export const StatementInfo: FC = () => {
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
-          <WithInfoTooltip text={organizationName}>
-            {ref => (
-              <Typography.Text innerRef={ref} line={'COLLAPSE'}>
-                {organizationName}
-              </Typography.Text>
-            )}
-          </WithInfoTooltip>
+          <Typography.Text>{organizationName}</Typography.Text>
         </Pattern.Span>
       </Pattern>
       <Gap />
