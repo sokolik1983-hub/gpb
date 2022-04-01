@@ -1,3 +1,10 @@
+# [2.2.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.19...v2.2.0-release.20) (2022-04-01)
+
+
+### Bug Fixes
+
+* GBO-23958 исправлен экспорт выписки ([9b4ff88](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9b4ff887b86974e2a881e597261668dc600fe900))
+
 # [2.2.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.18...v2.2.0-release.19) (2022-04-01)
 
 
