@@ -1,3 +1,10 @@
+# [2.2.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.18...v2.2.0-release.19) (2022-04-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23928 доработки скроллеров истории и проводок ([76d37c5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/76d37c5e5b22275dd44edcbba973d4426c063668))
+
 # [2.2.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.17...v2.2.0-release.18) (2022-04-01)
 
 
