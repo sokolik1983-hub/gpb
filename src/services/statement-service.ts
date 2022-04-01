@@ -178,7 +178,7 @@ export const statementService = {
       data,
     });
 
-    return resp;
+    return resp.data;
   },
   /** Получить статус актуальности выписки. */
   getStatementRelevanceStatus: (statementRequestId: string): Promise<IServerDataResp<IGetStatementRelevanceStatus>> =>
