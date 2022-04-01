@@ -156,19 +156,19 @@ export const statementService = {
     }).then(r => r.data),
   /** Возвращает файл для экспорта по Id запроса выписки. */
   exportStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
-    const { data } = await request({
+    const { data: resp } = await request({
       url: `${STATEMENT_URL}/attachment/${id}`,
     });
 
-    return data;
+    return resp.data;
   },
   /** Возвращает файл для печати по Id запроса выписки. */
   printStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
-    const { data } = await request({
+    const { data: resp } = await request({
       url: `${STATEMENT_URL}/print/${id}`,
     });
 
-    return data;
+    return resp.data;
   },
   /** Формирует вложения для печати / экспорта. */
   createAttachment: async (data: ICreateAttachmentRequestDto): Promise<ICreateAttachmentResponse> => {
