@@ -1,3 +1,164 @@
+# [2.2.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.20...v2.2.0-release.21) (2022-04-01)
+
+
+### Bug Fixes
+
+* GBO-23958 исправление методов печати и экспорта ([b0b1a79](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b0b1a79f4f08d87abce30b1851ddd97c4c547adf))
+
+# [2.2.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.19...v2.2.0-release.20) (2022-04-01)
+
+
+### Bug Fixes
+
+* GBO-23958 исправлен экспорт выписки ([9b4ff88](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9b4ff887b86974e2a881e597261668dc600fe900))
+
+# [2.2.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.18...v2.2.0-release.19) (2022-04-01)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23928 доработки скроллеров истории и проводок ([76d37c5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/76d37c5e5b22275dd44edcbba973d4426c063668))
+
+# [2.2.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.17...v2.2.0-release.18) (2022-04-01)
+
+
+### Bug Fixes
+
+* GBO-23874 исправление обработчика фатальных ошибок ([b5e8d36](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b5e8d36d443a8e61967311dfa8c109188f153317))
+* **визард:** GBO-20113 исправление работы флага "С комплектом документов" ([03526dc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/03526dce1cf0b69da24a0f8954a8d0e43decdbf5))
+* **скроллер:** GBO-23928 исправление отображения названия организации ([3b91b45](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3b91b45e75371b4e96408821f827f7665dda7925))
+
+# [2.2.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.16...v2.2.0-release.17) (2022-03-30)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23744 доработки значений фильтров при сбросе ([6ba5081](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6ba50818eee492e408093f8a6651d0f01a2c2aa3))
+
+# [2.2.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.15...v2.2.0-release.16) (2022-03-30)
+
+
+### Bug Fixes
+
+* GBO-22118 валидация диапазона дат ([790a981](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/790a981110233ab7b6159fcbaed3ae0dab1dd411))
+
+# [2.2.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.14...v2.2.0-release.15) (2022-03-30)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23744 доработка логики отображения флага "Отдельный файл по каждому счету" ([cc92fc1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cc92fc18fa623dc9dd17b58bd7bf5ded552a15f5))
+
+# [2.2.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.13...v2.2.0-release.14) (2022-03-29)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23490 доработки для флага "Отдельный файл по каждому счету" ([9cc69b5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9cc69b5d3853a047f7e9eacf136e6b92dff9f742))
+* **скроллер:** GBO-23103 исправление локали ([c583a78](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c583a78b93ec0d92d6ec830b15dbe82af36a7d5b))
+
+# [2.2.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.12...v2.2.0-release.13) (2022-03-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23635 обработка запроса в случае ошибки ([b7e7b9c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b7e7b9c2b8508a81dd9f23d1e65fd85715900965))
+
+# [2.2.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.11...v2.2.0-release.12) (2022-03-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23635 доработка ограничения доступа к скроллеру проводок ([f582cbf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f582cbf4981a963c890a36640358a4a30fa34785))
+
+# [2.2.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.10...v2.2.0-release.11) (2022-03-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23103 исправления локалей ([f7f87ff](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f7f87ff0e47bcd2aaef005b5269993610928bc9b))
+
+# [2.2.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.9...v2.2.0-release.10) (2022-03-25)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23490 исправления условия дизейбла для флага "Отдельный файл по каждому счету" ([8e12b9e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8e12b9ea908e59ddd2c5478760e1a3b87687e870))
+
+# [2.2.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.8...v2.2.0-release.9) (2022-03-25)
+
+
+### Bug Fixes
+
+* GBO-21219 исправления адреса для АПИ счетов и доработка сортировки по умолчанию ([d86171b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d86171b231dabc7453c3d0ad14957c31c04ec786))
+
+# [2.2.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.7...v2.2.0-release.8) (2022-03-24)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23490 исправление логики отображения флага "Отдельный файл по каждому счету" на ЭФ ([f599f03](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f599f035b26e71936c6f8021645f0cfc62989f70))
+
+# [2.2.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.6...v2.2.0-release.7) (2022-03-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23103 исправления локалей ([beb20dd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/beb20dda34025ce2bedd7951f3febc0d25341e6f))
+
+# [2.2.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.5...v2.2.0-release.6) (2022-03-23)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23445 дизейбл печати на ЭФ создания запроса выписки ([84fb67c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/84fb67ccf07d8abdbf3e7f43836fc1c65e68bfc9))
+
+# [2.2.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.4...v2.2.0-release.5) (2022-03-23)
+
+
+### Bug Fixes
+
+* **визард:** GBO-23104 исправление условий видимости блока параметров ([42f6598](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/42f65987d27c874badbe723549fccb181db0cb6f))
+
+# [2.2.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.3...v2.2.0-release.4) (2022-03-23)
+
+
+### Features
+
+* GBO-21804 добавлена подсветка номера документа ([937a76a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/937a76af6b6d3a853c20a5b0970699c35a006281))
+
+# [2.2.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.2...v2.2.0-release.3) (2022-03-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23205 исправления заголовка для вывода кол-ва проводок ([076ea7c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/076ea7cffe0e962aa89c267fd9e9210ff0dd09b4))
+
+# [2.2.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0-release.1...v2.2.0-release.2) (2022-03-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-23205 исправление заголовка для отображения кол-ва проводок ([bac295e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bac295e697c26d5583230ab3c9f4080fa7c80787))
+
+# [2.2.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.1.0...v2.2.0-release.1) (2022-03-21)
+
+
+### Bug Fixes
+
+* **визард:** GBO-22742 исправления проверок доступности функций ([8f9de6a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8f9de6a75c97a7037b434b4d5538e8c5d0507c0c))
+* **скроллер:** GBO-23205 исправлене заголовка для кол-ва отображаемых проводок ([ec41411](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ec4141191091a98ceffe22cb9519bd0bd08cffa0))
+
+
+### Features
+
+* **визард:** GBO-23102 доработка ЭФ параметров выписки и документов ([658a141](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/658a1411decf6ac04f0aadd782d8d4fa13692492))
+* **визард:** GBO-23104 доработка ЭФ создания запроса выписки ([964ce30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/964ce30ccbda5d5a70691da365bccc277c58d8ff))
+* **скроллер:** GBO-23103 корректировка названий для операций печати / экспорта ([90280cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/90280cf39c9f5e69df1d9f14ec2683bb99805d3a))
+* **скроллер:** GBO-23105 скрытие флага "Только действующие счета" ([60bb27c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/60bb27cde2007c0b801d60c2ea074aa6ee4c8242))
+* GBO-20953 переработка пагинации скроллеров ([676b248](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/676b248c75473ca68dbd5c14fd43960675143851))
+* GBO-21804 добавлена подсветка полей скроллера выписок ([3723f78](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3723f78a0ca45473e811529a3935ddc3cd60a775))
+
 # [2.1.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.0.0...v2.1.0) (2022-03-20)
 
 

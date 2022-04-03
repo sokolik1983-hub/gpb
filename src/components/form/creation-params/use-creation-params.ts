@@ -1,17 +1,17 @@
 import { useContext, useEffect, useState } from 'react';
+import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS, getDefaultCreationParamsOptions } from 'interfaces/form/creation-params';
 import { CREDIT_PARAMS } from 'interfaces/form/credit-params';
 import { DEBIT_PARAMS } from 'interfaces/form/debit-params';
 import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import type { IFormState } from 'interfaces/form/form-state';
+import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
 import {
   alwaysSendParamCasesFromUI,
-  creationParamsShowCases,
-  getHideEmptyTurnoverCases,
   getHideEsignCases,
   getHideSeparateAccountFilesCases,
+  withDocumentsSetCases,
 } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
@@ -36,12 +36,14 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            acc.push({ ...x, disabled: !hasMoreThenOneAccounts });
+            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.EXCEL || values.format === FORMAT.TXT;
+
+            acc.push({ ...x, disabled });
           }
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
-          if (isPdf && (!useCase || (useCase && creationParamsShowCases.includes(useCase)))) {
+          if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
             acc.push({ ...x, disabled: withSign });
           }
 
@@ -49,13 +51,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
         }
         case CREATION_PARAMS.WITH_SIGN: {
           if (isPdf && (!useCase || (useCase && !getHideEsignCases(action!).includes(useCase)))) {
-            acc.push(x);
-          }
-
-          break;
-        }
-        case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          if (!useCase || (useCase && !getHideEmptyTurnoverCases(action!).includes(useCase))) {
             acc.push(x);
           }
 
@@ -70,7 +65,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     }, []);
 
     setOptions(newOptions);
-  }, [action, change, isPdf, useCase, values.accountIds.length, withSign]);
+  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign]);
 
   useEffect(() => {
     if (!withDocumentsSet) {

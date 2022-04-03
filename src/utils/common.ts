@@ -1,4 +1,5 @@
 import type { IExtendedActionWebInfo } from 'interfaces';
+import { HTTP_STATUS_CODE } from 'interfaces';
 import { locale } from 'localization';
 import type { IExecuter } from '@platform/core';
 import { getActionButtons } from '@platform/core';
@@ -29,8 +30,14 @@ export const compareStrings = (a: string, b: string): -1 | 0 | 1 => {
   return 0;
 };
 
-/** Стандартный обработчик фатальной ошибки. */
-export const fatalHandler = ({ showError }: IBaseContext) => {
+/** Кастомный обработчик фатальной ошибки. */
+export const fatalHandler = ({ showError }: IBaseContext, { error }: { error?: Error }) => {
+  if ((error as any)?.response?.status === HTTP_STATUS_CODE.FORBIDDEN) {
+    showError(locale.errors.progressError, locale.common.checkAuthority.error);
+
+    return;
+  }
+
   showError(locale.errors.progressErrorHeader, locale.errors.progressError);
 };
 

@@ -43,7 +43,7 @@ export const Table: FC = () => {
   const handleClick = useCallback((doc: IStatementHistoryRow) => {
     if (doc.accountsIds.length === 1) {
       // TODO: в дальнейшем заменить на платформенный аналог
-      if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW)) {
+      if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_VIEW)) {
         return;
       }
 

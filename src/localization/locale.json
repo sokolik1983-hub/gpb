@@ -165,19 +165,19 @@
     "ru": "Экспорт"
   },
   "transactionsScroller.footerAction.export": {
-    "ru": "Экспорт"
+    "ru": "Экспорт документов"
   },
   "transactionsScroller.footerAction.print": {
-    "ru": "Печать"
+    "ru": "Печать документов"
   },
   "transactionsScroller.footerAction.more": {
     "ru": "Еще"
   },
   "transactionsScroller.rowAction.print": {
-    "ru": "Печать"
+    "ru": "Печать документа"
   },
   "transactionsScroller.rowAction.export": {
-    "ru": "Скачать документ основания"
+    "ru": "Экспорт документа"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"
@@ -546,7 +546,7 @@
     "ru": "Адрес электронной почты"
   },
   "form.buttons.download.label": {
-    "ru": "Скачать"
+    "ru": "Экспорт"
   },
   "form.buttons.sendToEmail.label": {
     "ru": "Отправить на почту"
@@ -594,7 +594,7 @@
     "ru": "Приложения"
   },
   "transactionCard.buttons.export": {
-    "ru": "Скачать"
+    "ru": "Экспорт"
   },
   "transactionCard.buttons.print": {
     "ru": "Печать"
@@ -672,7 +672,7 @@
     "ru": "Дата окончания периода не может быть меньше даты начала"
   },
   "exportParamsDialog.buttons.download.label": {
-    "ru": "Скачать"
+    "ru": "Экспортировать"
   },
   "exportParamsDialog.buttons.sendToEmail.label": {
     "ru": "Отправить на почту"
@@ -689,14 +689,20 @@
   "exportParamsDialog.exportStatement.label": {
     "ru": "Экспорт выписки"
   },
-  "exportParamsDialog.exportOutdatedStatement.label": {
-    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно скачать выписку?"
-  },
   "exportParamsDialog.viewOutdatedStatement.label": {
     "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно просмотреть выписку?"
   },
   "exportParamsDialog.printStatement.label": {
     "ru": "Печать выписки"
+  },
+  "exportParamsDialog.exportStatementDocuments.label": {
+    "ru": "Экспорт документов"
+  },
+  "exportParamsDialog.printStatementDocuments.label": {
+    "ru": "Печать документов"
+  },
+  "exportParamsDialog.exportOutdatedStatement.label": {
+    "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?"
   },
   "exportParamsDialog.print.creationParams.separateAccountsFiles": {
     "ru": "Отдельным файлом по каждому счёту"
@@ -709,5 +715,8 @@
   },
   "exportParamsDialog.print.creationParams.withSign": {
     "ru": "С электронной подписью банка"
+  },
+  "common.checkAuthority.error": {
+    "ru": "Недостаточно полномочий для выполнения операции"
   }
 }

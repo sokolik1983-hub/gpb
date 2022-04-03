@@ -17,7 +17,6 @@ export enum CREATION_PARAMS {
 /** Начальные значения параметров создания запроса выписки. */
 export const defaultCreationParamsValue = {
   [CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES]: false,
-  [CREATION_PARAMS.HIDE_EMPTY_TURNOVERS]: false,
   [CREATION_PARAMS.WITH_SIGN]: false,
   [CREATION_PARAMS.WITH_DOCUMENTS_SET]: false,
 };

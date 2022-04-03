@@ -1,9 +1,9 @@
 import type { FC } from 'react';
 import React, { useContext, useEffect } from 'react';
 import { AccountsField } from 'components';
-import { useDateRangeRestriction } from 'hooks';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
+import { isValidDateRange } from 'utils';
 import { Pattern, Box, Typography, Gap, Fields, Horizon } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { FORM_FIELDS } from './constants';
@@ -15,7 +15,7 @@ import css from './styles.scss';
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
 export const QuickFilter: FC = () => {
-  const { values } = useFormState<IFormState>();
+  const { valid, values } = useFormState<IFormState>();
 
   const { accountIds, dateFrom, dateTo } = values;
 
@@ -27,7 +27,9 @@ export const QuickFilter: FC = () => {
 
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
-    onOk(values);
+    if (valid && isValidDateRange({ dateFrom, dateTo })) {
+      onOk(values);
+    }
 
     // В хуке useFilter, после обновления стейта,
     // чтобы избежать закрытия формы на UI, вызывается открытие формы.
@@ -39,20 +41,13 @@ export const QuickFilter: FC = () => {
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, accountIds, dateFrom, dateTo]);
+  }, [onOk, accountIds, dateFrom, dateTo, valid]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены счета.
     onOk(values);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts]);
-
-  useDateRangeRestriction({
-    dateFromName: FORM_FIELDS.DATE_FROM,
-    dateToName: FORM_FIELDS.DATE_TO,
-    dateFrom,
-    dateTo,
-  });
 
   return (
     <Pattern>

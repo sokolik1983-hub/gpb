@@ -35,7 +35,7 @@ export const StatementInfo: FC = () => {
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.accountNumber}</Typography.Text>
           <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
         </Pattern.Span>
-        <Pattern.Span size={3}>
+        <Pattern.Span size={9}>
           <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
           <WithInfoTooltip text={organizationName}>
             {ref => (

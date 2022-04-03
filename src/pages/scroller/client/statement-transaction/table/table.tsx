@@ -7,6 +7,8 @@ import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination, useRowSelect } from 'react-table';
+import { PRIVILEGE } from 'stream-constants/client';
+import { isFunctionAvailability } from 'utils';
 import { Horizon, Typography, Gap, Box, Checkbox } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
@@ -19,13 +21,14 @@ export const Table: FC = () => {
   const {
     transactions,
     isLoading,
-    totalTransactionsAmount,
     sorting,
     setSorting,
     pagination,
     setPagination,
     setSelectedRows,
     selectedRows,
+    transactionsAmountByFilter,
+    totalTransactionsAmount,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   const [isVisibleOnlySelectedRows, setIsVisibleOnlySelectedRows] = useState<boolean>(false);
@@ -37,7 +40,7 @@ export const Table: FC = () => {
       manualPagination: true,
       manualSortBy: true,
       expandSubRows: false,
-      pageCount: Math.ceil(totalTransactionsAmount / pagination.pageSize),
+      pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize),
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
       initialState: {
@@ -63,6 +66,11 @@ export const Table: FC = () => {
 
   const handleClick = useCallback(
     (doc: IStatementTransactionRow) => {
+      // TODO: в дальнейшем заменить на платформенный аналог
+      if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_CARD_VIEW)) {
+        return;
+      }
+
       void executor.execute(viewTransaction, [doc], id);
     },
     [id]
@@ -88,7 +96,10 @@ export const Table: FC = () => {
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
           <Gap.SM />
           <Typography.Text data-field={'total'}>
-            {locale.transactionsScroller.table.totalValue({ total: totalTransactionsAmount, totalByFilters: pagination.pageSize })}
+            {locale.transactionsScroller.table.totalValue({
+              total: totalTransactionsAmount,
+              totalByFilters: transactionsAmountByFilter,
+            })}
           </Typography.Text>
           <Horizon.Spacer />
           {selectedRows.length > 0 && (
@@ -111,7 +122,7 @@ export const Table: FC = () => {
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}
-        totalAmount={totalTransactionsAmount}
+        totalAmount={transactionsAmountByFilter}
         onClick={handleClick}
       />
     </>

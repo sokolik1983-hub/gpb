@@ -1,9 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Row } from 'components/form/row';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
+import type { IFormContext } from 'interfaces/form/form-context';
+import { FormContext } from 'interfaces/form/form-context';
 import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
+import { creationParamsShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 import { useCreationParams } from './use-creation-params';
@@ -12,6 +15,7 @@ import { useCreationParams } from './use-creation-params';
 export const CreationParams: React.FC = () => {
   const { change, batch } = useForm();
   const [options] = useCreationParams();
+  const { useCase, isPdf } = useContext<IFormContext>(FormContext);
 
   const onParamsChange: OnChangeType<string[]> = useCallback(
     e => {
@@ -29,6 +33,12 @@ export const CreationParams: React.FC = () => {
     },
     [batch, change]
   );
+
+  const visible = !useCase || (useCase && creationParamsShowCases.includes(useCase) && isPdf);
+
+  if (!visible) {
+    return null;
+  }
 
   return (
     <Row align={'TOP'} label={locale.common.creationParams.label}>
