@@ -215,7 +215,7 @@
   "errors.periodStart.dateMoreRestriction": "Дата начала периода не может быть больше даты окончания",
   "errors.periodEnd.tomorrowRestriction": "Дата окончания периода не может быть больше текущей даты",
   "errors.periodEnd.dateLessRestriction": "Дата окончания периода не может быть меньше даты начала",
-  "exportParamsDialog.buttons.download.label": "Экспортировать",
+  "exportParamsDialog.buttons.download.label": "Экспорт",
   "exportParamsDialog.buttons.sendToEmail.label": "Отправить на почту",
   "exportParamsDialog.buttons.print.label": "Печать",
   "exportParamsDialog.buttons.ok.label": "Да",

@@ -9,6 +9,7 @@ declare namespace StylesScssModule {
     'tag': string;
     'tagBtn': string;
     'tagsWrapper': string;
+    'valueWrapper': string;
   }
 }
 

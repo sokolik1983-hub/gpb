@@ -29,7 +29,9 @@ const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick = noop, d
       <Horizon align="CENTER">
         <Typography.P line="NOWRAP">{label}</Typography.P>
         <Gap.X2S />
-        <ItemWithRestInPopUp component={Typography.P} items={Array.isArray(value) ? value : [value]} />
+        <Box className={css.valueWrapper}>
+          <ItemWithRestInPopUp component={Typography.P} items={Array.isArray(value) ? value : [value]} />
+        </Box>
         <Gap.XS />
         {!disabled && <ServiceIcons.Close clickable fill="ACCENT" scale="SM" onClick={handleRemoveClick} />}
       </Horizon>

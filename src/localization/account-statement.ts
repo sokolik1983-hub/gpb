@@ -1649,7 +1649,7 @@ export default {
 			download: {
 				/**
 				 * @ru
-				 * Экспортировать
+				 * Экспорт
 				 */
 				get label() {
 					return t('exportParamsDialog.buttons.download.label');

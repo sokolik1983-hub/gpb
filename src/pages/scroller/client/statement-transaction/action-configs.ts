@@ -4,7 +4,7 @@ import type { IExtendedIActionWithAuth } from 'interfaces';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { PRIVILEGE } from 'stream-constants/client';
-import { BUTTON, Icons, ServiceIcons } from '@platform/ui';
+import { BUTTON, Icons } from '@platform/ui';
 
 /**
  * Функция для создания конфига действия экспорта.
@@ -25,7 +25,7 @@ const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIA
  * @param useCase Вариант (место) использования в сервисе.
  */
 const getPrintStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIActionWithAuth => ({
-  icon: ServiceIcons.Refresh,
+  icon: Icons.PrintFile,
   label: '',
   action: getPrintStatementAttachment(useCase),
   name: 'PRINT_STATEMENT',

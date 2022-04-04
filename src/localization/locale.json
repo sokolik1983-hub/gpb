@@ -672,7 +672,7 @@
     "ru": "Дата окончания периода не может быть меньше даты начала"
   },
   "exportParamsDialog.buttons.download.label": {
-    "ru": "Экспортировать"
+    "ru": "Экспорт"
   },
   "exportParamsDialog.buttons.sendToEmail.label": {
     "ru": "Отправить на почту"

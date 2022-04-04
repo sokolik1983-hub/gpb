@@ -36,6 +36,7 @@ const Cell: FC<CheckboxCellProps> = ({ row }) => {
         extraSmall
         dimension="SM"
         indeterminate={indeterminate}
+        name={'checkboxCell'}
         value={checked}
         onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
       />
