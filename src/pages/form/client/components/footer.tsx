@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { ACTION } from 'interfaces/client/classificators';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
 import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS } from 'stream-constants/form';
+import { FormContext } from 'stream-constants/form/form-context';
+import type { IFormContext } from 'stream-constants/form/form-context';
 import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box, ACTIONS as DATA_ACTIONS } from '@platform/ui';
 
 /** Компонент футера. */
@@ -12,6 +14,8 @@ export const Footer: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
   const { goBack } = useHistory();
+  const { isPdf } = useContext<IFormContext>(FormContext);
+
   const hasOneAccount = values.accountIds.length === 1;
 
   return (
@@ -53,6 +57,7 @@ export const Footer: React.FC = () => {
         extraSmall
         data-action={DATA_ACTIONS.SUBMIT}
         dimension="SM"
+        disabled={!isPdf}
         type={'submit'}
         onClick={() => change(FORM_FIELDS.ACTION, ACTION.PRINT)}
       >

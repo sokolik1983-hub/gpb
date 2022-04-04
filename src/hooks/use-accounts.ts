@@ -1,6 +1,6 @@
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
-import { accountService } from 'services';
+import { statementService } from 'services';
 
 const DEFAULT_ACCOUNTS = [];
 
@@ -8,7 +8,7 @@ const DEFAULT_ACCOUNTS = [];
 export const useAccounts = () => {
   const { data: accounts = DEFAULT_ACCOUNTS, isFetching, isError: isAccountsError } = useQuery<IGetAccountsResponseDto[]>({
     queryKey: ['@eco/statement', 'accounts'],
-    queryFn: () => accountService.getAccounts(),
+    queryFn: () => statementService.getAccounts(),
     retry: false,
   });
 

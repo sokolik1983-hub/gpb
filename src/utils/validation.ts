@@ -1,5 +1,5 @@
+import type { IDateRangeFields } from 'interfaces/form/date-range-fields';
 import { locale } from 'localization';
-import { FORM_FIELDS } from 'stream-constants/form';
 import type { TestFunction } from 'yup/lib/util/createValidation';
 import { dateTime } from '@platform/tools/date-time';
 
@@ -27,38 +27,56 @@ export const isLessThanTomorrow = (value: string | undefined): boolean => {
 };
 
 /**
- * Проверяет валидность диапазона дат:
+ * Проверяет валидность диапазона дат в схеме валидации:
  * - чтобы дата начала периода была меньше или равна дате окончания
  * - чтобы дата окончания периода была больше или равна дате начала.
  *
- * @param value - Дата для проверки.
- * @param context - Контекст валидации функции.
- * @param context.path - Ключ проверяемого поля даты.
- * @param context.parent - Объект с текущими значениями формы.
+ * @param dateRangeFields - Объект с полями диапазона дат.
+ * @returns Function.
  */
-export const isValidDateRange: TestFunction<string | undefined> = (value, { path, parent }) => {
-  if (!value) {
-    return true;
-  }
-
-  let valid;
-
-  switch (path) {
-    case FORM_FIELDS.DATE_FROM: {
-      const dateTo = parent?.[FORM_FIELDS.DATE_TO];
-
-      valid = dateTo ? dateTime(value).isSameOrBefore(dateTime(dateTo), 'day') : true;
-      break;
+export const isValidDateRangeForSchema = (dateRangeFields: IDateRangeFields): TestFunction<string | undefined> =>
+  /**
+   * Тест функция yup.test.
+   *
+   * @param value - Текущее значение поля формы.
+   * @param context - Контекст валидации функции.
+   * @param context.path - Ключ проверяемого поля даты.
+   * @param context.parent - Объект с текущими значениями формы.
+   * @returns Boolean.
+   */
+  (value, { path, parent }) => {
+    if (!value) {
+      return true;
     }
-    case FORM_FIELDS.DATE_TO: {
-      const dateFrom = parent?.[FORM_FIELDS.DATE_FROM];
 
-      valid = dateFrom ? dateTime(value).isSameOrAfter(dateTime(dateFrom), 'day') : true;
-      break;
+    let valid;
+
+    switch (path) {
+      case dateRangeFields.dateFrom: {
+        const dateTo = parent?.[dateRangeFields.dateTo];
+
+        valid = dateTo ? dateTime(value).isSameOrBefore(dateTime(dateTo), 'day') : true;
+        break;
+      }
+      case dateRangeFields.dateTo: {
+        const dateFrom = parent?.[dateRangeFields.dateFrom];
+
+        valid = dateFrom ? dateTime(value).isSameOrAfter(dateTime(dateFrom), 'day') : true;
+        break;
+      }
+      default:
+        valid = true;
     }
-    default:
-      valid = true;
-  }
 
-  return valid;
-};
+    return valid;
+  };
+
+/**
+ * Проверяет валидность диапазона дат.
+ *
+ * @param range - Объект с диапазоном дат.
+ * @param range.dateFrom - Дата начала периода.
+ * @param range.dateTo - Дата окончания периода.
+ * @returns Boolean.
+ */
+export const isValidDateRange = ({ dateFrom, dateTo }) => dateTime(dateFrom).isSameOrBefore(dateTime(dateTo), 'day');

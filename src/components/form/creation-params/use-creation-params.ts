@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
+import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
 import { DEBIT_PARAMS, FormContext, FORM_FIELDS, CREDIT_PARAMS } from 'stream-constants/form';
@@ -33,7 +34,9 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            acc.push({ ...x, disabled: !hasMoreThenOneAccounts });
+            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.EXCEL || values.format === FORMAT.TXT;
+
+            acc.push({ ...x, disabled });
           }
 
           break;
@@ -60,7 +63,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     }, []);
 
     setOptions(newOptions);
-  }, [action, change, isPdf, useCase, values.accountIds.length, withSign]);
+  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign]);
 
   useEffect(() => {
     if (!withDocumentsSet) {

@@ -1,5 +1,4 @@
 export * from './use-accounts';
-export * from './use-date-range-restriction';
 export * from './use-initial-statement-request';
 export * from './use-scroll-button';
 export * from './use-scroller-tabs-props';

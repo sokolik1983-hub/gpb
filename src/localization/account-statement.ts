@@ -388,14 +388,14 @@ export default {
 		headerAction: {
 			/**
 			 * @ru
-			 * Печать документов
+			 * Печать
 			 */
 			get print() {
 				return t('transactionsScroller.headerAction.print');
 			},
 			/**
 			 * @ru
-			 * Экспорт документов
+			 * Экспорт
 			 */
 			get export() {
 				return t('transactionsScroller.headerAction.export');
@@ -1391,6 +1391,15 @@ export default {
 				return t('common.email.label');
 			},
 		},
+		checkAuthority: {
+			/**
+			 * @ru
+			 * Недостаточно полномочий для выполнения операции
+			 */
+			get error() {
+				return t('common.checkAuthority.error');
+			},
+		},
 	},
 	table: {
 		header: {
@@ -1467,7 +1476,7 @@ export default {
 		buttons: {
 			/**
 			 * @ru
-			 * Экспортировать
+			 * Экспорт
 			 */
 			get export() {
 				return t('transactionCard.buttons.export');

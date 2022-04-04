@@ -1,9 +1,9 @@
 import type {
-  IExpandedScrollerResponceDto,
   IExpandedCollectionResponse,
   IScrollerResponceDto,
   ICreateAttachmentResponse,
   FieldsRequired,
+  IExpandedScrollerResponceDto,
 } from 'interfaces';
 import type { IStatementHistoryRow, IStatementTransactionRow, IStatement } from 'interfaces/client';
 import type {
@@ -21,6 +21,7 @@ import type {
   IGetStatementRelevanceStatus,
   IStatementSummaryInfoResponseDto,
   ICreateAttachmentRequestDto,
+  IGetAccountsResponseDto,
 } from 'interfaces/dto';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
@@ -82,20 +83,32 @@ export const statementService = {
       url: `${STATEMENT_URL}/get-accounting-entry`,
       method: 'POST',
       data: { ...metadataToRequestParams(metaData), statementId },
-    }).then(res => {
-      const {
-        data: {
-          totalCount,
-          page: { page, size },
-        },
-      } = res.data;
+    })
+      .then(res => {
+        const {
+          data: {
+            totalCount,
+            page: { page, size },
+          },
+        } = res.data;
 
-      return {
-        data: page,
-        total: size,
-        totalCount,
-      };
-    }),
+        return {
+          data: page,
+          total: size,
+          totalCount,
+          status: res.status,
+        };
+      })
+      .catch(err => {
+        const { status } = err.response;
+
+        return {
+          data: [],
+          total: 0,
+          totalCount: 0,
+          status,
+        };
+      }),
   /** Возвращает сводную информацию по выписке. */
   getStatementSummaryInfo: (data: IStatementSummaryInfoRequestDto): Promise<IStatementSummaryInfoResponseDto> =>
     request<IServerDataResp<IStatementSummaryInfoResponseDto>>({
@@ -145,11 +158,7 @@ export const statementService = {
       url: `${STATEMENT_URL}/attachment/${id}`,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return resp.data;
   },
   /** Возвращает файл для печати по Id запроса выписки. */
   printStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
@@ -157,11 +166,7 @@ export const statementService = {
       url: `${STATEMENT_URL}/print/${id}`,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return resp.data;
   },
   /** Формирует вложения для печати / экспорта. */
   createAttachment: async (data: ICreateAttachmentRequestDto): Promise<ICreateAttachmentResponse> => {
@@ -171,15 +176,16 @@ export const statementService = {
       data,
     });
 
-    return {
-      mimeType: resp.data.mimeType,
-      fileName: resp.data.fileName,
-      content: resp.data.content,
-    };
+    return resp.data;
   },
   /** Получить статус актуальности выписки. */
   getStatementRelevanceStatus: (statementRequestId: string): Promise<IServerDataResp<IGetStatementRelevanceStatus>> =>
     request({
       url: `${STATEMENT_URL}/get-status/${statementRequestId}`,
     }).then(r => r.data),
+  /** Возвращает счета пользователя для формирования выписок. */
+  getAccounts: (): Promise<IGetAccountsResponseDto[]> =>
+    request<IServerDataResp<IGetAccountsResponseDto[]>>({
+      url: `${SUPPORT_STATEMENT_URL}/search-user-account-for-statement`,
+    }).then(result => result.data.data),
 };

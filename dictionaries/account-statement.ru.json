@@ -49,8 +49,8 @@
   "transactionsScroller.footer.selected": "Выбрано:",
   "transactionsScroller.footer.income": "Поступления:",
   "transactionsScroller.footer.outcome": "Списания:",
-  "transactionsScroller.headerAction.print": "Печать документов",
-  "transactionsScroller.headerAction.export": "Экспорт документов",
+  "transactionsScroller.headerAction.print": "Печать",
+  "transactionsScroller.headerAction.export": "Экспорт",
   "transactionsScroller.footerAction.export": "Экспорт документов",
   "transactionsScroller.footerAction.print": "Печать документов",
   "transactionsScroller.footerAction.more": "Еще",
@@ -191,7 +191,7 @@
   "transactionCard.subHeader": "{documentName} № {number} от {date}",
   "transactionCard.tabs.requisites": "Реквизиты",
   "transactionCard.tabs.attachments": "Приложения",
-  "transactionCard.buttons.export": "Экспортировать",
+  "transactionCard.buttons.export": "Экспорт",
   "transactionCard.buttons.print": "Печать",
   "transactionCard.buttons.more": "Еще",
   "transactionCard.labels.amount": "Сумма",
@@ -229,5 +229,6 @@
   "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
   "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
   "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
-  "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка"
+  "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка",
+  "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции"
 }

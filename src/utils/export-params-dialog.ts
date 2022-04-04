@@ -26,24 +26,7 @@ export const creationParamsCheckboxShowCases = [
 ];
 
 /** Набор случаев, при которых показываем блок "Параметры комплекта документов". */
-export const creationParamsShowCases = [
-  EXPORT_PARAMS_USE_CASES.ONE,
-  EXPORT_PARAMS_USE_CASES.TWO,
-  EXPORT_PARAMS_USE_CASES.THREE,
-  EXPORT_PARAMS_USE_CASES.FOUR,
-  EXPORT_PARAMS_USE_CASES.SIX,
-  EXPORT_PARAMS_USE_CASES.SEVEN,
-];
-
-/** Набор случаев, при которых показываем блок "Детальные параметры комплекта документов". */
-export const detailDocumentsParamsShowCases = [
-  EXPORT_PARAMS_USE_CASES.ONE,
-  EXPORT_PARAMS_USE_CASES.TWO,
-  EXPORT_PARAMS_USE_CASES.THREE,
-  EXPORT_PARAMS_USE_CASES.FOUR,
-  EXPORT_PARAMS_USE_CASES.SIX,
-  EXPORT_PARAMS_USE_CASES.SEVEN,
-];
+export const creationParamsShowCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
 
 /** Набор случаев, при которых показываем кнопку "Скачать". */
 export const downloadButtonShowCases = [
