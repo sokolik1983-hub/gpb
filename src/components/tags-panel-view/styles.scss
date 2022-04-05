@@ -9,11 +9,16 @@
   height: 32px;
   margin-bottom: 8px;
   padding: 6px 12px;
+  overflow: hidden;
   background-color: var(--box-lightdown-fill-faint-weak);
 }
 
 .tagBtn {
   background-color: var(--line-fill-base-weak);
+}
+
+.valueWrapper {
+  overflow: hidden;
 }
 
 .tagsWrapper {

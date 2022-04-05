@@ -18,7 +18,7 @@ interface IItemWitAmountProps {
 /** Наименование, с количеством неотображаемых элементов. */
 const ItemWitAmount = React.forwardRef<typeof Typography, IItemWitAmountProps>(({ item, additionalAmount, component: Component }, ref) => (
   <Horizon>
-    <WithInfoTooltip text={item}>
+    <WithInfoTooltip extraSmall text={item}>
       {tooltipRef => (
         <Component innerRef={tooltipRef} line={'COLLAPSE'}>
           {item}
