@@ -1,14 +1,14 @@
+import { checkOutdatedStatement } from 'actions/client/check-outdated-statement';
 import { getCreateAttachment } from 'actions/client/create-attachement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
-import { ACTION, EXPORT_PARAMS_USE_CASES, OUTDATED_STATEMENT_MODE } from 'interfaces/client';
+import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { fatalHandler } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { showFile } from '@platform/services/client';
 import type { context } from './executor';
-import { isContinueActionWithStatement } from './utils';
 
 /** Вернуть набор гардов для экспорта выписки. */
 const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
@@ -44,10 +44,12 @@ export const getExportStatementAttachment = (
       fatal(res?.error);
       fatal(err);
 
-      const isContinueAction = await isContinueActionWithStatement(res!.data.status, OUTDATED_STATEMENT_MODE.EXPORT);
+      const { succeeded } = await execute(checkOutdatedStatement, [doc, ACTION.DOWNLOAD]);
 
-      if (!isContinueAction) {
+      if (succeeded) {
         done();
+
+        return;
       }
     }
 
