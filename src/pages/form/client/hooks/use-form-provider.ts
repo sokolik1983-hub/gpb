@@ -9,7 +9,7 @@ import { defaultFormContextValue } from 'stream-constants/form';
 
 /** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
 export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTION) => {
-  const [value, setValue] = useState<IFormContext>(defaultFormContextValue);
+  const [value, setValue] = useState<IFormContext>({ ...defaultFormContextValue, useCase, action });
   const { values } = useFormState<IFormState>();
 
   useEffect(() => {
