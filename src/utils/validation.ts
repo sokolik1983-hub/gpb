@@ -79,4 +79,5 @@ export const isValidDateRangeForSchema = (dateRangeFields: IDateRangeFields): Te
  * @param range.dateTo - Дата окончания периода.
  * @returns Boolean.
  */
-export const isValidDateRange = ({ dateFrom, dateTo }) => dateTime(dateFrom).isSameOrBefore(dateTime(dateTo), 'day');
+export const isValidDateRange = ({ dateFrom, dateTo }) =>
+  dateFrom && dateTo ? dateTime(dateFrom).isSameOrBefore(dateTime(dateTo), 'day') : true;
