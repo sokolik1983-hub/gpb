@@ -4,7 +4,6 @@ import type { EXPORT_PARAMS_USE_CASES, TRANSACTION_ATTACHMENT_TYPES } from 'inte
 import { ACTION } from 'interfaces/client';
 import { fatalHandler, printBase64 } from 'utils';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
-import { mimeTypeToExt } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -35,9 +34,9 @@ export const getPrintStatementAttachment = (
       return;
     }
 
-    const { content, mimeType } = data;
+    const { content, mimeType, fileName } = data;
 
-    printBase64(content, mimeTypeToExt(mimeType));
+    await printBase64(content, fileName, mimeType);
 
     addSucceeded();
 
