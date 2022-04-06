@@ -229,6 +229,6 @@
   "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
   "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
   "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
-  "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка",
+  "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка в формате PDF",
   "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции"
 }

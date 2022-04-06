@@ -1771,7 +1771,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * С электронной подписью банка
+				 * С электронной подписью банка в формате PDF
 				 */
 				get withSign() {
 					return t('exportParamsDialog.print.creationParams.withSign');
