@@ -8,7 +8,7 @@ import type { IBaseEntity } from '@platform/services/client';
 import type { context } from './executor';
 
 /** Функция проверки актуальности выписки. */
-export const checkOutdatedStatement: IActionConfig<typeof context, void> = {
+export const checkOutdatedStatement: IActionConfig<typeof context, boolean> = {
   action: ({ done, fatal, addSucceeded }, { service, showLoader, hideLoader }) => async ([doc]: [IBaseEntity], action: ACTION) => {
     showLoader();
 
@@ -20,6 +20,7 @@ export const checkOutdatedStatement: IActionConfig<typeof context, void> = {
     fatal(err);
 
     if (res?.data.status === STATEMENT_RELEVANCE_STATUS.ACTUAL) {
+      addSucceeded(false);
       done();
 
       return;
@@ -27,13 +28,8 @@ export const checkOutdatedStatement: IActionConfig<typeof context, void> = {
 
     const [_, cancel] = await to(showOutdatedStatementDialog(action));
 
-    if (cancel) {
-      done();
-
-      return;
-    }
-
-    addSucceeded();
+    // если закрыли модалку, то это равносильно ситуации, что выписка устарела (дальше не идем)
+    addSucceeded(cancel);
 
     done();
   },

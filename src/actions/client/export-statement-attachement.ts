@@ -44,9 +44,11 @@ export const getExportStatementAttachment = (
       fatal(res?.error);
       fatal(err);
 
-      const { succeeded } = await execute(checkOutdatedStatement, [doc, ACTION.DOWNLOAD]);
+      const {
+        succeeded: [isOutdated],
+      } = await execute(checkOutdatedStatement, [doc], ACTION.DOWNLOAD);
 
-      if (succeeded) {
+      if (isOutdated) {
         done();
 
         return;

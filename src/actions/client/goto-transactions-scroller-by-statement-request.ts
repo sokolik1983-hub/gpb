@@ -10,9 +10,11 @@ import { gotoTransactionsScroller } from './goto-transactions-scroller';
 /** Действие перехода на скроллер проводок, по сущности "Запрос выписки". */
 export const gotoTransactionsScrollerByStatementRequest: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done, fatal, execute }, { service, showLoader, hideLoader }) => async ([doc]: [IBaseEntity]) => {
-    const { succeeded } = await execute(checkOutdatedStatement, [doc, ACTION.VIEW]);
+    const {
+      succeeded: [isOutdated],
+    } = await execute(checkOutdatedStatement, [doc], ACTION.VIEW);
 
-    if (succeeded) {
+    if (isOutdated) {
       done();
 
       return;
