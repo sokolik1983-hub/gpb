@@ -25,9 +25,11 @@ export const QuickFilter: FC = () => {
     accounts,
   } = useContext(HistoryScrollerContext);
 
+  const isDateValid = isValidDateRange({ dateFrom, dateTo });
+
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
-    if (valid && isValidDateRange({ dateFrom, dateTo })) {
+    if (valid && isDateValid) {
       onOk(values);
     }
 
