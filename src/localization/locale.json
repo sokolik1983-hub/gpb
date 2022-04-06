@@ -714,7 +714,7 @@
     "ru": "Скрыть нулевые обороты"
   },
   "exportParamsDialog.print.creationParams.withSign": {
-    "ru": "С электронной подписью банка"
+    "ru": "С электронной подписью банка в формате PDF"
   },
   "common.checkAuthority.error": {
     "ru": "Недостаточно полномочий для выполнения операции"
