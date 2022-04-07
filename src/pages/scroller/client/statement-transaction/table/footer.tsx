@@ -38,6 +38,8 @@ export const Footer: FC = () => {
     id,
   ]);
 
+  const dropDownActionsWithoutIcon = dropDownActions.map(({ icon, ...actionProps }) => actionProps);
+
   return (
     <Box className={cn(css.footer)} fill={'BASE'}>
       <Horizon>
@@ -61,10 +63,17 @@ export const Footer: FC = () => {
             {action.label}
           </PrimaryButton>
         )}
-        {dropDownActions.length > 0 && (
+        {dropDownActionsWithoutIcon.length > 0 && (
           <>
             <Gap />
-            <WithDropDown extraSmall actions={dropDownActions} className={css.footerDropdownActions} offset={10} radius="XS" shadow="LG">
+            <WithDropDown
+              extraSmall
+              actions={dropDownActionsWithoutIcon}
+              className={css.footerDropdownActions}
+              offset={10}
+              radius="XS"
+              shadow="LG"
+            >
               {(ref, _, toggleOpen) => (
                 <RegularButton
                   ref={ref}
