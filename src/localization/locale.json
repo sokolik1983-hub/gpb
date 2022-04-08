@@ -67,6 +67,9 @@
   "transactionsScroller.labels.transactionType": {
     "ru": "Операция"
   },
+  "transactionsScroller.labels.recentRequests": {
+    "ru": "Недавние запросы"
+  },
   "transactionsScroller.labels.counterparty": {
     "ru": "Контрагент"
   },
