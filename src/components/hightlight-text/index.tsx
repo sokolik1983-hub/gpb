@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import type { IWebFontProps, IWebBoxProps } from '@platform/ui';
-import { Box, Font } from '@platform/ui';
+import type { IWebBoxProps } from '@platform/ui';
+import { Box } from '@platform/ui';
 
 /**
  * Свойства компонента "Выделенный текст".
@@ -13,7 +13,7 @@ interface IHighlightedText extends Omit<IWebBoxProps, 'className'> {
   /**
    * Свойства шрифта выделенного текста.
    */
-  fontProps?: IWebFontProps;
+  fontProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
 /**
@@ -21,9 +21,9 @@ interface IHighlightedText extends Omit<IWebBoxProps, 'className'> {
  */
 const HighlightedText: React.FC<IHighlightedText> = ({ highlightClassName, children, fontProps, ...boxProps }) => (
   <Box inverse className={highlightClassName} fill="ACCENT" style={{ display: 'inline-block' }} {...boxProps}>
-    <Font inline {...fontProps}>
+    <span {...fontProps} style={{ color: 'white' }}>
       {children}
-    </Font>
+    </span>
   </Box>
 );
 
@@ -48,7 +48,7 @@ interface IHightlightText extends Omit<IWebBoxProps, 'className'> {
   /**
    * Свойства шрифта выделенного текста.
    */
-  fontProps?: IWebFontProps;
+  fontProps?: React.HTMLAttributes<HTMLSpanElement>;
 }
 
 /**
@@ -61,7 +61,7 @@ export const HightlightText: React.FC<IHightlightText> = ({
   fontProps,
   ...boxProps
 }) => {
-  const defaultResult = useMemo(() => <span>{textToHightlight}</span>, [textToHightlight]);
+  const defaultResult = useMemo(() => <div style={{ display: 'inline' }}>{textToHightlight}</div>, [textToHightlight]);
 
   if (!searchWords) {
     return defaultResult;
@@ -77,13 +77,13 @@ export const HightlightText: React.FC<IHightlightText> = ({
     const hightlighted = textToHightlight.slice(index, lastIndex);
 
     return (
-      <>
+      <span>
         {startText}
         <HighlightedText fontProps={fontProps} highlightClassName={highlightClassName} {...boxProps}>
           {hightlighted}
         </HighlightedText>
         {endText}
-      </>
+      </span>
     );
   }
 
