@@ -56,7 +56,7 @@ export const convertToExtendedCreationParams = (formState: IFormState) => ({
 });
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
-export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE.NEW): ICreateRequestStatementDto => ({
+export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE.NEW): Omit<ICreateRequestStatementDto, 'id'> => ({
   accountsIds: formState.accountIds,
   action: formState.action!,
   creationParams: convertToCreationParams(formState),

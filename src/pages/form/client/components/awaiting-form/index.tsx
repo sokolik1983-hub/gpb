@@ -19,7 +19,7 @@ import css from './styles.scss';
 export interface IAwaitingFormProps {
   /** Коллбэк закрытия формы. */
   onClose(): void;
-  /** Id закрытия формы. */
+  /** Id выписки. */
   id: string;
 }
 
@@ -107,7 +107,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       switch (statementActionDto) {
         case ACTION.VIEW:
-          await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
+          await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc], ACTION.VIEW);
 
           return;
         case ACTION.DOWNLOAD:
