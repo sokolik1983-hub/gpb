@@ -1,3 +1,15 @@
+# [2.3.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.2...v2.3.0-release.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* GBO-20566 исправлен компонент подсветки ([03091fb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/03091fb7f7ef67d8f6c5b60379cfe18fea685b63))
+
+
+### Features
+
+* GBO-21809 доработано поле с историей ([c470d48](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c470d480968ed800642bb7173ba957aa17427904))
+
 # [2.3.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.1...v2.3.0-release.2) (2022-04-08)
 
 
