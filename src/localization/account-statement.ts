@@ -194,6 +194,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Недавние запросы
+			 */
+			get recentRequests() {
+				return t('transactionsScroller.labels.recentRequests');
+			},
+			/**
+			 * @ru
 			 * Контрагент
 			 */
 			get counterparty() {
