@@ -1,3 +1,10 @@
+# [2.3.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.6...v2.3.0-release.7) (2022-04-13)
+
+
+### Features
+
+* **скроллер:** GBO-24361 изменен контракт для `/statement/summary` ([0c3c79e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0c3c79e3af1fb888d9afae41d67d0f3ce5447464))
+
 # [2.3.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.5...v2.3.0-release.6) (2022-04-13)
 
 
