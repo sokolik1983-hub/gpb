@@ -1,3 +1,10 @@
+# [2.3.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.5...v2.3.0-release.6) (2022-04-13)
+
+
+### Features
+
+* **скроллер:** GBO-23965 прокидывание параметра `source` для `/statement/get-accounting-entry` ([77c602e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/77c602e4aecae888308bec22176722e609ffe844))
+
 # [2.3.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.4...v2.3.0-release.5) (2022-04-13)
 
 
