@@ -12,3 +12,6 @@ export const NEW_ENTITY_ID = 'new';
 
 /** Наименование стрима. */
 export const ECO_STATEMENT = '@eco/statement';
+
+/** Используется для определения источника перехода в скроллер проводок. */
+export const ENTRY_SOURCE_VIEW = 'VIEW';

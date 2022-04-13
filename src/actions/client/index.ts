@@ -6,7 +6,6 @@ export * from './print-statement-attachement';
 export * from './export-statement';
 export * from './print-statement';
 export * from './repeat-statement';
-export * from './goto-transactions-scroller';
 export * from './goto-transactions-scroller-by-statement-request';
 export * from './view-transaction';
 export * from './check-outdated-statement';

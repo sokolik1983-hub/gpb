@@ -30,6 +30,10 @@ interface IUseScrollerPagination {
    * Пагинация по-умолчанию.
    */
   defaultPagination: IPagination;
+  /**
+   * Источник вызова скроллера проводок.
+   */
+  source?: string;
 }
 
 /**

@@ -11,7 +11,7 @@ import {
   STORAGE_KEY,
   StatementInfo,
   TagsPanel,
-  fields,
+  getFields,
   tagLabels,
   ADDITIONAL_FORM_FIELDS,
 } from 'pages/scroller/client/statement-transaction/filter';
@@ -25,8 +25,9 @@ import {
 import { Footer, Table } from 'pages/scroller/client/statement-transaction/table';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
+import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { validate } from '@platform/validation';
@@ -43,11 +44,14 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PA
  */
 export const StatementTransactionScrollerPage = () => {
   const { id } = useParams<IUrlParams>();
+  const { state: { entrySourceView } = {} } = useLocation<{ entrySourceView?: typeof ENTRY_SOURCE_VIEW }>();
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
+
+  const fields = getFields(entrySourceView);
 
   const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
     fields,
