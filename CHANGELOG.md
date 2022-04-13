@@ -1,3 +1,10 @@
+# [2.3.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.4...v2.3.0-release.5) (2022-04-13)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-24435 испаравлено формирование поля фильтра статуса запроса выписки ([e1fdde7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e1fdde7d6cd5b3839cf9a543c4d804f7717c6407))
+
 # [2.3.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.1...v2.3.0-release.2) (2022-04-13)
 
 
