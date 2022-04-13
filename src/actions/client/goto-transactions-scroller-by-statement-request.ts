@@ -1,18 +1,21 @@
 import { checkOutdatedStatement } from 'actions/client/check-outdated-statement';
-import { ACTION } from 'interfaces/client';
+import type { ACTION } from 'interfaces/client';
+import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import type { IBaseEntity } from '@platform/services/client';
 import type { context } from './executor';
 import { gotoTransactionsScroller } from './goto-transactions-scroller';
 
 /** Действие перехода на скроллер проводок, по сущности "Запрос выписки". */
 export const gotoTransactionsScrollerByStatementRequest: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done, fatal, execute }, { service, showLoader, hideLoader }) => async ([doc]: [IBaseEntity]) => {
+  action: ({ done, fatal, execute }, { service, showLoader, hideLoader }) => async (
+    [doc]: [ICreateRequestStatementDto],
+    action: ACTION
+  ) => {
     const {
       succeeded: [isOutdated],
-    } = await execute(checkOutdatedStatement, [doc], ACTION.VIEW);
+    } = await execute(checkOutdatedStatement, [doc], action);
 
     if (isOutdated) {
       done();

@@ -29,7 +29,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
+  const doc: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
       action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
@@ -60,10 +60,10 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
       return;
     }
 
-    const executeHandler = getHandlerDependingOnSelection(executor.execute);
+    const handler = getHandlerDependingOnSelection(executor.execute);
 
-    await executeHandler(createStatement, [requestDto]);
-  }, [requestDto]);
+    await handler(createStatement, [doc]);
+  }, [doc]);
 
   return (
     <WithClickable>
