@@ -21,8 +21,8 @@ export const StatementInfo: FC = () => {
     incomingBalance,
     outcome,
     income,
-    outcomeAccountEntryCount,
-    incomeAccountEntryCount,
+    outcomesCount,
+    incomesCount,
     outgoingBalance,
     currencyCode,
   } = statementSummaryInfo;
@@ -55,16 +55,16 @@ export const StatementInfo: FC = () => {
           </Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text data-field={'statementSummaryInfo.outcomeAccountEntryCount'} fill={'FAINT'}>
-            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomeAccountEntryCount })}
+          <Typography.Text data-field={'statementSummaryInfo.outcomesCount'} fill={'FAINT'}>
+            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomesCount })}
           </Typography.Text>
           <Typography.Text data-field={'statementSummaryInfo.outcome'} fill={'CRITIC'}>
             {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
           </Typography.Text>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text data-field={'statementSummaryInfo.incomeAccountEntryCount'} fill={'FAINT'}>
-            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomeAccountEntryCount })}
+          <Typography.Text data-field={'statementSummaryInfo.incomesCount'} fill={'FAINT'}>
+            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomesCount })}
           </Typography.Text>
           <Typography.Text data-field={'statementSummaryInfo.income'} fill={'SUCCESS'}>
             {locale.moneyString.positive({ amount: String(income), currencyCode })}
