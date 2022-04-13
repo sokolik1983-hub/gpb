@@ -12,6 +12,20 @@
 
 * GBO-21809 доработано поле с историей ([07e2bf3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/07e2bf30d84a3d1a54ae43c7c67ed80465763332))
 
+# [2.3.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.1...v2.3.0-release.2) (2022-04-13)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22886 доработки проверки актуальности выписки ([7a4dea3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7a4dea30e8e14623b2f092550776856f6b76241b))
+* GBO-20566 исправлен компонент подсветки ([4e31428](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4e31428812d74083884673351bd1526fd1a92281))
+* GBO-23874 добавлен текст при нехватке прав ([801b051](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/801b05175b7fb9b80bc9521877a888f1ca66df9f))
+
+
+### Features
+
+* GBO-21809 доработано поле с историей ([07e2bf3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/07e2bf30d84a3d1a54ae43c7c67ed80465763332))
+
 # [2.3.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.3...v2.3.0-release.4) (2022-04-13)
 
 
