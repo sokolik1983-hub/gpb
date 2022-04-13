@@ -1,3 +1,10 @@
+# [2.3.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.3...v2.3.0-release.4) (2022-04-13)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-22886 доработки проверки актуальности выписки ([98ca0e9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/98ca0e9508caed3cb807e65a608b090c1deb0423))
+
 # [2.3.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.2...v2.3.0-release.3) (2022-04-11)
 
 
