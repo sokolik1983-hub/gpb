@@ -52,7 +52,11 @@ export const fields: Record<string, IFilterField> = {
   [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.CREATED_AT, value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.ACCOUNT_IDS]: filterFields.in([], FORM_FIELDS.ACCOUNT_IDS),
   [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.PERIOD_TYPE),
-  [FORM_FIELDS.STATUS]: filterFields.in(EMPTY_VALUE, FORM_FIELDS.STATUS),
+  [FORM_FIELDS.STATUS]: filterFields.in(EMPTY_VALUE, FORM_FIELDS.STATUS, value => {
+    const selectedStatus = value as keyof typeof STATUSES_BY_SELECTED_STATUS | typeof EMPTY_VALUE;
+
+    return selectedStatus === EMPTY_VALUE ? [] : STATUSES_BY_SELECTED_STATUS[selectedStatus];
+  }),
   [FORM_FIELDS.SIGNED]: filterFields.eq(false, FORM_FIELDS.SIGNED),
 };
 
