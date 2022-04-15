@@ -1,3 +1,11 @@
+# [2.3.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.7...v2.3.0-release.8) (2022-04-15)
+
+
+### Bug Fixes
+
+* GBO-24485 скопирован и поправлен платформенный хук `useDebounce` ([e159374](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e159374141935e5f29e94248cc2191e991e40c0e))
+* **скроллер:** GBO-24485 поправлено очищение дополнительного фильтра скроллеров ([28fc937](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/28fc93719753f9b1607ceac636bcc1e2efcd423c))
+
 # [2.3.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.6...v2.3.0-release.7) (2022-04-13)
 
 
