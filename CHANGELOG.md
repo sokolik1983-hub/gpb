@@ -1,3 +1,11 @@
+# [2.3.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.9...v2.3.0-release.10) (2022-04-15)
+
+
+### Bug Fixes
+
+* **визард:** GBO-24097 доработка валидации на ЭФ создания запроса выписки ([293d031](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/293d0318c4c8279de9354a16ad500e79fc8f518e))
+* GBO-24281 убраны иконки доп.действий у карточки проводки ([0ca10a4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0ca10a406cf64d46742c5b4cb8a3e1b309ccd957))
+
 # [2.3.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.8...v2.3.0-release.9) (2022-04-15)
 
 
