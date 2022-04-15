@@ -17,7 +17,7 @@ export const Filter: React.FC<IFilterProperties> = ({
   filterState,
   tagsState,
 }) => {
-  const { onClose: closeAdditionalFilter, opened, onOk } = filterState;
+  const { onClose: closeAdditionalFilter, onClear, onOk, opened } = filterState;
   const { onClick: expandAdditionalFilter } = tagsState;
 
   const { restart } = useForm();
@@ -46,9 +46,10 @@ export const Filter: React.FC<IFilterProperties> = ({
   );
 
   const handleReset = useCallback(() => {
-    expandAdditionalFilter();
+    onClear();
     restart({ ...values, ...defaultAdditionalFilterValues });
-  }, [defaultAdditionalFilterValues, expandAdditionalFilter, restart, values]);
+    expandAdditionalFilter();
+  }, [defaultAdditionalFilterValues, expandAdditionalFilter, onClear, restart, values]);
 
   const pristine = useMemo(() => {
     if (opened) {
