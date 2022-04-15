@@ -2,7 +2,8 @@ import { getCreateAttachment } from 'actions/client/create-attachement';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import type { EXPORT_PARAMS_USE_CASES, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
-import { fatalHandler, printBase64 } from 'utils';
+import { printBase64 } from 'platform-copies/utils';
+import { fatalHandler } from 'utils';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
 

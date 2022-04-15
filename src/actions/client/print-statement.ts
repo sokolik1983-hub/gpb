@@ -1,4 +1,5 @@
-import { fatalHandler, printBase64 } from 'utils';
+import { printBase64 } from 'platform-copies/utils';
+import { fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
