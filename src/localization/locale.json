@@ -84,10 +84,10 @@
     "ru": "Номер документа:"
   },
   "transactionsScroller.tags.dateFrom": {
-    "ru": "Дата запроса c:"
+    "ru": "Дата платежа c:"
   },
   "transactionsScroller.tags.dateTo": {
-    "ru": "Дата запроса по:"
+    "ru": "Дата платежа по:"
   },
   "transactionsScroller.tags.transactionType": {
     "ru": "Операция:"
