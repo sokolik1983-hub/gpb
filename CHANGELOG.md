@@ -1,3 +1,12 @@
+# [2.3.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.8...v2.3.0-release.9) (2022-04-15)
+
+
+### Bug Fixes
+
+* GBO-24605 увелечение задержки при получении проводок ([d1795b5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d1795b5c41676028da103464caa2324fcadeddf5))
+* **скроллер:** GBO-24038 исправление локалей ([292e00f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/292e00ff44596971c4f00a638e9528fa8eb54dd2))
+* **скроллер:** GBO-24598 изменения вызова АПИ при экспорте из скроллера истории ([024021b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/024021b6b26ab6d90715803d2f8d2dc0c4a10524))
+
 # [2.3.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0-release.7...v2.3.0-release.8) (2022-04-15)
 
 
