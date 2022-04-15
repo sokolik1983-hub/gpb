@@ -1,5 +1,6 @@
 import { checkOutdatedStatement } from 'actions/client/check-outdated-statement';
 import { getCreateAttachment } from 'actions/client/create-attachement';
+import { exportStatement } from 'actions/client/export-statement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import type { IStatementHistoryRow, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
@@ -26,7 +27,7 @@ const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
 export const getExportStatementAttachment = (
   useCase: EXPORT_PARAMS_USE_CASES
 ): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
-  action: ({ done, fatal, addSucceeded, execute }) => async (
+  action: ({ done, fatal, addSucceeded, addFailed, execute }) => async (
     docs: IBaseEntity[],
     statementId?: string,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
@@ -43,6 +44,26 @@ export const getExportStatementAttachment = (
 
         return;
       }
+
+      const {
+        succeeded: [data],
+        failed: [error],
+      } = await execute(exportStatement, [doc]);
+
+      fatal(error);
+
+      if (!data) {
+        addFailed();
+        done();
+
+        return;
+      }
+
+      addSucceeded();
+
+      done();
+
+      return;
     }
 
     const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD, documentType);
@@ -55,6 +76,7 @@ export const getExportStatementAttachment = (
     fatal(error);
 
     if (!data) {
+      addFailed();
       done();
 
       return;
