@@ -52,7 +52,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     [filters, pagination, sorting]
   );
 
-  const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);
+  const debouncedRequestDto: IMetaData = useDebounce(requestDto, 500);
 
   const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError } = useQuery<
     IExpandedCollectionResponse<IStatementTransactionRow>

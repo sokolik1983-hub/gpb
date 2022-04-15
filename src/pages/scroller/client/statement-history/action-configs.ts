@@ -1,4 +1,5 @@
-import { exportStatement, repeatStatement } from 'actions/client';
+import { getExportStatementAttachment, repeatStatement } from 'actions/client';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { PRIVILEGE } from 'stream-constants/client';
 import type { IActionWithAuth } from '@platform/services';
@@ -8,7 +9,7 @@ import { Icons, ServiceIcons } from '@platform/ui';
 const EXPORT_STATEMENT: IActionWithAuth = {
   icon: Icons.Download,
   label: locale.historyScroller.action.exportStatement,
-  action: exportStatement,
+  action: getExportStatementAttachment(EXPORT_PARAMS_USE_CASES.FOURTEEN),
   name: 'EXPORT_STATEMENT',
   authorities: [PRIVILEGE.ATTACHMENT_DOWNLOAD],
 };
