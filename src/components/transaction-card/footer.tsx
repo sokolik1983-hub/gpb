@@ -33,11 +33,11 @@ export const Footer: FC<IFooterProps> = ({ transaction: doc, statementId: id }) 
     id,
   ]);
 
-  const otherActions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], id]), [
-    getAvailableActions,
-    doc,
-    id,
-  ]);
+  const otherActions = useMemo(() => {
+    const activeActionButtons = getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], id]);
+
+    return activeActionButtons.map(({ icon, ...restButtonProps }) => ({ ...restButtonProps }));
+  }, [getAvailableActions, doc, id]);
 
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>
