@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
+import { useDebounce } from 'platform-copies/hooks';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';
 import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
 import type { IMetaData } from '@platform/services/client';
-import { useDebounce } from '@platform/ui';
 
 const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = {
   data: [],
@@ -52,7 +52,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     [filters, pagination, sorting]
   );
 
-  const debouncedRequestDto: IMetaData = useDebounce(requestDto, 300);
+  const debouncedRequestDto: IMetaData = useDebounce(requestDto, 500);
 
   const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError } = useQuery<
     IExpandedCollectionResponse<IStatementTransactionRow>

@@ -194,6 +194,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Недавние запросы
+			 */
+			get recentRequests() {
+				return t('transactionsScroller.labels.recentRequests');
+			},
+			/**
+			 * @ru
 			 * Контрагент
 			 */
 			get counterparty() {
@@ -291,14 +298,14 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Дата запроса c:
+			 * Дата платежа c:
 			 */
 			get dateFrom() {
 				return t('transactionsScroller.tags.dateFrom');
 			},
 			/**
 			 * @ru
-			 * Дата запроса по:
+			 * Дата платежа по:
 			 */
 			get dateTo() {
 				return t('transactionsScroller.tags.dateTo');

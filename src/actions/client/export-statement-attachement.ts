@@ -1,11 +1,11 @@
 import { checkOutdatedStatement } from 'actions/client/check-outdated-statement';
 import { getCreateAttachment } from 'actions/client/create-attachement';
+import { exportStatement } from 'actions/client/export-statement';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
 import type { ICreateAttachmentResponse } from 'interfaces';
-import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
+import type { IStatementHistoryRow, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { fatalHandler } from 'utils';
-import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { showFile } from '@platform/services/client';
 import type { context } from './executor';
@@ -27,22 +27,13 @@ const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
 export const getExportStatementAttachment = (
   useCase: EXPORT_PARAMS_USE_CASES
 ): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
-  action: ({ done, fatal, addSucceeded, execute }, { service, showLoader, hideLoader }) => async (
+  action: ({ done, fatal, addSucceeded, addFailed, execute }) => async (
     docs: IBaseEntity[],
     statementId?: string,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
-      const [doc] = docs;
-
-      showLoader();
-
-      const [res, err] = await to(service.getStatementRelevanceStatus(doc.id));
-
-      hideLoader();
-
-      fatal(res?.error);
-      fatal(err);
+      const [doc] = docs as IStatementHistoryRow[];
 
       const {
         succeeded: [isOutdated],
@@ -53,6 +44,26 @@ export const getExportStatementAttachment = (
 
         return;
       }
+
+      const {
+        succeeded: [data],
+        failed: [error],
+      } = await execute(exportStatement, [doc]);
+
+      fatal(error);
+
+      if (!data) {
+        addFailed();
+        done();
+
+        return;
+      }
+
+      addSucceeded();
+
+      done();
+
+      return;
     }
 
     const createAttachment = getCreateAttachment(useCase, ACTION.DOWNLOAD, documentType);
@@ -65,6 +76,7 @@ export const getExportStatementAttachment = (
     fatal(error);
 
     if (!data) {
+      addFailed();
       done();
 
       return;

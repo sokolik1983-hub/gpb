@@ -8,6 +8,7 @@ import { ACTION } from 'interfaces/client';
 import type { IGetStatusResponceDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { statementService } from 'services';
+import { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'utils';
 import { to } from '@platform/core';
 import type { IServerDataResp } from '@platform/services';
@@ -19,7 +20,7 @@ import css from './styles.scss';
 export interface IAwaitingFormProps {
   /** Коллбэк закрытия формы. */
   onClose(): void;
-  /** Id закрытия формы. */
+  /** Id выписки. */
   id: string;
 }
 
@@ -107,7 +108,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
       switch (statementActionDto) {
         case ACTION.VIEW:
-          await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
+          await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc], ACTION.VIEW, ENTRY_SOURCE_VIEW);
 
           return;
         case ACTION.DOWNLOAD:

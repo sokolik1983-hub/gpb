@@ -9,5 +9,4 @@ export * from './actions';
 export * from './export-params-dialog';
 export * from './function-control';
 export * from './format-to-mask';
-export * from './platform';
 export * from './get-creation-params-options';

@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useCallback } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
 import { ScrollerTableView } from 'components/scroller-table-view';
 import type { IStatementHistoryRow } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination } from 'react-table';
 import { PRIVILEGE } from 'stream-constants/client';
@@ -47,7 +48,7 @@ export const Table: FC = () => {
         return;
       }
 
-      void executor.execute(gotoTransactionsScrollerByStatementRequest, [doc]);
+      void executor.execute(gotoTransactionsScrollerByStatementRequest, [doc], ACTION.VIEW);
     }
   }, []);
 

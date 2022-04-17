@@ -54,8 +54,8 @@ export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, acti
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve }, () => reject(true))
   );
 
-/** Вернуть заголовок диалога неактуальности выписки по способу вызова / возможному действию. */
-const getDialogTitleByAction: Record<ACTION.DOWNLOAD | ACTION.VIEW, string> = {
+/** Заголовок диалога неактуальности выписки по способу вызова / возможному действию. */
+const dialogTitleByAction: Record<ACTION.DOWNLOAD | ACTION.VIEW, string> = {
   [ACTION.DOWNLOAD]: locale.exportParamsDialog.exportOutdatedStatement.label,
   [ACTION.VIEW]: locale.exportParamsDialog.viewOutdatedStatement.label,
 };
@@ -63,7 +63,7 @@ const getDialogTitleByAction: Record<ACTION.DOWNLOAD | ACTION.VIEW, string> = {
 /** Диалог неактуальности выписки. */
 export const showOutdatedStatementDialog = (action: ACTION) =>
   new Promise<void>((resolve, reject) =>
-    dialog.showConfirmation(getDialogTitleByAction[action], resolve, {
+    dialog.showConfirmation(dialogTitleByAction[action], resolve, {
       cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
       okButtonText: locale.exportParamsDialog.buttons.ok.label,
       onClose: () => reject(true),

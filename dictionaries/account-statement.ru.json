@@ -21,6 +21,7 @@
   "transactionsScroller.labels.docNumber": "Номер документа",
   "transactionsScroller.labels.paymentDate": "Дата платежа",
   "transactionsScroller.labels.transactionType": "Операция",
+  "transactionsScroller.labels.recentRequests": "Недавние запросы",
   "transactionsScroller.labels.counterparty": "Контрагент",
   "transactionsScroller.labels.counterpartyInn": "ИНН: {inn}",
   "transactionsScroller.table.placeholder": "Документы не найдены",

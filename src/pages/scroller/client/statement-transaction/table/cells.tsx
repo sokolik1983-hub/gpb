@@ -149,6 +149,7 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   const { queryString } = filterPanel.values;
 
   const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
+  const [clampedText, setClampedText] = useState('');
 
   const clampedElementRef = useRef<HTMLDivElement>(null);
 
@@ -161,12 +162,14 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
       /** Если текст оканчивается на символ '…', то значит он был усечён, и надо отображать тултип. */
       if (textContent.match(/…$/)) {
         setIsShouldShowTooltip(true);
+        setClampedText(textContent);
       }
     }
   }, []);
 
   return (
     <WithInfoTooltip
+      extraSmall
       positioningOrder={[CONTAINER_POSITION.BOTTOM_CENTER, CONTAINER_POSITION.LEFT_CENTER, CONTAINER_POSITION.RIGHT_CENTER]}
       text={purpose}
     >
@@ -179,7 +182,7 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
             т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
           */}
           <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis', overflow: 'hidden' }}>
-            <HightlightText searchWords={queryString} textToHightlight={purpose} />
+            <HightlightText searchWords={queryString} textToHightlight={clampedText || purpose} />
           </div>
         </Typography.SmallText>
       )}

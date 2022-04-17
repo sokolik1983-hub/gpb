@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { createStatement, getExecutor } from 'actions/client';
+import { ForbiddenContent } from 'components';
 import { Accounts } from 'components/form/accounts';
 import { CreationParams } from 'components/form/creation-params';
 import { DetailDocumentsParams } from 'components/form/detail-documents-params';
@@ -34,10 +35,14 @@ export const CreateStatementForm: React.FC = () => {
     [creationType, executor]
   );
 
-  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
+  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError, isForbidden } = useInitialStatementRequest();
 
   if (isInitialLoading) {
     return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
+  }
+
+  if (isForbidden) {
+    return <ForbiddenContent />;
   }
 
   if (isInitialError) {
