@@ -3,8 +3,8 @@ import { AccountsField } from 'components';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
 import { useAccounts } from 'hooks/use-accounts';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
+import { FORM_FIELDS } from 'stream-constants/form';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
 

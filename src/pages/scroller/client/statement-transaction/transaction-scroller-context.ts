@@ -1,6 +1,7 @@
 import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
-import type { IGetCounterpartiesResponseDto, IStatementTransactionRow, IStatementSummaryInfoResponseDto } from 'interfaces/client';
+import type { IStatementTransactionRow } from 'interfaces/client';
+import type { IGetCounterpartiesResponseDto, IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';

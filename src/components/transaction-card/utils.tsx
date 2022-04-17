@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IGetTransactionCardResponseDto, IAgent } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto, IAgent } from 'interfaces/dto';
 import { locale } from 'localization';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';

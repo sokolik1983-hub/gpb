@@ -1,7 +1,7 @@
 import type { FormEventHandler } from 'react';
 import React, { useMemo } from 'react';
 import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
-import { FormContext } from 'interfaces/form/form-context';
+import { FormContext } from 'stream-constants/form';
 import { useFormProvider } from './hooks/use-form-provider';
 
 /** Свойства провайдера формы. */

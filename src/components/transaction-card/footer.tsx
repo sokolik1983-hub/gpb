@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useMemo } from 'react';
 import { executor } from 'actions/client/executor';
-import type { IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { CARD_FOOTER_ACTIONS, CARD_FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { getActiveActionButtons } from 'utils';
@@ -33,11 +33,11 @@ export const Footer: FC<IFooterProps> = ({ transaction: doc, statementId: id }) 
     id,
   ]);
 
-  const otherActions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], id]), [
-    getAvailableActions,
-    doc,
-    id,
-  ]);
+  const otherActions = useMemo(() => {
+    const activeActionButtons = getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], id]);
+
+    return activeActionButtons.map(({ icon, ...restButtonProps }) => ({ ...restButtonProps }));
+  }, [getAvailableActions, doc, id]);
 
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>

@@ -1,7 +1,7 @@
 import { showStatementParamsDialog } from 'components/export-params-dialog';
-import type { IStatementHistoryRow, IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
-import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
+import type { IGetTransactionCardResponseDto, ICreateAttachmentRequestDto } from 'interfaces/dto';
 import {
   alwaysSentParamsCasesWithoutUI,
   convertToCreationParams,

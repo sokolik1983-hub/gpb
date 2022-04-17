@@ -20,4 +20,6 @@ export interface IFormState {
   paymentDateTo?: string;
   /** Тип операции. */
   transactionType?: TRANSACTION_TYPES;
+  /** Источник вызова скроллера проводок. */
+  source?: string;
 }

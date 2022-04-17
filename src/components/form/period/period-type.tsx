@@ -1,6 +1,6 @@
 import React from 'react';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
+import { FORM_FIELDS } from 'stream-constants/form';
 import { Box, Fields } from '@platform/ui';
 import css from './styles.scss';
 import { usePeriod } from './use-period';

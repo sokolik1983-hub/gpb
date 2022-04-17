@@ -2,8 +2,8 @@ import type { FC } from 'react';
 import React, { useContext, useMemo, useCallback } from 'react';
 import { executor, createStatement } from 'actions/client';
 import cn from 'classnames';
-import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/client';
 import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
+import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/dto';
 import type { Row } from 'react-table';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { getHandlerDependingOnSelection, isFunctionAvailability } from 'utils';
@@ -29,7 +29,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const requestDto: Partial<ICreateRequestStatementDto> = useMemo(
+  const doc: Partial<ICreateRequestStatementDto> = useMemo(
     () => ({
       action: ACTION.VIEW,
       type: TYPE.HIDDEN_VIEW,
@@ -60,10 +60,10 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
       return;
     }
 
-    const executeHandler = getHandlerDependingOnSelection(executor.execute);
+    const handler = getHandlerDependingOnSelection(executor.execute);
 
-    await executeHandler(createStatement, [requestDto]);
-  }, [requestDto]);
+    await handler(createStatement, [doc]);
+  }, [doc]);
 
   return (
     <WithClickable>

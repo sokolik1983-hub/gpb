@@ -2,9 +2,9 @@ import { getCreateAttachment } from 'actions/client/create-attachement';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import type { EXPORT_PARAMS_USE_CASES, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
+import { printBase64 } from 'platform-copies/utils';
 import { fatalHandler } from 'utils';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
-import { mimeTypeToExt, printBase64 } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -35,9 +35,9 @@ export const getPrintStatementAttachment = (
       return;
     }
 
-    const { content, mimeType } = data;
+    const { content, mimeType, fileName } = data;
 
-    printBase64(content, mimeTypeToExt(mimeType));
+    await printBase64(content, fileName, mimeType);
 
     addSucceeded();
 

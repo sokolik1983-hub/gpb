@@ -5,12 +5,11 @@ import { useSeparateAccountFiles } from 'components/form/common/use-separate-acc
 import { Row } from 'components/form/row';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { fileFormatOptions } from 'interfaces/form/file-format';
-import { FormContext } from 'interfaces/form/form-context';
-import type { IFormState } from 'interfaces/form/form-state';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
+import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
+import { FormContext } from 'stream-constants/form/form-context';
 import { fileFormatShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';

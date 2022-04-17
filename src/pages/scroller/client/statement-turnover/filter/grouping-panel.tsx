@@ -1,7 +1,7 @@
 import React, { useMemo, useContext } from 'react';
 import cn from 'classnames';
-import type { IGroupedAccounts } from 'interfaces/client';
-import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/client';
+import type { IGroupedAccounts } from 'interfaces/dto';
+import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/dto';
 import { Typography, Gap, Box, Fields } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS, GROUPING_OPTIONS } from './constants';

@@ -194,6 +194,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Недавние запросы
+			 */
+			get recentRequests() {
+				return t('transactionsScroller.labels.recentRequests');
+			},
+			/**
+			 * @ru
 			 * Контрагент
 			 */
 			get counterparty() {
@@ -291,14 +298,14 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Дата запроса c:
+			 * Дата платежа c:
 			 */
 			get dateFrom() {
 				return t('transactionsScroller.tags.dateFrom');
 			},
 			/**
 			 * @ru
-			 * Дата запроса по:
+			 * Дата платежа по:
 			 */
 			get dateTo() {
 				return t('transactionsScroller.tags.dateTo');
@@ -1649,7 +1656,7 @@ export default {
 			download: {
 				/**
 				 * @ru
-				 * Экспортировать
+				 * Экспорт
 				 */
 				get label() {
 					return t('exportParamsDialog.buttons.download.label');
@@ -1771,7 +1778,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * С электронной подписью банка
+				 * С электронной подписью банка в формате PDF
 				 */
 				get withSign() {
 					return t('exportParamsDialog.print.creationParams.withSign');

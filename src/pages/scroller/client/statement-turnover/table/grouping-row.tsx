@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React from 'react';
-import type { IGroupedAccounts, IGroupInfo } from 'interfaces/client';
-import { GROUPING_TYPE } from 'interfaces/client';
+import type { IGroupedAccounts, IGroupInfo } from 'interfaces/dto';
+import { GROUPING_TYPE } from 'interfaces/dto';
 import type { Row } from 'react-table';
 import { Box, Typography, WithInfoTooltip, ROLE } from '@platform/ui';
 import css from './styles.scss';

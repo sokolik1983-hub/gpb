@@ -1,61 +1,22 @@
 import type { FC } from 'react';
-import React, { useCallback, useRef } from 'react';
-import { FilterFooter } from 'components/filter-layout/filter-footer';
-import { ToggleButton } from 'components/filter-layout/toggle-button';
-import type { ValidationErrors } from 'final-form';
-import type { IFilterPanel, ITagsPanel } from 'interfaces';
+import React, { useRef } from 'react';
 import { Form } from 'react-final-form';
-import { Box, Line, Horizon, Pattern, ROLE } from '@platform/ui';
+import { Filter } from './filter';
 import css from './styles.scss';
-
-/** Свойства компонента FilterLayout. */
-export interface IFilterProps {
-  /** Объект который возвращается платформенным хуком useFilter в поле "filterPanel". */
-  filterState: IFilterPanel;
-  /** Объект который возвращается платформенным хуком useFilter в поле "tagsPanel". */
-  tagsState: ITagsPanel;
-  /** Поля фильтров которые всегда видны на форме. */
-  quickFilter: React.ComponentType;
-  /** Дополнительные поля фильтрации. */
-  additionalFilter: React.ComponentType;
-  /** Теги формы фильтрации. */
-  tagsPanel: React.ComponentType;
-  /** Функция валидации значений формы. */
-  validate?(values: any): Promise<ValidationErrors> | ValidationErrors;
-}
+import type { IFilterProperties } from './types';
 
 /** Лэйаут фильтров скроллера. */
-export const FilterLayout: FC<IFilterProps> = ({
-  quickFilter: QuickFilter,
+export const FilterLayout: FC<IFilterProperties> = ({
+  AdditionalFilter,
+  QuickFilter,
+  TagsPanel,
   filterState,
+  additionalFilterFields,
+  filterFields,
   tagsState,
-  tagsPanel: TagsPanel,
-  additionalFilter: AdditionalFilter,
   validate,
 }) => {
-  const { onClose: closeAdditionalFilters, opened, onClear, onOk, values: valuesFromHookUseFilter } = filterState;
-
-  const { onClick: expandAdditionalFilter } = tagsState;
-
-  const handleApply = useCallback(
-    formValues => {
-      onOk(formValues);
-    },
-    [onOk]
-  );
-
-  const handleToggleClick = useCallback(() => {
-    if (opened) {
-      closeAdditionalFilters();
-    } else {
-      expandAdditionalFilter();
-    }
-  }, [opened, closeAdditionalFilters, expandAdditionalFilter]);
-
-  const handleReset = useCallback(() => {
-    onClear();
-    expandAdditionalFilter();
-  }, [expandAdditionalFilter, onClear]);
+  const { onOk, values: valuesFromHookUseFilter } = filterState;
 
   // Инициализация формы происходит из значений полученных из хука useFilter.
   // т.к. в хуке useFilter, происходит вычисление начальных значений формы фильтрации,
@@ -67,31 +28,15 @@ export const FilterLayout: FC<IFilterProps> = ({
       initialValues={initialValues}
       render={({ handleSubmit }) => (
         <form className={css.wrapper} onSubmit={handleSubmit}>
-          <Box className={css.filterWrapper}>
-            <Pattern>
-              <Pattern.Span size={10}>
-                <QuickFilter />
-              </Pattern.Span>
-              <Pattern.Span size={2}>
-                <Horizon align={'CENTER'} className={css.toggleButtonWrapper}>
-                  <Horizon.Spacer />
-                  <ToggleButton isOpen={opened} onClick={handleToggleClick} />
-                </Horizon>
-              </Pattern.Span>
-            </Pattern>
-            <TagsPanel />
-          </Box>
-          <Line fill="FAINT" />
-          {opened && (
-            <Box aria-expanded={opened} data-name={'additionalFilter'} role={ROLE.PANEL}>
-              <Box className={css.additionalFilterWrapper}>
-                <AdditionalFilter />
-              </Box>
-              <Line fill="FAINT" />
-              <FilterFooter onApply={handleApply} onReset={handleReset} />
-              <Line fill="FAINT" />
-            </Box>
-          )}
+          <Filter
+            AdditionalFilter={AdditionalFilter}
+            QuickFilter={QuickFilter}
+            TagsPanel={TagsPanel}
+            additionalFilterFields={additionalFilterFields}
+            filterFields={filterFields}
+            filterState={filterState}
+            tagsState={tagsState}
+          />
         </form>
       )}
       validate={validate}

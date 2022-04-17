@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 import { ACTION } from 'interfaces/client/classificators';
-import type { IFormContext } from 'interfaces/form/form-context';
-import { FormContext } from 'interfaces/form/form-context';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
-import type { IFormState } from 'interfaces/form/form-state';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
+import type { IFormState } from 'stream-constants/form';
+import { FORM_FIELDS } from 'stream-constants/form';
+import { FormContext } from 'stream-constants/form/form-context';
+import type { IFormContext } from 'stream-constants/form/form-context';
 import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box, ACTIONS as DATA_ACTIONS } from '@platform/ui';
 
 /** Компонент футера. */

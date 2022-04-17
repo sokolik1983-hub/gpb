@@ -56,7 +56,7 @@ export const InputWithHistory: React.FC<IInputWithSearchHistory> = ({
     setIsFocus(true);
   }, []);
 
-  const onInputChange = useCallback(
+  const onChangeInput = useCallback(
     ({ value }: { value: string }) => {
       setSearchValue(value);
 
@@ -75,13 +75,13 @@ export const InputWithHistory: React.FC<IInputWithSearchHistory> = ({
 
   const handleSelectOption = useCallback(
     (option: IOption) => {
-      onInputChange({ value: option.value });
+      onChangeInput({ value: option.value });
 
       if (onSelectOption) {
         onSelectOption(option);
       }
     },
-    [onInputChange, onSelectOption]
+    [onChangeInput, onSelectOption]
   );
 
   const showOptions = useMemo(() => isFocus && options.length > 0, [isFocus, options]);
@@ -94,7 +94,7 @@ export const InputWithHistory: React.FC<IInputWithSearchHistory> = ({
         name={name}
         placeholder={placeholder}
         onBlur={handleBlur}
-        onChange={onInputChange}
+        onChange={onChangeInput}
         onFocus={handleFocus}
         onIconClick={onIconClick}
         onKeyPress={handleKeyDown}

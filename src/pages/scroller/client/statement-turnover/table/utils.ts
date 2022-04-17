@@ -1,4 +1,4 @@
-import type { IAccountTurnoversInfo, IGroupInfo, IGroupedAccounts } from 'interfaces/client';
+import type { IAccountTurnoversInfo, IGroupInfo, IGroupedAccounts } from 'interfaces/dto';
 
 /**
  * Определяет является ли параметр блоком со сгруппированными счетами.

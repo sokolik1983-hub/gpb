@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
-import type { IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';

@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { DATE_PERIODS } from 'interfaces';
-import type { IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/client';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
-import type { IFormState } from 'interfaces/form/form-state';
+import type { IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useForm, useFormState } from 'react-final-form';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
+import type { IFormState } from 'stream-constants/form';
+import { FORM_FIELDS } from 'stream-constants/form';
 
 /** Хук с бизнес-логикой для компонента "Период формирования выписки". */
 export const usePeriod = () => {

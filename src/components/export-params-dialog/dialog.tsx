@@ -1,11 +1,11 @@
 import React, { useMemo } from 'react';
 import { Content } from 'components/export-params-dialog/content';
-import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
-import { OUTDATED_STATEMENT_MODE } from 'interfaces/client';
-import type { IFormState } from 'interfaces/form/form-state';
-import { getInitialFormState } from 'interfaces/form/form-state';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { Form } from 'react-final-form';
+import type { IFormState } from 'stream-constants/form';
+import { getInitialFormState } from 'stream-constants/form';
 import { dialog } from '@platform/ui';
 import type { IDialogContext } from './dialog-context';
 import { DialogContext } from './dialog-context';
@@ -54,15 +54,16 @@ export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, acti
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve }, () => reject(true))
   );
 
-const LocaleOfOutdatedStatementMode: Record<keyof typeof OUTDATED_STATEMENT_MODE, string> = {
-  [OUTDATED_STATEMENT_MODE.EXPORT]: locale.exportParamsDialog.exportOutdatedStatement.label,
-  [OUTDATED_STATEMENT_MODE.VIEW]: locale.exportParamsDialog.viewOutdatedStatement.label,
+/** Заголовок диалога неактуальности выписки по способу вызова / возможному действию. */
+const dialogTitleByAction: Record<ACTION.DOWNLOAD | ACTION.VIEW, string> = {
+  [ACTION.DOWNLOAD]: locale.exportParamsDialog.exportOutdatedStatement.label,
+  [ACTION.VIEW]: locale.exportParamsDialog.viewOutdatedStatement.label,
 };
 
-/** Диалог про неактуальную выписку. */
-export const showOutdatedStatementDialog = (mode: OUTDATED_STATEMENT_MODE) =>
+/** Диалог неактуальности выписки. */
+export const showOutdatedStatementDialog = (action: ACTION) =>
   new Promise<void>((resolve, reject) =>
-    dialog.showConfirmation(LocaleOfOutdatedStatementMode[mode], resolve, {
+    dialog.showConfirmation(dialogTitleByAction[action], resolve, {
       cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
       okButtonText: locale.exportParamsDialog.buttons.ok.label,
       onClose: () => reject(true),

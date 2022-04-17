@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { DATE_PERIODS } from 'interfaces';
-import { GROUPING_VALUES } from 'interfaces/client';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-turnover/filter/constants';
 import { Form } from 'react-final-form';
 import { getDateRangeValidationScheme } from 'schemas';

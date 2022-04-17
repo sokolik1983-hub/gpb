@@ -149,6 +149,7 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
   const { queryString } = filterPanel.values;
 
   const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
+  const [clampedText, setClampedText] = useState('');
 
   const clampedElementRef = useRef<HTMLDivElement>(null);
 
@@ -161,13 +162,15 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
       /** Если текст оканчивается на символ '…', то значит он был усечён, и надо отображать тултип. */
       if (textContent.match(/…$/)) {
         setIsShouldShowTooltip(true);
+        setClampedText(textContent);
       }
     }
   }, []);
 
   return (
     <WithInfoTooltip
-      positioningOrder={[CONTAINER_POSITION.LEFT_END, CONTAINER_POSITION.LEFT_CENTER, CONTAINER_POSITION.LEFT]}
+      extraSmall
+      positioningOrder={[CONTAINER_POSITION.BOTTOM_CENTER, CONTAINER_POSITION.LEFT_CENTER, CONTAINER_POSITION.RIGHT_CENTER]}
       text={purpose}
     >
       {ref => (
@@ -178,8 +181,8 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
             А если такой элемент есть, то отображает только если содержимое не помещается в элемент,
             т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
           */}
-          <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis' }}>
-            <HightlightText searchWords={queryString} textToHightlight={purpose} />
+          <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis', overflow: 'hidden' }}>
+            <HightlightText searchWords={queryString} textToHightlight={clampedText || purpose} />
           </div>
         </Typography.SmallText>
       )}

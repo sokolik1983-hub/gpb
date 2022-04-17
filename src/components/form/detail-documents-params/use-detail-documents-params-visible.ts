@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import type { IFormContext } from 'interfaces/form/form-context';
-import { FormContext } from 'interfaces/form/form-context';
-import type { IFormState } from 'interfaces/form/form-state';
 import { useFormState } from 'react-final-form';
+import type { IFormState } from 'stream-constants/form';
+import type { IFormContext } from 'stream-constants/form/form-context';
+import { FormContext } from 'stream-constants/form/form-context';
 
 /** Хук проверки видимости компонента "Детальные параметры комплекта документов". */
 export const useDetailDocumentsParamsVisible = (): boolean => {

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useCallback } from 'react';
 import { executor } from 'actions/client/executor';
-import type { IGetTransactionCardResponseDto } from 'interfaces/client';
+import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { CARD_ROW_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { getActiveActionButtons } from 'utils';
 import { useAuth } from '@platform/services/client';

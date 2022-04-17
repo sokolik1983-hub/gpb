@@ -8,12 +8,12 @@ interface IToggleProps {
   /** Обработчик клика по кнопки. */
   onClick(): void;
   /** Состояние переключателя. */
-  isOpen: boolean;
+  opened: boolean;
 }
 
 /** Кнопка переключения видимости дополнительных фильтров. */
-export const ToggleButton: React.FC<IToggleProps> = ({ onClick, isOpen }) => {
-  const Icon = isOpen ? ServiceIcons.ChevronUp : ServiceIcons.ChevronDown;
+export const ToggleButton: React.FC<IToggleProps> = ({ onClick, opened }) => {
+  const Icon = opened ? ServiceIcons.ChevronUp : ServiceIcons.ChevronDown;
 
   return (
     <Box
@@ -30,7 +30,7 @@ export const ToggleButton: React.FC<IToggleProps> = ({ onClick, isOpen }) => {
         </Box>
         <Gap.XS />
         <Typography.P clickable fill={'ACCENT'}>
-          {isOpen ? locale.scroller.filter.buttons.collapse : locale.scroller.filter.buttons.expand}
+          {opened ? locale.scroller.filter.buttons.collapse : locale.scroller.filter.buttons.expand}
         </Typography.P>
       </Horizon>
     </Box>

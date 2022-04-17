@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { TagsPanelView } from 'components';
+import type { ITagsPanelProps } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { STATUS_LABELS } from 'stream-constants/client';
@@ -27,7 +28,7 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 };
 
 /** Панель тегов фильтра. */
-export const TagsPanel = () => {
+export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
   const { restart } = useForm();
 
   const { values } = useFormState<IFormState>();
@@ -55,7 +56,7 @@ export const TagsPanel = () => {
   const preparedTags = orderTags(tags, FIELDS_WITH_TAGS).filter(tag => Boolean(values[tag.value]));
 
   const resetFilters = () => {
-    const newValues = getValuesAfterResetTags(values, FIELDS_WITH_TAGS);
+    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
 
     restart(newValues);
     onOk(newValues);

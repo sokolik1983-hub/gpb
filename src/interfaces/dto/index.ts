@@ -1,3 +1,13 @@
-// TODO: в дальнейшем переместить все клиентские ДТО в этот файлик в рамках https://jira.gboteam.ru/browse/GBO-19422
-
 export * from './create-attachment-request-dto';
+export * from './create-request-statement-dto';
+export * from './creation-params-dto';
+export * from './get-accounts-dto';
+export * from './get-counterparty-dto';
+export * from './get-date-period-dto';
+export * from './get-statement-relevance-status-dto';
+export * from './get-status-dto';
+export * from './get-transaction-card-response-dto';
+export * from './get-turnovers-dto';
+export * from './latest-statement-dto';
+export * from './statement-summary-info-request-dto';
+export * from './statement-summary-info-response-dto';

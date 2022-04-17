@@ -1,6 +1,7 @@
 import { DATE_PERIODS } from 'interfaces';
 import { FORMAT, OPERATIONS } from 'interfaces/client';
-import type { ACTION, ILatestStatementDto, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { ILatestStatementDto } from 'interfaces/dto';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { locale } from 'localization';
@@ -28,7 +29,7 @@ export interface IFormState {
 /** Начальное значение состояния формы. */
 export const defaultFormState: IFormState = {
   accountIds: [],
-  creationParams: [CREATION_PARAMS.WITH_DOCUMENTS_SET, CREATION_PARAMS.HIDE_EMPTY_TURNOVERS],
+  creationParams: [],
   creditParams: [],
   debitParams: [],
   documentsSetParams: [],

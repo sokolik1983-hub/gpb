@@ -5,26 +5,24 @@ import type {
   FieldsRequired,
   IExpandedScrollerResponceDto,
 } from 'interfaces';
+import type { IStatementHistoryRow, IStatementTransactionRow, IStatement } from 'interfaces/client';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
   IGetTurnoversResponseDto,
   IGetTurnoversRequestDto,
-  IStatementHistoryRow,
   IGetCounterpartiesResponseDto,
-  IStatementTransactionRow,
-  ILatestStatementDto,
-  IStatementSummaryInfoResponseDto,
-  IStatement,
   IGetStatusResponceDto,
   IGetTransactionCardResponseDto,
   ICreateRequestStatementDto,
   IStatementSummaryInfoRequestDto,
   IGetTransactionCardRequestDto,
+  ILatestStatementDto,
   IGetStatementRelevanceStatus,
+  IStatementSummaryInfoResponseDto,
+  ICreateAttachmentRequestDto,
   IGetAccountsResponseDto,
-} from 'interfaces/client';
-import type { ICreateAttachmentRequestDto } from 'interfaces/dto';
+} from 'interfaces/dto';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';

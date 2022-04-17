@@ -1,7 +1,7 @@
+import { printBase64 } from 'platform-copies/utils';
 import { fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
-import { mimeTypeToExt, printBase64 } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -20,9 +20,9 @@ export const printStatement: IActionConfig<typeof context, Promise<void>> = {
     fatal(res?.error);
     fatal(err);
 
-    const { content, mimeType } = res!;
+    const { content, mimeType, fileName } = res!;
 
-    printBase64(content, mimeTypeToExt(mimeType));
+    await printBase64(content, fileName, mimeType);
 
     done();
   },

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import type { IGroupedAccounts } from 'interfaces/client';
+import type { IGroupedAccounts } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { Row } from 'react-table';
 import { Typography, Box, ROLE } from '@platform/ui';

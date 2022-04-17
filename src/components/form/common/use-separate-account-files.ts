@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import type { IFormState } from 'interfaces/form/form-state';
-import { FORM_FIELDS } from 'interfaces/form/form-state';
 import { useForm, useFormState } from 'react-final-form';
+import type { IFormState } from 'stream-constants/form/form-state';
+import { FORM_FIELDS } from 'stream-constants/form/form-state';
 
 /** Хук установки / измнения состояния флага "Отдельный файл по каждому счету". */
 export const useSeparateAccountFiles = () => {

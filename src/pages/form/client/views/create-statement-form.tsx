@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { createStatement, getExecutor } from 'actions/client';
+import { ForbiddenContent } from 'components';
 import { Accounts } from 'components/form/accounts';
 import { CreationParams } from 'components/form/creation-params';
 import { DetailDocumentsParams } from 'components/form/detail-documents-params';
@@ -8,11 +9,11 @@ import { Operations } from 'components/form/operations';
 import { Period } from 'components/form/period';
 import { useCreationType } from 'hooks';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
-import type { IFormState } from 'interfaces/form/form-state';
-import { FORM_FIELD_LABELS, getInitialFormState } from 'interfaces/form/form-state';
 import { Footer } from 'pages/form/client/components/footer';
 import { FormProvider } from 'pages/form/client/form-provider';
 import { Form } from 'react-final-form';
+import { FORM_FIELD_LABELS, getInitialFormState } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
 import { mapFormToDto } from 'utils';
 import { NotFoundContent } from '@platform/services';
 import { Box, LoaderOverlay, Pattern, FormValidation, DATA_TYPE } from '@platform/ui';
@@ -34,10 +35,14 @@ export const CreateStatementForm: React.FC = () => {
     [creationType, executor]
   );
 
-  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError } = useInitialStatementRequest();
+  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError, isForbidden } = useInitialStatementRequest();
 
   if (isInitialLoading) {
     return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
+  }
+
+  if (isForbidden) {
+    return <ForbiddenContent />;
   }
 
   if (isInitialError) {

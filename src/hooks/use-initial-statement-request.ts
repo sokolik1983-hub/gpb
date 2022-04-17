@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import type { IUrlParams } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
-import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/client';
+import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';
@@ -22,8 +22,10 @@ export const useInitialStatementRequest = (): {
   initialStatementRequest: ILatestStatementDto | undefined;
   isInitialLoading: boolean;
   isInitialError: boolean;
+  isForbidden;
 } => {
   const { id } = useParams<IUrlParams>();
+  const [isForbidden, setIsForbidden] = useState(false);
 
   const isNewStatement = id === NEW_ENTITY_ID;
 
@@ -41,6 +43,14 @@ export const useInitialStatementRequest = (): {
     queryKey: ['@eco/statement', 'get-statement-request', id],
     queryFn: statementRequestFetcher,
     retry: false,
+    onError: err => {
+      // При 403 выкидывается ошибка с помощью createError, поэтому перехватываем здесь
+      const { status } = (err as { response: { status: number } }).response;
+
+      if (status === ERROR.FORBIDDEN) {
+        setIsForbidden(true);
+      }
+    },
   });
 
   const { data: statementRequest, error: statementRequestError } = StatementRequestResp ?? {};
@@ -75,5 +85,6 @@ export const useInitialStatementRequest = (): {
     initialStatementRequest: statementRequest,
     isInitialLoading: isStatementRequestLoading || isPeriodLoading,
     isInitialError: isStatementRequestLoadingError || isPeriodLoadingError || isStatementRequestError,
+    isForbidden,
   };
 };
