@@ -50,7 +50,9 @@ export const AdditionalFilter: FC = () => {
       <Pattern.Span size={6}>
         <FilterFormElement label={locale.transactionsScroller.labels.counterparty}>
           {/** Контрагент. */}
-          <CounterpartyField counterparties={counterparties} name={FORM_FIELDS.COUNTERPARTY} />
+          <div className={css.counterpartyField}>
+            <CounterpartyField counterparties={counterparties} name={FORM_FIELDS.COUNTERPARTY} />
+          </div>
         </FilterFormElement>
       </Pattern.Span>
     </Pattern>

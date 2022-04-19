@@ -5,6 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
+    'counterpartyField': string;
     'fieldWrapper': string;
     'statementInfoWrapper': string;
   }
