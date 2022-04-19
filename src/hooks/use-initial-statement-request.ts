@@ -51,6 +51,7 @@ export const useInitialStatementRequest = (): {
         setIsForbidden(true);
       }
     },
+    cacheTime: 0,
   });
 
   const { data: statementRequest, error: statementRequestError } = StatementRequestResp ?? {};
