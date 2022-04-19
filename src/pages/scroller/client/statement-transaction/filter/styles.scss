@@ -6,3 +6,11 @@
   flex: 0 0 auto;
   padding: 0 32px;
 }
+
+.counterpartyField {
+  width: 100%;
+
+  [data-action='clear'] {
+    min-width: auto;
+  }
+}
