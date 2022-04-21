@@ -1,3 +1,18 @@
+# [2.4.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0...v2.4.0-release.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* GBO-24407 поправлены стили мультиселекта контрагентов ([f46e49a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f46e49a40cb03755b3484afb48848286469a2031))
+* **визард:** GBO-24040 сброс кеша для запросов со счетами ([566ca91](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/566ca91c12da11aad1faef62dc2e0486ceb5ee9d))
+* **скроллер:** GBO-20566 исправлено обрезание длинного текста ([f177af7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f177af7e4541c726e19bace87e5e258eb68f4023))
+
+
+### Features
+
+* GBO-23346 добавлен аккордеон для скроллера оборотов ([07d8575](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/07d8575f753376365e842c526fcfa2a667426ad8))
+* **скроллер:** GBO-24361 изменен контракт для `/statement/summary` ([97e700b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/97e700bb7d428a6bb1baf46eb09096b9b4ac3502))
+
 # [2.3.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0...v2.3.0) (2022-04-17)
 
 
