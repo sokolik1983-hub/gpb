@@ -73,9 +73,10 @@ export const StatementTransactionScrollerPage = () => {
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
   const {
-    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status },
+    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status: httpRequestStatus },
     isTransactionsError,
     isTransactionsFetching,
+    status,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
 
   const contextValue: ITransactionScrollerContext = useMemo(
@@ -97,6 +98,7 @@ export const StatementTransactionScrollerPage = () => {
       statementSummaryInfo: info,
       selectedRows,
       setSelectedRows,
+      status,
     }),
     [
       hasError,
@@ -118,10 +120,11 @@ export const StatementTransactionScrollerPage = () => {
       totalTransactionsAmount,
       info,
       selectedRows,
+      status,
     ]
   );
 
-  const isStatementForbidden = status === HTTP_STATUS_CODE.FORBIDDEN;
+  const isStatementForbidden = httpRequestStatus === HTTP_STATUS_CODE.FORBIDDEN;
 
   if (isStatementForbidden) {
     return <RouteError />;

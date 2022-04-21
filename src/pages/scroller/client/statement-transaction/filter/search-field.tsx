@@ -1,11 +1,12 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { InputWithHistory } from 'components';
+import { usePrevious } from 'hooks';
 import { locale } from 'localization';
-import { useForm } from 'react-final-form';
-import { ECO_STATEMENT } from 'stream-constants';
+import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
+import { useForm, useFormState } from 'react-final-form';
+import { ECO_STATEMENT, QUERY_STATUS } from 'stream-constants';
 import { useLocalStorage } from '@platform/services';
 import type { IOption } from '@platform/ui';
-import { debounce } from '@platform/ui';
 import { FORM_FIELDS } from './constants';
 
 /** Максимальный размер истории. */
@@ -13,15 +14,18 @@ const MAX_HISTORY_SIZE = 5;
 
 /** Компонент "Поиск по таблице". */
 export const SearchField: React.FC = () => {
-  const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
+  const { values } = useFormState();
+  const [searchValue, setSearchValue] = useState(() => values[FORM_FIELDS.TABLE_SEARCH]);
 
   const { change } = useForm();
 
-  // TODO: раскомментировать Query, когда будет убран useDebounce в хуке useGetTransactionsList
-  // в ходе рефакторинга https://jira.gboteam.ru/browse/GBO-19422
-  // const queryClient = useQueryClient();
+  const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
-  const changeHistory = useCallback(
+  const { status } = useContext(TransactionScrollerContext);
+  const prevStatus = usePrevious(status);
+
+  /** Добавление значения в историю поиска по таблице. */
+  const addSearchValueInHistory = useCallback(
     (value: string) => {
       const option: IOption = { value, label: value };
 
@@ -36,25 +40,20 @@ export const SearchField: React.FC = () => {
     [historyOptions, setHistoryOptions]
   );
 
-  const onChangeSearch = useCallback(
-    value => {
-      // TODO: убрать все ключи Query в константы.
-      // void queryClient.invalidateQueries([ECO_STATEMENT, 'transactions']);
+  /** Метод, возвращающий флаг проверки переданного значения поля истории поиска по списку истории (если нет true). */
+  const isExcludeHistoryOptions = useCallback(value => !historyOptions.some(item => item.value === value), [historyOptions]);
 
-      if (value) {
-        const isTheSameHistory = historyOptions.find(el => el.value === value);
+  useEffect(() => {
+    if (searchValue && isExcludeHistoryOptions(searchValue) && prevStatus === QUERY_STATUS.LOADING && status === QUERY_STATUS.SUCCESS) {
+      addSearchValueInHistory(searchValue);
+    }
+  }, [addSearchValueInHistory, isExcludeHistoryOptions, prevStatus, searchValue, status]);
 
-        if (!isTheSameHistory) {
-          changeHistory(value);
-        }
-      }
-    },
-    [changeHistory, historyOptions]
-  );
+  /** Изменение значения поля поиска по таблице. */
+  const handleChange = useCallback(value => setSearchValue(value), []);
 
-  const debouncedOnChange = debounce(onChangeSearch, 300);
-
-  const onSelectOption = useCallback(
+  /** Выбор значения из истории поиска по таблице. */
+  const handleSelectOption = useCallback(
     option => {
       change(FORM_FIELDS.TABLE_SEARCH, option.value);
     },
@@ -66,8 +65,8 @@ export const SearchField: React.FC = () => {
       name={FORM_FIELDS.TABLE_SEARCH}
       options={historyOptions}
       placeholder={locale.transactionsScroller.placeholder.tableSearch}
-      onChange={debouncedOnChange}
-      onSelectOption={onSelectOption}
+      onChange={handleChange}
+      onSelectOption={handleSelectOption}
     />
   );
 };
