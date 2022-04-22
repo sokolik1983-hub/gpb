@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination } from 'hooks';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchingData } from 'hooks';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
@@ -55,6 +55,8 @@ export const StatementHistoryScrollerPage = () => {
     isStatementsFetching,
   } = useGetStatementList({ filters: filterValues, sorting, pagination });
 
+  const fetchingData = useIsFetchingData(isAccountsFetching, isStatementsFetching);
+
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
       hasError: hasError || isAccountsError || isStatementsError,
@@ -100,7 +102,7 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={fetchingData} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             AdditionalFilter={AdditionalFilter}
             QuickFilter={QuickFilter}

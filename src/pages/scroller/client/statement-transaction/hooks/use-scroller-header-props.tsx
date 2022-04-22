@@ -26,12 +26,8 @@ export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto):
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
 
-  return {
+  const headerProps: IScrollerHeaderProps = {
     onHomeClick: redirectToMainPage,
-    header: locale.transactionsScroller.title({
-      dateFrom: formatDateTime(info?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
-      dateTo: formatDateTime(info?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
-    }),
     actions,
     items: [
       {
@@ -40,4 +36,14 @@ export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto):
       },
     ],
   };
+
+  return info
+    ? {
+        ...headerProps,
+        header: locale.transactionsScroller.title({
+          dateFrom: formatDateTime(info?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
+          dateTo: formatDateTime(info?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
+        }),
+      }
+    : headerProps;
 };

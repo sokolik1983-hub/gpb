@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerPageLayout, ScrollerHeader, FilterLayout, RouteError } from 'components';
-import { useScrollerPagination } from 'hooks';
+import { useIsFetchingData, useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -79,6 +79,8 @@ export const StatementTransactionScrollerPage = () => {
     fetchedNewTransactions,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
 
+  const fetchingData = useIsFetchingData(isCounterpartiesFetching, isTransactionsFetching, isStatementSummaryInfoFetching);
+
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
       hasError: hasError || isCounterpartiesError || isTransactionsError || isStatementSummaryInfoError,
@@ -141,7 +143,7 @@ export const StatementTransactionScrollerPage = () => {
   return (
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout isLoading={fetchingData} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             AdditionalFilter={AdditionalFilter}
             QuickFilter={QuickFilter}
