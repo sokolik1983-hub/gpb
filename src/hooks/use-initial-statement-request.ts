@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { IUrlParams } from 'interfaces';
-import { DATE_PERIODS } from 'interfaces';
+import { DATE_PERIODS, HTTP_STATUS_CODE } from 'interfaces';
 import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
@@ -37,9 +37,12 @@ export const useInitialStatementRequest = (): {
     return () => statementService.getStatementRequest(id);
   }, [id, isNewStatement]);
 
-  const { data: StatementRequestResp, isLoading: isStatementRequestLoading, isError: isStatementRequestLoadingError } = useQuery<
-    IServerDataResp<ILatestStatementDto>
-  >({
+  const {
+    data: statementRequestResp,
+    isLoading: isStatementRequestLoading,
+    isError: isStatementRequestLoadingError,
+    isSuccess: isSuccessStatementRequest,
+  } = useQuery<IServerDataResp<ILatestStatementDto>>({
     queryKey: ['@eco/statement', 'get-statement-request', id],
     queryFn: statementRequestFetcher,
     retry: false,
@@ -54,7 +57,7 @@ export const useInitialStatementRequest = (): {
     cacheTime: 0,
   });
 
-  const { data: statementRequest, error: statementRequestError } = StatementRequestResp ?? {};
+  const { data: statementRequest, error: statementRequestError } = statementRequestResp ?? {};
 
   const { periodType } = statementRequest ?? {};
 
@@ -74,18 +77,15 @@ export const useInitialStatementRequest = (): {
     statementRequest.periodEnd = periodResp.dateTo;
   }
 
-  // Если по запросу последней выписки пришёл ответ 404, то это не считается ошибкой,
-  // так как подразумевается, что пользователь открыл форму для создания первой выписки
-  // и у него нет предыдущих выписок.
-  const isStatementRequestError =
-    // Приведение к строке потому, что в ДТО на фронте указано, что code - это строка, и в свагере указано, что code - это строка,
-    // а по факту возвращается числовой тип, в других сервисах наблюдается аналогичное поведение.
-    Boolean(statementRequestError && !(String(statementRequestError.code) === String(ERROR.NOT_FOUND) && isNewStatement));
+  // Код 404 не считается ошибкой - пользователь открыл форму для создания первой выписки, и у него нет предыдущих выписок.
+  const allowedState = Boolean(
+    statementRequestError && (Number(statementRequestError?.code) === HTTP_STATUS_CODE.NOT_FOUND || isSuccessStatementRequest)
+  );
 
   return {
     initialStatementRequest: statementRequest,
     isInitialLoading: isStatementRequestLoading || isPeriodLoading,
-    isInitialError: isStatementRequestLoadingError || isPeriodLoadingError || isStatementRequestError,
+    isInitialError: isStatementRequestLoadingError || isPeriodLoadingError || (!allowedState && isNewStatement),
     isForbidden,
   };
 };
