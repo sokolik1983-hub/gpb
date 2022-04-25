@@ -1,3 +1,11 @@
+# [2.4.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.1...v2.4.0-release.2) (2022-04-25)
+
+
+### Bug Fixes
+
+* GBO-24040 поправлено условие ошибки подгрузки данных для формы запроса выписки ([b3aec4d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b3aec4d2dfa7a31cbab1831642b29d0747310078))
+* GBO-25175 поправлена сетка фильтра скроллера оборотов ([cd822f7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cd822f71e60634236e011feaf28ae9e20f975cce))
+
 # [2.4.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0...v2.4.0-release.1) (2022-04-21)
 
 
