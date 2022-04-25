@@ -58,5 +58,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     disableResizing: true,
     disableSortBy: true,
     width: 84,
+    innerFocus: true,
   },
 ]);

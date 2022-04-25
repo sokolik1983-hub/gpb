@@ -1,26 +1,20 @@
-import type { FC } from 'react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import cn from 'classnames';
-import type { Row } from 'react-table';
+import { AccessibilityContext } from 'components/scroller-table-view/accessibility';
+import { Cell } from 'components/scroller-table-view/cell';
+import type { RecordCell } from 'components/scroller-table-view/types';
+import type { Row as RowPure } from 'react-table';
 import { getHandlerDependingOnSelection } from 'utils';
-import { Box, WithClickable, ROLE } from '@platform/ui';
+import { Box, WithClickable } from '@platform/ui';
 import css from './styles.scss';
-import { getCellPaddingClass } from './utils';
 
-/** Свойства компонента TableRow. */
-export interface ITableRowProps {
-  /** Строка с оборотами по счёту. */
-  row: Row<Record<string, any>>;
-  /** Обработчик клика по строке. */
-  onClick?(row: Record<string, any>): void;
+/** Свойства строки таблицы. */
+interface RowProps extends RowPure<RecordCell> {
+  onClick?(row: RecordCell): void;
 }
 
-/** Строка с информацией по счёту в таблице Оборотов. */
-export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
-  const { getRowProps, original, cells } = row;
-
-  const { key, ...rowProps } = getRowProps({ role: ROLE.ROW });
-
+/** Компонент строки таблицы. */
+export const Row: React.FC<RowProps> = ({ cells, getRowProps, onClick, original }) => {
   const handleClick = useCallback(() => {
     if (onClick) {
       const clickHandler = getHandlerDependingOnSelection(onClick);
@@ -29,31 +23,23 @@ export const TableRow: FC<ITableRowProps> = ({ row, onClick }) => {
     }
   }, [onClick, original]);
 
+  const { className, style } = getRowProps();
+
+  const { getRowAccessibilityProps } = useContext(AccessibilityContext);
+
   return (
-    <WithClickable>
-      {(ref, { hovered }) => (
-        <Box
-          ref={ref}
-          {...rowProps}
-          className={cn(css.clickableRow, css.borderedRow)}
-          fill={hovered ? 'FAINT' : 'BASE'}
-          onClick={handleClick}
-        >
-          {cells.map(cell => {
-            const { getCellProps, column, render } = cell;
-
-            const { key: cellKey, ...cellProps } = getCellProps({ role: ROLE.COLUMN });
-
-            return (
-              <Box key={cellKey} {...cellProps} className={cn(getCellPaddingClass(column.paddingType))}>
-                {render('Cell')}
-              </Box>
-            );
-          })}
-        </Box>
-      )}
-    </WithClickable>
+    <tr className={className} style={style} {...getRowAccessibilityProps()}>
+      <WithClickable>
+        {(ref, { hovered }) => (
+          <Box ref={ref} className={cn(css.row, css.clickableRow)} fill={hovered ? 'FAINT' : 'BASE'} style={style} onClick={handleClick}>
+            {cells.map(cell => (
+              <Cell key={cell.column.id} {...cell} />
+            ))}
+          </Box>
+        )}
+      </WithClickable>
+    </tr>
   );
 };
 
-TableRow.displayName = 'TableRow';
+Row.displayName = 'Row';
