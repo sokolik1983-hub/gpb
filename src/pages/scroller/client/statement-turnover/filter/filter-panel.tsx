@@ -46,7 +46,7 @@ export const FilterPanel = () => {
       <Pattern.Span size={6}>
         <Adjust pad={[null, 'XS', null, null]}>
           <Pattern>
-            <Pattern.Span size={5}>
+            <Pattern.Span size={4}>
               <Adjust pad={[null, 'X2S', null, null]}>
                 {/* Выбор периода. */}
                 <DatePeriodField
@@ -57,7 +57,7 @@ export const FilterPanel = () => {
                 />
               </Adjust>
             </Pattern.Span>
-            <Pattern.Span size={7}>
+            <Pattern.Span size={8}>
               <Adjust pad={[null, null, null, 'X2S']}>
                 <Horizon>
                   <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, 'X2S', null, null]))}>
