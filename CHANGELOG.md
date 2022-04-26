@@ -1,3 +1,10 @@
+# [2.4.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.3...v2.4.0-release.4) (2022-04-26)
+
+
+### Features
+
+* **скроллер:** GBO-24605 поправлена и увелечина задержа в контекстном поиске под таблице проводок ([5d35094](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5d3509411c2de7f70e2956f2d0b2cc0326c102f6))
+
 # [2.4.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.2...v2.4.0-release.3) (2022-04-26)
 
 
