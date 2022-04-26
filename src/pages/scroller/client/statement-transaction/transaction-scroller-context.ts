@@ -2,8 +2,7 @@ import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import type { IGetCounterpartiesResponseDto, IStatementSummaryInfoResponseDto } from 'interfaces/dto';
-import type { QueryStatus } from 'react-query';
-import { DEFAULT_PAGINATION, QUERY_STATUS } from 'stream-constants';
+import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
@@ -52,7 +51,7 @@ export interface ITransactionScrollerContext {
   /** Устанавливает выбранные строки в таблице скроллера. */
   setSelectedRows(value: IStatementTransactionRow[]): void;
   /** Статусы react-query. */
-  status: QueryStatus;
+  status: string;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -84,7 +83,7 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   totalTransactionsAmount: 0,
   selectedRows: [],
   setSelectedRows: noop,
-  status: QUERY_STATUS.idle,
+  status: 'idle',
 };
 
 /** Контекст скроллера "Проводки". */

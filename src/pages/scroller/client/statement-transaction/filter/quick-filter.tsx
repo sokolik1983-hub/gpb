@@ -1,7 +1,11 @@
 import type { FC } from 'react';
-import React, { useContext, useEffect } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { usePrevious } from 'hooks';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
+import { ECO_STATEMENT } from 'stream-constants';
+import { useLocalStorage } from '@platform/services';
+import type { IOption } from '@platform/ui';
 import { Pattern, Fields, Typography, Gap, Horizon, Box } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
@@ -10,20 +14,31 @@ import type { IFormState } from './interfaces';
 import { SearchField } from './search-field';
 import css from './styles.scss';
 
+/** Максимальный размер истории. */
+const MAX_HISTORY_SIZE = 5;
+
 /**
  * Поля фильтра которые всегда видны на форме фильтрации.
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
 export const QuickFilter: FC = () => {
-  const { values } = useFormState<IFormState>();
+  const {
+    values,
+    values: { amountFrom, amountTo, queryString },
+  } = useFormState<IFormState>();
 
-  const { amountFrom, amountTo, queryString } = values;
+  const [valueOfQueryString, setValueOfQueryString] = useState(queryString);
+
+  const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
   const {
     filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters },
     counterparties,
+    status,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+
+  const prevStatus = usePrevious(status);
 
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
@@ -47,12 +62,40 @@ export const QuickFilter: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counterparties]);
 
+  /** Добавление значения в историю поиска по таблице. */
+  const addQueryStringInHistory = useCallback(
+    (value: string) => {
+      const option: IOption = { value, label: value };
+
+      const newHistory = [option, ...historyOptions];
+
+      if (newHistory.length > MAX_HISTORY_SIZE) {
+        newHistory.pop();
+      }
+
+      setHistoryOptions(newHistory);
+    },
+    [historyOptions, setHistoryOptions]
+  );
+
+  /** Метод, возвращающий флаг проверки переданного значения поля истории поиска по списку истории (если нет true). */
+  const isExcludeHistoryOptions = useCallback(value => !historyOptions.some(item => item.value === value), [historyOptions]);
+
+  useEffect(() => {
+    if (valueOfQueryString && isExcludeHistoryOptions(valueOfQueryString) && prevStatus === 'loading' && status === 'success') {
+      addQueryStringInHistory(valueOfQueryString);
+    }
+  }, [addQueryStringInHistory, isExcludeHistoryOptions, prevStatus, valueOfQueryString, status]);
+
+  /** Изменение значения поля поиска по таблице. */
+  const handleSearch = useCallback(value => setValueOfQueryString(value), []);
+
   return (
     <Pattern gap={'MD'}>
       <Pattern.Span size={5}>
         <Horizon>
           {/* Поиск по таблице. */}
-          <SearchField />
+          <SearchField historyOptions={historyOptions} onSearch={handleSearch} />
         </Horizon>
       </Pattern.Span>
       <Pattern.Span size={6}>

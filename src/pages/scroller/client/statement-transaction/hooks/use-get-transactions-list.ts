@@ -2,15 +2,11 @@ import { useMemo } from 'react';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
-import { TRANSACTIONS_REQUEST_STATUS } from 'pages/scroller/client/statement-transaction/filter/constants';
 import { useDebounce } from 'platform-copies/hooks';
-import type { QueryStatus } from 'react-query';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';
-import { QUERY_STATUS } from 'stream-constants';
 import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
-import { useLocalStorage } from '@platform/services';
 import type { IMetaData } from '@platform/services/client';
 
 const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = {
@@ -47,8 +43,6 @@ interface IUseGetStatementListArgs {
 export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGetStatementListArgs) => {
   const { id } = useParams<IUrlParams>();
 
-  const [status, setStatus] = useLocalStorage<QueryStatus>(TRANSACTIONS_REQUEST_STATUS, QUERY_STATUS.IDLE);
-
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
@@ -60,20 +54,13 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
 
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 1500);
 
-  const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError } = useQuery<
+  const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError, status } = useQuery<
     IExpandedCollectionResponse<IStatementTransactionRow>
   >({
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
-    queryFn: () => {
-      setStatus(QUERY_STATUS.LOADING);
-
-      return statementService.getTransactionList(debouncedRequestDto, id);
-    },
-    onSuccess: () => setStatus(QUERY_STATUS.SUCCESS),
-    onError: () => setStatus(QUERY_STATUS.ERROR),
+    queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
     enabled: true,
-    keepPreviousData: true,
     retry: false,
   });
 
