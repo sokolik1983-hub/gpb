@@ -1,3 +1,10 @@
+# [2.4.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.2...v2.4.0-release.3) (2022-04-26)
+
+
+### Bug Fixes
+
+* GBO-25071 поправлено название поля `Счета` на форме запроса выписки ([c8c9279](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c8c927969182eb54e94469b9c2d0bbb5e9ab4068))
+
 # [2.4.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.1...v2.4.0-release.2) (2022-04-25)
 
 
