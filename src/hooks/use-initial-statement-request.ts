@@ -78,14 +78,13 @@ export const useInitialStatementRequest = (): {
   }
 
   // Код 404 не считается ошибкой - пользователь открыл форму для создания первой выписки, и у него нет предыдущих выписок.
-  const allowedState = Boolean(
-    statementRequestError && (Number(statementRequestError?.code) === HTTP_STATUS_CODE.NOT_FOUND || isSuccessStatementRequest)
-  );
+  const allowedState = Number(statementRequestError?.code) === HTTP_STATUS_CODE.NOT_FOUND || isSuccessStatementRequest;
 
   return {
     initialStatementRequest: statementRequest,
     isInitialLoading: isStatementRequestLoading || isPeriodLoading,
-    isInitialError: isStatementRequestLoadingError || isPeriodLoadingError || (!allowedState && isNewStatement),
+    isInitialError:
+      isStatementRequestLoadingError || isPeriodLoadingError || (Boolean(statementRequestError) && !allowedState && isNewStatement),
     isForbidden,
   };
 };
