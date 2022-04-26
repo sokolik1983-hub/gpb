@@ -76,7 +76,7 @@ export const StatementTransactionScrollerPage = () => {
     response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status: httpRequestStatus },
     isTransactionsError,
     isTransactionsFetching,
-    status,
+    fetchedNewTransactions,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
 
   const contextValue: ITransactionScrollerContext = useMemo(
@@ -98,7 +98,7 @@ export const StatementTransactionScrollerPage = () => {
       statementSummaryInfo: info,
       selectedRows,
       setSelectedRows,
-      status,
+      fetchedNewTransactions,
     }),
     [
       hasError,
@@ -120,7 +120,7 @@ export const StatementTransactionScrollerPage = () => {
       totalTransactionsAmount,
       info,
       selectedRows,
-      status,
+      fetchedNewTransactions,
     ]
   );
 

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { usePrevious } from 'hooks';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -54,7 +55,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
 
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 1500);
 
-  const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError, status } = useQuery<
+  const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError, isFetched } = useQuery<
     IExpandedCollectionResponse<IStatementTransactionRow>
   >({
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
@@ -64,5 +65,12 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     retry: false,
   });
 
-  return { response: data, isTransactionsFetching, isTransactionsError, status };
+  const prevIsFetched = usePrevious(isFetched);
+
+  return {
+    response: data,
+    isTransactionsFetching,
+    isTransactionsError,
+    fetchedNewTransactions: !prevIsFetched && isFetched && !isTransactionsError,
+  };
 };

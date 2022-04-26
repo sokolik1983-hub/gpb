@@ -50,8 +50,8 @@ export interface ITransactionScrollerContext {
   selectedRows: IStatementTransactionRow[];
   /** Устанавливает выбранные строки в таблице скроллера. */
   setSelectedRows(value: IStatementTransactionRow[]): void;
-  /** Статусы react-query. */
-  status: string;
+  /** Признак получения новых данных по проводкам с бэка. */
+  fetchedNewTransactions: boolean;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -83,7 +83,7 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   totalTransactionsAmount: 0,
   selectedRows: [],
   setSelectedRows: noop,
-  status: 'idle',
+  fetchedNewTransactions: false,
 };
 
 /** Контекст скроллера "Проводки". */

@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { usePrevious } from 'hooks';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { ECO_STATEMENT } from 'stream-constants';
@@ -35,10 +34,8 @@ export const QuickFilter: FC = () => {
     filterPanel: { onOk, opened },
     tagsPanel: { onClick: expandAdditionalFilters },
     counterparties,
-    status,
+    fetchedNewTransactions,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
-
-  const prevStatus = usePrevious(status);
 
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
@@ -82,10 +79,10 @@ export const QuickFilter: FC = () => {
   const isExcludeHistoryOptions = useCallback(value => !historyOptions.some(item => item.value === value), [historyOptions]);
 
   useEffect(() => {
-    if (valueOfQueryString && isExcludeHistoryOptions(valueOfQueryString) && prevStatus === 'loading' && status === 'success') {
+    if (valueOfQueryString && isExcludeHistoryOptions(valueOfQueryString) && fetchedNewTransactions) {
       addQueryStringInHistory(valueOfQueryString);
     }
-  }, [addQueryStringInHistory, isExcludeHistoryOptions, prevStatus, valueOfQueryString, status]);
+  }, [addQueryStringInHistory, isExcludeHistoryOptions, fetchedNewTransactions, valueOfQueryString]);
 
   /** Изменение значения поля поиска по таблице. */
   const handleSearch = useCallback(value => setValueOfQueryString(value), []);
