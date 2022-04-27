@@ -55,9 +55,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
 
   const debouncedRequestDto: IMetaData = useDebounce(requestDto, 1500);
 
-  const { data = DEFAULT_RESPONSE, isFetching: isTransactionsFetching, isError: isTransactionsError, isFetched } = useQuery<
-    IExpandedCollectionResponse<IStatementTransactionRow>
-  >({
+  const { data = DEFAULT_RESPONSE, isError, isFetched, isFetching } = useQuery<IExpandedCollectionResponse<IStatementTransactionRow>>({
     queryKey: ['@eco/statement', 'transactions', debouncedRequestDto],
     queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
@@ -67,10 +65,5 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
 
   const prevIsFetched = usePrevious(isFetched);
 
-  return {
-    response: data,
-    isTransactionsFetching,
-    isTransactionsError,
-    fetchedNewTransactions: !prevIsFetched && isFetched && !isTransactionsError,
-  };
+  return { data, isError, isFetched, isFetching, fetchedNewTransactions: !prevIsFetched && isFetched && !isError };
 };

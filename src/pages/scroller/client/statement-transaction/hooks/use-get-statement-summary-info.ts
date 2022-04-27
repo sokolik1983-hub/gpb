@@ -9,7 +9,7 @@ import { getUserDeviceInfo } from 'utils';
 export const useGetStatementSummaryInfo = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data, isFetching, isError } = useQuery<IStatementSummaryInfoResponseDto>({
+  const { data, isError, isFetched, isFetching } = useQuery<IStatementSummaryInfoResponseDto>({
     queryKey: ['@eco/statement', 'statement', id],
     queryFn: async () => {
       const userDeviceInfo = await getUserDeviceInfo();
@@ -19,5 +19,5 @@ export const useGetStatementSummaryInfo = () => {
     retry: false,
   });
 
-  return { statementSummaryInfo: data, isStatementSummaryInfoError: isError, isStatementSummaryInfoFetching: isFetching };
+  return { data, isError, isFetched, isFetching };
 };

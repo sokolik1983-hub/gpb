@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerPageLayout, ScrollerHeader, FilterLayout, RouteError } from 'components';
-import { useScrollerPagination } from 'hooks';
+import { useIsFetchedData, useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -62,22 +62,35 @@ export const StatementTransactionScrollerPage = () => {
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
 
   // Вызывается один раз.
-  const { counterparties, isCounterpartiesFetching, isCounterpartiesError } = useGetCounterparties();
+  const {
+    data: counterparties,
+    isError: isCounterpartiesError,
+    isFetched: isCounterpartiesFetched,
+    isFetching: isCounterpartiesFetching,
+  } = useGetCounterparties();
 
-  const { statementSummaryInfo: info, isStatementSummaryInfoError, isStatementSummaryInfoFetching } = useGetStatementSummaryInfo();
+  const {
+    data: statementSummaryInfo,
+    isError: isStatementSummaryInfoError,
+    isFetched: isStatementSummaryInfoFetched,
+    isFetching: isStatementSummaryInfoFetching,
+  } = useGetStatementSummaryInfo();
 
-  const headerProps = useScrollerHeaderProps(info);
+  const headerProps = useScrollerHeaderProps(statementSummaryInfo);
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
   const {
-    response: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status: httpRequestStatus },
-    isTransactionsError,
-    isTransactionsFetching,
+    data: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status: httpRequestStatus },
+    isError: isTransactionsError,
+    isFetched: isTransactionsFetched,
+    isFetching: isTransactionsFetching,
     fetchedNewTransactions,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
+
+  const dataFetched = useIsFetchedData(isCounterpartiesFetched, isTransactionsFetched, isStatementSummaryInfoFetched);
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
@@ -95,7 +108,7 @@ export const StatementTransactionScrollerPage = () => {
       transactions,
       transactionsAmountByFilter,
       totalTransactionsAmount,
-      statementSummaryInfo: info,
+      statementSummaryInfo,
       selectedRows,
       setSelectedRows,
       fetchedNewTransactions,
@@ -118,7 +131,7 @@ export const StatementTransactionScrollerPage = () => {
       transactions,
       transactionsAmountByFilter,
       totalTransactionsAmount,
-      info,
+      statementSummaryInfo,
       selectedRows,
       fetchedNewTransactions,
     ]
@@ -141,7 +154,7 @@ export const StatementTransactionScrollerPage = () => {
   return (
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             AdditionalFilter={AdditionalFilter}
             QuickFilter={QuickFilter}

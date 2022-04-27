@@ -40,7 +40,7 @@ export const useTurnovers = (filterValues: IFormState, sorting: Sorting) => {
     sort: sorting.length > 0 ? convertTableSortingToDto(sorting) : undefined,
   };
 
-  const { data = DEFAULT_TURNOVERS, isFetching: isTurnoversFetching, isError: isTurnoversError } = useQuery<IGetTurnoversResponseDto>({
+  const { data = DEFAULT_TURNOVERS, isError, isFetched, isFetching } = useQuery<IGetTurnoversResponseDto>({
     queryKey: ['@eco/statement', 'turnovers', requestDto],
     queryFn: () => statementService.getTurnovers(requestDto),
     enabled: Boolean(dateTo && dateFrom),
@@ -49,5 +49,5 @@ export const useTurnovers = (filterValues: IFormState, sorting: Sorting) => {
     retry: false,
   });
 
-  return { turnovers: data, isTurnoversFetching, isTurnoversError };
+  return { data, isError, isFetched, isFetching };
 };

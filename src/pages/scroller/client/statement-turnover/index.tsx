@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { ScrollerHeader, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
+import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
@@ -34,9 +34,14 @@ export const StatementTurnoverScrollerPage = () => {
   const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
-  const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
+  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched, isFetching: isAccountsFetching } = useAccounts();
 
-  const { turnovers, isTurnoversError, isTurnoversFetching } = useTurnovers(properlyTypedFilterPanel.values, sorting);
+  const { data: turnovers, isError: isTurnoversError, isFetched: isTurnoversFetched, isFetching: isTurnoversFetching } = useTurnovers(
+    properlyTypedFilterPanel.values,
+    sorting
+  );
+
+  const dataFetched = useIsFetchedData(isAccountsFetched, isTurnoversFetched);
 
   const groupByForRender = useGroupByForRender(properlyTypedFilterPanel.values.groupBy, isTurnoversFetching);
 
@@ -79,7 +84,7 @@ export const StatementTurnoverScrollerPage = () => {
   return (
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
           <Filter />
           <TurnoversTable />
         </ScrollerPageLayout>
