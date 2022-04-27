@@ -10,7 +10,7 @@ import css from './styles.scss';
 
 /** Компонент счета. */
 export const Accounts: React.FC = () => {
-  const { accounts } = useAccounts();
+  const { data: accounts } = useAccounts();
 
   // встраиваем реакцию на изменение параметров для флага "Отдельный файл по каждому счету"
   useSeparateAccountFiles();

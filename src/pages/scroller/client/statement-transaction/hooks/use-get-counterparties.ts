@@ -10,11 +10,11 @@ const DEFAULT_COUNTERPARTY = [];
 export const useGetCounterparties = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data = DEFAULT_COUNTERPARTY, isFetching, isError } = useQuery<IGetCounterpartiesResponseDto[]>({
+  const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<IGetCounterpartiesResponseDto[]>({
     queryKey: ['@eco/statement', 'counterparty', id],
     queryFn: () => statementService.getCounterparties(id),
     retry: false,
   });
 
-  return { counterparties: data, isCounterpartiesError: isError, isCounterpartiesFetching: isFetching };
+  return { data, isError, isFetched, isFetching };
 };

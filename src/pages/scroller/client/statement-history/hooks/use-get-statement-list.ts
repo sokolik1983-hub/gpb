@@ -41,9 +41,7 @@ export const useGetStatementList = ({ filters, sorting, pagination }: IUseGetSta
     ...convertTablePaginationToMetaData(pagination),
   };
 
-  const { data = DEFAULT_RESPONSE, isFetching: isStatementsFetching, isError: isStatementsError } = useQuery<
-    ICollectionResponse<IStatementHistoryRow>
-  >({
+  const { data = DEFAULT_RESPONSE, isError, isFetched, isFetching } = useQuery<ICollectionResponse<IStatementHistoryRow>>({
     queryKey: ['@eco/statement', 'history', requestDto],
     queryFn: () => statementService.getStatementList(requestDto),
     enabled: true,
@@ -52,5 +50,5 @@ export const useGetStatementList = ({ filters, sorting, pagination }: IUseGetSta
     retry: false,
   });
 
-  return { response: data, isStatementsFetching, isStatementsError };
+  return { data, isError, isFetched, isFetching };
 };
