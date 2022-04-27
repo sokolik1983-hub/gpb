@@ -1,3 +1,11 @@
+# [2.4.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.4...v2.4.0-release.5) (2022-04-27)
+
+
+### Features
+
+* **скроллер:** GBO-23704 исправления в отображении спинера при получении всех рестов. ([aabd514](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/aabd514f3e1104cbdb1db4fc57c5768bdabe2131))
+* **скроллер:** GBO-23704 отображение спинера при получении всех данных скроллера ([3a75a54](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3a75a5420424a0c3405d4f882690b07695fc7574))
+
 # [2.4.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.3...v2.4.0-release.4) (2022-04-26)
 
 
