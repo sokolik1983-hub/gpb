@@ -1,3 +1,10 @@
+# [2.4.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.6...v2.4.0-release.7) (2022-04-28)
+
+
+### Features
+
+* **скроллер:** GBO-23351 поправлено условие раскрытия по дефолту второго уровня вложенности ([ad9f611](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ad9f61104a36bc72bba313a56a7f384675b2be7c))
+
 # [2.4.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.5...v2.4.0-release.6) (2022-04-28)
 
 
