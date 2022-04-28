@@ -46,6 +46,8 @@ export const TurnoversTable: FC = () => {
 
   const columns = useMemo(() => getColumns(groupByForRender), [groupByForRender]);
 
+  const organizations = accounts.filter(item => item.groupInfo.groupingType === GROUPING_TYPE.ORGANIZATIONS);
+
   /**
    * Раскрытые строки по-умолчанию.
    */
@@ -58,17 +60,13 @@ export const TurnoversTable: FC = () => {
           acc[i] = true;
         }
 
-        if (
-          [GROUPING_TYPE.ORGANIZATIONS, GROUPING_TYPE.ACCOUNT_TYPE, GROUPING_TYPE.BRANCHES, GROUPING_TYPE.CURRENCIES].includes(
-            groupInfo.groupingType
-          )
-        ) {
-          acc[i] = true;
+        if ([GROUPING_TYPE.ACCOUNT_TYPE, GROUPING_TYPE.BRANCHES, GROUPING_TYPE.CURRENCIES].includes(groupInfo.groupingType)) {
+          acc[i] = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES ? organizations.length === 1 : true;
         }
 
         return acc;
       }, {}),
-    [accounts]
+    [accounts, groupByForRender, organizations.length]
   );
 
   const initialState = useMemo(
