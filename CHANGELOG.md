@@ -1,3 +1,10 @@
+# [2.4.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.5...v2.4.0-release.6) (2022-04-28)
+
+
+### Bug Fixes
+
+* GBO-25175 диапазон дат вынесен в компонент `DateRange` и заиспользован на формах ([770f90f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/770f90fe191ffee94fba1cb4399847f4d29dbe7f))
+
 # [2.4.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.4...v2.4.0-release.5) (2022-04-27)
 
 
