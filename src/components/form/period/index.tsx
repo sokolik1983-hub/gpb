@@ -16,13 +16,13 @@ export const Period: React.FC = () => {
 
   return (
     <Row label={FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE]}>
-      <Horizon>
-        <Box className={css.periodTypeWrapper}>
+      <Box className={css.period}>
+        <Horizon>
           <PeriodType />
-        </Box>
-        <Gap />
-        <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} onChange={onChangeDate} />
-      </Horizon>
+          <Gap />
+          <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} onChange={onChangeDate} />
+        </Horizon>
+      </Box>
     </Row>
   );
 };
