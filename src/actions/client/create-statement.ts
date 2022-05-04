@@ -2,6 +2,7 @@ import { TYPE } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
+import type { IFormState } from 'stream-constants/form';
 import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils';
 import type { ValidationError } from 'yup';
 import { to, singleAction } from '@platform/core';
@@ -20,7 +21,7 @@ export const createStatement: IActionConfig<typeof context, string> = {
     // если запрос создаётся не через форму, то первая найденная ошибка отображается в диалоге
     if (doc.type === TYPE.HIDDEN_VIEW) {
       const [_, validationError] = (await to(statementRequestValidationSchema.validate(doc, { abortEarly: true }))) as [
-        ICreateRequestStatementDto,
+        IFormState,
         ValidationError
       ];
 

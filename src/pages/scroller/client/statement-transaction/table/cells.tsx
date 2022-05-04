@@ -1,11 +1,11 @@
 import type { FC } from 'react';
-import React, { useState, useEffect, useRef, useMemo, useContext } from 'react';
+import React, { useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
-import clamp from 'clamp-js-main';
 import { HightlightText, StopPropagation } from 'components';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
+import { LinesEllipsis } from 'pages/scroller/client/statement-transaction/table/lines-ellipsis';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
 import { getActiveActionButtons, formatToMask } from 'utils';
@@ -141,31 +141,9 @@ export const Income: FC<TransactionCellProps> = ({ value }) => {
 Income.displayName = 'Income';
 
 /** Назначение платежа. */
-export const Purpose: FC<TransactionCellProps> = ({ value }) => {
-  const { purpose } = value;
-
+export const Purpose: FC<TransactionCellProps> = ({ value: { purpose } }) => {
   const { filterPanel } = useContext(TransactionScrollerContext);
-
   const { queryString } = filterPanel.values;
-
-  const [isShouldShowTooltip, setIsShouldShowTooltip] = useState<boolean>(false);
-  const [clampedText, setClampedText] = useState('');
-
-  const clampedElementRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (clampedElementRef.current) {
-      clamp(clampedElementRef.current, { clamp: 2, useNativeClamp: false });
-
-      const textContent = clampedElementRef.current.innerText;
-
-      /** Если текст оканчивается на символ '…', то значит он был усечён, и надо отображать тултип. */
-      if (textContent.match(/…$/)) {
-        setIsShouldShowTooltip(true);
-        setClampedText(textContent);
-      }
-    }
-  }, []);
 
   return (
     <WithInfoTooltip
@@ -175,15 +153,13 @@ export const Purpose: FC<TransactionCellProps> = ({ value }) => {
     >
       {ref => (
         <Typography.SmallText innerRef={ref}>
-          {/*
-            Компонент WithInfoTooltip всегда отображает тултип при наведении,
-            если в нём нет элемента со стилем "text-overflow: ellipsis" (поэтому передаётся undefined).
-            А если такой элемент есть, то отображает только если содержимое не помещается в элемент,
-            т.к. содержимое усечено, то оно помещается в элемент, и тултип не отображается.
-          */}
-          <div ref={clampedElementRef} style={{ textOverflow: isShouldShowTooltip ? undefined : 'ellipsis', overflow: 'hidden' }}>
-            <HightlightText searchWords={queryString} textToHightlight={clampedText || purpose} />
-          </div>
+          <LinesEllipsis maxLines={2}>
+            {(elementRef, clamped) => (
+              <div ref={elementRef} style={{ textOverflow: clamped ? undefined : 'ellipsis', overflow: 'hidden' }}>
+                <HightlightText searchWords={queryString} textToHightlight={purpose} />
+              </div>
+            )}
+          </LinesEllipsis>
         </Typography.SmallText>
       )}
     </WithInfoTooltip>

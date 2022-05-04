@@ -5,7 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'dateFieldWrapper': string;
+    'accordion': string;
+    'panel': string;
   }
 }
 

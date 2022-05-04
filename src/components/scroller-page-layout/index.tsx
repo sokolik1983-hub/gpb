@@ -21,25 +21,22 @@ export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({
   isLoading = false,
   children,
 }) => (
-  <Box className={cn(css.important, css.scrollerPageWrapper)}>
-    {navigationLine}
-    <Separator />
-    {isLoading ? (
-      <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={isLoading} />
-    ) : (
-      <>
-        {categoryTabsProps && (
-          <>
-            <Box className={css.categoryTabsWrapper}>
-              <CategoryTabs {...categoryTabsProps} />
-            </Box>
-            <Separator />
-          </>
-        )}
-        {children}
-      </>
-    )}
-  </Box>
+  <>
+    {isLoading && <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={isLoading} />}
+    <Box className={cn(css.scrollerLayoutContent, { [css.loading]: isLoading })}>
+      {navigationLine}
+      <Separator />
+      {categoryTabsProps && (
+        <>
+          <Box className={css.categoryTabsWrapper}>
+            <CategoryTabs {...categoryTabsProps} />
+          </Box>
+          <Separator />
+        </>
+      )}
+      {children}
+    </Box>
+  </>
 );
 
 ScrollerPageLayout.displayName = 'ScrollerPageLayout';

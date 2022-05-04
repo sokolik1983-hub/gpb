@@ -1,3 +1,62 @@
+# [2.4.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.6...v2.4.0-release.7) (2022-04-28)
+
+
+### Features
+
+* **скроллер:** GBO-23351 поправлено условие раскрытия по дефолту второго уровня вложенности ([ad9f611](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ad9f61104a36bc72bba313a56a7f384675b2be7c))
+
+# [2.4.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.5...v2.4.0-release.6) (2022-04-28)
+
+
+### Bug Fixes
+
+* GBO-25175 диапазон дат вынесен в компонент `DateRange` и заиспользован на формах ([770f90f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/770f90fe191ffee94fba1cb4399847f4d29dbe7f))
+
+# [2.4.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.4...v2.4.0-release.5) (2022-04-27)
+
+
+### Features
+
+* **скроллер:** GBO-23704 исправления в отображении спинера при получении всех рестов. ([aabd514](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/aabd514f3e1104cbdb1db4fc57c5768bdabe2131))
+* **скроллер:** GBO-23704 отображение спинера при получении всех данных скроллера ([3a75a54](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3a75a5420424a0c3405d4f882690b07695fc7574))
+
+# [2.4.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.3...v2.4.0-release.4) (2022-04-26)
+
+
+### Features
+
+* **скроллер:** GBO-24605 поправлена и увелечина задержа в контекстном поиске под таблице проводок ([5d35094](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5d3509411c2de7f70e2956f2d0b2cc0326c102f6))
+
+# [2.4.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.2...v2.4.0-release.3) (2022-04-26)
+
+
+### Bug Fixes
+
+* GBO-25071 поправлено название поля `Счета` на форме запроса выписки ([c8c9279](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c8c927969182eb54e94469b9c2d0bbb5e9ab4068))
+
+# [2.4.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0-release.1...v2.4.0-release.2) (2022-04-25)
+
+
+### Bug Fixes
+
+* GBO-24040 поправлено условие ошибки подгрузки данных для формы запроса выписки ([b3aec4d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b3aec4d2dfa7a31cbab1831642b29d0747310078))
+* GBO-25175 поправлена сетка фильтра скроллера оборотов ([cd822f7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cd822f71e60634236e011feaf28ae9e20f975cce))
+
+# [2.4.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.3.0...v2.4.0-release.1) (2022-04-21)
+
+
+### Bug Fixes
+
+* GBO-24407 поправлены стили мультиселекта контрагентов ([f46e49a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f46e49a40cb03755b3484afb48848286469a2031))
+* **визард:** GBO-24040 сброс кеша для запросов со счетами ([566ca91](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/566ca91c12da11aad1faef62dc2e0486ceb5ee9d))
+* **скроллер:** GBO-20566 исправлено обрезание длинного текста ([f177af7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f177af7e4541c726e19bace87e5e258eb68f4023))
+
+
+### Features
+
+* GBO-23346 добавлен аккордеон для скроллера оборотов ([07d8575](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/07d8575f753376365e842c526fcfa2a667426ad8))
+* **скроллер:** GBO-24361 изменен контракт для `/statement/summary` ([97e700b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/97e700bb7d428a6bb1baf46eb09096b9b4ac3502))
+
 # [2.3.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.2.0...v2.3.0) (2022-04-17)
 
 

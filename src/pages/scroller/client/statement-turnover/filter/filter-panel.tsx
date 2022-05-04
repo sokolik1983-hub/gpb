@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
-import cn from 'classnames';
 import { DatePeriodField, AccountsField } from 'components';
+import { DateRange } from 'components/form/date-range';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
-import { Fields, Pattern, Adjust, Horizon, Box, Typography } from '@platform/ui';
+import { Pattern, Adjust } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS } from './constants';
-import css from './styles.scss';
 
 /** Фильтры скроллера. */
 export const FilterPanel = () => {
@@ -46,7 +45,7 @@ export const FilterPanel = () => {
       <Pattern.Span size={6}>
         <Adjust pad={[null, 'XS', null, null]}>
           <Pattern>
-            <Pattern.Span size={5}>
+            <Pattern.Span size={4}>
               <Adjust pad={[null, 'X2S', null, null]}>
                 {/* Выбор периода. */}
                 <DatePeriodField
@@ -57,19 +56,9 @@ export const FilterPanel = () => {
                 />
               </Adjust>
             </Pattern.Span>
-            <Pattern.Span size={7}>
+            <Pattern.Span size={8}>
               <Adjust pad={[null, null, null, 'X2S']}>
-                <Horizon>
-                  <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, 'X2S', null, null]))}>
-                    {/* Дата от. */}
-                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} onChange={handleChangeDate} />
-                  </Box>
-                  <Typography.Text className={css.dateDelimiter}>–</Typography.Text>
-                  <Box className={cn(css.dateFieldWrapper, Adjust.getPadClass([null, null, null, 'X2S']))}>
-                    {/* Дата по. */}
-                    <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} onChange={handleChangeDate} />
-                  </Box>
-                </Horizon>
+                <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} onChange={handleChangeDate} />
               </Adjust>
             </Pattern.Span>
           </Pattern>

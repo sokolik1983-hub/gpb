@@ -24,13 +24,8 @@
 }
 
 .groupingRow {
-  padding: 24px 8px 12px;
+  padding: 14px 8px 12px;
   background-color: #fff;
-}
-
-.groupingRowByAccount {
-  background-color: #fff;
-  border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
 }
 
 .borderedRow {
@@ -41,8 +36,24 @@
   cursor: pointer;
 }
 
+.thirdLevelLine {
+  margin-left: 52px;
+}
+
+.secondLevelLine {
+  margin-left: 42px;
+}
+
+.thirdLevelCell {
+  padding-left: 54px;
+}
+
+.secondLevelCell {
+  padding-left: 44px;
+}
+
 .cell {
-  padding: 12px 16px;
+  padding: 8px 16px;
   &:first-child {
     padding-left: 8px;
   }

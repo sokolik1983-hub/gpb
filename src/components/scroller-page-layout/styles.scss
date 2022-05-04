@@ -1,4 +1,4 @@
-.important.scrollerPageWrapper {
+.scrollerLayoutContent {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -9,4 +9,8 @@
 .categoryTabsWrapper {
   flex: 0 0 auto;
   padding: 0 32px;
+}
+
+.loading {
+  display: none;
 }
