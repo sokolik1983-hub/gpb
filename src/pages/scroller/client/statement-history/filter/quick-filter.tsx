@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import React, { useContext, useEffect } from 'react';
 import { AccountsField } from 'components';
+import { DateRange } from 'components/form/date-range';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { isValidDateRange } from 'utils';
-import { Pattern, Box, Typography, Gap, Fields, Horizon } from '@platform/ui';
+import { Pattern, Typography, Gap, Horizon, Font, FONT_LINE } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
-import css from './styles.scss';
 
 /**
  * Поля фильтра которые всегда видны на форме фильтрации.
@@ -53,25 +53,17 @@ export const QuickFilter: FC = () => {
 
   return (
     <Pattern>
-      <Pattern.Span size={6}>
+      <Pattern.Span size={7}>
         <Horizon>
-          <Typography.P fill={'FAINT'}>{locale.historyScroller.filter.labels.date}</Typography.P>
+          <Font line={FONT_LINE.NOWRAP}>
+            <Typography.P fill={'FAINT'}>{locale.historyScroller.filter.labels.date}</Typography.P>
+          </Font>
           <Gap.XS />
-          <Box className={css.dateFieldWrapper}>
-            {/* Дата с */}
-            <Fields.Date extraSmall name={FORM_FIELDS.DATE_FROM} />
-          </Box>
-          <Gap.X2S />
-          <Typography.Text>–</Typography.Text>
-          <Gap.X2S />
-          <Box className={css.dateFieldWrapper}>
-            {/* Дата по */}
-            <Fields.Date extraSmall name={FORM_FIELDS.DATE_TO} />
-          </Box>
+          <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} />
           <Gap />
         </Horizon>
       </Pattern.Span>
-      <Pattern.Span size={6}>
+      <Pattern.Span size={5}>
         {/* Выбор счетов. */}
         <AccountsField
           accounts={accounts}

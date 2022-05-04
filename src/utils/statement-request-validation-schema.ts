@@ -1,20 +1,20 @@
 import type { DATE_PERIODS } from 'interfaces';
 import type { OPERATIONS } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
-import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { getDateRangeValidationScheme } from 'schemas';
 import { FORM_FIELDS, FORM_FIELD_LABELS } from 'stream-constants/form';
+import type { IFormState } from 'stream-constants/form';
 import type { SchemaOf } from 'yup';
 import { object, string, array, mixed } from 'yup';
 import { pathGenerator } from '@platform/core';
 import { getEmptyFieldErrorMessage } from './validation';
 
 /** Возвращает путь до поля в объекте. Используется для улучшения типизации. */
-export const getPath = pathGenerator<ICreateRequestStatementDto>();
+export const getPath = pathGenerator<IFormState>();
 
 /** Поля которые необходимо валидировать при создании "Запроса выписки". */
-type FieldsToValidate = Pick<ICreateRequestStatementDto, 'accountsIds' | 'email' | 'operations' | 'periodType'>;
+type FieldsToValidate = Pick<IFormState, 'accountIds' | 'email' | 'operations' | 'periodType'>;
 
 /**
  * Схема валидации диапазона дат.
@@ -32,7 +32,7 @@ export const statementRequestValidationSchema: SchemaOf<FieldsToValidate> = obje
     .max(100, locale.errors.emailLengthExceeded)
     .when(getPath('action'), { is: action => action === ACTION.SEND_TO_EMAIL, then: string().required(locale.errors.emailRequired) }),
   periodType: mixed<DATE_PERIODS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE])),
-  accountsIds: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS])),
+  accountIds: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS])),
   operations: mixed<OPERATIONS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.OPERATION])),
   dateFrom: string().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_FROM])),
   dateTo: string().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.DATE_TO])),

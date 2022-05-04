@@ -2,7 +2,7 @@ import { TRANSACTION_TYPES } from 'interfaces';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
-import { EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
+import { ECO_STATEMENT, EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { parseCounterparty } from 'utils';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
@@ -108,3 +108,5 @@ export const TRANSACTION_TYPE_OPTIONS: Array<IOption<TRANSACTION_TYPES | typeof 
   { value: TRANSACTION_TYPES.INCOME, label: TRANSACTION_TYPE_LABELS[TRANSACTION_TYPES.INCOME] },
   { value: TRANSACTION_TYPES.OUTCOME, label: TRANSACTION_TYPE_LABELS[TRANSACTION_TYPES.OUTCOME] },
 ];
+
+export const TRANSACTIONS_REQUEST_STATUS = `${ECO_STATEMENT}/transactionsRequestStatus`;

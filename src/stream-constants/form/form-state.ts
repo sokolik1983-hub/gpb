@@ -21,7 +21,7 @@ export interface IFormState {
   documentsSetParams: string[];
   debitParams: string[];
   creditParams: string[];
-  email: string;
+  email?: string;
   /** Действие. */
   action?: ACTION;
 }

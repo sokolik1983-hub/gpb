@@ -39,7 +39,7 @@ export const GroupingPanel = () => {
 
   const groupingReport = useMemo(() => computeGroupingReport(accounts, groupByForRender), [accounts, groupByForRender]);
 
-  return (
+  return accounts.length > 0 ? (
     <Box className={css.groupingPanelWrapper}>
       <Box className={cn(css.important, css.groupingLeftColumn)}>
         {/* Результаты группировки. */}
@@ -58,7 +58,7 @@ export const GroupingPanel = () => {
         </Box>
       </Box>
     </Box>
-  );
+  ) : null;
 };
 
 GroupingPanel.displayName = 'GroupingPanel';

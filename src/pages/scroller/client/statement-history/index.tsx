@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination } from 'hooks';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchedData } from 'hooks';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
@@ -47,13 +47,16 @@ export const StatementHistoryScrollerPage = () => {
   const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
-  const { accounts, isAccountsError, isAccountsFetching } = useAccounts();
+  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched, isFetching: isAccountsFetching } = useAccounts();
 
   const {
-    response: { data: statements, total: totalStatementsAmount },
-    isStatementsError,
-    isStatementsFetching,
+    data: { data: statements, total: totalStatementsAmount },
+    isError: isStatementsError,
+    isFetched: isStatementsFetched,
+    isFetching: isStatementsFetching,
   } = useGetStatementList({ filters: filterValues, sorting, pagination });
+
+  const dataFetched = useIsFetchedData(isAccountsFetched, isStatementsFetched);
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
@@ -100,7 +103,7 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} navigationLine={<ScrollerHeader {...headerProps} />}>
+        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
           <FilterLayout
             AdditionalFilter={AdditionalFilter}
             QuickFilter={QuickFilter}
