@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
+import { useWithPdfEsign } from 'components/form/common/use-with-pdf-esign';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
 import { DEBIT_PARAMS, FormContext, FORM_FIELDS, CREDIT_PARAMS } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
-import { getDefaultCreationParamsOptions } from 'utils';
+import { defaultCreationParamsOptions } from 'utils';
 import {
   alwaysSendParamCasesFromUI,
   getHideEsignCases,
@@ -20,6 +21,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
   const { values } = useFormState<IFormState>();
 
   const [options, setOptions] = useState<ICheckboxOption[]>([]);
+  const [withPdfEsignOption] = useWithPdfEsign();
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
@@ -27,8 +29,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     if (withSign) {
       change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
     }
-
-    const defaultCreationParamsOptions = getDefaultCreationParamsOptions(useCase);
 
     const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
@@ -47,10 +47,17 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         }
-        case CREATION_PARAMS.WITH_SIGN: {
+        case CREATION_PARAMS.WITH_PDF_SIGN: {
           if (isPdf && (!useCase || (useCase && !getHideEsignCases(action!).includes(useCase)))) {
-            acc.push(x);
+            acc.push(withPdfEsignOption);
           }
+
+          break;
+        }
+        case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
+          const disabled = !useCase && withSign;
+
+          acc.push({ ...x, disabled });
 
           break;
         }
@@ -63,7 +70,8 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     }, []);
 
     setOptions(newOptions);
-  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign, withPdfEsignOption.disabled]);
 
   useEffect(() => {
     if (!withDocumentsSet) {
