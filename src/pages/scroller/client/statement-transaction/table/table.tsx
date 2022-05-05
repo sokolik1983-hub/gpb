@@ -20,7 +20,7 @@ import css from './styles.scss';
 export const Table: FC = () => {
   const {
     transactions,
-    isLoading,
+    transactionsUpdating,
     sorting,
     setSorting,
     pagination,
@@ -117,8 +117,8 @@ export const Table: FC = () => {
       </Box>
       {/* Таблица. */}
       <ScrollerTableView
-        isLoading={isLoading}
         isVisibleOnlySelectedRows={isVisibleOnlySelectedRows && selectedRows.length > 0}
+        loading={transactionsUpdating}
         placeholderLabel={locale.transactionsScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}

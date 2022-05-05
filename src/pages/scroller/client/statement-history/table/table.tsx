@@ -15,7 +15,7 @@ import css from './styles.scss';
 
 /** Таблица скроллера истории запросов. */
 export const Table: FC = () => {
-  const { statements, isLoading, totalStatementsAmount, sorting, setSorting, pagination, setPagination } = useContext(
+  const { statements, statementsUpdating, totalStatementsAmount, sorting, setSorting, pagination, setPagination } = useContext(
     HistoryScrollerContext
   );
 
@@ -76,7 +76,7 @@ export const Table: FC = () => {
       </Box>
       {/* Таблица. */}
       <ScrollerTableView
-        isLoading={isLoading}
+        loading={statementsUpdating}
         placeholderLabel={locale.historyScroller.table.placeholder}
         setPagination={setPagination}
         tableInstance={tableInstance}

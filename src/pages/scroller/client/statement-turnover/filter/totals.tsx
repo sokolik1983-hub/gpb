@@ -10,7 +10,7 @@ import css from './styles.scss';
 export const Totals: FC = () => {
   const {
     turnovers: { total },
-    isLoading,
+    turnoversUpdating,
   } = useContext(TurnoverScrollerContext);
 
   const [isAllTotalVisible, toggleIsAllTotalVisible] = useToggle(false);
@@ -73,7 +73,7 @@ export const Totals: FC = () => {
             </Box>
           </Box>
         ))}
-        {isLoading && <ScrollerLoadingOverlay />}
+        {turnoversUpdating && <ScrollerLoadingOverlay />}
       </Box>
 
       {/* Кнопка управления видимостью строк. */}

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ScrollerPageLayout, ScrollerHeader, FilterLayout, RouteError } from 'components';
+import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError } from 'components';
 import { useIsFetchedData, useScrollerPagination } from 'hooks';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
@@ -48,7 +48,6 @@ export const StatementTransactionScrollerPage = () => {
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
 
   const fields = getFields(entrySourceView);
@@ -62,18 +61,12 @@ export const StatementTransactionScrollerPage = () => {
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
 
   // Вызывается один раз.
-  const {
-    data: counterparties,
-    isError: isCounterpartiesError,
-    isFetched: isCounterpartiesFetched,
-    isFetching: isCounterpartiesFetching,
-  } = useGetCounterparties();
+  const { data: counterparties, isError: isCounterpartiesError, isFetched: isCounterpartiesFetched } = useGetCounterparties();
 
   const {
     data: statementSummaryInfo,
     isError: isStatementSummaryInfoError,
     isFetched: isStatementSummaryInfoFetched,
-    isFetching: isStatementSummaryInfoFetching,
   } = useGetStatementSummaryInfo();
 
   const headerProps = useScrollerHeaderProps(statementSummaryInfo);
@@ -90,14 +83,16 @@ export const StatementTransactionScrollerPage = () => {
     fetchedNewTransactions,
   } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
 
-  const dataFetched = useIsFetchedData(isCounterpartiesFetched, isTransactionsFetched, isStatementSummaryInfoFetched);
+  const counterpartiesFetched = useIsFetchedData(isCounterpartiesFetched);
+  const transactionsFetched = useIsFetchedData(isTransactionsFetched);
+  const statementSummaryInfoFetched = useIsFetchedData(isStatementSummaryInfoFetched);
+  const dataFetched = counterpartiesFetched && transactionsFetched && statementSummaryInfoFetched;
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
       hasError: hasError || isCounterpartiesError || isTransactionsError || isStatementSummaryInfoError,
       setHasError,
-      isLoading: isLoading || isCounterpartiesFetching || isTransactionsFetching || isStatementSummaryInfoFetching,
-      setIsLoading,
+      transactionsUpdating: transactionsFetched && isTransactionsFetching,
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
       counterparties,
@@ -118,10 +113,8 @@ export const StatementTransactionScrollerPage = () => {
       isCounterpartiesError,
       isTransactionsError,
       isStatementSummaryInfoError,
-      isLoading,
-      isCounterpartiesFetching,
+      transactionsFetched,
       isTransactionsFetching,
-      isStatementSummaryInfoFetching,
       properlyTypedFilterPanel,
       tagsPanel,
       counterparties,
@@ -154,20 +147,26 @@ export const StatementTransactionScrollerPage = () => {
   return (
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
-          <FilterLayout
-            AdditionalFilter={AdditionalFilter}
-            QuickFilter={QuickFilter}
-            TagsPanel={TagsPanel}
-            additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-            filterFields={fields}
-            filterState={filterPanel}
-            tagsState={tagsPanel}
-            validate={validate(validationSchema)}
-          />
-          <StatementInfo />
-          <Table />
-          {selectedRows.length > 0 && <Footer />}
+        <ScrollerPageLayout headerProps={{ ...headerProps, loading: !statementSummaryInfoFetched }} loading={!dataFetched}>
+          <ContentLoader height={58} loading={!counterpartiesFetched}>
+            <FilterLayout
+              AdditionalFilter={AdditionalFilter}
+              QuickFilter={QuickFilter}
+              TagsPanel={TagsPanel}
+              additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+              filterFields={fields}
+              filterState={filterPanel}
+              tagsState={tagsPanel}
+              validate={validate(validationSchema)}
+            />
+          </ContentLoader>
+          <ContentLoader height={136} loading={!statementSummaryInfoFetched}>
+            <StatementInfo />
+          </ContentLoader>
+          <ContentLoader loading={!transactionsFetched}>
+            <Table />
+            {selectedRows.length > 0 && <Footer />}
+          </ContentLoader>
         </ScrollerPageLayout>
       </MainLayout>
     </TransactionScrollerContext.Provider>

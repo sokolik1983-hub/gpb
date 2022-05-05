@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ScrollerHeader, FilterLayout, ScrollerPageLayout } from 'components';
+import { ContentLoader, FilterLayout, ScrollerPageLayout } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchedData } from 'hooks';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
@@ -30,7 +30,6 @@ export const StatementHistoryScrollerPage = () => {
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
   const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
     fields,
@@ -47,7 +46,7 @@ export const StatementHistoryScrollerPage = () => {
   const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
-  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched, isFetching: isAccountsFetching } = useAccounts();
+  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched } = useAccounts();
 
   const {
     data: { data: statements, total: totalStatementsAmount },
@@ -56,14 +55,15 @@ export const StatementHistoryScrollerPage = () => {
     isFetching: isStatementsFetching,
   } = useGetStatementList({ filters: filterValues, sorting, pagination });
 
-  const dataFetched = useIsFetchedData(isAccountsFetched, isStatementsFetched);
+  const accountsFetched = useIsFetchedData(isAccountsFetched);
+  const statementsFetched = useIsFetchedData(isStatementsFetched);
+  const dataFetched = accountsFetched && statementsFetched;
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
       hasError: hasError || isAccountsError || isStatementsError,
       setHasError,
-      isLoading: isLoading || isAccountsFetching || isStatementsFetching,
-      setIsLoading,
+      statementsUpdating: statementsFetched && isStatementsFetching,
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
       accounts,
@@ -78,8 +78,6 @@ export const StatementHistoryScrollerPage = () => {
       accounts,
       hasError,
       isAccountsError,
-      isAccountsFetching,
-      isLoading,
       isStatementsError,
       isStatementsFetching,
       pagination,
@@ -87,6 +85,7 @@ export const StatementHistoryScrollerPage = () => {
       setPagination,
       sorting,
       statements,
+      statementsFetched,
       tagsPanel,
       totalStatementsAmount,
     ]
@@ -103,18 +102,22 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
-          <FilterLayout
-            AdditionalFilter={AdditionalFilter}
-            QuickFilter={QuickFilter}
-            TagsPanel={TagsPanel}
-            additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-            filterFields={fields}
-            filterState={filterPanel}
-            tagsState={tagsPanel}
-            validate={validate(validationSchema)}
-          />
-          <Table />
+        <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
+          <ContentLoader height={58} loading={!accountsFetched}>
+            <FilterLayout
+              AdditionalFilter={AdditionalFilter}
+              QuickFilter={QuickFilter}
+              TagsPanel={TagsPanel}
+              additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+              filterFields={fields}
+              filterState={filterPanel}
+              tagsState={tagsPanel}
+              validate={validate(validationSchema)}
+            />
+          </ContentLoader>
+          <ContentLoader loading={!statementsFetched}>
+            <Table />
+          </ContentLoader>
         </ScrollerPageLayout>
       </MainLayout>
     </HistoryScrollerContext.Provider>
