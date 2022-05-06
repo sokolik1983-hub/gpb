@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { ScrollerHeader, ScrollerPageLayout } from 'components';
+import { ContentLoader, ScrollerPageLayout } from 'components';
 import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
@@ -34,14 +34,16 @@ export const StatementTurnoverScrollerPage = () => {
   const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
-  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched, isFetching: isAccountsFetching } = useAccounts();
+  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched } = useAccounts();
 
   const { data: turnovers, isError: isTurnoversError, isFetched: isTurnoversFetched, isFetching: isTurnoversFetching } = useTurnovers(
     properlyTypedFilterPanel.values,
     sorting
   );
 
-  const dataFetched = useIsFetchedData(isAccountsFetched, isTurnoversFetched);
+  const accountsFetched = useIsFetchedData(isAccountsFetched);
+  const turnoversFetched = useIsFetchedData(isTurnoversFetched);
+  const dataFetched = accountsFetched && turnoversFetched;
 
   const groupByForRender = useGroupByForRender(properlyTypedFilterPanel.values.groupBy, isTurnoversFetching);
 
@@ -49,7 +51,7 @@ export const StatementTurnoverScrollerPage = () => {
     () => ({
       hasError: hasError || isTurnoversError || isAccountsError,
       setHasError,
-      isLoading: isLoading || isTurnoversFetching || isAccountsFetching,
+      turnoversUpdating: isLoading || (turnoversFetched && isTurnoversFetching),
       setIsLoading,
       filterPanel: properlyTypedFilterPanel,
       accounts,
@@ -59,14 +61,14 @@ export const StatementTurnoverScrollerPage = () => {
       groupByForRender,
     }),
     [
+      hasError,
+      isTurnoversError,
+      isAccountsError,
+      isLoading,
+      turnoversFetched,
+      isTurnoversFetching,
       properlyTypedFilterPanel,
       accounts,
-      hasError,
-      isAccountsError,
-      isAccountsFetching,
-      isLoading,
-      isTurnoversError,
-      isTurnoversFetching,
       sorting,
       turnovers,
       groupByForRender,
@@ -84,9 +86,13 @@ export const StatementTurnoverScrollerPage = () => {
   return (
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabsProps={tabsProps} isLoading={!dataFetched} navigationLine={<ScrollerHeader {...headerProps} />}>
-          <Filter />
-          <TurnoversTable />
+        <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
+          <ContentLoader height={182} loading={!accountsFetched}>
+            <Filter />
+          </ContentLoader>
+          <ContentLoader loading={!turnoversFetched}>
+            <TurnoversTable />
+          </ContentLoader>
         </ScrollerPageLayout>
       </MainLayout>
     </TurnoverScrollerContext.Provider>

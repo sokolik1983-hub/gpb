@@ -39,7 +39,7 @@ export const TurnoversTable: FC = () => {
   const {
     setSorting,
     sorting,
-    isLoading,
+    turnoversUpdating,
     groupByForRender,
     turnovers: { accounts = [] },
   } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
@@ -109,16 +109,16 @@ export const TurnoversTable: FC = () => {
 
   let tableContent: React.ReactNode;
 
-  if (!isLoading && accounts.length === 0) {
+  if (!turnoversUpdating && accounts.length === 0) {
     tableContent = <Placeholder />;
-  } else if (isLoading && rows.length === 0) {
+  } else if (turnoversUpdating && rows.length === 0) {
     tableContent = <ScrollerSpinnerPlaceholder />;
   } else {
     tableContent = (
       // key используется, чтобы размонтировать компонент, когда приходят данные для новой страницы.
       // Это нужно для того, чтобы сбросить стейт, контекста.
       // Если этого не делать, то массивы рефов на строки таблицы скроллера, будут содержать старые или дублирующмеся элементы.
-      <StickyRowsProvider key={String(isLoading)}>
+      <StickyRowsProvider key={String(turnoversUpdating)}>
         <TableBody prepareRow={prepareRow} rows={rows} {...getTableBodyProps()} />
       </StickyRowsProvider>
     );
