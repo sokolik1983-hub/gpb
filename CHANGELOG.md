@@ -1,3 +1,10 @@
+# [2.5.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0-release.1...v2.5.0-release.2) (2022-05-13)
+
+
+### Features
+
+* **скроллер:** GBO-25523 рендер элементов скроллера по мере получения необходимых данных ([afd4083](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/afd40833017ae8b2423da87c16150a360539c32d))
+
 # [2.5.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0...v2.5.0-release.1) (2022-05-05)
 
 
