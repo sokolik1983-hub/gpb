@@ -64,7 +64,8 @@ export const ScrollerTableView = <Row extends RecordCell>({
         <table {...getTableProps({ role: ROLE.GRID })} className={cn(css.table, css.layoutScrollWrapper)} {...getTableAccessibilityProps()}>
           <TableHeader disableMultiSort={disableMultiSort} headerGroups={headerGroups} />
           {loading && <ScrollerLoadingOverlay />}
-          {rows.length > 0 ? (
+          {rows.length === 0 && !loading && <ScrollerPlaceholder label={placeholderLabel} />}
+          {rows.length > 0 && (
             <>
               <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
                 <TableBody isVisibleOnlySelectedRows={isVisibleOnlySelectedRows} tableInstance={tableInstance} onClick={onClick} />
@@ -75,8 +76,6 @@ export const ScrollerTableView = <Row extends RecordCell>({
               <Gap.X2L />
               {isScrollButtonVisible && <ScrollButton Icon={ScrollIcon} onClick={handleScrollButtonClick} />}
             </>
-          ) : (
-            <ScrollerPlaceholder label={placeholderLabel} />
           )}
         </table>
       </AccessibilityContext.Provider>

@@ -60,6 +60,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
     queryFn: () => statementService.getTransactionList(debouncedRequestDto, id),
     cacheTime: 0,
     enabled: true,
+    keepPreviousData: true,
     retry: false,
   });
 
