@@ -5,8 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'categoryTabsWrapper': string;
-    'loading': string;
+    'categoryTabs': string;
     'scrollerLayoutContent': string;
   }
 }

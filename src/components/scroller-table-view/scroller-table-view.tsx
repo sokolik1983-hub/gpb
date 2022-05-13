@@ -1,8 +1,8 @@
 import React from 'react';
 import cn from 'classnames';
 import { PAGE_SIZES, Pagination } from 'components/pagination';
+import { ScrollerLoadingOverlay } from 'components/scroller-loading-overlay';
 import { ScrollerPlaceholder } from 'components/scroller-placeholder';
-import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
 import { AccessibilityContext, useAccessibility } from 'components/scroller-table-view/accessibility';
 import { ScrollButton } from 'components/scroller-table-view/scroll-button';
 import { TableBody } from 'components/scroller-table-view/table-body';
@@ -18,8 +18,8 @@ import css from './styles.scss';
 export interface IScrollerTableViewProps<Row extends RecordCell> {
   /** Экземпляр таблицы. */
   tableInstance: TableInstance<Row>;
-  /** Если true - то идёт процесс запроса данных, для отображения в таблице. */
-  isLoading: boolean;
+  /** Признак процесса запроса данных. */
+  loading?: boolean;
   /** Лейбл плейсхолдера. */
   placeholderLabel: string;
   /** Обработчик клика по строке. */
@@ -38,7 +38,7 @@ export interface IScrollerTableViewProps<Row extends RecordCell> {
  */
 export const ScrollerTableView = <Row extends RecordCell>({
   tableInstance,
-  isLoading,
+  loading,
   placeholderLabel,
   onClick,
   isVisibleOnlySelectedRows,
@@ -63,9 +63,8 @@ export const ScrollerTableView = <Row extends RecordCell>({
       <AccessibilityContext.Provider value={{ ...restAccessibilityProps }}>
         <table {...getTableProps({ role: ROLE.GRID })} className={cn(css.table, css.layoutScrollWrapper)} {...getTableAccessibilityProps()}>
           <TableHeader disableMultiSort={disableMultiSort} headerGroups={headerGroups} />
-          {isLoading && <ScrollerSpinnerPlaceholder />}
-          {!isLoading && rows.length === 0 && <ScrollerPlaceholder label={placeholderLabel} />}
-          {!isLoading && rows.length > 0 && (
+          {loading && <ScrollerLoadingOverlay />}
+          {rows.length > 0 ? (
             <>
               <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
                 <TableBody isVisibleOnlySelectedRows={isVisibleOnlySelectedRows} tableInstance={tableInstance} onClick={onClick} />
@@ -76,6 +75,8 @@ export const ScrollerTableView = <Row extends RecordCell>({
               <Gap.X2L />
               {isScrollButtonVisible && <ScrollButton Icon={ScrollIcon} onClick={handleScrollButtonClick} />}
             </>
+          ) : (
+            <ScrollerPlaceholder label={placeholderLabel} />
           )}
         </table>
       </AccessibilityContext.Provider>

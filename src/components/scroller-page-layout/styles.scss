@@ -6,11 +6,7 @@
   height: calc(100vh - 64px); // 64px - высота топлайна.
 }
 
-.categoryTabsWrapper {
+.categoryTabs {
   flex: 0 0 auto;
   padding: 0 32px;
-}
-
-.loading {
-  display: none;
 }

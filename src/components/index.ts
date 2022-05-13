@@ -15,3 +15,4 @@ export * from './hightlight-text';
 export * from './stop-propagation';
 export * from './route-error';
 export * from './accordion';
+export * from './content-loader';
