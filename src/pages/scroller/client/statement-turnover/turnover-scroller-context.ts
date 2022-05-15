@@ -12,8 +12,8 @@ export interface ITurnoverScrollerContext {
   hasError: boolean;
   /** Устанавливает ошибку. */
   setHasError(value: boolean): void;
-  /** Флаг ожидания выполнения запроса. */
-  isLoading: boolean;
+  /** Признак обновления данных скроллера оборотов. */
+  turnoversUpdating: boolean;
   /** Устанавливает флаг ожидания выполнения запроса. */
   setIsLoading(value: boolean): void;
   /** Свойства панели фильтрации. */
@@ -34,7 +34,7 @@ export interface ITurnoverScrollerContext {
 const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   hasError: false,
   setHasError: noop,
-  isLoading: false,
+  turnoversUpdating: false,
   setIsLoading: noop,
   accounts: [],
   sorting: [],

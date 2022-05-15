@@ -1,5 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
 import React from 'react';
+import type { CellAccessibilityInnerFocusProps } from 'components/scroller-table-view/accessibility';
 import { StopPropagation } from 'components/stop-propagation';
 import { COLUMN_PADDING_TYPES } from 'interfaces';
 import type { HeaderProps, CellProps, Hooks } from 'react-table';
@@ -7,7 +8,11 @@ import { Checkbox } from '@platform/ui';
 import { FIELD_NAMES } from './constants';
 
 /** Компонент заголовка колонки с чекбоксами. */
-const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSelectedProps }) => {
+const Header: FC<CellAccessibilityInnerFocusProps & HeaderProps<Record<string, any>>> = ({
+  column,
+  getCellAccessibilityInnerFocusProps,
+  getToggleAllPageRowsSelectedProps,
+}) => {
   const { checked, indeterminate, onChange } = getToggleAllPageRowsSelectedProps();
 
   return (
@@ -18,16 +23,17 @@ const Header: FC<HeaderProps<Record<string, any>>> = ({ getToggleAllPageRowsSele
       name={FIELD_NAMES.HEADER_CHECKBOX}
       value={checked}
       onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
+      {...getCellAccessibilityInnerFocusProps?.(0, column.id)}
     />
   );
 };
 
 Header.displayName = 'Header';
 
-type CheckboxCellProps = CellProps<Record<string, any>>;
+type CheckboxCellProps = CellAccessibilityInnerFocusProps & CellProps<Record<string, any>>;
 
 /** Ячейка с чекбоксом. */
-const Cell: FC<CheckboxCellProps> = ({ row }) => {
+const Cell: FC<CheckboxCellProps> = ({ column, getCellAccessibilityInnerFocusProps, row }) => {
   const { checked, indeterminate, onChange } = row.getToggleRowSelectedProps();
 
   return (
@@ -39,6 +45,7 @@ const Cell: FC<CheckboxCellProps> = ({ row }) => {
         name={'checkboxCell'}
         value={checked}
         onChange={(_, e) => e && onChange?.(e as ChangeEvent<HTMLInputElement>)}
+        {...getCellAccessibilityInnerFocusProps?.(row.index, column.id)}
       />
     </StopPropagation>
   );
@@ -63,6 +70,7 @@ export const useCheckboxColumn = <T extends Record<string, any>>(hooks: Hooks<T>
       Header,
       Cell,
       paddingType: COLUMN_PADDING_TYPES.RIGHT_REDUCED,
+      innerFocus: true,
     },
     ...columns,
   ]);

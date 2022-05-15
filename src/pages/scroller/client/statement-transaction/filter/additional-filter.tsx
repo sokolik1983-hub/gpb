@@ -24,7 +24,7 @@ export const AdditionalFilter: FC = () => {
       </Pattern.Span>
 
       <Pattern.Span size={6}>
-        <FilterFormElement label={locale.transactionsScroller.labels.paymentDate} labelWidth={155}>
+        <FilterFormElement label={locale.transactionsScroller.labels.paymentDate} labelWidth={150}>
           <DateRange name={[FORM_FIELDS.PAYMENT_DATE_FROM, FORM_FIELDS.PAYMENT_DATE_TO]} />
         </FilterFormElement>
       </Pattern.Span>
@@ -37,7 +37,7 @@ export const AdditionalFilter: FC = () => {
       </Pattern.Span>
 
       <Pattern.Span size={6}>
-        <FilterFormElement label={locale.transactionsScroller.labels.counterparty} labelWidth={155}>
+        <FilterFormElement label={locale.transactionsScroller.labels.counterparty} labelWidth={150}>
           {/** Контрагент. */}
           <div className={css.counterpartyField}>
             <CounterpartyField counterparties={counterparties} name={FORM_FIELDS.COUNTERPARTY} />

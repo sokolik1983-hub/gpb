@@ -20,10 +20,8 @@ export interface ITransactionScrollerContext {
   hasError: boolean;
   /** Устанавливает ошибку. */
   setHasError(value: boolean): void;
-  /** Флаг ожидания выполнения запроса. */
-  isLoading: boolean;
-  /** Устанавливает флаг ожидания выполнения запроса. */
-  setIsLoading(value: boolean): void;
+  /** Признак обновления проводок. */
+  transactionsUpdating?: boolean;
   /** Свойства панели фильтрации. */
   filterPanel: IFilterPanel<IFormState>;
   /** Свойства тегов. */
@@ -58,8 +56,7 @@ export interface ITransactionScrollerContext {
 const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   hasError: false,
   setHasError: noop,
-  isLoading: false,
-  setIsLoading: noop,
+  transactionsUpdating: false,
   tagsPanel: {
     tags: [],
     onRemoveAllTags: noop,

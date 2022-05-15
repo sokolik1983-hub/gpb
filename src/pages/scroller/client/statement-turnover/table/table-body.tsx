@@ -30,7 +30,7 @@ export type IScrollerView = ITableBodyProps;
 
 /** Тело таблицы. */
 export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyProps }) => {
-  const { isLoading, groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
+  const { turnoversUpdating, groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
   const { setScrollPosition, portalRef } = useContext(StickyRowsContext);
 
@@ -66,7 +66,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
         <div ref={portalRef} className={css.portal} style={{ top: scrolledElementRef.current?.getScrollTop() }} />
         <Box {...tableBodyProps} className={css.tableBody}>
           <ScrollerView prepareRow={prepareRow} rows={rows} />
-          {isLoading && <ScrollerLoadingOverlay />}
+          {turnoversUpdating && <ScrollerLoadingOverlay />}
         </Box>
         <Gap.X2L />
         <Gap.X2L />

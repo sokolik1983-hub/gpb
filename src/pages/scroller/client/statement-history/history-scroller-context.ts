@@ -16,10 +16,8 @@ export interface IHistoryScrollerContext {
   hasError: boolean;
   /** Устанавливает ошибку. */
   setHasError(value: boolean): void;
-  /** Флаг ожидания выполнения запроса. */
-  isLoading: boolean;
-  /** Устанавливает флаг ожидания выполнения запроса. */
-  setIsLoading(value: boolean): void;
+  /** Признак обновления выписок. */
+  statementsUpdating?: boolean;
   /** Свойства панели фильтрации. */
   filterPanel: IFilterPanel<IFormState>;
   /** Свойства тегов. */
@@ -44,8 +42,7 @@ export interface IHistoryScrollerContext {
 const DEFAULT_CONTEXT_VALUE: IHistoryScrollerContext = {
   hasError: false,
   setHasError: noop,
-  isLoading: false,
-  setIsLoading: noop,
+  statementsUpdating: false,
   accounts: [],
   tagsPanel: {
     tags: [],

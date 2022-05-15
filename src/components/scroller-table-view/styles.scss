@@ -1,3 +1,19 @@
+@mixin reset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-spacing: 0;
+}
+
+table,
+thead,
+tbody,
+tr,
+th,
+td {
+  @include reset;
+}
+
 .tableWrapper {
   position: relative;
   flex: 1 1 0;
@@ -11,18 +27,13 @@
 
 .tableBody {
   position: relative;
-  padding: 0 8px;
-}
-
-.headerRowWrapper {
-  padding: 0 32px;
 }
 
 .headerRow {
   border-bottom: 1px solid #e3e5ec;
 }
 
-.borderedRow {
+.row {
   border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
 }
 
@@ -110,5 +121,5 @@
 .layoutScrollWrapper {
   position: relative;
   flex: 1 1 0;
-  padding: 0 24px;
+  padding: 0 28px;
 }

@@ -5,8 +5,8 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
+    'period': string;
     'periodType': string;
-    'periodTypeWrapper': string;
   }
 }
 

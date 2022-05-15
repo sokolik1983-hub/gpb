@@ -1,19 +1,25 @@
 import React from 'react';
+import cn from 'classnames';
+import { PAGE_SIZES, Pagination } from 'components/pagination';
+import { ScrollerLoadingOverlay } from 'components/scroller-loading-overlay';
 import { ScrollerPlaceholder } from 'components/scroller-placeholder';
-import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
+import { AccessibilityContext, useAccessibility } from 'components/scroller-table-view/accessibility';
+import { ScrollButton } from 'components/scroller-table-view/scroll-button';
+import { TableBody } from 'components/scroller-table-view/table-body';
+import { TableHeader } from 'components/scroller-table-view/table-header';
+import type { RecordCell } from 'components/scroller-table-view/types';
+import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IPagination } from 'interfaces';
 import type { TableInstance } from 'react-table';
-import { Box } from '@platform/ui';
+import { Box, Gap, LayoutScroll, ROLE } from '@platform/ui';
 import css from './styles.scss';
-import { TableBody } from './table-body';
-import { TableHeader } from './table-header';
 
 /** Свойства компонента ScrollerTableView. */
-export interface IScrollerTableViewProps<Row extends Record<string, any>> {
+export interface IScrollerTableViewProps<Row extends RecordCell> {
   /** Экземпляр таблицы. */
   tableInstance: TableInstance<Row>;
-  /** Если true - то идёт процесс запроса данных, для отображения в таблице. */
-  isLoading: boolean;
+  /** Признак процесса запроса данных. */
+  loading?: boolean;
   /** Лейбл плейсхолдера. */
   placeholderLabel: string;
   /** Обработчик клика по строке. */
@@ -30,42 +36,50 @@ export interface IScrollerTableViewProps<Row extends Record<string, any>> {
  * Таблица скроллера. Реализована как глупый компонент.
  * Предполагается использовать её во всех скроллерах стрима.
  */
-export const ScrollerTableView = <Row extends Record<string, any>>({
+export const ScrollerTableView = <Row extends RecordCell>({
   tableInstance,
-  isLoading,
+  loading,
   placeholderLabel,
   onClick,
   isVisibleOnlySelectedRows,
   setPagination,
   totalAmount,
 }: IScrollerTableViewProps<Row>) => {
-  const { getTableProps, headerGroups, rows, disableMultiSort } = tableInstance;
+  const {
+    disableMultiSort,
+    headerGroups,
+    getTableProps,
+    pageCount,
+    rows,
+    state: { pageSize },
+  } = tableInstance;
 
-  let tableContent: React.ReactNode;
+  const { ScrollIcon, handleScroll, handleScrollButtonClick, isScrollButtonVisible, setScrolledElementRef } = useScrollButton();
 
-  if (!isLoading && rows.length === 0) {
-    tableContent = <ScrollerPlaceholder label={placeholderLabel} />;
-  } else if (isLoading && rows.length === 0) {
-    tableContent = <ScrollerSpinnerPlaceholder />;
-  } else {
-    tableContent = (
-      <TableBody
-        isLoading={isLoading}
-        isVisibleOnlySelectedRows={isVisibleOnlySelectedRows}
-        setPagination={setPagination}
-        tableInstance={tableInstance}
-        totalAmount={totalAmount}
-        onClick={onClick}
-      />
-    );
-  }
+  const { getTableAccessibilityProps, ...restAccessibilityProps } = useAccessibility(tableInstance);
 
   return (
     <Box className={css.tableWrapper}>
-      <Box {...getTableProps()} className={css.table}>
-        <TableHeader disableMultiSort={disableMultiSort} headerGroups={headerGroups} />
-        {tableContent}
-      </Box>
+      <AccessibilityContext.Provider value={{ ...restAccessibilityProps }}>
+        <table {...getTableProps({ role: ROLE.GRID })} className={cn(css.table, css.layoutScrollWrapper)} {...getTableAccessibilityProps()}>
+          <TableHeader disableMultiSort={disableMultiSort} headerGroups={headerGroups} />
+          {loading && <ScrollerLoadingOverlay />}
+          {rows.length > 0 ? (
+            <>
+              <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
+                <TableBody isVisibleOnlySelectedRows={isVisibleOnlySelectedRows} tableInstance={tableInstance} onClick={onClick} />
+                {pageCount * pageSize > PAGE_SIZES.PER_25 && (
+                  <Pagination setPagination={setPagination} tableInstance={tableInstance} totalAmount={totalAmount} />
+                )}
+              </LayoutScroll>
+              <Gap.X2L />
+              {isScrollButtonVisible && <ScrollButton Icon={ScrollIcon} onClick={handleScrollButtonClick} />}
+            </>
+          ) : (
+            <ScrollerPlaceholder label={placeholderLabel} />
+          )}
+        </table>
+      </AccessibilityContext.Provider>
     </Box>
   );
 };
