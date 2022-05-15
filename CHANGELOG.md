@@ -1,3 +1,18 @@
+# [2.5.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0...v2.5.0) (2022-05-15)
+
+
+### Bug Fixes
+
+* GBO-24040 поправлено условие ошибки подгрузки данных для формы запроса выписки ([0438386](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/04383860dce85342196eae677b2afc83b34951a0))
+* GBO-24040 поправлено условие ошибки подгрузки данных для формы запроса выписки ([33fff5f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/33fff5f16127d2d3c6f5e9b5287e7103c8e00076))
+* GBO-25491 поправлена верстка поля `Период` в форме `Запрос выписки` ([35f9973](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/35f99735dec4ad08ade0b86b1af231a2c9b7b723))
+
+
+### Features
+
+* **скроллер:** GBO-23350 семантическая верстка `ScrollerTableView`, добавлен хук `useAccessibility` ([1dcd77d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1dcd77dfcb44358e2b9672111a9279b07e810ea1))
+* **скроллер:** GBO-25523 рендер элементов скроллера по мере получения необходимых данных ([afd4083](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/afd40833017ae8b2423da87c16150a360539c32d))
+
 # [2.5.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0-release.1...v2.5.0-release.2) (2022-05-13)
 
 
