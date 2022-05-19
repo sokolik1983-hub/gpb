@@ -1,3 +1,10 @@
+## [2.5.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0...v2.5.1-release.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-26148 поправлено - сохранение предыдущих данных запроса, рендер оверлея у таблицы ([901cb7f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/901cb7fa8071185ee2c7cc47f629348cbd3198f9))
+
 # [2.5.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.4.0...v2.5.0) (2022-05-15)
 
 
