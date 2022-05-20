@@ -8,7 +8,7 @@ import type { IFormContext, IFormState } from 'stream-constants/form';
 import { defaultFormContextValue } from 'stream-constants/form';
 
 /** Хук с бизнес-логикой для общих данных формы (набор вычисляемых часто используемых значений, несвязанных с основным состоянием). */
-export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTION) => {
+export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTION, statementId?: string) => {
   const [value, setValue] = useState<IFormContext>({ ...defaultFormContextValue, useCase, action });
   const { values } = useFormState<IFormState>();
 
@@ -20,10 +20,11 @@ export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTI
       isPdf: values.format === FORMAT.PDF,
       useCase,
       action,
+      statementId,
     };
 
     setValue(newValue);
-  }, [action, useCase, values.creationParams, values.documentsSetParams, values.format]);
+  }, [action, statementId, useCase, values.accountIds, values.creationParams, values.documentsSetParams, values.format]);
 
   return value;
 };

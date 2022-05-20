@@ -31,7 +31,7 @@ const getFormHeaderByUseCase = (useCase: EXPORT_PARAMS_USE_CASES) => {
 
 /** Содержимое модального окна ЭФ параметров выписки и документов. */
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
-  const { onClose, useCase, action } = useContext<IDialogContext>(DialogContext);
+  const { onClose, useCase, action, statementId } = useContext<IDialogContext>(DialogContext);
   const isExport = exportCases.includes(useCase!);
 
   /** Кнопки модального окна. */
@@ -70,7 +70,7 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
       extraSmall
       actions={actions}
       content={
-        <FormProvider action={action} useCase={useCase} onSubmit={handleSubmit}>
+        <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
           <Box className={css.container}>
             <FileFormats />
             <CreationParams />

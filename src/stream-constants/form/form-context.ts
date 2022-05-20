@@ -18,6 +18,8 @@ export interface IFormContext {
   useCase?: EXPORT_PARAMS_USE_CASES;
   /** Действие. */
   action?: ACTION;
+  /** Идентификатор выписки. */
+  statementId?: string;
 }
 
 /** Начальное значение контекста формы. */

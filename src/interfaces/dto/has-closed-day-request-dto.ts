@@ -1,7 +1,9 @@
 /** ДТО запроса для проверки на закрытый день. */
 export interface IHasClosedDayRequestDto {
-  /** Коды филиалов РКО Ф1. */
-  absNumbers: string[];
+  /** Идентификаторы счетов. */
+  accountIds?: string[];
   /** Завершение периода. */
-  dateTo: string;
+  dateTo?: string;
+  /** Идентификатор выписки. */
+  statementId?: string;
 }

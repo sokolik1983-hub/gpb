@@ -14,7 +14,7 @@ import { useCreationParams } from './use-creation-params';
 export const CreationParams: React.FC = () => {
   const { change, batch } = useForm();
   const [options] = useCreationParams();
-  const { useCase, isPdf } = useContext<IFormContext>(FormContext);
+  const { useCase } = useContext<IFormContext>(FormContext);
 
   const onChangeParams: OnChangeType<string[]> = useCallback(
     e => {
@@ -33,7 +33,7 @@ export const CreationParams: React.FC = () => {
     [batch, change]
   );
 
-  const isVisible = !useCase || (useCase && creationParamsShowCases.includes(useCase) && isPdf);
+  const isVisible = !useCase || (useCase && creationParamsShowCases.includes(useCase));
 
   if (!isVisible) {
     return null;
