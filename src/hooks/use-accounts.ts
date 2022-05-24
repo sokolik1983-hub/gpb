@@ -10,6 +10,7 @@ export const useAccounts = () => {
     queryKey: ['@eco/statement', 'accounts'],
     queryFn: () => statementService.getAccounts(),
     retry: false,
+    cacheTime: 0,
   });
 
   return { data, isError, isFetched, isFetching, isSuccess };

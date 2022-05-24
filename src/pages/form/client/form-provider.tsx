@@ -12,11 +12,13 @@ export interface IFormProviderProps {
   useCase?: EXPORT_PARAMS_USE_CASES;
   /** Действие. */
   action?: ACTION;
+  /** Идентификатор выписки. */
+  statementId?: string;
 }
 
 /** Провайдер формы. Компонент для хранения и обработки общих данных на форме (дополнительно заворачивает содержимое в тэг form). */
-export const FormProvider: React.FC<IFormProviderProps> = ({ children, onSubmit, useCase, action }) => {
-  const value = useFormProvider(useCase, action);
+export const FormProvider: React.FC<IFormProviderProps> = ({ children, onSubmit, useCase, action, statementId }) => {
+  const value = useFormProvider(useCase, action, statementId);
 
   return <FormContext.Provider value={useMemo(() => value, [value])}>{<form onSubmit={onSubmit}>{children}</form>}</FormContext.Provider>;
 };

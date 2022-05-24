@@ -1,10 +1,11 @@
-import { useLayoutEffect, useState } from 'react';
-import { useAccounts } from 'hooks';
+import { useContext, useEffect, useState } from 'react';
+import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { statementService } from 'services';
 import type { IFormState } from 'stream-constants/form';
+import { FormContext } from 'stream-constants/form';
 import { to } from '@platform/core';
 import type { ICheckboxOption } from '@platform/ui';
 
@@ -15,32 +16,40 @@ const defaultOption: ICheckboxOption = {
 
 /** Хук для управления флагом "С электронной подписью в формате PDF". */
 export const useWithPdfEsign = (): [ICheckboxOption] => {
-  const [disabled, setDisabled] = useState<boolean>(false);
-
   const {
-    values: { dateTo, accountIds },
+    hasValidationErrors,
+    validating,
+    values: { accountIds, dateTo },
   } = useFormState<IFormState>();
+  const [disabled, setDisabled] = useState<boolean>(false);
+  const { statementId, useCase } = useContext(FormContext);
 
-  // достаем счета из кэша
-  const { data: accounts } = useAccounts();
-
-  useLayoutEffect(() => {
+  useEffect(() => {
     void (async () => {
-      const absNumbers = accounts.reduce<string[]>((acc, account) => {
-        if (accountIds.includes(account.id)) {
-          acc.push(account.bankClient.absId);
-        }
+      // только для ЭФ запроса выписки
+      if (!useCase && (validating || hasValidationErrors)) {
+        return;
+      }
 
-        return acc;
-      }, []);
+      // только для ЭФ параметров печати / экспорта
+      if (useCase && !statementId) {
+        return;
+      }
+
+      // формируем параметры по варианту вызова
+      const dto: IHasClosedDayRequestDto = {
+        accountIds: useCase ? undefined : accountIds,
+        dateTo: useCase ? undefined : dateTo,
+        statementId: useCase ? statementId : undefined,
+      };
 
       // проверяем на закрытый день
-      const [res, err] = await to(statementService.hasClosedDay({ absNumbers, dateTo }));
-      const hasClosedDay = !!res ?? !err;
+      const [res, err] = await to(statementService.hasClosedDay(dto));
+      const hasClosedDay = !!res || !err;
 
-      setDisabled(hasClosedDay);
+      setDisabled(!hasClosedDay);
     })();
-  }, [accountIds, accounts, dateTo]);
+  }, [accountIds, dateTo, hasValidationErrors, statementId, useCase, validating]);
 
   return [{ ...defaultOption, disabled }];
 };

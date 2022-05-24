@@ -20,10 +20,12 @@ export interface IExportParamsDialogProps {
   onClose(): void;
   /** Обработчик отправки формы. */
   onSubmit(values: IFormState): void;
+  /** Идентификатор выписки. */
+  statementId?: string;
 }
 
 /** Компонент "ЭФ параметров выписки и документов". */
-export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action }) => {
+export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action, statementId }) => {
   const initialFormState = getInitialFormState({ useCase });
 
   const handleSubmit = (values: IFormState) => {
@@ -36,8 +38,9 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
       onClose,
       useCase,
       action,
+      statementId,
     }),
-    [action, onClose, useCase]
+    [action, onClose, useCase, statementId]
   );
 
   return (
@@ -49,9 +52,9 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
 
 ExportParamsDialog.displayName = 'StatementParamsDialog';
 
-export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION) =>
+export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION, statementId) =>
   new Promise<IFormState>((resolve, reject) =>
-    dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve }, () => reject(true))
+    dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve, statementId }, () => reject(true))
   );
 
 /** Заголовок диалога неактуальности выписки по способу вызова / возможному действию. */

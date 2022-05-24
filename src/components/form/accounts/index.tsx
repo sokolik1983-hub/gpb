@@ -2,7 +2,7 @@ import React from 'react';
 import { AccountsField } from 'components';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
-import { useAccounts } from 'hooks/use-accounts';
+import { useAccounts } from 'hooks';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'stream-constants/form';
 import { Box } from '@platform/ui';
