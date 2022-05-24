@@ -1,3 +1,11 @@
+## [2.5.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.1...v2.5.1-release.2) (2022-05-24)
+
+
+### Bug Fixes
+
+* **визард:** GBO-25641 доработки ЭФ по итогам ПСИ ([af14e84](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/af14e84f30d19ef762128494d051ec61903a4942))
+* **визард:** GBO-25641 исправление поведения ЭФ запроса и параметров экспорта выписки ([a8098d0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a8098d05a267185f04a22e37cd2edd7ea97bc04b))
+
 ## [2.5.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0...v2.5.1-release.1) (2022-05-19)
 
 
