@@ -6,12 +6,12 @@ const DEFAULT_ACCOUNTS = [];
 
 /** Возвращает список счетов и организаций для селектов в фильтре. */
 export const useAccounts = () => {
-  const { data = DEFAULT_ACCOUNTS, isError, isFetched, isFetching } = useQuery<IGetAccountsResponseDto[]>({
+  const { data = DEFAULT_ACCOUNTS, isError, isFetched, isFetching, isSuccess } = useQuery<IGetAccountsResponseDto[]>({
     queryKey: ['@eco/statement', 'accounts'],
     queryFn: () => statementService.getAccounts(),
     retry: false,
     cacheTime: 0,
   });
 
-  return { data, isError, isFetched, isFetching };
+  return { data, isError, isFetched, isFetching, isSuccess };
 };

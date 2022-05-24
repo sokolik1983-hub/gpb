@@ -227,9 +227,6 @@
   "exportParamsDialog.exportStatementDocuments.label": "Экспорт документов",
   "exportParamsDialog.printStatementDocuments.label": "Печать документов",
   "exportParamsDialog.exportOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?",
-  "exportParamsDialog.print.creationParams.separateAccountsFiles": "Отдельным файлом по каждому счёту",
-  "exportParamsDialog.print.creationParams.withDocumentsSet": "С комплектом документов",
-  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
-  "exportParamsDialog.print.creationParams.withSign": "С электронной подписью банка в формате PDF",
-  "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции"
+  "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции",
+  "form.withPdfSign.tooltip": "При совпадении последнего условия отображается иконка подсказки"
 }

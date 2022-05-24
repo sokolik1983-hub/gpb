@@ -14,13 +14,13 @@ import { useCreationParams } from './use-creation-params';
 export const CreationParams: React.FC = () => {
   const { change, batch } = useForm();
   const [options] = useCreationParams();
-  const { useCase, isPdf } = useContext<IFormContext>(FormContext);
+  const { useCase } = useContext<IFormContext>(FormContext);
 
   const onChangeParams: OnChangeType<string[]> = useCallback(
     e => {
       const params = e.value;
 
-      if (e.value.includes(CREATION_PARAMS.WITH_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+      if (e.value.includes(CREATION_PARAMS.WITH_PDF_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
         change(FORM_FIELDS.CREATION_PARAMS, [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET]);
       } else if (!params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
         batch(() => {
@@ -33,9 +33,9 @@ export const CreationParams: React.FC = () => {
     [batch, change]
   );
 
-  const visible = !useCase || (useCase && creationParamsShowCases.includes(useCase) && isPdf);
+  const isVisible = !useCase || (useCase && creationParamsShowCases.includes(useCase));
 
-  if (!visible) {
+  if (!isVisible) {
     return null;
   }
 

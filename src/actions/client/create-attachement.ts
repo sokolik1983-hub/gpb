@@ -58,7 +58,7 @@ export const getCreateAttachment = (
     }
 
     if (isShowDialog) {
-      const [formState, close] = await to(showStatementParamsDialog(useCase, action));
+      const [formState, close] = await to(showStatementParamsDialog(useCase, action, statementId));
 
       if (close) {
         done();

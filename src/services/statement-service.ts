@@ -23,6 +23,7 @@ import type {
   ICreateAttachmentRequestDto,
   IGetAccountsResponseDto,
 } from 'interfaces/dto';
+import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { ICollectionResponse } from '@platform/services';
 import { request, metadataToRequestParams } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
@@ -188,4 +189,11 @@ export const statementService = {
     request<IServerDataResp<IGetAccountsResponseDto[]>>({
       url: `${SUPPORT_STATEMENT_URL}/search-user-account-for-statement`,
     }).then(result => result.data.data),
+  /** Проверить на закрытый день. */
+  hasClosedDay: (dto: IHasClosedDayRequestDto): Promise<boolean> =>
+    request<IServerDataResp<boolean>>({
+      url: `${SUPPORT_STATEMENT_URL}/has-closed-day`,
+      method: 'POST',
+      data: dto,
+    }).then(x => x.data.data),
 };
