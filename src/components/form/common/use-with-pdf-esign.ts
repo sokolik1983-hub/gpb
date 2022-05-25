@@ -44,10 +44,13 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
       };
 
       // проверяем на закрытый день
-      const [res, err] = await to(statementService.hasClosedDay(dto));
-      const hasClosedDay = !!res || !err;
+      const [hasClosedDay, err] = await to(statementService.hasClosedDay(dto));
 
-      setDisabled(!hasClosedDay);
+      if (err) {
+        setDisabled(true);
+      } else {
+        setDisabled(!hasClosedDay);
+      }
     })();
   }, [accountIds, dateTo, hasValidationErrors, statementId, useCase, validating]);
 
