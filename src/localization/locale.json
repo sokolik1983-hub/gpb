@@ -518,6 +518,9 @@
   "common.creationParams.withDocumentsSet": {
     "ru": "С комплектом документов"
   },
+  "common.creationParams.totalsOfDay": {
+    "ru": "Итоги за день"
+  },
   "common.documentsSetParams.label": {
     "ru": "Комплект документов"
   },

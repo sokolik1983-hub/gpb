@@ -1,7 +1,7 @@
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces/client';
+import { CREATION_TYPE, FORMAT, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces/client';
 import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/dto';
-import { DETAIL_DOCUMENT_PARAMS, CREATION_PARAMS } from 'interfaces/form';
+import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import type { IFormState } from 'stream-constants/form';
 import { CREDIT_PARAMS } from 'stream-constants/form/default-credit-params-options';
@@ -45,6 +45,15 @@ export const convertToCreationParams = (
 };
 
 /**
+ *
+ * Утилита для определения необходимости параметра `Итоги за день`.
+ *
+ * @param values - Данные формы.
+ */
+export const isNeedTotalsOfDay = (values: IFormState): boolean =>
+  values.dateFrom !== values.dateTo && (values.format === FORMAT.PDF || values.format === FORMAT.EXCEL);
+
+/**
  * Конвертер для преобразования состояния формы в расширенные / дополнительные параметры создания выписки.
  *
  * @param formState Состояние формы.
@@ -53,6 +62,7 @@ export const convertToExtendedCreationParams = (formState: IFormState) => ({
   hideEmptyTurnovers: formState.creationParams.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS),
   separateAccountsFiles: formState.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
   sign: formState.creationParams.includes(CREATION_PARAMS.WITH_PDF_SIGN),
+  totalsOfDay: isNeedTotalsOfDay(formState) && formState.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
 });
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */

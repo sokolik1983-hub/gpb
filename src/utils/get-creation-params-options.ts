@@ -7,6 +7,7 @@ export const defaultCreationParamsValues = {
   [CREATION_PARAMS.WITH_PDF_SIGN]: false,
   [CREATION_PARAMS.WITH_DOCUMENTS_SET]: false,
   [CREATION_PARAMS.HIDE_EMPTY_TURNOVERS]: false,
+  [CREATION_PARAMS.TOTALS_OF_DAY]: false,
 };
 
 /** Начальные значения опций создания запроса выписки. */

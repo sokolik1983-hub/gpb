@@ -20,6 +20,8 @@ export interface IFormContext {
   action?: ACTION;
   /** Идентификатор выписки. */
   statementId?: string;
+  /** Итоги за день. */
+  totalsOfDay: boolean;
 }
 
 /** Начальное значение контекста формы. */
@@ -28,6 +30,7 @@ export const defaultFormContextValue: IFormContext = {
   withSign: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_PDF_SIGN),
   withDocumentsSet: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET),
   isPdf: defaultFormState.format === FORMAT.PDF,
+  totalsOfDay: defaultFormState.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
 };
 
 /** Экземпляр контекста формы. */

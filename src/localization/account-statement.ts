@@ -1328,6 +1328,13 @@ export default {
 			get withDocumentsSet() {
 				return t('common.creationParams.withDocumentsSet');
 			},
+			/**
+			 * @ru
+			 * Итоги за день
+			 */
+			get totalsOfDay() {
+				return t('common.creationParams.totalsOfDay');
+			},
 		},
 		documentsSetParams: {
 			/**
