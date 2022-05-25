@@ -21,7 +21,6 @@ export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTI
       useCase,
       action,
       statementId,
-      totalsOfDay: values.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
     };
 
     setValue(newValue);

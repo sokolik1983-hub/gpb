@@ -50,4 +50,6 @@ export interface ILatestStatementDto {
   statementOperationDto: OPERATIONS;
   /** Скрыть нулевые обороты. */
   hideEmptyTurnovers: boolean;
+  /** Итоги за день. */
+  totalsOfDay: boolean;
 }

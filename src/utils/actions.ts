@@ -117,6 +117,10 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
     creationParams.push(CREATION_PARAMS.WITH_PDF_SIGN);
   }
 
+  if (dto.totalsOfDay) {
+    creationParams.push(CREATION_PARAMS.TOTALS_OF_DAY);
+  }
+
   if (dto.documentOptionsDto.separateDocumentsFiles) {
     documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
   }

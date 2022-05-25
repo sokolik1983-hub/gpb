@@ -21,7 +21,7 @@ export interface IFormContext {
   /** Идентификатор выписки. */
   statementId?: string;
   /** Итоги за день. */
-  totalsOfDay: boolean;
+  totalsOfDay?: boolean;
 }
 
 /** Начальное значение контекста формы. */
