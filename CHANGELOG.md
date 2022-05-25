@@ -1,3 +1,10 @@
+## [2.5.1-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.2...v2.5.1-release.3) (2022-05-25)
+
+
+### Bug Fixes
+
+* **визард:** GBO-25641 исправление для флага подписи с ПДФ ([8dd2fe0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8dd2fe00d7c543bc19293bba3375965009ffee4e))
+
 ## [2.5.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.1...v2.5.1-release.2) (2022-05-24)
 
 
