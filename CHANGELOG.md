@@ -1,3 +1,10 @@
+## [2.5.1-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.3...v2.5.1-release.4) (2022-05-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-26233 задана минимальная высота лейаута скроллера ([13289a3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/13289a37164b90520c72c3ab0777bc34c915b7ac))
+
 ## [2.5.1-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.2...v2.5.1-release.3) (2022-05-25)
 
 
