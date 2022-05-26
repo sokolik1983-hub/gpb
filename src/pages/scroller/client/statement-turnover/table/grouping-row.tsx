@@ -49,7 +49,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
   // отображается в таблице, так же как строки с данными по счётам.
   if (groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Box {...rowProps} className={css.borderedRow} fill="FAINT">
+      <Box {...rowProps} className={cn(css.borderedRow, css.subGroupRows)}>
         {cells.map(cell => {
           const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });
 
@@ -67,7 +67,7 @@ export const GroupingRow: FC<IGroupingRowProps> = ({ groupingRow }) => {
 
   // Группирующие строки рендерятся без колонок, чтобы избежать переноса строки в колонке.
   return (
-    <Box {...rowProps} className={cn(css.groupingRow, { [css.borderedRow]: !isExpanded })}>
+    <Box {...rowProps} className={cn(css.groupRows, { [css.borderedRow]: !isExpanded })}>
       <Horizon>
         <Icon fill="FAINT" scale={'MD'} />
         <Gap.SM />

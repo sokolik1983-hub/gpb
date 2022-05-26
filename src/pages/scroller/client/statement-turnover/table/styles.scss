@@ -23,11 +23,6 @@
   border-bottom: 1px solid #e3e5ec;
 }
 
-.groupingRow {
-  padding: 14px 8px 12px;
-  background-color: #fff;
-}
-
 .borderedRow {
   border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
 }
@@ -127,4 +122,19 @@
   z-index: getIndex(specific_element_accent);
   padding: 0 8px;
   background-color: #fff;
+}
+
+.hoveredRow {
+  background-color: #eef1f3;
+}
+
+.groupRows {
+  padding: 14px 8px 12px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.subGroupRows {
+  background-color: #f7f8fb;
+  cursor: pointer;
 }

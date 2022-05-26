@@ -9,11 +9,12 @@ declare namespace StylesScssModule {
     'cell': string;
     'clickableRow': string;
     'collapsedRow': string;
-    'groupingRow': string;
+    'groupRows': string;
     'headerCell': string;
     'headerColumnDelimiter': string;
     'headerRow': string;
     'headerRowWrapper': string;
+    'hoveredRow': string;
     'layoutScrollWrapper': string;
     'placeholderOverlay': string;
     'portal': string;
@@ -21,6 +22,7 @@ declare namespace StylesScssModule {
     'secondLevelCell': string;
     'secondLevelLine': string;
     'sortIconWrapper': string;
+    'subGroupRows': string;
     'table': string;
     'tableBody': string;
     'tableWrapper': string;

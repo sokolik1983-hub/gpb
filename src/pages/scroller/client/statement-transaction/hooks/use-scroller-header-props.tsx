@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 import { executor } from 'actions/client';
-import type { IScrollerHeaderProps } from 'components';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
@@ -10,13 +9,14 @@ import { getActiveActionButtons } from 'utils';
 import { useRedirect, DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
+import type { IScrollerHeader } from '@platform/ui';
 import { HEADER_ACTIONS } from '../action-configs';
 
 /** Возвращает свойства для заголовка скроллера.
  *
  * @param info - Информация о выписке, проводки которой отображаются в скроллере.
  */
-export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto): IScrollerHeaderProps => {
+export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto): IScrollerHeader => {
   const { id } = useParams<IUrlParams>();
 
   const redirectToMainPage = useRedirect(COMMON_STREAM_URL.MAINPAGE);
@@ -26,7 +26,7 @@ export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto):
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
 
-  const headerProps: IScrollerHeaderProps = {
+  const headerProps: IScrollerHeader = {
     onHomeClick: redirectToMainPage,
     actions,
     items: [
