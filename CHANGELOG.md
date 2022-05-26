@@ -1,3 +1,15 @@
+# [2.6.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.1...v2.6.0-release.2) (2022-05-26)
+
+
+### Bug Fixes
+
+* **визард:** GBO-26891 проверка на пустую выписку при влюченном флаге скрытия нулевых оборотов ([04f7e31](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/04f7e316b2c6b3b6db91e3a91bd47325049c8dfa))
+
+
+### Reverts
+
+* Revert "fix(скроллер): GBO-26233 задана минимальная высота лейаута скроллера" ([442bc11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/442bc1154c0cd92db3d1ad177fa860e4fae43bbd))
+
 # [2.6.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.4...v2.6.0-release.1) (2022-05-26)
 
 
