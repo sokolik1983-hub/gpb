@@ -1,3 +1,10 @@
+# [2.6.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.2...v2.6.0-release.3) (2022-05-26)
+
+
+### Bug Fixes
+
+* **визард:** GBO-26927 доработка условия дизейбла флага для скрыть нулевые обороты ([267f6cd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/267f6cdf8f65184f15236f71c48b30cfd6428596))
+
 # [2.6.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.1...v2.6.0-release.2) (2022-05-26)
 
 
