@@ -1,3 +1,11 @@
+# [2.6.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.4...v2.6.0-release.1) (2022-05-26)
+
+
+### Features
+
+* **скроллер:** GBO-23068 перевод сервиса на валютные компоненты ([29b04f5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/29b04f57829b4fb29eaf0f2a59fea797f6d974e8))
+* **скроллер:** GBO-23068 приведение скроллера ОСВ к макетам ([9c33b57](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9c33b570354f1455451be28dab54d07cefe237c3))
+
 ## [2.5.1-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.1-release.3...v2.5.1-release.4) (2022-05-25)
 
 
