@@ -8,4 +8,6 @@ export enum CREATION_PARAMS {
   WITH_PDF_SIGN = 'withSign',
   /** С комплектом документов. */
   WITH_DOCUMENTS_SET = 'withDocumentsSet',
+  /** Итоги за день. */
+  TOTALS_OF_DAY = 'totalsOfDay',
 }
