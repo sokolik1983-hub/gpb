@@ -1,6 +1,7 @@
-import { fatalHandler } from 'utils';
+import type { ILatestStatementDto } from 'interfaces/dto';
+import { checkEmptyStatement, fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
-import type { IActionConfig, IBaseEntity } from '@platform/services';
+import type { IActionConfig } from '@platform/services';
 import { showFile } from '@platform/services';
 import type { context } from './executor';
 
@@ -10,7 +11,7 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675637
  */
 export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [IBaseEntity]) => {
+  action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [ILatestStatementDto]) => {
     showLoader();
 
     const [res, err] = await to(service.exportStatement(doc.id));
@@ -19,6 +20,12 @@ export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
 
     fatal(res?.error);
     fatal(err);
+
+    if (checkEmptyStatement(doc, res!)) {
+      done();
+
+      return;
+    }
 
     const { content, fileName, mimeType } = res!;
 
