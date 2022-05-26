@@ -1169,6 +1169,13 @@ export default {
 				return t('form.withPdfSign.tooltip');
 			},
 		},
+		notFoundStatement: {
+			/**
+			 * @ru
+			 * Выписка за период {dateFrom} - {dateTo} отсутствует
+			 */
+			warning: (p: { dateFrom: string; dateTo: string }) => t('form.notFoundStatement.warning', p),
+		},
 	},
 	transactionType: {
 		labels: {
