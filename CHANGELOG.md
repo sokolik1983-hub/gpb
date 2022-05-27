@@ -1,3 +1,10 @@
+# [2.6.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.8...v2.6.0-release.9) (2022-05-27)
+
+
+### Bug Fixes
+
+* **визард:** GBO-26550 доработка ЭФ ([d698040](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d698040a62bf74168ce675ad43aa2f86ceac196b))
+
 # [2.6.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.7...v2.6.0-release.8) (2022-05-27)
 
 
