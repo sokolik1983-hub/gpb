@@ -124,10 +124,6 @@
   background-color: #fff;
 }
 
-.hoveredRow {
-  background-color: #eef1f3;
-}
-
 .groupRows {
   padding: 14px 8px 12px;
   background-color: #fff;
@@ -137,4 +133,8 @@
 .subGroupRows {
   background-color: #f7f8fb;
   cursor: pointer;
+}
+
+.hoveredRow {
+  background-color: #eef1f3;
 }
