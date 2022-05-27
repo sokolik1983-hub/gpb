@@ -47,6 +47,11 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
     }
 
     void (async () => {
+      // FIXME: переделать с использованием встроенных возможностей react-final-form
+      if (!useCase && !dateTo) {
+        return;
+      }
+
       // формируем параметры по варианту вызова
       const dto: IHasClosedDayRequestDto = {
         accountIds: useCase ? undefined : accountIds,
@@ -65,7 +70,7 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
 
       const params = [...creationParams];
 
-      if ((hasClosedDay || err) && params.includes(CREATION_PARAMS.WITH_PDF_SIGN)) {
+      if ((err || !hasClosedDay) && params.includes(CREATION_PARAMS.WITH_PDF_SIGN)) {
         change(
           FORM_FIELDS.CREATION_PARAMS,
           params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN)
