@@ -1,3 +1,10 @@
+# [2.6.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.5...v2.6.0-release.6) (2022-05-27)
+
+
+### Features
+
+* **скроллер:** GBO-26942 рамка фокуса ячейки таблицы соответствует цвету системы ([a8e0455](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a8e0455a711d1bbfb0200ec86446912c7a9b1acd))
+
 # [2.6.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.4...v2.6.0-release.5) (2022-05-27)
 
 
