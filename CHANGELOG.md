@@ -1,3 +1,10 @@
+# [2.6.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.4...v2.6.0-release.5) (2022-05-27)
+
+
+### Bug Fixes
+
+* **визард:** GBO-26927 доработка поведения ЭФ для флага "С комплектом документов" ([cd9179e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cd9179e8afa60c17e5cd0f53a91be668c989499c))
+
 # [2.6.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.3...v2.6.0-release.4) (2022-05-26)
 
 
