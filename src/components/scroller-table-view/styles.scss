@@ -14,6 +14,14 @@ td {
   @include reset;
 }
 
+td,
+th {
+  &:focus,
+  & [data-inner-focus='true']:focus {
+    outline: 1px solid #0057b6;
+  }
+}
+
 .tableWrapper {
   position: relative;
   flex: 1 1 0;
