@@ -18,17 +18,22 @@ export const CreationParams: React.FC = () => {
 
   const onChangeParams: OnChangeType<string[]> = useCallback(
     e => {
-      const params = e.value;
+      let params = [...e.value];
 
       if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && params.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS)) {
-        change(
-          FORM_FIELDS.CREATION_PARAMS,
-          params.filter(x => x !== CREATION_PARAMS.HIDE_EMPTY_TURNOVERS)
-        );
-      } else if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
-        change(FORM_FIELDS.CREATION_PARAMS, [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET]);
-      } else if (!params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+        params = params.filter(x => x !== CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
+      }
+
+      if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+        params = [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET];
+      }
+
+      if (params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+        change(FORM_FIELDS.CREATION_PARAMS, params);
+      } else {
         batch(() => {
+          change(FORM_FIELDS.CREATION_PARAMS, params);
+          // и сбрасываем остальные параметры, если флаг "С комплектом документов не установлен"
           change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
           change(FORM_FIELDS.DEBIT_PARAMS, []);
           change(FORM_FIELDS.CREDIT_PARAMS, []);
