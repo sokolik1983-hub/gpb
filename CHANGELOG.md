@@ -1,3 +1,10 @@
+# [2.6.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.6...v2.6.0-release.7) (2022-05-27)
+
+
+### Features
+
+* **скроллер:** GBO-26943 добавлен ховер на категорию подкатегорию в ОСВ ([a66fe3a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a66fe3a1f2ef6a2813ee33a52a0aa62157a8d6b6))
+
 # [2.6.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.5...v2.6.0-release.6) (2022-05-27)
 
 
