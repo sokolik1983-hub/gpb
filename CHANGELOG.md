@@ -1,3 +1,27 @@
+# [2.6.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0...v2.6.0) (2022-05-29)
+
+
+### Bug Fixes
+
+* **визард:** GBO-25641 доработки ЭФ по итогам ПСИ ([af14e84](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/af14e84f30d19ef762128494d051ec61903a4942))
+* **визард:** GBO-25641 исправление для флага подписи с ПДФ ([8dd2fe0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8dd2fe00d7c543bc19293bba3375965009ffee4e))
+* **визард:** GBO-25641 исправление поведения ЭФ запроса и параметров экспорта выписки ([a8098d0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a8098d05a267185f04a22e37cd2edd7ea97bc04b))
+* **визард:** GBO-26550 доработка ЭФ ([d698040](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d698040a62bf74168ce675ad43aa2f86ceac196b))
+* **визард:** GBO-26891 проверка на пустую выписку при влюченном флаге скрытия нулевых оборотов ([04f7e31](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/04f7e316b2c6b3b6db91e3a91bd47325049c8dfa))
+* **визард:** GBO-26927 доработка поведения ЭФ для флага "С комплектом документов" ([cd9179e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cd9179e8afa60c17e5cd0f53a91be668c989499c))
+* **визард:** GBO-26927 доработка условия дизейбла флага для скрыть нулевые обороты ([267f6cd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/267f6cdf8f65184f15236f71c48b30cfd6428596))
+* **визард:** GBO-26927 доработка ЭФ для флага скрытия нулевых оборотов ([79b6198](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/79b6198cf4c859fd984d51394021c2a02e73cb1d))
+* **визард:** GBO-26951 доработки ЭФ ([9339f5e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9339f5eb26521cb72f628baa84575c7b1a9ac6de))
+* **скроллер:** GBO-26148 поправлено - сохранение предыдущих данных запроса, рендер оверлея у таблицы ([901cb7f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/901cb7fa8071185ee2c7cc47f629348cbd3198f9))
+
+
+### Features
+
+* **скроллер:** GBO-23068 перевод сервиса на валютные компоненты ([29b04f5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/29b04f57829b4fb29eaf0f2a59fea797f6d974e8))
+* **скроллер:** GBO-23068 приведение скроллера ОСВ к макетам ([9c33b57](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9c33b570354f1455451be28dab54d07cefe237c3))
+* **скроллер:** GBO-26942 рамка фокуса ячейки таблицы соответствует цвету системы ([a8e0455](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a8e0455a711d1bbfb0200ec86446912c7a9b1acd))
+* **скроллер:** GBO-26943 добавлен ховер на категорию подкатегорию в ОСВ ([a66fe3a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a66fe3a1f2ef6a2813ee33a52a0aa62157a8d6b6))
+
 # [2.6.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0-release.8...v2.6.0-release.9) (2022-05-27)
 
 
