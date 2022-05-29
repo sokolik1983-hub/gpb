@@ -52,7 +52,7 @@ export const convertToCreationParams = (
 export const convertToExtendedCreationParams = (formState: IFormState) => ({
   hideEmptyTurnovers: formState.creationParams.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS),
   separateAccountsFiles: formState.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
-  sign: formState.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
+  sign: formState.creationParams.includes(CREATION_PARAMS.WITH_PDF_SIGN),
 });
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
@@ -104,7 +104,7 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
   }
 
   if (dto.signNeeded) {
-    creationParams.push(CREATION_PARAMS.WITH_SIGN);
+    creationParams.push(CREATION_PARAMS.WITH_PDF_SIGN);
   }
 
   if (dto.documentOptionsDto.separateDocumentsFiles) {

@@ -33,7 +33,7 @@ export const FileFormats: React.FC = () => {
       if (!isPdf && withSign) {
         change(
           FORM_FIELDS.CREATION_PARAMS,
-          params.filter(x => x !== CREATION_PARAMS.WITH_SIGN)
+          params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN)
         );
       }
     },

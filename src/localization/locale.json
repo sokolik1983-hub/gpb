@@ -707,19 +707,15 @@
   "exportParamsDialog.exportOutdatedStatement.label": {
     "ru": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?"
   },
-  "exportParamsDialog.print.creationParams.separateAccountsFiles": {
-    "ru": "Отдельным файлом по каждому счёту"
-  },
-  "exportParamsDialog.print.creationParams.withDocumentsSet": {
-    "ru": "С комплектом документов"
-  },
-  "exportParamsDialog.print.creationParams.hideEmptyTurnovers": {
-    "ru": "Скрыть нулевые обороты"
-  },
-  "exportParamsDialog.print.creationParams.withSign": {
-    "ru": "С электронной подписью банка в формате PDF"
-  },
   "common.checkAuthority.error": {
     "ru": "Недостаточно полномочий для выполнения операции"
+  },
+  "form.withPdfSign.tooltip": {
+    "ru": "При совпадении последнего условия отображается иконка подсказки"
+  },
+  "form.notFoundStatement.warning": {
+    "@dateFrom": "string",
+    "@dateTo": "string",
+    "ru": "Выписка за период {dateFrom} - {dateTo} отсутствует"
   }
 }

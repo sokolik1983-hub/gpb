@@ -1,15 +1,13 @@
 import React from 'react';
-import type { IScrollerHeaderProps } from 'components';
 import { ContentLoader } from 'components/content-loader';
-import { ScrollerHeader } from 'components/scroller-header';
-import type { ICategoryTabsProps } from '@platform/ui';
-import { Box, Separator, CategoryTabs, LoaderOverlay, DATA_TYPE } from '@platform/ui';
+import type { ICategoryTabsProps, IScrollerHeader } from '@platform/ui';
+import { Box, Separator, CategoryTabs, LoaderOverlay, DATA_TYPE, ScrollerHeader } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ScrollerPageLayout. */
 interface IScrollerPageLayoutProps {
   /** Навигация (хлебные крошки). */
-  headerProps: IScrollerHeaderProps & { loading?: boolean };
+  headerProps: IScrollerHeader & { loading?: boolean };
   /** Свойства для категорий. */
   categoryTabs?: ICategoryTabsProps;
   /** Если true, то вместо страницы будет отображаться лоадер. */

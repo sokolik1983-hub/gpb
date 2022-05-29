@@ -1160,6 +1160,22 @@ export default {
 				return t('form.tooltip.hasOneAccount');
 			},
 		},
+		withPdfSign: {
+			/**
+			 * @ru
+			 * При совпадении последнего условия отображается иконка подсказки
+			 */
+			get tooltip() {
+				return t('form.withPdfSign.tooltip');
+			},
+		},
+		notFoundStatement: {
+			/**
+			 * @ru
+			 * Выписка за период {dateFrom} - {dateTo} отсутствует
+			 */
+			warning: (p: { dateFrom: string; dateTo: string }) => t('form.notFoundStatement.warning', p),
+		},
 	},
 	transactionType: {
 		labels: {
@@ -1751,38 +1767,6 @@ export default {
 			 */
 			get label() {
 				return t('exportParamsDialog.exportOutdatedStatement.label');
-			},
-		},
-		print: {
-			creationParams: {
-				/**
-				 * @ru
-				 * Отдельным файлом по каждому счёту
-				 */
-				get separateAccountsFiles() {
-					return t('exportParamsDialog.print.creationParams.separateAccountsFiles');
-				},
-				/**
-				 * @ru
-				 * С комплектом документов
-				 */
-				get withDocumentsSet() {
-					return t('exportParamsDialog.print.creationParams.withDocumentsSet');
-				},
-				/**
-				 * @ru
-				 * Скрыть нулевые обороты
-				 */
-				get hideEmptyTurnovers() {
-					return t('exportParamsDialog.print.creationParams.hideEmptyTurnovers');
-				},
-				/**
-				 * @ru
-				 * С электронной подписью банка в формате PDF
-				 */
-				get withSign() {
-					return t('exportParamsDialog.print.creationParams.withSign');
-				},
 			},
 		},
 	},

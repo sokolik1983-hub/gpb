@@ -18,12 +18,14 @@ export interface IFormContext {
   useCase?: EXPORT_PARAMS_USE_CASES;
   /** Действие. */
   action?: ACTION;
+  /** Идентификатор выписки. */
+  statementId?: string;
 }
 
 /** Начальное значение контекста формы. */
 export const defaultFormContextValue: IFormContext = {
   onlyRequestsStatement: defaultFormState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS),
-  withSign: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_SIGN),
+  withSign: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_PDF_SIGN),
   withDocumentsSet: defaultFormState.creationParams.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET),
   isPdf: defaultFormState.format === FORMAT.PDF,
 };

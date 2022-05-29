@@ -5,7 +5,7 @@ export enum CREATION_PARAMS {
   /** Скрыть нулевые обороты. */
   HIDE_EMPTY_TURNOVERS = 'hideEmptyTurnovers',
   /** С электронной подписью банка в формате PDF. */
-  WITH_SIGN = 'withSign',
+  WITH_PDF_SIGN = 'withSign',
   /** С комплектом документов. */
   WITH_DOCUMENTS_SET = 'withDocumentsSet',
 }
