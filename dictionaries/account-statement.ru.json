@@ -229,5 +229,6 @@
   "exportParamsDialog.printStatementDocuments.label": "Печать документов",
   "exportParamsDialog.exportOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?",
   "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции",
-  "form.withPdfSign.tooltip": "При совпадении последнего условия отображается иконка подсказки"
+  "form.withPdfSign.tooltip": "При совпадении последнего условия отображается иконка подсказки",
+  "form.notFoundStatement.warning": "Выписка за период {dateFrom} - {dateTo} отсутствует"
 }

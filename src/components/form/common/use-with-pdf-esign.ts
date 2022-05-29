@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from 'react';
 import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
-import { useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { statementService } from 'services';
 import type { IFormState } from 'stream-constants/form';
-import { FormContext } from 'stream-constants/form';
+import { FORM_FIELDS, FormContext } from 'stream-constants/form';
 import { to } from '@platform/core';
 import type { ICheckboxOption } from '@platform/ui';
 
@@ -19,20 +19,36 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
   const {
     hasValidationErrors,
     validating,
-    values: { accountIds, dateTo },
+    values: { accountIds, dateTo, creationParams },
   } = useFormState<IFormState>();
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [canCalculateClosedDay, setCanCalculateClosedDay] = useState<boolean>(false);
   const { statementId, useCase } = useContext(FormContext);
+  const { change } = useForm();
 
   useEffect(() => {
-    void (async () => {
-      // только для ЭФ запроса выписки
-      if (!useCase && (validating || hasValidationErrors)) {
+    // eslint-disable-next-line no-negated-condition
+    if (!useCase) {
+      if (validating) {
         return;
       }
 
+      // только для ЭФ запроса выписки
+      setCanCalculateClosedDay(!hasValidationErrors);
+    } else {
       // только для ЭФ параметров печати / экспорта
-      if (useCase && !statementId) {
+      setCanCalculateClosedDay(!!statementId);
+    }
+  }, [hasValidationErrors, statementId, useCase, validating]);
+
+  useEffect(() => {
+    if (!canCalculateClosedDay) {
+      return;
+    }
+
+    void (async () => {
+      // FIXME: переделать с использованием встроенных возможностей react-final-form
+      if (!useCase && !dateTo) {
         return;
       }
 
@@ -44,12 +60,25 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
       };
 
       // проверяем на закрытый день
-      const [res, err] = await to(statementService.hasClosedDay(dto));
-      const hasClosedDay = !!res || !err;
+      const [hasClosedDay, err] = await to(statementService.hasClosedDay(dto));
 
-      setDisabled(!hasClosedDay);
+      if (err) {
+        setDisabled(true);
+      } else {
+        setDisabled(!hasClosedDay);
+      }
+
+      const params = [...creationParams];
+
+      if ((err || !hasClosedDay) && params.includes(CREATION_PARAMS.WITH_PDF_SIGN)) {
+        change(
+          FORM_FIELDS.CREATION_PARAMS,
+          params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN)
+        );
+      }
     })();
-  }, [accountIds, dateTo, hasValidationErrors, statementId, useCase, validating]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [accountIds, dateTo, useCase, canCalculateClosedDay]);
 
   return [{ ...defaultOption, disabled }];
 };

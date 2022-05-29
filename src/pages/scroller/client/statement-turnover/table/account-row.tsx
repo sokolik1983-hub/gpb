@@ -80,8 +80,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
             key={key}
             ref={ref}
             {...rowProps}
-            className={cn(css.clickableRow, { [css.borderedRow]: !hasMargin })}
-            fill={hovered ? 'FAINT' : 'BASE'}
+            className={cn(css.clickableRow, { [css.borderedRow]: !hasMargin, [css.hoveredRow]: hovered })}
             role={ROLE.ROW}
             onClick={handleClick}
           >

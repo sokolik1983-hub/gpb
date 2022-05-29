@@ -715,5 +715,10 @@
   },
   "form.withPdfSign.tooltip": {
     "ru": "При совпадении последнего условия отображается иконка подсказки"
+  },
+  "form.notFoundStatement.warning": {
+    "@dateFrom": "string",
+    "@dateTo": "string",
+    "ru": "Выписка за период {dateFrom} - {dateTo} отсутствует"
   }
 }

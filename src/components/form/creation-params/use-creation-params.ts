@@ -55,9 +55,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          const disabled = !useCase && withSign;
-
-          acc.push({ ...x, disabled });
+          acc.push({ ...x, disabled: withSign });
 
           break;
         }
