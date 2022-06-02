@@ -2,6 +2,7 @@ import React, { useMemo, useContext } from 'react';
 import cn from 'classnames';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_VALUES, GROUPING_TYPE } from 'interfaces/dto';
+import { Actions } from 'pages/scroller/client/statement-turnover/filter/actions';
 import { Typography, Gap, Box, Fields } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FORM_FIELDS, GROUPING_OPTIONS } from './constants';
@@ -30,7 +31,7 @@ export const computeGroupingReport = (data: IGroupedAccounts[], grouping: GROUPI
   }
 };
 
-/** Панель выбора и отображения значения группировки записей в таблице скроллера. */
+/** Панель выбора и отображения значения группировки записей в таблице, действий ОСВ. */
 export const GroupingPanel = () => {
   const {
     turnovers: { accounts },
@@ -48,6 +49,7 @@ export const GroupingPanel = () => {
         <Typography.Text>{groupingReport}</Typography.Text>
       </Box>
       <Box className={cn(css.important, css.groupingRightColumn)}>
+        <Actions />
         <Gap.XL />
         <Box>
           {/* Выбор группировки. */}
