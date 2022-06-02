@@ -1,3 +1,10 @@
+# [2.7.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0...v2.7.0-release.1) (2022-06-02)
+
+
+### Features
+
+* GBO-20984 на ЭФ Запрос выписки добавлен параметр Итоги за день ([0f71bc0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0f71bc0e572a853e1c65d714013ff58c00aaf939))
+
 # [2.6.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0...v2.6.0) (2022-05-29)
 
 
