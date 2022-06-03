@@ -1,3 +1,10 @@
+# [2.7.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.1...v2.7.0-release.2) (2022-06-03)
+
+
+### Features
+
+* GBO-20972 добавлены кнопки `Печать` и `Экспорт` в ОСВ ([2517a22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2517a229cfafc1d6bc0a6777eeec462f3e680df6))
+
 # [2.7.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0...v2.7.0-release.1) (2022-06-02)
 
 
