@@ -1,7 +1,9 @@
 import React, { useMemo } from 'react';
 import { Content } from 'components/export-params-dialog/content';
+import { useGetQueryData } from 'hooks';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
+import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { Form } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
@@ -26,7 +28,9 @@ export interface IExportParamsDialogProps {
 
 /** Компонент "ЭФ параметров выписки и документов". */
 export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action, statementId }) => {
-  const initialFormState = getInitialFormState({ useCase });
+  const statementSummary = useGetQueryData<IStatementSummaryInfoResponseDto>(['@eco/statement', 'statement', statementId]);
+
+  const initialFormState = getInitialFormState({ useCase, dateFrom: statementSummary?.dateFrom, dateTo: statementSummary?.dateTo });
 
   const handleSubmit = (values: IFormState) => {
     onClose();
