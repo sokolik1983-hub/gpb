@@ -27,7 +27,7 @@ export const EXPORT_ACTION: IActionWithAuth = {
 export const PRINT_ACTION: IActionWithAuth = {
   authorities: [PRIVILEGE.STATEMENT_REQUEST, PRIVILEGE.ATTACHMENT_DOWNLOAD],
   action: createStatement,
-  icon: Icons.Print,
+  icon: Icons.PrintFile,
   label: locale.form.buttons.print.label,
   name: 'TURNOVER_PRINT',
 };
