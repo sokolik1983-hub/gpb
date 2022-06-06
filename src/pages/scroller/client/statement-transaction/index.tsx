@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError } from 'components';
-import { useIsFetchedData, useScrollerPagination } from 'hooks';
+import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
+import { useIsFetchedData, useScrollerPagination, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
@@ -37,6 +37,11 @@ import { validate } from '@platform/validation';
  * Схема валидации формы фильтра ЭФ "Журнал проводок".
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
+
+/** Высота фильтра. */
+const FILTER_HEIGHT = 58;
+/** Высота инфоблока по проводкам. */
+const STATEMENT_INFO_HEIGHT = 136;
 
 /**
  * Страница скроллера: [Выписки_ЗВ] ЭФ Клиента "Журнал проводок".
@@ -133,6 +138,10 @@ export const StatementTransactionScrollerPage = () => {
     ]
   );
 
+  const height = useStreamContentHeight();
+
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_INFO_HEIGHT;
+
   const isStatementForbidden = httpRequestStatus === HTTP_STATUS_CODE.FORBIDDEN;
 
   if (isStatementForbidden) {
@@ -151,7 +160,7 @@ export const StatementTransactionScrollerPage = () => {
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
         <ScrollerPageLayout headerProps={{ ...headerProps, loading: !statementSummaryInfoFetched }} loading={!dataFetched}>
-          <ContentLoader height={58} loading={!counterpartiesFetched}>
+          <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
             <FilterLayout
               AdditionalFilter={AdditionalFilter}
               QuickFilter={QuickFilter}
@@ -163,10 +172,10 @@ export const StatementTransactionScrollerPage = () => {
               validate={validate(validationSchema)}
             />
           </ContentLoader>
-          <ContentLoader height={136} loading={!statementSummaryInfoFetched}>
+          <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
             <StatementInfo />
           </ContentLoader>
-          <ContentLoader loading={!transactionsFetched}>
+          <ContentLoader height={tableHeight} loading={!transactionsFetched}>
             <Table />
             {selectedRows.length > 0 && <Footer />}
           </ContentLoader>

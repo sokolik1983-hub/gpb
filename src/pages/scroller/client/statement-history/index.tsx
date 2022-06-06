@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, FilterLayout, ScrollerPageLayout } from 'components';
-import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchedData } from 'hooks';
+import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchedData, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
@@ -8,6 +8,7 @@ import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { validate } from '@platform/validation';
+import { TAB_HEIGHT } from 'constants/main';
 import type { IFormState } from './filter';
 import { QuickFilter, fields, tagLabels, STORAGE_KEY, ADDITIONAL_FORM_FIELDS, FORM_FIELDS } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
@@ -20,6 +21,9 @@ import { useGetStatementList } from './hooks';
  * Схема валидации формы фильтра скроллера "История оборотов".
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
+
+/** Высота фильтра. */
+const FILTER_HEIGHT = 58;
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -94,6 +98,10 @@ export const StatementHistoryScrollerPage = () => {
     ]
   );
 
+  const height = useStreamContentHeight();
+
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - TAB_HEIGHT - FILTER_HEIGHT;
+
   if (hasError || isAccountsError || isStatementsError) {
     return (
       <MainLayout>
@@ -106,7 +114,7 @@ export const StatementHistoryScrollerPage = () => {
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
         <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-          <ContentLoader height={58} loading={!accountsFetched}>
+          <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
             <FilterLayout
               AdditionalFilter={AdditionalFilter}
               QuickFilter={QuickFilter}
@@ -118,7 +126,7 @@ export const StatementHistoryScrollerPage = () => {
               validate={validate(validationSchema)}
             />
           </ContentLoader>
-          <ContentLoader loading={!statementsFetched}>
+          <ContentLoader height={tableHeight} loading={!statementsFetched}>
             <Table />
           </ContentLoader>
         </ScrollerPageLayout>

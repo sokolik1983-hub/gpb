@@ -14,12 +14,15 @@ interface IScrollerPageLayoutProps {
   loading?: boolean;
 }
 
+/** Высота хедера лэаута страницы скроллера. */
+export const SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT = 72;
+
 /** Лэаут страницы скроллера. */
 export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({ categoryTabs, children, headerProps, loading }) => (
   <>
     {loading && <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={loading} />}
     <Box className={css.scrollerLayoutContent}>
-      <ContentLoader height={72} loading={headerProps.loading}>
+      <ContentLoader height={SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT} loading={headerProps.loading}>
         <ScrollerHeader {...headerProps} />
       </ContentLoader>
       <Separator />
