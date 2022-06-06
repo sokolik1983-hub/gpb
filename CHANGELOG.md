@@ -1,3 +1,10 @@
+# [2.7.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.2...v2.7.0-release.3) (2022-06-06)
+
+
+### Bug Fixes
+
+* GBO-27265 добавлен чекбок `Итоги за день` на ЭФ Экспорт/печать выписки ([20c5712](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/20c57128e0ab88da065e40a5425345c862b70da3))
+
 # [2.7.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.1...v2.7.0-release.2) (2022-06-03)
 
 
