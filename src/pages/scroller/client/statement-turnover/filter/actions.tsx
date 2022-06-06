@@ -64,7 +64,7 @@ export const Actions = () => {
         .filter(action => action)
         .map(({ disabled, icon, label, onClick }, index, actions) => (
           <>
-            <Link extraSmall disabled={disabled} icon={icon} onClick={onClick}>
+            <Link extraSmall disabled={disabled} icon={icon} volume="MD" onClick={onClick}>
               {label}
             </Link>
             {index < actions.length - 1 && <Gap.XL />}
