@@ -1,3 +1,10 @@
+# [2.7.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.4...v2.7.0-release.5) (2022-06-06)
+
+
+### Features
+
+* **скроллер:** GBO-26286 прикручивание метрики для сервиса ([3a54f29](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3a54f29d008dd8359be481eee51d1031588e5ddf))
+
 # [2.7.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.3...v2.7.0-release.4) (2022-06-06)
 
 
