@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { locale } from 'localization';
 import { CreateStatementForm } from 'pages/form/client/views/create-statement-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
@@ -8,6 +9,8 @@ import { LayoutDocument, LayoutScroll } from '@platform/ui';
 
 /** ЭФ запроса выписки. */
 export const RequestStatementForm: React.FC = () => {
+  useMetricPageListener();
+
   const goHome = useRedirect(COMMON_STREAM_URL.MAINPAGE);
   const goToScroller = useRedirect(COMMON_STREAM_URL.STATEMENT_TURNOVER);
   const breadcrumbs: IBreadcrumb[] = [

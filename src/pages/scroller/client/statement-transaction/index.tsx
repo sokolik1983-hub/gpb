@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError } from 'components';
 import { useIsFetchedData, useScrollerPagination } from 'hooks';
+import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, Sorting, IUrlParams } from 'interfaces';
 import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -43,6 +44,8 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PA
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=286756666
  */
 export const StatementTransactionScrollerPage = () => {
+  useMetricPageListener();
+
   const { id } = useParams<IUrlParams>();
   const { state: { entrySourceView } = {} } = useLocation<{ entrySourceView?: typeof ENTRY_SOURCE_VIEW }>();
 
