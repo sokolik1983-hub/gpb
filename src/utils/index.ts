@@ -11,3 +11,4 @@ export * from './function-control';
 export * from './format-to-mask';
 export * from './get-creation-params-options';
 export * from './check-empty-statement';
+export * from './metric/metric-request-interceptor';

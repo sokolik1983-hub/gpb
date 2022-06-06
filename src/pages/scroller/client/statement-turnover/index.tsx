@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { ContentLoader, ScrollerPageLayout } from 'components';
 import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
+import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
@@ -17,6 +18,8 @@ import { TurnoverScrollerContext } from './turnover-scroller-context';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309
  */
 export const StatementTurnoverScrollerPage = () => {
+  useMetricPageListener();
+
   const tabsProps = useScrollerTabsProps();
 
   // region элементы стейта контекста скроллера.

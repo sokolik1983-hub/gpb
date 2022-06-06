@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, FilterLayout, ScrollerPageLayout } from 'components';
 import { useScrollerTabsProps, useTurnoverScrollerHeaderProps, useAccounts, useScrollerPagination, useIsFetchedData } from 'hooks';
+import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, Sorting } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
@@ -26,6 +27,8 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DA
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309
  */
 export const StatementHistoryScrollerPage = () => {
+  useMetricPageListener();
+
   const tabsProps = useScrollerTabsProps();
 
   // region элементы стейта контекста скроллера.
