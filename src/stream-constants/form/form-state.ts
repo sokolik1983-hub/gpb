@@ -47,12 +47,14 @@ export interface IStateConfig {
   useCase?: EXPORT_PARAMS_USE_CASES;
   /** Предыдущий запрос на выписку. */
   latestStatement?: ILatestStatementDto;
+  /** Дата начала периода. */
+  dateFrom?: string;
+  /** Дата окончания периода. */
+  dateTo?: string;
 }
 
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = (config: IStateConfig): Partial<IFormState> => {
-  const { latestStatement, useCase } = config;
-
+export const getInitialFormState = ({ latestStatement, useCase, dateFrom, dateTo }: IStateConfig): Partial<IFormState> => {
   if (!latestStatement) {
     const creationParams: string[] = [];
     const documentsSetParams: string[] = [];
@@ -62,7 +64,7 @@ export const getInitialFormState = (config: IStateConfig): Partial<IFormState> =
       documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS);
     }
 
-    return { ...defaultFormState, creationParams, documentsSetParams };
+    return { ...defaultFormState, creationParams, documentsSetParams, dateFrom, dateTo };
   }
 
   // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
