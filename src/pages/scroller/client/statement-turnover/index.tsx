@@ -4,8 +4,8 @@ import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps,
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
+import { TAB_HEIGHT } from 'stream-constants';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
-import { TAB_HEIGHT } from 'constants/main';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
 import { useGroupByForRender, useTurnovers } from './hooks';

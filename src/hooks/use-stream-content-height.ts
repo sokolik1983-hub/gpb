@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import { TOP_LINE_HEIGHT } from 'constants/main';
+import { TOPLINE_HEIGHT } from 'stream-constants';
 
 /** Хук получения текущего размера контента стрима. */
 export const useStreamContentHeight = (): number => {
-  const [height, setHeight] = useState<number>(0);
+  const [height, setHeight] = useState<number>(window.innerHeight - TOPLINE_HEIGHT);
 
   useEffect(() => {
     const handleResize = () => {
-      setHeight(window.innerHeight - TOP_LINE_HEIGHT);
+      setHeight(window.innerHeight - TOPLINE_HEIGHT);
     };
 
     window.addEventListener('resize', handleResize);
