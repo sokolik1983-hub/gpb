@@ -1,3 +1,10 @@
+# [2.7.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.3...v2.7.0-release.4) (2022-06-06)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-27357 исправление иконки печати и шрифта к экшенах ([a2a2282](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a2a2282b19de32152e3dc8c9ad707cc4798b6bcf))
+
 # [2.7.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.2...v2.7.0-release.3) (2022-06-06)
 
 
