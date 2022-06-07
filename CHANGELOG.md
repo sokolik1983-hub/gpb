@@ -1,3 +1,10 @@
+# [2.7.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.5...v2.7.0-release.6) (2022-06-07)
+
+
+### Features
+
+* GBO-27419 добавлен скелетон к процессу подгрузки данных ([53899a0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/53899a03be1b856e8763a5a2a2d816f01c8b9984))
+
 # [2.7.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.4...v2.7.0-release.5) (2022-06-06)
 
 
