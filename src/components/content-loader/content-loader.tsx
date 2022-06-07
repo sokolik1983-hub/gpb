@@ -30,6 +30,7 @@ export const ContentLoader: React.FC<ContentLoaderProps> = ({ children, height, 
     return pureHeight < rowWithGapHeight ? 1 : Math.round(pureHeight / rowWithGapHeight);
   }, [height]);
 
+  // FIXME: Скелетон, который жестко привязан к строкам и их размерам - это неправильный скелетон. Он должен принимать только высоту, которую при желании можно вычислить через кол-во и размеры строк.
   return loading ? (
     <Box style={{ height }}>
       <Skeleton gap={<Gap />} padding={['MD', 'XL', 'MD', 'XL']} rows={rows} />
