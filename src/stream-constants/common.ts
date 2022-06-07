@@ -15,3 +15,9 @@ export const ECO_STATEMENT = '@eco/statement';
 
 /** Используется для определения источника перехода в скроллер проводок. */
 export const ENTRY_SOURCE_VIEW = 'VIEW';
+
+/** Высота топлайна. */
+export const TOPLINE_HEIGHT = 64;
+
+/** Высота таба. */
+export const TAB_HEIGHT = 60;
