@@ -6,14 +6,14 @@ import { metricService } from 'services';
 /** Шаблон регулярного выражения для guid. */
 const guidRegEx = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}';
 /** Шаблон регулярного выражения для существующего запроса выписки. */
-const concreteStatementRegEx = new RegExp(`/request/${guidRegEx}$`);
+const concreteStatementRequestRegEx = new RegExp(`/request/${guidRegEx}$`);
 
 /** Функция для преобразования url в тип произошедшего действия для метрики. */
 export const mapUrlToMetricAction = (url: string): METRIC_ACTION | undefined => {
   switch (true) {
     case url.endsWith('/statement'):
       return METRIC_ACTION.STATEMENT_REQUEST;
-    case concreteStatementRegEx.test(url):
+    case concreteStatementRequestRegEx.test(url):
       return METRIC_ACTION.HIDDEN_VIEW_STATEMENT_REQUEST;
     case url.endsWith('/create-attachment'):
       return METRIC_ACTION.DOWNLOAD_ATTACHMENT;
@@ -30,7 +30,8 @@ export const mapUrlToMetricAction = (url: string): METRIC_ACTION | undefined => 
 
 /** Перехватчик для axios-запросов для отправки данных в метрику. */
 export const getMetricInterceptor = () => {
-  const metricData: Pick<IMetricDataDto, 'refererPage' | 'sourcePage'> = {
+  /** Данные страницы sourcePage и refererPage. */
+  const pageData: Pick<IMetricDataDto, 'refererPage' | 'sourcePage'> = {
     sourcePage: '',
     refererPage: '',
   };
@@ -49,8 +50,8 @@ export const getMetricInterceptor = () => {
     }
 
     const dto: IMetricDataDto = {
-      ...metricData,
-      url: metricData.sourcePage,
+      ...pageData,
+      url,
       tag: action,
       requestBody: requestBody ? JSON.stringify(requestBody) : undefined,
     };
@@ -61,12 +62,12 @@ export const getMetricInterceptor = () => {
   });
 
   return {
-    /** Метод обновления sourcePage и refererPage при изменении страницы. */
-    updatePathname: (newPathname: string) => {
-      metricData.refererPage = metricData.sourcePage;
-      metricData.sourcePage = newPathname;
+    /** Метод обновления данных страницы. */
+    updatePageData: (newPathname: string) => {
+      pageData.refererPage = pageData.sourcePage;
+      pageData.sourcePage = newPathname;
     },
   };
 };
 
-export const { updatePathname } = getMetricInterceptor();
+export const { updatePageData } = getMetricInterceptor();
