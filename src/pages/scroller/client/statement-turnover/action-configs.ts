@@ -1,5 +1,5 @@
 import { createStatement } from 'actions/client';
-import { showStatementForm } from 'actions/client/show-statement-form';
+import { showStatementRequestForm } from 'actions/client/show-statement-request-form';
 import { locale } from 'localization';
 import { PRIVILEGE } from 'stream-constants/client';
 import type { IActionWithAuth } from '@platform/services';
@@ -7,7 +7,7 @@ import { Icons } from '@platform/ui';
 
 /** Функция создания нового запроса выписки. */
 export const CREATE_STATEMENT: IActionWithAuth = {
-  action: showStatementForm,
+  action: showStatementRequestForm,
   authorities: [PRIVILEGE.STATEMENT_REQUEST],
   label: locale.action.labels.createStatement,
   name: 'CREATE_STATEMENT',
