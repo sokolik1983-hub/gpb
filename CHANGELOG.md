@@ -1,3 +1,10 @@
+# [2.7.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.8...v2.7.0-release.9) (2022-06-09)
+
+
+### Bug Fixes
+
+* GBO-26997 добавлена проверка на пустую выписку ([3513f33](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3513f33c48b4ef67e4b2f95672f18fe37bd0a305))
+
 # [2.7.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.7...v2.7.0-release.8) (2022-06-09)
 
 
