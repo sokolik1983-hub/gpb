@@ -1,3 +1,10 @@
+# [2.7.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.9...v2.7.0-release.10) (2022-06-09)
+
+
+### Bug Fixes
+
+* GBO-27734 добавлена опция `keepLocalTime` в форматирование даты проверки выписки ([f718933](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f718933ca919d544d920905b500e71525e9b2415))
+
 # [2.7.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.8...v2.7.0-release.9) (2022-06-09)
 
 
