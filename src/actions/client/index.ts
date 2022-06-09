@@ -1,5 +1,6 @@
 export * from './executor';
 export * from './create-statement';
+export * from './create-hidden-statement-outside';
 export * from './show-statement-form';
 export * from './export-statement-attachement';
 export * from './print-statement-attachement';
