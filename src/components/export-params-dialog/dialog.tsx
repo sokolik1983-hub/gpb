@@ -12,6 +12,17 @@ import { dialog } from '@platform/ui';
 import type { IDialogContext } from './dialog-context';
 import { DialogContext } from './dialog-context';
 
+/** Свойства ответа "ЭФ параметров выписки и документов". */
+interface StatementParamsDialogResponse {
+  /** Данные формы. */
+  formState: IFormState;
+  /** Информация по выписке. */
+  statementInfo: {
+    income?: number;
+    outcome?: number;
+  };
+}
+
 /** Свойства ЭФ с параметрами выписки и документов. */
 export interface IExportParamsDialogProps {
   /** Действие. */
@@ -21,7 +32,7 @@ export interface IExportParamsDialogProps {
   /** Обработчик закрытия формы. */
   onClose(): void;
   /** Обработчик отправки формы. */
-  onSubmit(values: IFormState): void;
+  onSubmit(values: StatementParamsDialogResponse): void;
   /** Идентификатор выписки. */
   statementId?: string;
 }
@@ -34,9 +45,9 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
 
   const initialFormState = getInitialFormState({ useCase, dateFrom: statementSummary?.dateFrom, dateTo: statementSummary?.dateTo });
 
-  const handleSubmit = (values: IFormState) => {
+  const handleSubmit = (formState: IFormState) => {
     onClose();
-    onSubmit(values);
+    onSubmit({ formState, statementInfo: { income: statementSummary?.income, outcome: statementSummary?.outcome } });
   };
 
   const value: IDialogContext = useMemo(
@@ -59,7 +70,7 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
 ExportParamsDialog.displayName = 'StatementParamsDialog';
 
 export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION, statementId) =>
-  new Promise<IFormState>((resolve, reject) =>
+  new Promise<StatementParamsDialogResponse>((resolve, reject) =>
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve, statementId }, () => reject(true))
   );
 
