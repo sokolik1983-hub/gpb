@@ -2,6 +2,7 @@ import { showStatementParamsDialog } from 'components/export-params-dialog';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
 import type { IGetTransactionCardResponseDto, ICreateAttachmentRequestDto } from 'interfaces/dto';
+import { locale } from 'localization';
 import {
   alwaysSentParamsCasesWithoutUI,
   convertToCreationParams,
@@ -13,6 +14,9 @@ import {
 } from 'utils';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
+import { DATE_FORMAT } from '@platform/services';
+import { formatDateTime } from '@platform/tools/date-time';
+import { dialog } from '@platform/ui';
 import type { context } from './executor';
 
 /** Вспомогательная функция формирования файла выписки или документа. */
@@ -58,7 +62,7 @@ export const getCreateAttachment = (
     }
 
     if (isShowDialog) {
-      const [formState, close] = await to(showStatementParamsDialog(useCase, action, statementId));
+      const [response, close] = await to(showStatementParamsDialog(useCase, action, statementId));
 
       if (close) {
         done();
@@ -66,14 +70,29 @@ export const getCreateAttachment = (
         return;
       }
 
+      const { formState, statementInfo } = response!;
+
       if (fileFormatShowCases.includes(useCase)) {
-        params.format = formState!.format;
+        params.format = formState.format;
       }
 
-      const baseParams = convertToCreationParams(formState!, useCase, documentType);
-      const { sign, ...extendedParams } = convertToExtendedCreationParams(formState!);
+      const baseParams = convertToCreationParams(formState, useCase, documentType);
+      const { sign, ...extendedParams } = convertToExtendedCreationParams(formState);
 
       otherParams = { ...baseParams, ...extendedParams, signed: sign };
+
+      if (otherParams.hideEmptyTurnovers && statementInfo.income === 0 && statementInfo.outcome === 0) {
+        dialog.showAlert(
+          locale.form.notFoundStatement.warning({
+            dateFrom: formatDateTime(formState.dateFrom, { format: DATE_FORMAT }),
+            dateTo: formatDateTime(formState.dateTo, { format: DATE_FORMAT }),
+          })
+        );
+
+        done();
+
+        return;
+      }
     } else if (alwaysSentParamsCasesWithoutUI.includes(useCase)) {
       let generateOrders;
       let generateStatements;
