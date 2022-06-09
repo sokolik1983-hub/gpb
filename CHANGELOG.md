@@ -1,3 +1,10 @@
+# [2.7.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.7...v2.7.0-release.8) (2022-06-09)
+
+
+### Bug Fixes
+
+* **метрика:** GBO-27568 доработки для передачи метрики ([33d2887](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/33d288765432d8238e5dfaac78629eb6714ce72c))
+
 # [2.7.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.6...v2.7.0-release.7) (2022-06-07)
 
 
