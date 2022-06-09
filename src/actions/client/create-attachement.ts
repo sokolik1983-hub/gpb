@@ -84,8 +84,8 @@ export const getCreateAttachment = (
       if (otherParams.hideEmptyTurnovers && statementInfo.income === 0 && statementInfo.outcome === 0) {
         dialog.showAlert(
           locale.form.notFoundStatement.warning({
-            dateFrom: formatDateTime(formState.dateFrom, { format: DATE_FORMAT }),
-            dateTo: formatDateTime(formState.dateTo, { format: DATE_FORMAT }),
+            dateFrom: formatDateTime(formState.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
+            dateTo: formatDateTime(formState.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
           })
         );
 
