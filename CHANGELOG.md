@@ -1,3 +1,10 @@
+# [2.7.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.10...v2.7.0-release.11) (2022-06-10)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-27621 доработки условий отправки данных в метрику ([2deab85](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2deab857aa9f39273ed0c5d4c19208288934d7fb))
+
 # [2.7.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.9...v2.7.0-release.10) (2022-06-09)
 
 
