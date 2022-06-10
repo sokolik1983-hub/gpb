@@ -7,7 +7,7 @@ import { ID_URL_PARAMETER } from 'stream-constants';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { GuardRoute } from '@platform/services/client';
 
-export { executeCreateStatementHidden } from 'utils/execute-action';
+export { executeCreateStatementHidden, executeCreateStatementOneTime } from 'utils/execute-actions';
 
 export const routes = [
   <GuardRoute
