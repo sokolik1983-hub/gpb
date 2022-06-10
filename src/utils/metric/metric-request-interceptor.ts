@@ -12,15 +12,20 @@ const concreteStatementRequestRegEx = new RegExp(`/request/${guidRegEx}$`);
 const exportStatementRegEx = new RegExp(`/export/${guidRegEx}$`);
 /** Шаблон регулярного выражения для печати выписки. */
 const printStatementRegEx = new RegExp(`/print/${guidRegEx}$`);
+/** Шаблон регулярного выражения для экспорта вложения по идентификатору выписки. */
+const exportAttachment = new RegExp(`/attachment/${guidRegEx}$`);
 
 /** Функция для преобразования url в тип произошедшего действия для метрики. */
-export const mapUrlToMetricAction = (url: string, sourcePage: string): METRIC_ACTION | undefined => {
+export const mapUrlToMetricAction = (url: string, sourcePage?: string): METRIC_ACTION | undefined => {
   switch (true) {
     case url.endsWith('/statement'):
       return METRIC_ACTION.STATEMENT_REQUEST;
-    case concreteStatementRequestRegEx.test(url) && sourcePage === COMMON_STREAM_URL.STATEMENT_TURNOVER:
+    case (concreteStatementRequestRegEx.test(url) && sourcePage === COMMON_STREAM_URL.STATEMENT_TURNOVER) || url.endsWith('/request'):
       return METRIC_ACTION.HIDDEN_VIEW_STATEMENT_REQUEST;
-    case url.endsWith('/create-attachment') || exportStatementRegEx.test(url) || printStatementRegEx.test(url):
+    case url.endsWith('/create-attachment') ||
+      exportStatementRegEx.test(url) ||
+      printStatementRegEx.test(url) ||
+      exportAttachment.test(url):
       return METRIC_ACTION.DOWNLOAD_ATTACHMENT;
     case url.endsWith('/request/get-page'):
       return METRIC_ACTION.STATEMENT_REQUEST_GET_PAGE;
@@ -68,9 +73,9 @@ export const getMetricInterceptor = () => {
 
   return {
     /** Метод обновления данных страницы. */
-    updatePageData: (newPathname: string, refererPage?: string) => {
-      pageData.refererPage = refererPage ?? pageData.sourcePage;
-      pageData.sourcePage = newPathname;
+    updatePageData: (newSourcePage: string, actualRefererPage?: string) => {
+      pageData.refererPage = actualRefererPage ?? pageData.sourcePage;
+      pageData.sourcePage = newSourcePage;
     },
   };
 };
