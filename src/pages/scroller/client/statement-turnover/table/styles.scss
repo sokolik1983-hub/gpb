@@ -32,15 +32,15 @@
 }
 
 .thirdLevelLine {
-  margin-left: 52px;
+  margin-left: 60px;
 }
 
 .secondLevelLine {
-  margin-left: 42px;
+  margin-left: 44px;
 }
 
 .thirdLevelCell {
-  padding-left: 54px;
+  padding-left: 60px;
 }
 
 .secondLevelCell {
@@ -124,15 +124,37 @@
   background-color: #fff;
 }
 
-.groupRows {
-  padding: 14px 8px 12px;
-  background-color: #fff;
+.groupingRow {
+  padding: 8px 16px;
   cursor: pointer;
 }
 
-.subGroupRows {
+.groupingRowSecondLevel {
+  padding: 8px 16px 8px 32px;
+}
+
+.groupingRowWithCells {
+  padding: 0;
+
+  &.groupingRowFirstLevel {
+    .cell:first-child {
+      padding-left: 16px;
+    }
+  }
+
+  &.groupingRowSecondLevel {
+    .cell:first-child {
+      padding-left: 32px;
+    }
+  }
+}
+
+.groupingRowPrimary {
+  padding-left: 8px;
+}
+
+.highlight {
   background-color: #f7f8fb;
-  cursor: pointer;
 }
 
 .hoveredRow {
