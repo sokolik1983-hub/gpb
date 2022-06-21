@@ -61,6 +61,7 @@
   @extend .cell;
 
   position: relative;
+  padding-bottom: 10px;
   user-select: none;
 }
 
@@ -150,6 +151,7 @@
 }
 
 .groupingRowPrimary {
+  padding-top: 12px;
   padding-left: 8px;
 }
 
