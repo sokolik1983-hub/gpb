@@ -1,3 +1,10 @@
+# [2.7.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.13...v2.7.0-release.14) (2022-06-21)
+
+
+### Features
+
+* **скроллер:** GBO-27785 поправлены отступы в скроллере ОСВ ([ecf8a0a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ecf8a0a1b1f71ee871be95639d506c139ea710c6))
+
 # [2.7.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.12...v2.7.0-release.13) (2022-06-21)
 
 
