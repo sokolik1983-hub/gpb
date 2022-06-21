@@ -34,7 +34,7 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
           <Horizon>
             <Icon fill="FAINT" scale={'MD'} />
             <Gap.SM />
-            <Typography.Text data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.Text>
+            <Typography.P data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.P>
           </Horizon>
         );
       // Группирующие строки для этих типов группировки, рендерятся без ячеек таблицы,
@@ -51,9 +51,9 @@ export const OrganizationCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversI
       <Box className={cn({ [css.secondLevelCell]: hasSecondLevelMargin })}>
         <WithInfoTooltip text={organizationName}>
           {ref => (
-            <Typography.SmallText data-field={'organizationName'} innerRef={ref} line={'COLLAPSE'}>
+            <Typography.P data-field={'organizationName'} innerRef={ref} line={'COLLAPSE'}>
               {organizationName}
-            </Typography.SmallText>
+            </Typography.P>
           )}
         </WithInfoTooltip>
       </Box>
@@ -79,10 +79,9 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
     if (groupingType === GROUPING_TYPE.CURRENCIES && groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES) {
       return (
         <Horizon>
-          <Gap.XL />
           <Icon fill="FAINT" scale={'MD'} />
           <Gap.SM />
-          <Typography.Text data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.Text>
+          <Typography.P data-field={'currencyNameOrCurrencyCode'}>{currencyName ?? currencyCode}</Typography.P>
         </Horizon>
       );
     }
@@ -109,7 +108,7 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
 
   return (
     <Box className={cn({ [css.thirdLevelCell]: hasThirdLevelMargin, [css.secondLevelCell]: hasSecondLevelMargin })}>
-      <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
+      <Typography.P>{formatAccountCode(accountNumber)}</Typography.P>
       <WithInfoTooltip text={accountDescription}>
         {ref => (
           <Typography.SmallText data-field={'accountDescription'} fill={'FAINT'} innerRef={ref} line={'COLLAPSE'}>
@@ -133,18 +132,18 @@ export const IncomingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} data-field={'incomingBalance'}>
+      <Typography.P align={'RIGHT'} data-field={'incomingBalance'}>
         {amount}
-      </Typography.Text>
+      </Typography.P>
     );
     // Правило отключено потому, что нельзя сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} data-field={'incomingBalance'} fill={'FAINT'}>
+      <Typography.PBold align={'RIGHT'} data-field={'incomingBalance'} fill={'FAINT'}>
         {amount}
-      </Typography.TextBold>
+      </Typography.PBold>
     );
   }
 
@@ -163,18 +162,18 @@ export const OutcomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo |
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
+      <Typography.P align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
         {amount}
-      </Typography.Text>
+      </Typography.P>
     );
     // Правило отключено потому, что TS не позволяет сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
+      <Typography.PBold align={'RIGHT'} data-field={'outcome'} fill={'CRITIC'}>
         {amount}
-      </Typography.TextBold>
+      </Typography.PBold>
     );
   }
 
@@ -193,18 +192,18 @@ export const IncomeCell: FC<CellProps<IGroupedAccounts, IAccountTurnoversInfo | 
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
+      <Typography.P align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
         {amount}
-      </Typography.Text>
+      </Typography.P>
     );
     // Правило отключено потому, что нельзя сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
+      <Typography.PBold align={'RIGHT'} data-field={'income'} fill={'SUCCESS'}>
         {amount}
-      </Typography.TextBold>
+      </Typography.PBold>
     );
   }
 
@@ -223,18 +222,18 @@ export const OutgoingBalanceCell: FC<CellProps<IGroupedAccounts, IAccountTurnove
   // Если ячейка была вызвана для строки с информацией по счёту.
   if (!isGroupingRow(value)) {
     return (
-      <Typography.Text align={'RIGHT'} data-field={'outgoingBalance'}>
+      <Typography.P align={'RIGHT'} data-field={'outgoingBalance'}>
         {amount}
-      </Typography.Text>
+      </Typography.P>
     );
     // Правило отключено потому, что нельзя сделать деструкцию, т.к. тип не уточнён,
     // линтер не учитывает типизацию.
     // eslint-disable-next-line unicorn/consistent-destructuring
   } else if (value.groupingType === GROUPING_TYPE.CURRENCIES) {
     return (
-      <Typography.TextBold align={'RIGHT'} data-field={'outgoingBalance'} fill={'FAINT'}>
+      <Typography.PBold align={'RIGHT'} data-field={'outgoingBalance'} fill={'FAINT'}>
         {amount}
-      </Typography.TextBold>
+      </Typography.PBold>
     );
   }
 

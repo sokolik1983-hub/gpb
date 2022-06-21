@@ -4,7 +4,7 @@ import type { IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_TYPE } from 'interfaces/dto';
 import type { Row } from 'react-table';
 import { AccountList } from '../account-list';
-import { GroupingRow } from '../grouping-row';
+import { GROUPING_ROW_LEVEL, GroupingRow } from '../grouping-row';
 import type { IScrollerView } from '../table-body';
 
 /**
@@ -63,7 +63,7 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
               expand={toggleRowExpanded}
               header={
                 <StickyRow secondLevelRow>
-                  <GroupingRow groupingRow={row} />
+                  <GroupingRow highlight groupingRow={row} level={GROUPING_ROW_LEVEL.SECOND} />
                 </StickyRow>
               }
               isExpanded={isCurrencyExpanded}
@@ -78,7 +78,7 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
             expand={toggleOrgRow}
             header={
               <StickyRow>
-                <GroupingRow groupingRow={orgRow} />
+                <GroupingRow primary groupingRow={orgRow} level={GROUPING_ROW_LEVEL.FIRST} />
               </StickyRow>
             }
             isExpanded={isOrgExpanded}
