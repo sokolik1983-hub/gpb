@@ -1,13 +1,14 @@
 import { useMemo } from 'react';
 import { usePrevious } from 'hooks';
 import { HTTP_STATUS_CODE } from 'interfaces';
-import type { Sorting, IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
+import type { IPagination, IUrlParams, IExpandedCollectionResponse } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { useDebounce } from 'platform-copies/hooks';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services';
-import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
+import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
+import type { ISortSettings } from '@platform/services';
 import type { IMetaData } from '@platform/services/client';
 
 const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = {
@@ -18,12 +19,6 @@ const DEFAULT_RESPONSE: IExpandedCollectionResponse<IStatementTransactionRow> = 
 };
 
 const SORTING_MAP = {
-  /** Дата и время запроса. */
-  entryDate: 'entryDate',
-  /** Информация о документе. */
-  documentNumber: 'documentNumber',
-  /** Информация о контрагенте. */
-  payeeName: 'payeeName',
   /** Списания. */
   outcome: 'amountDebit',
   /** Поступления. */
@@ -35,7 +30,7 @@ interface IUseGetStatementListArgs {
   /** Обработанные значения фильтров отправляемых на сервер. */
   filters: IMetaData['filters'];
   /** Состояние сортировки таблицы. */
-  sorting: Sorting;
+  sorting: ISortSettings;
   /** Состояние пагинации. */
   pagination: IPagination;
 }
@@ -47,7 +42,7 @@ export const useGetTransactionsList = ({ filters, sorting, pagination }: IUseGet
   const requestDto: IMetaData = useMemo(
     () => ({
       filters,
-      multiSort: sorting.length > 0 ? convertTableSortingToMetaData(sorting, SORTING_MAP) : undefined,
+      multiSort: convertTableSortByMap(sorting, SORTING_MAP),
       ...convertTablePaginationToMetaData(pagination),
     }),
     [filters, pagination, sorting]

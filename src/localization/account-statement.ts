@@ -229,7 +229,7 @@ export default {
 			counterpartyInn: (p: { inn: string }) => t('transactionsScroller.labels.counterpartyInn', p),
 			/**
 			 * @ru
-			 * № {documentNumber}
+			 * №{documentNumber}
 			 */
 			documentNumber: (p: { documentNumber: string }) => t('transactionsScroller.labels.documentNumber', p),
 			/**
@@ -376,13 +376,6 @@ export default {
 			 */
 			get income() {
 				return t('transactionsScroller.headers.income');
-			},
-			/**
-			 * @ru
-			 * Назначение
-			 */
-			get purpose() {
-				return t('transactionsScroller.headers.purpose');
 			},
 		},
 		footer: {
