@@ -1,3 +1,11 @@
+# [2.7.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.12...v2.7.0-release.13) (2022-06-21)
+
+
+### Features
+
+* GBO-27785 обновлена версия платформы до 12.5.0-release.3 ([8d24d9b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d24d9bf44e3f80a44e73b883135bf8cd789a47a))
+* **скроллер:** GBO-27785 соответствие скроллера ОСВ новым макетам ([85fca83](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/85fca833f6fedc7c443e4e52dd3c26eec14e3529))
+
 # [2.7.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.11...v2.7.0-release.12) (2022-06-10)
 
 
