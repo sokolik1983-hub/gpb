@@ -1,4 +1,4 @@
-import { ERROR } from '@platform/services';
+import { ERROR } from '@platform/services/client';
 
 /** Распарсеные параметры УРЛа. */
 export interface IUrlParams {
