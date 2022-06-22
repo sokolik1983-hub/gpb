@@ -1,8 +1,8 @@
-import type { Sorting, IPagination } from 'interfaces';
+import type { IPagination, Sorting } from 'interfaces';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import type { Column } from 'react-table';
 import { SORT_DIRECTION } from '@platform/core';
-import type { IMetaData } from '@platform/services';
+import type { IMetaData, ISortSettings } from '@platform/services';
 import type { IOption } from '@platform/ui';
 
 /**
@@ -41,6 +41,15 @@ export const convertTableSortingToMetaData = (sorting: Sorting, sortingMap?: Rec
 
     return acc;
   }, {});
+
+/**
+ * Преобразует ключи стейта сортировки таблицы в соответствии с переданным мапом (в форму, подходящую для запроса на сервер).
+ *
+ * @param sort - Стейт сортировки таблицы.
+ * @param map - Мап свойств сортировки таблицы, которые необходимо переопределить.
+ */
+export const convertTableSortByMap = (sort: ISortSettings, map: Record<string, string>): ISortSettings =>
+  Object.keys(sort).reduce((prev, item) => (map[item] ? { ...prev, [map[item]]: sort[item] } : { ...prev, [item]: sort[item] }), {});
 
 /**
  * Преобразует стейт пагинации таблицы, в форму подходящую для запроса на сервер.
@@ -84,7 +93,9 @@ export const parseCounterparty = (stringifiedCounterparty: string): IGetCounterp
  * @param columns - Конфиги колонок таблицы.
  * @returns - Конфиги колонок таблицы с дефолтными полями.
  */
-export const addMaxWidthField = <T extends Record<string, any>>(columns: Array<Column<T>>): Array<Column<T>> =>
+export const addMaxWidthField = <T extends Record<string, any>, P extends Record<string, any>>(
+  columns: Array<Column<T> & P>
+): Array<Column<T> & P> =>
   columns.map(column => ({
     maxWidth: Number.POSITIVE_INFINITY,
     ...column,

@@ -1,23 +1,35 @@
-import type { Sorting, IPagination } from 'interfaces';
+import type { IPagination } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-history/filter';
 import { useQuery } from 'react-query';
 import { statementService } from 'services';
-import { convertTableSortingToMetaData, convertTablePaginationToMetaData } from 'utils';
-import type { ICollectionResponse } from '@platform/services';
+import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
+import type { ICollectionResponse, IMetaData, ISortSettings } from '@platform/services';
 import { conditions } from '@platform/services/client';
-import type { IMetaData } from '@platform/services/client';
 
 const DEFAULT_RESPONSE = {
   data: [],
   total: 0,
 };
 
+const SORTING_MAP = {
+  /** Дата и время запроса. */
+  entryDate: 'entryDate',
+  /** Информация о документе. */
+  documentNumber: 'documentNumber',
+  /** Информация о контрагенте. */
+  payeeName: 'payeeName',
+  /** Списания. */
+  outcome: 'amountDebit',
+  /** Поступления. */
+  income: 'amountCredit',
+};
+
 interface IUseGetStatementListArgs {
   /** Обработанные значения фильтров отправляемых на сервер. */
   filters: IMetaData['filters'];
   /** Состояние сортировки таблицы. */
-  sorting: Sorting;
+  sorting: ISortSettings;
   /** Состояние пагинации. */
   pagination: IPagination;
 }
@@ -37,7 +49,7 @@ export const useGetStatementList = ({ filters, sorting, pagination }: IUseGetSta
 
   const requestDto: IMetaData = {
     filters: filterValues,
-    sort: sorting.length > 0 ? convertTableSortingToMetaData(sorting) : undefined,
+    multiSort: convertTableSortByMap(sorting, SORTING_MAP),
     ...convertTablePaginationToMetaData(pagination),
   };
 

@@ -1,8 +1,7 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
-import type { Column } from 'react-table';
 import { addMaxWidthField } from 'utils';
-import { CreatedAtCell, AccountNumber, Period, StatementFormat, Status, Actions } from './cells';
+import { AccountNumber, Actions, CreatedAtCell, Period, StatementFormat, Status } from './cells';
 import { COLUMN_NAMES } from './constants';
 
 /**
@@ -13,13 +12,14 @@ import { COLUMN_NAMES } from './constants';
 const accessor = (row: IStatementHistoryRow): IStatementHistoryRow => row;
 
 /** Конфигурация колонок таблицы. */
-export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
+export const columns = addMaxWidthField<IStatementHistoryRow, { isVisible: boolean }>([
   {
     Header: locale.historyScroller.headers.createdAt,
     id: COLUMN_NAMES.CREATED_AT,
     accessor,
     Cell: CreatedAtCell,
     width: 156,
+    isVisible: true,
   },
   {
     Header: locale.historyScroller.headers.accountNumber,
@@ -28,6 +28,7 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     Cell: AccountNumber,
     width: 390,
     disableSortBy: true,
+    isVisible: true,
   },
   {
     Header: locale.historyScroller.headers.period,
@@ -35,6 +36,7 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     accessor,
     Cell: Period,
     width: 268,
+    isVisible: true,
   },
   {
     Header: locale.historyScroller.headers.statementFormat,
@@ -42,6 +44,7 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     accessor,
     Cell: StatementFormat,
     width: 200,
+    isVisible: true,
   },
   {
     Header: locale.historyScroller.headers.status,
@@ -50,6 +53,7 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     Cell: Status,
     width: 232,
     disableResizing: true,
+    isVisible: true,
   },
   {
     id: COLUMN_NAMES.ACTIONS,
@@ -59,5 +63,6 @@ export const columns: Array<Column<IStatementHistoryRow>> = addMaxWidthField([
     disableSortBy: true,
     width: 84,
     innerFocus: true,
+    isVisible: true,
   },
 ]);
