@@ -144,6 +144,7 @@ export const DataTable = function Table<T extends { id: string }>({
   storageKey,
   onRowClick = noop,
   rowCaptionComponent: RowCaptionComponent,
+  visibleOnlySelectedRows,
 }: IDataTableProps<T>) {
   const { paginationState = DEFAULT_PAGINATION_STATE, goToPage, setPageSize } = usePaginationController(
     propsPaginationState,
@@ -519,76 +520,80 @@ export const DataTable = function Table<T extends { id: string }>({
                 ? getActionButtons(getAvailableActions(expandedRowActionsGetter(row.original)), executor, [[row.original]])
                 : [];
 
-              return (
-                <WithClickable key={row.getRowProps().key}>
-                  {(ref, { hovered }) => (
-                    <React.Fragment key={`rowLayout_${row.getRowProps().key}`}>
-                      <Box
-                        ref={ref}
-                        border={['FAINT', 'SM']}
-                        className={css.row}
-                        data-id={row.original.id}
-                        {...row.getRowProps()}
-                        key={`row_${row.getRowProps().key}`}
-                        aria-expanded={row.isExpanded}
-                        fill={hovered ? 'FAINT' : 'BASE'}
-                        style={{
-                          ...row.getRowProps().style,
+              const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
 
-                          borderRight: 'none',
-                          borderBottom: 'none',
-                          borderLeft: 'none',
-                          minWidth,
-                        }}
-                        onClick={handleRowClick(row)}
-                        onDoubleClick={handleRowDoubleClick(row)}
-                      >
-                        <Box className={css.rowContent} style={{ display: 'flex' }}>
-                          {row.cells.map((cell, cellIndex) => (
-                            // eslint-disable-next-line react/jsx-key
-                            <Box
-                              className={cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding}
-                              data-field={cell.column.id}
-                              {...cell.getCellProps()}
-                            >
-                              {cell.render('Cell', { refetch })}
-                            </Box>
-                          ))}
-                          {hovered && <FastActionsPanel actions={rowActionButtons} />}
+              return (
+                visibleRow && (
+                  <WithClickable key={row.getRowProps().key}>
+                    {(ref, { hovered }) => (
+                      <React.Fragment key={`rowLayout_${row.getRowProps().key}`}>
+                        <Box
+                          ref={ref}
+                          border={['FAINT', 'SM']}
+                          className={css.row}
+                          data-id={row.original.id}
+                          {...row.getRowProps()}
+                          key={`row_${row.getRowProps().key}`}
+                          aria-expanded={row.isExpanded}
+                          fill={hovered ? 'FAINT' : 'BASE'}
+                          style={{
+                            ...row.getRowProps().style,
+
+                            borderRight: 'none',
+                            borderBottom: 'none',
+                            borderLeft: 'none',
+                            minWidth,
+                          }}
+                          onClick={handleRowClick(row)}
+                          onDoubleClick={handleRowDoubleClick(row)}
+                        >
+                          <Box className={css.rowContent} style={{ display: 'flex' }}>
+                            {row.cells.map((cell, cellIndex) => (
+                              // eslint-disable-next-line react/jsx-key
+                              <Box
+                                className={cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding}
+                                data-field={cell.column.id}
+                                {...cell.getCellProps()}
+                              >
+                                {cell.render('Cell', { refetch })}
+                              </Box>
+                            ))}
+                            {hovered && <FastActionsPanel actions={rowActionButtons} />}
+                          </Box>
+                          {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
+                          {ExpandedRowComponent && row.isExpanded ? (
+                            <ExpandedRowComponent
+                              actions={extendedRowActionButtons}
+                              row={row.original}
+                              {...row.getRowProps()}
+                              key={`expanded_${row.getRowProps().key}`}
+                              style={{
+                                ...row.getRowProps().style,
+
+                                minWidth,
+                              }}
+                            />
+                          ) : null}
                         </Box>
-                        {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
-                        {ExpandedRowComponent && row.isExpanded ? (
-                          <ExpandedRowComponent
-                            actions={extendedRowActionButtons}
-                            row={row.original}
+                        {rowIndex === page.length - 1 ? (
+                          <Box
+                            border={['FAINT', 'SM']}
                             {...row.getRowProps()}
-                            key={`expanded_${row.getRowProps().key}`}
+                            key={`divider_${row.getRowProps().key}`}
                             style={{
                               ...row.getRowProps().style,
 
+                              borderTop: 'none',
+                              borderRight: 'none',
+                              borderLeft: 'none',
                               minWidth,
                             }}
                           />
                         ) : null}
-                      </Box>
-                      {rowIndex === page.length - 1 ? (
-                        <Box
-                          border={['FAINT', 'SM']}
-                          {...row.getRowProps()}
-                          key={`divider_${row.getRowProps().key}`}
-                          style={{
-                            ...row.getRowProps().style,
-
-                            borderTop: 'none',
-                            borderRight: 'none',
-                            borderLeft: 'none',
-                            minWidth,
-                          }}
-                        />
-                      ) : null}
-                    </React.Fragment>
-                  )}
-                </WithClickable>
+                      </React.Fragment>
+                    )}
+                  </WithClickable>
+                )
               );
             })}
           </Box>
