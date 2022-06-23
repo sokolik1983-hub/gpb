@@ -1,26 +1,29 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
 import {
-  useScrollerTabsProps,
-  useTurnoverScrollerHeaderProps,
   useAccounts,
-  useScrollerPagination,
   useIsFetchedData,
+  useScrollerPagination,
+  useScrollerTabsProps,
   useStreamContentHeight,
+  useTurnoverScrollerHeaderProps,
 } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
-import type { IFilterPanel, Sorting } from 'interfaces';
+import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, TAB_HEIGHT } from 'stream-constants';
+import type { ISortSettings } from '@platform/services';
+import { FractalScrollerPageLayout } from '@platform/services/admin/dist-types/components';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
+import { Line, ScrollerHeader } from '@platform/ui';
 import { validate } from '@platform/validation';
 import type { IFormState } from './filter';
-import { QuickFilter, fields, tagLabels, STORAGE_KEY, ADDITIONAL_FORM_FIELDS, FORM_FIELDS } from './filter';
+import { ADDITIONAL_FORM_FIELDS, fields, FORM_FIELDS, QuickFilter, STORAGE_KEY, tagLabels } from './filter';
 import { AdditionalFilter } from './filter/additional-filter';
 import { TagsPanel } from './filter/tags-panel';
 import type { IHistoryScrollerContext } from './history-scroller-context';
-import { HistoryScrollerContext, DEFAULT_SORTING } from './history-scroller-context';
+import { DEFAULT_SORTING, HistoryScrollerContext } from './history-scroller-context';
 import { useGetStatementList } from './hooks';
 
 /**
@@ -43,7 +46,7 @@ export const StatementHistoryScrollerPage = () => {
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
-  const [sorting, setSorting] = useState<Sorting>(DEFAULT_SORTING);
+  const [sorting, setSorting] = useState<ISortSettings>(DEFAULT_SORTING);
   const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
     fields,
     labels: tagLabels,
@@ -86,6 +89,8 @@ export const StatementHistoryScrollerPage = () => {
       setSorting,
       pagination,
       setPagination,
+      isStatementsError,
+      isStatementsFetched,
     }),
     [
       accounts,
@@ -101,6 +106,7 @@ export const StatementHistoryScrollerPage = () => {
       statementsFetched,
       tagsPanel,
       totalStatementsAmount,
+      isStatementsFetched,
     ]
   );
 
@@ -119,23 +125,30 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-          <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-            <FilterLayout
-              AdditionalFilter={AdditionalFilter}
-              QuickFilter={QuickFilter}
-              TagsPanel={TagsPanel}
-              additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-              filterFields={fields}
-              filterState={filterPanel}
-              tagsState={tagsPanel}
-              validate={validate(validationSchema)}
-            />
-          </ContentLoader>
+        <FractalScrollerPageLayout
+          categoryTabsProps={tabsProps}
+          filter={
+            <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+              <Line fill="FAINT" />
+              <FilterLayout
+                AdditionalFilter={AdditionalFilter}
+                QuickFilter={QuickFilter}
+                TagsPanel={TagsPanel}
+                additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                filterFields={fields}
+                filterState={filterPanel}
+                tagsState={tagsPanel}
+                validate={validate(validationSchema)}
+              />
+            </ContentLoader>
+          }
+          isLoading={!dataFetched}
+          navigationLine={<ScrollerHeader {...headerProps} />}
+        >
           <ContentLoader height={tableHeight} loading={!statementsFetched}>
             <Table />
           </ContentLoader>
-        </ScrollerPageLayout>
+        </FractalScrollerPageLayout>
       </MainLayout>
     </HistoryScrollerContext.Provider>
   );

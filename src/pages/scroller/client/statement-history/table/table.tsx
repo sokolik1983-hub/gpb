@@ -1,47 +1,41 @@
 import type { FC } from 'react';
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
-import { ScrollerTableView } from 'components/scroller-table-view';
+import type { IUrlParams } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
-import { useTable, useSortBy, useResizeColumns, useBlockLayout, usePagination } from 'react-table';
+import { STORAGE_KEY } from 'pages/scroller/client/statement-history/filter';
+import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
 import { isFunctionAvailability } from 'utils';
-import { Horizon, Typography, Gap, Box } from '@platform/ui';
-import { HistoryScrollerContext } from '../history-scroller-context';
+import type { IFetchDataResponse } from '@platform/services/admin/dist-types/components/data-table/interfaces';
+import { DataTable } from '@platform/services/common/dist-types/components';
+import { Box, Gap, Horizon, Typography } from '@platform/ui';
+import { DEFAULT_SORTING, HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
 import css from './styles.scss';
 
-/** Таблица скроллера истории запросов. */
+/** Cкроллер истории запросов. */
 export const Table: FC = () => {
-  const { statements, statementsUpdating, totalStatementsAmount, sorting, setSorting, pagination, setPagination } = useContext(
-    HistoryScrollerContext
-  );
+  const { id } = useParams<IUrlParams>();
 
-  const tableInstance = useTable<IStatementHistoryRow>(
-    {
-      data: statements,
-      columns,
-      disableMultiSort: true,
-      manualPagination: true,
-      manualSortBy: true,
-      expandSubRows: false,
-      pageCount: Math.ceil(totalStatementsAmount / pagination.pageSize),
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-      useControlledState: state => React.useMemo(() => ({ ...state, ...pagination }), [state, pagination]),
-      initialState: {
-        sortBy: sorting,
-        ...pagination,
-      },
-    },
-    useSortBy,
-    usePagination,
-    useResizeColumns,
-    useBlockLayout
-  );
+  const {
+    statements,
+    totalStatementsAmount,
+    setSorting,
+    pagination,
+    setPagination,
+    setHasError,
+    isStatementsError,
+    isStatementsFetched,
+  } = useContext(HistoryScrollerContext);
 
-  const handleClick = useCallback((doc: IStatementHistoryRow) => {
+  const [selectedRows, setSelectedRows] = useState<IStatementHistoryRow[]>([]);
+
+  const storageKey = `${STORAGE_KEY}:${id}`;
+
+  const handleRowClick = useCallback((doc: IStatementHistoryRow) => {
     if (doc.accountsIds.length === 1) {
       // TODO: в дальнейшем заменить на платформенный аналог
       if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_VIEW)) {
@@ -52,13 +46,23 @@ export const Table: FC = () => {
     }
   }, []);
 
-  const {
-    state: { sortBy },
-  } = tableInstance;
+  const sendHistoryToDataTable = useCallback(
+    ({ multiSort }): Promise<IFetchDataResponse<IStatementHistoryRow>> =>
+      new Promise((resolve, reject) => {
+        setSorting(multiSort);
 
-  useEffect(() => {
-    setSorting(sortBy);
-  }, [setSorting, sortBy]);
+        if (isStatementsFetched) {
+          resolve({ rows: statements, pageCount: Math.ceil(totalStatementsAmount / pagination.pageSize) });
+        }
+
+        if (isStatementsError) {
+          setHasError(true);
+
+          reject();
+        }
+      }),
+    [isStatementsError, isStatementsFetched, pagination.pageSize, setHasError, setSorting, statements, totalStatementsAmount]
+  );
 
   return (
     <>
@@ -74,14 +78,17 @@ export const Table: FC = () => {
         </Horizon>
         <Gap.LG />
       </Box>
-      {/* Таблица. */}
-      <ScrollerTableView
-        loading={statementsUpdating}
-        placeholderLabel={locale.historyScroller.table.placeholder}
-        setPagination={setPagination}
-        tableInstance={tableInstance}
-        totalAmount={totalStatementsAmount}
-        onClick={handleClick}
+      <DataTable<IStatementHistoryRow>
+        columns={columns}
+        defaultSort={DEFAULT_SORTING}
+        executor={executor}
+        fetchData={sendHistoryToDataTable}
+        paginationState={pagination}
+        selectedRows={selectedRows}
+        storageKey={storageKey}
+        onPaginationChange={setPagination}
+        onRowDoubleClick={handleRowClick}
+        onSelectedRowsChange={setSelectedRows}
       />
     </>
   );
