@@ -6,11 +6,11 @@ import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { STORAGE_KEY } from 'pages/scroller/client/statement-history/filter';
+import { DataTable } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
 import { isFunctionAvailability } from 'utils';
-import type { IFetchDataResponse } from '@platform/services/admin/dist-types/components/data-table/interfaces';
-import { DataTable } from '@platform/services/common/dist-types/components';
+import type { IFetchDataResponse } from '@platform/services';
 import { Box, Gap, Horizon, Typography } from '@platform/ui';
 import { DEFAULT_SORTING, HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
@@ -87,7 +87,7 @@ export const Table: FC = () => {
         selectedRows={selectedRows}
         storageKey={storageKey}
         onPaginationChange={setPagination}
-        onRowDoubleClick={handleRowClick}
+        onRowClick={handleRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
     </>
