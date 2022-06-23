@@ -79,7 +79,6 @@ export const Table: FC = () => {
         <Gap.LG />
       </Box>
       <DataTable<IStatementHistoryRow>
-        isHideCheckbox
         columns={columns}
         defaultSort={DEFAULT_SORTING}
         executor={executor}
