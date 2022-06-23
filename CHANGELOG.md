@@ -1,3 +1,11 @@
+# [2.7.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.15...v2.7.0-release.16) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27787 добавлены изменения в скопированный DataTable ([6e3fc50](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6e3fc507e18ef212fac15aaa2abe49f4872444fa))
+* **скроллер:** GBO-27787 скопирован платформенный компонент DataTable ([aaf8e08](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/aaf8e088da9896c041d114d35394604fce427918))
+
 # [2.7.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.14...v2.7.0-release.15) (2022-06-23)
 
 
