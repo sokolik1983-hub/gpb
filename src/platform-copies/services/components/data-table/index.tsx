@@ -284,7 +284,10 @@ export const DataTable = function Table<T extends { id: string }>({
   /**
    * Получаем список всех колонок скроллера.
    */
-  const columnOptions = React.useMemo(() => columns.map(c => ({ value: c.id, label: c.optionLabel || c.Header })), [columns]);
+  const columnOptions = React.useMemo(
+    () => columns.map(c => ({ value: c.id, label: c.optionLabel || c.Header })).filter(({ label }) => label),
+    [columns]
+  );
 
   /**
    * Получаем список id отображаемых на данный момент колонок, за исключением selectionAndExpand.
