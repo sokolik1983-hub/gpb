@@ -1,3 +1,10 @@
+# [2.7.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.17...v2.7.0-release.18) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-28334 одиночный клик по строке таблицы ([a9a489d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a9a489dbac862152db58a0a084665d79dafc2dfe))
+
 # [2.7.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.16...v2.7.0-release.17) (2022-06-23)
 
 
