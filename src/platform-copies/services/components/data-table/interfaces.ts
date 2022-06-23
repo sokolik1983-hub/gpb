@@ -82,4 +82,6 @@ export interface IDataTableProps<T extends { id: string }> {
   onRowClick?(row: T): void;
   /** Контент подписи к строке (располагается внизу строки). */
   rowCaptionComponent?: React.FC<ICaptionRowComponentProps<T>>;
+  /** Признак отображения только выбранных строк. */
+  visibleOnlySelectedRows?: boolean;
 }

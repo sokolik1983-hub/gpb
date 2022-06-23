@@ -1,9 +1,11 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
+import { locale } from 'localization';
 import { FOOTER_ACTIONS, FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { CaptionRow } from 'pages/scroller/client/statement-transaction/table/caption-row';
+import { ONLY_SELECTED_ROWS_CKECKBOX } from 'pages/scroller/client/statement-transaction/table/constants';
 import { Footer } from 'pages/scroller/client/statement-transaction/table/footer';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
@@ -13,11 +15,13 @@ import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
 import type { IFetchDataResponse } from '@platform/services/common/dist-types/components/data-table/interfaces';
-import { LayoutScroll } from '@platform/ui';
+import { Box, Checkbox, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
 import { columns } from './columns';
 
 /** Таблица скроллера проводок. */
 export const Table = () => {
+  const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(false);
+
   const {
     isTransactionsFetched,
     isTransactionsError,
@@ -27,6 +31,7 @@ export const Table = () => {
     setPagination,
     setSelectedRows,
     setSorting,
+    totalTransactionsAmount,
     transactions,
     transactionsAmountByFilter,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
@@ -71,22 +76,54 @@ export const Table = () => {
   );
 
   return (
-    <LayoutScroll>
-      <DataTable<IStatementTransactionRow>
-        columns={columns}
-        defaultSort={DEFAULT_SORTING}
-        executor={executor}
-        fetchData={sendTransactionsToDataTable}
-        footerActionsGetter={footerActions}
-        footerContent={Footer}
-        paginationState={pagination}
-        rowCaptionComponent={CaptionRow}
-        selectedRows={selectedRows}
-        onPaginationChange={setPagination}
-        onRowClick={handRowClick}
-        onSelectedRowsChange={setSelectedRows}
-      />
-    </LayoutScroll>
+    <>
+      <Box>
+        <Gap.SM />
+        <Horizon>
+          <Gap />
+          <Gap />
+          <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
+          <Gap.SM />
+          <Typography.Text data-field={'total'}>
+            {locale.transactionsScroller.table.totalValue({
+              total: totalTransactionsAmount,
+              totalByFilters: transactionsAmountByFilter,
+            })}
+          </Typography.Text>
+          <Horizon.Spacer />
+          {selectedRows.length > 0 && (
+            <Checkbox
+              extraSmall
+              dimension="SM"
+              label={locale.transactionsScroller.labels.showOnlySelectedRows}
+              name={ONLY_SELECTED_ROWS_CKECKBOX}
+              value={visibleOnlySelectedRows}
+              onChange={() => setVisibleOnlySelectedRows(!visibleOnlySelectedRows)}
+            />
+          )}
+          <Gap />
+          <Gap />
+        </Horizon>
+        <Gap.SM />
+      </Box>
+      <LayoutScroll>
+        <DataTable<IStatementTransactionRow>
+          columns={columns}
+          defaultSort={DEFAULT_SORTING}
+          executor={executor}
+          fetchData={sendTransactionsToDataTable}
+          footerActionsGetter={footerActions}
+          footerContent={Footer}
+          paginationState={pagination}
+          rowCaptionComponent={CaptionRow}
+          selectedRows={selectedRows}
+          visibleOnlySelectedRows={visibleOnlySelectedRows}
+          onPaginationChange={setPagination}
+          onRowClick={handRowClick}
+          onSelectedRowsChange={setSelectedRows}
+        />
+      </LayoutScroll>
+    </>
   );
 };
 
