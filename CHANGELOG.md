@@ -1,3 +1,10 @@
+# [2.7.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.19...v2.7.0-release.20) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-283346 правки багов по скролеру истории ([e8dee02](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e8dee02ba330cb2ebe6cc770d419e5adfabc2a08))
+
 # [2.7.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.18...v2.7.0-release.19) (2022-06-23)
 
 
