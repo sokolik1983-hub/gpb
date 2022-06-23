@@ -34,6 +34,7 @@ import {
 } from '@platform/ui';
 import type { IDataTableProps } from './interfaces';
 import './react-table-config';
+import { StopPropagation } from './stop-propagation';
 import css from './styles.scss';
 import { SCROLLER_SETTING_TYPE, useStorageSettings } from './use-setting-columns';
 
@@ -80,7 +81,9 @@ function HeaderSelectionAndExpand<T extends Record<string, unknown>>({
       )}
       {column.showExpanded && column.showCheckbox && <Gap.SM />}
       {column.showCheckbox && (
-        <Checkbox extraSmall dimension="SM" indeterminate={indeterminate} name="collapse-all" value={checked} onChange={handleChange} />
+        <StopPropagation>
+          <Checkbox extraSmall dimension="SM" indeterminate={indeterminate} name="collapse-all" value={checked} onChange={handleChange} />
+        </StopPropagation>
       )}
     </Horizon>
   );
@@ -105,7 +108,9 @@ function CellSelectionAndExpand<T extends Record<string, unknown>>({ row, column
       )}
       {column.showExpanded && column.showCheckbox && <Gap.SM />}
       {column.showCheckbox && (
-        <Checkbox extraSmall dimension="SM" indeterminate={indeterminate} name="collapse-all" value={checked} onChange={handleChange} />
+        <StopPropagation>
+          <Checkbox extraSmall dimension="SM" indeterminate={indeterminate} name="collapse-all" value={checked} onChange={handleChange} />
+        </StopPropagation>
       )}
     </Horizon>
   );
@@ -137,6 +142,8 @@ export const DataTable = function Table<T extends { id: string }>({
   placeholderMessage = locale.scroller.placeholder.text,
   showSettingsButton = true,
   storageKey,
+  onRowClick = noop,
+  rowCaptionComponent: RowCaptionComponent,
 }: IDataTableProps<T>) {
   const { paginationState = DEFAULT_PAGINATION_STATE, goToPage, setPageSize } = usePaginationController(
     propsPaginationState,
@@ -401,6 +408,13 @@ export const DataTable = function Table<T extends { id: string }>({
     [onRowDoubleClick]
   );
 
+  const handleRowClick = React.useCallback(
+    (row: Row<T>) => () => {
+      onRowClick(row.original);
+    },
+    [onRowClick]
+  );
+
   return (
     <>
       <Box className={css.wrapper}>
@@ -526,6 +540,7 @@ export const DataTable = function Table<T extends { id: string }>({
                           borderLeft: 'none',
                           minWidth,
                         }}
+                        onClick={handleRowClick(row)}
                         onDoubleClick={handleRowDoubleClick(row)}
                       >
                         <Box className={css.rowContent} style={{ display: 'flex' }}>
@@ -541,6 +556,7 @@ export const DataTable = function Table<T extends { id: string }>({
                           ))}
                           {hovered && <FastActionsPanel actions={rowActionButtons} />}
                         </Box>
+                        {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
                         {ExpandedRowComponent && row.isExpanded ? (
                           <ExpandedRowComponent
                             actions={extendedRowActionButtons}

@@ -1,3 +1,4 @@
+import type React from 'react';
 import type { Column, UsePaginationState } from 'react-table';
 import type { IExecuter, TransfomedAction } from '@platform/core';
 import type { IActionWebInfo, IActionWithAuth, ISortSettings } from '@platform/services';
@@ -27,6 +28,12 @@ export interface IExpandedRowComponentProps<T> extends React.AllHTMLAttributes<H
   row: T;
   /** Действия. */
   actions: IButtonAction[];
+}
+
+/** Свойства компонента подписи к строке. */
+export interface ICaptionRowComponentProps<T> extends React.AllHTMLAttributes<HTMLDivElement> {
+  /** Строка. */
+  row: T;
 }
 
 /** Свойства таблицы. */
@@ -71,4 +78,8 @@ export interface IDataTableProps<T extends { id: string }> {
   showSettingsButton?: boolean;
   /** Ключ для сохранения в sessionStorage. */
   storageKey?: string;
+  /** Обработчик одинарного клика по строке. */
+  onRowClick?(row: T): void;
+  /** Контент подписи к строке (располагается внизу строки). */
+  rowCaptionComponent?: React.FC<ICaptionRowComponentProps<T>>;
 }
