@@ -7,11 +7,10 @@ import { ACTION } from 'interfaces/client';
 import { locale } from 'localization';
 import { STORAGE_KEY } from 'pages/scroller/client/statement-history/filter';
 import { useParams } from 'react-router-dom';
-import type { UsePaginationState } from 'react-table';
 import { PRIVILEGE } from 'stream-constants/client';
 import { isFunctionAvailability } from 'utils';
 import type { IFetchDataResponse } from '@platform/services/admin/dist-types/components/data-table/interfaces';
-import { DataTable, DEFAULT_PAGINATION_STATE } from '@platform/services/common/dist-types/components';
+import { DataTable } from '@platform/services/common/dist-types/components';
 import { Box, Gap, Horizon, Typography } from '@platform/ui';
 import { DEFAULT_SORTING, HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
@@ -21,16 +20,22 @@ import css from './styles.scss';
 export const Table: FC = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { statements, totalStatementsAmount, setSorting, pagination, setHasError, isStatementsError, isStatementsFetched } = useContext(
-    HistoryScrollerContext
-  );
+  const {
+    statements,
+    totalStatementsAmount,
+    setSorting,
+    pagination,
+    setPagination,
+    setHasError,
+    isStatementsError,
+    isStatementsFetched,
+  } = useContext(HistoryScrollerContext);
 
-  const [paginationState, setPaginationState] = React.useState<UsePaginationState<IStatementHistoryRow>>(DEFAULT_PAGINATION_STATE);
   const [selectedRows, setSelectedRows] = useState<IStatementHistoryRow[]>([]);
 
   const storageKey = `${STORAGE_KEY}:${id}`;
 
-  const handRowDoubleClick = useCallback((doc: IStatementHistoryRow) => {
+  const handleRowClick = useCallback((doc: IStatementHistoryRow) => {
     if (doc.accountsIds.length === 1) {
       // TODO: в дальнейшем заменить на платформенный аналог
       if (!isFunctionAvailability(PRIVILEGE.ACCOUNTING_ENTRY_VIEW)) {
@@ -74,15 +79,16 @@ export const Table: FC = () => {
         <Gap.LG />
       </Box>
       <DataTable<IStatementHistoryRow>
+        isHideCheckbox
         columns={columns}
         defaultSort={DEFAULT_SORTING}
         executor={executor}
         fetchData={sendHistoryToDataTable}
-        paginationState={paginationState}
+        paginationState={pagination}
         selectedRows={selectedRows}
         storageKey={storageKey}
-        onPaginationChange={setPaginationState}
-        onRowDoubleClick={handRowDoubleClick}
+        onPaginationChange={setPagination}
+        onRowClick={handleRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
     </>
