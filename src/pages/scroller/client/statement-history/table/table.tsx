@@ -88,7 +88,7 @@ export const Table: FC = () => {
         selectedRows={selectedRows}
         storageKey={storageKey}
         onPaginationChange={setPagination}
-        onRowClick={handleRowClick}
+        onRowDoubleClick={handleRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
     </>
