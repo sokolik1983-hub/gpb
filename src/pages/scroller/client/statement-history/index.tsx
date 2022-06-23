@@ -1,22 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
-import {
-  useAccounts,
-  useIsFetchedData,
-  useScrollerPagination,
-  useScrollerTabsProps,
-  useStreamContentHeight,
-  useTurnoverScrollerHeaderProps,
-} from 'hooks';
+import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { useAccounts, useIsFetchedData, useScrollerPagination, useStreamContentHeight, useTurnoverScrollerHeaderProps } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, TAB_HEIGHT } from 'stream-constants';
 import type { ISortSettings } from '@platform/services';
-import { FractalScrollerPageLayout } from '@platform/services/admin/dist-types/components';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
-import { Line, ScrollerHeader } from '@platform/ui';
+import { Line } from '@platform/ui';
 import { validate } from '@platform/validation';
 import type { IFormState } from './filter';
 import { ADDITIONAL_FORM_FIELDS, fields, FORM_FIELDS, QuickFilter, STORAGE_KEY, tagLabels } from './filter';
@@ -41,8 +33,6 @@ const FILTER_HEIGHT = 58;
  */
 export const StatementHistoryScrollerPage = () => {
   useMetricPageListener();
-
-  const tabsProps = useScrollerTabsProps();
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
@@ -125,30 +115,24 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <FractalScrollerPageLayout
-          categoryTabsProps={tabsProps}
-          filter={
-            <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-              <Line fill="FAINT" />
-              <FilterLayout
-                AdditionalFilter={AdditionalFilter}
-                QuickFilter={QuickFilter}
-                TagsPanel={TagsPanel}
-                additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-                filterFields={fields}
-                filterState={filterPanel}
-                tagsState={tagsPanel}
-                validate={validate(validationSchema)}
-              />
-            </ContentLoader>
-          }
-          isLoading={!dataFetched}
-          navigationLine={<ScrollerHeader {...headerProps} />}
-        >
+        <ScrollerPageLayout headerProps={{ ...headerProps }} loading={!dataFetched}>
+          <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+            <Line fill="FAINT" />
+            <FilterLayout
+              AdditionalFilter={AdditionalFilter}
+              QuickFilter={QuickFilter}
+              TagsPanel={TagsPanel}
+              additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+              filterFields={fields}
+              filterState={filterPanel}
+              tagsState={tagsPanel}
+              validate={validate(validationSchema)}
+            />
+          </ContentLoader>
           <ContentLoader height={tableHeight} loading={!statementsFetched}>
             <Table />
           </ContentLoader>
-        </FractalScrollerPageLayout>
+        </ScrollerPageLayout>
       </MainLayout>
     </HistoryScrollerContext.Provider>
   );

@@ -337,7 +337,7 @@ export const DataTable = function Table<T extends { id: string }>({
     };
 
     dialog.show('Settings', SettingsForm, {
-      columns: columnOptions as ICheckboxOption[],
+      columns: columnOptions.filter(column => column.label) as ICheckboxOption[],
       defaultColumns: defaultVisibleColumns,
       values,
       onSubmit,
@@ -425,7 +425,7 @@ export const DataTable = function Table<T extends { id: string }>({
               // eslint-disable-next-line react/jsx-key
               <Box
                 {...headerGroup.getHeaderGroupProps({ role: ROLE.GRID_HEADER })}
-                style={{ ...headerGroup.getHeaderGroupProps().style, minWidth }}
+                style={{ ...headerGroup.getHeaderGroupProps().style, minWidth, position: 'relative' }}
               >
                 {headerGroup.headers.map((column, index) => {
                   const SortIcon = column.isSortedDesc ? ServiceIcons.ArrowDown : ServiceIcons.ArrowUp;

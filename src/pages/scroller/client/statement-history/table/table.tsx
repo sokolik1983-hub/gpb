@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
 import { isFunctionAvailability } from 'utils';
 import type { IFetchDataResponse } from '@platform/services';
-import { Box, Gap, Horizon, Typography } from '@platform/ui';
+import { Box, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
 import { DEFAULT_SORTING, HistoryScrollerContext } from '../history-scroller-context';
 import { columns } from './columns';
 import css from './styles.scss';
@@ -65,7 +65,7 @@ export const Table: FC = () => {
   );
 
   return (
-    <>
+    <LayoutScroll>
       <Box className={css.totalWrapper}>
         <Gap.SM />
         <Horizon>
@@ -90,7 +90,7 @@ export const Table: FC = () => {
         onRowClick={handleRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
-    </>
+    </LayoutScroll>
   );
 };
 
