@@ -1,3 +1,13 @@
+# [2.7.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.14...v2.7.0-release.15) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27786 новый скроллер для истории ([289b15a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/289b15aa7c89e4c9b4e62d713cb9290e1d6e55e8))
+* **скроллер:** GBO-27786 правки по скроллеру истории ([5d1c980](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5d1c980fb2951edb124b335e2f6b7ee28080e1d0))
+* **скроллер:** GBO-27786 правки по скроллеру истории (2) ([9ca3795](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9ca379550cc60b4c39f04dc7c2bc276878799a90))
+* **скроллер:** GBO-27786 правки по скроллеру истории (3) ([9681700](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9681700e6489e887c7428780fe01e2259774ef32))
+
 # [2.7.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.13...v2.7.0-release.14) (2022-06-21)
 
 
