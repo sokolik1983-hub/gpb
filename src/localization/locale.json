@@ -118,12 +118,9 @@
   "transactionsScroller.headers.income": {
     "ru": "Поступления"
   },
-  "transactionsScroller.headers.purpose": {
-    "ru": "Назначение"
-  },
   "transactionsScroller.labels.documentNumber": {
     "@documentNumber": "string",
-    "ru": "№ {documentNumber}"
+    "ru": "№{documentNumber}"
   },
   "transactionsScroller.labels.documentDate": {
     "@date": "string",

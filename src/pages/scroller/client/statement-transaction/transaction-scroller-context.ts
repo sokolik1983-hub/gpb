@@ -1,18 +1,20 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
+import type { IFilterPanel, ITagsPanel, IPagination } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import type { IGetCounterpartiesResponseDto, IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
+import type { ISortSettings } from '@platform/services';
+import { SORT_DIRECTION } from '@platform/services';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
 
 /** Состояние сортровки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [
-  { id: COLUMN_NAMES.OPERATION_DATE, desc: true },
-  { id: COLUMN_NAMES.INCOME, desc: false },
-  { id: COLUMN_NAMES.OUTCOME, desc: false },
-];
+export const DEFAULT_SORTING = {
+  [COLUMN_NAMES.OPERATION_DATE]: SORT_DIRECTION.DESC,
+  [COLUMN_NAMES.INCOME]: SORT_DIRECTION.ASC,
+  [COLUMN_NAMES.OUTCOME]: SORT_DIRECTION.ASC,
+};
 
 /** Контекст скроллера "Проводки". */
 export interface ITransactionScrollerContext {
@@ -29,9 +31,9 @@ export interface ITransactionScrollerContext {
   /** Контрагенты. */
   counterparties: IGetCounterpartiesResponseDto[];
   /** Сортировка. */
-  sorting?: Sorting;
+  sorting?: ISortSettings;
   /** Установить сортировку. */
-  setSorting(value: Sorting): void;
+  setSorting(value: ISortSettings): void;
   /** Стейт пагинации. */
   pagination: IPagination;
   /** Устанавливает стейт пагинации. */
@@ -50,6 +52,10 @@ export interface ITransactionScrollerContext {
   setSelectedRows(value: IStatementTransactionRow[]): void;
   /** Признак получения новых данных по проводкам с бэка. */
   fetchedNewTransactions: boolean;
+  /** Признак, что проводки получены. */
+  isTransactionsFetched?: boolean;
+  /** Признак ошибки получения проводок. */
+  isTransactionsError?: boolean;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -81,6 +87,8 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   selectedRows: [],
   setSelectedRows: noop,
   fetchedNewTransactions: false,
+  isTransactionsFetched: false,
+  isTransactionsError: false,
 };
 
 /** Контекст скроллера "Проводки". */
