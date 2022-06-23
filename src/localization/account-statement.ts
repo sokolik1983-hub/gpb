@@ -140,6 +140,22 @@ export default {
 				return t('scroller.pagination.displayBy');
 			},
 		},
+		placeholder: {
+			/**
+			 * @ru
+			 * Данные отсутствуют
+			 */
+			get header() {
+				return t('scroller.placeholder.header');
+			},
+			/**
+			 * @ru
+			 * После добавления данных здесь появится список
+			 */
+			get text() {
+				return t('scroller.placeholder.text');
+			},
+		},
 	},
 	transactionsScroller: {
 		/**
@@ -1775,6 +1791,15 @@ export default {
 			get label() {
 				return t('exportParamsDialog.exportOutdatedStatement.label');
 			},
+		},
+	},
+	column: {
+		/**
+		 * @ru
+		 * Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»
+		 */
+		get tooltip() {
+			return t('column.tooltip');
 		},
 	},
 };
