@@ -138,11 +138,11 @@ export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
 
   return (
     <StopPropagation>
-      <Horizon allHeight={false}>
+      <Box className={css.rowActions}>
         {actions.map(({ icon, name, onClick }) => (
           <RegularButton key={name} extraSmall className={css.rowActionButton} dimension={'MC'} icon={icon} onClick={onClick} />
         ))}
-      </Horizon>
+      </Box>
     </StopPropagation>
   );
 };
