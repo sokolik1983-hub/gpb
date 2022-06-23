@@ -1,3 +1,10 @@
+# [2.7.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.16...v2.7.0-release.17) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27787 скроллер проводок переведен на DataTable, соответствие новым макетам ([3e1e4ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3e1e4ee6ef983b4c7bb071ddb9e71b62c7e04eb0))
+
 # [2.7.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.15...v2.7.0-release.16) (2022-06-23)
 
 
