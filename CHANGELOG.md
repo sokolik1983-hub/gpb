@@ -1,3 +1,10 @@
+# [2.7.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.18...v2.7.0-release.19) (2022-06-23)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28346 вернул чекбокс `Показать только выбранные` в скроллере проводок ([7594736](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7594736a160f860d283bc9f23792043c73c69e8e))
+
 # [2.7.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.17...v2.7.0-release.18) (2022-06-23)
 
 
