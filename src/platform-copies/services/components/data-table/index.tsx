@@ -363,9 +363,9 @@ export const DataTable = function Table<T extends { id: string }>({
 
             return acc;
           }, {})
-        : undefined;
+        : {};
 
-    setSettingsSort(multiSort ?? {});
+    setSettingsSort(multiSort);
 
     try {
       const res = await fetchData({
