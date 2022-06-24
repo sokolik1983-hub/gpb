@@ -602,7 +602,7 @@ export const DataTable = function Table<T extends { id: string }>({
           </Box>
         </Box>
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
-        {rows.length > paginationState.pageSize && (
+        {pageCount > 1 && (
           <FractalPagination
             page={paginationState.pageIndex + 1}
             pageCount={pageCount}
