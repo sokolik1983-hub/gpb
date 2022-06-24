@@ -61,7 +61,7 @@ export const columns = addMaxWidthField<IStatementTransactionRow, { isVisible: b
     id: COLUMN_NAMES.ACTIONS,
     accessor,
     Cell: Actions,
-    width: 88,
+    width: 100,
     disableSortBy: true,
     disableResizing: true,
     paddingType: COLUMN_PADDING_TYPES.LEFT_REDUCED,

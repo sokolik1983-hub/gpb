@@ -284,7 +284,10 @@ export const DataTable = function Table<T extends { id: string }>({
   /**
    * Получаем список всех колонок скроллера.
    */
-  const columnOptions = React.useMemo(() => columns.map(c => ({ value: c.id, label: c.optionLabel || c.Header })), [columns]);
+  const columnOptions = React.useMemo(
+    () => columns.map(c => ({ value: c.id, label: c.optionLabel || c.Header })).filter(({ label }) => label),
+    [columns]
+  );
 
   /**
    * Получаем список id отображаемых на данный момент колонок, за исключением selectionAndExpand.
@@ -360,9 +363,9 @@ export const DataTable = function Table<T extends { id: string }>({
 
             return acc;
           }, {})
-        : undefined;
+        : {};
 
-    setSettingsSort(multiSort ?? {});
+    setSettingsSort(multiSort);
 
     try {
       const res = await fetchData({
@@ -599,7 +602,7 @@ export const DataTable = function Table<T extends { id: string }>({
           </Box>
         </Box>
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
-        {rows.length > 0 && (
+        {rows.length > paginationState.pageSize && (
           <FractalPagination
             page={paginationState.pageIndex + 1}
             pageCount={pageCount}
