@@ -8,7 +8,8 @@ import { useFormState } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { getActiveActionButtons } from 'utils';
 import { useAuth } from '@platform/services/client';
-import { Gap, Horizon, Link } from '@platform/ui';
+import { Box, Gap, Horizon, Link } from '@platform/ui';
+import css from './styles.scss';
 
 /** Компонент действий в ОСВ. */
 export const Actions = () => {
@@ -62,13 +63,25 @@ export const Actions = () => {
     <Horizon>
       {[exportAction, printAction]
         .filter(action => action)
-        .map(({ disabled, icon, label, onClick }, index, actions) => (
-          <>
-            <Link extraSmall disabled={disabled} icon={icon} volume="MD" onClick={onClick}>
-              {label}
-            </Link>
+        .map(({ disabled, icon, label, name, onClick }, index, actions) => (
+          <React.Fragment key={name}>
+            <Box className={css.linkFocusable}>
+              <Link
+                extraSmall
+                disabled={disabled}
+                href=""
+                icon={icon}
+                volume="MD"
+                onClick={event => {
+                  event.preventDefault();
+                  void onClick();
+                }}
+              >
+                {label}
+              </Link>
+            </Box>
             {index < actions.length - 1 && <Gap.XL />}
-          </>
+          </React.Fragment>
         ))}
     </Horizon>
   );

@@ -1,4 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import cn from 'classnames';
 import { locale } from 'localization';
 import type { CellProps, HeaderProps, Row } from 'react-table';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
@@ -533,7 +534,7 @@ export const DataTable = function Table<T extends { id: string }>({
                         <Box
                           ref={ref}
                           border={['FAINT', 'SM']}
-                          className={css.row}
+                          className={cn(css.row, css.focusable)}
                           data-id={row.original.id}
                           {...row.getRowProps()}
                           key={`row_${row.getRowProps().key}`}
@@ -554,7 +555,7 @@ export const DataTable = function Table<T extends { id: string }>({
                             {row.cells.map((cell, cellIndex) => (
                               // eslint-disable-next-line react/jsx-key
                               <Box
-                                className={cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding}
+                                className={cn(cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding, css.focusable)}
                                 data-field={cell.column.id}
                                 {...cell.getCellProps()}
                               >
