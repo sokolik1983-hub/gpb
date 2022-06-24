@@ -1,3 +1,13 @@
+# [2.7.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.20...v2.7.0-release.21) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28345 исправление замечаний по скроллеру (DataTable) ([da86033](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/da86033eca82eb48a3ab84fa47555f8ec5707f3e))
+* **скроллер:** GBO-28345 исправление замечаний по скроллеру (DataTable) ([927d3c6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/927d3c6203e5260b2adedf618fbbc7aa4d91b844))
+* **скроллер:** GBO-28345 поправлена сортировка в DataTable ([56177cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/56177cfc23bcf94a2cee4e0d62c2869c22717534))
+* **скроллер:** GBO-28345 поправлена ширина столбца ([bc7fea8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bc7fea81ab8c319e70b07e4b0d9b48050c6e6418))
+
 # [2.7.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.19...v2.7.0-release.20) (2022-06-23)
 
 
