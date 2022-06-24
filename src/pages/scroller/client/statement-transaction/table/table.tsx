@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -35,6 +35,12 @@ export const Table = () => {
     transactions,
     transactionsAmountByFilter,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+
+  useEffect(() => {
+    if (selectedRows.length === 0) {
+      setVisibleOnlySelectedRows(false);
+    }
+  }, [selectedRows, setVisibleOnlySelectedRows]);
 
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
