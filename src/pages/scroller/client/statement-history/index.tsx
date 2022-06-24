@@ -1,6 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
-import { useAccounts, useIsFetchedData, useScrollerPagination, useStreamContentHeight, useTurnoverScrollerHeaderProps } from 'hooks';
+import {
+  useAccounts,
+  useIsFetchedData,
+  useScrollerPagination,
+  useScrollerTabsProps,
+  useStreamContentHeight,
+  useTurnoverScrollerHeaderProps,
+} from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
@@ -33,6 +40,8 @@ const FILTER_HEIGHT = 58;
  */
 export const StatementHistoryScrollerPage = () => {
   useMetricPageListener();
+
+  const tabsProps = useScrollerTabsProps();
 
   // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
@@ -115,7 +124,7 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout headerProps={{ ...headerProps }} loading={!dataFetched}>
+        <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
           <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
             <Line fill="FAINT" />
             <FilterLayout
