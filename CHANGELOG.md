@@ -1,3 +1,10 @@
+# [2.7.0-release.24](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.23...v2.7.0-release.24) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28370 поправлены табы на скроллере истории ([7b2f6fa](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7b2f6fa25c03a1209c7e02f93ffc0267c33a6b85))
+
 # [2.7.0-release.23](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.22...v2.7.0-release.23) (2022-06-24)
 
 
