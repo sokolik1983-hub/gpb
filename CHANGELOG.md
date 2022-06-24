@@ -1,3 +1,10 @@
+# [2.7.0-release.23](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.22...v2.7.0-release.23) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28339 поправелено условие отображение пагинации ([acf53d1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/acf53d183f61b7c8ba02fb4223cc7bfc73ae0f51))
+
 # [2.7.0-release.22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.21...v2.7.0-release.22) (2022-06-24)
 
 
