@@ -1,3 +1,10 @@
+# [2.7.0-release.22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.21...v2.7.0-release.22) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28346 поправлена логика работы чекбокса Показать только выбранные проводки ([38388c9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/38388c920e5dc076f5e140ba1bdad453c609e6ec))
+
 # [2.7.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.20...v2.7.0-release.21) (2022-06-24)
 
 
