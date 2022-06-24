@@ -54,3 +54,23 @@
   width: calc(100% - 120px);
   max-width: 1392px;
 }
+
+.focusable {
+  position: relative;
+
+  &:focus {
+    outline: none;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: block;
+      border: 1px solid var(--line-fill-accent-strong);
+      border-radius: var(--box-radius-sm);
+      content: '';
+    }
+  }
+}

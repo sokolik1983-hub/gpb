@@ -12,6 +12,7 @@ declare namespace StylesScssModule {
     'groupingPanelWrapper': string;
     'groupingRightColumn': string;
     'important': string;
+    'linkFocusable': string;
     'totalSpinnerWrapper': string;
     'totalsCell': string;
     'totalsRow': string;
