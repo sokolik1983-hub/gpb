@@ -1,3 +1,10 @@
+# [2.7.0-release.25](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.24...v2.7.0-release.25) (2022-06-24)
+
+
+### Features
+
+* **визард:** GBO-27784 добавлено визуальное отображение фокуса для навигации по клавиатуре ([bbd4d22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bbd4d22e064326952547e380345bd963ca746519))
+
 # [2.7.0-release.24](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.23...v2.7.0-release.24) (2022-06-24)
 
 
