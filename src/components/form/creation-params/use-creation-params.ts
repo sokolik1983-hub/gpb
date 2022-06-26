@@ -3,9 +3,9 @@ import { useWithPdfEsign } from 'components/form/common/use-with-pdf-esign';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
-import { DEBIT_PARAMS, FormContext, FORM_FIELDS, CREDIT_PARAMS } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
-import { defaultCreationParamsOptions } from 'utils';
+import { CREDIT_PARAMS, DEBIT_PARAMS, FORM_FIELDS, FormContext } from 'stream-constants/form';
+import { defaultCreationParamsOptions, isNeedTotalsOfDay } from 'utils';
 import {
   alwaysSendParamCasesFromUI,
   getHideEsignCases,
@@ -59,6 +59,16 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         }
+        case CREATION_PARAMS.TOTALS_OF_DAY: {
+          const validDateRange = Boolean(values.dateFrom && values.dateTo);
+          const show = options.some(({ value }) => value === CREATION_PARAMS.TOTALS_OF_DAY);
+
+          if ((validDateRange && isNeedTotalsOfDay(values)) || (!validDateRange && show)) {
+            acc.push(x);
+          }
+
+          break;
+        }
         default: {
           acc.push(x);
         }
@@ -69,7 +79,18 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
     setOptions(newOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [action, change, isPdf, useCase, values.accountIds.length, values.format, withSign, withPdfEsignOption.disabled]);
+  }, [
+    action,
+    change,
+    isPdf,
+    useCase,
+    values.accountIds.length,
+    values.dateFrom,
+    values.dateTo,
+    values.format,
+    withSign,
+    withPdfEsignOption.disabled,
+  ]);
 
   useEffect(() => {
     if (!withDocumentsSet) {

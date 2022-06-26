@@ -1,6 +1,6 @@
 {
   "name": "@eco/account-statement",
-  "version": "2.6.0",
+  "version": "2.7.0-release.25",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -45,7 +45,7 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "11.29.1",
+    "@platform/services": "12.5.0-release.3",
     "@types/clamp-js-main": "0.11.2",
     "@types/react-table": "7.7.8"
   },

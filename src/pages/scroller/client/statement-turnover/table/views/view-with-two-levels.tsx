@@ -1,7 +1,7 @@
 import React from 'react';
 import { AccordionGroup, AccordionItem, StickyRow } from 'components';
 import { AccountList } from '../account-list';
-import { GroupingRow } from '../grouping-row';
+import { GROUPING_ROW_LEVEL, GroupingRow } from '../grouping-row';
 import type { IScrollerView } from '../table-body';
 
 /**
@@ -22,7 +22,7 @@ export const ViewWithTwoLevels: React.FC<IScrollerView> = ({ rows, prepareRow })
           expand={toggleRowExpanded}
           header={
             <StickyRow>
-              <GroupingRow groupingRow={row} />
+              <GroupingRow highlight groupingRow={row} level={GROUPING_ROW_LEVEL.FIRST} />
             </StickyRow>
           }
           isExpanded={isExpanded}

@@ -1,8 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import { ContentLoader, ScrollerPageLayout } from 'components';
-import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps } from 'hooks';
+import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps, useStreamContentHeight } from 'hooks';
+import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
+import { TAB_HEIGHT } from 'stream-constants';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
@@ -11,12 +13,17 @@ import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
 import { TurnoverScrollerContext } from './turnover-scroller-context';
 
+/** Высота фильтра. */
+const FILTER_HEIGHT = 58;
+
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34448309
  */
 export const StatementTurnoverScrollerPage = () => {
+  useMetricPageListener();
+
   const tabsProps = useScrollerTabsProps();
 
   // region элементы стейта контекста скроллера.
@@ -75,6 +82,10 @@ export const StatementTurnoverScrollerPage = () => {
     ]
   );
 
+  const height = useStreamContentHeight();
+
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - TAB_HEIGHT - FILTER_HEIGHT;
+
   if (hasError || isAccountsError || isTurnoversError) {
     return (
       <MainLayout>
@@ -87,10 +98,10 @@ export const StatementTurnoverScrollerPage = () => {
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
         <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-          <ContentLoader height={182} loading={!accountsFetched}>
+          <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
             <Filter />
           </ContentLoader>
-          <ContentLoader loading={!turnoversFetched}>
+          <ContentLoader height={tableHeight} loading={!turnoversFetched}>
             <TurnoversTable />
           </ContentLoader>
         </ScrollerPageLayout>

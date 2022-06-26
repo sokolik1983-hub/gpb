@@ -1,3 +1,186 @@
+# [2.7.0-release.25](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.24...v2.7.0-release.25) (2022-06-24)
+
+
+### Features
+
+* **визард:** GBO-27784 добавлено визуальное отображение фокуса для навигации по клавиатуре ([bbd4d22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bbd4d22e064326952547e380345bd963ca746519))
+
+# [2.7.0-release.24](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.23...v2.7.0-release.24) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28370 поправлены табы на скроллере истории ([7b2f6fa](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7b2f6fa25c03a1209c7e02f93ffc0267c33a6b85))
+
+# [2.7.0-release.23](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.22...v2.7.0-release.23) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28339 поправелено условие отображение пагинации ([acf53d1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/acf53d183f61b7c8ba02fb4223cc7bfc73ae0f51))
+
+# [2.7.0-release.22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.21...v2.7.0-release.22) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28346 поправлена логика работы чекбокса Показать только выбранные проводки ([38388c9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/38388c920e5dc076f5e140ba1bdad453c609e6ec))
+
+# [2.7.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.20...v2.7.0-release.21) (2022-06-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28345 исправление замечаний по скроллеру (DataTable) ([da86033](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/da86033eca82eb48a3ab84fa47555f8ec5707f3e))
+* **скроллер:** GBO-28345 исправление замечаний по скроллеру (DataTable) ([927d3c6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/927d3c6203e5260b2adedf618fbbc7aa4d91b844))
+* **скроллер:** GBO-28345 поправлена сортировка в DataTable ([56177cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/56177cfc23bcf94a2cee4e0d62c2869c22717534))
+* **скроллер:** GBO-28345 поправлена ширина столбца ([bc7fea8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bc7fea81ab8c319e70b07e4b0d9b48050c6e6418))
+
+# [2.7.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.19...v2.7.0-release.20) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-283346 правки багов по скролеру истории ([e8dee02](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e8dee02ba330cb2ebe6cc770d419e5adfabc2a08))
+
+# [2.7.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.18...v2.7.0-release.19) (2022-06-23)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28346 вернул чекбокс `Показать только выбранные` в скроллере проводок ([7594736](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7594736a160f860d283bc9f23792043c73c69e8e))
+
+# [2.7.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.17...v2.7.0-release.18) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-28334 одиночный клик по строке таблицы ([a9a489d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a9a489dbac862152db58a0a084665d79dafc2dfe))
+
+# [2.7.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.16...v2.7.0-release.17) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27787 скроллер проводок переведен на DataTable, соответствие новым макетам ([3e1e4ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3e1e4ee6ef983b4c7bb071ddb9e71b62c7e04eb0))
+
+# [2.7.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.15...v2.7.0-release.16) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27787 добавлены изменения в скопированный DataTable ([6e3fc50](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6e3fc507e18ef212fac15aaa2abe49f4872444fa))
+* **скроллер:** GBO-27787 скопирован платформенный компонент DataTable ([aaf8e08](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/aaf8e088da9896c041d114d35394604fce427918))
+
+# [2.7.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.14...v2.7.0-release.15) (2022-06-23)
+
+
+### Features
+
+* **скроллер:** GBO-27786 новый скроллер для истории ([289b15a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/289b15aa7c89e4c9b4e62d713cb9290e1d6e55e8))
+* **скроллер:** GBO-27786 правки по скроллеру истории ([5d1c980](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5d1c980fb2951edb124b335e2f6b7ee28080e1d0))
+* **скроллер:** GBO-27786 правки по скроллеру истории (2) ([9ca3795](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9ca379550cc60b4c39f04dc7c2bc276878799a90))
+* **скроллер:** GBO-27786 правки по скроллеру истории (3) ([9681700](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9681700e6489e887c7428780fe01e2259774ef32))
+
+# [2.7.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.13...v2.7.0-release.14) (2022-06-21)
+
+
+### Features
+
+* **скроллер:** GBO-27785 поправлены отступы в скроллере ОСВ ([ecf8a0a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ecf8a0a1b1f71ee871be95639d506c139ea710c6))
+
+# [2.7.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.12...v2.7.0-release.13) (2022-06-21)
+
+
+### Features
+
+* GBO-27785 обновлена версия платформы до 12.5.0-release.3 ([8d24d9b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d24d9bf44e3f80a44e73b883135bf8cd789a47a))
+* **скроллер:** GBO-27785 соответствие скроллера ОСВ новым макетам ([85fca83](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/85fca833f6fedc7c443e4e52dd3c26eec14e3529))
+
+# [2.7.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.11...v2.7.0-release.12) (2022-06-10)
+
+
+### Bug Fixes
+
+* **метрика:** GBO-27621 доработки условий отправки данных в метрику ([3170844](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3170844d9c282f2cd7846be582fc591a1c421f17))
+
+# [2.7.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.10...v2.7.0-release.11) (2022-06-10)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-27621 доработки условий отправки данных в метрику ([2deab85](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2deab857aa9f39273ed0c5d4c19208288934d7fb))
+
+# [2.7.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.9...v2.7.0-release.10) (2022-06-09)
+
+
+### Bug Fixes
+
+* GBO-27734 добавлена опция `keepLocalTime` в форматирование даты проверки выписки ([f718933](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f718933ca919d544d920905b500e71525e9b2415))
+
+# [2.7.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.8...v2.7.0-release.9) (2022-06-09)
+
+
+### Bug Fixes
+
+* GBO-26997 добавлена проверка на пустую выписку ([3513f33](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3513f33c48b4ef67e4b2f95672f18fe37bd0a305))
+
+# [2.7.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.7...v2.7.0-release.8) (2022-06-09)
+
+
+### Bug Fixes
+
+* **метрика:** GBO-27568 доработки для передачи метрики ([33d2887](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/33d288765432d8238e5dfaac78629eb6714ce72c))
+
+# [2.7.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.6...v2.7.0-release.7) (2022-06-07)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-27568 исправление передачи параметра в метрику ([ba08131](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ba081311e9bddb134a0abd84ca8c99e89d619376))
+
+# [2.7.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.5...v2.7.0-release.6) (2022-06-07)
+
+
+### Features
+
+* GBO-27419 добавлен скелетон к процессу подгрузки данных ([53899a0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/53899a03be1b856e8763a5a2a2d816f01c8b9984))
+
+# [2.7.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.4...v2.7.0-release.5) (2022-06-06)
+
+
+### Features
+
+* **скроллер:** GBO-26286 прикручивание метрики для сервиса ([3a54f29](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3a54f29d008dd8359be481eee51d1031588e5ddf))
+
+# [2.7.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.3...v2.7.0-release.4) (2022-06-06)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-27357 исправление иконки печати и шрифта к экшенах ([a2a2282](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a2a2282b19de32152e3dc8c9ad707cc4798b6bcf))
+
+# [2.7.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.2...v2.7.0-release.3) (2022-06-06)
+
+
+### Bug Fixes
+
+* GBO-27265 добавлен чекбок `Итоги за день` на ЭФ Экспорт/печать выписки ([20c5712](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/20c57128e0ab88da065e40a5425345c862b70da3))
+
+# [2.7.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0-release.1...v2.7.0-release.2) (2022-06-03)
+
+
+### Features
+
+* GBO-20972 добавлены кнопки `Печать` и `Экспорт` в ОСВ ([2517a22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2517a229cfafc1d6bc0a6777eeec462f3e680df6))
+
+# [2.7.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0...v2.7.0-release.1) (2022-06-02)
+
+
+### Features
+
+* GBO-20984 на ЭФ Запрос выписки добавлен параметр Итоги за день ([0f71bc0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0f71bc0e572a853e1c65d714013ff58c00aaf939))
+
 # [2.6.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.5.0...v2.6.0) (2022-05-29)
 
 

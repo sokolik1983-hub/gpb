@@ -29,55 +29,59 @@ export const StatementInfo: FC = () => {
 
   return (
     <Box className={css.statementInfoWrapper}>
-      <Gap />
+      <Gap.SM />
+      <Pattern gap={'X2L'}>
+        <Pattern.Span size={4}>
+          <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.accountNumber}</Typography.Text>
+          <Typography.P>{formatAccountCode(accountNumber)}</Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={2}>
+          <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem}>
+            {locale.transactionsScroller.labels.incomingBalance}
+          </Typography.Text>
+          <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.incomingBalance'}>
+            {locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={2}>
+          <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem} data-field={'statementSummaryInfo.outcomesCount'}>
+            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomesCount })}
+          </Typography.Text>
+          <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.outcome'} fill={'CRITIC'}>
+            {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={2}>
+          <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem} data-field={'statementSummaryInfo.incomesCount'}>
+            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomesCount })}
+          </Typography.Text>
+          <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.income'} fill={'SUCCESS'}>
+            {locale.moneyString.positive({ amount: String(income), currencyCode })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={2}>
+          <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem}>
+            {locale.transactionsScroller.labels.outgoingBalance}
+          </Typography.Text>
+          <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.outgoingBalance'}>
+            {locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}
+          </Typography.P>
+        </Pattern.Span>
+      </Pattern>
+      <Gap.XS />
       <Pattern gap={'X2L'}>
         <Pattern.Span size={3}>
-          <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.accountNumber}</Typography.Text>
-          <Typography.Text>{formatAccountCode(accountNumber)}</Typography.Text>
-        </Pattern.Span>
-        <Pattern.Span size={9}>
-          <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
+          <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
           <WithInfoTooltip text={organizationName}>
             {ref => (
-              <Typography.Text innerRef={ref} line={'COLLAPSE'}>
+              <Typography.P innerRef={ref} line={'COLLAPSE'}>
                 {organizationName}
-              </Typography.Text>
+              </Typography.P>
             )}
           </WithInfoTooltip>
         </Pattern.Span>
       </Pattern>
-      <Gap />
-      <Pattern gap={'X2L'}>
-        <Pattern.Span size={3}>
-          <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.incomingBalance}</Typography.Text>
-          <Typography.Text data-field={'statementSummaryInfo.incomingBalance'}>
-            {locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}
-          </Typography.Text>
-        </Pattern.Span>
-        <Pattern.Span size={3}>
-          <Typography.Text data-field={'statementSummaryInfo.outcomesCount'} fill={'FAINT'}>
-            {locale.transactionsScroller.labels.outcomeTransactions({ amount: outcomesCount })}
-          </Typography.Text>
-          <Typography.Text data-field={'statementSummaryInfo.outcome'} fill={'CRITIC'}>
-            {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
-          </Typography.Text>
-        </Pattern.Span>
-        <Pattern.Span size={3}>
-          <Typography.Text data-field={'statementSummaryInfo.incomesCount'} fill={'FAINT'}>
-            {locale.transactionsScroller.labels.incomeTransactions({ amount: incomesCount })}
-          </Typography.Text>
-          <Typography.Text data-field={'statementSummaryInfo.income'} fill={'SUCCESS'}>
-            {locale.moneyString.positive({ amount: String(income), currencyCode })}
-          </Typography.Text>
-        </Pattern.Span>
-        <Pattern.Span size={3}>
-          <Typography.Text fill={'FAINT'}>{locale.transactionsScroller.labels.outgoingBalance}</Typography.Text>
-          <Typography.Text data-field={'statementSummaryInfo.outgoingBalance'}>
-            {locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}
-          </Typography.Text>
-        </Pattern.Span>
-      </Pattern>
-      <Gap.XL />
+      <Gap.SM />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, Fragment } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { executor } from 'actions/client';
 import { ItemWithRestInPopUp } from 'components';
 import type { CellAccessibilityInnerFocusProps } from 'components/scroller-table-view/accessibility';
@@ -11,13 +11,13 @@ import { locale } from 'localization';
 import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
 import type { CellProps } from 'react-table';
 import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants';
-import { STATUS_LABELS, STATUS_COLOR } from 'stream-constants/client';
+import { STATUS_COLOR, STATUS_LABELS } from 'stream-constants/client';
 import { getActiveActionButtons } from 'utils';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Typography, Box, Horizon, Status as StatusMarker, Gap, ROLE } from '@platform/ui';
+import { Box, Horizon, RegularButton, Status as StatusMarker, Typography, Gap } from '@platform/ui';
 import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
@@ -27,12 +27,15 @@ type HistoryCellProps = CellAccessibilityInnerFocusProps & CellProps<IStatementH
 /** Дата и время создания запроса выписки. */
 export const CreatedAtCell: FC<HistoryCellProps> = ({ value: doc }) => {
   const { createdAt } = doc;
-  const [date, time] = formatDateTime(createdAt, { keepLocalTime: true, format: DATE_TIME_FORMAT_WITHOUT_SEC }).split(' ');
+  const [date, time] = formatDateTime(createdAt, {
+    keepLocalTime: true,
+    format: DATE_TIME_FORMAT_WITHOUT_SEC,
+  }).split(' ');
 
   return (
     <>
-      <Typography.Text data-field={'createdAtDate'}>{date}</Typography.Text>
-      <Typography.SmallText data-field={'createdAtTime'}>{time}</Typography.SmallText>
+      <Typography.P data-field={'createdAtDate'}>{date}</Typography.P>
+      <Typography.P data-field={'createdAtTime'}>{time}</Typography.P>
     </>
   );
 };
@@ -47,14 +50,15 @@ export const AccountNumber: FC<HistoryCellProps> = ({ value: doc }) => {
   const formattedAccounts = useMemo(() => accountNumbers.map(item => formatAccountCode(item)), [accountNumbers]);
 
   if (accountsIds.length === accounts.length) {
-    return <Typography.Text>{locale.historyScroller.table.allAccounts}</Typography.Text>;
+    return <Typography.P>{locale.historyScroller.table.allAccounts}</Typography.P>;
   }
 
   return (
     <>
       <Box>
-        <ItemWithRestInPopUp component={Typography.Text} items={formattedAccounts} />
+        <ItemWithRestInPopUp component={Typography.P} items={formattedAccounts} />
       </Box>
+      <Gap.XS />
       <Box>
         <ItemWithRestInPopUp component={Typography.SmallText} items={organizationNames} />
       </Box>
@@ -85,8 +89,9 @@ export const Period: FC<HistoryCellProps> = ({ value: doc }) => {
 
   return (
     <>
-      <Typography.Text data-field={'periodType'}>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.Text>
-      <Typography.SmallText data-field={'dateText'}>{dateText}</Typography.SmallText>
+      <Typography.P data-field={'periodType'}>{DATE_PERIOD_SCROLLER_LABELS[periodType]}</Typography.P>
+      <Gap.XS />
+      <Typography.P data-field={'dateText'}>{dateText}</Typography.P>
     </>
   );
 };
@@ -98,10 +103,10 @@ export const StatementFormat: FC<HistoryCellProps> = ({ value: doc }) => {
   const { statementFormat, action } = doc;
 
   if (action === ACTION.VIEW) {
-    return <Typography.Text>{locale.historyScroller.statementFormat.labels.onScreen}</Typography.Text>;
+    return <Typography.P>{locale.historyScroller.statementFormat.labels.onScreen}</Typography.P>;
   }
 
-  return <Typography.Text data-field={'statementFormat'}>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.Text>;
+  return <Typography.P data-field={'statementFormat'}>{STATEMENT_FORMAT_LABELS[statementFormat]}</Typography.P>;
 };
 
 StatementFormat.displayName = 'StatementFormat';
@@ -113,9 +118,9 @@ export const Status: FC<HistoryCellProps> = ({ value: doc }) => {
   return (
     <Horizon align="TOP">
       <StatusMarker className={css.status} type={STATUS_COLOR[status]} />
-      <Typography.Text data-field={'status'} line="BREAK">
+      <Typography.P data-field={'status'} line="BREAK">
         {STATUS_LABELS[status]}
-      </Typography.Text>
+      </Typography.P>
     </Horizon>
   );
 };
@@ -123,28 +128,22 @@ export const Status: FC<HistoryCellProps> = ({ value: doc }) => {
 Status.displayName = 'Status';
 
 /** Действия со строкой. */
-export const Actions: FC<HistoryCellProps> = ({ column, getCellAccessibilityInnerFocusProps, row, value: doc }) => {
+export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   const { getAvailableActions } = useAuth();
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc]]), [getAvailableActions, doc]);
 
-  return (
-    <Horizon align="TOP">
-      <Horizon.Spacer />
-      {actions.map((action, index) => {
-        const { icon: Icon, onClick, name } = action;
+  if (actions.length === 0) {
+    return null;
+  }
 
-        return (
-          <Fragment key={name}>
-            {index !== 0 && <Gap.LG />}
-            <StopPropagation>
-              <Box role={ROLE.BUTTON} onClick={onClick} {...getCellAccessibilityInnerFocusProps?.(row.index, column.id, index)}>
-                <Icon fill={'FAINT'} scale={'MD'} />
-              </Box>
-            </StopPropagation>
-          </Fragment>
-        );
-      })}
-    </Horizon>
+  return (
+    <StopPropagation>
+      <Box className={css.rowActions}>
+        {actions.map(({ icon, name, onClick }) => (
+          <RegularButton key={name} extraSmall className={css.rowActionButton} dimension={'MC'} icon={icon} onClick={onClick} />
+        ))}
+      </Box>
+    </StopPropagation>
   );
 };
 

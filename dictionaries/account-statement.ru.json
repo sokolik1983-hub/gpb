@@ -37,8 +37,7 @@
   "transactionsScroller.headers.counterparty": "Контрагент",
   "transactionsScroller.headers.outcome": "Списания",
   "transactionsScroller.headers.income": "Поступления",
-  "transactionsScroller.headers.purpose": "Назначение",
-  "transactionsScroller.labels.documentNumber": "№ {documentNumber}",
+  "transactionsScroller.labels.documentNumber": "№{documentNumber}",
   "transactionsScroller.labels.documentDate": "от {date}",
   "transactionsScroller.labels.accountNumber": "Счет",
   "transactionsScroller.labels.organizationName": "Организация",
@@ -167,6 +166,7 @@
   "common.creationParams.hideEmptyTurnovers": "Скрыть нулевые обороты",
   "common.creationParams.withSign": "С электронной подписью банка в формате PDF",
   "common.creationParams.withDocumentsSet": "С комплектом документов",
+  "common.creationParams.totalsOfDay": "Итоги за день",
   "common.documentsSetParams.label": "Комплект документов",
   "common.documentsSetParams.separateDocumentsFiles": "Отдельными файлами",
   "common.documentsSetParams.onlyRequestStatementDocuments": "Только документы выписки",
@@ -229,5 +229,8 @@
   "exportParamsDialog.exportOutdatedStatement.label": "Данная выписка устарела, некоторые проводки выписки были удалены. Все равно экспортировать выписку?",
   "common.checkAuthority.error": "Недостаточно полномочий для выполнения операции",
   "form.withPdfSign.tooltip": "При совпадении последнего условия отображается иконка подсказки",
-  "form.notFoundStatement.warning": "Выписка за период {dateFrom} - {dateTo} отсутствует"
+  "form.notFoundStatement.warning": "Выписка за период {dateFrom} - {dateTo} отсутствует",
+  "scroller.placeholder.header": "Данные отсутствуют",
+  "scroller.placeholder.text": "После добавления данных здесь появится список",
+  "column.tooltip": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
 }
