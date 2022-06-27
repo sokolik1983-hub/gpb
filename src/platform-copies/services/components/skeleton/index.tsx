@@ -25,7 +25,7 @@ export const Skeleton: React.FC<ISkeletonProps> = ({
   padding = [undefined, undefined],
 }) => {
   // вспомогатетельный массив для рендера списка компонентов, содержит в себе числа от 1 до `rows` включительно
-  const iterationDummy = useMemo(() => [...Array(rows).keys()].map((i: number) => i + 1), [rows]);
+  const iterationDummy = useMemo(() => Array.from(Array(rows).keys()).map((i: number) => i + 1), [rows]);
 
   return (
     <Box className={Adjust.getPadClass(padding)}>
