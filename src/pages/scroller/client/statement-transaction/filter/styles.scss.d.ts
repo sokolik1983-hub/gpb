@@ -8,6 +8,7 @@ declare namespace StylesScssModule {
     'counterpartyField': string;
     'fieldWrapper': string;
     'statementInfoWrapper': string;
+    'titleStatementInfoItem': string;
   }
 }
 

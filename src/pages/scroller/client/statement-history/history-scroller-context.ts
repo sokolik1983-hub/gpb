@@ -1,14 +1,18 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel, Sorting, IPagination } from 'interfaces';
+import type { IFilterPanel, IPagination, ITagsPanel } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
+import type { ISortSettings } from '@platform/services/common/dist-types/interfaces';
+import { SORT_DIRECTION } from '@platform/services/common/dist-types/interfaces';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
 
-/** Состояние сортровки по умолчанию. */
-export const DEFAULT_SORTING: Sorting = [{ id: COLUMN_NAMES.CREATED_AT, desc: true }];
+/** Состояние сортировки по умолчанию. */
+export const DEFAULT_SORTING = {
+  [COLUMN_NAMES.CREATED_AT]: SORT_DIRECTION.DESC,
+};
 
 /** Контекст скроллера "История запросов". */
 export interface IHistoryScrollerContext {
@@ -29,13 +33,17 @@ export interface IHistoryScrollerContext {
   /** Общее количество выписок, подходящих под условия фильтрации. */
   totalStatementsAmount: number;
   /** Сортировка. */
-  sorting?: Sorting;
+  sorting?: ISortSettings;
   /** Установить сортировку. */
-  setSorting(value: Sorting): void;
+  setSorting(value: ISortSettings): void;
   /** Стейт пагинации. */
   pagination: IPagination;
   /** Устанавливает стейт пагинации. */
   setPagination(value: IPagination): void;
+  /** Признак, что выписки получены. */
+  isStatementsError: boolean;
+  /** Признак ошибки получения выписок. */
+  isStatementsFetched: boolean;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -71,6 +79,8 @@ const DEFAULT_CONTEXT_VALUE: IHistoryScrollerContext = {
   setSorting: noop,
   pagination: DEFAULT_PAGINATION,
   setPagination: noop,
+  isStatementsError: false,
+  isStatementsFetched: false,
 };
 
 /** Контекст скроллера "История запросов". */

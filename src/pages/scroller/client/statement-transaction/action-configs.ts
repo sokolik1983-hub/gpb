@@ -10,9 +10,10 @@ import { BUTTON, Icons } from '@platform/ui';
  * Функция для создания конфига действия экспорта.
  *
  * @param useCase Вариант (место) использования в сервисе.
+ * @param withoutIcon Флаг экшена без иконки.
  */
-const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIActionWithAuth => ({
-  icon: Icons.Download,
+const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES, withoutIcon?: boolean): IExtendedIActionWithAuth => ({
+  icon: withoutIcon ? ('' as any) : Icons.Download,
   label: '',
   action: getExportStatementAttachment(useCase),
   name: 'EXPORT_STATEMENT',
@@ -23,9 +24,10 @@ const getExportStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIA
  * Функция для создания конфига действия печати.
  *
  * @param useCase Вариант (место) использования в сервисе.
+ * @param withoutIcon Флаг экшена без иконки.
  */
-const getPrintStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES): IExtendedIActionWithAuth => ({
-  icon: Icons.PrintFile,
+const getPrintStatementConfig = (useCase: EXPORT_PARAMS_USE_CASES, withoutIcon?: boolean): IExtendedIActionWithAuth => ({
+  icon: withoutIcon ? ('' as any) : Icons.PrintFile,
   label: '',
   action: getPrintStatementAttachment(useCase),
   name: 'PRINT_STATEMENT',
@@ -41,12 +43,12 @@ export const HEADER_ACTIONS = [
 
 /** Действия в футере скроллера. */
 export const FOOTER_ACTIONS = [
-  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.THREE), label: locale.transactionsScroller.footerAction.export },
+  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.THREE, true), label: locale.transactionsScroller.footerAction.export },
 ];
 
 /* Действия футера скроллера в выпадающем списке. */
 export const FOOTER_DROPDOWN_ACTIONS = [
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.FOUR), label: locale.transactionsScroller.footerAction.print },
+  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.FOUR, true), label: locale.transactionsScroller.footerAction.print },
 ];
 
 /** Действия строки скроллера в выпадающем списке. */

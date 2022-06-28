@@ -118,12 +118,9 @@
   "transactionsScroller.headers.income": {
     "ru": "Поступления"
   },
-  "transactionsScroller.headers.purpose": {
-    "ru": "Назначение"
-  },
   "transactionsScroller.labels.documentNumber": {
     "@documentNumber": "string",
-    "ru": "№ {documentNumber}"
+    "ru": "№{documentNumber}"
   },
   "transactionsScroller.labels.documentDate": {
     "@date": "string",
@@ -720,5 +717,14 @@
     "@dateFrom": "string",
     "@dateTo": "string",
     "ru": "Выписка за период {dateFrom} - {dateTo} отсутствует"
+  },
+  "scroller.placeholder.header": {
+    "ru": "Данные отсутствуют"
+  },
+  "scroller.placeholder.text": {
+    "ru": "После добавления данных здесь появится список"
+  },
+  "column.tooltip": {
+    "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
   }
 }

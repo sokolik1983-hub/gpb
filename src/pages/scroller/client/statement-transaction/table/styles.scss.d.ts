@@ -5,11 +5,12 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'actionsIconWrapper': string;
     'actionsRowButton': string;
+    'captionRow': string;
+    'captionRowText': string;
     'footer': string;
     'footerDropdownActions': string;
-    'rowDropdownActions': string;
+    'rowActionButton': string;
     'totalWrapper': string;
   }
 }

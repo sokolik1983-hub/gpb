@@ -1,4 +1,4 @@
-import { createStatement, getExecutor, showStatementForm } from 'actions/client';
+import { createStatement, getExecutor, showStatementRequestForm } from 'actions/client';
 import { DATE_PERIODS } from 'interfaces';
 import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client/classificators';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
@@ -52,5 +52,5 @@ export const executeCreateStatementOneTime = ({ accountsIds, refererPage }: { ac
 export const executeCreateStatementOrg = () => {
   const executor = getExecutor();
 
-  void executor.execute(showStatementForm);
+  void executor.execute(showStatementRequestForm);
 };

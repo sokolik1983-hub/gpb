@@ -5,7 +5,6 @@
 .footer {
   position: relative;
   padding: 16px 32px;
-  box-shadow: 0 -4px 48px rgba(38, 44, 64, 0.12);
 }
 
 .actionsRowButton {
@@ -16,15 +15,20 @@
   height: 16px;
 }
 
-.actionsIconWrapper {
-  width: 30px;
-  height: 30px;
-}
-
-.rowDropdownActions {
-  min-width: 292px;
-}
-
 .footerDropdownActions {
   min-width: 176px;
+}
+
+.rowActionButton {
+  width: 32px;
+  height: 24px;
+  padding: 0;
+}
+
+.captionRow {
+  padding: 0 80px 12px 32px;
+}
+
+.captionRowText {
+  color: #7c8793;
 }

@@ -1,0 +1,21 @@
+.linkFocusable {
+  position: relative;
+
+  &:focus-within {
+    outline: none;
+
+    ::after {
+      $indent: calc(-1 * var(--gap-size-x2s));
+
+      position: absolute;
+      top: $indent;
+      right: $indent;
+      bottom: $indent;
+      left: $indent;
+      display: block;
+      border: 1px solid var(--line-fill-accent-strong);
+      border-radius: var(--box-radius-xs);
+      content: '';
+    }
+  }
+}
