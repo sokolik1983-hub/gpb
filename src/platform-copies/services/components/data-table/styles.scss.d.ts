@@ -6,7 +6,6 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'cellPadding': string;
-    'focusable': string;
     'footer': string;
     'header': string;
     'headerLeftGap': string;

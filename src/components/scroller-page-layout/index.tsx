@@ -1,5 +1,7 @@
 import React from 'react';
 import { ContentLoader } from 'components/content-loader';
+import { FocusNode } from 'components/focus-tree';
+import { SCROLLER, TABS, HEADER } from 'stream-constants/a11y';
 import type { ICategoryTabsProps, IScrollerHeader } from '@platform/ui';
 import { Box, Separator, CategoryTabs, LoaderOverlay, DATA_TYPE, ScrollerHeader } from '@platform/ui';
 import css from './styles.scss';
@@ -23,16 +25,18 @@ export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({ categor
     {loading && <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={loading} />}
     <Box className={css.scrollerLayoutContent}>
       <ContentLoader height={SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT} loading={headerProps.loading}>
-        <ScrollerHeader {...headerProps} />
+        <FocusNode nodeId={HEADER} parentId={SCROLLER}>
+          <ScrollerHeader {...headerProps} />
+        </FocusNode>
       </ContentLoader>
       <Separator />
       {categoryTabs && (
-        <>
+        <FocusNode nodeId={TABS} parentId={SCROLLER}>
           <Box className={css.categoryTabs}>
             <CategoryTabs {...categoryTabs} />
           </Box>
           <Separator />
-        </>
+        </FocusNode>
       )}
       {children}
     </Box>

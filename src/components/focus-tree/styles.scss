@@ -1,0 +1,25 @@
+.node {
+  position: relative;
+
+  &:focus {
+    outline: none;
+
+    &::before {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      bottom: 3px;
+      left: 3px;
+      display: block;
+      border: 2px solid #0057b6;
+      border-radius: 6px;
+      content: '';
+    }
+  }
+}
+
+.tree {
+  &:focus {
+    outline: none;
+  }
+}
