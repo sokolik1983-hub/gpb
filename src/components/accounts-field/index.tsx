@@ -59,7 +59,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
       const filtered = sortedOptions.filter(option => {
         const { accountNumber, orgName } = option;
 
-        const searchValueLowerCase = searchValue.toLocaleLowerCase();
+        const searchValueLowerCase = searchValue.toLocaleLowerCase().replace(/\./g, '');
 
         return (
           accountNumber?.toLocaleLowerCase().includes(searchValueLowerCase) || orgName?.toLocaleLowerCase().includes(searchValueLowerCase)
