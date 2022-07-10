@@ -1,3 +1,16 @@
+# [2.8.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0...v2.8.0-release.1) (2022-06-30)
+
+
+### Features
+
+* **скелетон:** GBO-27803 кастомный компонент скелетона ил платформы ([7cab127](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7cab1274d3ca0c024351dfb237dc639a559ed0cb))
+* **скелетон:** GBO-27803 правки для массива ([a23ba4b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a23ba4b181581929f6cec3623e40b758a9176aeb))
+* **экшен:** GBO-27359 добавил новый экшен на создание запроса на выписку ([fef5faa](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fef5faa79a66a04974af28ccec63ba3e1f2e5fae))
+* **экшен:** GBO-27359 правки экшена ([b3ca6de](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b3ca6dea22368c2c8a7d9b5c73338221abee4918))
+* **экшен:** GBO-27359 экшен экзукьютер ([c1ea5ad](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c1ea5ad9b4616aa168377d601c01898ea3cc356c))
+* **экшен:** GBO-27366 экшен экзукьютер для перехода на создание выписки ([135da15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/135da15507360df4a308d32859fe024409a2ab22))
+* GBO-20972 добавлены кнопки `Печать` и `Экспорт` в ОСВ ([735e946](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/735e946e1370f9a6a6359fe1837e217ac13004f9))
+
 # [2.7.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.6.0...v2.7.0) (2022-06-26)
 
 

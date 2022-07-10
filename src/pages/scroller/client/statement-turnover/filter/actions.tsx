@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { executor } from 'actions/client';
 import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
@@ -17,15 +17,9 @@ export const Actions = () => {
 
   const { accounts, dateFrom, dateTo, datePeriod } = values;
 
-  /**
-   * Метод получения данных для формирования выписки.
-   *
-   * @param action - Действие с выпиской.
-   */
-  const getDoc: (action: ACTION.DOWNLOAD | ACTION.PRINT) => Partial<ICreateRequestStatementDto> = useCallback(
-    action => ({
+  const doc: Partial<ICreateRequestStatementDto> = useMemo(
+    () => ({
       accountsIds: accounts,
-      action,
       creationType: CREATION_TYPE.NEW,
       creationParams: {
         includeCreditOrders: false,
@@ -50,14 +44,14 @@ export const Actions = () => {
   const { getAvailableActions } = useAuth();
 
   const [exportAction] = useMemo(
-    () => getActiveActionButtons(getAvailableActions([EXPORT_ACTION]), executor, [[getDoc(ACTION.DOWNLOAD)]]),
-    [getAvailableActions, getDoc]
+    () => getActiveActionButtons(getAvailableActions([EXPORT_ACTION]), executor, [[{ ...doc, action: ACTION.DOWNLOAD }]]),
+    [getAvailableActions, doc]
   );
 
-  const [printAction] = useMemo(() => getActiveActionButtons(getAvailableActions([PRINT_ACTION]), executor, [[getDoc(ACTION.PRINT)]]), [
-    getAvailableActions,
-    getDoc,
-  ]);
+  const [printAction] = useMemo(
+    () => getActiveActionButtons(getAvailableActions([PRINT_ACTION]), executor, [[{ ...doc, action: ACTION.PRINT }]]),
+    [getAvailableActions, doc]
+  );
 
   return (
     <Horizon>
