@@ -17,7 +17,7 @@ export const Filter: React.FC<IFilterProperties> = ({
   filterState,
   tagsState,
 }) => {
-  const { onClose: closeAdditionalFilter, onClear, onOk, opened } = filterState;
+  const { onClose: closeAdditionalFilter, onClear, onOk, opened, values: currentStateValues } = filterState;
   const { onClick: expandAdditionalFilter } = tagsState;
 
   const { restart } = useForm();
@@ -61,11 +61,15 @@ export const Filter: React.FC<IFilterProperties> = ({
         {}
       );
 
-      return isEqual(defaultAdditionalFilterValues, currentAdditionalValues);
+      const diffFromCurrentState = Object.keys(currentAdditionalValues).some(
+        key => currentAdditionalValues[key] !== currentStateValues[key]
+      );
+
+      return !diffFromCurrentState && isEqual(defaultAdditionalFilterValues, currentAdditionalValues);
     }
 
     return true;
-  }, [defaultAdditionalFilterValues, opened, values]);
+  }, [defaultAdditionalFilterValues, opened, values, currentStateValues]);
 
   return (
     <>
