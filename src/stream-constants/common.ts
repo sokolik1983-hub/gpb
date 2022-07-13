@@ -21,3 +21,6 @@ export const TOPLINE_HEIGHT = 64;
 
 /** Высота таба. */
 export const TAB_HEIGHT = 60;
+
+/** Высота разделителя. */
+export const LINE_HEIGHT = 2;

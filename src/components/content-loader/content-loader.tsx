@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Box, Gap, Skeleton } from '@platform/ui';
+import { Adjust, Box, Gap, Skeleton } from '@platform/ui';
 
 /** Свойства компонента обертка для отображения заглушки или данных. */
 interface ContentLoaderProps {
@@ -15,11 +15,11 @@ interface ContentLoaderProps {
 const ROW_HEIGHT = 16;
 
 /** Вертикальные padding-и Skeleton - MD. */
-const ROW_TOP_PADDING = 16;
-const ROW_BOTTOM_PADDING = 16;
+const ROW_TOP_PADDING = 8;
+const ROW_BOTTOM_PADDING = 8;
 
 /** Высота gap Skeleton - MD. */
-const GAP_HEIGHT = 16;
+const GAP_HEIGHT = 4;
 
 /** Компонент обертка для отображения заглушки или данных.  */
 export const ContentLoader: React.FC<ContentLoaderProps> = ({ children, height, loading }) => {
@@ -30,10 +30,9 @@ export const ContentLoader: React.FC<ContentLoaderProps> = ({ children, height, 
     return pureHeight < rowWithGapHeight ? 1 : Math.round(pureHeight / rowWithGapHeight);
   }, [height]);
 
-  // FIXME: Скелетон, который жестко привязан к строкам и их размерам - это неправильный скелетон. Он должен принимать только высоту, которую при желании можно вычислить через кол-во и размеры строк.
   return loading ? (
-    <Box style={{ height }}>
-      <Skeleton gap={<Gap />} padding={['MD', 'XL', 'MD', 'XL']} rows={rows} />
+    <Box className={Adjust.getPadClass(['XS', 'XL', 'XS', 'XL'])} style={{ height }}>
+      <Skeleton gap={<Gap.X2S />} rows={rows} />
     </Box>
   ) : (
     (children as React.ReactElement)
