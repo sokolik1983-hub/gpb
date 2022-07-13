@@ -12,7 +12,7 @@ import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
-import { DEFAULT_PAGINATION, TAB_HEIGHT } from 'stream-constants';
+import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import type { ISortSettings } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { Line } from '@platform/ui';
@@ -30,8 +30,8 @@ import { useGetStatementList } from './hooks';
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
 
-/** Высота фильтра. */
-const FILTER_HEIGHT = 58;
+/** Высота фильтра. Минус разделитель внизу фильтра. */
+const FILTER_HEIGHT = 58 - LINE_HEIGHT;
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -126,7 +126,6 @@ export const StatementHistoryScrollerPage = () => {
       <MainLayout>
         <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
           <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-            <Line fill="FAINT" />
             <FilterLayout
               AdditionalFilter={AdditionalFilter}
               QuickFilter={QuickFilter}
@@ -138,6 +137,7 @@ export const StatementHistoryScrollerPage = () => {
               validate={validate(validationSchema)}
             />
           </ContentLoader>
+          {!accountsFetched && <Line fill="FAINT" />}
           <ContentLoader height={tableHeight} loading={!statementsFetched}>
             <Table />
           </ContentLoader>

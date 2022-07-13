@@ -4,8 +4,9 @@ import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps,
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
-import { TAB_HEIGHT } from 'stream-constants';
+import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { Line } from '@platform/ui';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
 import { useGroupByForRender, useTurnovers } from './hooks';
@@ -13,8 +14,8 @@ import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
 import { TurnoverScrollerContext } from './turnover-scroller-context';
 
-/** Высота фильтра. */
-const FILTER_HEIGHT = 58;
+/** Высота фильтра. Минус разделитель внизу фильтра. */
+const FILTER_HEIGHT = 58 - LINE_HEIGHT;
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -101,6 +102,7 @@ export const StatementTurnoverScrollerPage = () => {
           <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
             <Filter />
           </ContentLoader>
+          {!accountsFetched && <Line fill="FAINT" />}
           <ContentLoader height={tableHeight} loading={!turnoversFetched}>
             <TurnoversTable />
           </ContentLoader>

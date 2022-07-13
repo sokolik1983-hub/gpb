@@ -29,7 +29,7 @@ import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/clie
 import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
-import { DEFAULT_PAGINATION } from 'stream-constants';
+import { DEFAULT_PAGINATION, LINE_HEIGHT } from 'stream-constants';
 import type { ISortSettings } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { Gap, Line } from '@platform/ui';
@@ -40,8 +40,8 @@ import { validate } from '@platform/validation';
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
 
-/** Высота фильтра. */
-const FILTER_HEIGHT = 58;
+/** Высота фильтра. Минус разделитель снизу и вверху фильтра. */
+const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
 /** Высота инфоблока по проводкам. */
 const STATEMENT_INFO_HEIGHT = 112;
 
@@ -165,6 +165,7 @@ export const StatementTransactionScrollerPage = () => {
           <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
             <StatementInfo />
           </ContentLoader>
+          {!counterpartiesFetched && <Line fill="FAINT" />}
           <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
             <Line fill="FAINT" />
             <FilterLayout
@@ -178,6 +179,7 @@ export const StatementTransactionScrollerPage = () => {
               validate={validate(validationSchema)}
             />
           </ContentLoader>
+          {!counterpartiesFetched && <Line fill="FAINT" />}
           <ContentLoader height={tableHeight} loading={!transactionsFetched}>
             <Gap.SM />
             <Table />
