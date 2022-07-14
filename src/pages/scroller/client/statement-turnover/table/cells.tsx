@@ -108,7 +108,7 @@ export const AccountNumberCell: FC<CellProps<IGroupedAccounts, IAccountTurnovers
 
   return (
     <Box className={cn({ [css.thirdLevelCell]: hasThirdLevelMargin, [css.secondLevelCell]: hasSecondLevelMargin })}>
-      <Typography.P>{formatAccountCode(accountNumber)}</Typography.P>
+      <Typography.P data-field={'accountNumber'}>{formatAccountCode(accountNumber)}</Typography.P>
       <WithInfoTooltip text={accountDescription}>
         {ref => (
           <Typography.SmallText data-field={'accountDescription'} fill={'FAINT'} innerRef={ref} line={'COLLAPSE'}>

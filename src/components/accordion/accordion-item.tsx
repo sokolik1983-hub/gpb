@@ -63,10 +63,10 @@ export const AccordionItem = forwardRef<Box, IAccordionItem>(({ header, panel, e
 
   return (
     <Box ref={ref} className={css.accordion}>
-      <button aria-expanded={opened} tabIndex={disabled ? -1 : 0} type="button" onClick={handleClick}>
+      <button aria-expanded={opened} data-action="switch-expanded" tabIndex={disabled ? -1 : 0} type="button" onClick={handleClick}>
         {header}
       </button>
-      <div ref={wrapperRef} className={css.panel} role="region">
+      <div ref={wrapperRef} className={css.panel} data-role="row-details" role="region">
         <div ref={panelRef}>{panel}</div>
       </div>
     </Box>
