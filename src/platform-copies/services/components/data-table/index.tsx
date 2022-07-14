@@ -1,10 +1,11 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import cn from 'classnames';
+import { HEADER_ALIGN } from 'interfaces';
 import { locale } from 'localization';
 import type { CellProps, HeaderProps, Row } from 'react-table';
-import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
+import { useBlockLayout, useExpanded, usePagination, useResizeColumns, useRowSelect, useSortBy, useTable } from 'react-table';
 import type { IColumnsStorageObject } from '@platform/core';
-import { getActionButtons, applyMiddlewares, onSuccessMiddleware } from '@platform/core';
+import { applyMiddlewares, getActionButtons, onSuccessMiddleware } from '@platform/core';
 import type { ISortSettings } from '@platform/services';
 import { DEFAULT_PAGINATION_STATE, useAuth, usePaginationController } from '@platform/services';
 import type { ICheckboxOption } from '@platform/ui';
@@ -13,8 +14,8 @@ import {
   IconButton,
   Icons,
   FractalPagination,
-  FractalSelectedRowsInfo,
   Placeholder,
+  LayoutScroll,
   SettingsForm,
   SORT_DIRECTION,
   Box,
@@ -33,6 +34,7 @@ import {
   LoaderOverlay,
   noop,
 } from '@platform/ui';
+import { FractalSelectedRowsInfo } from '../fractal-selected-rows-info';
 import type { IDataTableProps } from './interfaces';
 import './react-table-config';
 import { StopPropagation } from './stop-propagation';
@@ -237,6 +239,7 @@ export const DataTable = function Table<T extends { id: string }>({
       data: rows,
       manualSortBy: true,
       manualPagination: true,
+      maxMultiSortColCount: 2,
       initialState: {
         hiddenColumns: defaultHiddenColumns,
         sortBy: defaultSortBy,
@@ -423,201 +426,211 @@ export const DataTable = function Table<T extends { id: string }>({
   return (
     <>
       <Box className={css.wrapper}>
-        <Box {...getTableProps()}>
-          {rows.length > 0 &&
-            headerGroups.map(headerGroup => (
-              // eslint-disable-next-line react/jsx-key
-              <Box
-                {...headerGroup.getHeaderGroupProps({ role: ROLE.GRID_HEADER })}
-                style={{ ...headerGroup.getHeaderGroupProps().style, minWidth, position: 'relative' }}
-              >
-                {headerGroup.headers.map((column, index) => {
-                  const SortIcon = column.isSortedDesc ? ServiceIcons.ArrowDown : ServiceIcons.ArrowUp;
+        {rows.length > 0 &&
+          headerGroups.map(headerGroup => (
+            // eslint-disable-next-line react/jsx-key
+            <Box
+              {...headerGroup.getHeaderGroupProps({ role: ROLE.GRID_HEADER })}
+              style={{ ...headerGroup.getHeaderGroupProps().style, minWidth, position: 'relative' }}
+            >
+              {headerGroup.headers.map((column, index) => {
+                const SortIcon = column.isSortedDesc ? ServiceIcons.ArrowDown : ServiceIcons.ArrowUp;
 
-                  const isFirstColumn = index === 0;
-                  const isSecondColumn = index === 1;
-                  const isLastColumn = index === headerGroup.headers.length - 1;
+                const isFirstColumn = index === 0;
+                const isSecondColumn = index === 1;
+                const isLastColumn = index === headerGroup.headers.length - 1;
 
-                  const sortByToggleProps = column.getSortByToggleProps();
+                const sortByToggleProps = column.getSortByToggleProps();
 
-                  delete sortByToggleProps.title;
+                delete sortByToggleProps.title;
 
-                  let sortDirection = '';
+                const sortIndex = column.sortedIndex + 1;
+                let sortDirection = '';
 
-                  if (column.isSorted) {
-                    sortDirection = column.isSortedDesc ? 'desc' : 'asc';
-                  }
+                if (column.isSorted) {
+                  sortDirection = column.isSortedDesc ? 'desc' : 'asc';
+                }
 
-                  const columnResizerProps = column.getResizerProps ? column.getResizerProps() : { style: {} };
+                const columnResizerProps = column.getResizerProps ? column.getResizerProps() : { style: {} };
 
-                  return (
-                    // eslint-disable-next-line react/jsx-key
-                    <Box data-name={column.id} {...column.getHeaderProps()}>
-                      <WithClickable>
-                        {(ref, { hovered }) => (
-                          <Horizon
-                            ref={ref}
-                            data-action={ACTIONS.SORT_DIRECTION}
-                            data-direction={sortDirection}
-                            data-role={ROLE.BUTTON}
-                            {...sortByToggleProps}
-                            align={'CENTER'}
-                            className={css.header}
-                          >
-                            {!isFirstColumn && !isSecondColumn && <Gap.SM />}
-                            <Typography.TextBold line="COLLAPSE">{column.render('Header')}</Typography.TextBold>
-                            {!isFirstColumn && column.canSort && (
-                              <WithInfoTooltip extraSmall text={locale.column.tooltip}>
-                                {tooltipRef => (
-                                  <Box ref={tooltipRef} className={css.sortIconWrapper}>
-                                    {(hovered || column.isSorted) && <SortIcon fill={column.isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />}
-                                  </Box>
-                                )}
-                              </WithInfoTooltip>
-                            )}
-                            <Gap.SM />
-                          </Horizon>
-                        )}
-                      </WithClickable>
-                      {!isFirstColumn && !isLastColumn && (
-                        <Box
-                          border={['FAINT', 'SM']}
-                          className={css.verticalSeparator}
-                          {...columnResizerProps}
-                          style={{
-                            ...columnResizerProps.style,
-
-                            borderTop: 'none',
-                            borderRight: 'none',
-                            borderBottom: 'none',
-                          }}
-                          title={''}
-                        />
-                      )}
-                    </Box>
-                  );
-                })}
-                {showSettingsButton && (
-                  <Box className={css.settingIcon}>
-                    <IconButton
-                      data-action={ACTIONS.OPEN}
-                      data-id="table-settings-button"
-                      fill={settingsFormOpen ? 'BASE' : 'FAINT'}
-                      icon={Icons.Gear}
-                      isActive={settingsFormOpen}
-                      onClick={handleOpenSettingsForm}
-                    />
-                  </Box>
-                )}
-              </Box>
-            ))}
-
-          <Box {...getTableBodyProps()}>
-            {page.map((row, rowIndex) => {
-              prepareRow(row);
-
-              const rowActionButtons = getActionButtons(getAvailableActions(fastActions), executor, [[row.original]]).filter(
-                ({ disabled }) => !disabled
-              );
-
-              const extendedRowActionButtons = expandedRowActionsGetter
-                ? getActionButtons(getAvailableActions(expandedRowActionsGetter(row.original)), executor, [[row.original]])
-                : [];
-
-              const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
-
-              return (
-                visibleRow && (
-                  <WithClickable key={row.getRowProps().key}>
-                    {(ref, { hovered }) => (
-                      <React.Fragment key={`rowLayout_${row.getRowProps().key}`}>
-                        <Box
+                return (
+                  // eslint-disable-next-line react/jsx-key
+                  <Box data-name={column.id} {...column.getHeaderProps()}>
+                    <WithClickable>
+                      {(ref, { hovered }) => (
+                        <Horizon
                           ref={ref}
-                          border={['FAINT', 'SM']}
-                          className={cn(css.row, css.focusable)}
-                          data-id={row.original.id}
-                          {...row.getRowProps()}
-                          key={`row_${row.getRowProps().key}`}
-                          aria-expanded={row.isExpanded}
-                          fill={hovered ? 'FAINT' : 'BASE'}
-                          style={{
-                            ...row.getRowProps().style,
-
-                            borderRight: 'none',
-                            borderBottom: 'none',
-                            borderLeft: 'none',
-                            minWidth,
-                          }}
-                          onClick={handleRowClick(row)}
-                          onDoubleClick={handleRowDoubleClick(row)}
+                          data-action={ACTIONS.SORT_DIRECTION}
+                          data-direction={sortDirection}
+                          data-role={ROLE.BUTTON}
+                          {...sortByToggleProps}
+                          align={'CENTER'}
+                          className={css.header}
                         >
-                          <Box className={css.rowContent} style={{ display: 'flex' }}>
-                            {row.cells.map((cell, cellIndex) => (
-                              // eslint-disable-next-line react/jsx-key
-                              <Box
-                                className={cn(cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding, css.focusable)}
-                                data-field={cell.column.id}
-                                {...cell.getCellProps()}
-                              >
-                                {cell.render('Cell', { refetch })}
-                              </Box>
-                            ))}
-                            {hovered && <FastActionsPanel actions={rowActionButtons} />}
+                          {column.headerAlign === HEADER_ALIGN.RIGHT && <Box className={css.headerLeftGap} />}
+                          {!isFirstColumn && !isSecondColumn && <Gap.SM />}
+                          <Typography.TextBold line="COLLAPSE">{column.render('Header')}</Typography.TextBold>
+                          {!isFirstColumn && column.canSort && (
+                            <WithInfoTooltip extraSmall text={locale.column.tooltip}>
+                              {tooltipRef => (
+                                <Box ref={tooltipRef} className={css.sortIconWrapper}>
+                                  {(hovered || column.isSorted) && <SortIcon fill={column.isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />}
+                                  {column.isSorted && Boolean(sortIndex) && (
+                                    <Typography.SmallText inline className={css.sortIndex} fill={'ACCENT'}>
+                                      {sortIndex}
+                                    </Typography.SmallText>
+                                  )}
+                                </Box>
+                              )}
+                            </WithInfoTooltip>
+                          )}
+                          <Gap.SM />
+                        </Horizon>
+                      )}
+                    </WithClickable>
+                    {!isFirstColumn && !isLastColumn && (
+                      <Box
+                        border={['FAINT', 'SM']}
+                        className={css.verticalSeparator}
+                        {...columnResizerProps}
+                        style={{
+                          ...columnResizerProps.style,
+
+                          borderTop: 'none',
+                          borderRight: 'none',
+                          borderBottom: 'none',
+                        }}
+                        title={''}
+                      />
+                    )}
+                  </Box>
+                );
+              })}
+              {showSettingsButton && (
+                <Box className={css.settingIcon}>
+                  <IconButton
+                    data-action={ACTIONS.OPEN}
+                    data-id="table-settings-button"
+                    fill={settingsFormOpen ? 'BASE' : 'FAINT'}
+                    icon={Icons.Gear}
+                    isActive={settingsFormOpen}
+                    onClick={handleOpenSettingsForm}
+                  />
+                </Box>
+              )}
+            </Box>
+          ))}
+
+        <LayoutScroll>
+          <Box className={css.scrollInner} {...getTableProps()}>
+            <Box {...getTableBodyProps()}>
+              {page.map((row, rowIndex) => {
+                prepareRow(row);
+
+                const rowActionButtons = getActionButtons(getAvailableActions(fastActions), executor, [[row.original]]).filter(
+                  ({ disabled }) => !disabled
+                );
+
+                const extendedRowActionButtons = expandedRowActionsGetter
+                  ? getActionButtons(getAvailableActions(expandedRowActionsGetter(row.original)), executor, [[row.original]])
+                  : [];
+
+                const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
+
+                return (
+                  visibleRow && (
+                    <WithClickable key={row.getRowProps().key}>
+                      {(ref, { hovered }) => (
+                        <React.Fragment key={`rowLayout_${row.getRowProps().key}`}>
+                          <Box
+                            ref={ref}
+                            border={['FAINT', 'SM']}
+                            className={cn(css.row, css.focusable)}
+                            data-id={row.original.id}
+                            {...row.getRowProps()}
+                            key={`row_${row.getRowProps().key}`}
+                            aria-expanded={row.isExpanded}
+                            fill={hovered ? 'FAINT' : 'BASE'}
+                            style={{
+                              ...row.getRowProps().style,
+
+                              borderRight: 'none',
+                              borderBottom: 'none',
+                              borderLeft: 'none',
+                              minWidth,
+                            }}
+                            onClick={handleRowClick(row)}
+                            onDoubleClick={handleRowDoubleClick(row)}
+                          >
+                            <Box className={css.rowContent} style={{ display: 'flex' }}>
+                              {row.cells.map((cell, cellIndex) => (
+                                // eslint-disable-next-line react/jsx-key
+                                <Box
+                                  className={cn(cellIndex === 0 || cellIndex === 1 ? firstCellPadding : css.cellPadding, css.focusable)}
+                                  data-field={cell.column.id}
+                                  {...cell.getCellProps()}
+                                >
+                                  {cell.render('Cell', { refetch })}
+                                </Box>
+                              ))}
+                              {hovered && <FastActionsPanel actions={rowActionButtons} />}
+                            </Box>
+                            {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
+                            {ExpandedRowComponent && row.isExpanded ? (
+                              <ExpandedRowComponent
+                                actions={extendedRowActionButtons}
+                                row={row.original}
+                                {...row.getRowProps()}
+                                key={`expanded_${row.getRowProps().key}`}
+                                style={{
+                                  ...row.getRowProps().style,
+
+                                  minWidth,
+                                }}
+                              />
+                            ) : null}
                           </Box>
-                          {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
-                          {ExpandedRowComponent && row.isExpanded ? (
-                            <ExpandedRowComponent
-                              actions={extendedRowActionButtons}
-                              row={row.original}
+                          {rowIndex === page.length - 1 ? (
+                            <Box
+                              border={['FAINT', 'SM']}
                               {...row.getRowProps()}
-                              key={`expanded_${row.getRowProps().key}`}
+                              key={`divider_${row.getRowProps().key}`}
                               style={{
                                 ...row.getRowProps().style,
 
+                                borderTop: 'none',
+                                borderRight: 'none',
+                                borderLeft: 'none',
                                 minWidth,
                               }}
                             />
                           ) : null}
-                        </Box>
-                        {rowIndex === page.length - 1 ? (
-                          <Box
-                            border={['FAINT', 'SM']}
-                            {...row.getRowProps()}
-                            key={`divider_${row.getRowProps().key}`}
-                            style={{
-                              ...row.getRowProps().style,
+                        </React.Fragment>
+                      )}
+                    </WithClickable>
+                  )
+                );
+              })}
+            </Box>
+            {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
+            {pageCount > 1 && (
+              <Box className={css.pagination}>
+                <FractalPagination
+                  page={paginationState.pageIndex + 1}
+                  pageCount={pageCount}
+                  pageSize={paginationState.pageSize}
+                  onPageChange={handlePageChange}
+                  onPageSizeChange={setPageSize}
+                />
+              </Box>
+            )}
 
-                              borderTop: 'none',
-                              borderRight: 'none',
-                              borderLeft: 'none',
-                              minWidth,
-                            }}
-                          />
-                        ) : null}
-                      </React.Fragment>
-                    )}
-                  </WithClickable>
-                )
-              );
-            })}
+            <LoaderOverlay opened={isLoading} />
+
+            <Gap.X3L />
+            <Gap.X3L />
           </Box>
-        </Box>
-        {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
-        {pageCount > 1 && (
-          <FractalPagination
-            page={paginationState.pageIndex + 1}
-            pageCount={pageCount}
-            pageSize={paginationState.pageSize}
-            onPageChange={handlePageChange}
-            onPageSizeChange={setPageSize}
-          />
-        )}
-
-        <LoaderOverlay opened={isLoading} />
-
-        <Gap />
-        <Gap.SM />
-        <Gap.X3L />
+        </LayoutScroll>
       </Box>
       {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
         <Box className={css.footer}>

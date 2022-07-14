@@ -4,7 +4,7 @@ import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
-import { dialog, DialogTemplate, Box, Gap, Typography, Tabs, LayoutScroll, DATA_TYPE } from '@platform/ui';
+import { Box, DATA_TYPE, dialog, DialogTemplate, Gap, Tabs, Typography } from '@platform/ui';
 import { AttachmentsTab } from './attachments-tab';
 import { TAB_OPTIONS, TABS } from './constants';
 import { Footer } from './footer';
@@ -49,13 +49,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, s
           </Typography.P>
           <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
           <Box className={css.contentWrapper}>
-            <LayoutScroll>
-              {tab === TABS.REQUISITES ? (
-                <RequisitesTab transaction={doc} />
-              ) : (
-                <AttachmentsTab statementId={statementId} transaction={doc} />
-              )}
-            </LayoutScroll>
+            {tab === TABS.REQUISITES ? <RequisitesTab transaction={doc} /> : <AttachmentsTab statementId={statementId} transaction={doc} />}
           </Box>
           <Footer statementId={statementId} transaction={doc} />
         </Box>

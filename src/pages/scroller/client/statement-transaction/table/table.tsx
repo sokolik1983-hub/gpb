@@ -15,7 +15,7 @@ import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
 import type { IFetchDataResponse } from '@platform/services/common/dist-types/components/data-table/interfaces';
-import { Box, Checkbox, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
+import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
 import { columns } from './columns';
 
 /** Таблица скроллера проводок. */
@@ -112,23 +112,21 @@ export const Table = () => {
         </Horizon>
         <Gap.SM />
       </Box>
-      <LayoutScroll>
-        <DataTable<IStatementTransactionRow>
-          columns={columns}
-          defaultSort={DEFAULT_SORTING}
-          executor={executor}
-          fetchData={sendTransactionsToDataTable}
-          footerActionsGetter={footerActions}
-          footerContent={Footer}
-          paginationState={pagination}
-          rowCaptionComponent={CaptionRow}
-          selectedRows={selectedRows}
-          visibleOnlySelectedRows={visibleOnlySelectedRows}
-          onPaginationChange={setPagination}
-          onRowClick={handRowClick}
-          onSelectedRowsChange={setSelectedRows}
-        />
-      </LayoutScroll>
+      <DataTable<IStatementTransactionRow>
+        columns={columns}
+        defaultSort={DEFAULT_SORTING}
+        executor={executor}
+        fetchData={sendTransactionsToDataTable}
+        footerActionsGetter={footerActions}
+        footerContent={Footer}
+        paginationState={pagination}
+        rowCaptionComponent={CaptionRow}
+        selectedRows={selectedRows}
+        visibleOnlySelectedRows={visibleOnlySelectedRows}
+        onPaginationChange={setPagination}
+        onRowClick={handRowClick}
+        onSelectedRowsChange={setSelectedRows}
+      />
     </>
   );
 };
