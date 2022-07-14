@@ -1,3 +1,19 @@
+# [2.9.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.8.0...v2.9.0-release.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28389 правки для селекта счетов ([4911917](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4911917f16139350bcdd9cfbb3cef611d3ec6d03))
+* **скроллер:** GBO-28400 правки для фильтра по истории запросов ([8ca5163](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8ca51633f315febd9bcfab2f619ffb71a17be749))
+* **скроллер:** GBO-28511 добавление атрибутов тестирования на элементы ([e097184](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e097184d58d5a2932bb3766fa03e7dba3ee15b2a))
+* **скроллер:** GBO-28610 правки для сохранения состояния раскрытия счетов в таблице ([6405577](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64055778b3bfbe34ee539d85d54dc66526b0b368))
+
+
+### Features
+
+* GBO-29411 выпелен кастомный скелетон в стриме ([1f41515](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1f415155c1a1fe781cdcdbd8b8d701080344c56a))
+* GBO-29411 доработки в отображении скелетона ([767c529](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/767c52997453399e9dfee022c878e33903532697))
+
 # [2.8.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0...v2.8.0) (2022-07-10)
 
 
