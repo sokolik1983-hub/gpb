@@ -9,11 +9,15 @@ declare namespace StylesScssModule {
     'focusable': string;
     'footer': string;
     'header': string;
+    'headerLeftGap': string;
     'margin': string;
+    'pagination': string;
     'row': string;
     'rowContent': string;
+    'scrollInner': string;
     'settingIcon': string;
     'sortIconWrapper': string;
+    'sortIndex': string;
     'verticalSeparator': string;
     'wrapper': string;
     'zLayerContainer': string;
