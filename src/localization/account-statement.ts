@@ -1682,6 +1682,15 @@ export default {
 				return t('errors.periodEnd.dateLessRestriction');
 			},
 		},
+		datatable: {
+			/**
+			 * @ru
+			 * Нельзя менять режим работы пейджинации в DataGrid во время работы. Используйте paginationState для controlled режима, а defaultPaginationState для uncontrolled.
+			 */
+			get paginationModeError() {
+				return t('errors.datatable.paginationModeError');
+			},
+		},
 	},
 	exportParamsDialog: {
 		buttons: {
