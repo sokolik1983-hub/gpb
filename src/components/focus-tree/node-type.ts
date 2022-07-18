@@ -1,7 +1,7 @@
 /** Тип визуального расположения узла в родительской группе. */
 export enum NODE_TYPE {
   /** Вертикальное (по умолчанию). */
-  VERT = 'VERT',
+  VERTICAL = 'VERTICAL',
   /** Горизонтальное. */
-  HORIZ = 'HORIZ',
+  HORIZONTAL = 'HORIZONTAL',
 }

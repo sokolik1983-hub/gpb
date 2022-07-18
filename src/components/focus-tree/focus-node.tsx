@@ -1,8 +1,8 @@
 import React, { useCallback, useContext, useLayoutEffect } from 'react';
 import { Box } from '@platform/ui';
 import { FocusTreeContext } from './focus-tree-context';
+import { NODE_TYPE } from './node-type';
 import css from './styles.scss';
-import { NODE_TYPE } from './type';
 
 /** Свойства компонента. */
 export interface FocusNodeProps {
@@ -14,6 +14,7 @@ export interface FocusNodeProps {
   type?: NODE_TYPE;
 }
 
+// FIXME добавить свойство order для принудительного задания порядка следования узла (иногда это может быть удобно)
 /** Компонент "Фокусируемый узел" (произвольньный контейнер компонентов на странице, поддерживающих фокус). */
 export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentId, type, children, ...props }) => {
   const { mountNode, unmountNode, setCurrent, tree, current } = useContext(FocusTreeContext);
@@ -57,7 +58,7 @@ export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentI
 });
 
 FocusNode.defaultProps = {
-  type: NODE_TYPE.VERT,
+  type: NODE_TYPE.VERTICAL,
 };
 
 FocusNode.displayName = 'FocusNode';

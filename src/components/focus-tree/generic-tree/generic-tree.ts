@@ -1,5 +1,7 @@
 /** Интерфейс для "Универсального дерева". */
 export interface ITreeNode {
+  /** Вернуть индекс дочернего узла. */
+  getChildIndex(nodeId: string): number;
   /** Вернуть дочерние узлы. */
   getChildren(): Map<string, ITreeNode>;
   /** Вернуть массив дочерних узлов. */
@@ -22,7 +24,7 @@ export interface ITreeNode {
   appendChildNode(node: ITreeNode, type: string | null): ITreeNode;
   /** Метод создает узел. */
   createChildNode(nodeId: string, type: string | null): ITreeNode;
-  /** Метод удаяет дочерний узел по его идетификатору. */
+  /** Метод удаяет дочерний узел по его идентификатору. */
   removeChildNodeById(nodeId: string): ITreeNode | null;
   /** Метод выполняет поиск узла по его идентификатору (через рекурсивный обход). */
   findNodeById(nodeId: string): ITreeNode | null;
@@ -40,6 +42,10 @@ export class GenericTree implements ITreeNode {
 
   constructor(treeId) {
     this.nodeId = treeId;
+  }
+
+  getChildIndex(nodeId: string) {
+    return this.getChildrenAsArray().findIndex(x => x.getNodeId() === nodeId);
   }
 
   getChildren() {
@@ -82,7 +88,7 @@ export class GenericTree implements ITreeNode {
     const newNode = new GenericTree(node.getNodeId());
 
     newNode.parent = this;
-    newNode.children = new Map<string, ITreeNode>(node.getChildren());
+    newNode.children = new Map(node.getChildren());
     newNode.order = this.getChildrenAsArray().length;
     newNode.type = type;
 
@@ -129,8 +135,14 @@ export class GenericTree implements ITreeNode {
 
   traverse(cb: (node: ITreeNode) => boolean) {
     for (const child of this.getChildrenAsArray()) {
-      if (cb(child) || child.traverse(cb)) {
+      if (cb(child)) {
         return child;
+      }
+
+      const foundNode = child.traverse(cb);
+
+      if (foundNode) {
+        return foundNode;
       }
     }
 

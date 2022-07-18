@@ -1,9 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
-import { FocusNode } from 'components/focus-tree';
-import { NODE_TYPE } from 'components/focus-tree/type';
 import isEqual from 'fast-deep-equal';
 import { useForm, useFormState } from 'react-final-form';
-import { FILTER, QUICK_FILTER, TOGGLE_BUTTON } from 'stream-constants/a11y';
 import { Box, Horizon, Line, Pattern, ROLE } from '@platform/ui';
 import { FilterFooter } from './filter-footer';
 import css from './styles.scss';
@@ -79,16 +76,12 @@ export const Filter: React.FC<IFilterProperties> = ({
       <Box className={css.filterWrapper}>
         <Pattern>
           <Pattern.Span size={10}>
-            <FocusNode nodeId={QUICK_FILTER} parentId={FILTER} type={NODE_TYPE.HORIZ}>
-              <QuickFilter />
-            </FocusNode>
+            <QuickFilter />
           </Pattern.Span>
           <Pattern.Span size={2}>
             <Horizon align={'CENTER'} className={css.toggleButtonWrapper}>
               <Horizon.Spacer />
-              <FocusNode nodeId={TOGGLE_BUTTON} parentId={'filter'} type={NODE_TYPE.HORIZ}>
-                <ToggleButton opened={opened} onClick={handleToggle} />
-              </FocusNode>
+              <ToggleButton opened={opened} onClick={handleToggle} />
             </Horizon>
           </Pattern.Span>
         </Pattern>

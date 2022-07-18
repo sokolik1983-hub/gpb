@@ -12,9 +12,10 @@ import {
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
+import FocusLock from 'react-focus-lock';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
-import { FILTER, SCROLLER } from 'stream-constants/a11y';
+import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import type { ISortSettings } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { Line } from '@platform/ui';
@@ -126,28 +127,30 @@ export const StatementHistoryScrollerPage = () => {
   return (
     <HistoryScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <FocusTree treeId={'history-scroller'}>
-          <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
-            <FocusNode nodeId={FILTER} parentId={SCROLLER}>
-              <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-                <FilterLayout
-                  AdditionalFilter={AdditionalFilter}
-                  QuickFilter={QuickFilter}
-                  TagsPanel={TagsPanel}
-                  additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-                  filterFields={fields}
-                  filterState={filterPanel}
-                  tagsState={tagsPanel}
-                  validate={validate(validationSchema)}
-                />
+        <FocusLock>
+          <FocusTree treeId={COMMON_SCROLLER_NODE}>
+            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
+              <FocusNode nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+                  <FilterLayout
+                    AdditionalFilter={AdditionalFilter}
+                    QuickFilter={QuickFilter}
+                    TagsPanel={TagsPanel}
+                    additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                    filterFields={fields}
+                    filterState={filterPanel}
+                    tagsState={tagsPanel}
+                    validate={validate(validationSchema)}
+                  />
+                </ContentLoader>
+              </FocusNode>
+              {!accountsFetched && <Line fill="FAINT" />}
+              <ContentLoader height={tableHeight} loading={!statementsFetched}>
+                <Table />
               </ContentLoader>
-            </FocusNode>
-            {!accountsFetched && <Line fill="FAINT" />}
-            <ContentLoader height={tableHeight} loading={!statementsFetched}>
-              <Table />
-            </ContentLoader>
-          </ScrollerPageLayout>
-        </FocusTree>
+            </ScrollerPageLayout>
+          </FocusTree>
+        </FocusLock>
       </MainLayout>
     </HistoryScrollerContext.Provider>
   );

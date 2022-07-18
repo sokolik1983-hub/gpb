@@ -2,6 +2,7 @@ import React from 'react';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { locale } from 'localization';
 import { CreateStatementForm } from 'pages/form/client/views/create-statement-form';
+import FocusLock from 'react-focus-lock';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { MainLayout, useRedirect } from '@platform/services/client';
 import type { IBreadcrumb } from '@platform/ui';
@@ -22,11 +23,13 @@ export const RequestStatementForm: React.FC = () => {
 
   return (
     <MainLayout>
-      <LayoutDocument breadcrumbs={breadcrumbs} header={locale.form.newRequestStatement.title} onHomeClick={goHome}>
-        <LayoutScroll autoHeight autoHeightMax="calc(100vh - 58px - 64px)">
-          <CreateStatementForm />
-        </LayoutScroll>
-      </LayoutDocument>
+      <FocusLock>
+        <LayoutDocument breadcrumbs={breadcrumbs} header={locale.form.newRequestStatement.title} onHomeClick={goHome}>
+          <LayoutScroll autoHeight autoHeightMax="calc(100vh - 58px - 64px)">
+            <CreateStatementForm />
+          </LayoutScroll>
+        </LayoutDocument>
+      </FocusLock>
     </MainLayout>
   );
 };

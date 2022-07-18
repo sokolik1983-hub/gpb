@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { noop } from 'utils';
 import type { ITreeNode } from './generic-tree';
-import type { NODE_TYPE } from './type';
+import type { NODE_TYPE } from './node-type';
 
 /** Интерфейс для контекста. */
 export interface IFocusTreeContext {
