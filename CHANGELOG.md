@@ -1,3 +1,10 @@
+# [2.9.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.2...v2.9.0-release.3) (2022-07-18)
+
+
+### Features
+
+* **скроллер:** GBO-28128 разделение компонента таблицы на DataTable и InfiniteDataTable ([e4ddaf6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e4ddaf6d6b8a061c9a3b0d255ab5041c9e3e2992))
+
 # [2.9.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.1...v2.9.0-release.2) (2022-07-18)
 
 
