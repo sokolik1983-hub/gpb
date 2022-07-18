@@ -105,8 +105,6 @@ declare module 'react-table' {
       UseSortByColumnOptions<D> {
     /** Тип горизонтальных отступов колонки таблицы. */
     paddingType?: COLUMN_PADDING_TYPES;
-    /** Выравнивание в заголовке колонки таблицы. */
-    headerAlign?: HEADER_ALIGN;
     /** Навигация внутри ячейки, используется для аксесабилити таблицы. */
     innerFocus?: boolean
   }

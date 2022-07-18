@@ -51,6 +51,7 @@ import {
   UseSortByState,
   UseTableHeaderGroupProps,
 } from 'react-table';
+import { HEADER_ALIGN } from '../data-table';
 
 declare module 'react-table' {
   export interface UseFlexLayoutInstanceProps<D extends object> {
@@ -112,6 +113,8 @@ declare module 'react-table' {
       UseResizeColumnsColumnOptions<D>,
       UseSortByColumnOptions<D> {
     align?: string;
+    /** Выравнивание в заголовке колонки таблицы. */
+    headerAlign?: HEADER_ALIGN;
   }
 
   export interface ColumnInstance<D extends object = {}>
