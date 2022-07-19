@@ -293,16 +293,11 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Операций:
+			 * Операций
 			 */
 			get total() {
 				return t('transactionsScroller.table.total');
 			},
-			/**
-			 * @ru
-			 * {totalByFilters} из {total}
-			 */
-			totalValue: (p: { total: number; totalByFilters: number }) => t('transactionsScroller.table.totalValue', p),
 		},
 		tags: {
 			/**

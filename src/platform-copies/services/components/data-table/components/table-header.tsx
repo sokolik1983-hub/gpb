@@ -8,28 +8,30 @@ import css from '../styles.scss';
 import type { RecordCell } from '../types';
 import { HEADER_ALIGN } from '../types';
 import { SettingsButton } from './settings-button';
-
 /** Свойства хедера таблицы. */
 interface TableHeaderProps {
-  /** Экземпляр таблицы. */
-  tableInstance: TableInstance<RecordCell>;
+  /** Коллбэк-реф хедера таблицы. */
+  refCallback?: React.RefCallback<HTMLElement>;
   /** Функция изменения настроек для колонок. */
   setSettingsColumns(value: IColumnsStorageObject[]): void;
   /** Настройки для колонок. */
   settingColumns: IColumnsStorageObject[];
   /** Флаг отображения кнопки настроек колонок таблицы. */
   showSettingsButton?: boolean;
+  /** Экземпляр таблицы. */
+  tableInstance: TableInstance<RecordCell>;
 }
 
 /** Хедер таблицы. */
 export const TableHeader: React.FC<TableHeaderProps> = ({
-  tableInstance,
-  tableInstance: { headerGroups },
+  refCallback,
   settingColumns,
   setSettingsColumns,
+  tableInstance,
+  tableInstance: { headerGroups },
   showSettingsButton,
 }) => (
-  <>
+  <div ref={refCallback}>
     {headerGroups.map(headerGroup => (
       // eslint-disable-next-line react/jsx-key
       <Box
@@ -114,7 +116,7 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
         )}
       </Box>
     ))}
-  </>
+  </div>
 );
 
 TableHeader.displayName = 'TableHeader';

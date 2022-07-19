@@ -5,7 +5,7 @@ import type { IActionWebInfo, IActionWithAuth, IBaseEntity, ISortSettings } from
 import type { IButtonAction } from '@platform/ui';
 
 /** Свойства запроса данных с сервера. */
-export interface FetchDataParams {
+export interface IFetchDataParams {
   /** Сортировка. */
   multiSort?: ISortSettings;
   /** Текущая страница. */
@@ -15,7 +15,7 @@ export interface FetchDataParams {
 }
 
 /** Свойства ответа данных с сервера. */
-export interface FetchDataResponse<T> {
+export interface IFetchDataResponse<T> {
   /** Строки. */
   rows: T[];
   /** Количество страниц. */
@@ -58,7 +58,7 @@ export interface DataTableProps<T extends IBaseEntity> {
   /** Геттер быстрых кнопок строки. */
   fastActions?: IActionWithAuth[] | ((row: T) => IActionWithAuth[]);
   /** Функция запроса данных с сервера. */
-  fetchData(params: FetchDataParams): Promise<FetchDataResponse<T>>;
+  fetchData(params: IFetchDataParams): Promise<IFetchDataResponse<T>>;
   /** Контент панели действий над данными. */
   footerContent?: React.FC<{ selectedRows: T[] }>;
   /** Геттер кнопок футера. */

@@ -35,6 +35,8 @@ interface RowForInfiniteScrollProps<T> {
   setSize(index: number, height?: number): void;
   /** CSS-стили строки для позиционирования. */
   style: CSSProperties;
+  /** Признак отображения только выбранных строк. */
+  visibleOnlySelectedRows?: boolean;
 }
 
 /** Компонент строки таблицы с бесконечным сколлингом. */
@@ -51,6 +53,7 @@ export const InfiniteRow = <T,>({
   rowCaptionComponent,
   setSize,
   style,
+  visibleOnlySelectedRows,
 }: RowForInfiniteScrollProps<T>) => {
   const ref = useRef<HTMLDivElement>();
 
@@ -73,6 +76,7 @@ export const InfiniteRow = <T,>({
         row={row}
         rowCaptionComponent={rowCaptionComponent}
         setRefRow={setRefRow}
+        visibleOnlySelectedRows={visibleOnlySelectedRows}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
       />
