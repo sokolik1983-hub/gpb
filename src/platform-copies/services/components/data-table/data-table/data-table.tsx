@@ -4,16 +4,8 @@ import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResiz
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import {
-  FractalPagination,
-  FractalSelectedRowsInfo,
-  Placeholder,
-  SORT_DIRECTION,
-  Box,
-  Gap,
-  useDebounce,
-  LoaderOverlay,
-} from '@platform/ui';
+import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay } from '@platform/ui';
+import { FractalSelectedRowsInfo } from '../../fractal-selected-rows-info';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import {
   DEFAULT_PAGINATION_STATE,
