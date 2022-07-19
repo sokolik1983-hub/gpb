@@ -1,3 +1,10 @@
+# [2.9.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.3...v2.9.0-release.4) (2022-07-19)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 багофикс по замечаниям для журнала проводок ([0c8c7ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0c8c7efc22b54241a4c4c85a29d368ac342f812b))
+
 # [2.9.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.2...v2.9.0-release.3) (2022-07-18)
 
 
