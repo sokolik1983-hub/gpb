@@ -6,7 +6,7 @@ import type { VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import type { IExecuter } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
-import { Box, LayoutScroll } from '@platform/ui';
+import { Box, LayoutScroll, Spinner } from '@platform/ui';
 import type { ICaptionRowComponentProps, IExpandedRowComponentProps, RecordCell } from '../types';
 import { InfiniteRow } from './infinite-row';
 
@@ -20,6 +20,8 @@ interface TableBodyWithInfiniteScrollProps<T> extends TableBodyPropsPure {
   expandedRowComponent?: React.FC<IExpandedRowComponentProps<T>>;
   /** Геттер быстрых кнопок строки. */
   fastActions?: IActionWithAuth[] | ((row: T) => IActionWithAuth[]);
+  /** Высота хедера. */
+  headerHeight: number;
   /** Признак процесса загрузки данных. */
   loading: boolean;
   /** Признак процесса загрузки данных при скроллировании. */
@@ -38,10 +40,13 @@ interface TableBodyWithInfiniteScrollProps<T> extends TableBodyPropsPure {
   rowCaptionComponent?: React.FC<ICaptionRowComponentProps<T>>;
   /** Экземпляр таблицы. */
   tableInstance: TableInstance<RecordCell>;
+  /** Признак отображения только выбранных строк. */
+  visibleOnlySelectedRows?: boolean;
 }
 
 const MINIMUM_BATCH_SIZE = 8;
 const THRESHOLD = 4;
+const SPINNER_HEIGHT = 120;
 
 /** Компонент тела таблицы с бесконечным скроллингом. */
 export const TableBody = <T,>({
@@ -49,6 +54,7 @@ export const TableBody = <T,>({
   expandedRowActionsGetter,
   expandedRowComponent,
   fastActions,
+  headerHeight,
   loading,
   loadingMore,
   needScrollToTop,
@@ -58,6 +64,7 @@ export const TableBody = <T,>({
   refetch,
   rowCaptionComponent,
   tableInstance,
+  visibleOnlySelectedRows,
 }: TableBodyWithInfiniteScrollProps<T>): React.ReactElement => {
   const { canNextPage, getTableBodyProps, prepareRow, rows, totalColumnsWidth } = tableInstance;
 
@@ -92,9 +99,9 @@ export const TableBody = <T,>({
   }, [needScrollToTop]);
 
   return (
-    <Box {...getTableBodyProps({ style: { height: '100%' } })}>
+    <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)` } })}>
       <LayoutScroll>
-        <AutoSizer style={{ height: '100%', width: totalColumnsWidth }}>
+        <AutoSizer className="AutoSizer12345" style={{ height: '100%', width: totalColumnsWidth }}>
           {({ height, width }) => (
             <InfiniteLoader
               isItemLoaded={() => false}
@@ -104,47 +111,56 @@ export const TableBody = <T,>({
               threshold={THRESHOLD}
             >
               {({ onItemsRendered, ref }) => (
-                <VariableSizeList
-                  ref={(list: List) => {
-                    (ref as React.RefCallback<List>)(list);
-                    listRef.current = list;
-                  }}
-                  height={height}
-                  itemCount={itemCount}
-                  itemSize={getItemSize}
-                  width={width}
-                  onItemsRendered={onItemsRendered}
-                >
-                  {({ index, style }) => {
-                    const row = rows[index];
+                <>
+                  <VariableSizeList
+                    ref={(list: List) => {
+                      (ref as React.RefCallback<List>)(list);
+                      listRef.current = list;
+                    }}
+                    className="VariableSizeList"
+                    height={loadingMore ? height - SPINNER_HEIGHT : height}
+                    itemCount={itemCount}
+                    itemSize={getItemSize}
+                    width={width}
+                    onItemsRendered={onItemsRendered}
+                  >
+                    {({ index, style }) => {
+                      const row = rows[index];
 
-                    if (!row) {
-                      return null;
-                    }
+                      if (!row) {
+                        return null;
+                      }
 
-                    prepareRow(row);
+                      prepareRow(row);
 
-                    const { key } = row.getRowProps();
+                      const { key } = row.getRowProps();
 
-                    return (
-                      <InfiniteRow<T>
-                        key={key}
-                        executor={executor}
-                        expandedRowActionsGetter={expandedRowActionsGetter}
-                        expandedRowComponent={expandedRowComponent}
-                        fastActions={fastActions}
-                        listIndex={index}
-                        refetch={refetch}
-                        row={row}
-                        rowCaptionComponent={rowCaptionComponent}
-                        setSize={setRowSize}
-                        style={style}
-                        onRowClick={onRowClick}
-                        onRowDoubleClick={onRowDoubleClick}
-                      />
-                    );
-                  }}
-                </VariableSizeList>
+                      return (
+                        <InfiniteRow<T>
+                          key={key}
+                          executor={executor}
+                          expandedRowActionsGetter={expandedRowActionsGetter}
+                          expandedRowComponent={expandedRowComponent}
+                          fastActions={fastActions}
+                          listIndex={index}
+                          refetch={refetch}
+                          row={row}
+                          rowCaptionComponent={rowCaptionComponent}
+                          setSize={setRowSize}
+                          style={style}
+                          visibleOnlySelectedRows={visibleOnlySelectedRows}
+                          onRowClick={onRowClick}
+                          onRowDoubleClick={onRowDoubleClick}
+                        />
+                      );
+                    }}
+                  </VariableSizeList>
+                  {loadingMore && (
+                    <Box className="Spinner123455" style={{ height: SPINNER_HEIGHT }}>
+                      <Spinner small={false} />
+                    </Box>
+                  )}
+                </>
               )}
             </InfiniteLoader>
           )}

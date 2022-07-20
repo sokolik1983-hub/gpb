@@ -96,12 +96,7 @@
     "ru": "Контрагент:"
   },
   "transactionsScroller.table.total": {
-    "ru": "Операций:"
-  },
-  "transactionsScroller.table.totalValue": {
-    "@total": "number",
-    "@totalByFilters": "number",
-    "ru": "{totalByFilters} из {total}"
+    "ru": "Операций"
   },
   "transactionsScroller.headers.operationDate": {
     "ru": "Дата опер."

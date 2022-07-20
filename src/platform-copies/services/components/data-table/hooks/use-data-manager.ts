@@ -1,10 +1,11 @@
 import type React from 'react';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { UsePaginationState } from 'react-table';
 import type { IExecuter } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services';
-import type { FetchDataParams, FetchDataResponse, IExpandedRowComponentProps } from '../types';
+import { useDebounce } from '@platform/ui';
+import type { IFetchDataParams, IFetchDataResponse, IExpandedRowComponentProps } from '../types';
 import { getServiceColumnWidth } from '../utils';
 import { DEFAULT_PAGINATION_STATE } from './use-pagination-controller';
 
@@ -13,7 +14,7 @@ interface DataManagerParams<T extends IBaseEntity> {
   /** Компонент раскрытой строки. */
   expandedRowComponent?: React.FC<IExpandedRowComponentProps<T>>;
   /** Функция запроса данных с сервера. */
-  fetchData(params: FetchDataParams): Promise<FetchDataResponse<T>>;
+  fetchData(params: IFetchDataParams): Promise<IFetchDataResponse<T>>;
   /** Данные мультисортировки. */
   multiSort: ISortSettings;
   /** Обработчик изменения выбранных строк. */
@@ -36,7 +37,7 @@ interface TableDataState<T extends IBaseEntity> {
   needScrollToTop: boolean;
   /** Данные таблицы. */
   rows: T[];
-  /** Функция устанавливает признак загрузки данных при скроллинге. */
+  /** Функция устанавливает признак загрузки данных при скроллировании. */
   onLoadMoreRows(): void;
   /** Данные пагинации (при скроллировании переключаются страницы и данные добавляются в конец списка). */
   paginationState: UsePaginationState<T>;
@@ -58,50 +59,52 @@ export const useDataManager = <T extends IBaseEntity>({
   onSelectedRowsChange,
   originalExecuter,
 }: DataManagerParams<T>): TableDataState<T> => {
+  const [paginationState, setPaginationState] = useState(DEFAULT_PAGINATION_STATE);
   const [pageCount, setPageCount] = useState(0);
-  const [needMoreRows, setNeedMoreRows] = useState(false);
   const [rows, setRows] = useState<T[]>([]);
 
-  const loading = useRef(false);
-  const loadingMore = useRef(false);
-  const needScrollToTop = useRef(false);
-  const paginationState = useRef(DEFAULT_PAGINATION_STATE);
+  const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [needMoreRows, setNeedMoreRows] = useState(false);
+  const [needScrollToTop, setNeedScrollToTop] = useState(false);
+
+  // Флаг для выполнения запроса с сервера - используется в debounce.
+  const [flagToFetch, setFlagToFetch] = useState<Record<string, unknown> | null>(null);
 
   const fetch = useCallback(async () => {
-    if (paginationState.current.pageIndex === 0) {
-      loading.current = true;
-      needScrollToTop.current = true;
+    if (paginationState.pageIndex === 0) {
+      setLoading(true);
+      setNeedScrollToTop(true);
     } else {
-      loadingMore.current = true;
+      setLoadingMore(true);
     }
 
     try {
       const data = await fetchData({
-        page: paginationState.current.pageIndex,
-        pageSize: paginationState.current.pageSize,
+        page: paginationState.pageIndex,
+        pageSize: paginationState.pageSize,
         multiSort,
       });
 
-      setRows(prevState => (paginationState.current.pageIndex === 0 ? data.rows : [...prevState, ...data.rows]));
+      setRows(prevState => (paginationState.pageIndex === 0 ? data.rows : [...prevState, ...data.rows]));
       setPageCount(data.total!);
     } finally {
-      if (paginationState.current.pageIndex === 0) {
-        loading.current = false;
-        needScrollToTop.current = false;
+      if (paginationState.pageIndex === 0) {
+        setLoading(false);
+        setNeedScrollToTop(false);
       } else {
-        loadingMore.current = false;
+        setLoadingMore(false);
       }
     }
-  }, [fetchData, multiSort]);
+  }, [fetchData, multiSort, paginationState.pageIndex, paginationState.pageSize]);
 
-  // Используем debounce для исключения повторных запросов
-  // value в useDebounce уходит в setState, поэтому используем сеттер
-  // const fetchDebounced = useDebounce(() => fetch, 100);
+  // Флаг для выполнения запроса с сервера.
+  const flagToFetchDebounced = useDebounce(flagToFetch, 100);
 
   useEffect(() => {
-    paginationState.current = { ...paginationState.current, pageIndex: 0 };
+    setFlagToFetch({});
 
-    void fetch();
+    setPaginationState(prevState => ({ ...prevState, pageIndex: 0 }));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchData, multiSort]);
@@ -109,21 +112,29 @@ export const useDataManager = <T extends IBaseEntity>({
   const handleLoadMoreRows = useCallback(() => setNeedMoreRows(true), []);
 
   useEffect(() => {
-    if (needMoreRows && !loadingMore.current && !loading.current) {
-      paginationState.current = { ...paginationState.current, pageIndex: paginationState.current.pageIndex + 1 };
-
+    if (needMoreRows && !loadingMore && !loading) {
       setNeedMoreRows(false);
 
-      void fetch();
+      setLoadingMore(true);
+
+      setFlagToFetch({});
+
+      setPaginationState(prevState => ({ ...prevState, pageIndex: prevState.pageIndex + 1 }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [needMoreRows, loading, loadingMore.current]);
+  }, [needMoreRows, loading, loadingMore]);
 
   const executer = applyMiddlewares(
     onSuccessMiddleware(() => {
-      void fetch();
+      setFlagToFetch({});
     })
   )(originalExecuter);
+
+  useEffect(() => {
+    if (flagToFetch) {
+      void fetch();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [flagToFetchDebounced]);
 
   const showExpanded = Boolean(expandedRowComponent);
   const showCheckbox = Boolean(onSelectedRowsChange);
@@ -132,11 +143,11 @@ export const useDataManager = <T extends IBaseEntity>({
   return {
     executer,
     fetch,
-    loading: loading.current,
-    loadingMore: loadingMore.current,
-    needScrollToTop: needScrollToTop.current,
+    loading,
+    loadingMore,
+    needScrollToTop,
     onLoadMoreRows: handleLoadMoreRows,
-    paginationState: paginationState.current,
+    paginationState,
     pageCount,
     rows,
     serviceColumnWidth,

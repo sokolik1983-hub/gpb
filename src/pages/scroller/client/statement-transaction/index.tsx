@@ -1,10 +1,9 @@
-import React, { useMemo, useState } from 'react';
-import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { ContentLoader, ScrollerPageLayout, FilterLayout } from 'components';
 import { FocusNode, FocusTree } from 'components/focus-tree';
-import { useIsFetchedData, useScrollerPagination, useStreamContentHeight } from 'hooks';
+import { useIsFetchedData, usePrevious } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
-import { HTTP_STATUS_CODE } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import {
   AdditionalFilter,
@@ -21,22 +20,26 @@ import type { IFormState } from 'pages/scroller/client/statement-transaction/fil
 import {
   useGetCounterparties,
   useGetStatementSummaryInfo,
-  useGetTransactionsList,
   useScrollerHeaderProps,
 } from 'pages/scroller/client/statement-transaction/hooks';
 import { Table } from 'pages/scroller/client/statement-transaction/table';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
-import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
+import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
+import { useDebounce } from 'platform-copies/hooks';
+import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import FocusLock from 'react-focus-lock';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
+import { statementService } from 'services';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
-import { DEFAULT_PAGINATION, LINE_HEIGHT } from 'stream-constants';
+import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
-import type { ISortSettings } from '@platform/services';
-import { FatalErrorContent, MainLayout } from '@platform/services/client';
+import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
+import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import type { IMetaData } from '@platform/services/client';
 import { Gap, Line } from '@platform/ui';
 import { validate } from '@platform/validation';
+import { SORTING_MAP } from './constants';
 
 /**
  * Схема валидации формы фильтра ЭФ "Журнал проводок".
@@ -57,19 +60,20 @@ export const StatementTransactionScrollerPage = () => {
   useMetricPageListener();
 
   const { id } = useParams<IUrlParams>();
+
   const { state: { entrySourceView } = {} } = useLocation<{ entrySourceView?: typeof ENTRY_SOURCE_VIEW }>();
-
-  const [sorting, setSorting] = useState<ISortSettings>(DEFAULT_SORTING);
-  const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
-  const [hasError, setHasError] = useState<boolean>(false);
-
   const fields = getFields(entrySourceView);
-  const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
+  const { filterPanel, filterValues, tagsPanel } = useFilter({
     fields,
     labels: tagLabels,
     storageKey: `${STORAGE_KEY}-${id}`,
-    defaultPagination: DEFAULT_PAGINATION,
   });
+
+  const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
+  const [transactionsFetching, setTransactionsFetching] = useState(false);
+
+  const transactionsInitialed = useRef(false);
+  const totalTransactions = useRef(0);
 
   // Вызывается один раз.
   const { data: counterparties, isError: isCounterpartiesError, isFetched: isCounterpartiesFetched } = useGetCounterparties();
@@ -85,75 +89,72 @@ export const StatementTransactionScrollerPage = () => {
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
-  const {
-    data: { data: transactions, total: transactionsAmountByFilter, totalCount: totalTransactionsAmount, status: httpRequestStatus },
-    isError: isTransactionsError,
-    isFetched: isTransactionsFetched,
-    isFetching: isTransactionsFetching,
-    fetchedNewTransactions,
-  } = useGetTransactionsList({ filters: filterValues, sorting, pagination });
+  const filterValuesDebounced = useDebounce(filterValues, 200);
+
+  /** Функция получения данных по проводкам с сервера. */
+  const fetchTransactions = useCallback(
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<IStatementTransactionRow>> => {
+      setTransactionsFetching(true);
+
+      try {
+        const requestDto: IMetaData = {
+          filters: filterValuesDebounced,
+          multiSort: convertTableSortByMap(multiSort ? multiSort : {}, SORTING_MAP),
+          ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
+        };
+
+        const { data: rows, totalCount: total } = await statementService.getTransactionList(requestDto, id);
+
+        totalTransactions.current = total;
+
+        return { rows, total };
+      } catch {
+        return { rows: [], total: 0 };
+      } finally {
+        if (!transactionsInitialed.current) {
+          transactionsInitialed.current = true;
+        }
+
+        setTransactionsFetching(false);
+      }
+    },
+    [filterValuesDebounced, id]
+  );
 
   const counterpartiesFetched = useIsFetchedData(isCounterpartiesFetched);
-  const transactionsFetched = useIsFetchedData(isTransactionsFetched);
   const statementSummaryInfoFetched = useIsFetchedData(isStatementSummaryInfoFetched);
-  const dataFetched = counterpartiesFetched && transactionsFetched && statementSummaryInfoFetched;
+  const dataFetched = counterpartiesFetched && statementSummaryInfoFetched && transactionsInitialed.current;
+
+  const prevTransactionsFetching = usePrevious(transactionsFetching);
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
-      hasError: hasError || isCounterpartiesError || isTransactionsError || isStatementSummaryInfoError,
-      setHasError,
-      transactionsUpdating: transactionsFetched && isTransactionsFetching,
+      counterparties,
+      fetchedNewTransactions: Boolean(transactionsInitialed.current && prevTransactionsFetching && !transactionsFetching),
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
-      counterparties,
-      sorting,
-      setSorting,
-      pagination,
-      setPagination,
-      transactions,
-      transactionsAmountByFilter,
-      totalTransactionsAmount,
-      statementSummaryInfo,
+      transactionsUpdating: transactionsInitialed.current && transactionsFetching,
+      totalTransactions: totalTransactions.current,
       selectedRows,
       setSelectedRows,
-      fetchedNewTransactions,
-      isTransactionsFetched,
-      isTransactionsError,
+      statementSummaryInfo,
     }),
     [
-      hasError,
-      isCounterpartiesError,
-      isTransactionsError,
-      isStatementSummaryInfoError,
-      transactionsFetched,
-      isTransactionsFetching,
+      counterparties,
+      prevTransactionsFetching,
       properlyTypedFilterPanel,
       tagsPanel,
-      counterparties,
-      sorting,
-      pagination,
-      setPagination,
-      transactions,
-      transactionsAmountByFilter,
-      totalTransactionsAmount,
-      statementSummaryInfo,
+      transactionsFetching,
       selectedRows,
-      fetchedNewTransactions,
-      isTransactionsFetched,
+      statementSummaryInfo,
     ]
   );
 
-  const height = useStreamContentHeight();
+  // const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_INFO_HEIGHT;
+  // const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_INFO_HEIGHT;
 
-  const isStatementForbidden = httpRequestStatus === HTTP_STATUS_CODE.FORBIDDEN;
-
-  if (isStatementForbidden) {
-    return <RouteError />;
-  }
-
-  if (contextValue.hasError) {
+  if (isCounterpartiesError || isStatementSummaryInfoError) {
     return (
       <MainLayout>
         <FatalErrorContent />
@@ -187,10 +188,8 @@ export const StatementTransactionScrollerPage = () => {
                 </ContentLoader>
               </FocusNode>
               {!counterpartiesFetched && <Line fill="FAINT" />}
-              <ContentLoader height={tableHeight} loading={!transactionsFetched}>
-                <Gap.SM />
-                <Table />
-              </ContentLoader>
+              <Gap.SM />
+              <Table fetchData={fetchTransactions} />
             </ScrollerPageLayout>
           </FocusTree>
         </FocusLock>
