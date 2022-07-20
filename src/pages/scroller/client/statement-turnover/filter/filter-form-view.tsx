@@ -1,9 +1,7 @@
 import type { FC } from 'react';
 import React, { useEffect, useContext } from 'react';
-import { FocusNode } from 'components/focus-tree';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-turnover/filter/constants';
 import type { FormRenderProps } from 'react-final-form';
-import { COMMON_SCROLLER_NODE, TURNOVERS_SCROLLER_FILTER_NODE, TURNOVERS_SCROLLER_TABLE_ACTIONS_NODE } from 'stream-constants/a11y-nodes';
 import { isValidDateRange } from 'utils';
 import { Box, Line } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -35,16 +33,12 @@ export const FilterFormView: FC<FormRenderProps<IFormState>> = ({ valid, values 
 
   return (
     <Box className={css.wrapper}>
-      <FocusNode nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
-        <Box className={css.filterWrapper}>
-          <FilterPanel />
-        </Box>
-      </FocusNode>
+      <Box className={css.filterWrapper}>
+        <FilterPanel />
+      </Box>
       <Line fill="FAINT" />
       <Totals />
-      <FocusNode nodeId={TURNOVERS_SCROLLER_TABLE_ACTIONS_NODE} parentId={COMMON_SCROLLER_NODE}>
-        <GroupingPanel />
-      </FocusNode>
+      <GroupingPanel />
     </Box>
   );
 };
