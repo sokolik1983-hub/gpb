@@ -1,3 +1,10 @@
+# [2.9.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.7...v2.9.0-release.8) (2022-07-20)
+
+
+### Features
+
+* **скроллер:** GBO-28128 доработки InfiniteDataTable ([d32a870](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d32a870311910858080af398880ce1c54e770388))
+
 # [2.9.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.6...v2.9.0-release.7) (2022-07-20)
 
 
