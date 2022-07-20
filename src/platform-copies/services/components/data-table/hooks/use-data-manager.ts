@@ -87,7 +87,7 @@ export const useDataManager = <T extends IBaseEntity>({
       });
 
       setRows(prevState => (paginationState.pageIndex === 0 ? data.rows : [...prevState, ...data.rows]));
-      setPageCount(data.total!);
+      setPageCount(data.pageCount);
     } finally {
       if (paginationState.pageIndex === 0) {
         setLoading(false);

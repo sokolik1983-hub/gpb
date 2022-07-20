@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { ContentLoader, ScrollerPageLayout, FilterLayout } from 'components';
+import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
 import { FocusTree } from 'components/focus-tree';
-import { useIsFetchedData, usePrevious } from 'hooks';
+import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
@@ -37,7 +37,7 @@ import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
 import type { IMetaData } from '@platform/services/client';
-import { Gap, Line } from '@platform/ui';
+import { Box, Gap, Line } from '@platform/ui';
 import { validate } from '@platform/validation';
 import { SORTING_MAP } from './constants';
 
@@ -107,9 +107,9 @@ export const StatementTransactionScrollerPage = () => {
 
         totalTransactions.current = total;
 
-        return { rows, total };
+        return { rows, pageCount: Math.ceil(total / pageSize) };
       } catch {
-        return { rows: [], total: 0 };
+        return { rows: [], pageCount: 0 };
       } finally {
         if (!transactionsInitialed.current) {
           transactionsInitialed.current = true;
@@ -150,9 +150,9 @@ export const StatementTransactionScrollerPage = () => {
     ]
   );
 
-  // const height = useStreamContentHeight();
+  const height = useStreamContentHeight();
 
-  // const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_INFO_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_INFO_HEIGHT;
 
   if (isCounterpartiesError || isStatementSummaryInfoError) {
     return (
@@ -186,8 +186,13 @@ export const StatementTransactionScrollerPage = () => {
                 />
               </ContentLoader>
               {!counterpartiesFetched && <Line fill="FAINT" />}
-              <Gap.SM />
-              <Table fetchData={fetchTransactions} />
+              <ContentLoader height={tableHeight} loading={!transactionsInitialed.current}>
+                <Box />
+              </ContentLoader>
+              <>
+                <Gap.SM />
+                <Table fetchData={fetchTransactions} />
+              </>
             </ScrollerPageLayout>
           </FocusTree>
         </FocusLock>

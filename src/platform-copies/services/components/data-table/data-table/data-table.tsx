@@ -179,7 +179,7 @@ export const DataTable = <T extends IBaseEntity>({
 
       if (data) {
         setRows(data.rows);
-        setControlledPageCount(data.pageCount!);
+        setControlledPageCount(data.pageCount);
       }
     } finally {
       setLoading(false);
