@@ -15,7 +15,7 @@ import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
 import type { IFetchDataResponse } from '@platform/services/common/dist-types/components/data-table/interfaces';
-import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
+import { Box, Checkbox, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
 import { columns } from './columns';
 
 /** Таблица скроллера проводок. */
@@ -82,7 +82,7 @@ export const Table = () => {
   );
 
   return (
-    <>
+    <LayoutScroll>
       <Box>
         <Gap.SM />
         <Horizon>
@@ -127,7 +127,7 @@ export const Table = () => {
         onRowClick={handRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
-    </>
+    </LayoutScroll>
   );
 };
 
