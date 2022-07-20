@@ -179,25 +179,27 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
             tableInstance={tableInstance}
           />
 
-          <TableBody<T>
-            executor={executer}
-            expandedRowActionsGetter={expandedRowActionsGetter}
-            expandedRowComponent={expandedRowComponent}
-            fastActions={fastActions}
-            headerHeight={tableHeaderRef.current?.clientHeight || 0}
-            loading={loading}
-            loadingMore={loadingMore}
-            needScrollToTop={needScrollToTop}
-            refetch={fetch}
-            rowCaptionComponent={rowCaptionComponent}
-            tableInstance={tableInstance}
-            visibleOnlySelectedRows={visibleOnlySelectedRows}
-            onLoadMoreRows={onLoadMoreRows}
-            onRowClick={onRowClick}
-            onRowDoubleClick={onRowDoubleClick}
-          />
+          {rows.length > 0 && (
+            <TableBody<T>
+              executor={executer}
+              expandedRowActionsGetter={expandedRowActionsGetter}
+              expandedRowComponent={expandedRowComponent}
+              fastActions={fastActions}
+              headerHeight={tableHeaderRef.current?.clientHeight || 0}
+              loading={loading}
+              loadingMore={loadingMore}
+              needScrollToTop={needScrollToTop}
+              refetch={fetch}
+              rowCaptionComponent={rowCaptionComponent}
+              tableInstance={tableInstance}
+              visibleOnlySelectedRows={visibleOnlySelectedRows}
+              onLoadMoreRows={onLoadMoreRows}
+              onRowClick={onRowClick}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          )}
+          {!loading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
         </Box>
-        {!loading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
 
         <LoaderOverlay opened={loading} />
       </Box>

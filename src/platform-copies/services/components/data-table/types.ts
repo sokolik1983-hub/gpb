@@ -19,9 +19,7 @@ export interface IFetchDataResponse<T> {
   /** Строки. */
   rows: T[];
   /** Количество страниц. */
-  pageCount?: number;
-  /** Общее количество записей. */
-  total?: number;
+  pageCount: number;
 }
 
 /** Свойства компонента раскрытой строки. */

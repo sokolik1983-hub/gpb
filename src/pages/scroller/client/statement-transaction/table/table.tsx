@@ -9,13 +9,13 @@ import { ONLY_SELECTED_ROWS_CKECKBOX } from 'pages/scroller/client/statement-tra
 import { Footer } from 'pages/scroller/client/statement-transaction/table/footer';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
-import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
+import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
-import { Box, Checkbox, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
+import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
 import { columns } from './columns';
 
 /** Свойства таблицы проводок. */
@@ -58,7 +58,7 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
   );
 
   return (
-    <LayoutScroll>
+    <>
       <Box>
         <Gap.SM />
         <Horizon>
@@ -96,7 +96,7 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
         onRowClick={handRowClick}
         onSelectedRowsChange={setSelectedRows}
       />
-    </LayoutScroll>
+    </>
   );
 };
 

@@ -101,7 +101,7 @@ export const TableBody = <T,>({
   return (
     <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)` } })}>
       <LayoutScroll>
-        <AutoSizer className="AutoSizer12345" style={{ height: '100%', width: totalColumnsWidth }}>
+        <AutoSizer style={{ height: '100%', width: totalColumnsWidth }}>
           {({ height, width }) => (
             <InfiniteLoader
               isItemLoaded={() => false}
@@ -117,10 +117,10 @@ export const TableBody = <T,>({
                       (ref as React.RefCallback<List>)(list);
                       listRef.current = list;
                     }}
-                    className="VariableSizeList"
                     height={loadingMore ? height - SPINNER_HEIGHT : height}
                     itemCount={itemCount}
                     itemSize={getItemSize}
+                    style={{ overflowX: 'hidden' }}
                     width={width}
                     onItemsRendered={onItemsRendered}
                   >
