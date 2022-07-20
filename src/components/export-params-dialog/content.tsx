@@ -8,6 +8,7 @@ import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
+import FocusLock from 'react-focus-lock';
 import type { IFormState } from 'stream-constants/form';
 import { exportCases } from 'utils';
 import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
@@ -66,22 +67,24 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
   const header = getFormHeaderByUseCase(useCase!);
 
   return (
-    <DialogTemplate
-      extraSmall
-      actions={actions}
-      content={
-        <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
-          <Box className={css.container}>
-            <FileFormats />
-            <CreationParams />
-            <DetailDocumentsParams />
-          </Box>
-        </FormProvider>
-      }
-      dataType={DATA_TYPE.CONFIRMATION}
-      header={header}
-      onClose={onClose}
-    />
+    <FocusLock>
+      <DialogTemplate
+        extraSmall
+        actions={actions}
+        content={
+          <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
+            <Box className={css.container}>
+              <FileFormats />
+              <CreationParams />
+              <DetailDocumentsParams />
+            </Box>
+          </FormProvider>
+        }
+        dataType={DATA_TYPE.CONFIRMATION}
+        header={header}
+        onClose={onClose}
+      />
+    </FocusLock>
   );
 };
 

@@ -18,7 +18,7 @@ const firstCellPadding = Adjust.getPadClass(['XS', null]);
 
 /** Компонент ячейки таблицы. */
 export const Cell: React.FC<CellProps> = ({ column, first, getCellProps, refetch, render }) => (
-  <Box className={cn(first ? firstCellPadding : css.cellPadding, css.focusable)} data-field={column.id} {...getCellProps()}>
+  <Box className={cn(first ? firstCellPadding : css.cellPadding)} data-field={column.id} {...getCellProps()}>
     {render('Cell', { refetch })}
   </Box>
 );

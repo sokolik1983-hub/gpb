@@ -2,9 +2,10 @@ import type { FC } from 'react';
 import React, { useState } from 'react';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
+import FocusLock from 'react-focus-lock';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
-import { Box, DATA_TYPE, dialog, DialogTemplate, Gap, Tabs, Typography } from '@platform/ui';
+import { Box, DATA_TYPE, dialog, DialogTemplate, Gap, Tabs, Typography, LayoutScroll } from '@platform/ui';
 import { AttachmentsTab } from './attachments-tab';
 import { TAB_OPTIONS, TABS } from './constants';
 import { Footer } from './footer';
@@ -34,30 +35,38 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, s
   const header = debit ? locale.transactionCard.header.debit : locale.transactionCard.header.credit;
 
   return (
-    <DialogTemplate
-      extraSmall
-      content={
-        <Box className={css.wrapper}>
-          <Typography.H3>{header}</Typography.H3>
-          <Gap.LG />
-          <Typography.P>
-            {locale.transactionCard.subHeader({
-              documentName,
-              number: documentNumber,
-              date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
-            })}
-          </Typography.P>
-          <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
-          <Box className={css.contentWrapper}>
-            {tab === TABS.REQUISITES ? <RequisitesTab transaction={doc} /> : <AttachmentsTab statementId={statementId} transaction={doc} />}
+    <FocusLock>
+      <DialogTemplate
+        extraSmall
+        content={
+          <Box className={css.wrapper}>
+            <Typography.H3>{header}</Typography.H3>
+            <Gap.LG />
+            <Typography.P>
+              {locale.transactionCard.subHeader({
+                documentName,
+                number: documentNumber,
+                date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
+              })}
+            </Typography.P>
+            <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
+            <Box className={css.contentWrapper}>
+              <LayoutScroll>
+                {tab === TABS.REQUISITES ? (
+                  <RequisitesTab transaction={doc} />
+                ) : (
+                  <AttachmentsTab statementId={statementId} transaction={doc} />
+                )}
+              </LayoutScroll>
+            </Box>
+            <Footer statementId={statementId} transaction={doc} />
           </Box>
-          <Footer statementId={statementId} transaction={doc} />
-        </Box>
-      }
-      dataType={DATA_TYPE.CONFIRMATION}
-      header={''}
-      onClose={onClose}
-    />
+        }
+        dataType={DATA_TYPE.CONFIRMATION}
+        header={''}
+        onClose={onClose}
+      />
+    </FocusLock>
   );
 };
 

@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import cn from 'classnames';
+import { FocusNode } from 'components/focus-tree';
 import type { Row as RowPure } from 'react-table';
+import { COMMON_SCROLLER_NODE, DATA_TABLE_ROW_NODE } from 'stream-constants/a11y-nodes';
 import type { IExecuter } from '@platform/core';
 import { getActionButtons } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
@@ -80,12 +81,12 @@ export const Row = <T,>({
       {visibleRow ? (
         <WithClickable key={rowKey}>
           {(ref, { hovered }) => (
-            <React.Fragment key={`rowLayout_${rowKey}`}>
+            <FocusNode key={`rowLayout_${rowKey}`} nodeId={`${DATA_TABLE_ROW_NODE}-${rowKey}`} parentId={COMMON_SCROLLER_NODE}>
               <div ref={setRefRow}>
                 <Box
                   ref={ref}
                   border={['FAINT', 'SM']}
-                  className={cn(css.row, css.focusable)}
+                  className={css.row}
                   data-id={original.id}
                   {...restRowProps}
                   key={`row_${rowKey}`}
@@ -141,7 +142,7 @@ export const Row = <T,>({
                   }}
                 />
               ) : null}
-            </React.Fragment>
+            </FocusNode>
           )}
         </WithClickable>
       ) : null}

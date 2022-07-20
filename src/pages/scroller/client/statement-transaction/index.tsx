@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, ScrollerPageLayout, FilterLayout, RouteError, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
+import { FocusNode, FocusTree } from 'components/focus-tree';
 import { useIsFetchedData, useScrollerPagination, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
@@ -26,10 +27,12 @@ import {
 import { Table } from 'pages/scroller/client/statement-transaction/table';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
+import FocusLock from 'react-focus-lock';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { DEFAULT_PAGINATION, LINE_HEIGHT } from 'stream-constants';
+import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import type { ISortSettings } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { Gap, Line } from '@platform/ui';
@@ -161,30 +164,36 @@ export const StatementTransactionScrollerPage = () => {
   return (
     <TransactionScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout headerProps={{ ...headerProps, loading: !statementSummaryInfoFetched }} loading={!dataFetched}>
-          <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
-            <StatementInfo />
-          </ContentLoader>
-          {!counterpartiesFetched && <Line fill="FAINT" />}
-          <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
-            <Line fill="FAINT" />
-            <FilterLayout
-              AdditionalFilter={AdditionalFilter}
-              QuickFilter={QuickFilter}
-              TagsPanel={TagsPanel}
-              additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-              filterFields={fields}
-              filterState={filterPanel}
-              tagsState={tagsPanel}
-              validate={validate(validationSchema)}
-            />
-          </ContentLoader>
-          {!counterpartiesFetched && <Line fill="FAINT" />}
-          <ContentLoader height={tableHeight} loading={!transactionsFetched}>
-            <Gap.SM />
-            <Table />
-          </ContentLoader>
-        </ScrollerPageLayout>
+        <FocusLock>
+          <FocusTree treeId={COMMON_SCROLLER_NODE}>
+            <ScrollerPageLayout headerProps={{ ...headerProps }} loading={!dataFetched}>
+              <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
+                <StatementInfo />
+              </ContentLoader>
+              {!counterpartiesFetched && <Line fill="FAINT" />}
+              <FocusNode nodeId={TRANSACTIONS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
+                  <Line fill="FAINT" />
+                  <FilterLayout
+                    AdditionalFilter={AdditionalFilter}
+                    QuickFilter={QuickFilter}
+                    TagsPanel={TagsPanel}
+                    additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                    filterFields={fields}
+                    filterState={filterPanel}
+                    tagsState={tagsPanel}
+                    validate={validate(validationSchema)}
+                  />
+                </ContentLoader>
+              </FocusNode>
+              {!counterpartiesFetched && <Line fill="FAINT" />}
+              <ContentLoader height={tableHeight} loading={!transactionsFetched}>
+                <Gap.SM />
+                <Table />
+              </ContentLoader>
+            </ScrollerPageLayout>
+          </FocusTree>
+        </FocusLock>
       </MainLayout>
     </TransactionScrollerContext.Provider>
   );

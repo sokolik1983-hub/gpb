@@ -1,6 +1,9 @@
 import React, { useMemo, useState, useEffect } from 'react';
+import { FocusNode } from 'components/focus-tree';
 import { locale } from 'localization';
+import { AutoFocusInside } from 'react-focus-lock';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
+import { COMMON_SCROLLER_NODE, DATA_TABLE_HEADER_NODE, DATA_TABLE_PAGINATION_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
@@ -219,13 +222,16 @@ export const DataTable = <T extends IBaseEntity>({
     <>
       <Box className={css.wrapper}>
         <Box {...getTableProps()}>
-          <TableHeader
-            setSettingsColumns={setSettingsColumns}
-            settingColumns={settingColumns}
-            showSettingsButton={showSettingsButton}
-            tableInstance={tableInstance}
-          />
-
+          <AutoFocusInside>
+            <FocusNode nodeId={DATA_TABLE_HEADER_NODE} parentId={COMMON_SCROLLER_NODE}>
+              <TableHeader
+                setSettingsColumns={setSettingsColumns}
+                settingColumns={settingColumns}
+                showSettingsButton={showSettingsButton}
+                tableInstance={tableInstance}
+              />
+            </FocusNode>
+          </AutoFocusInside>
           <TableBody<T>
             executor={executor}
             expandedRowActionsGetter={expandedRowActionsGetter}
@@ -243,15 +249,17 @@ export const DataTable = <T extends IBaseEntity>({
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
 
         {pageCount > 1 && (
-          <Box className={css.pagination}>
-            <FractalPagination
-              page={paginationState.pageIndex + 1}
-              pageCount={pageCount}
-              pageSize={paginationState.pageSize}
-              onPageChange={handlePageChange}
-              onPageSizeChange={setPageSize}
-            />
-          </Box>
+          <FocusNode nodeId={DATA_TABLE_PAGINATION_NODE} parentId={COMMON_SCROLLER_NODE}>
+            <Box className={css.pagination}>
+              <FractalPagination
+                page={paginationState.pageIndex + 1}
+                pageCount={pageCount}
+                pageSize={paginationState.pageSize}
+                onPageChange={handlePageChange}
+                onPageSizeChange={setPageSize}
+              />
+            </Box>
+          </FocusNode>
         )}
 
         <LoaderOverlay opened={isLoading} />

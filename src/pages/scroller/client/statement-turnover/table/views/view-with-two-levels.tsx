@@ -12,7 +12,7 @@ export const ViewWithTwoLevels: React.FC<IScrollerView> = ({ rows, prepareRow })
     {rows.map(row => {
       prepareRow(row);
 
-      const { subRows, getRowProps, isExpanded, toggleRowExpanded } = row;
+      const { subRows, getRowProps, isExpanded, toggleRowExpanded, id } = row;
 
       const { key } = getRowProps();
 
@@ -26,7 +26,7 @@ export const ViewWithTwoLevels: React.FC<IScrollerView> = ({ rows, prepareRow })
             </StickyRow>
           }
           isExpanded={isExpanded}
-          panel={<AccountList prepareRow={prepareRow} rows={subRows} />}
+          panel={<AccountList groupRowId={id} prepareRow={prepareRow} rows={subRows} />}
         />
       );
     })}
