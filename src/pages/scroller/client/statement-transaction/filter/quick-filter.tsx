@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { locale } from 'localization';
 import { useFormState } from 'react-final-form';
 import { ECO_STATEMENT } from 'stream-constants';
+import { isValidDateRange } from 'utils';
 import { useLocalStorage } from '@platform/services';
 import type { IOption } from '@platform/ui';
 import { Pattern, Fields, Typography, Gap, Horizon, Box } from '@platform/ui';
@@ -21,10 +22,9 @@ const MAX_HISTORY_SIZE = 5;
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
 export const QuickFilter: FC = () => {
-  const {
-    values,
-    values: { amountFrom, amountTo, queryString },
-  } = useFormState<IFormState>();
+  const { valid, values } = useFormState<IFormState>();
+
+  const { amountFrom, amountTo, queryString, paymentDateFrom, paymentDateTo } = values;
 
   const [valueOfQueryString, setValueOfQueryString] = useState(queryString);
 
@@ -37,9 +37,13 @@ export const QuickFilter: FC = () => {
     fetchedNewTransactions,
   } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
+  const isDateValid = isValidDateRange({ dateFrom: paymentDateFrom, dateTo: paymentDateTo });
+
   useEffect(() => {
     // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
-    onOk(values);
+    if (valid && isDateValid) {
+      onOk(values);
+    }
 
     // В хуке useFilter, после обновления стейта,
     // чтобы избежать закрытия формы на UI, вызывается открытие формы.
@@ -51,7 +55,7 @@ export const QuickFilter: FC = () => {
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, amountFrom, amountTo, queryString]);
+  }, [onOk, amountFrom, amountTo, queryString, paymentDateFrom, paymentDateTo, valid]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены все доп. данные.
