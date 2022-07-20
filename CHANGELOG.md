@@ -1,3 +1,10 @@
+# [2.9.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.6...v2.9.0-release.7) (2022-07-20)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29848 удалены лишние узлы для фокуса, исправлена рамка для узла ([8d3b2ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d3b2eeddd2c64349206dea9f1d89c1db552d150))
+
 # [2.9.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.5...v2.9.0-release.6) (2022-07-20)
 
 
