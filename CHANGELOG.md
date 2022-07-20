@@ -1,3 +1,16 @@
+# [2.9.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.4...v2.9.0-release.5) (2022-07-20)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-26073 доработки скроллеров и ЭФ ([c45a544](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c45a544ed6021fa63a54e02157d298d5f3a73a92))
+* **скроллер:** GBO-28375 правки для журнала проводок ([49ea014](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/49ea01448dd91f88760ca17954b7adcb86d1da56))
+
+
+### Features
+
+* GBO-26073 реализация библиотеки focus-tree ([5785953](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/578595316d660018ea1cf2e98aed0d246d1815ce))
+
 # [2.9.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.3...v2.9.0-release.4) (2022-07-19)
 
 
