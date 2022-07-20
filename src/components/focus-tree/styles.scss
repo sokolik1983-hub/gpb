@@ -4,19 +4,8 @@
 
   &:focus {
     outline: none;
-
-    &::before {
-      position: absolute;
-      display: block;
-      top: 2px;
-      bottom: 2px;
-      left: 2px;
-      right: 2px;
-      background: none;
-      border-radius: 2px;
-      box-shadow: 0 0 0 2px #508be2;
-      content: '';
-    }
+    border-radius: 2px;
+    border: 2px solid #508be2;
   }
 }
 

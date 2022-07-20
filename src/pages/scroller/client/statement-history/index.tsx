@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
-import { FocusNode, FocusTree } from 'components/focus-tree';
+import { FocusTree } from 'components/focus-tree';
 import {
   useAccounts,
   useIsFetchedData,
@@ -15,7 +15,7 @@ import { Table } from 'pages/scroller/client/statement-history/table';
 import FocusLock from 'react-focus-lock';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
-import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
+import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import type { ISortSettings } from '@platform/services';
 import { FatalErrorContent, MainLayout } from '@platform/services/client';
 import { Line } from '@platform/ui';
@@ -130,20 +130,18 @@ export const StatementHistoryScrollerPage = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
-              <FocusNode nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
-                <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-                  <FilterLayout
-                    AdditionalFilter={AdditionalFilter}
-                    QuickFilter={QuickFilter}
-                    TagsPanel={TagsPanel}
-                    additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-                    filterFields={fields}
-                    filterState={filterPanel}
-                    tagsState={tagsPanel}
-                    validate={validate(validationSchema)}
-                  />
-                </ContentLoader>
-              </FocusNode>
+              <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+                <FilterLayout
+                  AdditionalFilter={AdditionalFilter}
+                  QuickFilter={QuickFilter}
+                  TagsPanel={TagsPanel}
+                  additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                  filterFields={fields}
+                  filterState={filterPanel}
+                  tagsState={tagsPanel}
+                  validate={validate(validationSchema)}
+                />
+              </ContentLoader>
               {!accountsFetched && <Line fill="FAINT" />}
               <ContentLoader height={tableHeight} loading={!statementsFetched}>
                 <Table />
