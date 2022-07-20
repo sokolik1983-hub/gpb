@@ -1,3 +1,10 @@
+# [2.9.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.5...v2.9.0-release.6) (2022-07-20)
+
+
+### Features
+
+* **скроллер:** GBO-28128 Доработки InfiniteDataTable и интеграция в скроллер проводок ([0eb6498](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0eb64980f39bdd605e1e784968a83c3c86985c42))
+
 # [2.9.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.4...v2.9.0-release.5) (2022-07-20)
 
 
