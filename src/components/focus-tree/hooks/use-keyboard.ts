@@ -4,9 +4,16 @@ import type { IFocusTreeContext } from '../focus-tree-context';
 import { NODE_TYPE } from '../node-type';
 
 /** Хук для установки фокуса на очередном узле в зависмоси от нажатия соответствующей клавиши на клавиатуре. */
-export const useKeyboard = ({ goNextNode, goPrevNode, goParentNode }: IFocusTreeContext) => {
+export const useKeyboard = ({ goNextNode, goPrevNode, goParentNode, insideNode, setInsideNode }: IFocusTreeContext) => {
   const onKeyDown = useCallback(
     (e: KeyboardEvent) => {
+      const isEscape = e.code === 'Escape';
+
+      // если фокус провалился в какой-нибудь дочерний компонент внутри узла (но не в узел)
+      if (insideNode && !isEscape) {
+        return;
+      }
+
       switch (e.code) {
         // нажали коавишу "Стрелка ввверх"
         case 'ArrowUp':
@@ -18,6 +25,7 @@ export const useKeyboard = ({ goNextNode, goPrevNode, goParentNode }: IFocusTree
           break;
         // нажали коавишу "Escape"
         case 'Escape':
+          setInsideNode(false);
           goParentNode();
           break;
         // нажали коавишу "Стрелка влево"
@@ -31,7 +39,7 @@ export const useKeyboard = ({ goNextNode, goPrevNode, goParentNode }: IFocusTree
         default:
       }
     },
-    [goNextNode, goParentNode, goPrevNode]
+    [insideNode, goPrevNode, goNextNode, setInsideNode, goParentNode]
   );
 
   useEventListener('keydown', onKeyDown);

@@ -12,12 +12,14 @@ export interface FocusNodeProps {
   parentId: string;
   /** Расположение узла в группе. */
   type?: NODE_TYPE;
+  /** Скрывать ли рамку для узла при фокусе. */
+  hideBorder?: boolean;
 }
 
 // FIXME добавить свойство order для принудительного задания порядка следования узла (иногда это может быть удобно)
 /** Компонент "Фокусируемый узел" (произвольньный контейнер компонентов на странице, поддерживающих фокус). */
-export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentId, type, children, ...props }) => {
-  const { mountNode, unmountNode, setCurrent, tree, current } = useContext(FocusTreeContext);
+export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentId, type, hideBorder, children, ...props }) => {
+  const { mountNode, unmountNode, setCurrent, tree, current, setInsideNode } = useContext(FocusTreeContext);
 
   useLayoutEffect(() => {
     const newNode = mountNode(nodeId, parentId, type);
@@ -32,6 +34,8 @@ export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentI
       const currentNodeId = domNode.getAttribute('data-node-id');
 
       if (!currentNodeId) {
+        setInsideNode(true);
+
         return;
       }
 
@@ -42,22 +46,30 @@ export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentI
       const currentNode = tree?.findNodeById(currentNodeId);
 
       if (!currentNode) {
-        return nodeId;
+        return;
       }
 
+      setInsideNode(false);
       setCurrent(currentNode);
     },
-    [current, nodeId, setCurrent, tree]
+    [current, setCurrent, setInsideNode, tree]
   );
 
   return (
-    <Box {...props} className={css.node} data-node-id={nodeId} tabIndex={0} onFocus={handleOnFocus}>
+    <Box
+      {...props}
+      className={hideBorder ? css['node-without-border'] : css.node}
+      data-node-id={nodeId}
+      tabIndex={0}
+      onFocus={handleOnFocus}
+    >
       {children}
     </Box>
   );
 });
 
 FocusNode.defaultProps = {
+  hideBorder: false,
   type: NODE_TYPE.VERTICAL,
 };
 

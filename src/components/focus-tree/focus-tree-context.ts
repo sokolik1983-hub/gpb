@@ -10,7 +10,7 @@ export interface IFocusTreeContext {
   /** Текущий узел, на котором установлен фокус. */
   current: ITreeNode | null;
   /** Метод для установки текущего узла. */
-  setCurrent(current: ITreeNode): void;
+  setCurrent(current: ITreeNode | null): void;
   /** Примонтировать (добавить в древовидное представление) узел. */
   mountNode(nodeId: string, parentId: string | null, type?: NODE_TYPE): ITreeNode;
   /** Размонтировать (исключить из древовидного представления) узел. */
@@ -25,6 +25,10 @@ export interface IFocusTreeContext {
   goParentNode(): void;
   /** Установить фокус на узле с некоторым идентификатором. */
   focusNode(nodeId: string): void;
+  /** Признак находится ли фокус внутри узла на каком-то из его дочерни элементов. */
+  insideNode: boolean;
+  /** Метод установки признака фокуса дочернего элемента. */
+  setInsideNode(insideNode: boolean): void;
 }
 
 /** Начальное значение контекста. */
@@ -39,6 +43,8 @@ const defaultValue: IFocusTreeContext = {
   goNextNode: noop,
   goPrevNode: noop,
   focusNode: noop,
+  insideNode: false,
+  setInsideNode: noop,
 };
 
 /** Экземпляр контекста. */

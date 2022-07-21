@@ -9,6 +9,7 @@ export const useTree = (treeId: string): IFocusTreeContext => {
   const parentsStore = useRef<Map<string, ITreeNode>>(new Map());
   const tree = useRef<ITreeNode>(new GenericTree(treeId));
   const [current, setCurrent] = useState<ITreeNode | null>(null);
+  const [insideNode, setInsideNode] = useState<boolean>(false);
 
   const focusNode = useCallback((nodeId: string) => {
     const domNode = document.querySelector(`div[data-node-id="${nodeId}"]`) as HTMLDivElement;
@@ -256,5 +257,7 @@ export const useTree = (treeId: string): IFocusTreeContext => {
     goChildNodeByIndex,
     goParentNode,
     focusNode,
+    insideNode,
+    setInsideNode,
   };
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box } from '@platform/ui';
 import { FocusTreeContext } from './focus-tree-context';
 import { useKeyboard } from './hooks/use-keyboard';
@@ -11,17 +11,30 @@ export interface IFocusTreeProps {
   treeId: string;
 }
 
-/** Компонент "Дерево фокусируемых узлов". */
-export const FocusTree: React.FC<IFocusTreeProps> = ({ treeId, children, ...props }) => {
-  const tree = useTree(treeId);
+/** Компонент с содержимым страницы. */
+const FocusTreeContentWithKeyboard: React.FC = ({ children, ...props }) => {
+  const value = useContext(FocusTreeContext);
 
-  useKeyboard(tree);
+  useKeyboard(value);
+
+  const { tree } = value;
 
   return (
-    <FocusTreeContext.Provider value={tree}>
-      <Box {...props} className={css.tree} data-node-id={treeId} tabIndex={0}>
-        {children}
-      </Box>
+    <Box {...props} className={css.tree} data-node-id={tree?.getNodeId()} tabIndex={0}>
+      {children}
+    </Box>
+  );
+};
+
+FocusTreeContentWithKeyboard.displayName = 'FocusTreeContentWithKeyboard';
+
+/** Компонент "Дерево фокусируемых узлов". */
+export const FocusTree: React.FC<IFocusTreeProps> = ({ treeId, children, ...props }) => {
+  const value = useTree(treeId);
+
+  return (
+    <FocusTreeContext.Provider value={value}>
+      <FocusTreeContentWithKeyboard {...props}>{children}</FocusTreeContentWithKeyboard>
     </FocusTreeContext.Provider>
   );
 };

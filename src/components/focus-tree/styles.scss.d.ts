@@ -6,6 +6,7 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'node': string;
+    'node-without-border': string;
     'tree': string;
   }
 }

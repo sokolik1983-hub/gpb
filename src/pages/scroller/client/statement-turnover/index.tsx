@@ -1,13 +1,13 @@
 import React, { useState, useMemo } from 'react';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
-import { FocusTree } from 'components/focus-tree';
+import { FocusNode, FocusTree } from 'components/focus-tree';
 import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
 import FocusLock from 'react-focus-lock';
 import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
-import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
+import { COMMON_SCROLLER_NODE, TURNOVERS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
 import { Line } from '@platform/ui';
 import { fields, labels, Filter } from './filter';
@@ -104,9 +104,11 @@ export const StatementTurnoverScrollerPage = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-              <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-                <Filter />
-              </ContentLoader>
+              <FocusNode hideBorder nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+                  <Filter />
+                </ContentLoader>
+              </FocusNode>
               {!accountsFetched && <Line fill="FAINT" />}
               <ContentLoader height={tableHeight} loading={!turnoversFetched}>
                 <TurnoversTable />

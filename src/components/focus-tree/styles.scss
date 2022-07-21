@@ -9,6 +9,10 @@
   }
 }
 
+.node-without-border {
+  outline: none;
+}
+
 .tree {
   &:focus {
     outline: none;

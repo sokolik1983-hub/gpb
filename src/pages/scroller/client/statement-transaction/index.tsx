@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
-import { FocusTree } from 'components/focus-tree';
+import { FocusNode, FocusTree } from 'components/focus-tree';
 import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
@@ -33,7 +33,7 @@ import { getDateRangeValidationScheme } from 'schemas';
 import { statementService } from 'services';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { LINE_HEIGHT } from 'stream-constants';
-import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
+import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
 import type { IMetaData } from '@platform/services/client';
@@ -172,19 +172,21 @@ export const StatementTransactionScrollerPage = () => {
                 <StatementInfo />
               </ContentLoader>
               {!counterpartiesFetched && <Line fill="FAINT" />}
-              <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
-                <Line fill="FAINT" />
-                <FilterLayout
-                  AdditionalFilter={AdditionalFilter}
-                  QuickFilter={QuickFilter}
-                  TagsPanel={TagsPanel}
-                  additionalFilterFields={ADDITIONAL_FORM_FIELDS}
-                  filterFields={fields}
-                  filterState={filterPanel}
-                  tagsState={tagsPanel}
-                  validate={validate(validationSchema)}
-                />
-              </ContentLoader>
+              <FocusNode hideBorder nodeId={TRANSACTIONS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
+                  <Line fill="FAINT" />
+                  <FilterLayout
+                    AdditionalFilter={AdditionalFilter}
+                    QuickFilter={QuickFilter}
+                    TagsPanel={TagsPanel}
+                    additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                    filterFields={fields}
+                    filterState={filterPanel}
+                    tagsState={tagsPanel}
+                    validate={validate(validationSchema)}
+                  />
+                </ContentLoader>
+              </FocusNode>
               {!counterpartiesFetched && <Line fill="FAINT" />}
               <ContentLoader height={tableHeight} loading={!transactionsInitialed.current}>
                 <Box />
