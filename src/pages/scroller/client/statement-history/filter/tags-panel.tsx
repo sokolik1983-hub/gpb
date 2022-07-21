@@ -28,7 +28,7 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 };
 
 /** Панель тегов фильтра. */
-export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
+export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultFilterValues }) => {
   const { restart } = useForm();
 
   const { values } = useFormState<IFormState>();
@@ -56,7 +56,7 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
   const preparedTags = orderTags(tags, FIELDS_WITH_TAGS).filter(tag => Boolean(values[tag.value]));
 
   const resetFilters = () => {
-    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
+    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultFilterValues };
 
     restart(newValues);
     onOk(newValues);
