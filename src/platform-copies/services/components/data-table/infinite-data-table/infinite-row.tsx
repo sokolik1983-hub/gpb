@@ -68,7 +68,7 @@ export const InfiniteRow = <T,>({
   const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
 
   return visibleRow ? (
-    <Box key={key} className="InfiniteRow" style={style}>
+    <Box key={key} style={style}>
       <Row<T>
         executor={executor}
         expandedRowActionsGetter={expandedRowActionsGetter}
