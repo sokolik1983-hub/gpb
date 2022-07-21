@@ -1,3 +1,10 @@
+# [2.9.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.9...v2.9.0-release.10) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 правки для валидации фильтров журнала проводок ([82d6103](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/82d610375c7eabb976983e00a63bced3964c2468))
+
 # [2.9.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.8...v2.9.0-release.9) (2022-07-21)
 
 
