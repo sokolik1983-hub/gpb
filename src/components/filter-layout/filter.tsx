@@ -8,12 +8,20 @@ import { ToggleButton } from './toggle-button';
 import type { IFilterProperties } from './types';
 
 /** Компонент, используемый внутри формы фильтрации. */
-export const Filter: React.FC<IFilterProperties> = ({ AdditionalFilter, QuickFilter, TagsPanel, filterFields, filterState, tagsState }) => {
+export const Filter: React.FC<IFilterProperties> = ({
+  AdditionalFilter,
+  QuickFilter,
+  TagsPanel,
+  additionalFilterFields,
+  filterFields,
+  filterState,
+  tagsState,
+}) => {
   const { onClose: closeAdditionalFilter, onClear, onOk, opened, values: currentStateValues } = filterState;
   const { onClick: expandAdditionalFilter } = tagsState;
 
   const { restart } = useForm();
-  const { values, valid } = useFormState();
+  const { values } = useFormState();
 
   const handleApply = useCallback(() => onOk(values), [onOk, values]);
 
@@ -23,57 +31,45 @@ export const Filter: React.FC<IFilterProperties> = ({ AdditionalFilter, QuickFil
     expandAdditionalFilter,
   ]);
 
-  const defaultFilterValues = useMemo(
+  const defaultAdditionalFilterValues = useMemo(
     () =>
-      Object.keys(filterFields).reduce(
-        (prevDefaultValues, field) => ({
-          ...prevDefaultValues,
-          [field]: filterFields[field].value,
-        }),
-        {}
-      ),
-    [filterFields]
+      Object.keys(filterFields)
+        .filter(field => additionalFilterFields.includes(field))
+        .reduce(
+          (prevDefaultStateOfAdditionalFilter, field) => ({
+            ...prevDefaultStateOfAdditionalFilter,
+            [field]: filterFields[field].value,
+          }),
+          {}
+        ),
+    [additionalFilterFields, filterFields]
   );
 
   const handleReset = useCallback(() => {
     onClear();
-
-    console.log({ ...values, ...defaultFilterValues });
-
-    restart({ ...values, ...defaultFilterValues });
+    restart({ ...values, ...defaultAdditionalFilterValues });
     expandAdditionalFilter();
-  }, [expandAdditionalFilter, onClear, restart, values, defaultFilterValues]);
+  }, [defaultAdditionalFilterValues, expandAdditionalFilter, onClear, restart, values]);
 
-  const { pristine, different } = useMemo(() => {
-    let defaultEqual = true;
-    let diffFromCurrentState = false;
-
+  const pristine = useMemo(() => {
     if (opened) {
-      const currentValues = Object.keys(defaultFilterValues).reduce(
-        (prevCurrentValues, field) => ({
-          ...prevCurrentValues,
-          [field]: field in values ? values[field] : defaultFilterValues[field],
+      const currentAdditionalValues = Object.keys(defaultAdditionalFilterValues).reduce(
+        (currentValues, field) => ({
+          ...currentValues,
+          [field]: field in values ? values[field] : defaultAdditionalFilterValues[field],
         }),
         {}
       );
 
-      defaultEqual = isEqual(defaultFilterValues, currentValues);
+      const diffFromCurrentState = Object.keys(currentAdditionalValues).some(
+        key => currentAdditionalValues[key] !== currentStateValues[key]
+      );
 
-      diffFromCurrentState = Object.keys(values).some(key => {
-        const value = values[key];
-        const notEmpty = Array.isArray(value) ? value.length > 0 : !!value;
-
-        return notEmpty && value !== currentStateValues[key];
-      });
+      return !diffFromCurrentState && isEqual(defaultAdditionalFilterValues, currentAdditionalValues);
     }
 
-    return {
-      pristine: defaultEqual,
-      different: diffFromCurrentState,
-    };
-  }, [opened, values, currentStateValues, defaultFilterValues]);
-
-  const disabledApply = !valid || !different;
+    return true;
+  }, [defaultAdditionalFilterValues, opened, values, currentStateValues]);
 
   return (
     <>
@@ -89,7 +85,7 @@ export const Filter: React.FC<IFilterProperties> = ({ AdditionalFilter, QuickFil
             </Horizon>
           </Pattern.Span>
         </Pattern>
-        <TagsPanel defaultFilterValues={defaultFilterValues} />
+        <TagsPanel defaultAdditionalFilterValues={defaultAdditionalFilterValues} />
       </Box>
       <Line fill="FAINT" />
       {opened && (
@@ -98,7 +94,7 @@ export const Filter: React.FC<IFilterProperties> = ({ AdditionalFilter, QuickFil
             <AdditionalFilter />
           </Box>
           <Line fill="FAINT" />
-          <FilterFooter disabledApply={disabledApply} disabledReset={pristine} onApply={handleApply} onReset={handleReset} />
+          <FilterFooter disabled={pristine} onApply={handleApply} onReset={handleReset} />
           <Line fill="FAINT" />
         </Box>
       )}

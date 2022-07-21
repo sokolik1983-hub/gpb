@@ -9,14 +9,12 @@ interface IFooterProps {
   onReset(): void;
   /** Обработчик клика по кнопке "применить фильтры". */
   onApply(): void;
-  /** Признак недоступности кнопки "применить фильтры". */
-  disabledApply: boolean;
-  /** Признак недоступности кнопки "сбросить". */
-  disabledReset: boolean;
+  /** Признак недоступности кнопок. */
+  disabled: boolean;
 }
 
 /** Футер фильтра скроллера. */
-export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply, disabledApply, disabledReset }) => {
+export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply, disabled }) => {
   const handleCancel = useCallback(() => onReset(), [onReset]);
 
   const handleApply = useCallback(() => onApply(), [onApply]);
@@ -24,12 +22,12 @@ export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply, disable
   return (
     <Box className={css.footerWrapper}>
       <Horizon>
-        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={disabledApply} onClick={handleApply}>
+        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={disabled} onClick={handleApply}>
           {locale.scroller.filter.buttons.applyFilters}
         </PrimaryButton>
         <Gap />
 
-        <RegularButton extraSmall data-action={ACTIONS.CANCEL} dimension="SM" disabled={disabledReset} onClick={handleCancel}>
+        <RegularButton extraSmall data-action={ACTIONS.CANCEL} dimension="SM" disabled={disabled} onClick={handleCancel}>
           {locale.scroller.filter.buttons.reset}
         </RegularButton>
       </Horizon>

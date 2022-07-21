@@ -30,7 +30,7 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 };
 
 /** Панель тегов фильтра. */
-export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultFilterValues }) => {
+export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
   const { restart } = useForm();
 
   const { counterparties } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
@@ -81,7 +81,7 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultFilterValues }) =>
   });
 
   const resetFilters = () => {
-    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultFilterValues };
+    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
 
     restart(newValues);
     onOk(newValues);

@@ -1,5 +1,5 @@
 /** Пропсы панели тегов. */
 export interface ITagsPanelProps {
-  /** Дефолтное состояние фильтров. */
-  defaultFilterValues: Record<string, unknown[] | string>;
+  /** Дефолтное состояние дополнительных фильтров. */
+  defaultAdditionalFilterValues: Record<string, unknown[] | string>;
 }
