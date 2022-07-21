@@ -132,7 +132,7 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
   return (
     <FocusLock>
-      <Box className={css.container}>
+      <Box className={css.container} style={{ outline: 'none' }} tabIndex={0}>
         <DialogTemplate
           extraSmall
           actions={actions}

@@ -68,22 +68,24 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
 
   return (
     <FocusLock>
-      <DialogTemplate
-        extraSmall
-        actions={actions}
-        content={
-          <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
-            <Box className={css.container}>
-              <FileFormats />
-              <CreationParams />
-              <DetailDocumentsParams />
-            </Box>
-          </FormProvider>
-        }
-        dataType={DATA_TYPE.CONFIRMATION}
-        header={header}
-        onClose={onClose}
-      />
+      <Box style={{ outline: 'none' }} tabIndex={0}>
+        <DialogTemplate
+          extraSmall
+          actions={actions}
+          content={
+            <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
+              <Box className={css.container}>
+                <FileFormats />
+                <CreationParams />
+                <DetailDocumentsParams />
+              </Box>
+            </FormProvider>
+          }
+          dataType={DATA_TYPE.CONFIRMATION}
+          header={header}
+          onClose={onClose}
+        />
+      </Box>
     </FocusLock>
   );
 };
