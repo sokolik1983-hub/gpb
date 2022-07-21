@@ -1,6 +1,6 @@
 .node {
   position: relative;
-  padding: 2px;
+  border: 2px solid transparent;
 
   &:focus {
     outline: none;

@@ -36,36 +36,38 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, s
 
   return (
     <FocusLock>
-      <DialogTemplate
-        extraSmall
-        content={
-          <Box className={css.wrapper}>
-            <Typography.H3>{header}</Typography.H3>
-            <Gap.LG />
-            <Typography.P>
-              {locale.transactionCard.subHeader({
-                documentName,
-                number: documentNumber,
-                date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
-              })}
-            </Typography.P>
-            <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
-            <Box className={css.contentWrapper}>
-              <LayoutScroll>
-                {tab === TABS.REQUISITES ? (
-                  <RequisitesTab transaction={doc} />
-                ) : (
-                  <AttachmentsTab statementId={statementId} transaction={doc} />
-                )}
-              </LayoutScroll>
+      <Box style={{ outline: 'none' }} tabIndex={0}>
+        <DialogTemplate
+          extraSmall
+          content={
+            <Box className={css.wrapper}>
+              <Typography.H3>{header}</Typography.H3>
+              <Gap.LG />
+              <Typography.P>
+                {locale.transactionCard.subHeader({
+                  documentName,
+                  number: documentNumber,
+                  date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
+                })}
+              </Typography.P>
+              <Tabs className={css.tabs} options={TAB_OPTIONS} value={tab} onChange={setTab} />
+              <Box className={css.contentWrapper}>
+                <LayoutScroll>
+                  {tab === TABS.REQUISITES ? (
+                    <RequisitesTab transaction={doc} />
+                  ) : (
+                    <AttachmentsTab statementId={statementId} transaction={doc} />
+                  )}
+                </LayoutScroll>
+              </Box>
+              <Footer statementId={statementId} transaction={doc} />
             </Box>
-            <Footer statementId={statementId} transaction={doc} />
-          </Box>
-        }
-        dataType={DATA_TYPE.CONFIRMATION}
-        header={''}
-        onClose={onClose}
-      />
+          }
+          dataType={DATA_TYPE.CONFIRMATION}
+          header={''}
+          onClose={onClose}
+        />
+      </Box>
     </FocusLock>
   );
 };
