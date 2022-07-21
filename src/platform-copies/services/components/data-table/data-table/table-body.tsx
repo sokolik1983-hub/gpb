@@ -75,3 +75,5 @@ export const TableBody = <T,>({
     </Box>
   );
 };
+
+TableBody.displayName = 'TableBody';

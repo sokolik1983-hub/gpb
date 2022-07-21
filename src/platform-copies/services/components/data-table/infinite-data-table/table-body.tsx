@@ -1,4 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import type { CSSProperties } from 'react';
+import React, { forwardRef, useCallback, useEffect, useMemo, useRef } from 'react';
+import Scrollbars from 'react-custom-scrollbars';
 import type { TableBodyProps as TableBodyPropsPure, TableInstance } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { VariableSizeList } from 'react-window';
@@ -6,7 +8,7 @@ import type { VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import type { IExecuter } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
-import { Box, LayoutScroll, Spinner } from '@platform/ui';
+import { Box, Spinner } from '@platform/ui';
 import type { ICaptionRowComponentProps, IExpandedRowComponentProps, RecordCell } from '../types';
 import { InfiniteRow } from './infinite-row';
 
@@ -46,7 +48,14 @@ interface TableBodyWithInfiniteScrollProps<T> extends TableBodyPropsPure {
 
 const MINIMUM_BATCH_SIZE = 8;
 const THRESHOLD = 4;
-const SPINNER_HEIGHT = 120;
+
+/** Свойства блока контента тела таблицы (строки и лоадер). */
+interface TableBodyContentProps {
+  /** CSS-стили. */
+  style: CSSProperties;
+  /** Строки таблицы. */
+  children: React.ReactElement;
+}
 
 /** Компонент тела таблицы с бесконечным скроллингом. */
 export const TableBody = <T,>({
@@ -104,74 +113,92 @@ export const TableBody = <T,>({
     }
   }, [needScrollToTop]);
 
+  const tableBodyContent = forwardRef<any, TableBodyContentProps>(({ style, children }, ref) => (
+    <>
+      <Box ref={ref} style={style}>
+        {children}
+      </Box>
+
+      {loadingMore && (
+        <Box style={{ height: 120 }}>
+          <Spinner small={false} />
+        </Box>
+      )}
+    </>
+  ));
+
+  tableBodyContent.displayName = 'TableBodyContent';
+
+  const handleScroll = useCallback((event: React.BaseSyntheticEvent) => {
+    const {
+      target: { scrollTop },
+    } = event;
+
+    listRef.current?.scrollTo(scrollTop);
+  }, []);
+
   return (
     <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)` } })}>
-      <LayoutScroll>
-        <AutoSizer style={{ height: '100%', width: totalColumnsWidth }}>
-          {({ height, width }) => (
-            <InfiniteLoader
-              isItemLoaded={() => false}
-              itemCount={itemCount}
-              loadMoreItems={loadMoreRows}
-              minimumBatchSize={MINIMUM_BATCH_SIZE}
-              threshold={THRESHOLD}
-            >
-              {({ onItemsRendered, ref }) => (
-                <>
-                  <VariableSizeList
-                    ref={(list: List) => {
-                      (ref as React.RefCallback<List>)(list);
-                      listRef.current = list;
-                    }}
-                    height={loadingMore ? height - SPINNER_HEIGHT : height}
-                    itemCount={itemCount}
-                    itemSize={getItemSize}
-                    style={{ overflowX: 'hidden' }}
-                    width={width}
-                    onItemsRendered={onItemsRendered}
-                  >
-                    {({ index, style }) => {
-                      const row = rows[index];
+      <AutoSizer style={{ height: '100%', width: totalColumnsWidth }}>
+        {({ height, width }) => (
+          <InfiniteLoader
+            isItemLoaded={() => false}
+            itemCount={itemCount}
+            loadMoreItems={loadMoreRows}
+            minimumBatchSize={MINIMUM_BATCH_SIZE}
+            threshold={THRESHOLD}
+          >
+            {({ onItemsRendered, ref }) => (
+              <Scrollbars onScroll={handleScroll}>
+                <VariableSizeList
+                  ref={(list: List) => {
+                    (ref as React.RefCallback<List>)(list);
+                    listRef.current = list;
+                  }}
+                  height={height}
+                  innerElementType={tableBodyContent}
+                  itemCount={itemCount}
+                  itemSize={getItemSize}
+                  style={{ overflow: undefined }}
+                  width={width}
+                  onItemsRendered={onItemsRendered}
+                >
+                  {({ index, style }) => {
+                    const row = rows[index];
 
-                      if (!row) {
-                        return null;
-                      }
+                    if (!row) {
+                      return null;
+                    }
 
-                      prepareRow(row);
+                    prepareRow(row);
 
-                      const { key } = row.getRowProps();
+                    const { key } = row.getRowProps();
 
-                      return (
-                        <InfiniteRow<T>
-                          key={key}
-                          executor={executor}
-                          expandedRowActionsGetter={expandedRowActionsGetter}
-                          expandedRowComponent={expandedRowComponent}
-                          fastActions={fastActions}
-                          listIndex={index}
-                          refetch={refetch}
-                          row={row}
-                          rowCaptionComponent={rowCaptionComponent}
-                          setSize={setRowSize}
-                          style={style}
-                          visibleOnlySelectedRows={visibleOnlySelectedRows}
-                          onRowClick={onRowClick}
-                          onRowDoubleClick={onRowDoubleClick}
-                        />
-                      );
-                    }}
-                  </VariableSizeList>
-                  {loadingMore && (
-                    <Box className="Spinner123455" style={{ height: SPINNER_HEIGHT }}>
-                      <Spinner small={false} />
-                    </Box>
-                  )}
-                </>
-              )}
-            </InfiniteLoader>
-          )}
-        </AutoSizer>
-      </LayoutScroll>
+                    return (
+                      <InfiniteRow<T>
+                        key={key}
+                        executor={executor}
+                        expandedRowActionsGetter={expandedRowActionsGetter}
+                        expandedRowComponent={expandedRowComponent}
+                        fastActions={fastActions}
+                        listIndex={index}
+                        refetch={refetch}
+                        row={row}
+                        rowCaptionComponent={rowCaptionComponent}
+                        setSize={setRowSize}
+                        style={style}
+                        visibleOnlySelectedRows={visibleOnlySelectedRows}
+                        onRowClick={onRowClick}
+                        onRowDoubleClick={onRowDoubleClick}
+                      />
+                    );
+                  }}
+                </VariableSizeList>
+              </Scrollbars>
+            )}
+          </InfiniteLoader>
+        )}
+      </AutoSizer>
     </Box>
   );
 };
