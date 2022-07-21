@@ -1,3 +1,10 @@
+# [2.9.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.14...v2.9.0-release.15) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29848 исправлении навигации внутри узла ([6497de7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6497de73f50f7107fdc915170d89864633b4beeb))
+
 # [2.9.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.13...v2.9.0-release.14) (2022-07-21)
 
 
