@@ -1,3 +1,10 @@
+# [2.9.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.8...v2.9.0-release.9) (2022-07-21)
+
+
+### Features
+
+* **скроллер:** GBO-29869 исправлена логика работы скроллирования при флаге visibleOnlySelectedRows ([64657cc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64657cca40f6b0aa6b3e53465dafccf7f0353909))
+
 # [2.9.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.7...v2.9.0-release.8) (2022-07-20)
 
 
