@@ -1,3 +1,10 @@
+# [2.9.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.11...v2.9.0-release.12) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 правки багов для скролеров ([f269ddb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f269ddbd235bc05bba07dd359ffae0a4b21436f8))
+
 # [2.9.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.10...v2.9.0-release.11) (2022-07-21)
 
 
