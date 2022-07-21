@@ -65,9 +65,11 @@ export const InfiniteRow = <T,>({
 
   const { key } = row.getRowProps();
 
-  return (
-    <Box key={key} style={style}>
-      <Row
+  const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
+
+  return visibleRow ? (
+    <Box key={key} className="InfiniteRow" style={style}>
+      <Row<T>
         executor={executor}
         expandedRowActionsGetter={expandedRowActionsGetter}
         expandedRowComponent={expandedRowComponent}
@@ -76,12 +78,11 @@ export const InfiniteRow = <T,>({
         row={row}
         rowCaptionComponent={rowCaptionComponent}
         setRefRow={setRefRow}
-        visibleOnlySelectedRows={visibleOnlySelectedRows}
         onRowClick={onRowClick}
         onRowDoubleClick={onRowDoubleClick}
       />
     </Box>
-  );
+  ) : null;
 };
 
 InfiniteRow.displayName = 'InfiniteRow';

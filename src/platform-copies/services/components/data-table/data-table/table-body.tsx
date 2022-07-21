@@ -52,21 +52,24 @@ export const TableBody = <T,>({
 
         const { key } = row.getRowProps();
 
+        const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
+
         return (
-          <Row<T>
-            key={key}
-            executor={executor}
-            expandedRowActionsGetter={expandedRowActionsGetter}
-            expandedRowComponent={expandedRowComponent}
-            fastActions={fastActions}
-            last={rowIndex === page.length - 1}
-            refetch={refetch}
-            row={row}
-            rowCaptionComponent={rowCaptionComponent}
-            visibleOnlySelectedRows={visibleOnlySelectedRows}
-            onRowClick={onRowClick}
-            onRowDoubleClick={onRowDoubleClick}
-          />
+          visibleRow && (
+            <Row<T>
+              key={key}
+              executor={executor}
+              expandedRowActionsGetter={expandedRowActionsGetter}
+              expandedRowComponent={expandedRowComponent}
+              fastActions={fastActions}
+              last={rowIndex === page.length - 1}
+              refetch={refetch}
+              row={row}
+              rowCaptionComponent={rowCaptionComponent}
+              onRowClick={onRowClick}
+              onRowDoubleClick={onRowDoubleClick}
+            />
+          )
         );
       })}
     </Box>
