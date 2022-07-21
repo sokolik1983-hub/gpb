@@ -1,3 +1,10 @@
+# [2.9.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.13...v2.9.0-release.14) (2022-07-21)
+
+
+### Reverts
+
+* Revert "fix(скроллер): GBO-28375 правки для валидации фильтров журнала проводок" ([e6e551b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e6e551b48c223f68a98d79a0a0bef81d17f20caa))
+
 # [2.9.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.12...v2.9.0-release.13) (2022-07-21)
 
 
