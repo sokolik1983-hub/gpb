@@ -1,3 +1,10 @@
+# [2.9.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.12...v2.9.0-release.13) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29893 поправлен скролл тела таблицы InfiniteScroll ([22f689c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/22f689c5e824cc865d05194b2e7d8f8e401b6174))
+
 # [2.9.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.11...v2.9.0-release.12) (2022-07-21)
 
 
