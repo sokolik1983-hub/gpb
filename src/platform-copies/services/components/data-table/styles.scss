@@ -20,6 +20,8 @@
 .header {
   height: 40px;
   user-select: none;
+  border-bottom: 1px solid;
+  border-color: var(--line-fill-faint-strong);
 }
 
 .headerLeftGap {

@@ -87,7 +87,7 @@ export const Row = <T,>({
               style={{
                 ...rowStyle,
                 borderRight: 'none',
-                borderBottom: 'none',
+                borderTop: 'none',
                 borderLeft: 'none',
                 minWidth: MIN_WIDTH,
               }}
