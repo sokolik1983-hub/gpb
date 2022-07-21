@@ -74,18 +74,24 @@ export const TableBody = <T,>({
   const loadMoreRows = useCallback(
     (startIndex, endIndex) =>
       new Promise<void>(resolve => {
-        if (!loadingMore && !loading && canNextPage && rows.length - endIndex <= THRESHOLD) {
+        if (!visibleOnlySelectedRows && !loadingMore && !loading && canNextPage && rows.length - endIndex <= THRESHOLD) {
           onLoadMoreRows();
         }
 
         resolve();
       }),
-    [canNextPage, loading, loadingMore, onLoadMoreRows, rows.length]
+    [canNextPage, loading, loadingMore, onLoadMoreRows, rows.length, visibleOnlySelectedRows]
   );
 
-  const itemCount = useMemo(() => (canNextPage ? rows.length + 3 : rows.length), [canNextPage, rows.length]);
+  const itemCount = useMemo(() => {
+    if (visibleOnlySelectedRows) {
+      return rows.length;
+    }
 
-  const getItemSize = useCallback(index => rowSizeMap.current[index] || 50, []);
+    return canNextPage ? rows.length + 1 : rows.length;
+  }, [canNextPage, rows.length, visibleOnlySelectedRows]);
+
+  const getItemSize = useCallback(index => rowSizeMap.current[index] || 0, []);
 
   const setRowSize = useCallback((index: number, size: number) => {
     rowSizeMap.current = { ...rowSizeMap.current, [index]: size };

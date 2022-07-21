@@ -35,8 +35,6 @@ interface RowProps<T> {
   rowCaptionComponent?: React.FC<ICaptionRowComponentProps<T>>;
   /** Признак последней строки. */
   last?: boolean;
-  /** Признак отображения только выбранных строк. */
-  visibleOnlySelectedRows?: boolean;
 }
 
 /** Компонент строки таблицы. */
@@ -53,7 +51,6 @@ export const Row = <T,>({
   row,
   row: { cells, getRowProps, isExpanded, original },
   rowCaptionComponent: RowCaptionComponent,
-  visibleOnlySelectedRows,
 }: RowProps<T>): React.ReactElement => {
   const { getAvailableActions } = useAuth();
 
@@ -71,82 +68,73 @@ export const Row = <T,>({
     ? getActionButtons(getAvailableActions(expandedRowActionsGetter(original)), executor, [[original]])
     : [];
 
-  const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
-
   const { key: rowKey, style: rowStyle, ...restRowProps } = getRowProps();
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <>
-      {visibleRow ? (
-        <WithClickable key={rowKey}>
-          {(ref, { hovered }) => (
-            <FocusNode key={`rowLayout_${rowKey}`} nodeId={`${DATA_TABLE_ROW_NODE}-${rowKey}`} parentId={COMMON_SCROLLER_NODE}>
-              <div ref={setRefRow}>
-                <Box
-                  ref={ref}
-                  border={['FAINT', 'SM']}
-                  className={css.row}
-                  data-id={original.id}
-                  {...restRowProps}
-                  key={`row_${rowKey}`}
-                  aria-expanded={isExpanded}
-                  fill={hovered ? 'FAINT' : 'BASE'}
-                  style={{
-                    ...rowStyle,
+    <WithClickable key={rowKey}>
+      {(ref, { hovered }) => (
+        <FocusNode key={`rowLayout_${rowKey}`} nodeId={`${DATA_TABLE_ROW_NODE}-${rowKey}`} parentId={COMMON_SCROLLER_NODE}>
+          <div ref={setRefRow}>
+            <Box
+              ref={ref}
+              border={['FAINT', 'SM']}
+              className={css.row}
+              data-id={original.id}
+              {...restRowProps}
+              key={`row_${rowKey}`}
+              aria-expanded={isExpanded}
+              fill={hovered ? 'FAINT' : 'BASE'}
+              style={{
+                ...rowStyle,
+                borderRight: 'none',
+                borderBottom: 'none',
+                borderLeft: 'none',
+                minWidth: MIN_WIDTH,
+              }}
+              onClick={handleRowClick(row)}
+              onDoubleClick={handleRowDoubleClick(row)}
+            >
+              <Box className={css.rowContent} style={{ display: 'flex' }}>
+                {cells.map((cell, cellIndex) => {
+                  const { key } = cell.getCellProps();
 
-                    borderRight: 'none',
-                    borderBottom: 'none',
-                    borderLeft: 'none',
-                    minWidth: MIN_WIDTH,
-                  }}
-                  onClick={handleRowClick(row)}
-                  onDoubleClick={handleRowDoubleClick(row)}
-                >
-                  <Box className={css.rowContent} style={{ display: 'flex' }}>
-                    {cells.map((cell, cellIndex) => {
-                      const { key } = cell.getCellProps();
-
-                      return <Cell key={key} {...cell} first={cellIndex === 0 || cellIndex === 1} refetch={refetch} />;
-                    })}
-                    {hovered && <FastActionsPanel actions={rowActionButtons} />}
-                  </Box>
-                  {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
-                  {ExpandedRowComponent && row.isExpanded ? (
-                    <ExpandedRowComponent
-                      actions={extendedRowActionButtons}
-                      row={row.original}
-                      {...row.getRowProps()}
-                      key={`expanded_${row.getRowProps().key}`}
-                      style={{
-                        ...row.getRowProps().style,
-
-                        minWidth: MIN_WIDTH,
-                      }}
-                    />
-                  ) : null}
-                </Box>
-              </div>
-              {last ? (
-                <Box
-                  border={['FAINT', 'SM']}
+                  return <Cell key={key} {...cell} first={cellIndex === 0 || cellIndex === 1} refetch={refetch} />;
+                })}
+                {hovered && <FastActionsPanel actions={rowActionButtons} />}
+              </Box>
+              {RowCaptionComponent ? <RowCaptionComponent row={row.original} /> : null}
+              {ExpandedRowComponent && row.isExpanded ? (
+                <ExpandedRowComponent
+                  actions={extendedRowActionButtons}
+                  row={row.original}
                   {...row.getRowProps()}
-                  key={`divider_${row.getRowProps().key}`}
+                  key={`expanded_${row.getRowProps().key}`}
                   style={{
                     ...row.getRowProps().style,
 
-                    borderTop: 'none',
-                    borderRight: 'none',
-                    borderLeft: 'none',
                     minWidth: MIN_WIDTH,
                   }}
                 />
               ) : null}
-            </FocusNode>
-          )}
-        </WithClickable>
-      ) : null}
-    </>
+            </Box>
+          </div>
+          {last ? (
+            <Box
+              border={['FAINT', 'SM']}
+              {...row.getRowProps()}
+              key={`divider_${row.getRowProps().key}`}
+              style={{
+                ...row.getRowProps().style,
+                borderTop: 'none',
+                borderRight: 'none',
+                borderLeft: 'none',
+                minWidth: MIN_WIDTH,
+              }}
+            />
+          ) : null}
+        </FocusNode>
+      )}
+    </WithClickable>
   );
 };
 
