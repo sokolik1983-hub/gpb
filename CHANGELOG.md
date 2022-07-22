@@ -1,3 +1,10 @@
+# [2.9.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.16...v2.9.0-release.17) (2022-07-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29990 поправлено формирование идентификатора строки react-table и скролл ([d316bc2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d316bc21dc1e1e5d91671298a79a370a73113693))
+
 # [2.9.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.15...v2.9.0-release.16) (2022-07-22)
 
 
