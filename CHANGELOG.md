@@ -1,3 +1,10 @@
+# [2.9.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.15...v2.9.0-release.16) (2022-07-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 исправление сортировки в скроллере проводок ([76a6681](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/76a66813fbc7889e48de99b0d97c7d0ffb93e811))
+
 # [2.9.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.14...v2.9.0-release.15) (2022-07-21)
 
 
