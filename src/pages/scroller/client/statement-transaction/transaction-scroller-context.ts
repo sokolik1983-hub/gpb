@@ -11,6 +11,7 @@ import { COLUMN_NAMES } from './table/constants';
 export const DEFAULT_SORTING = {
   [COLUMN_NAMES.OPERATION_DATE]: SORT_DIRECTION.DESC,
   [COLUMN_NAMES.INCOME]: SORT_DIRECTION.ASC,
+  [COLUMN_NAMES.OUTCOME]: SORT_DIRECTION.ASC,
 };
 
 /** Контекст скроллера "Проводки". */
