@@ -75,7 +75,7 @@ export const TableBody = <T,>({
   tableInstance,
   visibleOnlySelectedRows,
 }: TableBodyWithInfiniteScrollProps<T>): React.ReactElement => {
-  const { canNextPage, getTableBodyProps, prepareRow, rows, totalColumnsWidth } = tableInstance;
+  const { allColumns, canNextPage, getTableBodyProps, prepareRow, rows, totalColumnsWidth, visibleColumns } = tableInstance;
 
   const rowSizeMap = useRef<Record<string, number>>({});
   const listRef = useRef<List>();
@@ -139,7 +139,7 @@ export const TableBody = <T,>({
 
   return (
     <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)` } })}>
-      <AutoSizer style={{ height: '100%', width: totalColumnsWidth }}>
+      <AutoSizer style={{ height: '100%', width: allColumns.length === visibleColumns.length ? totalColumnsWidth : '100%' }}>
         {({ height, width }) => (
           <InfiniteLoader
             isItemLoaded={() => false}

@@ -93,7 +93,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
   const tableInstance = useTable<T>(
     {
       columns: columnsWithDefaultValues,
-      getRowId: original => original.id,
+      getRowId: (original, relativeIndex) => `${relativeIndex}-${original.id}`,
       autoResetSelectedRows: false,
       data: rows,
       manualSortBy: true,
