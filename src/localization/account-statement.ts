@@ -293,16 +293,11 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Операций:
+			 * Операций
 			 */
 			get total() {
 				return t('transactionsScroller.table.total');
 			},
-			/**
-			 * @ru
-			 * {totalByFilters} из {total}
-			 */
-			totalValue: (p: { total: number; totalByFilters: number }) => t('transactionsScroller.table.totalValue', p),
 		},
 		tags: {
 			/**
@@ -1680,6 +1675,15 @@ export default {
 			 */
 			get dateLessRestriction() {
 				return t('errors.periodEnd.dateLessRestriction');
+			},
+		},
+		datatable: {
+			/**
+			 * @ru
+			 * Нельзя менять режим работы пейджинации в DataGrid во время работы. Используйте paginationState для controlled режима, а defaultPaginationState для uncontrolled.
+			 */
+			get paginationModeError() {
+				return t('errors.datatable.paginationModeError');
 			},
 		},
 	},

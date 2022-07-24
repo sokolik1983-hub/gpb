@@ -11,7 +11,6 @@ declare namespace StylesScssModule {
     'footer': string;
     'footerDropdownActions': string;
     'rowActionButton': string;
-    'totalWrapper': string;
   }
 }
 

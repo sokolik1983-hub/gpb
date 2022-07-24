@@ -7,6 +7,7 @@ declare namespace StylesScssModule {
   export interface IStylesScss {
     'contentWrapper': string;
     'dropdownActions': string;
+    'paymentPurpose': string;
     'tabs': string;
     'wrapper': string;
   }

@@ -1,3 +1,169 @@
+# [2.9.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.8.0...v2.9.0) (2022-07-24)
+
+
+### Bug Fixes
+
+* **визард:** GBO-29851 исправление рамок в диалогах и узлах с фокусом ([9052367](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/905236750f7c191268be691b6415676467fcaf4e))
+* **скроллер:** GBO-26073 доработки скроллеров и ЭФ ([c45a544](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c45a544ed6021fa63a54e02157d298d5f3a73a92))
+* **скроллер:** GBO-28375 багофикс по замечаниям для журнала проводок ([0c8c7ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0c8c7efc22b54241a4c4c85a29d368ac342f812b))
+* **скроллер:** GBO-28375 исправление сортировки в скроллере проводок ([76a6681](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/76a66813fbc7889e48de99b0d97c7d0ffb93e811))
+* **скроллер:** GBO-28375 правки багов для скролеров ([f269ddb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f269ddbd235bc05bba07dd359ffae0a4b21436f8))
+* **скроллер:** GBO-28375 правки для журнала проводок ([49ea014](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/49ea01448dd91f88760ca17954b7adcb86d1da56))
+* **скроллер:** GBO-28375 правки по замечаниям для журнала проводок ([f95af76](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f95af76257ab7f668e898850370e85a747b80227))
+* **скроллер:** GBO-28389 правки для селекта счетов ([4911917](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4911917f16139350bcdd9cfbb3cef611d3ec6d03))
+* **скроллер:** GBO-28400 правки для фильтра по истории запросов ([8ca5163](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8ca51633f315febd9bcfab2f619ffb71a17be749))
+* **скроллер:** GBO-28511 добавление атрибутов тестирования на элементы ([e097184](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e097184d58d5a2932bb3766fa03e7dba3ee15b2a))
+* **скроллер:** GBO-28610 правки для сохранения состояния раскрытия счетов в таблице ([6405577](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64055778b3bfbe34ee539d85d54dc66526b0b368))
+* **скроллер:** GBO-29848 исправлении навигации внутри узла ([6497de7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6497de73f50f7107fdc915170d89864633b4beeb))
+* **скроллер:** GBO-29848 удалены лишние узлы для фокуса, исправлена рамка для узла ([8d3b2ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d3b2eeddd2c64349206dea9f1d89c1db552d150))
+* **скроллер:** GBO-29893 поправлен скролл тела таблицы InfiniteScroll ([22f689c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/22f689c5e824cc865d05194b2e7d8f8e401b6174))
+* **скроллер:** GBO-29990 поправлено формирование идентификатора строки react-table и скролл ([d316bc2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d316bc21dc1e1e5d91671298a79a370a73113693))
+
+
+### Features
+
+* **скроллер:** GBO-28128 доработки InfiniteDataTable ([d32a870](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d32a870311910858080af398880ce1c54e770388))
+* **скроллер:** GBO-28128 Доработки InfiniteDataTable и интеграция в скроллер проводок ([0eb6498](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0eb64980f39bdd605e1e784968a83c3c86985c42))
+* **скроллер:** GBO-28128 разделение компонента таблицы на DataTable и InfiniteDataTable ([e4ddaf6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e4ddaf6d6b8a061c9a3b0d255ab5041c9e3e2992))
+* **скроллер:** GBO-29869 исправлена логика работы скроллирования при флаге visibleOnlySelectedRows ([64657cc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64657cca40f6b0aa6b3e53465dafccf7f0353909))
+* GBO-26073 реализация библиотеки focus-tree ([5785953](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/578595316d660018ea1cf2e98aed0d246d1815ce))
+* GBO-29411 выпелен кастомный скелетон в стриме ([1f41515](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1f415155c1a1fe781cdcdbd8b8d701080344c56a))
+* GBO-29411 доработки в отображении скелетона ([767c529](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/767c52997453399e9dfee022c878e33903532697))
+
+# [2.9.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.16...v2.9.0-release.17) (2022-07-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29990 поправлено формирование идентификатора строки react-table и скролл ([d316bc2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d316bc21dc1e1e5d91671298a79a370a73113693))
+
+# [2.9.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.15...v2.9.0-release.16) (2022-07-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 исправление сортировки в скроллере проводок ([76a6681](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/76a66813fbc7889e48de99b0d97c7d0ffb93e811))
+
+# [2.9.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.14...v2.9.0-release.15) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29848 исправлении навигации внутри узла ([6497de7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6497de73f50f7107fdc915170d89864633b4beeb))
+
+# [2.9.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.13...v2.9.0-release.14) (2022-07-21)
+
+
+### Reverts
+
+* Revert "fix(скроллер): GBO-28375 правки для валидации фильтров журнала проводок" ([e6e551b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e6e551b48c223f68a98d79a0a0bef81d17f20caa))
+
+# [2.9.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.12...v2.9.0-release.13) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29893 поправлен скролл тела таблицы InfiniteScroll ([22f689c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/22f689c5e824cc865d05194b2e7d8f8e401b6174))
+
+# [2.9.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.11...v2.9.0-release.12) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 правки багов для скролеров ([f269ddb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f269ddbd235bc05bba07dd359ffae0a4b21436f8))
+
+# [2.9.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.10...v2.9.0-release.11) (2022-07-21)
+
+
+### Bug Fixes
+
+* **визард:** GBO-29851 исправление рамок в диалогах и узлах с фокусом ([9052367](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/905236750f7c191268be691b6415676467fcaf4e))
+
+# [2.9.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.9...v2.9.0-release.10) (2022-07-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 правки для валидации фильтров журнала проводок ([82d6103](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/82d610375c7eabb976983e00a63bced3964c2468))
+
+# [2.9.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.8...v2.9.0-release.9) (2022-07-21)
+
+
+### Features
+
+* **скроллер:** GBO-29869 исправлена логика работы скроллирования при флаге visibleOnlySelectedRows ([64657cc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64657cca40f6b0aa6b3e53465dafccf7f0353909))
+
+# [2.9.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.7...v2.9.0-release.8) (2022-07-20)
+
+
+### Features
+
+* **скроллер:** GBO-28128 доработки InfiniteDataTable ([d32a870](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d32a870311910858080af398880ce1c54e770388))
+
+# [2.9.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.6...v2.9.0-release.7) (2022-07-20)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29848 удалены лишние узлы для фокуса, исправлена рамка для узла ([8d3b2ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8d3b2eeddd2c64349206dea9f1d89c1db552d150))
+
+# [2.9.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.5...v2.9.0-release.6) (2022-07-20)
+
+
+### Features
+
+* **скроллер:** GBO-28128 Доработки InfiniteDataTable и интеграция в скроллер проводок ([0eb6498](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0eb64980f39bdd605e1e784968a83c3c86985c42))
+
+# [2.9.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.4...v2.9.0-release.5) (2022-07-20)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-26073 доработки скроллеров и ЭФ ([c45a544](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c45a544ed6021fa63a54e02157d298d5f3a73a92))
+* **скроллер:** GBO-28375 правки для журнала проводок ([49ea014](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/49ea01448dd91f88760ca17954b7adcb86d1da56))
+
+
+### Features
+
+* GBO-26073 реализация библиотеки focus-tree ([5785953](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/578595316d660018ea1cf2e98aed0d246d1815ce))
+
+# [2.9.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.3...v2.9.0-release.4) (2022-07-19)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 багофикс по замечаниям для журнала проводок ([0c8c7ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0c8c7efc22b54241a4c4c85a29d368ac342f812b))
+
+# [2.9.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.2...v2.9.0-release.3) (2022-07-18)
+
+
+### Features
+
+* **скроллер:** GBO-28128 разделение компонента таблицы на DataTable и InfiniteDataTable ([e4ddaf6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e4ddaf6d6b8a061c9a3b0d255ab5041c9e3e2992))
+
+# [2.9.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0-release.1...v2.9.0-release.2) (2022-07-18)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28375 правки по замечаниям для журнала проводок ([f95af76](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f95af76257ab7f668e898850370e85a747b80227))
+
+# [2.9.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.8.0...v2.9.0-release.1) (2022-07-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-28389 правки для селекта счетов ([4911917](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4911917f16139350bcdd9cfbb3cef611d3ec6d03))
+* **скроллер:** GBO-28400 правки для фильтра по истории запросов ([8ca5163](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8ca51633f315febd9bcfab2f619ffb71a17be749))
+* **скроллер:** GBO-28511 добавление атрибутов тестирования на элементы ([e097184](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e097184d58d5a2932bb3766fa03e7dba3ee15b2a))
+* **скроллер:** GBO-28610 правки для сохранения состояния раскрытия счетов в таблице ([6405577](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/64055778b3bfbe34ee539d85d54dc66526b0b368))
+
+
+### Features
+
+* GBO-29411 выпелен кастомный скелетон в стриме ([1f41515](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1f415155c1a1fe781cdcdbd8b8d701080344c56a))
+* GBO-29411 доработки в отображении скелетона ([767c529](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/767c52997453399e9dfee022c878e33903532697))
+
 # [2.8.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.7.0...v2.8.0) (2022-07-10)
 
 

@@ -7,6 +7,7 @@ import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import { ACTION } from 'interfaces/client';
 import type { IGetStatusResponceDto } from 'interfaces/dto';
 import { locale } from 'localization';
+import FocusLock from 'react-focus-lock';
 import { statementService } from 'services';
 import { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'utils';
@@ -130,23 +131,25 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
   }, []);
 
   return (
-    <Box className={css.container}>
-      <DialogTemplate
-        extraSmall
-        actions={actions}
-        content={<Typography.P>{locale.awaitingForm.content}</Typography.P>}
-        dataType={DATA_TYPE.CONFIRMATION}
-        header={
-          <>
-            <ServiceIcons.ServiceProgress fill={'FAINT'} scale={'XL'} />
-            <Gap />
-            <Typography.H1>{locale.awaitingForm.title}</Typography.H1>
-            <Gap />
-          </>
-        }
-        onClose={closeAwaitingForm}
-      />
-    </Box>
+    <FocusLock>
+      <Box className={css.container} style={{ outline: 'none' }} tabIndex={0}>
+        <DialogTemplate
+          extraSmall
+          actions={actions}
+          content={<Typography.P>{locale.awaitingForm.content}</Typography.P>}
+          dataType={DATA_TYPE.CONFIRMATION}
+          header={
+            <>
+              <ServiceIcons.ServiceProgress fill={'FAINT'} scale={'XL'} />
+              <Gap />
+              <Typography.H1>{locale.awaitingForm.title}</Typography.H1>
+              <Gap />
+            </>
+          }
+          onClose={closeAwaitingForm}
+        />
+      </Box>
+    </FocusLock>
   );
 };
 
