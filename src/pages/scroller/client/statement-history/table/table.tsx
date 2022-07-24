@@ -65,7 +65,7 @@ export const Table: FC = () => {
   );
 
   return (
-    <LayoutScroll>
+    <>
       <Box className={css.totalWrapper}>
         <Gap.SM />
         <Horizon>
@@ -78,19 +78,21 @@ export const Table: FC = () => {
         </Horizon>
         <Gap.LG />
       </Box>
-      <DataTable<IStatementHistoryRow>
-        columns={columns}
-        defaultSort={DEFAULT_SORTING}
-        executor={executor}
-        fetchData={sendHistoryToDataTable}
-        paginationState={pagination}
-        selectedRows={selectedRows}
-        storageKey={storageKey}
-        onPaginationChange={setPagination}
-        onRowClick={handleRowClick}
-        onSelectedRowsChange={setSelectedRows}
-      />
-    </LayoutScroll>
+      <LayoutScroll>
+        <DataTable<IStatementHistoryRow>
+          columns={columns}
+          defaultSort={DEFAULT_SORTING}
+          executor={executor}
+          fetchData={sendHistoryToDataTable}
+          paginationState={pagination}
+          selectedRows={selectedRows}
+          storageKey={storageKey}
+          onPaginationChange={setPagination}
+          onRowClick={handleRowClick}
+          onSelectedRowsChange={setSelectedRows}
+        />
+      </LayoutScroll>
+    </>
   );
 };
 

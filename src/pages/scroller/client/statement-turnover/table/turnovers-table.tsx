@@ -94,6 +94,7 @@ export const TurnoversTable: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       initialState,
+      autoResetExpanded: false,
     },
     useSortBy,
     useExpanded,

@@ -5,7 +5,8 @@ import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { IConfirmationOption } from '@platform/ui';
-import { Typography, Box } from '@platform/ui';
+import { Typography, Box, LayoutScroll } from '@platform/ui';
+import css from './styles.scss';
 
 /**
  * Возвращает информацию об агенте проводки.
@@ -46,7 +47,14 @@ export const getPaymentPurposeOptions = (transaction: IGetTransactionCardRespons
   const { paymentPurpose, entryDate } = transaction;
 
   return [
-    { label: locale.transactionCard.labels.paymentPurpose, value: paymentPurpose },
+    {
+      label: locale.transactionCard.labels.paymentPurpose,
+      value: (
+        <Box className={css.paymentPurpose}>
+          <LayoutScroll>{paymentPurpose}</LayoutScroll>
+        </Box>
+      ),
+    },
     {
       label: locale.transactionCard.labels.operationDate,
       value: formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT }),

@@ -96,12 +96,7 @@
     "ru": "Контрагент:"
   },
   "transactionsScroller.table.total": {
-    "ru": "Операций:"
-  },
-  "transactionsScroller.table.totalValue": {
-    "@total": "number",
-    "@totalByFilters": "number",
-    "ru": "{totalByFilters} из {total}"
+    "ru": "Операций"
   },
   "transactionsScroller.headers.operationDate": {
     "ru": "Дата опер."
@@ -726,5 +721,8 @@
   },
   "column.tooltip": {
     "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
+  },
+  "errors.datatable.paginationModeError": {
+    "ru": "Нельзя менять режим работы пейджинации в DataGrid во время работы. Используйте paginationState для controlled режима, а defaultPaginationState для uncontrolled."
   }
 }

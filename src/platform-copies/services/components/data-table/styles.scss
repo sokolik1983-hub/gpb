@@ -4,6 +4,11 @@
   height: 16px;
 }
 
+.sortIndex {
+  font-size: 8px;
+  vertical-align: top;
+}
+
 .verticalSeparator {
   position: absolute;
   top: 10px;
@@ -14,6 +19,13 @@
 
 .header {
   height: 40px;
+  user-select: none;
+  border-bottom: 1px solid;
+  border-color: var(--line-fill-faint-strong);
+}
+
+.headerLeftGap {
+  margin-left: auto;
 }
 
 .rowContent {
@@ -22,7 +34,7 @@
 
 .settingIcon {
   position: absolute;
-  right: 20px;
+  right: 0;
   z-index: getIndex(control);
   padding: 8px 0;
 }
@@ -34,13 +46,23 @@
 }
 
 .cellPadding {
-  padding: calc(var(--gap-size-sm) - var(--line-weight-md)) var(--gap-size-sm);
+  padding: var(--gap-size-x2s) var(--gap-size-sm);
 }
 
 .wrapper {
   position: relative;
   height: 100%;
   margin: 0 32px;
+}
+
+.scrollInner {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.pagination {
+  margin-top: auto;
 }
 
 .margin {
@@ -53,24 +75,4 @@
   // 120px - ширина бокового меню.
   width: calc(100% - 120px);
   max-width: 1392px;
-}
-
-.focusable {
-  position: relative;
-
-  &:focus {
-    outline: none;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      display: block;
-      border: 1px solid var(--line-fill-accent-strong);
-      border-radius: var(--box-radius-sm);
-      content: '';
-    }
-  }
 }

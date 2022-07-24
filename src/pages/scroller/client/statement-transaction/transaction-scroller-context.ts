@@ -1,10 +1,8 @@
 import { createContext } from 'react';
-import type { IFilterPanel, ITagsPanel, IPagination } from 'interfaces';
+import type { IFilterPanel, ITagsPanel } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import type { IGetCounterpartiesResponseDto, IStatementSummaryInfoResponseDto } from 'interfaces/dto';
-import { DEFAULT_PAGINATION } from 'stream-constants';
 import { noop } from 'utils';
-import type { ISortSettings } from '@platform/services';
 import { SORT_DIRECTION } from '@platform/services';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';
@@ -18,10 +16,6 @@ export const DEFAULT_SORTING = {
 
 /** Контекст скроллера "Проводки". */
 export interface ITransactionScrollerContext {
-  /** Ошибка сетевого запроса. */
-  hasError: boolean;
-  /** Устанавливает ошибку. */
-  setHasError(value: boolean): void;
   /** Признак обновления проводок. */
   transactionsUpdating?: boolean;
   /** Свойства панели фильтрации. */
@@ -30,20 +24,8 @@ export interface ITransactionScrollerContext {
   tagsPanel: ITagsPanel;
   /** Контрагенты. */
   counterparties: IGetCounterpartiesResponseDto[];
-  /** Сортировка. */
-  sorting?: ISortSettings;
-  /** Установить сортировку. */
-  setSorting(value: ISortSettings): void;
-  /** Стейт пагинации. */
-  pagination: IPagination;
-  /** Устанавливает стейт пагинации. */
-  setPagination(value: IPagination): void;
-  /** Проводки для отображения в скроллере проводок. */
-  transactions: IStatementTransactionRow[];
-  /** Общее количество проводок, удовлетворяющих условиям фильтрации. */
-  transactionsAmountByFilter: number;
   /** Общее количество проводок, без учёта фильтрации. */
-  totalTransactionsAmount: number;
+  totalTransactions: number;
   /** Сводная информация по выписке. */
   statementSummaryInfo?: IStatementSummaryInfoResponseDto;
   /** Выбранные строки в таблице скроллера. */
@@ -52,16 +34,10 @@ export interface ITransactionScrollerContext {
   setSelectedRows(value: IStatementTransactionRow[]): void;
   /** Признак получения новых данных по проводкам с бэка. */
   fetchedNewTransactions: boolean;
-  /** Признак, что проводки получены. */
-  isTransactionsFetched?: boolean;
-  /** Признак ошибки получения проводок. */
-  isTransactionsError?: boolean;
 }
 
 /** Дефолтное состояние контекста скроллера. */
 const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
-  hasError: false,
-  setHasError: noop,
   transactionsUpdating: false,
   tagsPanel: {
     tags: [],
@@ -77,18 +53,10 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
     opened: false,
   },
   counterparties: [],
-  sorting: DEFAULT_SORTING,
-  setSorting: noop,
-  pagination: DEFAULT_PAGINATION,
-  setPagination: noop,
-  transactions: [],
-  transactionsAmountByFilter: 0,
-  totalTransactionsAmount: 0,
+  totalTransactions: 0,
   selectedRows: [],
   setSelectedRows: noop,
   fetchedNewTransactions: false,
-  isTransactionsFetched: false,
-  isTransactionsError: false,
 };
 
 /** Контекст скроллера "Проводки". */

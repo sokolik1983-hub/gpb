@@ -1,11 +1,15 @@
 import React, { useState, useMemo } from 'react';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { FocusNode, FocusTree } from 'components/focus-tree';
 import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
-import { TAB_HEIGHT } from 'stream-constants';
+import FocusLock from 'react-focus-lock';
+import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
+import { COMMON_SCROLLER_NODE, TURNOVERS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { Line } from '@platform/ui';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
 import { useGroupByForRender, useTurnovers } from './hooks';
@@ -13,8 +17,8 @@ import { TurnoversTable } from './table';
 import type { ITurnoverScrollerContext } from './turnover-scroller-context';
 import { TurnoverScrollerContext } from './turnover-scroller-context';
 
-/** Высота фильтра. */
-const FILTER_HEIGHT = 58;
+/** Высота фильтра. Минус разделитель внизу фильтра. */
+const FILTER_HEIGHT = 58 - LINE_HEIGHT;
 
 /**
  * Страница скроллера выписок, вкладка: "Обороты (ОСВ)".
@@ -97,14 +101,21 @@ export const StatementTurnoverScrollerPage = () => {
   return (
     <TurnoverScrollerContext.Provider value={contextValue}>
       <MainLayout>
-        <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-          <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-            <Filter />
-          </ContentLoader>
-          <ContentLoader height={tableHeight} loading={!turnoversFetched}>
-            <TurnoversTable />
-          </ContentLoader>
-        </ScrollerPageLayout>
+        <FocusLock>
+          <FocusTree treeId={COMMON_SCROLLER_NODE}>
+            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
+              <FocusNode hideBorder nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+                  <Filter />
+                </ContentLoader>
+              </FocusNode>
+              {!accountsFetched && <Line fill="FAINT" />}
+              <ContentLoader height={tableHeight} loading={!turnoversFetched}>
+                <TurnoversTable />
+              </ContentLoader>
+            </ScrollerPageLayout>
+          </FocusTree>
+        </FocusLock>
       </MainLayout>
     </TurnoverScrollerContext.Provider>
   );

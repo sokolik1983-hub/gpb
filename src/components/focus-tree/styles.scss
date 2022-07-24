@@ -1,0 +1,20 @@
+.node {
+  position: relative;
+  border: 2px solid transparent;
+
+  &:focus {
+    outline: none;
+    border-radius: 2px;
+    border: 2px solid #508be2;
+  }
+}
+
+.node-without-border {
+  outline: none;
+}
+
+.tree {
+  &:focus {
+    outline: none;
+  }
+}

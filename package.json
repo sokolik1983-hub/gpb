@@ -1,6 +1,6 @@
 {
   "name": "@eco/account-statement",
-  "version": "2.8.0",
+  "version": "2.9.0-release.17",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -8,7 +8,7 @@
     "test:update": "jest --updateSnapshot",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "eslint:write": "npm run eslint -- --fix",
-    "stylelint": "stylelint src/**/*.{scss,tsx} --aei",
+    "stylelint": "stylelint src/**/*.scss",
     "stylelint:fix": "npm run stylelint -- --fix",
     "lint": "npm run eslint && npm run stylelint",
     "locale": "localization -a account-statement -s ./src/localization/locale.json -o ./dictionaries/ -t ./src/localization/ -l ru",
@@ -17,10 +17,10 @@
     "build:admin": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.admin.js",
     "update": "rm -rf node_modules/@platform && rm -f package-lock.json && npm i",
     "please": "rm -rf node_modules && rm -f package-lock.json && npm i",
-    "start": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.client.js --host=0.0.0.0",
+    "start": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.client.js --host=0.0.0.0 --no-client-overlay",
     "start:admin": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.admin.js",
-    "rc": "cross-env DEV_ENV=stage npm start",
-    "prod": "cross-env DEV_ENV=release npm start",
+    "rc": "cross-env DEV_ENV=stage npm start --no-client-overlay",
+    "prod": "cross-env DEV_ENV=release npm start --no-client-overlay",
     "rc:admin": "cross-env DEV_ENV=stage npm run start:admin",
     "prod:admin": "cross-env DEV_ENV=release npm run start:admin",
     "prettier": "prettier --config ./prettier.config.js --write \"./src/**/*.{ts,tsx}\" \"!./src/**/*.d.ts\" \"!.src/localization/**\"",
@@ -45,12 +45,13 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "12.5.0-release.3",
+    "@platform/services": "13.1.0-release.4",
     "@types/clamp-js-main": "0.11.2",
     "@types/react-table": "7.7.8"
   },
   "dependencies": {
     "clamp-js-main": "0.11.6",
+    "react-focus-lock": "2.9.1",
     "react-table": "7.7.0"
   }
 }

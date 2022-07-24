@@ -9,32 +9,26 @@ import { ONLY_SELECTED_ROWS_CKECKBOX } from 'pages/scroller/client/statement-tra
 import { Footer } from 'pages/scroller/client/statement-transaction/table/footer';
 import type { ITransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { DEFAULT_SORTING, TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
-import { DataTable } from 'platform-copies/services';
+import { InfiniteDataTable } from 'platform-copies/services';
+import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
-import type { IFetchDataResponse } from '@platform/services/common/dist-types/components/data-table/interfaces';
-import { Box, Checkbox, Gap, Horizon, LayoutScroll, Typography } from '@platform/ui';
+import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
 import { columns } from './columns';
 
-/** Таблица скроллера проводок. */
-export const Table = () => {
+/** Свойства таблицы проводок. */
+interface TableProps {
+  /** Функция запроса проводок на сервер. */
+  fetchData(params: IFetchDataParams): Promise<IFetchDataResponse<IStatementTransactionRow>>;
+}
+
+/** Таблица проводок. */
+export const Table: React.FC<TableProps> = ({ fetchData }) => {
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(false);
 
-  const {
-    isTransactionsFetched,
-    isTransactionsError,
-    pagination,
-    selectedRows,
-    setHasError,
-    setPagination,
-    setSelectedRows,
-    setSorting,
-    totalTransactionsAmount,
-    transactions,
-    transactionsAmountByFilter,
-  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+  const { selectedRows, setSelectedRows, totalTransactions } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   useEffect(() => {
     if (selectedRows.length === 0) {
@@ -49,24 +43,6 @@ export const Table = () => {
     scrollerExecutor => (rows: IStatementTransactionRow[]) =>
       getActiveActionButtons(getAvailableActions([...FOOTER_ACTIONS, ...FOOTER_DROPDOWN_ACTIONS]), scrollerExecutor, [rows, id]),
     [getAvailableActions, id]
-  );
-
-  const sendTransactionsToDataTable = useCallback(
-    ({ multiSort }): Promise<IFetchDataResponse<IStatementTransactionRow>> =>
-      new Promise((resolve, reject) => {
-        setSorting(multiSort);
-
-        if (isTransactionsFetched) {
-          resolve({ rows: transactions, pageCount: Math.ceil(transactionsAmountByFilter / pagination.pageSize) });
-        }
-
-        if (isTransactionsError) {
-          setHasError(true);
-
-          reject();
-        }
-      }),
-    [isTransactionsError, isTransactionsFetched, pagination.pageSize, setHasError, setSorting, transactions, transactionsAmountByFilter]
   );
 
   const handRowClick = useCallback(
@@ -89,13 +65,8 @@ export const Table = () => {
           <Gap />
           <Gap />
           <Typography.TextBold>{locale.transactionsScroller.table.total}</Typography.TextBold>
-          <Gap.SM />
-          <Typography.Text data-field={'total'}>
-            {locale.transactionsScroller.table.totalValue({
-              total: totalTransactionsAmount,
-              totalByFilters: transactionsAmountByFilter,
-            })}
-          </Typography.Text>
+          <Gap.X2S />
+          <Typography.Text data-field={'total'}>{totalTransactions}</Typography.Text>
           <Horizon.Spacer />
           {selectedRows.length > 0 && (
             <Checkbox
@@ -112,23 +83,19 @@ export const Table = () => {
         </Horizon>
         <Gap.SM />
       </Box>
-      <LayoutScroll>
-        <DataTable<IStatementTransactionRow>
-          columns={columns}
-          defaultSort={DEFAULT_SORTING}
-          executor={executor}
-          fetchData={sendTransactionsToDataTable}
-          footerActionsGetter={footerActions}
-          footerContent={Footer}
-          paginationState={pagination}
-          rowCaptionComponent={CaptionRow}
-          selectedRows={selectedRows}
-          visibleOnlySelectedRows={visibleOnlySelectedRows}
-          onPaginationChange={setPagination}
-          onRowClick={handRowClick}
-          onSelectedRowsChange={setSelectedRows}
-        />
-      </LayoutScroll>
+      <InfiniteDataTable<IStatementTransactionRow>
+        columns={columns}
+        defaultSort={DEFAULT_SORTING}
+        executor={executor}
+        fetchData={fetchData}
+        footerActionsGetter={footerActions}
+        footerContent={Footer}
+        rowCaptionComponent={CaptionRow}
+        selectedRows={selectedRows}
+        visibleOnlySelectedRows={visibleOnlySelectedRows}
+        onRowClick={handRowClick}
+        onSelectedRowsChange={setSelectedRows}
+      />
     </>
   );
 };
