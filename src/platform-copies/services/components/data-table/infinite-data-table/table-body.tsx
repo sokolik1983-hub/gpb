@@ -1,6 +1,5 @@
 import type { CSSProperties } from 'react';
 import React, { forwardRef, useCallback, useEffect, useMemo, useRef } from 'react';
-import Scrollbars from 'react-custom-scrollbars';
 import type { TableBodyProps as TableBodyPropsPure, TableInstance } from 'react-table';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import { VariableSizeList } from 'react-window';
@@ -8,7 +7,7 @@ import type { VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import type { IExecuter } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
-import { Box, Spinner } from '@platform/ui';
+import { Box, LayoutScroll, Spinner } from '@platform/ui';
 import type { ICaptionRowComponentProps, IExpandedRowComponentProps, RecordCell } from '../types';
 import { InfiniteRow } from './infinite-row';
 
@@ -149,7 +148,7 @@ export const TableBody = <T,>({
             threshold={THRESHOLD}
           >
             {({ onItemsRendered, ref }) => (
-              <Scrollbars onScroll={handleScroll}>
+              <LayoutScroll style={{ width: width + 4 }} onScroll={handleScroll}>
                 <VariableSizeList
                   ref={(list: List) => {
                     (ref as React.RefCallback<List>)(list);
@@ -194,7 +193,7 @@ export const TableBody = <T,>({
                     );
                   }}
                 </VariableSizeList>
-              </Scrollbars>
+              </LayoutScroll>
             )}
           </InfiniteLoader>
         )}
