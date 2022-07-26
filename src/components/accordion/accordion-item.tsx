@@ -1,8 +1,7 @@
-import React, { useCallback, useContext, forwardRef, useRef, useEffect, useMemo } from 'react';
+import React, { useCallback, forwardRef, useRef, useEffect, useMemo } from 'react';
 import ResizeSensor from 'lib/resize-sensor';
 import type { ResizeSensorClass } from '@platform/ui';
 import { useToggle, Box } from '@platform/ui';
-import { AccordionContext } from './accordion-group';
 import css from './styles.scss';
 /**
  * Свойства компонента "Аккордеон".
@@ -31,7 +30,6 @@ interface IAccordionItem {
  */
 export const AccordionItem = forwardRef<Box, IAccordionItem>(({ header, panel, expand, isExpanded = false }, ref) => {
   const [isOpen, open] = useToggle(isExpanded);
-  const { disabled } = useContext(AccordionContext);
 
   const panelRef = useRef<HTMLDivElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -63,9 +61,9 @@ export const AccordionItem = forwardRef<Box, IAccordionItem>(({ header, panel, e
 
   return (
     <Box ref={ref} className={css.accordion}>
-      <button aria-expanded={opened} data-action="switch-expanded" tabIndex={disabled ? -1 : 0} type="button" onClick={handleClick}>
+      <Box aria-expanded={opened} data-action="switch-expanded" type="button" onClick={handleClick}>
         {header}
-      </button>
+      </Box>
       <div ref={wrapperRef} className={css.panel} data-role="row-details" role="region">
         <div ref={panelRef}>{panel}</div>
       </div>

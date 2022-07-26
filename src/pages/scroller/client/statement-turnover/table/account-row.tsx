@@ -2,10 +2,12 @@ import type { FC } from 'react';
 import React, { useContext, useMemo, useCallback } from 'react';
 import { executor, createStatement } from 'actions/client';
 import cn from 'classnames';
+import { FocusNode } from 'components/focus-tree';
 import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/dto';
 import { GROUPING_VALUES } from 'interfaces/dto';
 import type { Row } from 'react-table';
+import { TURNOVERS_SCROLLER_ROW_NODE, TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE } from 'stream-constants/a11y-nodes';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { getHandlerDependingOnSelection, isFunctionAvailability } from 'utils';
 import { Box, WithClickable, ROLE, Line } from '@platform/ui';
@@ -17,11 +19,13 @@ import css from './styles.scss';
 export interface IAccountInfoRowProps {
   /** Строка с оборотами по счёту. */
   accountInfoRow: Row<IAccountTurnoversInfo>;
+  /** Идентификатор подгруппы с валютой. */
+  groupRowId: string;
 }
 
 /** Строка с информацией по счёту в таблице Оборотов. */
-export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => {
-  const { original, getRowProps, cells } = accountInfoRow;
+export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow, groupRowId }) => {
+  const { original, getRowProps, cells, id } = accountInfoRow;
   const { key, ...rowProps } = getRowProps();
 
   const {
@@ -73,7 +77,12 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
   const hasMargin = hasSecondLevelMargin || hasThirdLevelMargin;
 
   return (
-    <React.Fragment key={key}>
+    <FocusNode
+      key={key}
+      handleOnClick={handleClick}
+      nodeId={`${TURNOVERS_SCROLLER_ROW_NODE}-${id}`}
+      parentId={`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${groupRowId}`}
+    >
       <WithClickable>
         {(ref, { hovered }) => (
           <Box
@@ -103,7 +112,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
           width={'100%'}
         />
       )}
-    </React.Fragment>
+    </FocusNode>
   );
 };
 
