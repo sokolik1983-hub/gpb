@@ -1,6 +1,7 @@
 .node {
   position: relative;
   border: 2px solid transparent;
+  overflow: hidden;
 
   &:focus {
     outline: none;
@@ -11,6 +12,7 @@
 
 .node-without-border {
   outline: none;
+  overflow: hidden;
 }
 
 .tree {
