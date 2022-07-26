@@ -66,6 +66,7 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
           return (
             <FocusNode
               key={key}
+              handleOnClick={toggleRowExpanded}
               nodeId={`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${row.id}`}
               parentId={`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${id}`}
             >
@@ -84,7 +85,12 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
         });
 
         return (
-          <FocusNode key={orgRowKey} nodeId={`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${id}`} parentId={COMMON_SCROLLER_NODE}>
+          <FocusNode
+            key={orgRowKey}
+            handleOnClick={toggleOrgRow}
+            nodeId={`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${id}`}
+            parentId={COMMON_SCROLLER_NODE}
+          >
             <AccordionItem
               expand={toggleOrgRow}
               header={

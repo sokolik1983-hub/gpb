@@ -14,59 +14,76 @@ export interface FocusNodeProps {
   type?: NODE_TYPE;
   /** Скрывать ли рамку для узла при фокусе. */
   hideBorder?: boolean;
+  /** Обработчик клика на узле. */
+  handleOnClick?(): void;
 }
 
 // FIXME добавить свойство order для принудительного задания порядка следования узла (иногда это может быть удобно)
 /** Компонент "Фокусируемый узел" (произвольньный контейнер компонентов на странице, поддерживающих фокус). */
-export const FocusNode: React.FC<FocusNodeProps> = React.memo(({ nodeId, parentId, type, hideBorder, children, ...props }) => {
-  const { mountNode, unmountNode, setCurrent, tree, current, setInsideNode } = useContext(FocusTreeContext);
+export const FocusNode: React.FC<FocusNodeProps> = React.memo(
+  ({ nodeId, parentId, type, hideBorder, children, handleOnClick, ...props }) => {
+    const { mountNode, unmountNode, setCurrent, tree, current, setInsideNode } = useContext(FocusTreeContext);
 
-  useLayoutEffect(() => {
-    const newNode = mountNode(nodeId, parentId, type);
+    useLayoutEffect(() => {
+      const newNode = mountNode(nodeId, parentId, type);
 
-    return () => unmountNode(newNode);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+      return () => unmountNode(newNode);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-  const handleOnFocus = useCallback(
-    (e: React.SyntheticEvent<HTMLDivElement>) => {
-      const domNode = e.target as HTMLDivElement;
-      const currentNodeId = domNode.getAttribute('data-node-id');
+    const handleOnFocus = useCallback(
+      (e: React.SyntheticEvent<HTMLDivElement>) => {
+        const domNode = e.target as HTMLDivElement;
+        const currentNodeId = domNode.getAttribute('data-node-id');
 
-      if (!currentNodeId) {
-        setInsideNode(true);
+        if (!currentNodeId) {
+          setInsideNode(true);
 
-        return;
-      }
+          return;
+        }
 
-      if (currentNodeId === current?.getNodeId()) {
-        return;
-      }
+        if (currentNodeId === current?.getNodeId()) {
+          return;
+        }
 
-      const currentNode = tree?.findNodeById(currentNodeId);
+        const currentNode = tree?.findNodeById(currentNodeId);
 
-      if (!currentNode) {
-        return;
-      }
+        if (!currentNode) {
+          return;
+        }
 
-      setInsideNode(false);
-      setCurrent(currentNode);
-    },
-    [current, setCurrent, setInsideNode, tree]
-  );
+        setInsideNode(false);
+        setCurrent(currentNode);
+      },
+      [current, setCurrent, setInsideNode, tree]
+    );
 
-  return (
-    <Box
-      {...props}
-      className={hideBorder ? css['node-without-border'] : css.node}
-      data-node-id={nodeId}
-      tabIndex={0}
-      onFocus={handleOnFocus}
-    >
-      {children}
-    </Box>
-  );
-});
+    const handleOnKeyDown = useCallback(
+      (e: React.KeyboardEvent<HTMLDivElement>) => {
+        if (e.code === 'Space' || e.code === 'Enter') {
+          e.stopPropagation();
+
+          handleOnClick?.();
+        }
+      },
+      [handleOnClick]
+    );
+
+    return (
+      <Box
+        {...props}
+        className={hideBorder ? css['node-without-border'] : css.node}
+        data-node-id={nodeId}
+        tabIndex={0}
+        onClick={handleOnClick}
+        onFocus={handleOnFocus}
+        onKeyDown={handleOnKeyDown}
+      >
+        {children}
+      </Box>
+    );
+  }
+);
 
 FocusNode.defaultProps = {
   hideBorder: false,
