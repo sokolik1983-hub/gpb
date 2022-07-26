@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
+import { FocusLock } from 'components/focus-lock';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
-import FocusLock from 'react-focus-lock';
 import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { Box, DATA_TYPE, dialog, DialogTemplate, Gap, Tabs, Typography, LayoutScroll } from '@platform/ui';

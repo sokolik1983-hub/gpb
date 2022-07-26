@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { FocusLock } from 'components/focus-lock';
 import { FocusNode, FocusTree } from 'components/focus-tree';
 import {
   useAccounts,
@@ -12,7 +13,6 @@ import {
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
-import FocusLock from 'react-focus-lock';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
