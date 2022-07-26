@@ -1,6 +1,7 @@
 .accordion {
   display: inline-flex;
   flex-direction: column;
+  max-width: 100%;
 }
 
 .panel {
