@@ -1346,6 +1346,20 @@ export default {
 			get totalsOfDay() {
 				return t('common.creationParams.totalsOfDay');
 			},
+			/**
+			 * @ru
+			 * Рублёвый эквивалент
+			 */
+			get nationalCurrency() {
+				return t('common.creationParams.nationalCurrency');
+			},
+			/**
+			 * @ru
+			 * Проводки переоценки
+			 */
+			get revaluationAccountEntry() {
+				return t('common.creationParams.revaluationAccountEntry');
+			},
 		},
 		documentsSetParams: {
 			/**

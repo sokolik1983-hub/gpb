@@ -29,6 +29,11 @@ export interface ICreateRequestStatementDto extends IBaseEntity {
   hideEmptyTurnovers: boolean;
   /** Операции. */
   operations: OPERATIONS;
+  // FIXME раскомментировать после доработки BE
+  /** Признак рублёвого эквивалента. */
+  // nationalCurrency: boolean;
+  /** Признак проводки переоценки. */
+  // revaluationAccountEntry: boolean;
   /** Тип периода запроса выписки. */
   periodType: DATE_PERIODS;
   /** Признак того, что счета необходимо формировать отдельными файлами. */

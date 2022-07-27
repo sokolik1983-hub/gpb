@@ -513,6 +513,12 @@
   "common.creationParams.totalsOfDay": {
     "ru": "Итоги за день"
   },
+  "common.creationParams.nationalCurrency": {
+    "ru": "Рублёвый эквивалент"
+  },
+  "common.creationParams.revaluationAccountEntry": {
+    "ru": "Проводки переоценки"
+  },
   "common.documentsSetParams.label": {
     "ru": "Комплект документов"
   },
