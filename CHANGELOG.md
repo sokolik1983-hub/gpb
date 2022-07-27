@@ -1,3 +1,12 @@
+## [2.9.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0...v2.9.1) (2022-07-27)
+
+
+### Bug Fixes
+
+* GBO-30075 исправление работы сервиса в IE ([3ed13ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3ed13ef1b1aae05e6dfd578219836fdd420ce210))
+* GBO-30075 исправление работы сервиса в IE ([fead4ae](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fead4aed5c224cd47445e8626e9cec4baf678948))
+* GBO-30075 исправление работы сервиса в IE ([1473214](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1473214923c20cde3db8454cd45fc9e74cd5a54d))
+
 ## [2.9.1-hotfix.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.1-hotfix.2...v2.9.1-hotfix.3) (2022-07-26)
 
 
