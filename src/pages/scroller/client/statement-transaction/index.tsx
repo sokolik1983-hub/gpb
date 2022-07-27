@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
+import { FocusLock } from 'components/focus-lock';
 import { FocusNode, FocusTree } from 'components/focus-tree';
 import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
@@ -27,7 +28,6 @@ import type { ITransactionScrollerContext } from 'pages/scroller/client/statemen
 import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { useDebounce } from 'platform-copies/hooks';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
-import FocusLock from 'react-focus-lock';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
 import { statementService } from 'services';

@@ -1,6 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import type { IDialogContext } from 'components/export-params-dialog/dialog-context';
 import { DialogContext } from 'components/export-params-dialog/dialog-context';
+import { FocusLock } from 'components/focus-lock';
 import { CreationParams } from 'components/form/creation-params';
 import { DetailDocumentsParams } from 'components/form/detail-documents-params';
 import { FileFormats } from 'components/form/file-formats';
@@ -8,7 +9,6 @@ import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
-import FocusLock from 'react-focus-lock';
 import type { IFormState } from 'stream-constants/form';
 import { exportCases } from 'utils';
 import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';

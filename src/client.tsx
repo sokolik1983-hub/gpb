@@ -6,6 +6,7 @@ import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-t
 import { ID_URL_PARAMETER } from 'stream-constants';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { GuardRoute } from '@platform/services/client';
+import './utils/ie-matches-polyfill';
 
 export { executeCreateStatementOrg, executeCreateStatementHidden, executeCreateStatementOneTime } from 'utils/execute-actions';
 
