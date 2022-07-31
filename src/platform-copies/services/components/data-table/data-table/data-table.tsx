@@ -1,13 +1,11 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { FocusNode } from 'components/focus-tree';
+import { ScrollerLoadingOverlay } from 'components';
 import { locale } from 'localization';
-import { AutoFocusInside } from 'react-focus-lock';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
-import { COMMON_SCROLLER_NODE, DATA_TABLE_HEADER_NODE, DATA_TABLE_PAGINATION_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay } from '@platform/ui';
+import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce } from '@platform/ui';
 import { FractalSelectedRowsInfo } from '../../fractal-selected-rows-info';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import {
@@ -218,65 +216,57 @@ export const DataTable = <T extends IBaseEntity>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSelectedRowsChange, selectedRowIds]);
 
+  const tableProps = getTableProps();
+
   return (
-    <>
-      <Box className={css.wrapper}>
-        <Box {...getTableProps()}>
-          <AutoFocusInside>
-            <FocusNode nodeId={DATA_TABLE_HEADER_NODE} parentId={COMMON_SCROLLER_NODE}>
-              <TableHeader
-                setSettingsColumns={setSettingsColumns}
-                settingColumns={settingColumns}
-                showSettingsButton={showSettingsButton}
-                tableInstance={tableInstance}
-              />
-            </FocusNode>
-          </AutoFocusInside>
-          <TableBody<T>
-            executor={executor}
-            expandedRowActionsGetter={expandedRowActionsGetter}
-            expandedRowComponent={expandedRowComponent}
-            fastActions={fastActions}
-            refetch={refetch}
-            rowCaptionComponent={rowCaptionComponent}
-            tableInstance={tableInstance}
-            visibleOnlySelectedRows={visibleOnlySelectedRows}
-            onRowClick={onRowClick}
-            onRowDoubleClick={onRowDoubleClick}
-          />
-        </Box>
+    <Box className={css.wrapper}>
+      <Box {...tableProps}>
+        <TableHeader
+          setSettingsColumns={setSettingsColumns}
+          settingColumns={settingColumns}
+          showSettingsButton={showSettingsButton}
+          tableInstance={tableInstance}
+        />
+
+        <TableBody<T>
+          executor={executor}
+          expandedRowActionsGetter={expandedRowActionsGetter}
+          expandedRowComponent={expandedRowComponent}
+          fastActions={fastActions}
+          refetch={refetch}
+          rowCaptionComponent={rowCaptionComponent}
+          tableInstance={tableInstance}
+          visibleOnlySelectedRows={visibleOnlySelectedRows}
+          onRowClick={onRowClick}
+          onRowDoubleClick={onRowDoubleClick}
+        />
 
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
 
-        {pageCount > 1 && (
-          <FocusNode nodeId={DATA_TABLE_PAGINATION_NODE} parentId={COMMON_SCROLLER_NODE}>
-            <Box className={css.pagination}>
-              <FractalPagination
-                page={paginationState.pageIndex + 1}
-                pageCount={pageCount}
-                pageSize={paginationState.pageSize}
-                onPageChange={handlePageChange}
-                onPageSizeChange={setPageSize}
-              />
-            </Box>
-          </FocusNode>
-        )}
-
-        <LoaderOverlay opened={isLoading} />
-
-        <Gap.X3L />
-        <Gap.X3L />
-      </Box>
-      {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
-        <Box className={css.footer}>
-          <FractalSelectedRowsInfo<RecordCell>
-            actionsGetter={footerActionsGetter(executor)}
-            content={footerContent}
-            selectedRows={selectedRows}
+        <Box className={css.pagination}>
+          <FractalPagination
+            page={paginationState.pageIndex + 1}
+            pageCount={pageCount}
+            pageSize={paginationState.pageSize}
+            onPageChange={handlePageChange}
+            onPageSizeChange={setPageSize}
           />
         </Box>
-      )}
-    </>
+
+        <Gap />
+
+        {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
+          <Box className={css.footer}>
+            <FractalSelectedRowsInfo<RecordCell>
+              actionsGetter={footerActionsGetter(executor)}
+              content={footerContent}
+              selectedRows={selectedRows}
+            />
+          </Box>
+        )}
+        {isLoading && <ScrollerLoadingOverlay />}
+      </Box>
+    </Box>
   );
 };
 

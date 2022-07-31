@@ -20,7 +20,6 @@
 .header {
   height: 40px;
   user-select: none;
-  border-bottom: 1px solid;
   border-color: var(--line-fill-faint-strong);
 }
 
@@ -52,7 +51,7 @@
 .wrapper {
   position: relative;
   height: 100%;
-  margin: 0 32px;
+  margin: 2px 32px;
 }
 
 .scrollInner {

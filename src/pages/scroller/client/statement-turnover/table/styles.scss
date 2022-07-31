@@ -12,7 +12,7 @@
 }
 
 .tableBody {
-  padding: 0 8px;
+  padding: 0 2px;
 }
 
 .headerRowWrapper {
@@ -49,6 +49,7 @@
 
 .cell {
   padding: 8px 16px;
+
   &:first-child {
     padding-left: 8px;
   }
@@ -120,8 +121,8 @@
   top: 0;
   right: 0;
   left: 0;
-  z-index: getIndex(specific_element_accent);
-  padding: 0 8px;
+  z-index: getIndex(fix);
+  padding: 0 2px;
   background-color: #fff;
 }
 
