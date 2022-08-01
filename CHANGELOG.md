@@ -1,3 +1,10 @@
+# [2.10.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.1...v2.10.0-release.2) (2022-08-01)
+
+
+### Bug Fixes
+
+* GBO-29853 кумулятивное исправление дефектов ([cbb80b6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cbb80b6196c1d9c6afc39fe22fedc84e13ea18df))
+
 # [2.10.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.1...v2.10.0-release.1) (2022-07-30)
 
 
