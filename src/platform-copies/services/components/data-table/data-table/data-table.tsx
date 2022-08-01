@@ -1,11 +1,10 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { ScrollerLoadingOverlay } from 'components';
 import { locale } from 'localization';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce } from '@platform/ui';
+import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay } from '@platform/ui';
 import { FractalSelectedRowsInfo } from '../../fractal-selected-rows-info';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import {
@@ -228,30 +227,36 @@ export const DataTable = <T extends IBaseEntity>({
           tableInstance={tableInstance}
         />
 
-        <TableBody<T>
-          executor={executor}
-          expandedRowActionsGetter={expandedRowActionsGetter}
-          expandedRowComponent={expandedRowComponent}
-          fastActions={fastActions}
-          refetch={refetch}
-          rowCaptionComponent={rowCaptionComponent}
-          tableInstance={tableInstance}
-          visibleOnlySelectedRows={visibleOnlySelectedRows}
-          onRowClick={onRowClick}
-          onRowDoubleClick={onRowDoubleClick}
-        />
+        {rows.length > 0 && (
+          <TableBody<T>
+            executor={executor}
+            expandedRowActionsGetter={expandedRowActionsGetter}
+            expandedRowComponent={expandedRowComponent}
+            fastActions={fastActions}
+            refetch={refetch}
+            rowCaptionComponent={rowCaptionComponent}
+            tableInstance={tableInstance}
+            visibleOnlySelectedRows={visibleOnlySelectedRows}
+            onRowClick={onRowClick}
+            onRowDoubleClick={onRowDoubleClick}
+          />
+        )}
 
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
 
-        <Box className={css.pagination}>
-          <FractalPagination
-            page={paginationState.pageIndex + 1}
-            pageCount={pageCount}
-            pageSize={paginationState.pageSize}
-            onPageChange={handlePageChange}
-            onPageSizeChange={setPageSize}
-          />
-        </Box>
+        {pageCount > 1 && (
+          <Box className={css.pagination}>
+            <FractalPagination
+              page={paginationState.pageIndex + 1}
+              pageCount={pageCount}
+              pageSize={paginationState.pageSize}
+              onPageChange={handlePageChange}
+              onPageSizeChange={setPageSize}
+            />
+          </Box>
+        )}
+
+        <LoaderOverlay opened={isLoading} />
 
         <Gap />
 
@@ -264,7 +269,6 @@ export const DataTable = <T extends IBaseEntity>({
             />
           </Box>
         )}
-        {isLoading && <ScrollerLoadingOverlay />}
       </Box>
     </Box>
   );
