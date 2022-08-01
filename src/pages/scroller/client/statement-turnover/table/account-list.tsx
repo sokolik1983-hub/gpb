@@ -1,8 +1,11 @@
 import React, { useState, useCallback, useContext } from 'react';
 import cn from 'classnames';
+import type { IFocusParentNodeProps } from 'components/focus-tree';
+import { FocusNode } from 'components/focus-tree';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_VALUES } from 'interfaces/dto';
 import type { Row } from 'react-table';
+import { TURNOVERS_SCROLLER_ROW_NODE } from 'stream-constants/a11y-nodes';
 import { Box } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -13,7 +16,7 @@ import { ToggleRowsVisibilityButton } from './toggle-rows-visibility-button';
 /**
  * Свойства компонента "Список счетов".
  */
-interface IAccountList {
+interface IAccountList extends IFocusParentNodeProps {
   /**
    * Строки счетов.
    */
@@ -26,14 +29,12 @@ interface IAccountList {
    * Флаг, определяющий отображение кнопки раскрытия/скрытия счетов.
    */
   withoutBtn?: boolean;
-  /** Идентификатор подгруппы с валютой. */
-  groupRowId: string;
 }
 
 /**
  * Компонент "Список счетов".
  */
-export const AccountList = ({ rows, prepareRow, groupRowId, withoutBtn = false }: IAccountList) => {
+export const AccountList = ({ rows, prepareRow, withoutBtn = false, nodesIds: [nodeId, parentId], hidden }: IAccountList) => {
   const [maxVisibleSize, setMaxVisibleSize] = useState(withoutBtn ? rows.length : 3);
   const { groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
@@ -47,25 +48,25 @@ export const AccountList = ({ rows, prepareRow, groupRowId, withoutBtn = false }
   const list = rows.slice(0, maxVisibleSize).map(accountRow => {
     prepareRow(accountRow);
 
-    const { key: accountInfoRowKey } = accountRow.getRowProps();
+    const { key } = accountRow.getRowProps();
 
     return (
       <AccountInfoRow
-        key={accountInfoRowKey}
+        key={key}
         accountInfoRow={(accountRow as unknown) as Row<IAccountTurnoversInfo>}
-        groupRowId={groupRowId}
+        nodesIds={[`${TURNOVERS_SCROLLER_ROW_NODE}-${key}`, nodeId]}
       />
     );
   });
 
   return (
-    <>
+    <FocusNode preferBorder hidden={hidden} nodeId={nodeId} parentId={parentId}>
       {list}
       {!withoutBtn && rows.length > 3 && (
         <Box className={cn({ [css.secondLevelCell]: hasSecondLevelMargin, [css.thirdLevelCell]: hasThirdLevelMargin })}>
           <ToggleRowsVisibilityButton maxVisibleSize={maxVisibleSize} totalSize={rows.length} onClick={handleBtnClick} />
         </Box>
       )}
-    </>
+    </FocusNode>
   );
 };

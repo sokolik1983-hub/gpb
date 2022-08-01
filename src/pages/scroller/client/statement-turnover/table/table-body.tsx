@@ -5,7 +5,7 @@ import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import type Scrollbars from 'react-custom-scrollbars';
 import type { TableBodyProps, Row } from 'react-table';
-import { Box, LayoutScrollComponent, Gap, ROLE } from '@platform/ui';
+import { Box, Gap, ROLE, LayoutScroll } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import css from './styles.scss';
@@ -61,7 +61,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
 
   return (
     <Box className={css.layoutScrollWrapper}>
-      <LayoutScrollComponent innerRef={setScrolledElementRef} onScroll={handleScroll}>
+      <LayoutScroll innerRef={setScrolledElementRef} onScroll={handleScroll}>
         {/* Элемент внутри которого будут рендерится сроки в состоянии стики. */}
         <div ref={portalRef} className={css.portal} style={{ top: scrolledElementRef.current?.getScrollTop() }} />
         <Box {...tableBodyProps} className={css.tableBody}>
@@ -70,7 +70,7 @@ export const TableBody: FC<ITableBodyProps> = ({ rows, prepareRow, ...tableBodyP
         </Box>
         <Gap.X2L />
         <Gap.X2L />
-      </LayoutScrollComponent>
+      </LayoutScroll>
 
       {/* Кнопка прокрутки таблицы. */}
       {isScrollButtonVisible && (

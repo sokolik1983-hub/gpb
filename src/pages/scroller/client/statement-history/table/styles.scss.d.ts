@@ -7,8 +7,20 @@ declare namespace StylesScssModule {
   export interface IStylesScss {
     'rowActionButton': string;
     'rowActions': string;
+    'scrollIcon': string;
     'status': string;
     'totalWrapper': string;
+    'zLayerContainer': string;
+    'zLayerControl': string;
+    'zLayerFix': string;
+    'zLayerFluid': string;
+    'zLayerMessage': string;
+    'zLayerModal': string;
+    'zLayerSidebar': string;
+    'zLayerSpecific_element': string;
+    'zLayerSpecific_element_accent': string;
+    'zLayerSubmenu': string;
+    'zLayerTopline': string;
   }
 }
 

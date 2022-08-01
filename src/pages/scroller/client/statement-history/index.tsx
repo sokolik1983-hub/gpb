@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
+import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerLoadingOverlay, ScrollerPageLayout } from 'components';
 import { FocusLock } from 'components/focus-lock';
 import { FocusNode, FocusTree } from 'components/focus-tree';
 import {
@@ -46,9 +46,9 @@ export const StatementHistoryScrollerPage = () => {
 
   const tabsProps = useScrollerTabsProps();
 
-  // region элементы стейта контекста скроллера.
   const [hasError, setHasError] = useState<boolean>(false);
   const [sorting, setSorting] = useState<ISortSettings>(DEFAULT_SORTING);
+
   const { pagination, setPagination, filterPanel, tagsPanel, filterValues } = useScrollerPagination({
     fields,
     labels: tagLabels,
@@ -64,7 +64,7 @@ export const StatementHistoryScrollerPage = () => {
   const headerProps = useTurnoverScrollerHeaderProps();
 
   // Вызывается один раз.
-  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched } = useAccounts();
+  const { data: accounts, isError: isAccountsError, isFetched: isAccountsFetched, isFetching: isAccountsFetching } = useAccounts();
 
   const {
     data: { data: statements, total: totalStatementsAmount },
@@ -76,6 +76,8 @@ export const StatementHistoryScrollerPage = () => {
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const statementsFetched = useIsFetchedData(isStatementsFetched);
   const dataFetched = accountsFetched && statementsFetched;
+
+  const isLoading = isAccountsFetching || isStatementsFetching;
 
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
@@ -130,7 +132,7 @@ export const StatementHistoryScrollerPage = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
-              <FocusNode hideBorder nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+              <FocusNode hidden nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
                   <FilterLayout
                     AdditionalFilter={AdditionalFilter}
@@ -147,6 +149,7 @@ export const StatementHistoryScrollerPage = () => {
               {!accountsFetched && <Line fill="FAINT" />}
               <ContentLoader height={tableHeight} loading={!statementsFetched}>
                 <Table />
+                {isLoading && <ScrollerLoadingOverlay />}
               </ContentLoader>
             </ScrollerPageLayout>
           </FocusTree>

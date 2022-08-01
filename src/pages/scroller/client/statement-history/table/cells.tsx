@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
 import { executor } from 'actions/client';
 import { ItemWithRestInPopUp } from 'components';
-import type { CellAccessibilityInnerFocusProps } from 'components/scroller-table-view/accessibility';
 import { StopPropagation } from 'components/stop-propagation';
 import { DATE_PERIODS } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
@@ -22,7 +21,7 @@ import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Свойства ячеек таблицы истории. */
-type HistoryCellProps = CellAccessibilityInnerFocusProps & CellProps<IStatementHistoryRow, IStatementHistoryRow>;
+type HistoryCellProps = CellProps<IStatementHistoryRow, IStatementHistoryRow>;
 
 /** Дата и время создания запроса выписки. */
 export const CreatedAtCell: FC<HistoryCellProps> = ({ value: doc }) => {

@@ -148,7 +148,7 @@ export const TableBody = <T,>({
             threshold={THRESHOLD}
           >
             {({ onItemsRendered, ref }) => (
-              <LayoutScroll style={{ width: width + 4 }} onScroll={handleScroll}>
+              <LayoutScroll scrollMarginVerticalBottom={40} style={{ width: width + 4 }} onScroll={handleScroll}>
                 <VariableSizeList
                   ref={(list: List) => {
                     (ref as React.RefCallback<List>)(list);
