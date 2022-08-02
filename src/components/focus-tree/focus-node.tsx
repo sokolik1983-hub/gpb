@@ -23,7 +23,7 @@ export interface IFocusNodeProps extends IWebBoxProps {
   /** Расположение узла в группе. */
   type?: NODE_TYPE;
   /** Обработчик клика на узле. */
-  onClick?(): void;
+  onClick?(e): void;
   /** Скрывать ли рамку для узла при фокусе. */
   hidden?: boolean;
   /** Сфокусированный узел подсвечивать через border, а не через outline, в слуяае если элемент не скрытый. */
@@ -73,11 +73,11 @@ export const FocusNode: React.FC<IFocusNodeProps> = React.memo(
     );
 
     const handleOnKeyDown = useCallback(
-      (e: React.KeyboardEvent<HTMLDivElement>) => {
+      (e: React.KeyboardEvent) => {
         if (e.code === 'Space' || e.code === 'Enter') {
           e.stopPropagation();
 
-          onClick?.();
+          onClick?.(e);
         }
       },
       [onClick]
