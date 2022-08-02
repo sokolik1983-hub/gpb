@@ -22,7 +22,7 @@ export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({ categor
   <>
     {loading && <LoaderOverlay data-type={DATA_TYPE.LOADER_LOCAL} opened={loading} />}
     <Box className={css.scrollerLayoutContent}>
-      <ContentLoader height={SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT} loading={headerProps.loading}>
+      <ContentLoader height={SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT} loading={loading}>
         <ScrollerHeader {...headerProps} />
       </ContentLoader>
       <Separator />

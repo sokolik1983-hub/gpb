@@ -6,9 +6,9 @@ import type { IBaseEntity, ISortSettings } from '@platform/services/client';
 import { FractalSelectedRowsInfo, Placeholder, Box, SORT_DIRECTION, LoaderOverlay } from '@platform/ui';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import { SCROLLER_SETTING_TYPE, useColumnsWithDefaultValues, useDataManager, useDefaultHiddenColumns, useStorageSettings } from '../hooks';
-import css from '../styles.scss';
 import type { InfiniteScrollDataTableProps, RecordCell } from '../types';
 import '../react-table-config';
+import css from './styles.scss';
 import { TableBody } from './table-body';
 
 /** Таблица бесконечного скроллирования данных. */
@@ -171,13 +171,15 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
     <>
       <Box className={css.wrapper}>
         <Box {...getTableProps({ style: { height: '100%' } })}>
-          <TableHeader
-            refCallback={handleTableHeaderRef}
-            setSettingsColumns={setSettingsColumns}
-            settingColumns={settingColumns}
-            showSettingsButton={showSettingsButton}
-            tableInstance={tableInstance}
-          />
+          <Box className={css.header}>
+            <TableHeader
+              refCallback={handleTableHeaderRef}
+              setSettingsColumns={setSettingsColumns}
+              settingColumns={settingColumns}
+              showSettingsButton={showSettingsButton}
+              tableInstance={tableInstance}
+            />
+          </Box>
 
           {rows.length > 0 && (
             <TableBody<T>
