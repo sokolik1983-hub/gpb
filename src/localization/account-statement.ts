@@ -229,6 +229,13 @@ export default {
 			counterpartyInn: (p: { inn: string }) => t('transactionsScroller.labels.counterpartyInn', p),
 			/**
 			 * @ru
+			 * Списания и поступления в одной колонке
+			 */
+			get summary() {
+				return t('transactionsScroller.labels.summary');
+			},
+			/**
+			 * @ru
 			 * №{documentNumber}
 			 */
 			documentNumber: (p: { documentNumber: string }) => t('transactionsScroller.labels.documentNumber', p),
@@ -257,6 +264,13 @@ export default {
 			 */
 			get incomingBalance() {
 				return t('transactionsScroller.labels.incomingBalance');
+			},
+			/**
+			 * @ru
+			 * Руб. эквивалент
+			 */
+			get nationalCurrency() {
+				return t('transactionsScroller.labels.nationalCurrency');
 			},
 			/**
 			 * @ru
@@ -372,6 +386,13 @@ export default {
 			get income() {
 				return t('transactionsScroller.headers.income');
 			},
+			/**
+			 * @ru
+			 * Сумма
+			 */
+			get summary() {
+				return t('transactionsScroller.headers.summary');
+			},
 		},
 		footer: {
 			/**
@@ -449,6 +470,36 @@ export default {
 			 */
 			get export() {
 				return t('transactionsScroller.rowAction.export');
+			},
+		},
+		settings: {
+			/**
+			 * @ru
+			 * Показывать колонки
+			 */
+			get columnsHeader() {
+				return t('transactionsScroller.settings.columnsHeader');
+			},
+			/**
+			 * @ru
+			 * Настройка отображения
+			 */
+			get viewHeader() {
+				return t('transactionsScroller.settings.viewHeader');
+			},
+			/**
+			 * @ru
+			 * Применить
+			 */
+			get apply() {
+				return t('transactionsScroller.settings.apply');
+			},
+			/**
+			 * @ru
+			 * По умолчанию
+			 */
+			get byDefault() {
+				return t('transactionsScroller.settings.byDefault');
 			},
 		},
 	},
