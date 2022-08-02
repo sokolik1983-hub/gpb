@@ -113,6 +113,12 @@
   "transactionsScroller.headers.income": {
     "ru": "Поступления"
   },
+  "transactionsScroller.headers.summary": {
+    "ru": "Сумма"
+  },
+  "transactionsScroller.labels.summary": {
+    "ru": "Списания и поступления в одной колонке"
+  },
   "transactionsScroller.labels.documentNumber": {
     "@documentNumber": "string",
     "ru": "№{documentNumber}"
@@ -129,6 +135,9 @@
   },
   "transactionsScroller.labels.incomingBalance": {
     "ru": "Входящий остаток"
+  },
+  "transactionsScroller.labels.nationalCurrency": {
+    "ru": "Руб. эквивалент"
   },
   "transactionsScroller.labels.outcomeTransactions": {
     "@amount": "number",
@@ -173,6 +182,18 @@
   },
   "transactionsScroller.rowAction.export": {
     "ru": "Экспорт документа"
+  },
+  "transactionsScroller.settings.columnsHeader": {
+    "ru": "Показывать колонки"
+  },
+  "transactionsScroller.settings.viewHeader": {
+    "ru": "Настройка отображения"
+  },
+  "transactionsScroller.settings.apply": {
+    "ru": "Применить"
+  },
+  "transactionsScroller.settings.byDefault": {
+    "ru": "По умолчанию"
   },
   "historyScroller.filter.labels.date": {
     "ru": "Дата запроса"

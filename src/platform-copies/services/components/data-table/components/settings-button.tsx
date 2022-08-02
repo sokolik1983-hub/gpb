@@ -3,7 +3,7 @@ import type { TableInstance } from 'react-table';
 import type { IColumnsStorageObject } from '@platform/core';
 import type { IBaseEntity } from '@platform/services';
 import type { ICheckboxOption } from '@platform/ui';
-import { ACTIONS, Box, dialog, IconButton, Icons, SettingsForm } from '@platform/ui';
+import { ACTIONS, Box, dialog, IconButton, Icons } from '@platform/ui';
 import css from '../styles.scss';
 import type { RecordCell, TableColumn } from '../types';
 
@@ -24,6 +24,7 @@ export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, sett
     setHiddenColumns,
     state: { columnResizing },
     visibleColumns,
+    customSettingsForm: SettingsForm,
   } = tableInstance;
 
   const [settingsFormOpen, setSettingsFormOpen] = useState(false);
@@ -98,7 +99,7 @@ export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, sett
       onSubmit,
       handleClose: () => setSettingsFormOpen(false),
     });
-  }, [columnOptions, defaultVisibleColumns, values, columns, setSettingsColumns, settingColumns, setHiddenColumns]);
+  }, [SettingsForm, columnOptions, defaultVisibleColumns, values, columns, setSettingsColumns, settingColumns, setHiddenColumns]);
 
   /** Обработчик клика по кнопке настроек колонок таблицы. */
   const handleOpenSettingsForm = React.useCallback(() => {

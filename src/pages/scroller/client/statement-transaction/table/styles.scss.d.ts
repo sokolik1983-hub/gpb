@@ -10,6 +10,10 @@ declare namespace StylesScssModule {
     'captionRowText': string;
     'footer': string;
     'footerDropdownActions': string;
+    'incomeNat': string;
+    'natCurrencyHeader': string;
+    'natCurrencyHeaderText': string;
+    'outcomeNat': string;
     'rowActionButton': string;
   }
 }
