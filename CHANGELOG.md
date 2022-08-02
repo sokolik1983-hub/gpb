@@ -1,3 +1,10 @@
+# [2.10.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.3...v2.10.0-release.4) (2022-08-02)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29853 доработка рамок ([5ff9243](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5ff9243ba62515b3e70960ef68f8d2989f49c51f))
+
 # [2.10.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.2...v2.10.0-release.3) (2022-08-02)
 
 
