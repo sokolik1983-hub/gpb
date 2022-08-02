@@ -6,6 +6,7 @@ import type { IActionWithAuth } from '@platform/services';
 import { Box } from '@platform/ui';
 import { Row } from '../components';
 import type { ICaptionRowComponentProps, IExpandedRowComponentProps, RecordCell } from '../types';
+import css from './styles.scss';
 
 /** Свойства строки таблицы с бесконечным сколлингом. */
 interface RowForInfiniteScrollProps<T> {
@@ -57,7 +58,8 @@ export const InfiniteRow = <T,>({
 }: RowForInfiniteScrollProps<T>) => {
   const ref = useRef<HTMLDivElement>();
 
-  useEffect(() => setSize(listIndex, ref.current?.getBoundingClientRect().height), [listIndex, setSize]);
+  // +4 из-за двух отступов по 2px
+  useEffect(() => setSize(listIndex, (ref.current?.getBoundingClientRect().height ?? 0) + 4), [listIndex, setSize]);
 
   const setRefRow = useCallback(element => {
     ref.current = element;
@@ -68,7 +70,7 @@ export const InfiniteRow = <T,>({
   const visibleRow = visibleOnlySelectedRows ? row.isSelected : true;
 
   return visibleRow ? (
-    <Box key={key} style={style}>
+    <Box key={key} className={css.infiniteRow} style={style}>
       <Row<T>
         executor={executor}
         expandedRowActionsGetter={expandedRowActionsGetter}

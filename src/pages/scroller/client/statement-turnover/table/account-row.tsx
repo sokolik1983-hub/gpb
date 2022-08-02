@@ -59,16 +59,21 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow, nodes
     [dateFrom, datePeriod, dateTo, original.accountId]
   );
 
-  const handleClick = useCallback(async () => {
-    // TODO: в дальнейшем заменить на платформенный аналог
-    if (!isFunctionAvailability(PRIVILEGE.STATEMENT_REQUEST)) {
-      return;
-    }
+  const handleClick = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    const handler = getHandlerDependingOnSelection(executor.execute);
+      // TODO: в дальнейшем заменить на платформенный аналог
+      if (!isFunctionAvailability(PRIVILEGE.STATEMENT_REQUEST)) {
+        return;
+      }
 
-    await handler(createStatement, [doc]);
-  }, [doc]);
+      const handler = getHandlerDependingOnSelection(executor.execute);
+
+      await handler(createStatement, [doc]);
+    },
+    [doc]
+  );
 
   const hasThirdLevelMargin = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES;
   const hasSecondLevelMargin = ![GROUPING_VALUES.NO_GROUPING, GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES].includes(groupByForRender);

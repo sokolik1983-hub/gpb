@@ -67,7 +67,7 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
               data-name={column.id}
               {...restHeaderProps}
               key={columnKey}
-              nodeId={`${DATA_TABLE_COLUMN_NODE}-${columnKey}`}
+              nodeId={`${DATA_TABLE_COLUMN_NODE}-${index}`}
               parentId={COMMON_SCROLLER_NODE}
               type={NODE_TYPE.HORIZONTAL}
             >

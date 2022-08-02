@@ -80,7 +80,7 @@ export const Row = <T,>({
               border={['FAINT', 'SM']}
               className={css.row}
               data-id={original.id}
-              nodeId={`${DATA_TABLE_ROW_NODE}-${rowKey}`}
+              nodeId={`${DATA_TABLE_ROW_NODE}-${row.index}`}
               parentId={COMMON_SCROLLER_NODE}
               {...restRowProps}
               key={`row_${rowKey}`}
@@ -105,7 +105,7 @@ export const Row = <T,>({
                       key={key}
                       {...cell}
                       first={cellIndex === 0 || cellIndex === 1}
-                      nodesIds={[`${DATA_TABLE_ROW_CELL_NODE}-${key}`, `${DATA_TABLE_ROW_NODE}-${rowKey}`]}
+                      nodesIds={[`${DATA_TABLE_ROW_CELL_NODE}-${row.index}-${cellIndex}`, `${DATA_TABLE_ROW_NODE}-${row.index}`]}
                       refetch={refetch}
                     />
                   );

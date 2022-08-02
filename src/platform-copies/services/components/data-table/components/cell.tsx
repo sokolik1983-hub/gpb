@@ -16,7 +16,7 @@ interface CellProps extends CellPure<RecordCell>, IFocusParentNodeProps {
 }
 
 /** Отступы первой ячейки. */
-const firstCellPadding = Adjust.getPadClass(['XS', null]);
+const firstCellPadding = Adjust.getPadClass(['X2S', null, 'X2S', null]);
 
 /** Компонент ячейки таблицы. */
 export const Cell: React.FC<CellProps> = ({ column, first, getCellProps, refetch, render, nodesIds: [nodeId, parentId] }) => (
