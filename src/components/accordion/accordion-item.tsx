@@ -38,9 +38,13 @@ export const AccordionItem = forwardRef<Box, IAccordionItem>(
     const panelRef = useRef<HTMLDivElement>(null);
     const wrapperRef = useRef<HTMLDivElement>(null);
 
-    const handleClick = useCallback(() => {
-      expand ? expand() : open();
-    }, [expand, open]);
+    const handleClick = useCallback(
+      (e: React.SyntheticEvent) => {
+        e.stopPropagation();
+        expand ? expand() : open();
+      },
+      [expand, open]
+    );
 
     const opened = useMemo(() => (expand ? isExpanded : isOpen), [expand, isExpanded, isOpen]);
 
