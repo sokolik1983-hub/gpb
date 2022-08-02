@@ -1,3 +1,11 @@
+# [2.10.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.2...v2.10.0-release.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29657 доработка раскрытия групп ([9c126e4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9c126e41a3fd960d664d036bba2714fc38319acc))
+* **скроллер:** GBO-29657 исправление лоадера и постраничника ([77034d1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/77034d12aeefb37bc77fe358ba01af1e5fbec2ba))
+
 # [2.10.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.1...v2.10.0-release.2) (2022-08-01)
 
 
