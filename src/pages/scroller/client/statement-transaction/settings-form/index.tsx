@@ -118,13 +118,18 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
  *
  * @example dialog.show('Settings', SettingsForm, { onSubmit: ()=> {}, columns: columns, values: [] }, () => reject(true))
  */
-export const SettingsForm: React.FC<SettingsFormProps> = ({ onClose, onSubmit, columns, defaultColumns, values }) => {
+export const SettingsForm: React.FC<SettingsFormProps> = ({ onClose, handleClose, onSubmit, columns, defaultColumns, values }) => {
+  const onCloseHandler = useCallback(() => {
+    onClose();
+    handleClose?.();
+  }, [handleClose, onClose]);
+
   const onSubmitHandler = useCallback(
     data => {
       onSubmit(data.columns);
-      onClose();
+      onCloseHandler();
     },
-    [onSubmit, onClose]
+    [onSubmit, onCloseHandler]
   );
 
   const cols = useMemo(() => columns.filter(c => !!c.label && typeof c.label === 'string'), [columns]);
@@ -141,7 +146,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ onClose, onSubmit, c
       }
       dataType={DATA_TYPE.CONFIRMATION}
       header={null}
-      onClose={onClose}
+      onClose={onCloseHandler}
     />
   );
 };
