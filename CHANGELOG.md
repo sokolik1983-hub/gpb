@@ -1,3 +1,10 @@
+# [2.10.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.4...v2.10.0-release.5) (2022-08-04)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-30821 исправление обработчика нажатия кнопки ([f9bf2f2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f9bf2f23df813f2f8a28642f083aeb88938888d0))
+
 # [2.10.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.3...v2.10.0-release.4) (2022-08-02)
 
 
