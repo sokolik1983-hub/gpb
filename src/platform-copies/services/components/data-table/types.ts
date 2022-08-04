@@ -41,9 +41,13 @@ export interface ICaptionRowComponentProps<T> extends React.AllHTMLAttributes<HT
  */
 export interface SettingsFormProps {
   /**
-   * Обработчик закрытия модального окна.
+   * Обработчик закрытия модального окна приходящий из dialog.
    */
   onClose(): void;
+  /**
+   * Обработчик закрытия модального окна.
+   */
+  handleClose?(): void;
   /**
    * Обработчик применения выбранных фильтров.
    */

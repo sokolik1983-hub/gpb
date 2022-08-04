@@ -25,18 +25,23 @@ const accessor = (row: IAccountTurnoversInfo | IGroupedAccounts): IAccountTurnov
  *
  * @param grouping - Значение группировки которое пользователь выбрал на форме фильтрации.
  */
-export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAccounts>> => {
+export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAccounts> & { isVisible: boolean }> => {
   const isOrganizationColumnVisible = ![GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES, GROUPING_VALUES.ORGANIZATIONS].includes(grouping);
 
-  return addMaxWidthField([
-    {
-      Header: locale.turnoverScroller.headers.organization,
-      id: COLUMN_NAMES.ORGANIZATION_NAME,
-      accessor,
-      Cell: OrganizationCell,
-      disableSortBy: true,
-      width: 204,
-    },
+  return addMaxWidthField<IGroupedAccounts, { isVisible: boolean }>([
+    ...(isOrganizationColumnVisible
+      ? [
+          {
+            Header: locale.turnoverScroller.headers.organization,
+            id: COLUMN_NAMES.ORGANIZATION_NAME,
+            accessor,
+            Cell: OrganizationCell,
+            disableSortBy: true,
+            width: 204,
+            isVisible: true,
+          },
+        ]
+      : []),
     {
       Header: locale.turnoverScroller.headers.accountNumber,
       id: COLUMN_NAMES.ACCOUNT_NUMBER,
@@ -44,6 +49,7 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: AccountNumberCell,
       disableSortBy: true,
       width: isOrganizationColumnVisible ? 266 : 432,
+      isVisible: true,
     },
     {
       Header: locale.turnoverScroller.headers.incomingBalance,
@@ -52,6 +58,7 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: IncomingBalanceCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 229 : 224,
+      isVisible: true,
     },
     {
       Header: locale.turnoverScroller.headers.outcome,
@@ -60,6 +67,7 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: OutcomeCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 200 : 224,
+      isVisible: true,
     },
     {
       Header: locale.turnoverScroller.headers.income,
@@ -68,6 +76,7 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: IncomeCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 200 : 224,
+      isVisible: true,
     },
     {
       Header: locale.turnoverScroller.headers.outgoingBalance,
@@ -76,6 +85,7 @@ export const getColumns = (grouping: GROUPING_VALUES): Array<Column<IGroupedAcco
       Cell: OutgoingBalanceCell,
       disableSortBy: false,
       width: isOrganizationColumnVisible ? 229 : 224,
+      isVisible: true,
     },
   ]);
 };

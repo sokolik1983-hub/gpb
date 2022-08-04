@@ -1,21 +1,34 @@
-import type { FC } from 'react';
 import React from 'react';
-import type { IGroupedAccounts } from 'interfaces/dto';
-import type { HeaderGroup } from 'react-table';
+import cn from 'classnames';
+import type { RecordCell } from 'platform-copies/services';
+import { SettingsButton } from 'platform-copies/services/components/data-table/components/settings-button';
+import type { TableInstance } from 'react-table';
+import type { IColumnsStorageObject } from '@platform/core';
 import { Box, ServiceIcons, WithClickable, Typography, Horizon } from '@platform/ui';
 import { COLUMN_NAMES } from './constants';
 import css from './styles.scss';
 
 /** Свойства компонента TableHeader. */
-export interface ITableHeaderProps {
-  /** Заголовки таблицы. */
-  headerGroups: Array<HeaderGroup<IGroupedAccounts>>;
+export interface ITableHeaderProps<T extends RecordCell> {
+  /** Функция изменения настроек для колонок. */
+  setSettingsColumns(value: IColumnsStorageObject[]): void;
+  /** Настройки для колонок. */
+  settingColumns: IColumnsStorageObject[];
+  /** Флаг отображения кнопки настроек колонок таблицы. */
+  showSettingsButton?: boolean;
+  /** Экземпляр таблицы. */
+  tableInstance: TableInstance<T>;
 }
 
 /** Шапка таблицы. */
-export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
+export const TableHeader = <T extends RecordCell>({
+  tableInstance,
+  setSettingsColumns,
+  settingColumns,
+  showSettingsButton,
+}: ITableHeaderProps<T>) => (
   <Box className={css.headerRowWrapper}>
-    {headerGroups.map(headerGroup => {
+    {tableInstance.headerGroups.map(headerGroup => {
       const { key: headerGroupKey, ...restHeaderGroupKey } = headerGroup.getHeaderGroupProps();
 
       return (
@@ -35,7 +48,11 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
             const isRightAlign = column.id !== COLUMN_NAMES.ORGANIZATION_NAME && column.id !== COLUMN_NAMES.ACCOUNT_NUMBER;
 
             return (
-              <Box key={columnKey} {...restHeaderProps} className={css.headerCell}>
+              <Box
+                key={columnKey}
+                {...restHeaderProps}
+                className={cn(css.headerCell, { [css.settingButton]: isLastColumn && showSettingsButton })}
+              >
                 <WithClickable>
                   {(ref, { hovered }) => (
                     <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
@@ -59,6 +76,9 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
               </Box>
             );
           })}
+          {showSettingsButton && (
+            <SettingsButton setSettingsColumns={setSettingsColumns} settingColumns={settingColumns} tableInstance={tableInstance} />
+          )}
         </Box>
       );
     })}

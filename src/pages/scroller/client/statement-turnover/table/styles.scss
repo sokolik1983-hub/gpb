@@ -20,6 +20,7 @@
 }
 
 .headerRow {
+  position: relative;
   border-bottom: 1px solid #e3e5ec;
 }
 
@@ -63,6 +64,10 @@
   position: relative;
   padding-bottom: 10px;
   user-select: none;
+
+  &.settingButton {
+    padding-right: 35px;
+  }
 }
 
 .headerColumnDelimiter {

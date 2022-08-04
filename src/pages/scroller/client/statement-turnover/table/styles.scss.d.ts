@@ -26,6 +26,7 @@ declare namespace StylesScssModule {
     'scrollIconBox': string;
     'secondLevelCell': string;
     'secondLevelLine': string;
+    'settingButton': string;
     'sortIconWrapper': string;
     'table': string;
     'tableBody': string;

@@ -4,24 +4,17 @@ import { StickyRowsProvider } from 'components';
 import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/dto';
+import { SCROLLER_SETTING_TYPE, useStorageSettings } from 'platform-copies/services/components/data-table/hooks';
 import { useTable, useSortBy, useResizeColumns, useExpanded, useBlockLayout } from 'react-table';
-import { Box } from '@platform/ui';
+import type { IColumnsStorageObject } from '@platform/core';
+import { Box, SettingsForm } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { getColumns } from './columns';
-import { COLUMN_NAMES } from './constants';
 import { Placeholder } from './placeholder';
 import css from './styles.scss';
 import { TableBody } from './table-body';
 import { TableHeader } from './table-header';
-
-/**
- * Возвращает список скрытых колонок.
- *
- * @param grouping - Значение группировки, выбранное в фильтре.
- */
-const getHiddenColumns = (grouping: GROUPING_VALUES) =>
-  [GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES, GROUPING_VALUES.ORGANIZATIONS].includes(grouping) ? [COLUMN_NAMES.ORGANIZATION_NAME] : [];
 
 /**
  * Определяет путь до подстрок.
@@ -48,6 +41,17 @@ export const TurnoversTable: FC = () => {
 
   const organizations = accounts.filter(item => item.groupInfo.groupingType === GROUPING_TYPE.ORGANIZATIONS);
 
+  const { values: settingColumns, setValues: setSettingsColumns } = useStorageSettings<IColumnsStorageObject[]>({
+    value: columns.reduce<IColumnsStorageObject[]>((acc, { id, width, isVisible }) => {
+      if (id) {
+        acc.push({ id, width, isVisible });
+      }
+
+      return acc;
+    }, []),
+    settingsName: SCROLLER_SETTING_TYPE.COLUMNS,
+  });
+
   /**
    * Раскрытые строки по-умолчанию.
    */
@@ -72,28 +76,21 @@ export const TurnoversTable: FC = () => {
   const initialState = useMemo(
     () => ({
       sortBy: sorting,
-      hiddenColumns: getHiddenColumns(groupByForRender),
       expanded,
     }),
-    [sorting, groupByForRender, expanded]
+    [sorting, expanded]
   );
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state: { sortBy },
-  } = useTable<IGroupedAccounts>(
+  const tableInstance = useTable<IGroupedAccounts>(
     {
       data: accounts ?? [],
       columns,
       getSubRows,
-      disableMultiSort: false,
+      disableMultiSort: true,
       manualSortBy: true,
       expandSubRows: false,
       initialState,
+      customSettingsForm: SettingsForm,
       autoResetExpanded: false,
     },
     useSortBy,
@@ -101,6 +98,14 @@ export const TurnoversTable: FC = () => {
     useResizeColumns,
     useBlockLayout
   );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    rows,
+    prepareRow,
+    state: { sortBy },
+  } = tableInstance;
 
   useEffect(() => {
     if (setSorting) {
@@ -128,7 +133,12 @@ export const TurnoversTable: FC = () => {
   return (
     <Box className={css.tableWrapper}>
       <Box {...getTableProps()} className={css.table}>
-        <TableHeader headerGroups={headerGroups} />
+        <TableHeader
+          showSettingsButton
+          setSettingsColumns={setSettingsColumns}
+          settingColumns={settingColumns}
+          tableInstance={tableInstance}
+        />
         {tableContent}
       </Box>
     </Box>
