@@ -38,9 +38,14 @@ export const AccountList = ({ rows, prepareRow, withoutBtn = false, nodesIds: [n
   const [maxVisibleSize, setMaxVisibleSize] = useState(withoutBtn ? rows.length : 3);
   const { groupByForRender } = useContext<ITurnoverScrollerContext>(TurnoverScrollerContext);
 
-  const handleBtnClick = useCallback(() => {
-    setMaxVisibleSize(size => (size === 3 ? rows.length : 3));
-  }, [rows.length]);
+  const handleBtnClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.stopPropagation();
+
+      setMaxVisibleSize(size => (size === 3 ? rows.length : 3));
+    },
+    [rows.length]
+  );
 
   const hasThirdLevelMargin = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES;
   const hasSecondLevelMargin = ![GROUPING_VALUES.NO_GROUPING, GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES].includes(groupByForRender);
