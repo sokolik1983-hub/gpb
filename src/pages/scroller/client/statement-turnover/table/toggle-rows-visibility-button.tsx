@@ -6,10 +6,8 @@ import css from './styles.scss';
 
 /** Свойства компонента ToggleRowsVisibilityButton. */
 export interface IToggleRowsVisibilityButtonProps {
-  /**
-   * Обработчик нажатия на кнопку.
-   */
-  onClick(): void;
+  /** Обработчик нажатия на кнопку. */
+  onClick(e: React.MouseEvent): void;
   /**
    * Максимальное кол-во видимых счетов.
    */
