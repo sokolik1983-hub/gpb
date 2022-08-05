@@ -26,6 +26,8 @@ export interface IFormContext {
   nationalCurrency?: boolean;
   /** Проводки переоценки. */
   revaluationAccountEntry?: boolean;
+  /** Признак счета в иностранной валюте. */
+  hasForeignCurrency?: boolean;
 }
 
 /** Начальное значение контекста формы. */

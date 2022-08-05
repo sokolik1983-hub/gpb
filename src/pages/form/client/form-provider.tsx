@@ -14,11 +14,13 @@ export interface IFormProviderProps {
   action?: ACTION;
   /** Идентификатор выписки. */
   statementId?: string;
+  /** Имеет счета в иностранной валюте. */
+  hasForeignCurrency: boolean;
 }
 
 /** Провайдер формы. Компонент для хранения и обработки общих данных на форме (дополнительно заворачивает содержимое в тэг form). */
-export const FormProvider: React.FC<IFormProviderProps> = ({ children, onSubmit, useCase, action, statementId }) => {
-  const value = useFormProvider(useCase, action, statementId);
+export const FormProvider: React.FC<IFormProviderProps> = ({ children, onSubmit, useCase, action, statementId, hasForeignCurrency }) => {
+  const value = useFormProvider(useCase, action, statementId, hasForeignCurrency);
 
   return <FormContext.Provider value={useMemo(() => value, [value])}>{<form onSubmit={onSubmit}>{children}</form>}</FormContext.Provider>;
 };

@@ -1,5 +1,9 @@
 import { useContext, useEffect, useState } from 'react';
+import { useNationalCurrency } from 'components/form/common/use-national-currency';
+import { useNationalCurrencyAndRevaluationAccount } from 'components/form/common/use-national-currency-and-revaluation-account';
+import { useRevaluationAccount } from 'components/form/common/use-revaluation-account';
 import { useWithPdfEsign } from 'components/form/common/use-with-pdf-esign';
+import { Decorator } from 'final-form';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
@@ -16,12 +20,16 @@ import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [ICheckboxOption[]] => {
-  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action } = useContext(FormContext);
+  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action, hasForeignCurrency } = useContext(FormContext);
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
   const [options, setOptions] = useState<ICheckboxOption[]>([]);
   const [withPdfEsignOption] = useWithPdfEsign();
+
+  useRevaluationAccount();
+  useNationalCurrency();
+  // useNationalCurrencyAndRevaluationAccount();
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
@@ -69,6 +77,16 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         }
+        case CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY: {
+          acc.push({ ...x, disabled: !hasForeignCurrency });
+
+          break;
+        }
+        case CREATION_PARAMS.NATIONAL_CURRENCY: {
+          acc.push({ ...x, disabled: !hasForeignCurrency || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
+
+          break;
+        }
         default: {
           acc.push(x);
         }
@@ -80,6 +98,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     setOptions(newOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    hasForeignCurrency,
     action,
     change,
     isPdf,

@@ -95,7 +95,7 @@ export const FORM_FIELDS = {
   CREDIT_PARAMS: 'creditParams',
   EMAIL: 'email',
   ACTION: 'action',
-};
+} as const;
 
 /** Метки полей формы создания "Запроса выписки". */
 export const FORM_FIELD_LABELS = {
