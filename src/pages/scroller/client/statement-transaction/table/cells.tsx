@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import React, { useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
 import { HightlightText, StopPropagation } from 'components';
-import type { CellAccessibilityInnerFocusProps } from 'components/scroller-table-view/accessibility';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
@@ -19,7 +18,7 @@ import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-type TransactionCellProps = CellAccessibilityInnerFocusProps & CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value: { operationDate } }) => (

@@ -1,5 +1,10 @@
 import React from 'react';
 import { AccordionGroup, AccordionItem, StickyRow } from 'components';
+import {
+  COMMON_SCROLLER_NODE,
+  TURNOVERS_SCROLLER_ROW_CATEGORY_NODE,
+  TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE,
+} from 'stream-constants/a11y-nodes';
 import { AccountList } from '../account-list';
 import { GROUPING_ROW_LEVEL, GroupingRow } from '../grouping-row';
 import type { IScrollerView } from '../table-body';
@@ -12,7 +17,7 @@ export const ViewWithTwoLevels: React.FC<IScrollerView> = ({ rows, prepareRow })
     {rows.map(row => {
       prepareRow(row);
 
-      const { subRows, getRowProps, isExpanded, toggleRowExpanded, id } = row;
+      const { subRows, getRowProps, isExpanded, toggleRowExpanded } = row;
 
       const { key } = getRowProps();
 
@@ -26,7 +31,15 @@ export const ViewWithTwoLevels: React.FC<IScrollerView> = ({ rows, prepareRow })
             </StickyRow>
           }
           isExpanded={isExpanded}
-          panel={<AccountList groupRowId={id} prepareRow={prepareRow} rows={subRows} />}
+          nodesIds={[`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${key}`, COMMON_SCROLLER_NODE]}
+          panel={
+            <AccountList
+              key={key}
+              nodesIds={[`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${key}`, `${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${key}`]}
+              prepareRow={prepareRow}
+              rows={subRows}
+            />
+          }
         />
       );
     })}

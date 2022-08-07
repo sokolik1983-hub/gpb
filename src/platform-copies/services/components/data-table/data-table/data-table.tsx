@@ -1,9 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
-import { FocusNode } from 'components/focus-tree';
 import { locale } from 'localization';
-import { AutoFocusInside } from 'react-focus-lock';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
-import { COMMON_SCROLLER_NODE, DATA_TABLE_HEADER_NODE, DATA_TABLE_PAGINATION_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
@@ -218,20 +215,19 @@ export const DataTable = <T extends IBaseEntity>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onSelectedRowsChange, selectedRowIds]);
 
+  const tableProps = getTableProps();
+
   return (
-    <>
-      <Box className={css.wrapper}>
-        <Box {...getTableProps()}>
-          <AutoFocusInside>
-            <FocusNode nodeId={DATA_TABLE_HEADER_NODE} parentId={COMMON_SCROLLER_NODE}>
-              <TableHeader
-                setSettingsColumns={setSettingsColumns}
-                settingColumns={settingColumns}
-                showSettingsButton={showSettingsButton}
-                tableInstance={tableInstance}
-              />
-            </FocusNode>
-          </AutoFocusInside>
+    <Box className={css.wrapper}>
+      <Box {...tableProps}>
+        <TableHeader
+          setSettingsColumns={setSettingsColumns}
+          settingColumns={settingColumns}
+          showSettingsButton={showSettingsButton}
+          tableInstance={tableInstance}
+        />
+
+        {rows.length > 0 && (
           <TableBody<T>
             executor={executor}
             expandedRowActionsGetter={expandedRowActionsGetter}
@@ -244,39 +240,37 @@ export const DataTable = <T extends IBaseEntity>({
             onRowClick={onRowClick}
             onRowDoubleClick={onRowDoubleClick}
           />
-        </Box>
+        )}
 
         {!isLoading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
 
         {pageCount > 1 && (
-          <FocusNode nodeId={DATA_TABLE_PAGINATION_NODE} parentId={COMMON_SCROLLER_NODE}>
-            <Box className={css.pagination}>
-              <FractalPagination
-                page={paginationState.pageIndex + 1}
-                pageCount={pageCount}
-                pageSize={paginationState.pageSize}
-                onPageChange={handlePageChange}
-                onPageSizeChange={setPageSize}
-              />
-            </Box>
-          </FocusNode>
+          <Box className={css.pagination}>
+            <FractalPagination
+              page={paginationState.pageIndex + 1}
+              pageCount={pageCount}
+              pageSize={paginationState.pageSize}
+              onPageChange={handlePageChange}
+              onPageSizeChange={setPageSize}
+            />
+          </Box>
         )}
 
         <LoaderOverlay opened={isLoading} />
 
-        <Gap.X3L />
-        <Gap.X3L />
+        <Gap />
+
+        {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
+          <Box className={css.footer}>
+            <FractalSelectedRowsInfo<RecordCell>
+              actionsGetter={footerActionsGetter(executor)}
+              content={footerContent}
+              selectedRows={selectedRows}
+            />
+          </Box>
+        )}
       </Box>
-      {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
-        <Box className={css.footer}>
-          <FractalSelectedRowsInfo<RecordCell>
-            actionsGetter={footerActionsGetter(executor)}
-            content={footerContent}
-            selectedRows={selectedRows}
-          />
-        </Box>
-      )}
-    </>
+    </Box>
   );
 };
 
