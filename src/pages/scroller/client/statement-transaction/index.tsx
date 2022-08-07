@@ -172,7 +172,7 @@ export const StatementTransactionScrollerPage = () => {
                 <StatementInfo />
               </ContentLoader>
               {!counterpartiesFetched && <Line fill="FAINT" />}
-              <FocusNode hideBorder nodeId={TRANSACTIONS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+              <FocusNode hidden nodeId={TRANSACTIONS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!counterpartiesFetched}>
                   <Line fill="FAINT" />
                   <FilterLayout

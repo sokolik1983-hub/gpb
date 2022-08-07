@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useMemo } from 'react';
 import { StickyRowsProvider } from 'components';
 import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
 import type { IGroupedAccounts } from 'interfaces/dto';
-import { GROUPING_TYPE, GROUPING_VALUES } from 'interfaces/dto';
+import { GROUPING_VALUES } from 'interfaces/dto';
 import { useTable, useSortBy, useResizeColumns, useExpanded, useBlockLayout } from 'react-table';
 import { Box } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
@@ -46,27 +46,17 @@ export const TurnoversTable: FC = () => {
 
   const columns = useMemo(() => getColumns(groupByForRender), [groupByForRender]);
 
-  const organizations = accounts.filter(item => item.groupInfo.groupingType === GROUPING_TYPE.ORGANIZATIONS);
-
   /**
    * Раскрытые строки по-умолчанию.
    */
   const expanded = useMemo(
     () =>
       accounts.reduce((acc, el, i) => {
-        const { groupInfo } = el;
-
-        if (groupInfo.groupingType === GROUPING_TYPE.ORGANIZATIONS) {
-          acc[i] = true;
-        }
-
-        if ([GROUPING_TYPE.ACCOUNT_TYPE, GROUPING_TYPE.BRANCHES, GROUPING_TYPE.CURRENCIES].includes(groupInfo.groupingType)) {
-          acc[i] = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES ? organizations.length === 1 : true;
-        }
+        acc[i] = true;
 
         return acc;
       }, {}),
-    [accounts, groupByForRender, organizations.length]
+    [accounts]
   );
 
   const initialState = useMemo(
@@ -94,7 +84,7 @@ export const TurnoversTable: FC = () => {
       manualSortBy: true,
       expandSubRows: false,
       initialState,
-      autoResetExpanded: false,
+      autoResetExpanded: true,
     },
     useSortBy,
     useExpanded,

@@ -20,7 +20,6 @@
 .header {
   height: 40px;
   user-select: none;
-  border-bottom: 1px solid;
   border-color: var(--line-fill-faint-strong);
 }
 
@@ -46,13 +45,13 @@
 }
 
 .cellPadding {
-  padding: var(--gap-size-x2s) var(--gap-size-sm);
+  padding: 4px 12px;
 }
 
 .wrapper {
   position: relative;
   height: 100%;
-  margin: 0 32px;
+  margin: 2px 32px;
 }
 
 .scrollInner {

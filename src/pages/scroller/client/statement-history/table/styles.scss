@@ -1,3 +1,5 @@
+@import '~@platform/ui/dist/streams/ui/common';
+
 .status {
   margin-top: 5px;
 }
@@ -18,4 +20,18 @@
   height: 24px;
   margin: 0 4px;
   padding: 0;
+}
+
+.scrollIcon {
+  position: absolute;
+  right: 50px;
+  bottom: 17px;
+  z-index: getIndex(control);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 0.4;
 }

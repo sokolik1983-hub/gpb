@@ -5,11 +5,21 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'rowActionButton': string;
-    'rowActions': string;
-    'scrollIcon': string;
-    'status': string;
-    'totalWrapper': string;
+    'cellPadding': string;
+    'footer': string;
+    'header': string;
+    'headerLeftGap': string;
+    'infiniteRow': string;
+    'margin': string;
+    'pagination': string;
+    'row': string;
+    'rowContent': string;
+    'scrollInner': string;
+    'settingIcon': string;
+    'sortIconWrapper': string;
+    'sortIndex': string;
+    'verticalSeparator': string;
+    'wrapper': string;
     'zLayerContainer': string;
     'zLayerControl': string;
     'zLayerFix': string;

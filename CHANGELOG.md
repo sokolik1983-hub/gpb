@@ -1,3 +1,46 @@
+# [2.10.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.4...v2.10.0-release.5) (2022-08-04)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-30821 исправление обработчика нажатия кнопки ([f9bf2f2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f9bf2f23df813f2f8a28642f083aeb88938888d0))
+
+# [2.10.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.3...v2.10.0-release.4) (2022-08-02)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29853 доработка рамок ([5ff9243](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5ff9243ba62515b3e70960ef68f8d2989f49c51f))
+
+# [2.10.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.2...v2.10.0-release.3) (2022-08-02)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29657 доработка раскрытия групп ([9c126e4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9c126e41a3fd960d664d036bba2714fc38319acc))
+* **скроллер:** GBO-29657 исправление лоадера и постраничника ([77034d1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/77034d12aeefb37bc77fe358ba01af1e5fbec2ba))
+
+# [2.10.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0-release.1...v2.10.0-release.2) (2022-08-01)
+
+
+### Bug Fixes
+
+* GBO-29853 кумулятивное исправление дефектов ([cbb80b6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cbb80b6196c1d9c6afc39fe22fedc84e13ea18df))
+
+# [2.10.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.1...v2.10.0-release.1) (2022-07-30)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-29852 исправления рамок для скроллеров ([d2f68b2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d2f68b29776818efc00711a6e6aa664cf0dc8487))
+* **скроллер:** GBO-29852 правки для рамки выдления счетов ([bb9f908](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bb9f908d278890d19edd318e8c132fa5a6ac32c2))
+* **скроллер:** GBO-29853 доработки навигации в ОСВ ([b79c388](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b79c388b4a555cad46a6697c842a04f41ea2a6b5))
+
+
+### Features
+
+* **скроллер:** GBO-29893 поправлено использование компонента LayoutScroll в InfiniteTable ([fc9f068](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fc9f068ac082837454f04627ae3ae34e92fcd99c))
+
 ## [2.9.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.0...v2.9.1) (2022-07-27)
 
 

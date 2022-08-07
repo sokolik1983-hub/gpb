@@ -1,26 +1,29 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo, useCallback } from 'react';
-import { executor, createStatement } from 'actions/client';
+import React, { useCallback, useContext, useMemo } from 'react';
+import { createStatement, executor } from 'actions/client';
 import cn from 'classnames';
-import { TYPE, CREATION_TYPE, ACTION, OPERATIONS } from 'interfaces/client';
+import type { IFocusParentNodeProps } from 'components/focus-tree';
+import { FocusNode, NODE_TYPE } from 'components/focus-tree';
+import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/dto';
 import { GROUPING_VALUES } from 'interfaces/dto';
 import type { Row } from 'react-table';
+import { DATA_TABLE_ROW_CELL_NODE } from 'stream-constants/a11y-nodes';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { getHandlerDependingOnSelection, isFunctionAvailability } from 'utils';
-import { Box, WithClickable, ROLE, Line } from '@platform/ui';
+import { Line, ROLE, WithClickable } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import css from './styles.scss';
 
 /** Свойства компонента AccountInfoRow. */
-export interface IAccountInfoRowProps {
+export interface IAccountInfoRowProps extends IFocusParentNodeProps {
   /** Строка с оборотами по счёту. */
   accountInfoRow: Row<IAccountTurnoversInfo>;
 }
 
 /** Строка с информацией по счёту в таблице Оборотов. */
-export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => {
+export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow, nodesIds: [nodeId, parentId] }) => {
   const { original, getRowProps, cells } = accountInfoRow;
   const { key, ...rowProps } = getRowProps();
 
@@ -56,16 +59,21 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     [dateFrom, datePeriod, dateTo, original.accountId]
   );
 
-  const handleClick = useCallback(async () => {
-    // TODO: в дальнейшем заменить на платформенный аналог
-    if (!isFunctionAvailability(PRIVILEGE.STATEMENT_REQUEST)) {
-      return;
-    }
+  const handleClick = useCallback(
+    async (e: React.MouseEvent) => {
+      e.stopPropagation();
 
-    const handler = getHandlerDependingOnSelection(executor.execute);
+      // TODO: в дальнейшем заменить на платформенный аналог
+      if (!isFunctionAvailability(PRIVILEGE.STATEMENT_REQUEST)) {
+        return;
+      }
 
-    await handler(createStatement, [doc]);
-  }, [doc]);
+      const handler = getHandlerDependingOnSelection(executor.execute);
+
+      await handler(createStatement, [doc]);
+    },
+    [doc]
+  );
 
   const hasThirdLevelMargin = groupByForRender === GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES;
   const hasSecondLevelMargin = ![GROUPING_VALUES.NO_GROUPING, GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES].includes(groupByForRender);
@@ -76,11 +84,14 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
     <React.Fragment key={key}>
       <WithClickable>
         {(ref, { hovered }) => (
-          <Box
+          <FocusNode
             key={key}
             ref={ref}
             {...rowProps}
+            preferBorder
             className={cn(css.clickableRow, { [css.borderedRow]: !hasMargin, [css.hoveredRow]: hovered })}
+            nodeId={nodeId}
+            parentId={parentId}
             role={ROLE.ROW}
             onClick={handleClick}
           >
@@ -88,12 +99,20 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow }) => 
               const { key: cellKey, ...cellProps } = cell.getCellProps({ role: ROLE.GRIDCELL });
 
               return (
-                <Box key={cellKey} {...cellProps} className={css.cell}>
+                <FocusNode
+                  key={cellKey}
+                  preferBorder
+                  {...cellProps}
+                  className={css.cell}
+                  nodeId={`${DATA_TABLE_ROW_CELL_NODE}-${cellKey}`}
+                  parentId={nodeId}
+                  type={NODE_TYPE.HORIZONTAL}
+                >
                   {cell.render('Cell')}
-                </Box>
+                </FocusNode>
               );
             })}
-          </Box>
+          </FocusNode>
         )}
       </WithClickable>
       {hasMargin && (

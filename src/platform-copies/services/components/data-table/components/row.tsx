@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { FocusNode } from 'components/focus-tree';
 import type { Row as RowPure } from 'react-table';
-import { COMMON_SCROLLER_NODE, DATA_TABLE_ROW_NODE } from 'stream-constants/a11y-nodes';
+import { COMMON_SCROLLER_NODE, DATA_TABLE_ROW_CELL_NODE, DATA_TABLE_ROW_NODE } from 'stream-constants/a11y-nodes';
 import type { IExecuter } from '@platform/core';
 import { getActionButtons } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
@@ -73,13 +73,15 @@ export const Row = <T,>({
   return (
     <WithClickable key={rowKey}>
       {(ref, { hovered }) => (
-        <FocusNode key={`rowLayout_${rowKey}`} nodeId={`${DATA_TABLE_ROW_NODE}-${rowKey}`} parentId={COMMON_SCROLLER_NODE}>
+        <React.Fragment key={`rowLayout_${rowKey}`}>
           <div ref={setRefRow}>
-            <Box
+            <FocusNode
               ref={ref}
               border={['FAINT', 'SM']}
               className={css.row}
               data-id={original.id}
+              nodeId={`${DATA_TABLE_ROW_NODE}-${row.index}`}
+              parentId={COMMON_SCROLLER_NODE}
               {...restRowProps}
               key={`row_${rowKey}`}
               aria-expanded={isExpanded}
@@ -98,7 +100,15 @@ export const Row = <T,>({
                 {cells.map((cell, cellIndex) => {
                   const { key } = cell.getCellProps();
 
-                  return <Cell key={key} {...cell} first={cellIndex === 0 || cellIndex === 1} refetch={refetch} />;
+                  return (
+                    <Cell
+                      key={key}
+                      {...cell}
+                      first={cellIndex === 0 || cellIndex === 1}
+                      nodesIds={[`${DATA_TABLE_ROW_CELL_NODE}-${row.index}-${cellIndex}`, `${DATA_TABLE_ROW_NODE}-${row.index}`]}
+                      refetch={refetch}
+                    />
+                  );
                 })}
                 {hovered && <FastActionsPanel actions={rowActionButtons} />}
               </Box>
@@ -110,13 +120,12 @@ export const Row = <T,>({
                   {...row.getRowProps()}
                   key={`expanded_${row.getRowProps().key}`}
                   style={{
-                    ...row.getRowProps().style,
-
+                    ...rowStyle,
                     minWidth: MIN_WIDTH,
                   }}
                 />
               ) : null}
-            </Box>
+            </FocusNode>
           </div>
           {last ? (
             <Box
@@ -124,7 +133,7 @@ export const Row = <T,>({
               {...row.getRowProps()}
               key={`divider_${row.getRowProps().key}`}
               style={{
-                ...row.getRowProps().style,
+                ...rowStyle,
                 borderTop: 'none',
                 borderRight: 'none',
                 borderLeft: 'none',
@@ -132,7 +141,7 @@ export const Row = <T,>({
               }}
             />
           ) : null}
-        </FocusNode>
+        </React.Fragment>
       )}
     </WithClickable>
   );

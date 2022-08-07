@@ -1,6 +1,8 @@
 import React from 'react';
+import { FocusNode, NODE_TYPE } from 'components/focus-tree';
 import { locale } from 'localization';
 import type { TableInstance } from 'react-table';
+import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
 import { ACTIONS, Box, Gap, Horizon, ROLE, ServiceIcons, Typography, WithClickable, WithInfoTooltip } from '@platform/ui';
 import { MIN_WIDTH } from '../constants';
@@ -8,6 +10,7 @@ import css from '../styles.scss';
 import type { RecordCell } from '../types';
 import { HEADER_ALIGN } from '../types';
 import { SettingsButton } from './settings-button';
+
 /** Свойства хедера таблицы. */
 interface TableHeaderProps {
   /** Коллбэк-реф хедера таблицы. */
@@ -57,10 +60,17 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
           }
 
           const columnResizerProps = column.getResizerProps ? column.getResizerProps() : { style: {} };
+          const { key: columnKey, ...restHeaderProps } = column.getHeaderProps();
 
           return (
-            // eslint-disable-next-line react/jsx-key
-            <Box data-name={column.id} {...column.getHeaderProps()}>
+            <FocusNode
+              data-name={column.id}
+              {...restHeaderProps}
+              key={columnKey}
+              nodeId={`${DATA_TABLE_COLUMN_NODE}-${index}`}
+              parentId={COMMON_SCROLLER_NODE}
+              type={NODE_TYPE.HORIZONTAL}
+            >
               <WithClickable>
                 {(ref, { hovered }) => (
                   <Horizon
@@ -100,7 +110,6 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
                   {...columnResizerProps}
                   style={{
                     ...columnResizerProps.style,
-
                     borderTop: 'none',
                     borderRight: 'none',
                     borderBottom: 'none',
@@ -108,7 +117,7 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
                   title={''}
                 />
               )}
-            </Box>
+            </FocusNode>
           );
         })}
         {showSettingsButton && (

@@ -104,7 +104,7 @@ export const StatementTurnoverScrollerPage = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
-              <FocusNode hideBorder nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+              <FocusNode hidden nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
                   <Filter />
                 </ContentLoader>

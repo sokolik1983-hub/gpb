@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { AccordionGroup, AccordionItem, StickyRow } from 'components';
-import { FocusNode } from 'components/focus-tree';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_TYPE } from 'interfaces/dto';
 import type { Row } from 'react-table';
@@ -49,7 +48,7 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
       {formattedRows.map(orgRow => {
         prepareRow(orgRow);
 
-        const { subRows: currencyRows, getRowProps, isExpanded: isOrgExpanded, toggleRowExpanded: toggleOrgRow, id } = orgRow;
+        const { subRows: currencyRows, getRowProps, isExpanded: isOrgExpanded, toggleRowExpanded: toggleOrgRow } = orgRow;
 
         const { key: orgRowKey } = getRowProps();
 
@@ -64,38 +63,41 @@ export const ViewByOrgAndCurrency: React.FC<IScrollerView> = ({ rows, prepareRow
           const { key } = getCurrencyRowProps();
 
           return (
-            <FocusNode
+            <AccordionItem
               key={key}
-              nodeId={`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${row.id}`}
-              parentId={`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${id}`}
-            >
-              <AccordionItem
-                expand={toggleRowExpanded}
-                header={
-                  <StickyRow secondLevelRow>
-                    <GroupingRow highlight groupingRow={row} level={GROUPING_ROW_LEVEL.SECOND} />
-                  </StickyRow>
-                }
-                isExpanded={isCurrencyExpanded}
-                panel={<AccountList key={key} groupRowId={row.id} prepareRow={prepareRow} rows={subRows} />}
-              />
-            </FocusNode>
+              expand={toggleRowExpanded}
+              header={
+                <StickyRow secondLevelRow>
+                  <GroupingRow highlight groupingRow={row} level={GROUPING_ROW_LEVEL.SECOND} />
+                </StickyRow>
+              }
+              isExpanded={isCurrencyExpanded}
+              nodesIds={[`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${key}`, `${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${orgRowKey}`]}
+              panel={
+                <AccountList
+                  key={key}
+                  nodesIds={[`${TURNOVERS_SCROLLER_ROW_SUBCATEGORY_NODE}-${key}`, `${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${orgRowKey}`]}
+                  prepareRow={prepareRow}
+                  rows={subRows}
+                />
+              }
+            />
           );
         });
 
         return (
-          <FocusNode key={orgRowKey} nodeId={`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${id}`} parentId={COMMON_SCROLLER_NODE}>
-            <AccordionItem
-              expand={toggleOrgRow}
-              header={
-                <StickyRow>
-                  <GroupingRow primary groupingRow={orgRow} level={GROUPING_ROW_LEVEL.FIRST} />
-                </StickyRow>
-              }
-              isExpanded={isOrgExpanded}
-              panel={<AccordionGroup disabled={!isOrgExpanded}>{CurrencyList}</AccordionGroup>}
-            />
-          </FocusNode>
+          <AccordionItem
+            key={orgRowKey}
+            expand={toggleOrgRow}
+            header={
+              <StickyRow>
+                <GroupingRow primary groupingRow={orgRow} level={GROUPING_ROW_LEVEL.FIRST} />
+              </StickyRow>
+            }
+            isExpanded={isOrgExpanded}
+            nodesIds={[`${TURNOVERS_SCROLLER_ROW_CATEGORY_NODE}-${orgRowKey}`, COMMON_SCROLLER_NODE]}
+            panel={<AccordionGroup disabled={!isOrgExpanded}>{CurrencyList}</AccordionGroup>}
+          />
         );
       })}
     </AccordionGroup>
