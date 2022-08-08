@@ -25,6 +25,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
+    const hasAccounts = values.accountIds.length > 0;
 
     if (withSign) {
       change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);
@@ -70,12 +71,12 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency });
+          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts });
 
           break;
         }
         case CREATION_PARAMS.NATIONAL_CURRENCY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
+          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
 
           break;
         }

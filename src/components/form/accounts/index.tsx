@@ -3,6 +3,7 @@ import { AccountsField } from 'components';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
 import { useAccounts } from 'hooks';
+import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useFormState, useForm } from 'react-final-form';
@@ -25,18 +26,24 @@ export const Accounts: React.FC = () => {
   const onChangeAccounts: OnChangeType<string[]> = useCallback(
     e => {
       const accountIds = e.value;
-      const params = [...values.creationParams];
-
       const hasAccounts = accountIds.length > 0;
 
-      if (hasAccounts && !hasForeignCurrency) {
-        change(
-          FORM_FIELDS.CREATION_PARAMS,
-          params.filter(x => x !== CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY)
-        );
+      let params = [...values.creationParams];
+
+      const isC1 = values.format === FORMAT.C1;
+      const isText = values.format === FORMAT.TXT;
+
+      if (!hasForeignCurrency || !hasAccounts || isC1 || isText) {
+        params = params.filter(x => x !== CREATION_PARAMS.NATIONAL_CURRENCY);
       }
+
+      if (!hasForeignCurrency || !hasAccounts) {
+        params = params.filter(x => x !== CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY);
+      }
+
+      change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, hasForeignCurrency, values.creationParams]
+    [change, hasForeignCurrency, values.creationParams, values.format]
   );
 
   return (

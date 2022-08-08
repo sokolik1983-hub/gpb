@@ -26,13 +26,16 @@ export const FileFormats: React.FC = () => {
 
   const onChangeFileFormat: OnChangeType<FORMAT> = useCallback(
     e => {
+      const hasAccounts = values.accountIds.length > 0;
+
       let params = [...values.creationParams];
+
       const format = e.value;
       const isPdf = format === FORMAT.PDF;
       const isC1 = format === FORMAT.C1;
       const isText = format === FORMAT.TXT;
 
-      if (!hasForeignCurrency || isC1 || isText) {
+      if (!hasForeignCurrency || !hasAccounts || isC1 || isText) {
         params = params.filter(x => x !== CREATION_PARAMS.NATIONAL_CURRENCY);
       }
 
@@ -42,7 +45,7 @@ export const FileFormats: React.FC = () => {
 
       change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, hasForeignCurrency, values.creationParams, withSign]
+    [change, hasForeignCurrency, values.accountIds.length, values.creationParams, withSign]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));
