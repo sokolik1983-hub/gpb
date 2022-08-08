@@ -38,7 +38,7 @@ export const Accounts: React.FC = () => {
       }
 
       if (!hasForeignCurrency || !hasAccounts) {
-        params = params.filter(x => x !== CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY);
+        params = params.filter(x => x !== CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY);
       }
 
       change(FORM_FIELDS.CREATION_PARAMS, params);

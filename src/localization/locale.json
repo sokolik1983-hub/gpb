@@ -537,7 +537,7 @@
   "common.creationParams.nationalCurrency": {
     "ru": "Рублёвый эквивалент"
   },
-  "common.creationParams.revaluationAccountEntry": {
+  "common.creationParams.revaluationAccountingEntry": {
     "ru": "Проводки переоценки"
   },
   "common.documentsSetParams.label": {

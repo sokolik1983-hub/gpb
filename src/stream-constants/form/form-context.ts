@@ -25,7 +25,7 @@ export interface IFormContext {
   /** Рублёвый эквивалент. */
   nationalCurrency?: boolean;
   /** Проводки переоценки. */
-  revaluationAccountEntry?: boolean;
+  revaluationAccountingEntry?: boolean;
   /** Признак счета в иностранной валюте. */
   hasForeignCurrency?: boolean;
 }
@@ -38,7 +38,7 @@ export const defaultFormContextValue: IFormContext = {
   isPdf: defaultFormState.format === FORMAT.PDF,
   totalsOfDay: defaultFormState.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
   nationalCurrency: defaultFormState.creationParams.includes(CREATION_PARAMS.NATIONAL_CURRENCY),
-  revaluationAccountEntry: defaultFormState.creationParams.includes(CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY),
+  revaluationAccountingEntry: defaultFormState.creationParams.includes(CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY),
 };
 
 /** Экземпляр контекста формы. */
