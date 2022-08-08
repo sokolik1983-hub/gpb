@@ -222,7 +222,8 @@ export const DataTable = <T extends IBaseEntity>({
   return (
     <Box className={css.wrapper}>
       <Box {...tableProps}>
-        <TableHeader
+        <TableHeader<T>
+          originalColumns={columns}
           setSettingsColumns={setSettingsColumns}
           settingColumns={settingColumns}
           showSettingsButton={showSettingsButton}

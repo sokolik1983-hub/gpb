@@ -4,6 +4,7 @@ import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { FOOTER_ACTIONS, FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
+import { STORAGE_KEY } from 'pages/scroller/client/statement-transaction/filter';
 import { CaptionRow } from 'pages/scroller/client/statement-transaction/table/caption-row';
 import { ONLY_SELECTED_ROWS_CKECKBOX } from 'pages/scroller/client/statement-transaction/table/constants';
 import { Footer } from 'pages/scroller/client/statement-transaction/table/footer';
@@ -100,6 +101,7 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
         footerContent={Footer}
         rowCaptionComponent={CaptionRow}
         selectedRows={selectedRows}
+        storageKey={STORAGE_KEY}
         visibleOnlySelectedRows={visibleOnlySelectedRows}
         onRowClick={handRowClick}
         onSelectedRowsChange={setSelectedRows}

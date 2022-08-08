@@ -8,7 +8,9 @@ import css from '../styles.scss';
 import type { RecordCell, TableColumn } from '../types';
 
 /** Свойства компонента кнопки для настройки колонок таблицы. */
-interface SettingsButtonProps {
+interface SettingsButtonProps<T extends IBaseEntity> {
+  /** Параметры оригинальных колонок. */
+  originalColumns: TableColumn<T>;
   /** Функция изменения настроек для колонок. */
   setSettingsColumns(value: IColumnsStorageObject[]): void;
   /** Настройки для колонок. */
@@ -18,7 +20,12 @@ interface SettingsButtonProps {
 }
 
 /** Компонент кнопки для настройки колонок таблицы. */
-export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, settingColumns, tableInstance }: SettingsButtonProps) => {
+export const SettingsButton = <T extends IBaseEntity>({
+  originalColumns,
+  setSettingsColumns,
+  settingColumns,
+  tableInstance,
+}: SettingsButtonProps<T>) => {
   const {
     columns,
     setHiddenColumns,
@@ -48,14 +55,14 @@ export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, sett
   /** Список колонок, которые будут выбраны как дефолтные по признаку isVisible. */
   const defaultVisibleColumns = useMemo(
     () =>
-      columns.reduce((acc: string[], item) => {
+      originalColumns.reduce((acc: string[], item) => {
         if (item.id && item.isVisible) {
           acc.push(item.id);
         }
 
         return acc;
       }, []),
-    [columns]
+    [originalColumns]
   );
 
   /** Список id отображаемых на данный момент колонок, за исключением selectionAndExpand. */
