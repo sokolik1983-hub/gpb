@@ -34,6 +34,8 @@ export interface ITransactionScrollerContext {
   setSelectedRows(value: IStatementTransactionRow[]): void;
   /** Признак получения новых данных по проводкам с бэка. */
   fetchedNewTransactions: boolean;
+  /** Признак отображения национального эквивалента. */
+  isNationalCurrency: boolean;
 }
 
 /** Дефолтное состояние контекста скроллера. */
@@ -57,6 +59,7 @@ const DEFAULT_CONTEXT_VALUE: ITransactionScrollerContext = {
   selectedRows: [],
   setSelectedRows: noop,
   fetchedNewTransactions: false,
+  isNationalCurrency: false,
 };
 
 /** Контекст скроллера "Проводки". */

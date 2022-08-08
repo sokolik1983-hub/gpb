@@ -7,8 +7,8 @@ import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
-import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
+import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
 import { fileFormatShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
@@ -19,25 +19,33 @@ export const FileFormats: React.FC = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
   const { useCase } = useContext<IDialogContext>(DialogContext);
-  const { withSign } = useContext(FormContext);
+  const { withSign, hasForeignCurrency } = useContext(FormContext);
 
   // встраиваем реакцию на изменение параметров для флага "Отдельный файл по каждому счету"
   useSeparateAccountFiles();
 
   const onChangeFileFormat: OnChangeType<FORMAT> = useCallback(
     e => {
-      const params = [...values.creationParams];
+      const hasAccounts = values.accountIds.length > 0;
+
+      let params = [...values.creationParams];
+
       const format = e.value;
       const isPdf = format === FORMAT.PDF;
+      const isC1 = format === FORMAT.C1;
+      const isText = format === FORMAT.TXT;
+
+      if (!hasForeignCurrency || !hasAccounts || isC1 || isText) {
+        params = params.filter(x => x !== CREATION_PARAMS.NATIONAL_CURRENCY);
+      }
 
       if (!isPdf && withSign) {
-        change(
-          FORM_FIELDS.CREATION_PARAMS,
-          params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN)
-        );
+        params = params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN);
       }
+
+      change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, values.creationParams, withSign]
+    [change, hasForeignCurrency, values.accountIds.length, values.creationParams, withSign]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));

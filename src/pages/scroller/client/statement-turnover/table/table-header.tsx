@@ -1,23 +1,36 @@
-import type { FC } from 'react';
 import React from 'react';
+import cn from 'classnames';
 import { FocusNode, NODE_TYPE } from 'components/focus-tree';
-import type { IGroupedAccounts } from 'interfaces/dto';
-import type { HeaderGroup } from 'react-table';
+import type { RecordCell } from 'platform-copies/services';
+import { SettingsButton } from 'platform-copies/services/components/data-table/components/settings-button';
+import type { TableInstance } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';
+import type { IColumnsStorageObject } from '@platform/core';
 import { Box, ServiceIcons, WithClickable, Typography, Horizon } from '@platform/ui';
 import { COLUMN_NAMES } from './constants';
 import css from './styles.scss';
 
 /** Свойства компонента TableHeader. */
-export interface ITableHeaderProps {
-  /** Заголовки таблицы. */
-  headerGroups: Array<HeaderGroup<IGroupedAccounts>>;
+export interface ITableHeaderProps<T extends RecordCell> {
+  /** Функция изменения настроек для колонок. */
+  setSettingsColumns(value: IColumnsStorageObject[]): void;
+  /** Настройки для колонок. */
+  settingColumns: IColumnsStorageObject[];
+  /** Флаг отображения кнопки настроек колонок таблицы. */
+  showSettingsButton?: boolean;
+  /** Экземпляр таблицы. */
+  tableInstance: TableInstance<T>;
 }
 
 /** Шапка таблицы. */
-export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
+export const TableHeader = <T extends RecordCell>({
+  tableInstance,
+  setSettingsColumns,
+  settingColumns,
+  showSettingsButton,
+}: ITableHeaderProps<T>) => (
   <Box className={css.headerRowWrapper}>
-    {headerGroups.map(headerGroup => {
+    {tableInstance.headerGroups.map(headerGroup => {
       const { key: headerGroupKey, ...restHeaderGroupKey } = headerGroup.getHeaderGroupProps();
 
       return (
@@ -42,32 +55,35 @@ export const TableHeader: FC<ITableHeaderProps> = ({ headerGroups }) => (
                 nodeId={`${DATA_TABLE_COLUMN_NODE}-${columnKey}`}
                 parentId={COMMON_SCROLLER_NODE}
                 type={NODE_TYPE.HORIZONTAL}
+                {...restHeaderProps}
+                className={cn(css.headerCell, { [css.settingButton]: isLastColumn && showSettingsButton })}
               >
-                <Box {...restHeaderProps} className={css.headerCell}>
-                  <WithClickable>
-                    {(ref, { hovered }) => (
-                      <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
-                        {isRightAlign && <Horizon.Spacer />}
+                <WithClickable>
+                  {(ref, { hovered }) => (
+                    <Horizon ref={ref} {...sortByToggleProps} align={'CENTER'}>
+                      {isRightAlign && <Horizon.Spacer />}
 
-                        {/* Стрелка показывающая сортировку. */}
-                        {column.canSort && (column.isSorted || hovered) && (
-                          <Box className={css.sortIconWrapper}>
-                            <SortIcon fill={column.isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />
-                          </Box>
-                        )}
+                      {/* Стрелка показывающая сортировку. */}
+                      {column.canSort && (column.isSorted || hovered) && (
+                        <Box className={css.sortIconWrapper}>
+                          <SortIcon fill={column.isSorted ? 'ACCENT' : 'FAINT'} scale="SM" />
+                        </Box>
+                      )}
 
-                        {/* Текстовое содержимое заголовка таблицы. */}
-                        <Typography.TextBold>{column.render('Header')}</Typography.TextBold>
-                      </Horizon>
-                    )}
-                  </WithClickable>
+                      {/* Текстовое содержимое заголовка таблицы. */}
+                      <Typography.TextBold>{column.render('Header')}</Typography.TextBold>
+                    </Horizon>
+                  )}
+                </WithClickable>
 
-                  {/* Разделитель колонок таблицы, после последней колонки не отображается. */}
-                  {!isLastColumn && <Box {...column.getResizerProps()} className={css.headerColumnDelimiter} />}
-                </Box>
+                {/* Разделитель колонок таблицы, после последней колонки не отображается. */}
+                {!isLastColumn && <Box {...column.getResizerProps()} className={css.headerColumnDelimiter} />}
               </FocusNode>
             );
           })}
+          {showSettingsButton && (
+            <SettingsButton setSettingsColumns={setSettingsColumns} settingColumns={settingColumns} tableInstance={tableInstance} />
+          )}
         </Box>
       );
     })}

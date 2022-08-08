@@ -10,16 +10,24 @@ export interface IStatementSummaryInfoResponseDto {
   dateTo: string;
   /** Приход. */
   income: number;
+  /** Приход в национальном эквиваленте. */
+  incomeNatCurr: number;
   /** Количество проводок с приходом. */
   incomesCount: number;
   /** Входящий остаток. */
   incomingBalance: number;
+  /** Входящий остаток в национальном эквиваленте. */
+  incomingBalanceNatCurr: number;
   /** Наименование организации. */
   organizationName: string;
   /** Расход. */
   outcome: number;
+  /** Расход в национальном эквиваленте. */
+  outcomeNatCurr: number;
   /** Количество проводок с расходом. */
   outcomesCount: number;
   /** Исходящий остаток. */
   outgoingBalance: number;
+  /** Исходящий остаток в национальном эквиваленте. */
+  outgoingBalanceNatCurr: number;
 }

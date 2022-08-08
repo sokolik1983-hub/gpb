@@ -2,7 +2,7 @@ import type React from 'react';
 import type { Column, UsePaginationState } from 'react-table';
 import type { IExecuter, TransfomedAction } from '@platform/core';
 import type { IActionWebInfo, IActionWithAuth, IBaseEntity, ISortSettings } from '@platform/services';
-import type { IButtonAction } from '@platform/ui';
+import type { IButtonAction, ICheckboxOption } from '@platform/ui';
 
 /** Свойства запроса данных с сервера. */
 export interface IFetchDataParams {
@@ -34,6 +34,36 @@ export interface IExpandedRowComponentProps<T> extends React.AllHTMLAttributes<H
 export interface ICaptionRowComponentProps<T> extends React.AllHTMLAttributes<HTMLDivElement> {
   /** Строка. */
   row: T;
+}
+
+/**
+ * Пропcы формы настроек колонок скроллера.
+ */
+export interface SettingsFormProps {
+  /**
+   * Обработчик закрытия модального окна приходящий из dialog.
+   */
+  onClose(): void;
+  /**
+   * Обработчик закрытия модального окна.
+   */
+  handleClose?(): void;
+  /**
+   * Обработчик применения выбранных фильтров.
+   */
+  onSubmit(val: string[]): void;
+  /**
+   * Список всех колонок скроллера.
+   */
+  columns: ICheckboxOption[];
+  /**
+   * Текущий набор выбранных колонок.
+   */
+  values: string[];
+  /**
+   * Набор колонок, выбранных по умолчанию.
+   */
+  defaultColumns: string[];
 }
 
 /** Тип колонок таблицы. */
@@ -85,6 +115,8 @@ export interface DataTableProps<T extends IBaseEntity> {
   storageKey?: string;
   /** Признак отображения только выбранных строк. */
   visibleOnlySelectedRows?: boolean;
+  /** Кастомный компонент настроек таблицы. */
+  customSettingsForm?: React.FC<SettingsFormProps>;
 }
 
 /** Свойства таблицы с бесконечным скроллингом. */
