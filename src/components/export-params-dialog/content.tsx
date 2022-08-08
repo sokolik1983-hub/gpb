@@ -6,9 +6,12 @@ import { CreationParams } from 'components/form/creation-params';
 import { DetailDocumentsParams } from 'components/form/detail-documents-params';
 import { FileFormats } from 'components/form/file-formats';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
+import { useQueryClient } from 'react-query';
+import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
 import { exportCases } from 'utils';
 import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
@@ -34,6 +37,9 @@ const getFormHeaderByUseCase = (useCase: EXPORT_PARAMS_USE_CASES) => {
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
   const { onClose, useCase, action, statementId } = useContext<IDialogContext>(DialogContext);
   const isExport = exportCases.includes(useCase!);
+  const queryClient = useQueryClient();
+
+  const summary = queryClient.getQueryData<IStatementSummaryInfoResponseDto>(['@eco/statement', 'statement', statementId]);
 
   /** Кнопки модального окна. */
   const getActions = useCallback(() => {
@@ -73,7 +79,13 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
           extraSmall
           actions={actions}
           content={
-            <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
+            <FormProvider
+              action={action}
+              hasForeignCurrency={summary?.currencyCode !== RUB_CURRENCY}
+              statementId={statementId}
+              useCase={useCase}
+              onSubmit={handleSubmit}
+            >
               <Box className={css.container}>
                 <FileFormats />
                 <CreationParams />
