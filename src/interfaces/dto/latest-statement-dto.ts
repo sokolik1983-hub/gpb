@@ -55,5 +55,5 @@ export interface ILatestStatementDto {
   /** Рублёвый эквивалент. */
   nationalCurrency: boolean;
   /** Проводки переоценки. */
-  revaluationAccountEntry: boolean;
+  revaluationAccountingEntry: boolean;
 }

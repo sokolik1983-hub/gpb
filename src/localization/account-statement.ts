@@ -1408,8 +1408,8 @@ export default {
 			 * @ru
 			 * Проводки переоценки
 			 */
-			get revaluationAccountEntry() {
-				return t('common.creationParams.revaluationAccountEntry');
+			get revaluationAccountingEntry() {
+				return t('common.creationParams.revaluationAccountingEntry');
 			},
 		},
 		documentsSetParams: {

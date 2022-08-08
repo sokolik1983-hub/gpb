@@ -174,7 +174,7 @@
   "common.creationParams.withDocumentsSet": "С комплектом документов",
   "common.creationParams.totalsOfDay": "Итоги за день",
   "common.creationParams.nationalCurrency": "Рублёвый эквивалент",
-  "common.creationParams.revaluationAccountEntry": "Проводки переоценки",
+  "common.creationParams.revaluationAccountingEntry": "Проводки переоценки",
   "common.documentsSetParams.label": "Комплект документов",
   "common.documentsSetParams.separateDocumentsFiles": "Отдельными файлами",
   "common.documentsSetParams.onlyRequestStatementDocuments": "Только документы выписки",

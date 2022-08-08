@@ -70,7 +70,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         }
-        case CREATION_PARAMS.REVALUATION_ACCOUNT_ENTRY: {
+        case CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY: {
           acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts });
 
           break;

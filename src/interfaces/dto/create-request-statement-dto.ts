@@ -32,7 +32,7 @@ export interface ICreateRequestStatementDto extends IBaseEntity {
   /** Признак рублёвого эквивалента. */
   nationalCurrency: boolean;
   /** Признак проводки переоценки. */
-  revaluationAccountEntry: boolean;
+  revaluationAccountingEntry: boolean;
   /** Тип периода запроса выписки. */
   periodType: DATE_PERIODS;
   /** Признак того, что счета необходимо формировать отдельными файлами. */

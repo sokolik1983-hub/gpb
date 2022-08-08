@@ -13,5 +13,5 @@ export enum CREATION_PARAMS {
   /** Рублёвый эквивалент. */
   NATIONAL_CURRENCY = 'nationalCurrency',
   /** Проводки переоценки. */
-  REVALUATION_ACCOUNT_ENTRY = 'revaluationAccountEntry',
+  REVALUATION_ACCOUNTING_ENTRY = 'revaluationAccountingEntry',
 }
