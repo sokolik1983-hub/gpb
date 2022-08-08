@@ -174,7 +174,8 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
       <Box className={css.wrapper}>
         <Box {...getTableProps({ style: { height: '100%' } })}>
           <Box className={css.header}>
-            <TableHeader
+            <TableHeader<T>
+              originalColumns={columns}
               refCallback={handleTableHeaderRef}
               setSettingsColumns={setSettingsColumns}
               settingColumns={settingColumns}
