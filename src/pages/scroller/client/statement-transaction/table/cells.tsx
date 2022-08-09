@@ -19,7 +19,7 @@ import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellProps<IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value: { operationDate } }) => (
@@ -149,19 +149,14 @@ export const Income: FC<TransactionCellProps> = ({ value: { income, incomeNatCur
 Income.displayName = 'Income';
 
 /** Поступления и списания. */
-export const Summary: FC<TransactionCellProps> = ({ income, outcome, ...props }) => {
-  if (typeof income === 'number') {
-    return <Income income={income} outcome={outcome} {...props} />;
-  }
+export const Summary: FC<TransactionCellProps> = props => (
+  <>
+    <Income {...props} />
+    <Outcome {...props} />
+  </>
+);
 
-  if (typeof outcome === 'number') {
-    return <Outcome income={income} outcome={outcome} {...props} />;
-  }
-
-  return null;
-};
-
-Income.displayName = 'Summary';
+Summary.displayName = 'Summary';
 
 /** Действия со строкой. */
 export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
