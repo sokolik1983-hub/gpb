@@ -51,6 +51,9 @@ const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
 /** Высота инфоблока по проводкам. */
 const STATEMENT_INFO_HEIGHT = 112;
 
+/** Поля фильтра для ручного ввода (необходимо для определения задержки запроса). */
+const manualEntryFields = [FORM_FIELDS.TABLE_SEARCH, FORM_FIELDS.DOC_NUMBER, FORM_FIELDS.AMOUNT_FROM, FORM_FIELDS.AMOUNT_TO];
+
 /**
  * Страница скроллера: [Выписки_ЗВ] ЭФ Клиента "Журнал проводок".
  *
@@ -71,6 +74,7 @@ export const StatementTransactionScrollerPage = () => {
 
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
   const [transactionsFetching, setTransactionsFetching] = useState(false);
+  const [activeFieldAndValue, setActiveFieldAndValue] = useState<[string, unknown]>();
 
   const transactionsInitialed = useRef(false);
   const totalTransactions = useRef(0);
@@ -89,7 +93,8 @@ export const StatementTransactionScrollerPage = () => {
   // у которого не определена "index signatures".
   const properlyTypedFilterPanel = (filterPanel as unknown) as IFilterPanel<IFormState>;
 
-  const filterValuesDebounced = useDebounce(filterValues, 200);
+  const delay = activeFieldAndValue && manualEntryFields.includes(activeFieldAndValue[0]) && activeFieldAndValue[1] ? 1500 : 200;
+  const filterValuesDebounced = useDebounce(filterValues, delay);
 
   /** Функция получения данных по проводкам с сервера. */
   const fetchTransactions = useCallback(
@@ -185,6 +190,7 @@ export const StatementTransactionScrollerPage = () => {
                     additionalFilterFields={ADDITIONAL_FORM_FIELDS}
                     filterFields={fields}
                     filterState={filterPanel}
+                    setActiveFieldAndValue={setActiveFieldAndValue}
                     tagsState={tagsPanel}
                     validate={validate(validationSchema)}
                   />

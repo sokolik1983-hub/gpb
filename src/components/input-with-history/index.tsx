@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import cn from 'classnames';
+import { useForm } from 'react-final-form';
 import type { WebIcon, IOption } from '@platform/ui';
 import { Box, FILL, SHADOW, RADIUS, RADIUS_APPLY, ROLE, Fields } from '@platform/ui';
 import { OptionsList } from './options-list';
@@ -41,6 +42,8 @@ export const InputWithHistory: React.FC<IInputWithSearchHistory> = ({
   options,
   onSelectOption,
 }) => {
+  const { focus } = useForm();
+
   const [searchValue, setSearchValue] = useState('');
   const [isFocus, setIsFocus] = useState(false);
 
@@ -54,7 +57,9 @@ export const InputWithHistory: React.FC<IInputWithSearchHistory> = ({
 
   const handleFocus = useCallback(() => {
     setIsFocus(true);
-  }, []);
+
+    focus(name);
+  }, [focus, name]);
 
   const onChangeInput = useCallback(
     ({ value }: { value: string }) => {

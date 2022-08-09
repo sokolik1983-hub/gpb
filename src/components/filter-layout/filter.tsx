@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import isEqual from 'fast-deep-equal';
 import { useForm, useFormState } from 'react-final-form';
 import { Box, Horizon, Line, Pattern, ROLE } from '@platform/ui';
@@ -15,13 +15,16 @@ export const Filter: React.FC<IFilterProperties> = ({
   additionalFilterFields,
   filterFields,
   filterState,
+  setActiveFieldAndValue,
   tagsState,
 }) => {
   const { onClose: closeAdditionalFilter, onClear, onOk, opened, values: currentStateValues } = filterState;
   const { onClick: expandAdditionalFilter } = tagsState;
 
   const { restart } = useForm();
-  const { values } = useFormState();
+  const { active, values } = useFormState();
+
+  useEffect(() => setActiveFieldAndValue?.(active ? [active, values[active]] : undefined), [active, setActiveFieldAndValue, values]);
 
   const handleApply = useCallback(() => onOk(values), [onOk, values]);
 
