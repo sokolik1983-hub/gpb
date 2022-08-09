@@ -16,7 +16,9 @@ import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [ICheckboxOption[]] => {
-  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action, hasForeignCurrency } = useContext(FormContext);
+  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action, hasForeignCurrency, hasAccounts } = useContext(
+    FormContext
+  );
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -25,7 +27,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
-    const hasAccounts = values.accountIds.length > 0;
 
     if (withSign) {
       change(FORM_FIELDS.DOCUMENTS_SET_PARAMS, []);

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { AccountsField } from 'components';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
@@ -7,8 +7,9 @@ import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useFormState, useForm } from 'react-final-form';
+import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
-import { FORM_FIELDS, FormContext } from 'stream-constants/form';
+import { FORM_FIELDS } from 'stream-constants/form';
 import type { OnChangeType } from '@platform/ui';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
@@ -16,7 +17,6 @@ import css from './styles.scss';
 /** Компонент счета. */
 export const Accounts: React.FC = () => {
   const { data: accounts } = useAccounts();
-  const { hasForeignCurrency } = useContext(FormContext);
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -27,6 +27,7 @@ export const Accounts: React.FC = () => {
     e => {
       const accountIds = e.value;
       const hasAccounts = accountIds.length > 0;
+      const hasForeignCurrency = accounts.filter(x => accountIds.includes(x.id)).some(x => x.currency.code !== RUB_CURRENCY);
 
       let params = [...values.creationParams];
 
@@ -43,7 +44,7 @@ export const Accounts: React.FC = () => {
 
       change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, hasForeignCurrency, values.creationParams, values.format]
+    [accounts, change, values.creationParams, values.format]
   );
 
   return (

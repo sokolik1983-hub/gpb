@@ -28,6 +28,8 @@ export interface IFormContext {
   revaluationAccountingEntry?: boolean;
   /** Признак счета в иностранной валюте. */
   hasForeignCurrency?: boolean;
+  /** Признак наличия счетов. */
+  hasAccounts: boolean;
 }
 
 /** Начальное значение контекста формы. */
@@ -39,6 +41,7 @@ export const defaultFormContextValue: IFormContext = {
   totalsOfDay: defaultFormState.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
   nationalCurrency: defaultFormState.creationParams.includes(CREATION_PARAMS.NATIONAL_CURRENCY),
   revaluationAccountingEntry: defaultFormState.creationParams.includes(CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY),
+  hasAccounts: defaultFormState.accountIds.length > 0,
 };
 
 /** Экземпляр контекста формы. */
