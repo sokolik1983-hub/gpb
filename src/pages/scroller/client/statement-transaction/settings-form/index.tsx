@@ -53,7 +53,7 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
     (activeCols: string[]) => {
       const cols = activeCols.includes(COLUMN_NAMES.SUMMARY)
         ? [...activeCols.filter(c => c !== COLUMN_NAMES.INCOME && c !== COLUMN_NAMES.OUTCOME)]
-        : activeCols;
+        : [...activeCols, COLUMN_NAMES.INCOME, COLUMN_NAMES.OUTCOME];
 
       change('columns', cols);
     },
