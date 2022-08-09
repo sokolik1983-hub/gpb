@@ -1,11 +1,13 @@
 import React from 'react';
 import cn from 'classnames';
 import { FocusNode, NODE_TYPE } from 'components/focus-tree';
-import type { RecordCell } from 'platform-copies/services';
+import type { IGroupedAccounts } from 'interfaces/dto';
+import type { RecordCell, TableColumn } from 'platform-copies/services';
 import { SettingsButton } from 'platform-copies/services/components/data-table/components/settings-button';
 import type { TableInstance } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
+import type { IBaseEntity } from '@platform/services';
 import { Box, ServiceIcons, WithClickable, Typography, Horizon } from '@platform/ui';
 import { COLUMN_NAMES } from './constants';
 import css from './styles.scss';
@@ -82,7 +84,12 @@ export const TableHeader = <T extends RecordCell>({
             );
           })}
           {showSettingsButton && (
-            <SettingsButton setSettingsColumns={setSettingsColumns} settingColumns={settingColumns} tableInstance={tableInstance} />
+            <SettingsButton
+              originalColumns={tableInstance.columns as TableColumn<IBaseEntity & IGroupedAccounts>}
+              setSettingsColumns={setSettingsColumns}
+              settingColumns={settingColumns}
+              tableInstance={tableInstance}
+            />
           )}
         </Box>
       );
