@@ -20,7 +20,7 @@ export const getAgentOptions = (agent: IAgent, title: string): IConfirmationOpti
   return [
     {
       value: locale.transactionCard.values.agentInfo({ inn, name }),
-      label: <Typography.PBold fill={'FAINT'}>{title}</Typography.PBold>,
+      label: <Typography.P fill={'FAINT'}>{title}</Typography.P>,
     },
     { label: locale.transactionCard.labels.agentAccountNumber, value: formatAccountCode(account) },
     {
