@@ -1,5 +1,4 @@
-import type { FC } from 'react';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { createStatement, getExecutor } from 'actions/client';
 import { ForbiddenContent } from 'components';
 import { Accounts } from 'components/form/accounts';
@@ -8,12 +7,11 @@ import { DetailDocumentsParams } from 'components/form/detail-documents-params';
 import { FileFormats } from 'components/form/file-formats';
 import { Operations } from 'components/form/operations';
 import { Period } from 'components/form/period';
-import { useAccounts, useCreationType } from 'hooks';
+import { useCreationType } from 'hooks/use-creation-type';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
 import { Footer } from 'pages/form/client/components/footer';
 import { FormProvider } from 'pages/form/client/form-provider';
-import { Form, useFormState } from 'react-final-form';
-import { RUB_CURRENCY } from 'stream-constants';
+import { Form } from 'react-final-form';
 import { FORM_FIELD_LABELS, getInitialFormState } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
 import { mapFormToDto } from 'utils';
@@ -22,40 +20,9 @@ import { Box, LoaderOverlay, Pattern, FormValidation, DATA_TYPE } from '@platfor
 import { validateForm } from '../views/validate-form';
 import css from './styles.scss';
 
-const FormView: FC<{ handleSubmit(): void }> = ({ handleSubmit }) => {
-  const { values } = useFormState<IFormState>();
-  const { data: accounts } = useAccounts();
-
-  const hasForeignCurrency = useMemo((): boolean => {
-    const ids = new Set(values.accountIds);
-
-    return accounts.filter(acc => ids.has(acc.id)).some(acc => acc.currency.code !== RUB_CURRENCY);
-  }, [accounts, values.accountIds]);
-
-  return (
-    <FormProvider hasForeignCurrency={hasForeignCurrency} onSubmit={handleSubmit}>
-      <Pattern gap={'XL'}>
-        <Pattern.Span size={9}>
-          <Period />
-          <Accounts />
-          <Operations />
-          <FileFormats />
-          <CreationParams />
-          <DetailDocumentsParams />
-          <Footer />
-        </Pattern.Span>
-        <Pattern.Span size={3}>
-          <FormValidation fieldLabels={FORM_FIELD_LABELS} />
-        </Pattern.Span>
-      </Pattern>
-    </FormProvider>
-  );
-};
-
 /** ЭФ создания запроса на выписку. */
 export const CreateStatementForm: React.FC = () => {
   const creationType = useCreationType();
-
   const executor = getExecutor();
 
   const submit = useCallback(
@@ -87,7 +54,24 @@ export const CreateStatementForm: React.FC = () => {
     <Box className={css.form} fill={'FAINT'}>
       <Form
         initialValues={initialFormState}
-        render={({ handleSubmit }) => <FormView handleSubmit={handleSubmit} />}
+        render={({ handleSubmit }) => (
+          <FormProvider onSubmit={handleSubmit}>
+            <Pattern gap={'XL'}>
+              <Pattern.Span size={9}>
+                <Period />
+                <Accounts />
+                <Operations />
+                <FileFormats />
+                <CreationParams />
+                <DetailDocumentsParams />
+                <Footer />
+              </Pattern.Span>
+              <Pattern.Span size={3}>
+                <FormValidation fieldLabels={FORM_FIELD_LABELS} />
+              </Pattern.Span>
+            </Pattern>
+          </FormProvider>
+        )}
         validate={validateForm}
         onSubmit={submit}
       />

@@ -3,10 +3,12 @@ import type { IDialogContext } from 'components/export-params-dialog/dialog-cont
 import { DialogContext } from 'components/export-params-dialog/dialog-context';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
+import { useAccounts } from 'hooks/use-accounts';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
+import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
 import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
@@ -16,19 +18,22 @@ import { Fields } from '@platform/ui';
 
 /** Компонент выбора формата файла. */
 export const FileFormats: React.FC = () => {
+  const { data: accounts } = useAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
+  const { accountIds, creationParams } = values;
   const { useCase } = useContext<IDialogContext>(DialogContext);
-  const { withSign, hasForeignCurrency } = useContext(FormContext);
+  const { withSign } = useContext(FormContext);
 
   // встраиваем реакцию на изменение параметров для флага "Отдельный файл по каждому счету"
   useSeparateAccountFiles();
 
   const onChangeFileFormat: OnChangeType<FORMAT> = useCallback(
     e => {
-      const hasAccounts = values.accountIds.length > 0;
+      const hasAccounts = accountIds.length > 0;
+      const hasForeignCurrency = accounts.filter(x => accountIds.includes(x.id)).some(x => x.currency.code !== RUB_CURRENCY);
 
-      let params = [...values.creationParams];
+      let params = [...creationParams];
 
       const format = e.value;
       const isPdf = format === FORMAT.PDF;
@@ -45,7 +50,7 @@ export const FileFormats: React.FC = () => {
 
       change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, hasForeignCurrency, values.accountIds.length, values.creationParams, withSign]
+    [accountIds, accounts, creationParams, withSign, change]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));
