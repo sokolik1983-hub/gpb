@@ -1,5 +1,4 @@
 import React, { useContext, useMemo } from 'react';
-import cn from 'classnames';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { bigNumber } from '@platform/tools/big-number';
@@ -26,7 +25,7 @@ export const Footer: React.FC<FooterProps> = ({ selectedRows }) => {
   ]);
 
   return (
-    <Box className={cn(css.footer)} fill={'BASE'}>
+    <Box className={css.footer} fill={'BASE'}>
       <Horizon>
         {/* Выбрано */}
         <Typography.P>{locale.transactionsScroller.footer.selected}</Typography.P>
