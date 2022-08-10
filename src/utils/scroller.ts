@@ -48,8 +48,13 @@ export const convertTableSortingToMetaData = (sorting: Sorting, sortingMap?: Rec
  * @param sort - Стейт сортировки таблицы.
  * @param map - Мап свойств сортировки таблицы, которые необходимо переопределить.
  */
-export const convertTableSortByMap = (sort: ISortSettings, map: Record<string, string>): ISortSettings =>
-  Object.keys(sort).reduce((prev, item) => (map[item] ? { ...prev, [map[item]]: sort[item] } : { ...prev, [item]: sort[item] }), {});
+export const convertTableSortByMap = (sort: ISortSettings, map: Record<string, string[] | string>): ISortSettings =>
+  Object.keys(sort).reduce((prev, item) => {
+    const key = map[item] ? map[item] : item;
+    const value = Array.isArray(key) ? key.reduce((acc, x) => ({ ...acc, [x]: sort[item] }), {}) : { [key]: sort[item] };
+
+    return { ...prev, ...value };
+  }, {});
 
 /**
  * Преобразует стейт пагинации таблицы, в форму подходящую для запроса на сервер.

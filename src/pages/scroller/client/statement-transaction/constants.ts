@@ -4,4 +4,6 @@ export const SORTING_MAP = {
   outcome: 'amountDebit',
   /** Поступления. */
   income: 'amountCredit',
+  /** Сумма. */
+  summary: ['amountDebit', 'amountCredit'],
 };
