@@ -57,6 +57,15 @@ export const StatementInfo: FC = () => {
         <Pattern.Span size={4}>
           <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.accountNumber}</Typography.Text>
           <Typography.P>{formatAccountCode(accountNumber)}</Typography.P>
+          <Gap.XS />
+          <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
+          <WithInfoTooltip text={organizationName}>
+            {ref => (
+              <Typography.P innerRef={ref} line={'COLLAPSE'}>
+                {organizationName}
+              </Typography.P>
+            )}
+          </WithInfoTooltip>
         </Pattern.Span>
         <Pattern.Span size={2}>
           <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem}>
@@ -100,19 +109,6 @@ export const StatementInfo: FC = () => {
         </Pattern.Span>
       </Pattern>
       <Gap.XS />
-      <Pattern gap={'X2L'}>
-        <Pattern.Span size={3}>
-          <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
-          <WithInfoTooltip text={organizationName}>
-            {ref => (
-              <Typography.P innerRef={ref} line={'COLLAPSE'}>
-                {organizationName}
-              </Typography.P>
-            )}
-          </WithInfoTooltip>
-        </Pattern.Span>
-      </Pattern>
-      <Gap.SM />
     </Box>
   );
 };

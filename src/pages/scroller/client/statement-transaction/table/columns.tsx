@@ -93,7 +93,7 @@ export const getColumns = (
       accessor,
       Cell: Summary,
       optionLabel: locale.transactionsScroller.labels.summary,
-      width: 239,
+      width: 457,
       headerAlign: HEADER_ALIGN.RIGHT,
       isVisible: false,
     },
