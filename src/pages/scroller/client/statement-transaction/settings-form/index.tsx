@@ -49,7 +49,14 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
   );
   const settingsViewColumns = useMemo(() => columns.filter(c => c.value.includes(COLUMN_NAMES.SUMMARY)), [columns]);
 
-  const onChange = useCallback(
+  const onChangeVisibleColumns = useCallback(
+    (activeCols: string[]) => {
+      change('columns', activeCols);
+    },
+    [change]
+  );
+
+  const onChangeViewSettingsColumns = useCallback(
     (activeCols: string[]) => {
       const cols = activeCols.includes(COLUMN_NAMES.SUMMARY)
         ? [...activeCols.filter(c => c !== COLUMN_NAMES.INCOME && c !== COLUMN_NAMES.OUTCOME)]
@@ -81,7 +88,7 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
         name="settings-form"
         options={visibleColumns}
         value={values.columns}
-        onChange={onChange}
+        onChange={onChangeVisibleColumns}
       />
       <Gap.XL />
       <Box>
@@ -97,7 +104,7 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
         name="settings-view-form"
         options={settingsViewColumns}
         value={values.columns}
-        onChange={onChange}
+        onChange={onChangeViewSettingsColumns}
       />
       <Gap.XL />
       <Horizon>
