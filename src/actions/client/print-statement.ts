@@ -21,7 +21,7 @@ export const printStatement: IActionConfig<typeof context, Promise<void>> = {
     fatal(res?.error);
     fatal(err);
 
-    if (checkEmptyStatement(doc, res!)) {
+    if (checkEmptyStatement(doc, res?.content)) {
       done();
 
       return;
