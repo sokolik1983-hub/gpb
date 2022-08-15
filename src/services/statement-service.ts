@@ -156,10 +156,10 @@ export const statementService = {
       data,
       url: `${TRANSACTION_URL}`,
     }).then(r => r.data),
-  /** Возвращает файл для экспорта по Id запроса выписки. */
-  exportStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
+  /** Возвращает Id файла для экспорта и токен по Id запроса выписки для дальнейшей загрузки через file storage. */
+  exportStatement: async (id: string) => {
     const { data: resp } = await request({
-      url: `${STATEMENT_URL}/attachment/${id}`,
+      url: `${STATEMENT_URL}/generate-download-token/${id}`,
     });
 
     return resp.data;

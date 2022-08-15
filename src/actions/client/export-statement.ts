@@ -2,7 +2,7 @@ import type { ILatestStatementDto } from 'interfaces/dto';
 import { checkEmptyStatement, fatalHandler } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { showFile } from '@platform/services';
+import { attachmentService, errorHandler, showFile } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -14,22 +14,25 @@ export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [ILatestStatementDto]) => {
     showLoader();
 
-    const [res, err] = await to(service.exportStatement(doc.id));
+    const [data, err] = await to(service.exportStatement(doc.id));
 
     hideLoader();
 
-    fatal(res?.error);
+    fatal(data?.error);
     fatal(err);
 
-    if (checkEmptyStatement(doc, res!)) {
-      done();
+    const { fileId, token } = data;
 
-      return;
-    }
+    attachmentService
+      .download(fileId, token)
+      .then(file => {
+        if (checkEmptyStatement(doc, file.data, true)) {
+          return;
+        }
 
-    const { content, fileName, mimeType } = res!;
-
-    showFile(content, fileName, mimeType);
+        showFile(file.data, file.fileName, file.type);
+      })
+      .catch(errorHandler());
 
     done();
   },
