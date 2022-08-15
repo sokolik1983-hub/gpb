@@ -1,3 +1,10 @@
+# [2.11.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.1...v2.11.0-release.2) (2022-08-15)
+
+
+### Bug Fixes
+
+* GBO-31404 исправление экспорта выписки ([1b055eb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1b055eb0c3d23c56f99c660f4608818caf29d221))
+
 # [2.11.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0...v2.11.0-release.1) (2022-08-11)
 
 
