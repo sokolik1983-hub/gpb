@@ -105,18 +105,22 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         return;
       }
 
-      closeAwaitingForm();
-
       switch (statementActionDto) {
         case ACTION.VIEW:
+          closeAwaitingForm();
+
           await executor.execute(gotoTransactionsScrollerByStatementRequest, [doc], ACTION.VIEW, ENTRY_SOURCE_VIEW);
 
           return;
         case ACTION.DOWNLOAD:
           await executor.execute(exportStatement, [doc]);
 
+          closeAwaitingForm();
+
           return;
         case ACTION.PRINT:
+          closeAwaitingForm();
+
           await executor.execute(printStatement, [doc]);
 
           return;
