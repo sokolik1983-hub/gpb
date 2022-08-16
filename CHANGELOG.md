@@ -1,3 +1,10 @@
+# [2.11.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.2...v2.11.0-release.3) (2022-08-16)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-31153 исправлено вычисление признака рублевого эквивалента ([95b1f16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/95b1f16c2e139f21cc72e2e4ff5c76f1d172090e))
+
 # [2.11.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.1...v2.11.0-release.2) (2022-08-15)
 
 
