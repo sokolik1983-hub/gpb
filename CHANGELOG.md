@@ -1,3 +1,10 @@
+# [2.11.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.3...v2.11.0-release.4) (2022-08-16)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31654 закрытие ЭФ статуса после загрузки выписки ([4b2ecea](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4b2ecea8de5755a60a1ae05e71fdb09468e99d70))
+
 # [2.11.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.2...v2.11.0-release.3) (2022-08-16)
 
 
