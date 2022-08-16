@@ -30,4 +30,6 @@ export interface IStatementSummaryInfoResponseDto {
   outgoingBalance: number;
   /** Исходящий остаток в национальном эквиваленте. */
   outgoingBalanceNatCurr: number;
+  /** Признак выписки с рублевым эквивалентом. */
+  nationalCurrency: boolean;
 }

@@ -32,7 +32,7 @@ import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
 import { statementService } from 'services';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
-import { LINE_HEIGHT, RUB_CURRENCY } from 'stream-constants';
+import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
 import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
@@ -131,7 +131,7 @@ export const StatementTransactionScrollerPage = () => {
   const dataFetched = counterpartiesFetched && statementSummaryInfoFetched && transactionsInitialed.current;
 
   const prevTransactionsFetching = usePrevious(transactionsFetching);
-  const isNationalCurrency = statementSummaryInfo ? statementSummaryInfo.currencyCode !== RUB_CURRENCY : false;
+  const isNationalCurrency = !!statementSummaryInfo?.nationalCurrency;
 
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
