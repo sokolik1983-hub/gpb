@@ -1,3 +1,10 @@
+# [2.11.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.4...v2.11.0-release.5) (2022-08-17)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31654 доработки экшона загрузки выписки ([34c5912](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/34c5912dab7430779bca6b18a696e30f0f570935))
+
 # [2.11.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.3...v2.11.0-release.4) (2022-08-16)
 
 
