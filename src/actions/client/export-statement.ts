@@ -32,9 +32,10 @@ export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
 
         showFile(file.data, file.fileName, file.type);
       })
-      .catch(errorHandler());
-
-    done();
+      .catch(errorHandler())
+      .finally(() => {
+        done();
+      });
   },
   fatalHandler,
   guardians: [singleAction],
