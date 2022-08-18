@@ -1,3 +1,10 @@
+# [2.11.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.5...v2.11.0-release.6) (2022-08-18)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31787 доработка проверки экспорта пустой выписки ([5e3b9df](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5e3b9dfdfd8d1fc9eaf48c0ee34971a886e5b0a2))
+
 # [2.11.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.4...v2.11.0-release.5) (2022-08-17)
 
 
