@@ -1,8 +1,8 @@
 import type { ILatestStatementDto } from 'interfaces/dto';
-import { checkEmptyStatement, fatalHandler } from 'utils';
+import { checkEmptyStatement, fatalHandler, showEmptyStatementWarning } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { attachmentService, errorHandler, showFile } from '@platform/services/client';
+import { attachmentService, ERROR, errorHandler, showFile } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -32,7 +32,18 @@ export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
 
         showFile(file.data, file.fileName, file.type);
       })
-      .catch(errorHandler())
+      .catch(e => {
+        // потенциально может сработать только при экспорте и только для ИФТ или ПРОМ из-за особенностей ФС
+        const { status } = e.response;
+
+        if (status === ERROR.UNEXPECTED_SYSTEM_ERROR) {
+          showEmptyStatementWarning(doc);
+
+          return;
+        }
+
+        errorHandler();
+      })
       .finally(() => {
         done();
       });
