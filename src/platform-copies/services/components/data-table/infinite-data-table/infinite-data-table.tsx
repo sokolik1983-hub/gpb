@@ -3,7 +3,7 @@ import { locale } from 'localization';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
 import type { IColumnsStorageObject } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import { FractalSelectedRowsInfo, Placeholder, Box, SORT_DIRECTION, LoaderOverlay } from '@platform/ui';
+import { FractalSelectedRowsInfo, Placeholder, Box, SORT_DIRECTION, LoaderOverlay, SettingsForm } from '@platform/ui';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import { SCROLLER_SETTING_TYPE, useColumnsWithDefaultValues, useDataManager, useDefaultHiddenColumns, useStorageSettings } from '../hooks';
 import type { InfiniteScrollDataTableProps, RecordCell } from '../types';
@@ -32,6 +32,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
   onRowClick,
   rowCaptionComponent,
   visibleOnlySelectedRows,
+  customSettingsForm = SettingsForm,
 }: InfiniteScrollDataTableProps<T>) => {
   const tableHeaderRef = useRef<HTMLElement>();
 
@@ -105,6 +106,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
         ...paginationState,
       },
       pageCount,
+      customSettingsForm,
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useControlledState: state => React.useMemo(() => ({ ...state, ...paginationState }), [state, paginationState]),
     },
@@ -172,7 +174,8 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
       <Box className={css.wrapper}>
         <Box {...getTableProps({ style: { height: '100%' } })}>
           <Box className={css.header}>
-            <TableHeader
+            <TableHeader<T>
+              originalColumns={columns}
               refCallback={handleTableHeaderRef}
               setSettingsColumns={setSettingsColumns}
               settingColumns={settingColumns}

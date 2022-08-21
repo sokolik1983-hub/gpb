@@ -7,11 +7,11 @@ import { DetailDocumentsParams } from 'components/form/detail-documents-params';
 import { FileFormats } from 'components/form/file-formats';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
-import { FormProvider } from 'pages/form/client/form-provider';
 import type { FormRenderProps } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
 import { exportCases } from 'utils';
 import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
+import { FormProvider } from './form-provider';
 import css from './styles.scss';
 
 /** Функция получения заголовка ЭФ. */

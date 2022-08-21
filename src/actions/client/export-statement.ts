@@ -1,8 +1,8 @@
 import type { ILatestStatementDto } from 'interfaces/dto';
-import { checkEmptyStatement, fatalHandler } from 'utils';
+import { checkEmptyStatement, fatalHandler, showEmptyStatementWarning } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { showFile } from '@platform/services';
+import { attachmentService, ERROR, errorHandler, showFile } from '@platform/services/client';
 import type { context } from './executor';
 
 /**
@@ -14,24 +14,39 @@ export const exportStatement: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done, fatal }, { showLoader, hideLoader, service }) => async ([doc]: [ILatestStatementDto]) => {
     showLoader();
 
-    const [res, err] = await to(service.exportStatement(doc.id));
+    const [data, err] = await to(service.exportStatement(doc.id));
 
     hideLoader();
 
-    fatal(res?.error);
+    fatal(data?.error);
     fatal(err);
 
-    if (checkEmptyStatement(doc, res!)) {
-      done();
+    const { fileId, token } = data;
 
-      return;
-    }
+    attachmentService
+      .download(fileId, token)
+      .then(file => {
+        if (checkEmptyStatement(doc, file.data, true)) {
+          return;
+        }
 
-    const { content, fileName, mimeType } = res!;
+        showFile(file.data, file.fileName, file.type);
+      })
+      .catch(e => {
+        // потенциально может сработать только при экспорте и только для ИФТ или ПРОМ из-за особенностей ФС
+        const { status } = e.response;
 
-    showFile(content, fileName, mimeType);
+        if (status === ERROR.UNEXPECTED_SYSTEM_ERROR) {
+          showEmptyStatementWarning(doc);
 
-    done();
+          return;
+        }
+
+        errorHandler();
+      })
+      .finally(() => {
+        done();
+      });
   },
   fatalHandler,
   guardians: [singleAction],

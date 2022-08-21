@@ -13,6 +13,7 @@ export const FilterLayout: FC<IFilterProperties> = ({
   filterState,
   additionalFilterFields,
   filterFields,
+  setActiveFieldAndValue,
   tagsState,
   validate,
 }) => {
@@ -35,6 +36,7 @@ export const FilterLayout: FC<IFilterProperties> = ({
             additionalFilterFields={additionalFilterFields}
             filterFields={filterFields}
             filterState={filterState}
+            setActiveFieldAndValue={setActiveFieldAndValue}
             tagsState={tagsState}
           />
         </form>

@@ -7,6 +7,7 @@ import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
+import { RUB_CURRENCY } from 'stream-constants';
 import { getActiveActionButtons, formatToMask } from 'utils';
 import { DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
@@ -18,7 +19,7 @@ import { TransactionScrollerContext } from '../transaction-scroller-context';
 import css from './styles.scss';
 
 /** Свойства ячейки. */
-type TransactionCellProps = CellProps<IStatementTransactionRow, IStatementTransactionRow>;
+type TransactionCellProps = CellProps<IStatementTransactionRow>;
 
 /** Дата операции. */
 export const OperationDate: FC<TransactionCellProps> = ({ value: { operationDate } }) => (
@@ -82,8 +83,8 @@ export const CounterpartyInfo: FC<TransactionCellProps> = ({ value: { counterpar
 CounterpartyInfo.displayName = 'CounterpartyInfo';
 
 /** Списания. */
-export const Outcome: FC<TransactionCellProps> = ({ value: { outcome, currencyCode } }) => {
-  const { filterPanel } = useContext(TransactionScrollerContext);
+export const Outcome: FC<TransactionCellProps> = ({ value: { outcome, outcomeNatCurr, currencyCode } }) => {
+  const { filterPanel, isNationalCurrency } = useContext(TransactionScrollerContext);
 
   const { queryString } = filterPanel.values;
 
@@ -94,20 +95,30 @@ export const Outcome: FC<TransactionCellProps> = ({ value: { outcome, currencyCo
   }
 
   return (
-    <Typography.P align={'RIGHT'} fill={'CRITIC'}>
-      <HightlightText
-        searchWords={moneyMaskValue.conformedValue}
-        textToHightlight={locale.moneyString.negative({ amount: String(outcome), currencyCode })}
-      />
-    </Typography.P>
+    <>
+      <Typography.P align={'RIGHT'} fill={'CRITIC'}>
+        <HightlightText
+          searchWords={moneyMaskValue.conformedValue}
+          textToHightlight={locale.moneyString.negative({ amount: String(outcome), currencyCode })}
+        />
+      </Typography.P>
+      {isNationalCurrency && (
+        <Typography.Text align={'RIGHT'} className={css.outcomeNat} fill={'CRITIC'}>
+          <HightlightText
+            searchWords={moneyMaskValue.conformedValue}
+            textToHightlight={locale.moneyString.negative({ amount: String(outcomeNatCurr), currencyCode: RUB_CURRENCY })}
+          />
+        </Typography.Text>
+      )}
+    </>
   );
 };
 
 Outcome.displayName = 'Outcome';
 
 /** Поступления. */
-export const Income: FC<TransactionCellProps> = ({ value: { income, currencyCode } }) => {
-  const { filterPanel } = useContext(TransactionScrollerContext);
+export const Income: FC<TransactionCellProps> = ({ value: { income, incomeNatCurr, currencyCode } }) => {
+  const { filterPanel, isNationalCurrency } = useContext(TransactionScrollerContext);
 
   const { queryString } = filterPanel.values;
 
@@ -116,13 +127,36 @@ export const Income: FC<TransactionCellProps> = ({ value: { income, currencyCode
   }
 
   return (
-    <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
-      <HightlightText searchWords={queryString} textToHightlight={locale.moneyString.positive({ amount: String(income), currencyCode })} />
-    </Typography.P>
+    <>
+      <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
+        <HightlightText
+          searchWords={queryString}
+          textToHightlight={locale.moneyString.positive({ amount: String(income), currencyCode })}
+        />
+      </Typography.P>
+      {isNationalCurrency && (
+        <Typography.Text align={'RIGHT'} className={css.incomeNat} fill={'SUCCESS'}>
+          <HightlightText
+            searchWords={queryString}
+            textToHightlight={locale.moneyString.positive({ amount: String(incomeNatCurr), currencyCode: RUB_CURRENCY })}
+          />
+        </Typography.Text>
+      )}
+    </>
   );
 };
 
 Income.displayName = 'Income';
+
+/** Поступления и списания. */
+export const Summary: FC<TransactionCellProps> = props => (
+  <>
+    <Income {...props} />
+    <Outcome {...props} />
+  </>
+);
+
+Summary.displayName = 'Summary';
 
 /** Действия со строкой. */
 export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {

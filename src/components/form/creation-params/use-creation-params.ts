@@ -16,7 +16,9 @@ import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
 export const useCreationParams = (): [ICheckboxOption[]] => {
-  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action } = useContext(FormContext);
+  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action, hasForeignCurrency, hasAccounts } = useContext(
+    FormContext
+  );
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -69,6 +71,16 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         }
+        case CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY: {
+          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts });
+
+          break;
+        }
+        case CREATION_PARAMS.NATIONAL_CURRENCY: {
+          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
+
+          break;
+        }
         default: {
           acc.push(x);
         }
@@ -80,6 +92,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     setOptions(newOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    hasForeignCurrency,
     action,
     change,
     isPdf,

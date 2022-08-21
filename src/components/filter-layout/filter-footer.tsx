@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 import { locale } from 'localization';
+import { useFormState } from 'react-final-form';
 import { Gap, Horizon, PrimaryButton, RegularButton, Box, ACTIONS } from '@platform/ui';
 import css from './styles.scss';
 
@@ -19,10 +20,12 @@ export const FilterFooter: React.FC<IFooterProps> = ({ onReset, onApply, disable
 
   const handleApply = useCallback(() => onApply(), [onApply]);
 
+  const { invalid } = useFormState();
+
   return (
     <Box className={css.footerWrapper}>
       <Horizon>
-        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={disabled} onClick={handleApply}>
+        <PrimaryButton extraSmall dataAction={ACTIONS.SUBMIT} dimension="SM" disabled={invalid || disabled} onClick={handleApply}>
           {locale.scroller.filter.buttons.applyFilters}
         </PrimaryButton>
         <Gap />

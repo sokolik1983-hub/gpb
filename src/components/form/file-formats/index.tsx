@@ -3,12 +3,14 @@ import type { IDialogContext } from 'components/export-params-dialog/dialog-cont
 import { DialogContext } from 'components/export-params-dialog/dialog-context';
 import { useSeparateAccountFiles } from 'components/form/common/use-separate-account-files';
 import { Row } from 'components/form/row';
+import { useAccounts } from 'hooks/use-accounts';
 import { FORMAT } from 'interfaces/client';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
-import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
+import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
+import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
 import { fileFormatShowCases } from 'utils';
 import type { OnChangeType } from '@platform/ui';
@@ -16,8 +18,10 @@ import { Fields } from '@platform/ui';
 
 /** Компонент выбора формата файла. */
 export const FileFormats: React.FC = () => {
+  const { data: accounts } = useAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
+  const { accountIds, creationParams } = values;
   const { useCase } = useContext<IDialogContext>(DialogContext);
   const { withSign } = useContext(FormContext);
 
@@ -26,18 +30,27 @@ export const FileFormats: React.FC = () => {
 
   const onChangeFileFormat: OnChangeType<FORMAT> = useCallback(
     e => {
-      const params = [...values.creationParams];
+      const hasAccounts = accountIds.length > 0;
+      const hasForeignCurrency = accounts.filter(x => accountIds.includes(x.id)).some(x => x.currency.code !== RUB_CURRENCY);
+
+      let params = [...creationParams];
+
       const format = e.value;
       const isPdf = format === FORMAT.PDF;
+      const isC1 = format === FORMAT.C1;
+      const isText = format === FORMAT.TXT;
+
+      if (!hasForeignCurrency || !hasAccounts || isC1 || isText) {
+        params = params.filter(x => x !== CREATION_PARAMS.NATIONAL_CURRENCY);
+      }
 
       if (!isPdf && withSign) {
-        change(
-          FORM_FIELDS.CREATION_PARAMS,
-          params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN)
-        );
+        params = params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN);
       }
+
+      change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [change, values.creationParams, withSign]
+    [accountIds, accounts, creationParams, withSign, change]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));

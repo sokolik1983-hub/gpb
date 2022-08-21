@@ -19,6 +19,8 @@ export const COLUMN_NAMES = {
   INCOME: 'income',
   // Назначение платежа.
   PURPOSE: 'paymentPurpose',
+  // Списания и поступления в одной колонке.
+  SUMMARY: 'summary',
   // Действия.
   ACTIONS: 'ACTIONS',
 } as const;

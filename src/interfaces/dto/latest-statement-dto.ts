@@ -52,4 +52,8 @@ export interface ILatestStatementDto {
   hideEmptyTurnovers: boolean;
   /** Итоги за день. */
   totalsOfDay: boolean;
+  /** Рублёвый эквивалент. */
+  nationalCurrency: boolean;
+  /** Проводки переоценки. */
+  revaluationAccountingEntry: boolean;
 }

@@ -10,4 +10,8 @@ export enum CREATION_PARAMS {
   WITH_DOCUMENTS_SET = 'withDocumentsSet',
   /** Итоги за день. */
   TOTALS_OF_DAY = 'totalsOfDay',
+  /** Рублёвый эквивалент. */
+  NATIONAL_CURRENCY = 'nationalCurrency',
+  /** Проводки переоценки. */
+  REVALUATION_ACCOUNTING_ENTRY = 'revaluationAccountingEntry',
 }

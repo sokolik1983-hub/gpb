@@ -63,6 +63,8 @@ export const convertToExtendedCreationParams = (formState: IFormState) => ({
   separateAccountsFiles: formState.creationParams.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES),
   sign: formState.creationParams.includes(CREATION_PARAMS.WITH_PDF_SIGN),
   totalsOfDay: isNeedTotalsOfDay(formState) && formState.creationParams.includes(CREATION_PARAMS.TOTALS_OF_DAY),
+  nationalCurrency: formState.creationParams.includes(CREATION_PARAMS.NATIONAL_CURRENCY),
+  revaluationAccountingEntry: formState.creationParams.includes(CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY),
 });
 
 /** Функция для преобразования значений формы в ДТО запроса выписки. */
@@ -119,6 +121,14 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
 
   if (dto.totalsOfDay) {
     creationParams.push(CREATION_PARAMS.TOTALS_OF_DAY);
+  }
+
+  if (dto.nationalCurrency) {
+    creationParams.push(CREATION_PARAMS.NATIONAL_CURRENCY);
+  }
+
+  if (dto.revaluationAccountingEntry) {
+    creationParams.push(CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY);
   }
 
   if (dto.documentOptionsDto.separateDocumentsFiles) {

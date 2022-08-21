@@ -4,7 +4,7 @@ import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResiz
 import type { IColumnsStorageObject } from '@platform/core';
 import { applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay } from '@platform/ui';
+import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay, SettingsForm } from '@platform/ui';
 import { FractalSelectedRowsInfo } from '../../fractal-selected-rows-info';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
 import {
@@ -45,6 +45,7 @@ export const DataTable = <T extends IBaseEntity>({
   onRowClick,
   rowCaptionComponent,
   visibleOnlySelectedRows,
+  customSettingsForm = SettingsForm,
 }: DataTableProps<T>) => {
   const { paginationState = DEFAULT_PAGINATION_STATE, goToPage, setPageSize } = usePaginationController(
     propsPaginationState,
@@ -107,6 +108,7 @@ export const DataTable = <T extends IBaseEntity>({
         sortBy: defaultSortBy,
         ...paginationState,
       },
+      customSettingsForm,
       pageCount: controlledPageCount,
       // eslint-disable-next-line react-hooks/exhaustive-deps
       useControlledState: state => React.useMemo(() => ({ ...state, ...paginationState }), [state, paginationState]),
@@ -220,7 +222,8 @@ export const DataTable = <T extends IBaseEntity>({
   return (
     <Box className={css.wrapper}>
       <Box {...tableProps}>
-        <TableHeader
+        <TableHeader<T>
+          originalColumns={columns}
           setSettingsColumns={setSettingsColumns}
           settingColumns={settingColumns}
           showSettingsButton={showSettingsButton}

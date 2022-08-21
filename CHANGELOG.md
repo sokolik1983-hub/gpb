@@ -1,3 +1,70 @@
+# [2.11.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.5...v2.11.0-release.6) (2022-08-18)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31787 доработка проверки экспорта пустой выписки ([5e3b9df](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5e3b9dfdfd8d1fc9eaf48c0ee34971a886e5b0a2))
+
+# [2.11.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.4...v2.11.0-release.5) (2022-08-17)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31654 доработки экшона загрузки выписки ([34c5912](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/34c5912dab7430779bca6b18a696e30f0f570935))
+
+# [2.11.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.3...v2.11.0-release.4) (2022-08-16)
+
+
+### Bug Fixes
+
+* **визард:** GBO-31654 закрытие ЭФ статуса после загрузки выписки ([4b2ecea](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4b2ecea8de5755a60a1ae05e71fdb09468e99d70))
+
+# [2.11.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.2...v2.11.0-release.3) (2022-08-16)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-31153 исправлено вычисление признака рублевого эквивалента ([95b1f16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/95b1f16c2e139f21cc72e2e4ff5c76f1d172090e))
+
+# [2.11.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0-release.1...v2.11.0-release.2) (2022-08-15)
+
+
+### Bug Fixes
+
+* GBO-31404 исправление экспорта выписки ([1b055eb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1b055eb0c3d23c56f99c660f4608818caf29d221))
+
+# [2.11.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0...v2.11.0-release.1) (2022-08-11)
+
+
+### Bug Fixes
+
+* **api:** GBO-29150 Добавлены заголовки в запросы выписок ([ff55fc7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ff55fc7463608318d880a00abbcb2b590fb2b0c5))
+* **визард:** GBO-30504 доработки логики изменения флагов ([a197618](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a197618e5f97e7ce517e73f3e9b517dfde175a1a))
+* **визард:** GBO-30504 исправление условий для флагов ([2e5a274](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2e5a27417f66fd1490c28bc5c3cfecba065ecb22))
+* **визард:** GBO-31064 доработка ЭФ настроек колонок ([2774544](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/277454426aeacb416d0e299f5c6982b6e29f8852))
+* **визард:** GBO-31096 исправление вычисления признака наличия иностранной валюты ([ca9a71b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ca9a71b46af7d58e4e0da7b4687dbd9bb4e32b3c))
+* **скроллер:** GBO-28375 выровнен левый край футера скроллера проводок ([de67756](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/de677565e534fff354fdfc48a3212953d760d349))
+* **скроллер:** GBO-28375 дисейбл кнопки запроса данных фильтра при невалидных данных ([54368a7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/54368a7b2479eafd61c68db350590469743d2357))
+* **скроллер:** GBO-28375 разный delay при ручном вводе, выборе или сбросе поля ([01035ac](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/01035ac94d59e9146c9983b803384ee78bbace7b))
+* **скроллер:** GBO-28375 убран браузенрый скролл у модального окна проводки ([b73c1a8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b73c1a806b56f72e60bc5ae07cb93bf75e809fa1))
+* **скроллер:** GBO-28375 учет оранжевого уведомления в топлайне при расчете высоты скроллера ([8cd58d4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8cd58d457cfcee07b74902539379fe6e5108577c))
+* **скроллер:** GBO-28375 фикс в карточке проводки ([9b4368d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9b4368d1ff690a3a4067669a594ca3bcdb706524))
+* **скроллер:** GBO-30097 настройка отображения колонок скроллера Оборотов ([08786c3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/08786c3b224685e1d107cc29163e8a8348762e83)), closes [#236](https://bitbucket.gboteam.ru/eco_fe/eco-statement/issues/236)
+* **скроллер:** GBO-30097 поправлена настройка колонок для отображения в data-table ([925f9ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/925f9ee71afe6a3c09c8004147f5cf40003fe593))
+* **скроллер:** GBO-31063 исправление колонки суммы в проводках ([45d2c29](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/45d2c298aa65b1111442901c4abf561282a89272))
+* **скроллер:** GBO-31064 исправление чекбоксов на ЭФ настройки колонок ([f49220c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f49220c4fc1c1aeadc46129a2a9b123eea49769d))
+* **скроллер:** GBO-31160 исправление мультисортировки для синтетической колонки ([11b9230](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/11b92304458e99bba60eb50a62e1970439c0838b))
+* **скроллер:** GBO-31165 исправление замечаний по скроллеру проводок ([0aa2916](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0aa29164246c7dcaa0e93f6eab2877484087d75b))
+* GBO-31042 переименование поля в ДТО ([134f125](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/134f125a1159993b98ebde618ae66d7883025a5a))
+
+
+### Features
+
+* **визард:** GBO-29299 добавлены новые параметры для создания выписки ([9742fe5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9742fe54611ec433338a613ace14f9e9b9d57252))
+* **скроллер:** GBO-29297 Доработки скроллера ОСВ ([9dc2bfd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9dc2bfdc875086ca508c0759df11b95f8377de03))
+* **скроллер:** GBO-29298 Доработки скроллера проводок ([a5db69c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a5db69c579226079d1bc4d8754fad121ef6aee45))
+* **скроллер:** GBO-30504 Реализация логики работы чекбоксов ([4007297](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/40072977265af447a264f65ea683b9f8b59a554b))
+
 # [2.10.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.9.1...v2.10.0) (2022-08-07)
 
 

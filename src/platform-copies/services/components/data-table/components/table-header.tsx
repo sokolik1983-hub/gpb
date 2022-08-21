@@ -4,15 +4,18 @@ import { locale } from 'localization';
 import type { TableInstance } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';
 import type { IColumnsStorageObject } from '@platform/core';
+import type { IBaseEntity } from '@platform/services';
 import { ACTIONS, Box, Gap, Horizon, ROLE, ServiceIcons, Typography, WithClickable, WithInfoTooltip } from '@platform/ui';
 import { MIN_WIDTH } from '../constants';
 import css from '../styles.scss';
-import type { RecordCell } from '../types';
+import type { RecordCell, TableColumn } from '../types';
 import { HEADER_ALIGN } from '../types';
 import { SettingsButton } from './settings-button';
 
 /** Свойства хедера таблицы. */
-interface TableHeaderProps {
+interface TableHeaderProps<T extends IBaseEntity> {
+  /** Параметры оригинальных колонок. */
+  originalColumns: TableColumn<T>;
   /** Коллбэк-реф хедера таблицы. */
   refCallback?: React.RefCallback<HTMLElement>;
   /** Функция изменения настроек для колонок. */
@@ -26,14 +29,15 @@ interface TableHeaderProps {
 }
 
 /** Хедер таблицы. */
-export const TableHeader: React.FC<TableHeaderProps> = ({
+export const TableHeader = <T extends IBaseEntity>({
+  originalColumns,
   refCallback,
   settingColumns,
   setSettingsColumns,
   tableInstance,
   tableInstance: { headerGroups },
   showSettingsButton,
-}) => (
+}: TableHeaderProps<T>) => (
   <div ref={refCallback}>
     {headerGroups.map(headerGroup => (
       // eslint-disable-next-line react/jsx-key
@@ -121,7 +125,12 @@ export const TableHeader: React.FC<TableHeaderProps> = ({
           );
         })}
         {showSettingsButton && (
-          <SettingsButton setSettingsColumns={setSettingsColumns} settingColumns={settingColumns} tableInstance={tableInstance} />
+          <SettingsButton<T>
+            originalColumns={originalColumns}
+            setSettingsColumns={setSettingsColumns}
+            settingColumns={settingColumns}
+            tableInstance={tableInstance}
+          />
         )}
       </Box>
     ))}

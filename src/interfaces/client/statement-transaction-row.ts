@@ -14,8 +14,12 @@ export interface IStatementTransactionRow {
   counterpartyAccountNumber: string;
   /** Сумма списания. */
   outcome?: number;
+  /** Сумма списания в рублёвом эквиваленте. */
+  outcomeNatCurr: number;
   /** Сумма поступления. */
   income?: number;
+  /** Сумма поступления в рублёвом эквиваленте. */
+  incomeNatCurr: number;
   /** Назначение платежа. */
   purpose: string;
   /** Код валюты. */

@@ -24,3 +24,6 @@ export const TAB_HEIGHT = 60;
 
 /** Высота разделителя. */
 export const LINE_HEIGHT = 2;
+
+/** Валюта рубль. */
+export const RUB_CURRENCY = 'RUB';

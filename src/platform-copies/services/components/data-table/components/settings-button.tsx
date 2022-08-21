@@ -3,12 +3,14 @@ import type { TableInstance } from 'react-table';
 import type { IColumnsStorageObject } from '@platform/core';
 import type { IBaseEntity } from '@platform/services';
 import type { ICheckboxOption } from '@platform/ui';
-import { ACTIONS, Box, dialog, IconButton, Icons, SettingsForm } from '@platform/ui';
+import { ACTIONS, Box, dialog, IconButton, Icons } from '@platform/ui';
 import css from '../styles.scss';
 import type { RecordCell, TableColumn } from '../types';
 
 /** Свойства компонента кнопки для настройки колонок таблицы. */
-interface SettingsButtonProps {
+interface SettingsButtonProps<T extends IBaseEntity> {
+  /** Параметры оригинальных колонок. */
+  originalColumns: TableColumn<T>;
   /** Функция изменения настроек для колонок. */
   setSettingsColumns(value: IColumnsStorageObject[]): void;
   /** Настройки для колонок. */
@@ -18,12 +20,18 @@ interface SettingsButtonProps {
 }
 
 /** Компонент кнопки для настройки колонок таблицы. */
-export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, settingColumns, tableInstance }: SettingsButtonProps) => {
+export const SettingsButton = <T extends IBaseEntity>({
+  originalColumns,
+  setSettingsColumns,
+  settingColumns,
+  tableInstance,
+}: SettingsButtonProps<T>) => {
   const {
     columns,
     setHiddenColumns,
     state: { columnResizing },
     visibleColumns,
+    customSettingsForm: SettingsForm,
   } = tableInstance;
 
   const [settingsFormOpen, setSettingsFormOpen] = useState(false);
@@ -47,14 +55,14 @@ export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, sett
   /** Список колонок, которые будут выбраны как дефолтные по признаку isVisible. */
   const defaultVisibleColumns = useMemo(
     () =>
-      columns.reduce((acc: string[], item) => {
+      originalColumns.reduce((acc: string[], item) => {
         if (item.id && item.isVisible) {
           acc.push(item.id);
         }
 
         return acc;
       }, []),
-    [columns]
+    [originalColumns]
   );
 
   /** Список id отображаемых на данный момент колонок, за исключением selectionAndExpand. */
@@ -98,7 +106,7 @@ export const SettingsButton = <T extends IBaseEntity>({ setSettingsColumns, sett
       onSubmit,
       handleClose: () => setSettingsFormOpen(false),
     });
-  }, [columnOptions, defaultVisibleColumns, values, columns, setSettingsColumns, settingColumns, setHiddenColumns]);
+  }, [SettingsForm, columnOptions, defaultVisibleColumns, values, columns, setSettingsColumns, settingColumns, setHiddenColumns]);
 
   /** Обработчик клика по кнопке настроек колонок таблицы. */
   const handleOpenSettingsForm = React.useCallback(() => {

@@ -7,7 +7,7 @@ import { DetailDocumentsParams } from 'components/form/detail-documents-params';
 import { FileFormats } from 'components/form/file-formats';
 import { Operations } from 'components/form/operations';
 import { Period } from 'components/form/period';
-import { useCreationType } from 'hooks';
+import { useCreationType } from 'hooks/use-creation-type';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
 import { Footer } from 'pages/form/client/components/footer';
 import { FormProvider } from 'pages/form/client/form-provider';
@@ -23,7 +23,6 @@ import css from './styles.scss';
 /** ЭФ создания запроса на выписку. */
 export const CreateStatementForm: React.FC = () => {
   const creationType = useCreationType();
-
   const executor = getExecutor();
 
   const submit = useCallback(

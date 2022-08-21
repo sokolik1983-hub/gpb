@@ -25,7 +25,7 @@ import type {
 } from 'interfaces/dto';
 import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { ICollectionResponse } from '@platform/services';
-import { request, metadataToRequestParams } from '@platform/services';
+import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
 
 /** Базовый URL сервиса "Выписки". */
@@ -116,6 +116,7 @@ export const statementService = {
       method: 'POST',
       url: `${STATEMENT_URL}/summary`,
       data,
+      headers: AUTH_REQUEST_CONFIG.headers,
     }).then(r => r.data.data),
   /** Возвращает выписку по id запроса выписки. */
   getStatementByStatementRequestId: (id: string): Promise<IServerDataResp<IStatement>> =>
@@ -128,11 +129,13 @@ export const statementService = {
       url: `${STATEMENT_REQUEST_URL}`,
       method: 'POST',
       data: { data },
+      headers: AUTH_REQUEST_CONFIG.headers,
     }).then(r => r.data),
   /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string): Promise<IServerDataResp<ILatestStatementDto>> =>
     request<IServerDataResp<ILatestStatementDto>>({
       url: `${STATEMENT_REQUEST_URL}/${id}`,
+      headers: AUTH_REQUEST_CONFIG.headers,
     }).then(r => r.data),
   /** Получить последний запрос выписки у текущего пользователя. */
   getLatestStatementRequest: (): Promise<IServerDataResp<ILatestStatementDto>> =>
@@ -153,10 +156,10 @@ export const statementService = {
       data,
       url: `${TRANSACTION_URL}`,
     }).then(r => r.data),
-  /** Возвращает файл для экспорта по Id запроса выписки. */
-  exportStatement: async (id: string): Promise<ICreateAttachmentResponse> => {
+  /** Возвращает Id файла для экспорта и токен по Id запроса выписки для дальнейшей загрузки через file storage. */
+  exportStatement: async (id: string) => {
     const { data: resp } = await request({
-      url: `${STATEMENT_URL}/attachment/${id}`,
+      url: `${STATEMENT_URL}/generate-download-token/${id}`,
     });
 
     return resp.data;
@@ -175,6 +178,7 @@ export const statementService = {
       url: `${STATEMENT_URL}/create-attachment`,
       method: 'POST',
       data,
+      headers: AUTH_REQUEST_CONFIG.headers,
     });
 
     return resp.data;

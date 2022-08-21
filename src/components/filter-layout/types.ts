@@ -18,6 +18,8 @@ export interface IFilterProperties {
   filterFields: Record<string, IFilterField>;
   /** Объект, который возвращается платформенным хуком useFilter в поле "filterPanel". */
   filterState: IFilterPanel;
+  /** Функция установки активного поля и его значения. */
+  setActiveFieldAndValue?(fieldAndValue?: [string, unknown]): void;
   /** Объект, который возвращается платформенным хуком useFilter в поле "tagsPanel". */
   tagsState: ITagsPanel;
   /** Функция валидации значений формы. */

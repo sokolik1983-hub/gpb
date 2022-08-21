@@ -1,9 +1,10 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { executor, viewTransaction } from 'actions/client';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import { FOOTER_ACTIONS, FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
+import { STORAGE_KEY } from 'pages/scroller/client/statement-transaction/filter';
 import { CaptionRow } from 'pages/scroller/client/statement-transaction/table/caption-row';
 import { ONLY_SELECTED_ROWS_CKECKBOX } from 'pages/scroller/client/statement-transaction/table/constants';
 import { Footer } from 'pages/scroller/client/statement-transaction/table/footer';
@@ -16,7 +17,8 @@ import { PRIVILEGE } from 'stream-constants/client';
 import { getActiveActionButtons, isFunctionAvailability } from 'utils';
 import { useAuth } from '@platform/services/client';
 import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
-import { columns } from './columns';
+import { SettingsForm } from '../settings-form';
+import { getColumns } from './columns';
 
 /** Свойства таблицы проводок. */
 interface TableProps {
@@ -28,7 +30,9 @@ interface TableProps {
 export const Table: React.FC<TableProps> = ({ fetchData }) => {
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(false);
 
-  const { selectedRows, setSelectedRows, totalTransactions } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+  const { selectedRows, setSelectedRows, totalTransactions, isNationalCurrency } = useContext<ITransactionScrollerContext>(
+    TransactionScrollerContext
+  );
 
   useEffect(() => {
     if (selectedRows.length === 0) {
@@ -56,6 +60,10 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
     },
     [id]
   );
+
+  // FIXME разобраться почему ругается линтер
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  const columns = useMemo(() => getColumns(isNationalCurrency), [isNationalCurrency]);
 
   return (
     <>
@@ -85,6 +93,7 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
       </Box>
       <InfiniteDataTable<IStatementTransactionRow>
         columns={columns}
+        customSettingsForm={SettingsForm}
         defaultSort={DEFAULT_SORTING}
         executor={executor}
         fetchData={fetchData}
@@ -92,6 +101,7 @@ export const Table: React.FC<TableProps> = ({ fetchData }) => {
         footerContent={Footer}
         rowCaptionComponent={CaptionRow}
         selectedRows={selectedRows}
+        storageKey={STORAGE_KEY}
         visibleOnlySelectedRows={visibleOnlySelectedRows}
         onRowClick={handRowClick}
         onSelectedRowsChange={setSelectedRows}
