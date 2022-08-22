@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useEffect, useCallback } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useForm } from 'react-final-form';
-import { noop, compareStrings } from 'utils';
+import { compareStrings } from 'utils';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -42,12 +42,24 @@ export interface IAccountsFieldProps {
 }
 
 /** Селект выбора счетов. */
-export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
+export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange }) => {
   const { change, getFieldState, submit } = useForm();
 
   const sortedOptions = useMemo(
     () => accounts.map(account => getAccountOption(account)).sort((a, b) => compareStrings(a.orgName, b.orgName)),
     [accounts]
+  );
+
+  // Обёртка для отправки запроса при изменении данных, но отсуствии onChange функции
+  const onChangeFn = useCallback<OnChangeType<string[]>>(
+    (...args) => {
+      if (onChange) {
+        onChange(...args);
+      } else {
+        void submit();
+      }
+    },
+    [onChange, submit]
   );
 
   const filterFn = useCallback(
@@ -94,7 +106,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
       optionTemplate={AccountOption}
       options={sortedOptions}
       placeholder={placeholder}
-      onChange={onChange}
+      onChange={onChangeFn}
     />
   );
 };
