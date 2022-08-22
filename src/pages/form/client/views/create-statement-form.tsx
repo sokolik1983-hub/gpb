@@ -9,9 +9,11 @@ import { Operations } from 'components/form/operations';
 import { Period } from 'components/form/period';
 import { useCreationType } from 'hooks/use-creation-type';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
+import type { ExternalStatementRequest } from 'interfaces/form';
 import { Footer } from 'pages/form/client/components/footer';
 import { FormProvider } from 'pages/form/client/form-provider';
 import { Form } from 'react-final-form';
+import { useLocation } from 'react-router-dom';
 import { FORM_FIELD_LABELS, getInitialFormState } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
 import { mapFormToDto } from 'utils';
@@ -22,6 +24,10 @@ import css from './styles.scss';
 
 /** ЭФ создания запроса на выписку. */
 export const CreateStatementForm: React.FC = () => {
+  const {
+    state: { formValues: prefilledFormValues },
+  } = useLocation<ExternalStatementRequest>();
+
   const creationType = useCreationType();
   const executor = getExecutor();
 
@@ -48,7 +54,7 @@ export const CreateStatementForm: React.FC = () => {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest });
+  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest, prefilledFormValues });
 
   return (
     <Box className={css.form} fill={'FAINT'}>
