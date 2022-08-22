@@ -43,7 +43,7 @@ export interface IAccountsFieldProps {
 
 /** Селект выбора счетов. */
 export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
-  const { change, getFieldState } = useForm();
+  const { change, getFieldState, submit } = useForm();
 
   const sortedOptions = useMemo(
     () => accounts.map(account => getAccountOption(account)).sort((a, b) => compareStrings(a.orgName, b.orgName)),
@@ -81,8 +81,9 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
         name,
         accounts.map(item => item.id)
       );
+      void submit();
     }
-  }, [accounts, change, getFieldState, name]);
+  }, [accounts, change, getFieldState, name, submit]);
 
   return (
     <Fields.MultiSelect
