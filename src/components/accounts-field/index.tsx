@@ -51,7 +51,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
   );
 
   // Обёртка для отправки запроса при изменении данных, но отсуствии onChange функции
-  const onChangeFn = useCallback<OnChangeType<string[]>>(
+  const handleChange = useCallback<OnChangeType<string[]>>(
     (...args) => {
       if (onChange) {
         onChange(...args);
@@ -106,7 +106,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
       optionTemplate={AccountOption}
       options={sortedOptions}
       placeholder={placeholder}
-      onChange={onChangeFn}
+      onChange={handleChange}
     />
   );
 };
