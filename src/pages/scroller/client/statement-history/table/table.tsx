@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useCallback, useContext, useRef, useState } from 'react';
+import React, { useCallback, useContext, useRef } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
 import { useScrollButton } from 'hooks';
 import type { IStatementHistoryRow } from 'interfaces/client';
@@ -28,8 +28,6 @@ export const Table: FC = () => {
     isStatementsError,
     isStatementsFetched,
   } = useContext(HistoryScrollerContext);
-
-  const [selectedRows, setSelectedRows] = useState<IStatementHistoryRow[]>([]);
 
   const handleRowClick = useCallback((doc: IStatementHistoryRow) => {
     if (doc.accountsIds.length === 1) {
@@ -90,11 +88,9 @@ export const Table: FC = () => {
           executor={executor}
           fetchData={sendHistoryToDataTable}
           paginationState={pagination}
-          selectedRows={selectedRows}
           storageKey={STORAGE_KEY}
           onPaginationChange={setPagination}
           onRowClick={handleRowClick}
-          onSelectedRowsChange={setSelectedRows}
         />
       </LayoutScroll>
 
