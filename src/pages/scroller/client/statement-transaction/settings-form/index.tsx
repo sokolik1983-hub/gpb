@@ -70,8 +70,7 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
   const onResetHandler = useCallback(() => {
     reset({ columns: defaultColumns });
     onReset?.();
-    void submit();
-  }, [defaultColumns, onReset, reset, submit]);
+  }, [defaultColumns, onReset, reset]);
 
   return (
     <Box className={cn(css.container, Adjust.getPadClass([undefined, 'XS']))} data-id="table-columns-settings">
@@ -136,7 +135,7 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ onClose, handleClose
       onSubmit(data.columns);
       onCloseHandler();
     },
-    [onSubmit, onCloseHandler]
+    [onCloseHandler, onSubmit]
   );
 
   const cols = useMemo(() => columns.filter(c => !!c.label && typeof c.label === 'string'), [columns]);
