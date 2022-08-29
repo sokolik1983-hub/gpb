@@ -51,10 +51,22 @@ export interface IStateConfig {
   dateFrom?: string;
   /** Дата окончания периода. */
   dateTo?: string;
+  /** Предзаполненные поля формы при запросе выписки с другого сервиса. */
+  prefilledFormValues?: IFormState;
 }
 
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = ({ latestStatement, useCase, dateFrom, dateTo }: IStateConfig): Partial<IFormState> => {
+export const getInitialFormState = ({
+  latestStatement,
+  useCase,
+  dateFrom,
+  dateTo,
+  prefilledFormValues,
+}: IStateConfig): Partial<IFormState> => {
+  if (prefilledFormValues) {
+    return { ...defaultFormState, ...prefilledFormValues };
+  }
+
   if (!latestStatement) {
     const creationParams: string[] = [];
     const documentsSetParams: string[] = [];
