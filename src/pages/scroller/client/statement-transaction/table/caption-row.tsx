@@ -21,7 +21,12 @@ export const CaptionRow: React.FC<CaptionRowProps> = ({ row: { purpose } }) => {
     <Box className={css.captionRow}>
       <WithInfoTooltip
         extraSmall
-        positioningOrder={[CONTAINER_POSITION.BOTTOM_CENTER, CONTAINER_POSITION.LEFT_CENTER, CONTAINER_POSITION.RIGHT_CENTER]}
+        positioningOrder={[
+          CONTAINER_POSITION.BOTTOM_CENTER,
+          CONTAINER_POSITION.LEFT_CENTER,
+          CONTAINER_POSITION.RIGHT_CENTER,
+          CONTAINER_POSITION.TOP_CENTER,
+        ]}
         text={purpose}
       >
         {ref => (
