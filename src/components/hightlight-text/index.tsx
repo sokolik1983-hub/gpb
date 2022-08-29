@@ -63,7 +63,7 @@ export const HightlightText: React.FC<IHightlightText> = ({
 }) => {
   const defaultResult = useMemo(() => <div style={{ display: 'inline' }}>{textToHightlight}</div>, [textToHightlight]);
 
-  if (!searchWords) {
+  if (!searchWords || !textToHightlight) {
     return defaultResult;
   }
 
