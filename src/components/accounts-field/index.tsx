@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useEffect, useCallback } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useForm } from 'react-final-form';
-import { compareStrings } from 'utils';
+import { noop, compareStrings } from 'utils';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -42,24 +42,12 @@ export interface IAccountsFieldProps {
 }
 
 /** Селект выбора счетов. */
-export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange }) => {
-  const { change, getFieldState, submit } = useForm();
+export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
+  const { change, getFieldState } = useForm();
 
   const sortedOptions = useMemo(
     () => accounts.map(account => getAccountOption(account)).sort((a, b) => compareStrings(a.orgName, b.orgName)),
     [accounts]
-  );
-
-  // Обёртка для отправки запроса при изменении данных, но отсуствии onChange функции
-  const handleChange = useCallback<OnChangeType<string[]>>(
-    (...args) => {
-      if (onChange) {
-        onChange(...args);
-      } else {
-        void submit();
-      }
-    },
-    [onChange, submit]
   );
 
   const filterFn = useCallback(
@@ -93,9 +81,8 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
         name,
         accounts.map(item => item.id)
       );
-      void submit();
     }
-  }, [accounts, change, getFieldState, name, submit]);
+  }, [accounts, change, getFieldState, name]);
 
   return (
     <Fields.MultiSelect
@@ -106,7 +93,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
       optionTemplate={AccountOption}
       options={sortedOptions}
       placeholder={placeholder}
-      onChange={handleChange}
+      onChange={onChange}
     />
   );
 };
