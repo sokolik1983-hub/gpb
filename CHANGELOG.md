@@ -1,3 +1,10 @@
+## [2.11.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1-release.1...v2.11.1-release.2) (2022-09-02)
+
+
+### Bug Fixes
+
+* ретриггер релиза ([4fa3ece](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4fa3ece5f843f2add30b8c6a0c66a5ad8b4d04cf))
+
 ## [2.11.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0...v2.11.1-release.1) (2022-08-25)
 
 
