@@ -1,3 +1,22 @@
+## [2.11.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1-release.1...v2.11.1-release.2) (2022-09-02)
+
+
+### Bug Fixes
+
+* ретриггер релиза ([4fa3ece](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4fa3ece5f843f2add30b8c6a0c66a5ad8b4d04cf))
+
+## [2.11.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0...v2.11.1-release.1) (2022-08-25)
+
+
+### Bug Fixes
+
+* GBO-30097 Исправление кнопки "По умолчанию" журнала проводок ([e5cbe47](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e5cbe47a99a6cbd95586d5cf932a9fe1b70110b5))
+* GBO-31688 Исправлено поведение компонента выбора счетов ([71b2332](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/71b23328e696ecb814bfc085860e3a777c663864))
+* GBO-31688 Переименование метода согласно codeconvention ([1726d18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1726d186e316975654689a5478e8b2a77ef63522))
+* GBO-31688 Убран запрос оборотов при неверной валидации ([b30972c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b30972c183101c4d3f8194fd6ef4f1b500de6ec3))
+* GBO-31997 Убран "CheckBox" из скроллера истории ([f7fc512](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f7fc512e3acb2645a3a0f5bf51ede9988e5ccf8d))
+* GBO-31998 Добавлен лоадер при загрузке файла выписки ([e65752b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e65752b002b43fcfea6f5638810b7ee68c3d9cc7))
+
 # [2.11.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.10.0...v2.11.0) (2022-08-21)
 
 

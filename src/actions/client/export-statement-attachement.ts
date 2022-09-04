@@ -27,11 +27,13 @@ const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
 export const getExportStatementAttachment = (
   useCase: EXPORT_PARAMS_USE_CASES
 ): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
-  action: ({ done, fatal, addSucceeded, addFailed, execute }) => async (
+  action: ({ done, fatal, addSucceeded, addFailed, execute }, { showLoader, hideLoader }) => async (
     docs: IBaseEntity[],
     statementId?: string,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
+    showLoader();
+
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
       const [doc] = docs as IStatementHistoryRow[];
 
@@ -40,6 +42,7 @@ export const getExportStatementAttachment = (
       } = await execute(checkOutdatedStatement, [doc], ACTION.DOWNLOAD);
 
       if (isOutdated) {
+        hideLoader();
         done();
 
         return;
@@ -53,11 +56,14 @@ export const getExportStatementAttachment = (
       fatal(error);
 
       if (!data) {
+        hideLoader();
         addFailed();
         done();
 
         return;
       }
+
+      hideLoader();
 
       addSucceeded();
 
@@ -76,6 +82,7 @@ export const getExportStatementAttachment = (
     fatal(error);
 
     if (!data) {
+      hideLoader();
       addFailed();
       done();
 
@@ -85,6 +92,8 @@ export const getExportStatementAttachment = (
     const { content, mimeType, fileName } = data;
 
     showFile(content, fileName, mimeType);
+
+    hideLoader();
 
     addSucceeded();
 
