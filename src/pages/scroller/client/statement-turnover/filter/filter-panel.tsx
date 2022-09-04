@@ -38,7 +38,6 @@ export const FilterPanel = () => {
 
   const handleChangeDate = () => {
     change(FORM_FIELDS.DATE_PERIOD, DATE_PERIODS.SELECT_PERIOD);
-    void submit();
   };
 
   return (
