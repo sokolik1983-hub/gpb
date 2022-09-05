@@ -5,7 +5,7 @@ import { gotoTransactionsScrollerByStatementRequest } from 'actions/client/goto-
 import { printStatement } from 'actions/client/print-statement';
 import { FocusLock } from 'components/focus-lock';
 import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
-import { ACTION } from 'interfaces/client';
+import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { IGetStatusResponceDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { statementService } from 'services';
@@ -14,7 +14,7 @@ import { polling, POLLING_WAS_STOPPED_BY_USER, showCommonErrorMessage } from 'ut
 import { to } from '@platform/core';
 import type { IServerDataResp } from '@platform/services';
 import type { IButtonAction } from '@platform/ui';
-import { Box, BUTTON, DialogTemplate, Gap, ServiceIcons, Typography, dialog, DATA_TYPE } from '@platform/ui';
+import { Box, BUTTON, DATA_TYPE, dialog, DialogTemplate, Gap, ServiceIcons, Typography } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента AwaitingForm. */
@@ -23,6 +23,7 @@ export interface IAwaitingFormProps {
   onClose(): void;
   /** Id выписки. */
   id: string;
+  useCase: EXPORT_PARAMS_USE_CASES;
 }
 
 /**
@@ -31,7 +32,7 @@ export interface IAwaitingFormProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440121
  */
-export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
+export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id, useCase }) => {
   const job = () => statementService.getStatus(id);
 
   const checker = (result: IServerDataResp<IGetStatusResponceDto>): boolean => {
@@ -140,13 +141,19 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
         <DialogTemplate
           extraSmall
           actions={actions}
-          content={<Typography.P>{locale.awaitingForm.content}</Typography.P>}
+          content={
+            <Typography.P>
+              {useCase === EXPORT_PARAMS_USE_CASES.FIFTEEN ? locale.awaitingForm.osvContent : locale.awaitingForm.content}
+            </Typography.P>
+          }
           dataType={DATA_TYPE.CONFIRMATION}
           header={
             <>
               <ServiceIcons.ServiceProgress fill={'FAINT'} scale={'XL'} />
               <Gap />
-              <Typography.H1>{locale.awaitingForm.title}</Typography.H1>
+              <Typography.H1>
+                {useCase === EXPORT_PARAMS_USE_CASES.FIFTEEN ? locale.awaitingForm.osvTitle : locale.awaitingForm.title}
+              </Typography.H1>
               <Gap />
             </>
           }
@@ -159,13 +166,14 @@ export const AwaitingForm: React.FC<IAwaitingFormProps> = ({ onClose, id }) => {
 
 AwaitingForm.displayName = 'AwaitingForm';
 
-export const showAwaitingForm = (id: string) =>
+export const showAwaitingForm = (id: string, useCase: EXPORT_PARAMS_USE_CASES) =>
   new Promise((resolve, reject) =>
     dialog.show(
       'awaitingForm',
       AwaitingForm,
       {
         id,
+        useCase,
       },
       () => reject(true)
     )

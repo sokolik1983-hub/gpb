@@ -1,3 +1,4 @@
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { TYPE } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { locale } from 'localization';
@@ -14,7 +15,7 @@ import type { context } from './executor';
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675639
  */
-export const createStatement: IActionConfig<typeof context, string> = {
+export const createStatement: (useCase: EXPORT_PARAMS_USE_CASES) => IActionConfig<typeof context, string> = useCase => ({
   action: ({ done, fatal, addSucceeded }, { service, showLoader, showError, hideLoader }) => async ([doc]: [
     ICreateRequestStatementDto
   ]) => {
@@ -45,7 +46,7 @@ export const createStatement: IActionConfig<typeof context, string> = {
     fatal(err || error);
 
     // показываем ЭФ ожидания формирования выписки
-    const [_, close] = await to(showAwaitingForm(id!));
+    const [_, close] = await to(showAwaitingForm(id!, useCase));
 
     if (close) {
       done();
@@ -57,4 +58,4 @@ export const createStatement: IActionConfig<typeof context, string> = {
   },
   fatalHandler,
   guardians: [singleAction],
-};
+});

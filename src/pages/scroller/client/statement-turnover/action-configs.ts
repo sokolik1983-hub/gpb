@@ -1,5 +1,6 @@
 import { createStatement } from 'actions/client';
 import { showStatementRequestForm } from 'actions/client/show-statement-request-form';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
 import { PRIVILEGE } from 'stream-constants/client';
 import type { IActionWithAuth } from '@platform/services';
@@ -17,7 +18,7 @@ export const CREATE_STATEMENT: IActionWithAuth = {
 /** Действие экспорта выписки из ОСВ. */
 export const EXPORT_ACTION: IActionWithAuth = {
   authorities: [PRIVILEGE.STATEMENT_REQUEST, PRIVILEGE.ATTACHMENT_DOWNLOAD],
-  action: createStatement,
+  action: createStatement(EXPORT_PARAMS_USE_CASES.FIFTEEN),
   icon: Icons.Download,
   label: locale.form.buttons.download.label,
   name: 'TURNOVER_EXPORT',
@@ -26,7 +27,7 @@ export const EXPORT_ACTION: IActionWithAuth = {
 /** Действие печати выписки из ОСВ. */
 export const PRINT_ACTION: IActionWithAuth = {
   authorities: [PRIVILEGE.STATEMENT_REQUEST, PRIVILEGE.ATTACHMENT_DOWNLOAD],
-  action: createStatement,
+  action: createStatement(EXPORT_PARAMS_USE_CASES.FIFTEEN),
   icon: Icons.PrintFile,
   label: locale.form.buttons.print.label,
   name: 'TURNOVER_PRINT',

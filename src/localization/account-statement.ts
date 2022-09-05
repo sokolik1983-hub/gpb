@@ -1514,17 +1514,31 @@ export default {
 	awaitingForm: {
 		/**
 		 * @ru
-		 * Формируем выписку
+		 * Формирование выписки
 		 */
 		get title() {
 			return t('awaitingForm.title');
 		},
 		/**
 		 * @ru
-		 * Обычно выписка формируется менее двух минут.
+		 * Формирование оборотно-сальдовой ведомости
+		 */
+		get osvTitle() {
+			return t('awaitingForm.osvTitle');
+		},
+		/**
+		 * @ru
+		 * Обычно выписка формируется менее двух минут
 		 */
 		get content() {
 			return t('awaitingForm.content');
+		},
+		/**
+		 * @ru
+		 * Обычно документ формируется менее двух минут
+		 */
+		get osvContent() {
+			return t('awaitingForm.osvContent');
 		},
 		/**
 		 * @ru
