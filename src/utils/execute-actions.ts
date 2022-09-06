@@ -1,5 +1,6 @@
 import { createStatement, getExecutor } from 'actions/client';
 import { DATE_PERIODS } from 'interfaces';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client/classificators';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
 
@@ -45,7 +46,7 @@ export const executeCreateStatementHidden = ({ accountsIds, refererPage }: Exter
     sourcePage: refererPage,
   };
 
-  void executor.execute(createStatement, [doc]);
+  void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
 };
 
 /** Создать выписку с типом "Разовый запрос" из другого сервиса. */
@@ -60,5 +61,5 @@ export const executeCreateStatementOneTime = ({ accountsIds, periodType, referer
     sourcePage: refererPage,
   };
 
-  void executor.execute(createStatement, [doc]);
+  void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
 };

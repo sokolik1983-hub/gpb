@@ -15,7 +15,8 @@ const EXPORT_STATEMENT: IActionWithAuth = {
 };
 
 /** Повторный запрос выписки. */
-const REPEAT_STATEMENT: IActionWithAuth = {
+const REPEAT_STATEMENT: IActionWithAuth & { dataAction: string } = {
+  dataAction: '',
   icon: ServiceIcons.Refresh,
   label: locale.historyScroller.action.repeatStatement,
   action: repeatStatement,
@@ -24,4 +25,4 @@ const REPEAT_STATEMENT: IActionWithAuth = {
 };
 
 /** Действия строки скроллера. */
-export const ROW_ACTIONS = [EXPORT_STATEMENT, REPEAT_STATEMENT];
+export const ROW_ACTIONS: IActionWithAuth[] = [EXPORT_STATEMENT, REPEAT_STATEMENT];
