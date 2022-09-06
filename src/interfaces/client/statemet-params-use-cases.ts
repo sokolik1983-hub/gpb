@@ -38,4 +38,6 @@ export enum EXPORT_PARAMS_USE_CASES {
   SIXTEEN = 16,
   /** Другой сервис. */
   SEVENTEEN = 17,
+  /** Формирование выписки (со скроллера оборотов). */
+  EIGHTEEN = 18,
 }
