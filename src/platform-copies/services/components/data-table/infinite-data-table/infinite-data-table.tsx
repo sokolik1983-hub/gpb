@@ -209,7 +209,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
         <LoaderOverlay opened={loading} />
       </Box>
       {selectedRows && footerActionsGetter && footerContent && selectedRows.length > 0 && (
-        <Box className={css.footer}>
+        <Box className={css.footer} role="footer">
           <FractalSelectedRowsInfo<RecordCell>
             actionsGetter={footerActionsGetter(executer)}
             content={footerContent}
