@@ -1,12 +1,14 @@
 import { getExportStatementAttachment, repeatStatement } from 'actions/client';
+import type { IExtendedIActionWithAuth } from 'interfaces';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
 import { PRIVILEGE } from 'stream-constants/client';
-import type { IActionWithAuth } from '@platform/services';
 import { Icons, ServiceIcons } from '@platform/ui';
 
 /** Функция экспорта файла выписки или документа. */
-const EXPORT_STATEMENT: IActionWithAuth = {
+const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
+  dataAction: DATA_ACTION.EXPORT,
   icon: Icons.Download,
   label: locale.historyScroller.action.exportStatement,
   action: getExportStatementAttachment(EXPORT_PARAMS_USE_CASES.FOURTEEN),
@@ -15,8 +17,8 @@ const EXPORT_STATEMENT: IActionWithAuth = {
 };
 
 /** Повторный запрос выписки. */
-const REPEAT_STATEMENT: IActionWithAuth & { dataAction: string } = {
-  dataAction: '',
+const REPEAT_STATEMENT: IExtendedIActionWithAuth = {
+  dataAction: DATA_ACTION.REPEAT_REQUEST,
   icon: ServiceIcons.Refresh,
   label: locale.historyScroller.action.repeatStatement,
   action: repeatStatement,
@@ -25,4 +27,4 @@ const REPEAT_STATEMENT: IActionWithAuth & { dataAction: string } = {
 };
 
 /** Действия строки скроллера. */
-export const ROW_ACTIONS: IActionWithAuth[] = [EXPORT_STATEMENT, REPEAT_STATEMENT];
+export const ROW_ACTIONS: IExtendedIActionWithAuth[] = [EXPORT_STATEMENT, REPEAT_STATEMENT];
