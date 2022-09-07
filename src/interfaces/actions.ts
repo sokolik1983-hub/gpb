@@ -1,3 +1,4 @@
+import type { DATA_ACTION } from 'interfaces/data-action';
 import type { TransfomedAction } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
 import type { IActionWebInfo } from '@platform/services/client';
@@ -7,6 +8,7 @@ import type { BUTTON } from '@platform/ui';
 export interface ActionConfigExtension {
   /** Тип кнопки, которым может быть, если требуется, отрендерена кнопка, выполняющая действие. */
   buttonType?: BUTTON;
+  dataAction?: DATA_ACTION;
 }
 
 /** Расширенный конфиг действия. */
