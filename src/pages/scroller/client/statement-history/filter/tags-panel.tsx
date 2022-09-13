@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { TagsPanelView } from 'components';
 import type { ITagsPanelProps } from 'interfaces/client';
 import { useForm, useFormState } from 'react-final-form';
@@ -11,8 +11,7 @@ import { FIELDS_WITH_TAGS, FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
 
 /**
- * Возвращает новые значения формы фильтрации, в которых будут удалены значения для тех полей,
- * теги для которых отображаются на форме.
+ * Возвращает новые значения формы фильтрации, где будут удалены значения, которые отображаются на форме.
  *
  * @param values - Значения формы.
  * @param fieldsWithTags - Массив, с именами полей для которых отображаются тэги.
@@ -29,13 +28,12 @@ const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) =
 
 /** Панель тегов фильтра. */
 export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
-  const { restart } = useForm();
-
-  const { values } = useFormState<IFormState>();
+  const { change, restart, submit } = useForm();
+  const { valid, values } = useFormState<IFormState>();
 
   const {
-    filterPanel: { onOk, opened },
-    tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
+    filterPanel: { opened },
+    tagsPanel: { onClick: expandAdditionalFilters, tags },
   } = useContext(HistoryScrollerContext);
 
   const tagValueFormatter = (name: keyof IFormState, formValues: IFormState): string[] | string => {
@@ -55,28 +53,48 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
 
   const preparedTags = orderTags(tags, FIELDS_WITH_TAGS).filter(tag => Boolean(values[tag.value]));
 
-  const resetFilters = () => {
+  /** Действие над открытой панелью. */
+  const actionPanelReOpening = useCallback(() => {
+    // В хуке useFilter, после обновления стейта, чтобы избежать закрытия формы на UI, вызывается открытие формы.
+    if (opened) {
+      expandAdditionalFilters();
+    }
+  }, [expandAdditionalFilters, opened]);
+
+  /** Сброс всех полей. */
+  const handleRemoveAllTags = useCallback(() => {
     const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
 
     restart(newValues);
-    onOk(newValues);
 
-    // В хуке useFilter, после обновления стейта,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
+    if (valid) {
+      // Логичнее было использование onRemoveAllTags, но внутри себя он вызывает onOk({}).
+      // onOk({}) сбрасывает и основной фильтр, в результате чего запрос уходит с пустым значением фильтра.
+      // onOk - это submit формы.
+      void submit();
+
+      actionPanelReOpening();
     }
-  };
+  }, [actionPanelReOpening, defaultAdditionalFilterValues, restart, submit, valid, values]);
 
-  const handleRemoveTag = (name: string) => {
-    onRemoveTag(name);
+  /**
+   * Сброс одного поля по имени.
+   *
+   * @param name - Имя поля.
+   */
+  const handleRemoveTag = useCallback(
+    (name: string) => {
+      change(name, defaultAdditionalFilterValues[name]);
 
-    // В хуке useFilter, после удаления тега форма закрывается,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
-    }
-  };
+      if (valid) {
+        // Логичнее было использование onRemoveTag, но внутри себя он вызывает onOk. onOk - это submit формы.
+        void submit();
+
+        actionPanelReOpening();
+      }
+    },
+    [actionPanelReOpening, change, defaultAdditionalFilterValues, submit, valid]
+  );
 
   if (preparedTags.length === 0) {
     return null;
@@ -89,7 +107,7 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
         tagValueFormatter={tagValueFormatter}
         tags={preparedTags}
         onRemoveTag={handleRemoveTag}
-        onRemoveTags={resetFilters}
+        onRemoveTags={handleRemoveAllTags}
         onTagClick={expandAdditionalFilters}
       />
     </>
