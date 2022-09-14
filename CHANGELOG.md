@@ -1,3 +1,10 @@
+# [2.12.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.1...v2.12.0-release.2) (2022-09-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-31688 при невалидной дате в фильтре не отправляется запрос данных ([50410be](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/50410be3105a81fcbc60988cc15c8ce7cf9f91db))
+
 # [2.12.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1...v2.12.0-release.1) (2022-09-08)
 
 
