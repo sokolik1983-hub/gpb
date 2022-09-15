@@ -13,6 +13,7 @@ declare namespace StylesScssModule {
     'zLayerFluid': string;
     'zLayerMessage': string;
     'zLayerModal': string;
+    'zLayerOverlay': string;
     'zLayerSidebar': string;
     'zLayerSpecific_element': string;
     'zLayerSpecific_element_accent': string;
