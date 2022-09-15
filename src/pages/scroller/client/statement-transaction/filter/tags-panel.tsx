@@ -1,7 +1,8 @@
 import React, { useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components';
+import { useFilterTags } from 'hooks';
 import type { ITagsPanelProps } from 'interfaces/client';
-import { useForm, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { orderTags, stringifyCounterparty } from 'utils';
 import { DATE_FORMAT } from '@platform/services/client';
@@ -12,30 +13,17 @@ import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FIELDS_WITH_TAGS, FORM_FIELDS } from './constants';
 import type { IFormState } from './interfaces';
 
-/**
- * Возвращает новые значения формы фильтрации, в которых будут удалены значения для тех полей,
- * теги для которых отображаются на форме.
- *
- * @param values - Значения формы.
- * @param fieldsWithTags - Массив, с именами полей для которых отображаются тэги.
- */
-const getValuesAfterResetTags = (values: IFormState, fieldsWithTags: string[]) => {
-  const newValues = { ...values };
-
-  fieldsWithTags.forEach(item => {
-    newValues[item] = undefined;
-  });
-
-  return newValues;
-};
-
 /** Панель тегов фильтра. */
-export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues }) => {
-  const { restart } = useForm();
+export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, onChangeVisibleAdditionalFilter }) => {
+  const { valid, values: formValues } = useFormState<IFormState>();
 
-  const { counterparties } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+  const {
+    counterparties,
+    filterPanel: { values: storageValues },
+    tagsPanel: { tags },
+  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
-  const { values } = useFormState<IFormState>();
+  const values = valid ? storageValues : formValues;
 
   const counterpartyNameById = useMemo(
     () =>
@@ -49,13 +37,8 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
     [counterparties]
   );
 
-  const {
-    filterPanel: { onOk, opened },
-    tagsPanel: { onClick: expandAdditionalFilters, tags, onRemoveTag },
-  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
-
-  const tagValueFormatter = (name: keyof IFormState, formValues: IFormState): string[] | string => {
-    const value = formValues[name];
+  const tagValueFormatter = (name: keyof IFormState, formState: IFormState): string[] | string => {
+    const value = formState[name];
 
     switch (name) {
       case FORM_FIELDS.PAYMENT_DATE_FROM:
@@ -80,28 +63,12 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
     return Boolean(value);
   });
 
-  const resetFilters = () => {
-    const newValues = { ...getValuesAfterResetTags(values, FIELDS_WITH_TAGS), ...defaultAdditionalFilterValues };
-
-    restart(newValues);
-    onOk(newValues);
-
-    // В хуке useFilter, после обновления стейта,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
-    }
-  };
-
-  const handleRemoveTag = (name: string) => {
-    onRemoveTag(name);
-
-    // В хуке useFilter, после удаления тега форма закрывается,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
-    }
-  };
+  const { onOpenAdditionalFilter, onRemoveTag, onRemoveAllTags } = useFilterTags<IFormState>({
+    defaultAdditionalFilterValues,
+    fieldsWithTags: FIELDS_WITH_TAGS,
+    onChangeVisibleAdditionalFilter,
+    values,
+  });
 
   if (preparedTags.length === 0) {
     return null;
@@ -110,12 +77,13 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
   return (
     <>
       <Gap.SM />
-      <TagsPanelView
+      <TagsPanelView<IFormState>
         tagValueFormatter={tagValueFormatter}
         tags={preparedTags}
-        onRemoveTag={handleRemoveTag}
-        onRemoveTags={resetFilters}
-        onTagClick={expandAdditionalFilters}
+        values={values}
+        onRemoveTag={onRemoveTag}
+        onRemoveTags={onRemoveAllTags}
+        onTagClick={onOpenAdditionalFilter}
       />
     </>
   );
