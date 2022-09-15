@@ -1,3 +1,10 @@
+# [2.12.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.3...v2.12.0-release.4) (2022-09-15)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-33654 исправление лоадера на ЭФ настроек экспорта / печати ([02604bc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/02604bc02b4d8362761477919a12fdf5735bae24))
+
 # [2.12.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.2...v2.12.0-release.3) (2022-09-15)
 
 
