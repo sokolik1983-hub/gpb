@@ -1,3 +1,10 @@
+# [2.12.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.2...v2.12.0-release.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* GBO-32535 Добавление атрибута data-action ([eed8885](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/eed8885d895b9d9f5fd0944d60b99b6bbb9a3b4b))
+
 # [2.12.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.1...v2.12.0-release.2) (2022-09-14)
 
 
