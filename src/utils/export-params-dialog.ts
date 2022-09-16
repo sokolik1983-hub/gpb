@@ -37,9 +37,6 @@ export const downloadButtonShowCases = [
   EXPORT_PARAMS_USE_CASES.TWELVE,
 ];
 
-/** Набор случаев, при которых показываем кнопку "Отправить на почту". */
-export const sendToEmailButtonShowCases = [EXPORT_PARAMS_USE_CASES.FIVE, EXPORT_PARAMS_USE_CASES.EIGHT, EXPORT_PARAMS_USE_CASES.ELEVEN];
-
 /** Набор случаев, при которых показываем кнопку "Печать". */
 export const printButtonShowCases = [EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOUR, EXPORT_PARAMS_USE_CASES.SIX];
 
