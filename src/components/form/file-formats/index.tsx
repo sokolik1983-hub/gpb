@@ -12,7 +12,7 @@ import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
 import { fileFormatOptions, FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
-import { fileFormatShowCases } from 'utils';
+import { fileFormatShowCases, isNeedTotalsOfDay } from 'utils';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
@@ -48,9 +48,17 @@ export const FileFormats: React.FC = () => {
         params = params.filter(x => x !== CREATION_PARAMS.WITH_PDF_SIGN);
       }
 
+      if (isPdf && params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+        params = params.filter(x => x !== CREATION_PARAMS.WITH_DOCUMENTS_SET);
+      }
+
+      if (!isNeedTotalsOfDay({ ...values, format }) && params.includes(CREATION_PARAMS.TOTALS_OF_DAY)) {
+        params = params.filter(x => x !== CREATION_PARAMS.TOTALS_OF_DAY);
+      }
+
       change(FORM_FIELDS.CREATION_PARAMS, params);
     },
-    [accountIds, accounts, creationParams, withSign, change]
+    [accountIds, accounts, creationParams, withSign, values, change]
   );
 
   const visible = !useCase || (useCase && fileFormatShowCases.includes(useCase));

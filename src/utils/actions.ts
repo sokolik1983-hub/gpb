@@ -48,10 +48,13 @@ export const convertToCreationParams = (
  *
  * Утилита для определения необходимости параметра `Итоги за день`.
  *
- * @param values - Данные формы.
+ * @param formState Стейт формы.
  */
-export const isNeedTotalsOfDay = (values: IFormState): boolean =>
-  values.dateFrom !== values.dateTo && (values.format === FORMAT.PDF || values.format === FORMAT.EXCEL);
+export const isNeedTotalsOfDay = (formState: IFormState): boolean => {
+  const { dateFrom, dateTo, format } = formState;
+
+  return !!dateFrom && !!dateTo && dateFrom !== dateTo && (format === FORMAT.PDF || format === FORMAT.EXCEL);
+};
 
 /**
  * Конвертер для преобразования состояния формы в расширенные / дополнительные параметры создания выписки.
