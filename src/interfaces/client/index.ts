@@ -5,3 +5,4 @@ export * from './classificators';
 export * from './statement';
 export * from './statemet-params-use-cases';
 export * from './tags-panel';
+export * from './quick-filter-panel';

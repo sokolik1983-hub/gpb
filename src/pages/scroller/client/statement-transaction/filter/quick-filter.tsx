@@ -1,7 +1,8 @@
 import type { FC } from 'react';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import type { QuickFilterPanelProps } from 'interfaces/client';
 import { locale } from 'localization';
-import { useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { ECO_STATEMENT } from 'stream-constants';
 import { useLocalStorage } from '@platform/services';
 import type { IOption } from '@platform/ui';
@@ -20,9 +21,9 @@ const MAX_HISTORY_SIZE = 5;
  * Поля фильтра которые всегда видны на форме фильтрации.
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
-export const QuickFilter: FC = () => {
+export const QuickFilter: FC<QuickFilterPanelProps> = () => {
+  const { submit } = useForm();
   const {
-    values,
     values: { amountFrom, amountTo, queryString },
   } = useFormState<IFormState>();
 
@@ -30,32 +31,20 @@ export const QuickFilter: FC = () => {
 
   const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
-  const {
-    filterPanel: { onOk, opened },
-    tagsPanel: { onClick: expandAdditionalFilters },
-    counterparties,
-    fetchedNewTransactions,
-  } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
+  const { counterparties, fetchedNewTransactions } = useContext<ITransactionScrollerContext>(TransactionScrollerContext);
 
   useEffect(() => {
-    // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
-    onOk(values);
-
-    // В хуке useFilter, после обновления стейта,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
-    }
+    void submit();
 
     // values не включён в массив зависимостей хука т.к запрос на сервер при изменении значения фильтра
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, amountFrom, amountTo, queryString]);
+  }, [amountFrom, amountTo, queryString]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены все доп. данные.
-    onOk(values);
+    void submit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counterparties]);
 
