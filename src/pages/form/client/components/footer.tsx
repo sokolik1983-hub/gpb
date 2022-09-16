@@ -1,22 +1,18 @@
 import React, { useContext } from 'react';
 import { ACTION } from 'interfaces/client/classificators';
 import { locale } from 'localization';
-import { useForm, useFormState } from 'react-final-form';
+import { useForm } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
-import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
 import type { IFormContext } from 'stream-constants/form/form-context';
-import { Gap, Horizon, PrimaryButton, RegularButton, WithInfoTooltip, Box, ACTIONS as DATA_ACTIONS } from '@platform/ui';
+import { Gap, Horizon, PrimaryButton, RegularButton, ACTIONS as DATA_ACTIONS } from '@platform/ui';
 
 /** Компонент футера. */
 export const Footer: React.FC = () => {
   const { change } = useForm();
-  const { values } = useFormState<IFormState>();
   const { goBack } = useHistory();
   const { isPdf } = useContext<IFormContext>(FormContext);
-
-  const hasOneAccount = values.accountIds.length === 1;
 
   return (
     <Horizon>
@@ -30,40 +26,30 @@ export const Footer: React.FC = () => {
         {locale.form.buttons.download.label}
       </PrimaryButton>
       <Gap />
-      {hasOneAccount ? (
-        <RegularButton
-          extraSmall
-          data-action={DATA_ACTIONS.SUBMIT}
-          dimension="SM"
-          type={'submit'}
-          onClick={() => change(FORM_FIELDS.ACTION, ACTION.VIEW)}
-        >
-          {locale.form.buttons.show.label}
-        </RegularButton>
-      ) : (
-        <WithInfoTooltip extraSmall text={locale.form.tooltip.hasOneAccount}>
-          {ref => (
-            // Без обёртки тултип не показывается, когда кнопка задизейблена.
-            <Box ref={ref}>
-              <RegularButton disabled extraSmall dimension="SM">
-                {locale.form.buttons.show.label}
-              </RegularButton>
-            </Box>
-          )}
-        </WithInfoTooltip>
-      )}
-      <Gap />
       <RegularButton
         extraSmall
         data-action={DATA_ACTIONS.SUBMIT}
         dimension="SM"
-        disabled={!isPdf}
         type={'submit'}
-        onClick={() => change(FORM_FIELDS.ACTION, ACTION.PRINT)}
+        onClick={() => change(FORM_FIELDS.ACTION, ACTION.VIEW)}
       >
-        {locale.form.buttons.print.label}
+        {locale.form.buttons.show.label}
       </RegularButton>
       <Gap />
+      {isPdf && (
+        <>
+          <RegularButton
+            extraSmall
+            data-action={DATA_ACTIONS.SUBMIT}
+            dimension="SM"
+            type={'submit'}
+            onClick={() => change(FORM_FIELDS.ACTION, ACTION.PRINT)}
+          >
+            {locale.form.buttons.print.label}
+          </RegularButton>
+          <Gap />
+        </>
+      )}
       <RegularButton extraSmall data-action={DATA_ACTIONS.BACK} dimension="SM" onClick={goBack}>
         {locale.form.buttons.cancel.label}
       </RegularButton>
