@@ -18,15 +18,13 @@ export const Filter: React.FC<IFilterProperties> = ({
   setActiveFieldAndValue,
   tagsState,
 }) => {
-  const { onClose: closeAdditionalFilter, onClear, onOk, opened, values: currentStateValues } = filterState;
+  const { onClose: closeAdditionalFilter, opened, values: currentStateValues } = filterState;
   const { onClick: expandAdditionalFilter } = tagsState;
 
-  const { restart } = useForm();
-  const { active, values } = useFormState();
+  const { restart, submit } = useForm();
+  const { active, valid, values } = useFormState();
 
   useEffect(() => setActiveFieldAndValue?.(active ? [active, values[active]] : undefined), [active, setActiveFieldAndValue, values]);
-
-  const handleApply = useCallback(() => onOk(values), [onOk, values]);
 
   const handleToggle = useCallback(() => (opened ? closeAdditionalFilter() : expandAdditionalFilter()), [
     opened,
@@ -48,11 +46,16 @@ export const Filter: React.FC<IFilterProperties> = ({
     [additionalFilterFields, filterFields]
   );
 
+  /** Сбросить поля дополнительного фильтра. */
   const handleReset = useCallback(() => {
-    onClear();
     restart({ ...values, ...defaultAdditionalFilterValues });
-    expandAdditionalFilter();
-  }, [defaultAdditionalFilterValues, expandAdditionalFilter, onClear, restart, values]);
+
+    if (valid) {
+      void submit();
+    }
+
+    closeAdditionalFilter();
+  }, [closeAdditionalFilter, defaultAdditionalFilterValues, restart, submit, valid, values]);
 
   const pristine = useMemo(() => {
     if (opened) {
@@ -97,7 +100,7 @@ export const Filter: React.FC<IFilterProperties> = ({
             <AdditionalFilter />
           </Box>
           <Line fill="FAINT" />
-          <FilterFooter disabled={pristine} onApply={handleApply} onReset={handleReset} />
+          <FilterFooter disabled={pristine} onApply={submit} onReset={handleReset} />
           <Line fill="FAINT" />
         </Box>
       )}

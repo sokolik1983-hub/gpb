@@ -138,8 +138,16 @@ export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   return (
     <StopPropagation>
       <Box className={css.rowActions}>
-        {actions.map(({ icon, name, onClick }) => (
-          <RegularButton key={name} extraSmall className={css.rowActionButton} dimension={'MC'} icon={icon} onClick={onClick} />
+        {actions.map(({ icon, name, onClick, dataAction }) => (
+          <RegularButton
+            key={name}
+            extraSmall
+            className={css.rowActionButton}
+            data-action={dataAction}
+            dimension={'MC'}
+            icon={icon}
+            onClick={onClick}
+          />
         ))}
       </Box>
     </StopPropagation>

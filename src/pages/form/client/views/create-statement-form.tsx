@@ -9,19 +9,26 @@ import { Operations } from 'components/form/operations';
 import { Period } from 'components/form/period';
 import { useCreationType } from 'hooks/use-creation-type';
 import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { ExternalStatementRequest } from 'interfaces/form';
 import { Footer } from 'pages/form/client/components/footer';
 import { FormProvider } from 'pages/form/client/form-provider';
 import { Form } from 'react-final-form';
-import { FORM_FIELD_LABELS, getInitialFormState } from 'stream-constants/form';
+import { useLocation } from 'react-router-dom';
 import type { IFormState } from 'stream-constants/form';
+import { FORM_FIELD_LABELS, getInitialFormState } from 'stream-constants/form';
 import { mapFormToDto } from 'utils';
 import { NotFoundContent } from '@platform/services';
-import { Box, LoaderOverlay, Pattern, FormValidation, DATA_TYPE } from '@platform/ui';
+import { Box, DATA_TYPE, FormValidation, LoaderOverlay, Pattern } from '@platform/ui';
 import { validateForm } from '../views/validate-form';
 import css from './styles.scss';
 
 /** ЭФ создания запроса на выписку. */
 export const CreateStatementForm: React.FC = () => {
+  const {
+    state: { formValues: prefilledFormValues },
+  } = useLocation<ExternalStatementRequest>();
+
   const creationType = useCreationType();
   const executor = getExecutor();
 
@@ -29,7 +36,7 @@ export const CreateStatementForm: React.FC = () => {
     (values: IFormState) => {
       const dto = mapFormToDto(values, creationType);
 
-      void executor.execute(createStatement, [dto]);
+      void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SIXTEEN), [dto]);
     },
     [creationType, executor]
   );
@@ -48,7 +55,7 @@ export const CreateStatementForm: React.FC = () => {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest });
+  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest, prefilledFormValues });
 
   return (
     <Box className={css.form} fill={'FAINT'}>

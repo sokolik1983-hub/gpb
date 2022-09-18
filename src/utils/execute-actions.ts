@@ -1,7 +1,18 @@
-import { createStatement, getExecutor, showStatementRequestForm } from 'actions/client';
+import { createStatement, getExecutor } from 'actions/client';
 import { DATE_PERIODS } from 'interfaces';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client/classificators';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
+
+/** Свойства создания выписки из других сервисов. */
+interface ExternalCreateStatement {
+  /** Идентификаторы счетов. */
+  accountsIds: string[];
+  /** Тип периода запроса выписки. */
+  periodType?: DATE_PERIODS;
+  /** URL страницы, с которой был создан запрос. */
+  refererPage: string;
+}
 
 /** Данные для запроса на выписку. */
 const baseDoc: Partial<ICreateRequestStatementDto> = {
@@ -23,34 +34,32 @@ const baseDoc: Partial<ICreateRequestStatementDto> = {
   sign: false,
 };
 
-export const executeCreateStatementHidden = ({ accountsIds, refererPage }: { accountsIds: string[]; refererPage: string }) => {
+/** Создать выписку с типом "Скрытый запрос просмотра" из другого сервиса. */
+export const executeCreateStatementHidden = ({ accountsIds, refererPage }: ExternalCreateStatement): void => {
   const executor = getExecutor();
 
   const doc: Partial<ICreateRequestStatementDto> = {
     ...baseDoc,
     type: TYPE.HIDDEN_VIEW,
+    periodType: DATE_PERIODS.YESTERDAY,
     accountsIds,
     sourcePage: refererPage,
   };
 
-  void executor.execute(createStatement, [doc]);
+  void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
 };
 
-export const executeCreateStatementOneTime = ({ accountsIds, refererPage }: { accountsIds: string[]; refererPage: string }) => {
+/** Создать выписку с типом "Разовый запрос" из другого сервиса. */
+export const executeCreateStatementOneTime = ({ accountsIds, periodType, refererPage }: ExternalCreateStatement): void => {
   const executor = getExecutor();
 
   const doc: Partial<ICreateRequestStatementDto> = {
     ...baseDoc,
     type: TYPE.ONETIME,
     accountsIds,
+    periodType,
     sourcePage: refererPage,
   };
 
-  void executor.execute(createStatement, [doc]);
-};
-
-export const executeCreateStatementOrg = () => {
-  const executor = getExecutor();
-
-  void executor.execute(showStatementRequestForm);
+  void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
 };

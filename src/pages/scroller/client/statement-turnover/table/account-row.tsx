@@ -4,7 +4,7 @@ import { createStatement, executor } from 'actions/client';
 import cn from 'classnames';
 import type { IFocusParentNodeProps } from 'components/focus-tree';
 import { FocusNode, NODE_TYPE } from 'components/focus-tree';
-import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client';
+import { ACTION, CREATION_TYPE, EXPORT_PARAMS_USE_CASES, OPERATIONS, TYPE } from 'interfaces/client';
 import type { IAccountTurnoversInfo, ICreateRequestStatementDto } from 'interfaces/dto';
 import { GROUPING_VALUES } from 'interfaces/dto';
 import type { Row } from 'react-table';
@@ -70,7 +70,7 @@ export const AccountInfoRow: FC<IAccountInfoRowProps> = ({ accountInfoRow, nodes
 
       const handler = getHandlerDependingOnSelection(executor.execute);
 
-      await handler(createStatement, [doc]);
+      await handler(createStatement(EXPORT_PARAMS_USE_CASES.EIGHTEEN), [doc]);
     },
     [doc]
   );

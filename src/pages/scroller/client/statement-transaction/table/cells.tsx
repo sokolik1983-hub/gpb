@@ -180,7 +180,15 @@ export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
     <StopPropagation>
       <Horizon allHeight={false}>
         {visibleActions.map(({ icon, name, onClick }) => (
-          <RegularButton key={name} extraSmall className={css.rowActionButton} dimension={'MC'} icon={icon} onClick={onClick} />
+          <RegularButton
+            key={name}
+            extraSmall
+            className={css.rowActionButton}
+            data-action={name}
+            dimension={'MC'}
+            icon={icon}
+            onClick={onClick}
+          />
         ))}
 
         {dropDownActions.length > 0 && (

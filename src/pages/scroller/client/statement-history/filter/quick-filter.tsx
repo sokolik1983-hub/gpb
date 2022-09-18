@@ -3,8 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { AccountsField } from 'components';
 import { DateRange } from 'components/form/date-range';
 import { locale } from 'localization';
-import { useFormState } from 'react-final-form';
-import { isValidDateRange } from 'utils';
+import { useForm, useFormState } from 'react-final-form';
 import { Pattern, Typography, Gap, Horizon, Font, FONT_LINE } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { FORM_FIELDS } from './constants';
@@ -15,39 +14,36 @@ import type { IFormState } from './interfaces';
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
 export const QuickFilter: FC = () => {
+  const { submit } = useForm();
   const { valid, values } = useFormState<IFormState>();
 
   const { accountIds, dateFrom, dateTo } = values;
 
   const {
-    filterPanel: { onOk, opened },
+    filterPanel: { opened },
     tagsPanel: { onClick: expandAdditionalFilters },
     accounts,
   } = useContext(HistoryScrollerContext);
 
-  const isDateValid = isValidDateRange({ dateFrom, dateTo });
-
   useEffect(() => {
-    // При изменении значений полей быстрых фильтров, происходит обновление состояния хука useFilter.
-    if (valid && isDateValid) {
-      onOk(values);
-    }
+    if (valid) {
+      void submit();
 
-    // В хуке useFilter, после обновления стейта,
-    // чтобы избежать закрытия формы на UI, вызывается открытие формы.
-    if (opened) {
-      expandAdditionalFilters();
+      // В хуке useFilter, после обновления стейта, чтобы избежать закрытия формы на UI, вызывается открытие формы.
+      if (opened) {
+        expandAdditionalFilters();
+      }
     }
 
     // values не включён в массив зависимостей хука т.к запрос на сервер при изменении значения фильтра
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onOk, accountIds, dateFrom, dateTo, valid]);
+  }, [accountIds, dateFrom, dateTo, valid]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены счета.
-    onOk(values);
+    void submit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accounts]);
 

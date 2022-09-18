@@ -32,10 +32,10 @@ export const getExportStatementAttachment = (
     statementId?: string,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
-    showLoader();
-
     if (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN) {
       const [doc] = docs as IStatementHistoryRow[];
+
+      showLoader();
 
       const {
         succeeded: [isOutdated],
