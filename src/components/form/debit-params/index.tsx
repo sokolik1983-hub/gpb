@@ -1,27 +1,22 @@
 import React, { useContext, useEffect, useRef } from 'react';
-import { DEBIT_PARAMS, defaultDebitParamsOptions, FormContext, FORM_FIELDS } from 'stream-constants/form';
-import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
+import { defaultDebitParamsOptions, FormContext, FORM_FIELDS, DEBIT_PARAMS } from 'stream-constants/form';
 import type { ICheckboxOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
 /** Компонент дебетового комплекта документов. */
 export const DebitParams: React.FC = () => {
   const options = useRef<ICheckboxOption[]>([]);
-  const { onlyRequestsStatement, withSign, useCase } = useContext(FormContext);
+  const { onlyRequestsStatement } = useContext(FormContext);
 
   useEffect(() => {
     options.current = defaultDebitParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
-      if (useCase && alwaysSendParamCasesFromUI.includes(useCase) && x.value === DEBIT_PARAMS.INCLUDE_STATEMENTS) {
-        acc.push({ ...x, disabled: true });
-      } else {
-        const disabled = onlyRequestsStatement || withSign;
-
-        acc.push({ ...x, disabled });
+      if (onlyRequestsStatement) {
+        return x.value === DEBIT_PARAMS.INCLUDE_STATEMENTS ? [...acc, { ...x, disabled: false }] : acc;
       }
 
-      return acc;
+      return [...acc, { ...x, disabled: false }];
     }, []);
-  }, [onlyRequestsStatement, useCase, withSign]);
+  }, [onlyRequestsStatement]);
 
   return <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DEBIT_PARAMS} options={options.current} />;
 };

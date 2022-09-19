@@ -5,13 +5,8 @@ import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, FORM_FIELDS, FormContext } from 'stream-constants/form';
-import { defaultCreationParamsOptions, isNeedTotalsOfDay } from 'utils';
-import {
-  alwaysSendParamCasesFromUI,
-  getHideEsignCases,
-  getHideSeparateAccountFilesCases,
-  withDocumentsSetCases,
-} from 'utils/export-params-dialog';
+import { defaultCreationParamsOptions, isNeedTotalsOfDay, withDocumentsSetCases } from 'utils';
+import { alwaysSendParamCasesFromUI, getHideEsignCases, getHideSeparateAccountFilesCases } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
@@ -44,7 +39,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
           if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
-            acc.push({ ...x, disabled: withSign });
+            acc.push({ ...x, disabled: false });
           }
 
           break;
