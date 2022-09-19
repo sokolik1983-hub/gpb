@@ -1,3 +1,65 @@
+# [2.12.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1...v2.12.0) (2022-09-18)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-33654 исправление лоадера на ЭФ настроек экспорта / печати ([02604bc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/02604bc02b4d8362761477919a12fdf5735bae24))
+* GBO-32535 Добавление атрибута data-action ([eed8885](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/eed8885d895b9d9f5fd0944d60b99b6bbb9a3b4b))
+* **скроллер:** GBO-31688 при невалидной дате в фильтре не отправляется запрос данных ([50410be](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/50410be3105a81fcbc60988cc15c8ce7cf9f91db))
+* GBO-30967 Добавление атрибута data-action ([49289ad](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/49289adb21f98035b93df9118d194a18aec847a3))
+* GBO-32081 Добавлен вариант всплывающего окна для подсказки внизу экрана ([ecb2a6e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ecb2a6ef3d479762b55256a8d08148dfc7fb48c8))
+* GBO-32083 Добавлена проверка на наличие текста для подсветки ([0f91462](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0f91462c0e7332f945507bee4c75be6cb914e470))
+* GBO-32535 Добавление роли "footer" в таблицы ([dcad825](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dcad825df9f2116c290bb50649f3a1c3b9b347b3))
+* GBO-32563 Изменён текст на ЭФ "Выписка формируется" ([ab2382e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ab2382e03854365c008206b7a36bdd56fa12b36b))
+* GBO-32563 Указан useCase для скроллера оборотов ([269c48b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/269c48b3b3c2dd4e94c0fb81798cb9ad2d9118fe))
+* **скроллер:** GBO-30395 рендер элемента аккордеона без библиотеки ResizeSensor ([63defc1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/63defc17a9f7a3e656040c9ada5c4320e3068208))
+* **скроллер:** GBO-32665 исправлена логика работы кнопки "Сбросить" в фильтре ([d8f3ae5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d8f3ae581ba15a12670d7a28702f3d89d95f5202))
+
+
+### Features
+
+* GBO-28874 изменения для экшенов главной страницы ([8135435](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/81354354e44a0f7a11780d011bc71260418e626b))
+
+# [2.12.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.3...v2.12.0-release.4) (2022-09-15)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-33654 исправление лоадера на ЭФ настроек экспорта / печати ([02604bc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/02604bc02b4d8362761477919a12fdf5735bae24))
+
+# [2.12.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.2...v2.12.0-release.3) (2022-09-15)
+
+
+### Bug Fixes
+
+* GBO-32535 Добавление атрибута data-action ([eed8885](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/eed8885d895b9d9f5fd0944d60b99b6bbb9a3b4b))
+
+# [2.12.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0-release.1...v2.12.0-release.2) (2022-09-14)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-31688 при невалидной дате в фильтре не отправляется запрос данных ([50410be](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/50410be3105a81fcbc60988cc15c8ce7cf9f91db))
+
+# [2.12.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1...v2.12.0-release.1) (2022-09-08)
+
+
+### Bug Fixes
+
+* GBO-30967 Добавление атрибута data-action ([49289ad](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/49289adb21f98035b93df9118d194a18aec847a3))
+* GBO-32081 Добавлен вариант всплывающего окна для подсказки внизу экрана ([ecb2a6e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ecb2a6ef3d479762b55256a8d08148dfc7fb48c8))
+* GBO-32083 Добавлена проверка на наличие текста для подсветки ([0f91462](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0f91462c0e7332f945507bee4c75be6cb914e470))
+* GBO-32535 Добавление роли "footer" в таблицы ([dcad825](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dcad825df9f2116c290bb50649f3a1c3b9b347b3))
+* GBO-32563 Изменён текст на ЭФ "Выписка формируется" ([ab2382e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ab2382e03854365c008206b7a36bdd56fa12b36b))
+* GBO-32563 Указан useCase для скроллера оборотов ([269c48b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/269c48b3b3c2dd4e94c0fb81798cb9ad2d9118fe))
+* **скроллер:** GBO-30395 рендер элемента аккордеона без библиотеки ResizeSensor ([63defc1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/63defc17a9f7a3e656040c9ada5c4320e3068208))
+* **скроллер:** GBO-32665 исправлена логика работы кнопки "Сбросить" в фильтре ([d8f3ae5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d8f3ae581ba15a12670d7a28702f3d89d95f5202))
+
+
+### Features
+
+* GBO-28874 изменения для экшенов главной страницы ([8135435](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/81354354e44a0f7a11780d011bc71260418e626b))
+
 ## [2.11.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.0...v2.11.1) (2022-09-04)
 
 
