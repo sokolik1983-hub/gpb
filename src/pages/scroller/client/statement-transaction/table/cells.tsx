@@ -4,6 +4,7 @@ import { executor } from 'actions/client/executor';
 import { HightlightText, StopPropagation } from 'components';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
+import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
@@ -200,6 +201,7 @@ export const Actions: FC<TransactionCellProps> = ({ value: doc }) => {
                   ref={ref}
                   extraSmall
                   className={css.rowActionButton}
+                  data-action={DATA_ACTION.MORE}
                   dimension={'MC'}
                   icon={ServiceIcons.ActionMenuHorizontal}
                   onClick={toggleOpen}
