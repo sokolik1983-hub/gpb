@@ -757,5 +757,8 @@
   },
   "errors.datatable.paginationModeError": {
     "ru": "Нельзя менять режим работы пейджинации в DataGrid во время работы. Используйте paginationState для controlled режима, а defaultPaginationState для uncontrolled."
+  },
+  "common.creationParams.warnings.withSign": {
+    "ru": "Электронной подписью Банка может быть подписана только выписка по закрытым периодам"
   }
 }

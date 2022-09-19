@@ -31,15 +31,25 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
           if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.EXCEL || values.format === FORMAT.TXT;
+            if (hasMoreThenOneAccounts) {
+              acc.push(x);
 
-            acc.push({ ...x, disabled });
+              break;
+            }
+
+            if (values.format === FORMAT.EXCEL || values.format === FORMAT.TXT) {
+              acc.push({ ...x, disabled: true });
+            }
           }
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
           if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
-            acc.push({ ...x, disabled: false });
+            if (withSign) {
+              acc.push({ ...x, disabled: false });
+            } else {
+              acc.push(x);
+            }
           }
 
           break;
@@ -52,27 +62,31 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          acc.push({ ...x, disabled: withSign });
+          acc.push(x);
 
           break;
         }
         case CREATION_PARAMS.TOTALS_OF_DAY: {
-          const validDateRange = Boolean(values.dateFrom && values.dateTo);
-          const show = options.some(({ value }) => value === CREATION_PARAMS.TOTALS_OF_DAY);
+          const hasDateRange = !!values.dateFrom && !!values.dateTo;
+          const hasTotalsOfDay = options.some(({ value }) => value === CREATION_PARAMS.TOTALS_OF_DAY);
 
-          if ((validDateRange && isNeedTotalsOfDay(values)) || (!validDateRange && show)) {
+          if ((hasDateRange && isNeedTotalsOfDay(values)) || (!hasDateRange && hasTotalsOfDay)) {
             acc.push(x);
           }
 
           break;
         }
         case CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts });
+          if (!hasForeignCurrency || !hasAccounts) {
+            acc.push(x);
+          }
 
           break;
         }
         case CREATION_PARAMS.NATIONAL_CURRENCY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
+          if (!hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT) {
+            acc.push(x);
+          }
 
           break;
         }
