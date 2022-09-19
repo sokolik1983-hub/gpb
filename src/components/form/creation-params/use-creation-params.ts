@@ -77,14 +77,14 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY: {
-          if (!hasForeignCurrency || !hasAccounts) {
+          if (hasForeignCurrency && hasAccounts) {
             acc.push(x);
           }
 
           break;
         }
         case CREATION_PARAMS.NATIONAL_CURRENCY: {
-          if (!hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT) {
+          if (hasForeignCurrency && hasAccounts && values.format !== FORMAT.C1 && values.format !== FORMAT.TXT) {
             acc.push(x);
           }
 
