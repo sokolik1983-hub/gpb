@@ -5,7 +5,7 @@ import type { IActionConfig } from '@platform/services';
 
 /** Показать форму просмотра запроса на выписку. */
 export const showStatementRequestForm: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done }, { router }) => async ({ id, refererPage }: StatementRequest) => {
+  action: ({ done }, { router }) => ({ id, refererPage }: StatementRequest) => {
     router.push(`${ADMIN_STREAM_URL.STATEMENT}/${id}`, { refererPage });
 
     done();

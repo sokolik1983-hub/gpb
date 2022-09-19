@@ -5,7 +5,7 @@ import type { IActionConfig } from '@platform/services';
 
 /** Показать журнал проводок из запроса. */
 export const showTransactionsScroller: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done }, { router }) => async ({ id, refererPage }: RequestTransactions) => {
+  action: ({ done }, { router }) => ({ id, refererPage }: RequestTransactions) => {
     router.push(`${ADMIN_STREAM_URL.TRANSACTION_REQUESTS}/${id}`, { refererPage });
 
     done();
