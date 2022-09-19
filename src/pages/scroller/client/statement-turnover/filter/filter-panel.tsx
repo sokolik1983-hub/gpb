@@ -58,7 +58,11 @@ export const FilterPanel = () => {
             </Pattern.Span>
             <Pattern.Span size={8}>
               <Adjust pad={[null, null, null, 'X2S']}>
-                <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} onChange={handleChangeDate} />
+                <DateRange
+                  name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]}
+                  onChangeFrom={handleChangeDate}
+                  onChangeTo={handleChangeDate}
+                />
               </Adjust>
             </Pattern.Span>
           </Pattern>
