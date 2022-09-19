@@ -80,5 +80,5 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountIds, dateTo, useCase, canCalculateClosedDay]);
 
-  return [{ ...defaultOption, disabled }];
+  return [{ ...defaultOption, disabled, informer: disabled ? locale.common.creationParams.warnings.withSign : undefined }];
 };
