@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { ACTION } from 'interfaces/client/classificators';
 import { locale } from 'localization';
-import { useForm } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';
+import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS } from 'stream-constants/form';
 import { FormContext } from 'stream-constants/form/form-context';
 import type { IFormContext } from 'stream-constants/form/form-context';
@@ -11,8 +12,11 @@ import { Gap, Horizon, PrimaryButton, RegularButton, ACTIONS as DATA_ACTIONS } f
 /** Компонент футера. */
 export const Footer: React.FC = () => {
   const { change } = useForm();
+  const { values } = useFormState<IFormState>();
   const { goBack } = useHistory();
   const { isPdf } = useContext<IFormContext>(FormContext);
+
+  const hasOneAccount = values.accountIds.length === 1;
 
   return (
     <Horizon>
@@ -26,16 +30,20 @@ export const Footer: React.FC = () => {
         {locale.form.buttons.download.label}
       </PrimaryButton>
       <Gap />
-      <RegularButton
-        extraSmall
-        data-action={DATA_ACTIONS.SUBMIT}
-        dimension="SM"
-        type={'submit'}
-        onClick={() => change(FORM_FIELDS.ACTION, ACTION.VIEW)}
-      >
-        {locale.form.buttons.show.label}
-      </RegularButton>
-      <Gap />
+      {hasOneAccount && (
+        <>
+          <RegularButton
+            extraSmall
+            data-action={DATA_ACTIONS.SUBMIT}
+            dimension="SM"
+            type={'submit'}
+            onClick={() => change(FORM_FIELDS.ACTION, ACTION.VIEW)}
+          >
+            {locale.form.buttons.show.label}
+          </RegularButton>
+          <Gap />
+        </>
+      )}
       {isPdf && (
         <>
           <RegularButton
