@@ -1,4 +1,4 @@
-import { showTransactionCard } from 'components/transaction-card';
+import { showTransactionCard } from 'components/client/transaction-card';
 import { fatalHandler, getUserDeviceInfo } from 'utils';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';

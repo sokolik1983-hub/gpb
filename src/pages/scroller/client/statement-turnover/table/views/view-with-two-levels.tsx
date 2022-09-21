@@ -1,5 +1,5 @@
 import React from 'react';
-import { AccordionGroup, AccordionItem, StickyRow } from 'components';
+import { AccordionGroup, AccordionItem, StickyRow } from 'components/common';
 import {
   COMMON_SCROLLER_NODE,
   TURNOVERS_SCROLLER_ROW_CATEGORY_NODE,

@@ -1,6 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
-import { FocusNode, NODE_TYPE } from 'components/focus-tree';
+import { FocusNode, NODE_TYPE } from 'components/common/focus-tree';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import type { RecordCell, TableColumn } from 'platform-copies/services';
 import { SettingsButton } from 'platform-copies/services/components/data-table/components/settings-button';

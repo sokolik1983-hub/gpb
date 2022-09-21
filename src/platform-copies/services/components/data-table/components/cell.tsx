@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
-import type { IFocusParentNodeProps } from 'components/focus-tree';
-import { FocusNode, NODE_TYPE } from 'components/focus-tree';
+import type { IFocusParentNodeProps } from 'components/common/focus-tree';
+import { FocusNode, NODE_TYPE } from 'components/common/focus-tree';
 import type { Cell as CellPure } from 'react-table';
 import { Adjust } from '@platform/ui';
 import css from '../styles.scss';

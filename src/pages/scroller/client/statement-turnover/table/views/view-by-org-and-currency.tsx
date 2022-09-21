@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { AccordionGroup, AccordionItem, StickyRow } from 'components';
+import { AccordionGroup, AccordionItem, StickyRow } from 'components/common';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_TYPE } from 'interfaces/dto';
 import type { Row } from 'react-table';

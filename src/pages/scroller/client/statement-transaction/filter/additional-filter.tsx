@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { FilterFormElement } from 'components';
-import { DateRange } from 'components/form/date-range';
+import { FilterFormElement } from 'components/common';
+import { DateRange } from 'components/common/form/date-range';
 import { locale } from 'localization';
 import { Pattern, Fields } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';

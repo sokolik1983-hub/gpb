@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext, useRef, useCallback, useMemo } from 'react';
-import { StickyRowsContext, ScrollerLoadingOverlay } from 'components';
+import { StickyRowsContext, ScrollerLoadingOverlay } from 'components/common';
 import { useScrollButton } from 'hooks/use-scroll-button';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import type Scrollbars from 'react-custom-scrollbars';

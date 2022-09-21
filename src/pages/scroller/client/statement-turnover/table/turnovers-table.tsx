@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useContext, useEffect, useMemo } from 'react';
-import { StickyRowsProvider } from 'components';
-import { ScrollerSpinnerPlaceholder } from 'components/scroller-spinner-placeholder';
+import { StickyRowsProvider } from 'components/common';
+import { ScrollerSpinnerPlaceholder } from 'components/common/scroller-spinner-placeholder';
 import type { IGroupedAccounts } from 'interfaces/dto';
 import { SCROLLER_SETTING_TYPE, useStorageSettings } from 'platform-copies/services/components/data-table/hooks';
 import { useTable, useSortBy, useResizeColumns, useExpanded, useBlockLayout } from 'react-table';

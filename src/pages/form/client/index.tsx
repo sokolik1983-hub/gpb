@@ -1,5 +1,5 @@
 import React from 'react';
-import { FocusLock } from 'components/focus-lock';
+import { FocusLock } from 'components/common/focus-lock';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { locale } from 'localization';
 import { CreateStatementForm } from 'pages/form/client/views/create-statement-form';

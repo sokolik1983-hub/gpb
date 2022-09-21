@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
-import { HightlightText, StopPropagation } from 'components';
+import { HightlightText, StopPropagation } from 'components/common';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { DATA_ACTION } from 'interfaces/data-action';

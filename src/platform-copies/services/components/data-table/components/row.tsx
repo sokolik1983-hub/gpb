@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FocusNode } from 'components/focus-tree';
+import { FocusNode } from 'components/common/focus-tree';
 import type { Row as RowPure } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_ROW_CELL_NODE, DATA_TABLE_ROW_NODE } from 'stream-constants/a11y-nodes';
 import type { IExecuter } from '@platform/core';

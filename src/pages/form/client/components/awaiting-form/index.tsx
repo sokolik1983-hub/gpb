@@ -3,7 +3,7 @@ import { executor } from 'actions/client/executor';
 import { exportStatement } from 'actions/client/export-statement';
 import { gotoTransactionsScrollerByStatementRequest } from 'actions/client/goto-transactions-scroller-by-statement-request';
 import { printStatement } from 'actions/client/print-statement';
-import { FocusLock } from 'components/focus-lock';
+import { FocusLock } from 'components/common/focus-lock';
 import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { IGetStatusResponceDto } from 'interfaces/dto';

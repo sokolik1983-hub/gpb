@@ -1,5 +1,5 @@
 import React, { useContext, useMemo } from 'react';
-import { TagsPanelView } from 'components';
+import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks';
 import type { ITagsPanelProps } from 'interfaces/client';
 import { useFormState } from 'react-final-form';
