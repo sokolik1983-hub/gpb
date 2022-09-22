@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useState } from 'react';
 import { FocusLock } from 'components/common/focus-lock';
-import type { IExtendedActionWebInfo } from 'interfaces';
+import type { IExtendedActionWebInfo, IExtendedIActionWithAuth } from 'interfaces';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { TransfomedAction } from '@platform/core';
@@ -21,6 +21,8 @@ export interface ITransactionCardProps {
   transaction: IGetTransactionCardResponseDto;
   /** Id запроса на выписку. */
   statementId: string;
+  /** Возможные действия над приложенными файлами. */
+  attachmentActions: IExtendedIActionWithAuth[];
   /** Действия кнопок. */
   actions: Array<TransfomedAction<IExtendedActionWebInfo>>;
   /** Действия кнопок в DropDown. */
@@ -34,7 +36,14 @@ export interface ITransactionCardProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, statementId, actions, dropdownActions, onClose }) => {
+export const TransactionCard: FC<ITransactionCardProps> = ({
+  transaction: doc,
+  statementId,
+  attachmentActions,
+  actions,
+  dropdownActions,
+  onClose,
+}) => {
   const [tab, setTab] = useState<TABS>(TABS.REQUISITES);
 
   const { debit, documentNumber, documentName, documentDate } = doc;
@@ -62,7 +71,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, s
                     {tab === TABS.REQUISITES ? (
                       <RequisitesTab transaction={doc} />
                     ) : (
-                      <AttachmentsTab statementId={statementId} transaction={doc} />
+                      <AttachmentsTab attachmentActions={attachmentActions} statementId={statementId} transaction={doc} />
                     )}
                   </Box>
                   <Footer actions={actions} dropdownActions={dropdownActions} />

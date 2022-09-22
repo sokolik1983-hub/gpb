@@ -1,14 +1,16 @@
 import type { FC } from 'react';
 import React, { useCallback } from 'react';
 import { executor } from 'actions/client/executor';
+import type { IExtendedIActionWithAuth } from 'interfaces';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
-import { CARD_ROW_ACTIONS } from 'pages/scroller/client/statement-transaction/action-configs';
 import { getActiveActionButtons } from 'utils';
 import { useAuth } from '@platform/services/client';
 import { Typography, Gap, Line, Adjust, Horizon } from '@platform/ui';
 
 /** Свойства компонента AttachmentsTab. */
 export interface IAttachmentsTabProps {
+  /** Возможные действия над приложенными файлами. */
+  attachmentActions: IExtendedIActionWithAuth[];
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
   /** Id запроса на выписку. */
@@ -20,14 +22,14 @@ export interface IAttachmentsTabProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction: doc, statementId }) => {
+export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction: doc, statementId, attachmentActions }) => {
   const { appendixDto: { documents: docs = [] } = {} } = doc;
 
   const { getAvailableActions } = useAuth();
 
   const getActions = useCallback(
-    documentType => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [[doc], statementId, documentType]),
-    [doc, getAvailableActions, statementId]
+    documentType => getActiveActionButtons(getAvailableActions(attachmentActions), executor, [[doc], statementId, documentType]),
+    [doc, getAvailableActions, statementId, attachmentActions]
   );
 
   return (
