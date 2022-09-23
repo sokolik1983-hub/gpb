@@ -1,4 +1,4 @@
-import { showOutdatedStatementDialog } from 'components/export-params-dialog';
+import { showOutdatedStatementDialog } from 'components/common/export-params-dialog';
 import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
 import type { ACTION } from 'interfaces/client';
 import { COMMON_STREAM_URL } from 'stream-constants/client';

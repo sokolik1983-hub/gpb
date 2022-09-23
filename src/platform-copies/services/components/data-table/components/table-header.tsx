@@ -1,5 +1,5 @@
 import React from 'react';
-import { FocusNode, NODE_TYPE } from 'components/focus-tree';
+import { FocusNode, NODE_TYPE } from 'components/common/focus-tree';
 import { locale } from 'localization';
 import type { TableInstance } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';

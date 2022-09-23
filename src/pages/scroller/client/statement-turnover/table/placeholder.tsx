@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import { TurnoverScrollerPlaceholderIcon } from 'components/icons';
+import { TurnoverScrollerPlaceholderIcon } from 'components/common/icons';
 import { locale } from 'localization';
 import { Gap, Typography, Box } from '@platform/ui';
 import css from './styles.scss';

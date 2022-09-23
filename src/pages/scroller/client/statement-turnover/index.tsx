@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components';
-import { FocusLock } from 'components/focus-lock';
-import { FocusNode, FocusTree } from 'components/focus-tree';
+import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { FocusLock } from 'components/common/focus-lock';
+import { FocusNode, FocusTree } from 'components/common/focus-tree';
 import { useIsFetchedData, useScrollerTabsProps, useTurnoverScrollerHeaderProps, useStreamContentHeight } from 'hooks';
 import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
 import { useAccounts } from 'hooks/use-accounts';

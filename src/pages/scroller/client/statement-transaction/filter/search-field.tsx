@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { InputWithHistory } from 'components';
+import { InputWithHistory } from 'components/common';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
 import type { IOption } from '@platform/ui';

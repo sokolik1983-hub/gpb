@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useContext } from 'react';
 import cn from 'classnames';
-import type { IFocusParentNodeProps } from 'components/focus-tree';
-import { FocusNode } from 'components/focus-tree';
+import type { IFocusParentNodeProps } from 'components/common/focus-tree';
+import { FocusNode } from 'components/common/focus-tree';
 import type { IAccountTurnoversInfo, IGroupedAccounts } from 'interfaces/dto';
 import { GROUPING_VALUES } from 'interfaces/dto';
 import type { Row } from 'react-table';

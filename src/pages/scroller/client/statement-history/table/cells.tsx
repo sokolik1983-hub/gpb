@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
 import { executor } from 'actions/client';
-import { ItemWithRestInPopUp } from 'components';
-import { StopPropagation } from 'components/stop-propagation';
+import { ItemWithRestInPopUp } from 'components/common';
+import { StopPropagation } from 'components/common/stop-propagation';
 import { DATE_PERIODS } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION } from 'interfaces/client';

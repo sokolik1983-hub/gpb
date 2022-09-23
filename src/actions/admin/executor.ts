@@ -11,5 +11,5 @@ export const context = {
 /** Экзекутор клиента. */
 export const executor = createExecuter(context);
 
-/** Метод получения экзекутора.  */
+/** Метод получения экзекутора. */
 export const getExecutor = () => applyMiddlewares<typeof context>(onSuccessMiddleware(noop))(executor);
