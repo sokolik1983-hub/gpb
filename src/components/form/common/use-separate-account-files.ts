@@ -16,10 +16,10 @@ export const useSeparateAccountFiles = () => {
   const hasSeparateAccountsFiles = params.includes(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
 
   useEffect(() => {
-    if ((format === FORMAT.PDF || format === FORMAT.C1) && !hasSeparateAccountsFiles && hasMoreThenOneAccounts) {
+    if ((format === FORMAT.TXT || format === FORMAT.EXCEL) && !hasSeparateAccountsFiles && hasMoreThenOneAccounts) {
       params.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
       change(FORM_FIELDS.CREATION_PARAMS, params);
-    } else if (hasSeparateAccountsFiles) {
+    } else if ((format === FORMAT.C1 || format === FORMAT.PDF) && hasSeparateAccountsFiles) {
       change(
         FORM_FIELDS.CREATION_PARAMS,
         params.filter(x => x !== CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES)
