@@ -1,3 +1,10 @@
+# [2.13.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.2...v2.13.0-release.3) (2022-09-27)
+
+
+### Bug Fixes
+
+* **визард:** GBO-34088 исправление логики флага отдельных файлов по счету ([d21acc8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d21acc860593b874aa6bd67a13808306a2b89bf1))
+
 # [2.13.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.1...v2.13.0-release.2) (2022-09-27)
 
 
