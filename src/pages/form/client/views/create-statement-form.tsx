@@ -25,9 +25,7 @@ import css from './styles.scss';
 
 /** ЭФ создания запроса на выписку. */
 export const CreateStatementForm: React.FC = () => {
-  const {
-    state: { formValues: prefilledFormValues },
-  } = useLocation<ExternalStatementRequest>();
+  const { state } = useLocation<ExternalStatementRequest>();
 
   const creationType = useCreationType();
   const executor = getExecutor();
@@ -55,7 +53,7 @@ export const CreateStatementForm: React.FC = () => {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest, prefilledFormValues });
+  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest, prefilledFormValues: state?.formValues });
 
   return (
     <Box className={css.form} fill={'FAINT'}>
