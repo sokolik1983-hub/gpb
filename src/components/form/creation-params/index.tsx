@@ -20,10 +20,6 @@ export const CreationParams: React.FC = () => {
     e => {
       let params = [...e.value];
 
-      if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && params.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS)) {
-        params = params.filter(x => x !== CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
-      }
-
       if (!withSign && params.includes(CREATION_PARAMS.WITH_PDF_SIGN)) {
         params = [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET];
       }
