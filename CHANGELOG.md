@@ -1,3 +1,10 @@
+# [2.13.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.3...v2.13.0-release.4) (2022-09-28)
+
+
+### Bug Fixes
+
+* **визард:** GBO-34200 исправление логики флага электронной подписи ([0a85d11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0a85d11161fb76b5e281e1f6d94126988083d205))
+
 # [2.13.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.2...v2.13.0-release.3) (2022-09-27)
 
 
