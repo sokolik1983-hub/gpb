@@ -3,5 +3,24 @@
 exports[`AdminFormPage renders 1`] = `
 <t>
   Админская форма
+  <ActionButtons
+    actions={
+      Array [
+        Object {
+          "label": "testButton",
+          "name": "test",
+          "onClick": [Function],
+        },
+      ]
+    }
+    collapseAfter={2}
+    direction="horizontal"
+    dropdownPositionOrder={
+      Array [
+        "TOP_END",
+      ]
+    }
+    gap="XS"
+  />
 </t>
 `;
