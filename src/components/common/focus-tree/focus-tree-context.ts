@@ -1,5 +1,5 @@
 import { createContext } from 'react';
-import { noop } from 'utils';
+import { noop } from 'utils/common';
 import type { ITreeNode } from './generic-tree';
 import type { NODE_TYPE } from './node-type';
 

@@ -3,7 +3,7 @@ import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
-import { addMaxWidthField } from 'utils';
+import { addMaxWidthField } from 'utils/common';
 import { Typography } from '@platform/ui';
 import { Actions, CounterpartyInfo, DocumentInfo, Income, OperationDate, Outcome, Summary } from './cells';
 import { COLUMN_NAMES } from './constants';

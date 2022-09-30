@@ -3,7 +3,7 @@ import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-requ
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS, FormContext } from 'stream-constants/form';
 import { to } from '@platform/core';

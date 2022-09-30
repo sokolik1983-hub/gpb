@@ -8,7 +8,7 @@ import {
   CARD_FOOTER_ACTIONS,
   CARD_FOOTER_DROPDOWN_ACTIONS,
 } from 'pages/scroller/client/statement-transaction/action-configs';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/client';
 import { dialog } from '@platform/ui';
 

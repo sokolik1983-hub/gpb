@@ -1,5 +1,4 @@
-import type { STATEMENT_REQUEST_STATUSES, DATE_PERIODS } from 'interfaces';
-import type { FORMAT, ACTION } from 'interfaces/client/classificators';
+import type { STATEMENT_REQUEST_STATUSES, FORMAT, ACTION, DATE_PERIODS } from 'interfaces';
 
 /** Строка скроллера истории запросов выписок. */
 export interface IStatementHistoryRow {

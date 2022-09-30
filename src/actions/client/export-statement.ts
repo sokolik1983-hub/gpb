@@ -1,5 +1,5 @@
 import type { ILatestStatementDto } from 'interfaces/dto';
-import { checkEmptyStatement, fatalHandler, showEmptyStatementWarning } from 'utils';
+import { checkEmptyStatement, fatalHandler, showEmptyStatementWarning } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import { attachmentService, ERROR, errorHandler, showFile } from '@platform/services/client';

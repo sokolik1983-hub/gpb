@@ -1,5 +1,4 @@
-import { DATE_PERIODS, TRANSACTION_TYPES } from 'interfaces';
-import { FORMAT } from 'interfaces/client';
+import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT } from 'interfaces';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 

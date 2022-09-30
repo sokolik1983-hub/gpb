@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ACTION } from 'interfaces/client/classificators';
+import { ACTION } from 'interfaces/common';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { useHistory } from 'react-router-dom';

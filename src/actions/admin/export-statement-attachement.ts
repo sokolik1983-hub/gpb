@@ -1,5 +1,5 @@
 import type { ICreateAttachmentResponse } from 'interfaces';
-import { asyncNoop, fatalHandler } from 'utils';
+import { asyncNoop, fatalHandler } from 'utils/common';
 import type { IActionConfig } from '@platform/services';
 import type { context } from './executor';
 

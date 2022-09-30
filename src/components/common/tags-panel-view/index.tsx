@@ -2,7 +2,7 @@ import type { MouseEvent } from 'react';
 import React from 'react';
 import cn from 'classnames';
 import { locale } from 'localization';
-import { noop } from 'utils';
+import { noop } from 'utils/common';
 import type { IOption } from '@platform/ui';
 import { Typography, Horizon, Box, Gap, ServiceIcons, ROLE } from '@platform/ui';
 import { ItemWithRestInPopUp } from '../item-with-rest-in-pop-up';

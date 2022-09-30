@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useEffect, useCallback } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useForm } from 'react-final-form';
-import { noop, compareStrings } from 'utils';
+import { noop, compareStrings } from 'utils/common';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';

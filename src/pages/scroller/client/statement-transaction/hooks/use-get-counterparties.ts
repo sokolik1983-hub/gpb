@@ -2,7 +2,7 @@ import type { IUrlParams } from 'interfaces';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 
 const DEFAULT_COUNTERPARTY = [];
 

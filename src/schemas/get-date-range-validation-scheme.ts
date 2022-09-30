@@ -1,6 +1,6 @@
 import type { IDateRangeFields } from 'interfaces/form/date-range-fields';
 import { locale } from 'localization';
-import { isLessThanTomorrow, isValidDateRangeForSchema } from 'utils/validation';
+import { isLessThanTomorrow, isValidDateRangeForSchema } from 'utils/common/validation';
 import { object, string } from 'yup';
 import type { SchemaOf } from 'yup';
 

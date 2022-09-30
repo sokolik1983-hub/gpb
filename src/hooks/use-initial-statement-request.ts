@@ -4,7 +4,7 @@ import { DATE_PERIODS, HTTP_STATUS_CODE } from 'interfaces';
 import type { ILatestStatementDto, IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 import { NEW_ENTITY_ID } from 'stream-constants';
 import type { IServerDataResp } from '@platform/services';
 import { ERROR } from '@platform/services/client';

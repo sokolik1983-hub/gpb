@@ -1,5 +1,4 @@
-import type { IUserDeviceInfo } from 'interfaces';
-import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client/classificators';
+import type { IUserDeviceInfo, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces';
 
 /** ДТО запроса информации по проводке. */
 export interface IGetTransactionCardRequestDto {

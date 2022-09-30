@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FORMAT } from 'interfaces/client';
+import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form/form-state';

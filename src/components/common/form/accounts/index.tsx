@@ -3,7 +3,7 @@ import { AccountsField } from 'components/common';
 import { useSeparateAccountFiles } from 'components/common/form/common/use-separate-account-files';
 import { Row } from 'components/common/form/row';
 import { useAccounts } from 'hooks';
-import { FORMAT } from 'interfaces/client';
+import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useFormState, useForm } from 'react-final-form';

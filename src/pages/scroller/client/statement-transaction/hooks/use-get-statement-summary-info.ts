@@ -2,8 +2,8 @@ import type { IUrlParams } from 'interfaces';
 import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
-import { statementService } from 'services';
-import { getUserDeviceInfo } from 'utils';
+import { statementService } from 'services/client';
+import { getUserDeviceInfo } from 'utils/common';
 
 /** Возвращает сводную информацию по выписке. */
 export const useGetStatementSummaryInfo = () => {

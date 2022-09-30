@@ -1,6 +1,6 @@
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 
 const DEFAULT_ACCOUNTS = [];
 

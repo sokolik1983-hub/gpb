@@ -1,5 +1,5 @@
-import { statementService } from 'services';
-import { noop } from 'utils';
+import { statementService } from 'services/admin';
+import { noop } from 'utils/common';
 import { createExecuter, applyMiddlewares, onSuccessMiddleware } from '@platform/core';
 import { createContext } from '@platform/services';
 

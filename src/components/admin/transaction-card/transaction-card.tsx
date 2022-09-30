@@ -4,7 +4,7 @@ import { executor } from 'actions/admin';
 import { TransactionCard as TransactionCardContent } from 'components/common/transaction-card';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { CARD_FOOTER_ACTIONS, CARD_FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/admin/statement-transaction/action-configs';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/admin';
 import { dialog } from '@platform/ui';
 
