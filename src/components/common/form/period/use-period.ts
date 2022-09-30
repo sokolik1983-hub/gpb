@@ -3,7 +3,7 @@ import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, RequestPeriodType } from 'interfaces/dto';
 import { useForm, useFormState } from 'react-final-form';
 import { useQuery } from 'react-query';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS } from 'stream-constants/form';
 

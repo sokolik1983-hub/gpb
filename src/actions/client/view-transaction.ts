@@ -1,5 +1,5 @@
 import { showTransactionCard } from 'components/client/transaction-card';
-import { fatalHandler, getUserDeviceInfo } from 'utils';
+import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
 import type { IBaseEntity } from '@platform/services/client';

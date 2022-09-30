@@ -1,4 +1,4 @@
-import { OPERATIONS } from 'interfaces/client/classificators/operations';
+import { OPERATIONS } from 'interfaces/common/classificators/operations';
 import { locale } from 'localization';
 
 /** Опции операций для выписки. */

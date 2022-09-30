@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { executor } from 'actions/client/executor';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/client';
 import { Typography, Gap, Line, Adjust, Horizon } from '@platform/ui';
 

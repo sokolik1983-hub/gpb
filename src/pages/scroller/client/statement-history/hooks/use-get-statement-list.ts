@@ -2,8 +2,8 @@ import type { IPagination } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-history/filter';
 import { useQuery } from 'react-query';
-import { statementService } from 'services';
-import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
+import { statementService } from 'services/client';
+import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils/common';
 import type { ICollectionResponse, IMetaData, ISortSettings } from '@platform/services';
 import { conditions } from '@platform/services/client';
 

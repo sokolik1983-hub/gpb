@@ -1,4 +1,4 @@
-import { FORMAT } from 'interfaces/client/classificators/format';
+import { FORMAT } from 'interfaces/common/classificators/format';
 import { locale } from 'localization';
 
 /** Опций форматов файла выписки. */

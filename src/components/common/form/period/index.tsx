@@ -6,7 +6,7 @@ import { CREATION_PARAMS } from 'interfaces/form';
 import { useForm, useFormState } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS, FORM_FIELD_LABELS } from 'stream-constants/form';
-import { isNeedTotalsOfDay } from 'utils';
+import { isNeedTotalsOfDay } from 'utils/common';
 import type { OnChangeType } from '@platform/ui';
 import { Gap, Box, Horizon } from '@platform/ui';
 import { PeriodType } from './period-type';

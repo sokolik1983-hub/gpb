@@ -1,6 +1,6 @@
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { locale } from 'localization';
-import { addMaxWidthField } from 'utils';
+import { addMaxWidthField } from 'utils/common';
 import { AccountNumber, Actions, CreatedAtCell, Period, StatementFormat, Status } from './cells';
 import { COLUMN_NAMES } from './constants';
 

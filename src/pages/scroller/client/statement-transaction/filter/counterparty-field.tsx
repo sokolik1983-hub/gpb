@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useMemo, useCallback } from 'react';
 import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
-import { stringifyCounterparty } from 'utils';
+import { stringifyCounterparty } from 'utils/common';
 import type { IOptionTemplateProps, IOption } from '@platform/ui';
 import { Fields, Box, Option, Typography } from '@platform/ui';
 

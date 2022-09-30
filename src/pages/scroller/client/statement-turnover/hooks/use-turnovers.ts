@@ -1,7 +1,7 @@
 import type { Sorting } from 'interfaces';
 import type { IGetTurnoversRequestDto, IGetTurnoversResponseDto } from 'interfaces/dto';
 import { useQuery } from 'react-query';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IFormState } from '../filter/interfaces';
 

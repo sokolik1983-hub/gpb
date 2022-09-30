@@ -1,7 +1,7 @@
 import type { IFormRouterState } from 'interfaces/client';
-import { CREATION_TYPE } from 'interfaces/client/classificators/creation-type';
+import { CREATION_TYPE } from 'interfaces/common/classificators/creation-type';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { fatalHandler } from 'utils';
+import { fatalHandler } from 'utils/common';
 import { singleAction } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';

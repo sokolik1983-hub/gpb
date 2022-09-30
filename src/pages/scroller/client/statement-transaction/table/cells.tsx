@@ -9,7 +9,7 @@ import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
 import { RUB_CURRENCY } from 'stream-constants';
-import { getActiveActionButtons, formatToMask } from 'utils';
+import { getActiveActionButtons, formatToMask } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';

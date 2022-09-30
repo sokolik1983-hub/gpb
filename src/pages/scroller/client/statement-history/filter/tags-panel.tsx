@@ -5,7 +5,7 @@ import type { ITagsPanelProps } from 'interfaces/client';
 import { useFormState } from 'react-final-form';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { STATUS_LABELS } from 'stream-constants/client';
-import { orderTags } from 'utils';
+import { orderTags } from 'utils/common';
 import { Gap } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
 import { FIELDS_WITH_TAGS, FORM_FIELDS } from './constants';

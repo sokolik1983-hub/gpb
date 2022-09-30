@@ -2,7 +2,7 @@ import type { IAccountTurnoversInfo, IGroupedAccounts, IGroupInfo } from 'interf
 import { GROUPING_VALUES } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { Column } from 'react-table';
-import { addMaxWidthField } from 'utils';
+import { addMaxWidthField } from 'utils/common';
 import { AccountNumberCell, OrganizationCell, IncomingBalanceCell, OutcomeCell, IncomeCell, OutgoingBalanceCell } from './cells';
 import { COLUMN_NAMES } from './constants';
 import { isGroupedAccounts } from './utils';

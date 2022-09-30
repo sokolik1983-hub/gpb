@@ -2,7 +2,7 @@ import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import type { IGetCounterpartiesResponseDto, IStatementSummaryInfoResponseDto } from 'interfaces/dto';
-import { noop } from 'utils';
+import { noop } from 'utils/common';
 import { SORT_DIRECTION } from '@platform/services';
 import type { IFormState } from './filter/interfaces';
 import { COLUMN_NAMES } from './table/constants';

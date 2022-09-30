@@ -8,7 +8,7 @@ import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { GuardRoute } from '@platform/services/client';
 import './utils/ie-matches-polyfill';
 
-export { executeCreateStatementHidden, executeCreateStatementOneTime } from 'utils/execute-actions';
+export { executeCreateStatementHidden, executeCreateStatementOneTime } from 'utils/common/execute-actions';
 
 export const routes = [
   <GuardRoute

@@ -3,7 +3,7 @@ import { executor } from 'actions/client/executor';
 import { locale } from 'localization';
 import { HEADER_ACTIONS } from 'pages/scroller/client/statement-turnover/action-configs';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useRedirect } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import type { IScrollerHeader } from '@platform/ui';

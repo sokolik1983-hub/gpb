@@ -1,4 +1,4 @@
-import type { CREATION_TYPE } from './classificators/creation-type';
+import type { CREATION_TYPE } from '../common/classificators/creation-type';
 
 /**
  * Стейт роутера, при открытии формы.

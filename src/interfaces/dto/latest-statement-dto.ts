@@ -1,7 +1,4 @@
-import type { DATE_PERIODS, STATEMENT_REQUEST_STATUSES } from 'interfaces';
-import type { OPERATIONS } from 'interfaces/client/classificators';
-import type { ACTION } from 'interfaces/client/classificators/action';
-import type { FORMAT } from 'interfaces/client/classificators/format';
+import type { DATE_PERIODS, STATEMENT_REQUEST_STATUSES, OPERATIONS, ACTION, FORMAT } from 'interfaces';
 
 /** DTO для поиска последнего запроса выписки у текущего пользователя. */
 export interface ILatestStatementDto {

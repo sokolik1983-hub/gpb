@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useEffect, useContext } from 'react';
 import { FORM_FIELDS } from 'pages/scroller/client/statement-turnover/filter/constants';
 import type { FormRenderProps } from 'react-final-form';
-import { isValidDateRange } from 'utils';
+import { isValidDateRange } from 'utils/common';
 import { Box, Line } from '@platform/ui';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
 import { FilterPanel } from './filter-panel';
