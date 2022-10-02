@@ -28,7 +28,7 @@ export const creationParamsCheckboxShowCases = [
 /** Набор случаев, при которых показываем блок "Параметры комплекта документов". */
 export const creationParamsShowCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
 
-/** Набор случаев, при которых показываем кнопку "Скачать". */
+/** Набор случаев, при которых показываем кнопку "Экспорт". */
 export const downloadButtonShowCases = [
   EXPORT_PARAMS_USE_CASES.ONE,
   EXPORT_PARAMS_USE_CASES.THREE,

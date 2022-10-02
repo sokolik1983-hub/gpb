@@ -1,3 +1,47 @@
+# [2.13.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.3...v2.13.0-release.4) (2022-09-28)
+
+
+### Bug Fixes
+
+* **визард:** GBO-34200 исправление логики флага электронной подписи ([0a85d11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0a85d11161fb76b5e281e1f6d94126988083d205))
+
+# [2.13.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.2...v2.13.0-release.3) (2022-09-27)
+
+
+### Bug Fixes
+
+* **визард:** GBO-34088 исправление логики флага отдельных файлов по счету ([d21acc8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d21acc860593b874aa6bd67a13808306a2b89bf1))
+
+# [2.13.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0-release.1...v2.13.0-release.2) (2022-09-27)
+
+
+### Bug Fixes
+
+* **визард:** GBO-34088 исправление логики флага отдельных файлов по счету ([e3d0dc8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e3d0dc89c644d0b44270a18ffaf062920cf62ca7))
+
+# [2.13.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.12.0...v2.13.0-release.1) (2022-09-22)
+
+
+### Bug Fixes
+
+* **визард:** GBO-33970 чекбокс "Только документы выписки" = false при экспорте/печате ([7571dee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7571dee040849d4755ebaa44a0105b6d57f50b0c))
+* GBO-33895 Кнопка "Показать на экране" скрывается при множественном выборе счетов ([1efdeb3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1efdeb36ec76ecd8ed49a35c37c47a2ba6ef9d95))
+* **визард:** GBO-33654 добавление информера к флагу подписи ([d9f8e1a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d9f8e1ae5416e6a6065fb5bc6aa237cf138428f8))
+* **визард:** GBO-33654 исправление логики работы флагов ([1dbb939](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1dbb939a021d08035a7fbefcbbcd2dfae3cee71e))
+* **визард:** GBO-33873 исправление условия отображения флагов ([b075d1b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b075d1b76741f7e6bd60cc8f0bd499e2153e36cb))
+* GBO-32535 Добавлен аттрибут data-action на кнопку раскрытия списка действий ([95cd8eb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/95cd8eba62bb67bb7da95c484a66b826b98a31ce))
+* **скроллер:** GBO-33500 исправлена работа логики фильтров ([c35cef9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c35cef98497e2eac3ff46bd89840f40304d99876))
+
+
+### Features
+
+* GBO-33318 Реализация действия просмотра журнала проводок из запроса ([f27945d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f27945d5ee51cb73f25eaa27e4854b2cc9526bae))
+* GBO-33399 Реализация действия просмотра журнала запросов выписки ([aca9ec1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/aca9ec1e98a40139175d40ebfbd47cfc8fc3cdfe))
+* GBO-33513 Изменение логики работы кнопок на ЭФ ([704392f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/704392f20428871d03cff67da95ccd521fd0abe9))
+* GBO-33527 Реализация действия просмотра запроса выписки ([2bd4efe](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2bd4efec876adf3502f6b4eeca5986159130d9fa))
+* **визард:** GBO-33512 изменена логика работы чекбоксов "Параметры комплекта документов" ([05d665e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/05d665e98d86d0a21738a84f7588e197091e22ea))
+* GBO-33513 Изменение логики работы кнопок на ЭФ ([e56c968](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e56c9686d17f3a5a4ac4128df0b9d8eabf288878))
+
 # [2.12.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.11.1...v2.12.0) (2022-09-18)
 
 

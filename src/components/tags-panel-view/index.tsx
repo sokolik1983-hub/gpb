@@ -1,8 +1,7 @@
-import type { FC, MouseEvent } from 'react';
+import type { MouseEvent } from 'react';
 import React from 'react';
 import cn from 'classnames';
 import { locale } from 'localization';
-import { useForm } from 'react-final-form';
 import { noop } from 'utils';
 import type { IOption } from '@platform/ui';
 import { Typography, Horizon, Box, Gap, ServiceIcons, ROLE } from '@platform/ui';
@@ -42,7 +41,7 @@ const Tag: React.FC<ITagProps> = ({ value, label, onRemoveTag, onClick = noop, d
 Tag.displayName = 'Tag';
 
 /** Свойства компонента TagsPanelView. */
-interface ITagsPanelViewProps {
+interface ITagsPanelViewProps<FormState> {
   /** Теги. */
   tags: IOption[];
   /** Обработчик удаления тегов. */
@@ -61,18 +60,21 @@ interface ITagsPanelViewProps {
    * @param values - Стейт формы.
    */
   tagValueFormatter(key: string, values: Record<string, any>): string[] | string;
+  /** Значения полей формы фильтра. */
+  values: FormState;
 }
 
 /** Панель тегов фильтра. */
-export const TagsPanelView: FC<ITagsPanelViewProps> = ({ tags, onRemoveTags, onRemoveTag, onTagClick = noop, tagValueFormatter }) => {
-  const { getState, change } = useForm();
-
-  const { values } = getState();
-
-  const handleRemoveTag = (key: string) => () => {
-    change(key);
-    onRemoveTag(key);
-  };
+export const TagsPanelView = <FormState,>({
+  onRemoveTag,
+  onRemoveTags,
+  onTagClick = noop,
+  tags,
+  tagValueFormatter,
+  values,
+}: ITagsPanelViewProps<FormState>) => {
+  /** Удаление одного тега. */
+  const handleRemoveTag = (key: string) => () => onRemoveTag(key);
 
   return (
     <Box className={css.tagsWrapper} data-name={'tags'} role={ROLE.PANEL}>

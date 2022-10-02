@@ -5,13 +5,8 @@ import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, FORM_FIELDS, FormContext } from 'stream-constants/form';
-import { defaultCreationParamsOptions, isNeedTotalsOfDay } from 'utils';
-import {
-  alwaysSendParamCasesFromUI,
-  getHideEsignCases,
-  getHideSeparateAccountFilesCases,
-  withDocumentsSetCases,
-} from 'utils/export-params-dialog';
+import { defaultCreationParamsOptions, isNeedTotalsOfDay, withDocumentsSetCases } from 'utils';
+import { alwaysSendParamCasesFromUI, getHideEsignCases, getHideSeparateAccountFilesCases } from 'utils/export-params-dialog';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
@@ -35,16 +30,22 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
-          if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            const disabled = !hasMoreThenOneAccounts || values.format === FORMAT.EXCEL || values.format === FORMAT.TXT;
-
-            acc.push({ ...x, disabled });
+          if ((!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) && hasMoreThenOneAccounts) {
+            if (values.format === FORMAT.EXCEL || values.format === FORMAT.TXT) {
+              acc.push({ ...x, disabled: true });
+            } else {
+              acc.push(x);
+            }
           }
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
           if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
-            acc.push({ ...x, disabled: withSign });
+            if (withSign) {
+              acc.push({ ...x, disabled: false });
+            } else {
+              acc.push(x);
+            }
           }
 
           break;
@@ -57,27 +58,31 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.HIDE_EMPTY_TURNOVERS: {
-          acc.push({ ...x, disabled: withSign });
+          acc.push(x);
 
           break;
         }
         case CREATION_PARAMS.TOTALS_OF_DAY: {
-          const validDateRange = Boolean(values.dateFrom && values.dateTo);
-          const show = options.some(({ value }) => value === CREATION_PARAMS.TOTALS_OF_DAY);
+          const hasDateRange = !!values.dateFrom && !!values.dateTo;
+          const hasTotalsOfDay = options.some(({ value }) => value === CREATION_PARAMS.TOTALS_OF_DAY);
 
-          if ((validDateRange && isNeedTotalsOfDay(values)) || (!validDateRange && show)) {
+          if ((hasDateRange && isNeedTotalsOfDay(values)) || (!hasDateRange && hasTotalsOfDay)) {
             acc.push(x);
           }
 
           break;
         }
         case CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts });
+          if (hasForeignCurrency && hasAccounts) {
+            acc.push(x);
+          }
 
           break;
         }
         case CREATION_PARAMS.NATIONAL_CURRENCY: {
-          acc.push({ ...x, disabled: !hasForeignCurrency || !hasAccounts || values.format === FORMAT.C1 || values.format === FORMAT.TXT });
+          if (hasForeignCurrency && hasAccounts && values.format !== FORMAT.C1 && values.format !== FORMAT.TXT) {
+            acc.push(x);
+          }
 
           break;
         }

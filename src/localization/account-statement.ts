@@ -1411,6 +1411,15 @@ export default {
 			get revaluationAccountingEntry() {
 				return t('common.creationParams.revaluationAccountingEntry');
 			},
+			warnings: {
+				/**
+				 * @ru
+				 * Электронной подписью Банка может быть подписана только выписка по закрытым периодам
+				 */
+				get withSign() {
+					return t('common.creationParams.warnings.withSign');
+				},
+			},
 		},
 		documentsSetParams: {
 			/**

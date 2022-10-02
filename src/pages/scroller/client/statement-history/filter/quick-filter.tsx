@@ -2,6 +2,8 @@ import type { FC } from 'react';
 import React, { useContext, useEffect } from 'react';
 import { AccountsField } from 'components';
 import { DateRange } from 'components/form/date-range';
+import { usePrevious } from 'hooks';
+import type { QuickFilterPanelProps } from 'interfaces/client';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { Pattern, Typography, Gap, Horizon, Font, FONT_LINE } from '@platform/ui';
@@ -13,26 +15,21 @@ import type { IFormState } from './interfaces';
  * Поля фильтра которые всегда видны на форме фильтрации.
  * Изменения значений этих полей вызывают обновление скроллера, без нажатия кнопки применить фильтры.
  */
-export const QuickFilter: FC = () => {
+export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndStorage }) => {
   const { submit } = useForm();
   const { valid, values } = useFormState<IFormState>();
 
   const { accountIds, dateFrom, dateTo } = values;
 
-  const {
-    filterPanel: { opened },
-    tagsPanel: { onClick: expandAdditionalFilters },
-    accounts,
-  } = useContext(HistoryScrollerContext);
+  const { accounts } = useContext(HistoryScrollerContext);
+
+  const prevValid = usePrevious(valid);
 
   useEffect(() => {
     if (valid) {
-      void submit();
+      applyMixValuesFormAndStorage(Boolean(prevValid));
 
-      // В хуке useFilter, после обновления стейта, чтобы избежать закрытия формы на UI, вызывается открытие формы.
-      if (opened) {
-        expandAdditionalFilters();
-      }
+      void submit();
     }
 
     // values не включён в массив зависимостей хука т.к запрос на сервер при изменении значения фильтра

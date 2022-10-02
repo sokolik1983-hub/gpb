@@ -3,7 +3,6 @@ import { FORMAT, OPERATIONS } from 'interfaces/client';
 import type { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { ILatestStatementDto } from 'interfaces/dto';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { locale } from 'localization';
 import { mapDtoToForm } from 'utils/actions';
 import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
@@ -73,7 +72,6 @@ export const getInitialFormState = ({
 
     if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
       creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
-      documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.ONLY_REQUEST_STATEMENT_DOCUMENTS);
     }
 
     return { ...defaultFormState, creationParams, documentsSetParams, dateFrom, dateTo };

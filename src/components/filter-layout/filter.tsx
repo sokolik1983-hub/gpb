@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import isEqual from 'fast-deep-equal';
 import { useForm, useFormState } from 'react-final-form';
 import { Box, Horizon, Line, Pattern, ROLE } from '@platform/ui';
@@ -13,24 +13,21 @@ export const Filter: React.FC<IFilterProperties> = ({
   QuickFilter,
   TagsPanel,
   additionalFilterFields,
+  applyMixValuesFormAndStorage,
   filterFields,
   filterState,
   setActiveFieldAndValue,
-  tagsState,
 }) => {
-  const { onClose: closeAdditionalFilter, opened, values: currentStateValues } = filterState;
-  const { onClick: expandAdditionalFilter } = tagsState;
+  const [visibleAdditionalFilter, setVisibleAdditionalFilter] = useState(false);
+
+  const { values: currentStateValues } = filterState;
 
   const { restart, submit } = useForm();
-  const { active, valid, values } = useFormState();
+  const { active, errors, valid, values } = useFormState();
 
   useEffect(() => setActiveFieldAndValue?.(active ? [active, values[active]] : undefined), [active, setActiveFieldAndValue, values]);
 
-  const handleToggle = useCallback(() => (opened ? closeAdditionalFilter() : expandAdditionalFilter()), [
-    opened,
-    closeAdditionalFilter,
-    expandAdditionalFilter,
-  ]);
+  const handleToggle = useCallback(() => setVisibleAdditionalFilter(!visibleAdditionalFilter), [visibleAdditionalFilter]);
 
   const defaultAdditionalFilterValues = useMemo(
     () =>
@@ -50,15 +47,21 @@ export const Filter: React.FC<IFilterProperties> = ({
   const handleReset = useCallback(() => {
     restart({ ...values, ...defaultAdditionalFilterValues });
 
+    const errorAdditionalFilter = additionalFilterFields.some(item => errors?.[item]);
+
+    if (errorAdditionalFilter) {
+      void submit();
+
+      return;
+    }
+
     if (valid) {
       void submit();
     }
-
-    closeAdditionalFilter();
-  }, [closeAdditionalFilter, defaultAdditionalFilterValues, restart, submit, valid, values]);
+  }, [additionalFilterFields, defaultAdditionalFilterValues, errors, restart, submit, valid, values]);
 
   const pristine = useMemo(() => {
-    if (opened) {
+    if (visibleAdditionalFilter) {
       const currentAdditionalValues = Object.keys(defaultAdditionalFilterValues).reduce(
         (currentValues, field) => ({
           ...currentValues,
@@ -75,27 +78,30 @@ export const Filter: React.FC<IFilterProperties> = ({
     }
 
     return true;
-  }, [defaultAdditionalFilterValues, opened, values, currentStateValues]);
+  }, [currentStateValues, defaultAdditionalFilterValues, values, visibleAdditionalFilter]);
 
   return (
     <>
       <Box className={css.filterWrapper}>
         <Pattern>
           <Pattern.Span size={10}>
-            <QuickFilter />
+            <QuickFilter applyMixValuesFormAndStorage={applyMixValuesFormAndStorage} />
           </Pattern.Span>
           <Pattern.Span size={2}>
             <Horizon align={'CENTER'} className={css.toggleButtonWrapper}>
               <Horizon.Spacer />
-              <ToggleButton opened={opened} onClick={handleToggle} />
+              <ToggleButton opened={visibleAdditionalFilter} onClick={handleToggle} />
             </Horizon>
           </Pattern.Span>
         </Pattern>
-        <TagsPanel defaultAdditionalFilterValues={defaultAdditionalFilterValues} />
+        <TagsPanel
+          defaultAdditionalFilterValues={defaultAdditionalFilterValues}
+          onChangeVisibleAdditionalFilter={setVisibleAdditionalFilter}
+        />
       </Box>
       <Line fill="FAINT" />
-      {opened && (
-        <Box aria-expanded={opened} data-name={'additionalFilter'} role={ROLE.PANEL}>
+      {visibleAdditionalFilter && (
+        <Box aria-expanded={visibleAdditionalFilter} data-name={'additionalFilter'} role={ROLE.PANEL}>
           <Box className={css.additionalFilterWrapper}>
             <AdditionalFilter />
           </Box>

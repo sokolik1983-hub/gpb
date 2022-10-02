@@ -14,17 +14,13 @@ import { useCreationParams } from './use-creation-params';
 export const CreationParams: React.FC = () => {
   const { change, batch } = useForm();
   const [options] = useCreationParams();
-  const { useCase } = useContext<IFormContext>(FormContext);
+  const { useCase, withSign } = useContext<IFormContext>(FormContext);
 
   const onChangeParams: OnChangeType<string[]> = useCallback(
     e => {
       let params = [...e.value];
 
-      if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && params.includes(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS)) {
-        params = params.filter(x => x !== CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
-      }
-
-      if (params.includes(CREATION_PARAMS.WITH_PDF_SIGN) && !params.includes(CREATION_PARAMS.WITH_DOCUMENTS_SET)) {
+      if (!withSign && params.includes(CREATION_PARAMS.WITH_PDF_SIGN)) {
         params = [...params, CREATION_PARAMS.WITH_DOCUMENTS_SET];
       }
 
@@ -40,7 +36,7 @@ export const CreationParams: React.FC = () => {
         });
       }
     },
-    [batch, change]
+    [batch, change, withSign]
   );
 
   const isVisible = !useCase || (useCase && creationParamsShowCases.includes(useCase));
