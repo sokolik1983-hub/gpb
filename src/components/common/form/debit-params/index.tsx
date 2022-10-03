@@ -3,8 +3,12 @@ import { defaultDebitParamsOptions, FormContext, FORM_FIELDS, DEBIT_PARAMS } fro
 import type { ICheckboxOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
+interface DebitParamsProps {
+  disabled?: boolean;
+}
+
 /** Компонент дебетового комплекта документов. */
-export const DebitParams: React.FC = () => {
+export const DebitParams: React.FC<DebitParamsProps> = ({ disabled }) => {
   const options = useRef<ICheckboxOption[]>([]);
   const { onlyRequestsStatement } = useContext(FormContext);
 
@@ -18,7 +22,16 @@ export const DebitParams: React.FC = () => {
     }, []);
   }, [onlyRequestsStatement]);
 
-  return <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DEBIT_PARAMS} options={options.current} />;
+  return (
+    <Fields.CheckboxGroup
+      extraSmall
+      columns={12}
+      disabled={disabled}
+      indent="MD"
+      name={FORM_FIELDS.DEBIT_PARAMS}
+      options={options.current}
+    />
+  );
 };
 
 DebitParams.displayName = 'DebitParams';

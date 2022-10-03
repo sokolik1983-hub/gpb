@@ -9,8 +9,12 @@ import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 import { useCreationParams } from './use-creation-params';
 
+interface CreationParamsProps {
+  disabled?: boolean;
+}
+
 /** Компонент параметров создания выписки. */
-export const CreationParams: React.FC = () => {
+export const CreationParams: React.FC<CreationParamsProps> = ({ disabled }) => {
   const { change, batch } = useForm();
   const [options] = useCreationParams();
   const { withSign } = useContext<IFormContext>(FormContext);
@@ -47,6 +51,7 @@ export const CreationParams: React.FC = () => {
       <Fields.CheckboxGroup
         extraSmall
         columns={12}
+        disabled={disabled}
         indent="MD"
         name={FORM_FIELDS.CREATION_PARAMS}
         options={options}

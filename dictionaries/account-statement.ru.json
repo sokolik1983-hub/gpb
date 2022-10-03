@@ -143,6 +143,8 @@
   "moneyString.positive": "+{amount, money} {currencyCode}",
   "client.form.title": "Клиентская форма",
   "admin.form.title": "Админская форма",
+  "admin.form.header": "Параметры запроса",
+  "admin.form.buttons.back.label": "К запросам выписок",
   "admin.scroller.title": "Админский скроллер",
   "action.labels.createStatement": "Запросить выписку",
   "accountType.labels.checking": "Расчётный",

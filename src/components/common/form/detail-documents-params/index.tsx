@@ -8,8 +8,12 @@ import { Box, Fields, Gap, Horizon, Typography } from '@platform/ui';
 import { useDetailDocumentsParams } from './use-detail-documents-params';
 import { useDetailDocumentsParamsVisible } from './use-detail-documents-params-visible';
 
+interface DetailDocumentsParamsProps {
+  disabled?: boolean;
+}
+
 /** Компонент параметров комплекта документов. */
-export const DetailDocumentsParams: React.FC = () => {
+export const DetailDocumentsParams: React.FC<DetailDocumentsParamsProps> = ({ disabled }) => {
   const [options] = useDetailDocumentsParams();
   const visible = useDetailDocumentsParamsVisible();
 
@@ -20,18 +24,25 @@ export const DetailDocumentsParams: React.FC = () => {
   return (
     <Row align={'TOP'} label={locale.common.documentsSetParams.label}>
       <Box>
-        <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.DOCUMENTS_SET_PARAMS} options={options} />
+        <Fields.CheckboxGroup
+          extraSmall
+          columns={12}
+          disabled={disabled}
+          indent="MD"
+          name={FORM_FIELDS.DOCUMENTS_SET_PARAMS}
+          options={options}
+        />
         <Gap />
         <Horizon>
           <Box>
             <Typography.SmallText>{locale.common.debitParams.label}</Typography.SmallText>
             <Gap.SM />
-            <DebitParams />
+            <DebitParams disabled={disabled} />
           </Box>
           <Box>
             <Typography.SmallText>{locale.common.creditParams.label}</Typography.SmallText>
             <Gap.SM />
-            <CreditParams />
+            <CreditParams disabled={disabled} />
           </Box>
         </Horizon>
       </Box>

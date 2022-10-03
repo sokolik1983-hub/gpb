@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useContext, useEffect } from 'react';
 import { AccountsField } from 'components/common';
 import { DateRange } from 'components/common/form/date-range';
-import { usePrevious } from 'hooks';
+import { usePrevious } from 'hooks/common';
 import type { QuickFilterPanelProps } from 'interfaces/client';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';

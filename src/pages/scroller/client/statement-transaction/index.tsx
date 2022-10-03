@@ -2,8 +2,8 @@ import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusNode, FocusTree } from 'components/common/focus-tree';
-import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks';
-import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
+import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks/common';
+import { useMetricPageListener } from 'hooks/common/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import {

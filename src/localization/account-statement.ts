@@ -1077,6 +1077,24 @@ export default {
 			get title() {
 				return t('admin.form.title');
 			},
+			/**
+			 * @ru
+			 * Параметры запроса
+			 */
+			get header() {
+				return t('admin.form.header');
+			},
+			buttons: {
+				back: {
+					/**
+					 * @ru
+					 * К запросам выписок
+					 */
+					get label() {
+						return t('admin.form.buttons.back.label');
+					},
+				},
+			},
 		},
 		scroller: {
 			/**

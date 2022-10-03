@@ -3,8 +3,12 @@ import { FORM_FIELDS, FormContext, defaultCreditParamsOptions, CREDIT_PARAMS } f
 import type { ICheckboxOption } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
+interface CreditParamsProps {
+  disabled?: boolean;
+}
+
 /** Компонент кредитного комплекта документов. */
-export const CreditParams: React.FC = () => {
+export const CreditParams: React.FC<CreditParamsProps> = ({ disabled }) => {
   const options = useRef<ICheckboxOption[]>([]);
   const { onlyRequestsStatement } = useContext(FormContext);
 
@@ -18,7 +22,16 @@ export const CreditParams: React.FC = () => {
     }, []);
   }, [onlyRequestsStatement]);
 
-  return <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FORM_FIELDS.CREDIT_PARAMS} options={options.current} />;
+  return (
+    <Fields.CheckboxGroup
+      extraSmall
+      columns={12}
+      disabled={disabled}
+      indent="MD"
+      name={FORM_FIELDS.CREDIT_PARAMS}
+      options={options.current}
+    />
+  );
 };
 
 CreditParams.displayName = 'CreditParams';

@@ -15,8 +15,8 @@ import {
   useScrollerTabsProps,
   useStreamContentHeight,
   useTurnoverScrollerHeaderProps,
-} from 'hooks';
-import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
+} from 'hooks/common';
+import { useMetricPageListener } from 'hooks/common/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
