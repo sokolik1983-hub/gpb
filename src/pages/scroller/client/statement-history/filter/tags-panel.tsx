@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { TagsPanelView } from 'components/common';
-import { useFilterTags } from 'hooks';
+import { useFilterTags } from 'hooks/common';
 import type { ITagsPanelProps } from 'interfaces/client';
 import { useFormState } from 'react-final-form';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';

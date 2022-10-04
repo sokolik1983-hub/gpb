@@ -39,10 +39,11 @@ export interface IAccountsFieldProps {
   onChange?: OnChangeType<string[]>;
   /** Плейсхолдер. */
   placeholder?: string;
+  disabled?: boolean;
 }
 
 /** Селект выбора счетов. */
-export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop }) => {
+export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop, disabled }) => {
   const { change, getFieldState } = useForm();
 
   const sortedOptions = useMemo(
@@ -88,6 +89,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
     <Fields.MultiSelect
       extraSmall
       withSearch
+      disabled={disabled}
       filterFn={filterFn}
       name={name}
       optionTemplate={AccountOption}

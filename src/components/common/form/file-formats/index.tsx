@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { useSeparateAccountFiles } from 'components/common/form/common/use-separate-account-files';
 import { Row } from 'components/common/form/row';
-import { useAccounts } from 'hooks/use-accounts';
+import { useAccounts } from 'hooks/common/use-accounts';
 import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { locale } from 'localization';
@@ -14,8 +14,14 @@ import { isNeedTotalsOfDay } from 'utils/common';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
+/** Cвойства компонента выбора формата файла. */
+interface FileFormatsProps {
+  /** Блокировка редактирования значений. */
+  disabled?: boolean;
+}
+
 /** Компонент выбора формата файла. */
-export const FileFormats: React.FC = () => {
+export const FileFormats: React.FC<FileFormatsProps> = ({ disabled }) => {
   const { data: accounts } = useAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
@@ -60,7 +66,13 @@ export const FileFormats: React.FC = () => {
 
   return (
     <Row label={locale.common.fileFormat.label}>
-      <Fields.SwitchBar extraSmall name={FORM_FIELDS.FILE_FORMAT} options={fileFormatOptions} onChange={onChangeFileFormat} />
+      <Fields.SwitchBar
+        extraSmall
+        disabled={disabled}
+        name={FORM_FIELDS.FILE_FORMAT}
+        options={fileFormatOptions}
+        onChange={onChangeFileFormat}
+      />
     </Row>
   );
 };

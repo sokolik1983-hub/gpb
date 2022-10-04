@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { AccountsField } from 'components/common';
 import { useSeparateAccountFiles } from 'components/common/form/common/use-separate-account-files';
 import { Row } from 'components/common/form/row';
-import { useAccounts } from 'hooks';
+import { useAccounts } from 'hooks/common';
 import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
@@ -14,8 +14,14 @@ import type { OnChangeType } from '@platform/ui';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
 
+/** Свойства компонента счета. */
+interface AccountsProps {
+  /** Блокировка редактирования значений. */
+  disabled?: boolean;
+}
+
 /** Компонент счета. */
-export const Accounts: React.FC = () => {
+export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
   const { data: accounts } = useAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
@@ -50,7 +56,7 @@ export const Accounts: React.FC = () => {
   return (
     <Row label={locale.common.accounts.label}>
       <Box className={css.accounts}>
-        <AccountsField accounts={accounts} name={FORM_FIELDS.ACCOUNTS} onChange={onChangeAccounts} />
+        <AccountsField accounts={accounts} disabled={disabled} name={FORM_FIELDS.ACCOUNTS} onChange={onChangeAccounts} />
       </Box>
     </Row>
   );

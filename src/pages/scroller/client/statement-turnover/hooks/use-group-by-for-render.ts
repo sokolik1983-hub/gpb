@@ -1,4 +1,4 @@
-import { usePrevious } from 'hooks';
+import { usePrevious } from 'hooks/common';
 import type { GROUPING_VALUES } from 'interfaces/dto';
 
 /**

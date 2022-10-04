@@ -444,6 +444,12 @@
   "admin.form.title": {
     "ru": "Админская форма"
   },
+  "admin.form.header": {
+    "ru": "Параметры запроса"
+  },
+  "admin.form.buttons.back.label": {
+    "ru": "К запросам выписок"
+  },
   "admin.scroller.title": {
     "ru": "Админский скроллер"
   },

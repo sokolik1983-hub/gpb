@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAccounts } from 'hooks/common/use-accounts';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import type { ACTION } from 'interfaces/common';
 import { FORMAT } from 'interfaces/common/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';

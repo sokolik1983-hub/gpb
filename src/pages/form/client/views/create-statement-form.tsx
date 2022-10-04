@@ -7,8 +7,8 @@ import { DetailDocumentsParams } from 'components/common/form/detail-documents-p
 import { FileFormats } from 'components/common/form/file-formats';
 import { Operations } from 'components/common/form/operations';
 import { Period } from 'components/common/form/period';
-import { useCreationType } from 'hooks/use-creation-type';
-import { useInitialStatementRequest } from 'hooks/use-initial-statement-request';
+import { useInitialStatementRequest } from 'hooks/client/use-initial-statement-request';
+import { useCreationType } from 'hooks/common/use-creation-type';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { ExternalStatementRequest } from 'interfaces/form';
 import { Footer } from 'pages/form/client/components/footer';

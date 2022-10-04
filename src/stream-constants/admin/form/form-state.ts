@@ -1,10 +1,10 @@
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import type { ILatestStatementDto } from 'interfaces/dto';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import type { IFormState } from 'stream-constants/form';
 import { defaultFormState } from 'stream-constants/form';
-import { mapDtoToForm } from 'utils/client/actions';
-import { alwaysSendParamCasesFromUI } from 'utils/client/export-params-dialog';
+import { mapDtoToForm } from 'utils/admin/actions';
+import { alwaysSendParamCasesFromUI } from 'utils/admin/export-params-dialog';
 
 /** Конфиг начального состояния формы. */
 export interface IStateConfig {

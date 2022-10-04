@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useCallback, useContext, useRef } from 'react';
 import { executor, gotoTransactionsScrollerByStatementRequest } from 'actions/client';
-import { useScrollButton } from 'hooks';
+import { useScrollButton } from 'hooks/common';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import { ACTION } from 'interfaces/common';
 import { locale } from 'localization';

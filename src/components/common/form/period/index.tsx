@@ -12,8 +12,14 @@ import { Gap, Box, Horizon } from '@platform/ui';
 import { PeriodType } from './period-type';
 import css from './styles.scss';
 
+/** Свойства компонента задания периода (именованный период + даты). */
+interface PeriodProps {
+  /** Блокировка редактирования значений. */
+  disabled?: boolean;
+}
+
 /** Компонент задания периода (именованный период + даты). */
-export const Period: React.FC = () => {
+export const Period: React.FC<PeriodProps> = ({ disabled }) => {
   const { change, batch } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -62,9 +68,14 @@ export const Period: React.FC = () => {
     <Row label={FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE]}>
       <Box className={css.period}>
         <Horizon>
-          <PeriodType />
+          <PeriodType disabled={disabled} />
           <Gap />
-          <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} onChangeFrom={onChangeTo} onChangeTo={onChangeFrom} />
+          <DateRange
+            disabled={disabled}
+            name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]}
+            onChangeFrom={onChangeTo}
+            onChangeTo={onChangeFrom}
+          />
         </Horizon>
       </Box>
     </Row>
