@@ -8,7 +8,9 @@ import { Box, Fields, Gap, Horizon, Typography } from '@platform/ui';
 import { useDetailDocumentsParams } from './use-detail-documents-params';
 import { useDetailDocumentsParamsVisible } from './use-detail-documents-params-visible';
 
+/** Свойства компонента параметров комплекта документов. */
 interface DetailDocumentsParamsProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 

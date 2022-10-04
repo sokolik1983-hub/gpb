@@ -5,12 +5,13 @@ import type { RequestPeriodType } from 'interfaces/dto';
 import { asyncNoop } from 'utils/common';
 
 export const statementService = {
-  getLatestStatementRequest: asyncNoop,
+  /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string) => {
     console.log(id);
 
     return asyncNoop;
   },
+  /** Возвращает временной период. */
   getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => {
     console.log(periodType);
 

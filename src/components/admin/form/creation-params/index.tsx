@@ -9,7 +9,9 @@ import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 import { useCreationParams } from './use-creation-params';
 
+/** Свойства компонента параметров создания выписки. */
 interface CreationParamsProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 

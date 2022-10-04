@@ -1,11 +1,10 @@
 import { useMemo, useState } from 'react';
 import type { IUrlParams } from 'interfaces';
-import { DATE_PERIODS, HTTP_STATUS_CODE } from 'interfaces';
+import { DATE_PERIODS } from 'interfaces';
 import type { ILatestStatementDto, RequestPeriodType } from 'interfaces/dto';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
-import { NEW_ENTITY_ID } from 'stream-constants';
 import { ERROR } from '@platform/services/admin';
 
 /**
@@ -26,22 +25,9 @@ export const useInitialStatementRequest = (): {
   const { id } = useParams<IUrlParams>();
   const [isForbidden, setIsForbidden] = useState(false);
 
-  const isNewStatement = id === NEW_ENTITY_ID;
+  const statementRequestFetcher = useMemo(() => () => statementService.getStatementRequest(id), [id]);
 
-  const statementRequestFetcher = useMemo(() => {
-    if (isNewStatement) {
-      return statementService.getLatestStatementRequest;
-    }
-
-    return () => statementService.getStatementRequest(id);
-  }, [id, isNewStatement]);
-
-  const {
-    data: statementRequestResp,
-    isLoading: isStatementRequestLoading,
-    isError: isStatementRequestLoadingError,
-    isSuccess: isSuccessStatementRequest,
-  } = useQuery<any>({
+  const { data: statementRequestResp, isLoading: isStatementRequestLoading, isError: isStatementRequestLoadingError } = useQuery<any>({
     queryKey: ['@eco/statement', 'get-statement-request', id],
     queryFn: statementRequestFetcher,
     retry: false,
@@ -56,7 +42,7 @@ export const useInitialStatementRequest = (): {
     cacheTime: 0,
   });
 
-  const { data: statementRequest, error: statementRequestError } = statementRequestResp ?? {};
+  const { data: statementRequest } = statementRequestResp ?? {};
 
   const { periodType } = statementRequest ?? {};
 
@@ -67,7 +53,7 @@ export const useInitialStatementRequest = (): {
         periodType: periodType as RequestPeriodType,
       }),
     // При создании новой выписки, для запроса последней выписки, не требуется пересчитывать период, т.к это выполняется на беке.
-    enabled: Boolean(periodType) && periodType !== DATE_PERIODS.SELECT_PERIOD && !isNewStatement,
+    enabled: Boolean(periodType) && periodType !== DATE_PERIODS.SELECT_PERIOD,
     retry: false,
   });
 
@@ -76,14 +62,10 @@ export const useInitialStatementRequest = (): {
     statementRequest.periodEnd = periodResp.dateTo;
   }
 
-  // Код 404 не считается ошибкой - пользователь открыл форму для создания первой выписки, и у него нет предыдущих выписок.
-  const allowedState = Number(statementRequestError?.code) === HTTP_STATUS_CODE.NOT_FOUND || isSuccessStatementRequest;
-
   return {
     initialStatementRequest: statementRequest,
     isInitialLoading: isStatementRequestLoading || isPeriodLoading,
-    isInitialError:
-      isStatementRequestLoadingError || isPeriodLoadingError || (Boolean(statementRequestError) && !allowedState && isNewStatement),
+    isInitialError: isStatementRequestLoadingError || isPeriodLoadingError,
     isForbidden,
   };
 };

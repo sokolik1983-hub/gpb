@@ -14,7 +14,9 @@ import type { OnChangeType } from '@platform/ui';
 import { Box } from '@platform/ui';
 import css from './styles.scss';
 
+/** Свойства компонента счета. */
 interface AccountsProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 

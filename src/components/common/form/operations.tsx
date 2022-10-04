@@ -4,7 +4,9 @@ import { locale } from 'localization';
 import { FORM_FIELDS, operationOptions } from 'stream-constants/form';
 import { Fields } from '@platform/ui';
 
+/** Свойства компонента выбора допустимой операции. */
 interface OperationsProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 

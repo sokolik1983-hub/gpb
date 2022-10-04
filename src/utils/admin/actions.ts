@@ -1,6 +1,6 @@
 import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import type { ICreateRequestStatementDto } from 'interfaces/dto';
+import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/dto';
 import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 import type { IFormState } from 'stream-constants/form';
@@ -74,3 +74,74 @@ export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE
   sourcePage: ADMIN_STREAM_URL.STATEMENT,
   type: TYPE.ONETIME,
 });
+
+/** Функция для преобразования ДТО ответа для последний выписки в значения формы. */
+export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
+  const creditParams: string[] = [];
+  const debitParams: string[] = [];
+  const creationParams: string[] = [];
+  const documentsSetParams: string[] = [];
+
+  if (dto.documentOptionsDto.includeCreditOrders) {
+    creditParams.push(CREDIT_PARAMS.INCLUDE_ORDERS);
+  }
+
+  if (dto.documentOptionsDto.includeCreditStatements) {
+    creditParams.push(CREDIT_PARAMS.INCLUDE_STATEMENTS);
+  }
+
+  if (dto.documentOptionsDto.includeDebitOrders) {
+    debitParams.push(DEBIT_PARAMS.INCLUDE_ORDERS);
+  }
+
+  if (dto.documentOptionsDto.includeDebitStatements) {
+    debitParams.push(DEBIT_PARAMS.INCLUDE_STATEMENTS);
+  }
+
+  if (dto.separateAccountsFiles) {
+    creationParams.push(CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES);
+  }
+
+  if (dto.hideEmptyTurnovers) {
+    creationParams.push(CREATION_PARAMS.HIDE_EMPTY_TURNOVERS);
+  }
+
+  if (dto.signNeeded) {
+    creationParams.push(CREATION_PARAMS.WITH_PDF_SIGN);
+  }
+
+  if (dto.totalsOfDay) {
+    creationParams.push(CREATION_PARAMS.TOTALS_OF_DAY);
+  }
+
+  if (dto.nationalCurrency) {
+    creationParams.push(CREATION_PARAMS.NATIONAL_CURRENCY);
+  }
+
+  if (dto.revaluationAccountingEntry) {
+    creationParams.push(CREATION_PARAMS.REVALUATION_ACCOUNTING_ENTRY);
+  }
+
+  if (dto.documentOptionsDto.separateDocumentsFiles) {
+    documentsSetParams.push(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
+  }
+
+  const hasDocumentSet = creditParams.length > 0 || debitParams.length > 0 || documentsSetParams.length > 0;
+
+  if (hasDocumentSet) {
+    creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
+  }
+
+  return {
+    accountIds: dto.accountsIds,
+    dateFrom: dto.periodStart,
+    dateTo: dto.periodEnd,
+    format: dto.statementFormat,
+    periodType: dto.periodType,
+    operations: dto.statementOperationDto,
+    creationParams,
+    creditParams,
+    debitParams,
+    documentsSetParams,
+  };
+};

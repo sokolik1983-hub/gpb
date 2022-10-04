@@ -12,7 +12,9 @@ import { Gap, Box, Horizon } from '@platform/ui';
 import { PeriodType } from './period-type';
 import css from './styles.scss';
 
+/** Свойства компонента задания периода (именованный период + даты). */
 interface PeriodProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 

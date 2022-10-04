@@ -21,7 +21,11 @@ import { NotFoundContent } from '@platform/services';
 import { Box, ServiceIcons, DATA_TYPE, FormValidation, Link, LoaderOverlay, Pattern, Typography, Gap } from '@platform/ui';
 import css from './styles.scss';
 
-/** ЭФ создания запроса на выписку. */
+/**
+ * ЭФ просмотра запроса на выписку.
+ *
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440051
+ */
 export const CreateStatementForm: React.FC = () => {
   const { state } = useLocation<ExternalStatementRequest>();
 

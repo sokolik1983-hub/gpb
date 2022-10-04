@@ -14,7 +14,9 @@ import { isNeedTotalsOfDay } from 'utils/common';
 import type { OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
+/** Cвойства компонента выбора формата файла. */
 interface FileFormatsProps {
+  /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 
