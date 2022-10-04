@@ -2,37 +2,10 @@
   flex: 1 1 224px;
 }
 
-.statementInfoWrapper {
-  flex: 0 0 auto;
-  padding: 0 32px;
-}
-
 .counterpartyField {
   width: 100%;
 
   [data-action='clear'] {
     min-width: auto;
   }
-}
-
-.titleStatementInfoItem {
-  color: #7c8793;
-  line-height: 16px;
-}
-
-.natCurrencyText {
-  color: #7c8793;
-  margin-bottom: 2px;
-}
-
-.unsigned {
-  opacity: 0.7;
-}
-
-.negative {
-  opacity: 0.6;
-}
-
-.positive {
-  opacity: 0.7;
 }

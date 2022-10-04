@@ -7,12 +7,6 @@ declare namespace StylesScssModule {
   export interface IStylesScss {
     'counterpartyField': string;
     'fieldWrapper': string;
-    'natCurrencyText': string;
-    'negative': string;
-    'positive': string;
-    'statementInfoWrapper': string;
-    'titleStatementInfoItem': string;
-    'unsigned': string;
   }
 }
 
