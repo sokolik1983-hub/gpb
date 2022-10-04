@@ -1,20 +1,22 @@
 /**
  * Сервис выписок сотрудника банка.
  */
-import type { RequestPeriodType } from 'interfaces/dto';
+import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { asyncNoop } from 'utils/common';
+import type { IServerDataResp } from '@platform/services/client';
 
 export const statementService = {
   /** Получить сущность "Запрос выписки". */
-  getStatementRequest: (id: string) => {
-    console.log(id);
-
-    return asyncNoop;
-  },
+  // TODO убрать eslint-disable после реализации метода
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getStatementRequest: (id: string) => asyncNoop,
+  /** Возвращает проводку. */
+  // TODO убрать eslint-disable после реализации метода
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
+    asyncNoop(),
   /** Возвращает временной период. */
-  getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => {
-    console.log(periodType);
-
-    return asyncNoop;
-  },
+  // TODO убрать eslint-disable после реализации метода
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => asyncNoop,
 };
