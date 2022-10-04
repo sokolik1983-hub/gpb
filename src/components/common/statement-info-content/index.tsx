@@ -6,23 +6,43 @@ import { formatAccountCode } from '@platform/tools/localization';
 import { Box, Gap, Pattern, Typography, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
 
+/** Свойства компонента общей информации по выписке. */
 interface StatmentInfoContentProps {
+  /** Счёт. */
   accountNumber: string;
+  /** Организация. */
   organizationName: string;
+  /** Иностранная ли валюта (Нужен рублёвый эквивалент). */
   isNationalCurrency: boolean;
+  /** Входящий остаток. */
   incomingBalance: number;
+  /** Код валюты. */
   currencyCode: string;
+  /** Входящий остаток в рублёвом эквиваленте. */
   incomingBalanceNatCurr: number;
+  /** Количество списаний. */
   outcomesCount: number;
+  /** Сумма списаний. */
   outcome: number;
+  /** Сумма списаний в рублёвом эквиваленте. */
   outcomeNatCurr: number;
+  /** Количество поступлений. */
   incomesCount: number;
+  /** Сумма поступлений. */
   income: number;
+  /** Сумма поступлений в рублёвом эквиваленте. */
   incomeNatCurr: number;
+  /** Исходящий остаток. */
   outgoingBalance: number;
+  /** Исходящий остаток в рублёвом эквиваленте. */
   outgoingBalanceNatCurr: number;
 }
 
+/** Компонент общей информации по выписке.
+ *
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440034
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675666
+ * */
 export const StatementInfoContent = ({
   accountNumber,
   organizationName,
