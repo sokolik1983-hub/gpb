@@ -1,0 +1,26 @@
+.statementInfoWrapper {
+  flex: 0 0 auto;
+  padding: 0 32px;
+}
+
+.titleStatementInfoItem {
+  color: #7c8793;
+  line-height: 16px;
+}
+
+.natCurrencyText {
+  color: #7c8793;
+  margin-bottom: 2px;
+}
+
+.unsigned {
+  opacity: 0.7;
+}
+
+.negative {
+  opacity: 0.6;
+}
+
+.positive {
+  opacity: 0.7;
+}
