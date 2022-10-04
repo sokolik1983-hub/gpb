@@ -2,7 +2,7 @@ import { showTransactionCard } from 'components/admin/transaction-card';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import type { IBaseEntity } from '@platform/services/client';
+import type { IBaseEntity } from '@platform/services/admin';
 import type { context } from './executor';
 
 /**
@@ -20,10 +20,7 @@ export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
 
     fatal(err);
 
-    // TODO Убрать после реализации сервиса getTransaction
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    const { data: transaction, error } = res;
+    const { data: transaction, error } = res!;
 
     fatal(error);
 
