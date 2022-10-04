@@ -11,6 +11,12 @@ export const statementService = {
 
     return asyncNoop;
   },
+  /** Возвращает проводку. */
+  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }) => {
+    console.log(accountingEntryId);
+
+    return asyncNoop();
+  },
   /** Возвращает временной период. */
   getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => {
     console.log(periodType);
