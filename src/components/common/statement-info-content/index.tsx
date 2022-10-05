@@ -1,6 +1,9 @@
 import React from 'react';
 import { NationalCurrencyText } from 'components/common/statement-info-content/national-currency-text';
-import { NationalCurrencyTransactionSummary } from 'components/common/statement-info-content/national-currency-transaction-summary';
+import {
+  NationalCurrencyTransactionSummary,
+  SUMMARY_TYPE,
+} from 'components/common/statement-info-content/national-currency-transaction-summary';
 import { locale } from 'localization';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Box, Gap, Pattern, Typography, WithInfoTooltip } from '@platform/ui';
@@ -83,7 +86,7 @@ export const StatementInfoContent = ({
         <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.incomingBalance'}>
           {locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}
         </Typography.P>
-        {isNationalCurrency && <NationalCurrencyTransactionSummary amount={incomingBalanceNatCurr} type="unsigned" />}
+        {isNationalCurrency && <NationalCurrencyTransactionSummary amount={incomingBalanceNatCurr} type={SUMMARY_TYPE.UNSIGNED} />}
       </Pattern.Span>
       <Pattern.Span size={2}>
         <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem} data-field={'statementSummaryInfo.outcomesCount'}>
@@ -92,7 +95,7 @@ export const StatementInfoContent = ({
         </Typography.Text>
         <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.outcome'} fill={'CRITIC'}>
           {locale.moneyString.negative({ amount: String(outcome), currencyCode })}
-          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={outcomeNatCurr} type="negative" />}
+          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={outcomeNatCurr} type={SUMMARY_TYPE.NEGATIVE} />}
         </Typography.P>
       </Pattern.Span>
       <Pattern.Span size={2}>
@@ -102,7 +105,7 @@ export const StatementInfoContent = ({
         </Typography.Text>
         <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.income'} fill={'SUCCESS'}>
           {locale.moneyString.positive({ amount: String(income), currencyCode })}
-          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={incomeNatCurr} type="positive" />}
+          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={incomeNatCurr} type={SUMMARY_TYPE.POSITIVE} />}
         </Typography.P>
       </Pattern.Span>
       <Pattern.Span size={2}>
@@ -112,7 +115,7 @@ export const StatementInfoContent = ({
         </Typography.Text>
         <Typography.P align={'RIGHT'} data-field={'statementSummaryInfo.outgoingBalance'}>
           {locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode })}
-          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={outgoingBalanceNatCurr} type="unsigned" />}
+          {isNationalCurrency && <NationalCurrencyTransactionSummary amount={outgoingBalanceNatCurr} type={SUMMARY_TYPE.UNSIGNED} />}
         </Typography.P>
       </Pattern.Span>
     </Pattern>

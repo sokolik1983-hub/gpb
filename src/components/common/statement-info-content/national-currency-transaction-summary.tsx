@@ -5,7 +5,7 @@ import { RUB_CURRENCY } from 'stream-constants';
 import { Typography } from '@platform/ui';
 import css from './styles.scss';
 
-enum SUMMARY_TYPE {
+export enum SUMMARY_TYPE {
   POSITIVE = 'positive',
   NEGATIVE = 'negative',
   UNSIGNED = 'unsigned',
