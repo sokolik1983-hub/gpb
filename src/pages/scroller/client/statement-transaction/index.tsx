@@ -35,7 +35,7 @@ import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils/common';
-import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { FatalErrorContent, MainLayout, useFilter, useNotifications } from '@platform/services/client';
 import type { IMetaData } from '@platform/services/client';
 import { Box, Gap, Line } from '@platform/ui';
 import { validate } from '@platform/validation';
@@ -133,6 +133,8 @@ export const StatementTransactionScrollerPage = () => {
   const prevTransactionsFetching = usePrevious(transactionsFetching);
   const isNationalCurrency = !!statementSummaryInfo?.nationalCurrency;
 
+  const { showImportantNotification, importantNotificationMessage } = useNotifications();
+
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
       counterparties,
@@ -175,7 +177,11 @@ export const StatementTransactionScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout headerProps={{ ...headerProps }} loading={!dataFetched}>
+            <ScrollerPageLayout
+              headerProps={{ ...headerProps }}
+              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+              loading={!dataFetched}
+            >
               <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
                 <StatementInfo />
               </ContentLoader>

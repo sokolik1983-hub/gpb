@@ -1,10 +1,19 @@
-/**
- * Сервис выписок сотрудника банка.
- */
+import type { IScrollerResponceDto } from 'interfaces';
+import type { StatementHistoryRow, StatementHistoryResponseDto, Organization } from 'interfaces/admin';
 import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { asyncNoop } from 'utils/common';
+import type { ICollectionResponse } from '@platform/services';
+import { metadataToRequestParams, request } from '@platform/services/admin';
 import type { IServerDataResp } from '@platform/services/client';
+import type { IMetaData } from '@platform/services/client/dist-types/interfaces/common';
 
+/** Базовый URL сервиса "Выписки". */
+const BASE_URL = '/api';
+
+/** URL сервиса выписок. */
+const STATEMENT_BANK_URL = `${BASE_URL}/statement-bank`;
+
+/** Сервис выписок админа. */
 export const statementService = {
   /** Получить сущность "Запрос выписки". */
   // TODO убрать eslint-disable после реализации метода
@@ -19,4 +28,78 @@ export const statementService = {
   // TODO убрать eslint-disable после реализации метода
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => asyncNoop,
+  /** Возвращает список выписок истории запросов. */
+  getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
+    request<IServerDataResp<IScrollerResponceDto<StatementHistoryResponseDto>>>({
+      url: `${STATEMENT_BANK_URL}/statement/request/page`,
+      method: 'POST',
+      data: metadataToRequestParams(metaData),
+    })
+      .then(response => {
+        const data = response.data.data.page.map(
+          ({
+            accounts,
+            action,
+            createdAt,
+            format,
+            id,
+            periodEnd,
+            periodStart,
+            periodType,
+            statementId,
+            statementStatus,
+            statementType,
+            status,
+            user,
+          }) => {
+            const { accountNumbers, accountsIds, organizations, serviceBranches } = accounts.reduce<{
+              accountNumbers: string[];
+              accountsIds: string[];
+              organizations: Organization[];
+              serviceBranches: string[];
+            }>(
+              (prevValue, { filialName, id: accountId, number, organization }) => ({
+                accountNumbers: [...prevValue.accountNumbers, number],
+                accountsIds: [...prevValue.accountsIds, accountId],
+                organizations: [...prevValue.organizations, organization],
+                serviceBranches: [...prevValue.serviceBranches, filialName],
+              }),
+              {
+                accountNumbers: [],
+                accountsIds: [],
+                organizations: [],
+                serviceBranches: [],
+              }
+            );
+
+            return {
+              accountNumbers,
+              accountsIds,
+              action,
+              createdAt,
+              format,
+              id,
+              organizations,
+              periodEnd,
+              periodStart,
+              periodType,
+              requestStatus: status,
+              serviceBranches,
+              statementId,
+              statementType,
+              statementStatus,
+              user,
+            };
+          }
+        );
+
+        return {
+          data,
+          total: response.data.data.size,
+        };
+      })
+      .catch(() => ({
+        data: [],
+        total: 0,
+      })),
 };

@@ -17,6 +17,54 @@
   "client.statementStatuses.denied": {
     "ru": "Отклонен"
   },
+  "admin.requestStatus.new": {
+    "ru": "Запрос сформирован"
+  },
+  "admin.requestStatus.delivered": {
+    "ru": "Доставлен"
+  },
+  "admin.requestStatus.detailsValid": {
+    "ru": "Реквизиты верны"
+  },
+  "admin.requestStatus.received": {
+    "ru": "Принят"
+  },
+  "admin.requestStatus.executed": {
+    "ru": "Исполнен"
+  },
+  "admin.requestStatus.denied": {
+    "ru": "Отклонен"
+  },
+  "admin.requestStatus.canceled": {
+    "ru": "Отменен"
+  },
+  "admin.statementStatus.notExecuted": {
+    "ru": "Не исполнен"
+  },
+  "admin.statementStatus.executed": {
+    "ru": "Исполнен"
+  },
+  "admin.statementStatus.error": {
+    "ru": "Ошибка"
+  },
+  "admin.statementStatus.notRelevant": {
+    "ru": "Данные не актуальны"
+  },
+  "admin.statementType.statement": {
+    "ru": "Выписка"
+  },
+  "admin.statementType.reference": {
+    "ru": "Справка"
+  },
+  "admin.userType.bank": {
+    "ru": "Сотрудник Банка"
+  },
+  "admin.userType.client": {
+    "ru": "Сотрудник Клиента"
+  },
+  "admin.userType.technical": {
+    "ru": "Технический пользователь"
+  },
   "scroller.tags.labels.resetAll": {
     "ru": "Сбросить всё"
   },
@@ -204,11 +252,29 @@
   "historyScroller.filter.labels.status": {
     "ru": "Статус"
   },
+  "historyScroller.filter.labels.requestStatus": {
+    "ru": "Статус запроса"
+  },
+  "historyScroller.filter.labels.statementStatus": {
+    "ru": "Статус выписки/справки"
+  },
   "historyScroller.filter.labels.signaturePresence": {
     "ru": "Электронная подпись"
   },
   "historyScroller.filter.labels.datePeriod": {
     "ru": "Тип периода"
+  },
+  "historyScroller.filter.labels.period": {
+    "ru": "Период"
+  },
+  "historyScroller.filter.labels.statement": {
+    "ru": "Выписка/справка"
+  },
+  "historyScroller.filter.labels.user": {
+    "ru": "Пользователь"
+  },
+  "historyScroller.filter.labels.serviceBranch": {
+    "ru": "Подразделение обслуживания"
   },
   "historyScroller.filter.placeholders.accounts": {
     "ru": "Все счета"
@@ -316,6 +382,96 @@
   },
   "historyScroller.statementFormat.labels.multicash": {
     "ru": "Multicash"
+  },
+  "admin.historyScroller.pageTitle": {
+    "ru": "Запросы выписки"
+  },
+  "admin.historyScroller.filter.labels.requestStatus": {
+    "ru": "Статус запроса"
+  },
+  "admin.historyScroller.filter.labels.statementStatus": {
+    "ru": "Статус выписки"
+  },
+  "admin.historyScroller.filter.labels.signaturePresence": {
+    "ru": "Электронная подпись"
+  },
+  "admin.historyScroller.filter.labels.period": {
+    "ru": "Период"
+  },
+  "admin.historyScroller.filter.labels.organization": {
+    "ru": "Организация"
+  },
+  "admin.historyScroller.filter.placeholders.account": {
+    "ru": "Счет"
+  },
+  "admin.historyScroller.filter.labels.statementType": {
+    "ru": "Выписка/Справка"
+  },
+  "admin.historyScroller.filter.labels.user": {
+    "ru": "Пользователь"
+  },
+  "admin.historyScroller.filter.labels.serviceBranch": {
+    "ru": "Подразделение обслуживания"
+  },
+  "admin.historyScroller.table.header.createdAt": {
+    "ru": "Дата запроса"
+  },
+  "admin.historyScroller.table.header.accountNumber": {
+    "ru": "Счет"
+  },
+  "admin.historyScroller.table.header.organization": {
+    "ru": "Организация"
+  },
+  "admin.historyScroller.table.header.requestPeriod": {
+    "ru": "Период запроса"
+  },
+  "admin.historyScroller.table.header.format": {
+    "ru": "Формат"
+  },
+  "admin.historyScroller.table.header.requestStatus": {
+    "ru": "Статус запроса"
+  },
+  "admin.historyScroller.table.header.user": {
+    "ru": "Пользователь"
+  },
+  "admin.historyScroller.table.header.serviceBranch": {
+    "ru": "Филиал обслуживания"
+  },
+  "admin.historyScroller.table.header.statementType": {
+    "ru": "Признак сформированной выписки"
+  },
+  "admin.historyScroller.table.header.statementStatus": {
+    "ru": "Статус выписки"
+  },
+  "admin.historyScroller.table.cell.inn": {
+    "ru": "ИНН"
+  },
+  "admin.historyScroller.table.total": {
+    "ru": "Запросы"
+  },
+  "admin.historyScroller.action.createStatement": {
+    "ru": "Запросить выписку"
+  },
+  "admin.historyScroller.action.exportRegistryStatements": {
+    "ru": "Экспорт реестра"
+  },
+  "admin.historyScroller.action.repeatStatement": {
+    "ru": "Повторить выписку"
+  },
+  "admin.historyScroller.action.exportStatement": {
+    "ru": "Экспорт выписки"
+  },
+  "admin.historyScroller.action.viewModifiedTransactions": {
+    "ru": "Просмотреть измененные проводки"
+  },
+  "admin.historyScroller.action.viewTransactions": {
+    "ru": "Просмотреть выписку"
+  },
+  "admin.historyScroller.action.viewQueryParams": {
+    "ru": "Просмотреть параметры запроса"
+  },
+  "admin.historyScroller.footer.selected": {
+    "ru": "Выбрано:"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
