@@ -11,17 +11,20 @@ export interface StatementHistoryRow {
   /** Тип действия. */
   action: ACTION;
   /** Дата запроса. */
-  createdAt: string;
+  createdAt: {
+    /** Дата. */
+    date: string;
+    /** Время. */
+    time: string;
+  };
   /** Формат выписки. */
   format: FORMAT;
   /** Идентификатор запроса выписки. */
   id: string;
   /** Наименование организаций. */
   organizations: Organization[];
-  /** Конец периода. */
-  periodEnd: string;
-  /** Начало периода. */
-  periodStart: string;
+  /** Дата периода. */
+  periodDate: string;
   /** Тип периода. */
   periodType: DATE_PERIODS;
   /** Статус запроса. */

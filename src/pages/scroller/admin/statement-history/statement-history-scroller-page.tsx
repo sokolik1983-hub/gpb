@@ -120,3 +120,5 @@ export const StatementHistoryScrollerPage = () => {
     </StatementHistoryScrollerContext.Provider>
   );
 };
+
+StatementHistoryScrollerPage.displayName = 'StatementHistoryScrollerPage';

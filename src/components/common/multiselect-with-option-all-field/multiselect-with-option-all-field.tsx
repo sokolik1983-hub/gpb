@@ -1,5 +1,6 @@
 import type { FC } from 'react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
+import { locale } from 'localization';
 import { useForm } from 'react-final-form';
 import { ALL_VALUE } from 'stream-constants';
 import type { IOption } from '@platform/ui';
@@ -11,11 +12,13 @@ interface MultiselectWithOptionAllFieldProps {
   /** Название поля. */
   name: string;
   /** Опции. */
-  options: any[];
+  options: IOption[];
 }
 
 /** Мультиселект с опцией "Все". */
 export const MultiselectWithOptionAllField: FC<MultiselectWithOptionAllFieldProps> = ({ name, options }) => {
+  const optionsWithAllValue = useMemo(() => [{ value: ALL_VALUE, label: locale.form.labels.selectAll }, ...options], [options]);
+
   const { change } = useForm();
 
   /** Обработчик изменения опций. */
@@ -39,5 +42,5 @@ export const MultiselectWithOptionAllField: FC<MultiselectWithOptionAllFieldProp
     [change, name]
   );
 
-  return <Fields.MultiSelect extraSmall name={name} options={options} onChange={handleChange} />;
+  return <Fields.MultiSelect extraSmall name={name} options={optionsWithAllValue} onChange={handleChange} />;
 };

@@ -72,8 +72,6 @@ export const fields: Record<string, IFilterField> = {
 
 /** Отсортированные опции статусов запроса выписки. */
 export const REQUEST_STATUS_OPTIONS: Array<IOption<STATEMENT_REQUEST_STATUSES | typeof ALL_VALUE>> = [
-  /** Все. */
-  { value: ALL_VALUE, label: locale.form.labels.selectAll },
   ...(Object.keys(STATEMENT_REQUEST_STATUSES) as STATEMENT_REQUEST_STATUSES[])
     .map(item => ({ label: STATEMENT_REQUEST_STATUS_LABEL[item], value: item }))
     .sort(byLabel),
@@ -81,8 +79,6 @@ export const REQUEST_STATUS_OPTIONS: Array<IOption<STATEMENT_REQUEST_STATUSES | 
 
 /** Опции статусов выписки. */
 export const STATEMENT_STATUS_OPTIONS: Array<IOption<STATEMENT_STATUSES | typeof ALL_VALUE>> = [
-  /** Все. */
-  { value: ALL_VALUE, label: locale.form.labels.selectAll },
   ...(Object.keys(STATEMENT_STATUSES) as STATEMENT_STATUSES[]).map(item => ({ label: STATEMENT_STATUS_LABEL[item], value: item })),
 ];
 

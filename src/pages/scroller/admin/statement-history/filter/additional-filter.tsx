@@ -67,3 +67,5 @@ export const AdditionalFilter: FC = () => {
     </>
   );
 };
+
+AdditionalFilter.displayName = 'AdditionalFilter';

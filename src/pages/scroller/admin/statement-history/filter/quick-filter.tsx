@@ -84,3 +84,5 @@ export const QuickFilter: FC = () => {
     </Pattern>
   );
 };
+
+QuickFilter.displayName = 'QuickFilter';

@@ -1,6 +1,7 @@
 import type { IScrollerResponceDto } from 'interfaces';
-import type { StatementHistoryRow, StatementHistoryResponseDto, Organization } from 'interfaces/admin';
+import type { StatementHistoryRow, StatementHistoryResponseDto } from 'interfaces/admin';
 import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
+import { mapDtoToViewForStatementList } from 'services/admin/mappers';
 import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse } from '@platform/services';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -36,65 +37,12 @@ export const statementService = {
       data: metadataToRequestParams(metaData),
     })
       .then(response => {
-        const data = response.data.data.page.map(
-          ({
-            accounts,
-            action,
-            createdAt,
-            format,
-            id,
-            periodEnd,
-            periodStart,
-            periodType,
-            statementId,
-            statementStatus,
-            statementType,
-            status,
-            user,
-          }) => {
-            const { accountNumbers, accountsIds, organizations, serviceBranches } = accounts.reduce<{
-              accountNumbers: string[];
-              accountsIds: string[];
-              organizations: Organization[];
-              serviceBranches: string[];
-            }>(
-              (prevValue, { filialName, id: accountId, number, organization }) => ({
-                accountNumbers: [...prevValue.accountNumbers, number],
-                accountsIds: [...prevValue.accountsIds, accountId],
-                organizations: [...prevValue.organizations, organization],
-                serviceBranches: [...prevValue.serviceBranches, filialName],
-              }),
-              {
-                accountNumbers: [],
-                accountsIds: [],
-                organizations: [],
-                serviceBranches: [],
-              }
-            );
-
-            return {
-              accountNumbers,
-              accountsIds,
-              action,
-              createdAt,
-              format,
-              id,
-              organizations,
-              periodEnd,
-              periodStart,
-              periodType,
-              requestStatus: status,
-              serviceBranches,
-              statementId,
-              statementType,
-              statementStatus,
-              user,
-            };
-          }
-        );
+        if (response.data.error?.code) {
+          throw response.data.error.message;
+        }
 
         return {
-          data,
+          data: mapDtoToViewForStatementList(response.data.data.page),
           total: response.data.data.size,
         };
       })
