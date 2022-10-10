@@ -1,16 +1,17 @@
 import React from 'react';
 import { ContentLoader } from 'components/common/content-loader';
-import { useNotifications } from '@platform/services/client';
 import type { ICategoryTabsProps, IScrollerHeader } from '@platform/ui';
 import { Box, Separator, CategoryTabs, LoaderOverlay, DATA_TYPE, ScrollerHeader } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента ScrollerPageLayout. */
 interface IScrollerPageLayoutProps {
-  /** Навигация (хлебные крошки). */
-  headerProps: IScrollerHeader & { loading?: boolean };
   /** Свойства для категорий. */
   categoryTabs?: ICategoryTabsProps;
+  /** Навигация (хлебные крошки). */
+  headerProps: IScrollerHeader & { loading?: boolean };
+  /** Признак присутствия уведомления в топлайне. */
+  importantNotification?: boolean;
   /** Если true, то вместо страницы будет отображаться лоадер. */
   loading?: boolean;
 }
@@ -19,10 +20,14 @@ interface IScrollerPageLayoutProps {
 export const SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT = 72;
 
 /** Лэаут страницы скроллера. */
-export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({ categoryTabs, children, headerProps, loading }) => {
-  const { showImportantNotification, importantNotificationMessage } = useNotifications();
-
-  const topLineHeight = showImportantNotification && importantNotificationMessage ? 120 : 64;
+export const ScrollerPageLayout: React.FC<IScrollerPageLayoutProps> = ({
+  categoryTabs,
+  children,
+  headerProps,
+  importantNotification,
+  loading,
+}) => {
+  const topLineHeight = importantNotification ? 120 : 64;
 
   return (
     <>

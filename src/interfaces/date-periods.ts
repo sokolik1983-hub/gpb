@@ -1,4 +1,8 @@
-/** Значения периодов. */
+/**
+ * Классификатор типов периодов запроса выписки.
+ *
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440612
+ */
 export enum DATE_PERIODS {
   /** Выбрать период. */
   SELECT_PERIOD = 'SELECTPERIOD',

@@ -77,7 +77,7 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
     const { value = [] } = getFieldState(name) ?? {};
 
     // При первоначальной загрузке, если ничего не выбрано, то выбираются все значения.
-    if (value.length === 0) {
+    if (value.length === 0 && accounts.length > 0) {
       change(
         name,
         accounts.map(item => item.id)

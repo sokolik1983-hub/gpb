@@ -8,7 +8,7 @@ import { useAccounts } from 'hooks/common/use-accounts';
 import type { Sorting, IFilterPanel } from 'interfaces';
 import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TURNOVERS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
-import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { FatalErrorContent, MainLayout, useFilter, useNotifications } from '@platform/services/client';
 import { Line } from '@platform/ui';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
@@ -58,6 +58,8 @@ export const StatementTurnoverScrollerPage = () => {
 
   const groupByForRender = useGroupByForRender(properlyTypedFilterPanel.values.groupBy, isTurnoversFetching);
 
+  const { showImportantNotification, importantNotificationMessage } = useNotifications();
+
   const contextValue: ITurnoverScrollerContext = useMemo(
     () => ({
       hasError: hasError || isTurnoversError || isAccountsError,
@@ -103,7 +105,12 @@ export const StatementTurnoverScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={headerProps} loading={!dataFetched}>
+            <ScrollerPageLayout
+              categoryTabs={tabsProps}
+              headerProps={headerProps}
+              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+              loading={!dataFetched}
+            >
               <FocusNode hidden nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
                   <Filter />

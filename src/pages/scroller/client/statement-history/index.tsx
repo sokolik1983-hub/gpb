@@ -23,7 +23,7 @@ import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import type { ISortSettings } from '@platform/services';
-import { FatalErrorContent, MainLayout } from '@platform/services/client';
+import { FatalErrorContent, MainLayout, useNotifications } from '@platform/services/client';
 import { Line } from '@platform/ui';
 import { validate } from '@platform/validation';
 import type { IFormState } from './filter';
@@ -85,6 +85,8 @@ export const StatementHistoryScrollerPage = () => {
 
   const isLoading = isAccountsFetching || isStatementsFetching;
 
+  const { showImportantNotification, importantNotificationMessage } = useNotifications();
+
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
       hasError: hasError || isAccountsError || isStatementsError,
@@ -137,7 +139,12 @@ export const StatementHistoryScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
+            <ScrollerPageLayout
+              categoryTabs={tabsProps}
+              headerProps={{ ...headerProps }}
+              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+              loading={!dataFetched}
+            >
               <FocusNode hidden nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
                   <FilterLayout
