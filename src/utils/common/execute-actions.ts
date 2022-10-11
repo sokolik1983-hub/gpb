@@ -7,7 +7,7 @@ import type { ICreateRequestStatementDto } from 'interfaces/dto';
 /** Свойства создания выписки из других сервисов. */
 interface ExternalCreateStatement {
   /** Идентификаторы счетов. */
-  accountsIds: string[];
+  accountIds: string[];
   /** Тип периода запроса выписки. */
   periodType?: DATE_PERIODS;
   /** URL страницы, с которой был создан запрос. */
@@ -35,14 +35,14 @@ const baseDoc: Partial<ICreateRequestStatementDto> = {
 };
 
 /** Создать выписку с типом "Скрытый запрос просмотра" из другого сервиса. */
-export const executeCreateStatementHidden = ({ accountsIds, refererPage }: ExternalCreateStatement): void => {
+export const executeCreateStatementHidden = ({ accountIds, refererPage }: ExternalCreateStatement): void => {
   const executor = getExecutor();
 
   const doc: Partial<ICreateRequestStatementDto> = {
     ...baseDoc,
     type: TYPE.HIDDEN_VIEW,
     periodType: DATE_PERIODS.YESTERDAY,
-    accountsIds,
+    accountsIds: accountIds,
     sourcePage: refererPage,
   };
 
@@ -50,13 +50,13 @@ export const executeCreateStatementHidden = ({ accountsIds, refererPage }: Exter
 };
 
 /** Создать выписку с типом "Разовый запрос" из другого сервиса. */
-export const executeCreateStatementOneTime = ({ accountsIds, periodType, refererPage }: ExternalCreateStatement): void => {
+export const executeCreateStatementOneTime = ({ accountIds, periodType, refererPage }: ExternalCreateStatement): void => {
   const executor = getExecutor();
 
   const doc: Partial<ICreateRequestStatementDto> = {
     ...baseDoc,
     type: TYPE.ONETIME,
-    accountsIds,
+    accountsIds: accountIds,
     periodType,
     sourcePage: refererPage,
   };
