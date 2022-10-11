@@ -4,6 +4,7 @@ export * from './statement-request-scroller';
 export * from './statement-params-use-cases';
 export * from './request-transactions';
 export * from './organization';
+export * from './services';
 export * from './statement-history-row';
 export * from './statement-history-response-dto';
 export * from './user';

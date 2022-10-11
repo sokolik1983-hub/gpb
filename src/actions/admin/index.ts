@@ -5,6 +5,7 @@ export * from './show-transaction-scroller';
 export * from './export-statement-attachement';
 export * from './export-registry-statements';
 export * from './export-statement';
+export * from './export-statement-history';
 export * from './print-statement-attachement';
 export * from './repeat-statement';
 export * from './view-modified-transactions';
