@@ -1,10 +1,11 @@
 import type { FORMAT } from 'interfaces';
 import type { StatementHistoryRow } from 'interfaces/admin';
-import { printBase64 } from 'platform-copies/utils';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
+import { downloadFile } from './download-file';
 import type { context } from './executor';
+import { executor } from './executor';
 
 /**
  * Функция формирования ПФ "Список запросов.
@@ -34,9 +35,7 @@ export const exportStatementHistory: IActionConfig<typeof context, unknown> = {
       return;
     }
 
-    const { content, mimeType, fileName } = res!;
-
-    await printBase64(content, fileName, mimeType);
+    await executor.execute(downloadFile, res);
 
     done();
   },
