@@ -1,5 +1,9 @@
 @import '~@platform/ui/dist/streams/ui/common';
 
+.table {
+  position: relative;
+}
+
 .sortIconWrapper {
   height: 16px;
 }
@@ -33,6 +37,7 @@
 
 .settingIcon {
   position: absolute;
+  top: 0;
   right: 0;
   z-index: getIndex(control);
   padding: 8px 0;
