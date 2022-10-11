@@ -1,12 +1,14 @@
-import type { IScrollerResponceDto } from 'interfaces';
-import type { StatementHistoryRow, StatementHistoryResponseDto } from 'interfaces/admin';
+import type { IScrollerResponceDto, FORMAT } from 'interfaces';
+import type { StatementHistoryRow, StatementHistoryResponseDto, IFileDataResponse } from 'interfaces/admin';
 import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
 import { mapDtoToViewForStatementList } from 'services/admin/mappers';
 import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse } from '@platform/services';
+import { DATE_FORMAT } from '@platform/services';
 import { metadataToRequestParams, request } from '@platform/services/admin';
 import type { IServerDataResp } from '@platform/services/client';
 import type { IMetaData } from '@platform/services/client/dist-types/interfaces/common';
+import { formatDateTime } from '@platform/tools/date-time';
 
 /** Базовый URL сервиса "Выписки". */
 const BASE_URL = '/api';
@@ -50,4 +52,29 @@ export const statementService = {
         data: [],
         total: 0,
       })),
+  /** Генерация ПФ Список запросов выписки. */
+  generateReport: async ({
+    statementIds,
+    dateFrom,
+    dateTo,
+    format,
+  }: {
+    statementIds: string[];
+    dateFrom: Date;
+    dateTo: Date;
+    format: FORMAT.EXCEL | FORMAT.PDF;
+  }) => {
+    const { data: resp } = await request<IFileDataResponse>({
+      url: `${STATEMENT_BANK_URL}/statement/request/generate-report`,
+      method: 'POST',
+      data: {
+        statementIds,
+        dateFrom: formatDateTime(dateFrom, { keepLocalTime: false, format: DATE_FORMAT }),
+        dateTo: formatDateTime(dateTo, { keepLocalTime: false, format: DATE_FORMAT }),
+        format,
+      },
+    });
+
+    return resp;
+  },
 };
