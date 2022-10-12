@@ -18,6 +18,7 @@ declare namespace StylesScssModule {
     'settingIcon': string;
     'sortIconWrapper': string;
     'sortIndex': string;
+    'table': string;
     'verticalSeparator': string;
     'wrapper': string;
     'zLayerContainer': string;

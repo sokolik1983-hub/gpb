@@ -7,7 +7,7 @@ import type { VariableSizeList as List } from 'react-window';
 import InfiniteLoader from 'react-window-infinite-loader';
 import type { IExecuter } from '@platform/core';
 import type { IActionWithAuth } from '@platform/services';
-import { Box, LayoutScroll, Spinner } from '@platform/ui';
+import { Box, Spinner } from '@platform/ui';
 import type { ICaptionRowComponentProps, IExpandedRowComponentProps, RecordCell } from '../types';
 import { InfiniteRow } from './infinite-row';
 
@@ -39,6 +39,8 @@ interface TableBodyWithInfiniteScrollProps<T> extends TableBodyPropsPure {
   refetch(): void;
   /** Контент подписи к строке (располагается внизу строки). */
   rowCaptionComponent?: React.FC<ICaptionRowComponentProps<T>>;
+  /** Реф списка строк таблицы. */
+  rowListRef: React.MutableRefObject<List | undefined>;
   /** Экземпляр таблицы. */
   tableInstance: TableInstance<RecordCell>;
   /** Признак отображения только выбранных строк. */
@@ -71,13 +73,13 @@ export const TableBody = <T,>({
   onRowDoubleClick,
   refetch,
   rowCaptionComponent,
+  rowListRef,
   tableInstance,
   visibleOnlySelectedRows,
 }: TableBodyWithInfiniteScrollProps<T>): React.ReactElement => {
   const { allColumns, canNextPage, getTableBodyProps, prepareRow, rows, totalColumnsWidth, visibleColumns } = tableInstance;
 
   const rowSizeMap = useRef<Record<string, number>>({});
-  const listRef = useRef<List>();
 
   const loadMoreRows = useCallback(
     (startIndex, endIndex) =>
@@ -101,16 +103,19 @@ export const TableBody = <T,>({
 
   const getItemSize = useCallback(index => rowSizeMap.current[index] || 0, []);
 
-  const setRowSize = useCallback((index: number, size: number) => {
-    rowSizeMap.current = { ...rowSizeMap.current, [index]: size };
-    listRef.current?.resetAfterIndex(index);
-  }, []);
+  const setRowSize = useCallback(
+    (index: number, size: number) => {
+      rowSizeMap.current = { ...rowSizeMap.current, [index]: size };
+      rowListRef.current?.resetAfterIndex(index);
+    },
+    [rowListRef]
+  );
 
   useEffect(() => {
     if (needScrollToTop) {
-      listRef.current?.scrollToItem(0);
+      rowListRef.current?.scrollToItem(0);
     }
-  }, [needScrollToTop]);
+  }, [needScrollToTop, rowListRef]);
 
   const tableBodyContent = forwardRef<any, TableBodyContentProps>(({ style, children }, ref) => (
     <>
@@ -128,16 +133,8 @@ export const TableBody = <T,>({
 
   tableBodyContent.displayName = 'TableBodyContent';
 
-  const handleScroll = useCallback((event: React.BaseSyntheticEvent) => {
-    const {
-      target: { scrollTop },
-    } = event;
-
-    listRef.current?.scrollTo(scrollTop);
-  }, []);
-
   return (
-    <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)` } })}>
+    <Box {...getTableBodyProps({ style: { height: `calc(100% - ${headerHeight}px)`, width: '100%' } })}>
       <AutoSizer style={{ height: '100%', width: allColumns.length === visibleColumns.length ? totalColumnsWidth : '100%' }}>
         {({ height, width }) => (
           <InfiniteLoader
@@ -148,52 +145,50 @@ export const TableBody = <T,>({
             threshold={THRESHOLD}
           >
             {({ onItemsRendered, ref }) => (
-              <LayoutScroll scrollMarginVerticalBottom={40} style={{ width: width + 4 }} onScroll={handleScroll}>
-                <VariableSizeList
-                  ref={(list: List) => {
-                    (ref as React.RefCallback<List>)(list);
-                    listRef.current = list;
-                  }}
-                  height={height}
-                  innerElementType={tableBodyContent}
-                  itemCount={itemCount}
-                  itemSize={getItemSize}
-                  style={{ overflow: undefined }}
-                  width={width}
-                  onItemsRendered={onItemsRendered}
-                >
-                  {({ index, style }) => {
-                    const row = rows[index];
+              <VariableSizeList
+                ref={(list: List) => {
+                  (ref as React.RefCallback<List>)(list);
+                  rowListRef.current = list;
+                }}
+                height={height}
+                innerElementType={tableBodyContent}
+                itemCount={itemCount}
+                itemSize={getItemSize}
+                style={{ overflow: undefined }}
+                width={width}
+                onItemsRendered={onItemsRendered}
+              >
+                {({ index, style }) => {
+                  const row = rows[index];
 
-                    if (!row) {
-                      return null;
-                    }
+                  if (!row) {
+                    return null;
+                  }
 
-                    prepareRow(row);
+                  prepareRow(row);
 
-                    const { key } = row.getRowProps();
+                  const { key } = row.getRowProps();
 
-                    return (
-                      <InfiniteRow<T>
-                        key={key}
-                        executor={executor}
-                        expandedRowActionsGetter={expandedRowActionsGetter}
-                        expandedRowComponent={expandedRowComponent}
-                        fastActions={fastActions}
-                        listIndex={index}
-                        refetch={refetch}
-                        row={row}
-                        rowCaptionComponent={rowCaptionComponent}
-                        setSize={setRowSize}
-                        style={style}
-                        visibleOnlySelectedRows={visibleOnlySelectedRows}
-                        onRowClick={onRowClick}
-                        onRowDoubleClick={onRowDoubleClick}
-                      />
-                    );
-                  }}
-                </VariableSizeList>
-              </LayoutScroll>
+                  return (
+                    <InfiniteRow<T>
+                      key={key}
+                      executor={executor}
+                      expandedRowActionsGetter={expandedRowActionsGetter}
+                      expandedRowComponent={expandedRowComponent}
+                      fastActions={fastActions}
+                      listIndex={index}
+                      refetch={refetch}
+                      row={row}
+                      rowCaptionComponent={rowCaptionComponent}
+                      setSize={setRowSize}
+                      style={style}
+                      visibleOnlySelectedRows={visibleOnlySelectedRows}
+                      onRowClick={onRowClick}
+                      onRowDoubleClick={onRowDoubleClick}
+                    />
+                  );
+                }}
+              </VariableSizeList>
             )}
           </InfiniteLoader>
         )}

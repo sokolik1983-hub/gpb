@@ -1,10 +1,12 @@
 import React, { useMemo, useEffect, useCallback, useRef } from 'react';
 import { locale } from 'localization';
 import { useTable, useSortBy, usePagination, useRowSelect, useExpanded, useResizeColumns, useBlockLayout } from 'react-table';
+import type { VariableSizeList } from 'react-window';
 import type { IColumnsStorageObject } from '@platform/core';
 import type { IBaseEntity, ISortSettings } from '@platform/services/client';
-import { FractalSelectedRowsInfo, Placeholder, Box, SORT_DIRECTION, LoaderOverlay, SettingsForm } from '@platform/ui';
+import { FractalSelectedRowsInfo, Placeholder, Box, SORT_DIRECTION, LayoutScroll, LoaderOverlay, SettingsForm } from '@platform/ui';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
+import { SettingsButton } from '../components/settings-button';
 import { SCROLLER_SETTING_TYPE, useColumnsWithDefaultValues, useDataManager, useDefaultHiddenColumns, useStorageSettings } from '../hooks';
 import type { InfiniteScrollDataTableProps, RecordCell } from '../types';
 import '../react-table-config';
@@ -35,6 +37,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
   customSettingsForm = SettingsForm,
 }: InfiniteScrollDataTableProps<T>) => {
   const tableHeaderRef = useRef<HTMLElement>();
+  const rowListRef = useRef<VariableSizeList>();
 
   const { values: settingColumns, setValues: setSettingsColumns } = useStorageSettings<IColumnsStorageObject[]>({
     value: columns.reduce<IColumnsStorageObject[]>((acc, { id, width, isVisible }) => {
@@ -137,6 +140,7 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
 
   const {
     getTableProps,
+    headerGroups,
     state: { sortBy, selectedRowIds },
     selectedFlatRows,
   } = tableInstance;
@@ -169,41 +173,54 @@ export const InfiniteDataTable = <T extends IBaseEntity>({
     tableHeaderRef.current = element;
   }, []);
 
+  /** Обработчик скроллирования таблицы. */
+  const handleScroll = useCallback((event: React.BaseSyntheticEvent) => {
+    const {
+      target: { scrollTop },
+    } = event;
+
+    rowListRef.current?.scrollTo(scrollTop);
+  }, []);
+
   return (
     <>
       <Box className={css.wrapper}>
-        <Box {...getTableProps({ style: { height: '100%' } })}>
-          <Box className={css.header}>
-            <TableHeader<T>
+        <Box className={css.table} {...getTableProps({ style: { height: '100%', width: '100%' } })}>
+          {showSettingsButton && (
+            <SettingsButton<T>
               originalColumns={columns}
-              refCallback={handleTableHeaderRef}
               setSettingsColumns={setSettingsColumns}
               settingColumns={settingColumns}
-              showSettingsButton={showSettingsButton}
               tableInstance={tableInstance}
-            />
-          </Box>
-
-          {rows.length > 0 && (
-            <TableBody<T>
-              executor={executer}
-              expandedRowActionsGetter={expandedRowActionsGetter}
-              expandedRowComponent={expandedRowComponent}
-              fastActions={fastActions}
-              headerHeight={tableHeaderRef.current?.clientHeight || 0}
-              loading={loading}
-              loadingMore={loadingMore}
-              needScrollToTop={needScrollToTop}
-              refetch={fetch}
-              rowCaptionComponent={rowCaptionComponent}
-              tableInstance={tableInstance}
-              visibleOnlySelectedRows={visibleOnlySelectedRows}
-              onLoadMoreRows={onLoadMoreRows}
-              onRowClick={onRowClick}
-              onRowDoubleClick={onRowDoubleClick}
             />
           )}
-          {!loading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
+
+          <LayoutScroll scrollMarginVerticalBottom={40} onScroll={handleScroll}>
+            <TableHeader headerGroups={headerGroups} refCallback={handleTableHeaderRef} />
+
+            {rows.length > 0 && (
+              <TableBody<T>
+                executor={executer}
+                expandedRowActionsGetter={expandedRowActionsGetter}
+                expandedRowComponent={expandedRowComponent}
+                fastActions={fastActions}
+                headerHeight={tableHeaderRef.current?.clientHeight || 0}
+                loading={loading}
+                loadingMore={loadingMore}
+                needScrollToTop={needScrollToTop}
+                refetch={fetch}
+                rowCaptionComponent={rowCaptionComponent}
+                rowListRef={rowListRef}
+                tableInstance={tableInstance}
+                visibleOnlySelectedRows={visibleOnlySelectedRows}
+                onLoadMoreRows={onLoadMoreRows}
+                onRowClick={onRowClick}
+                onRowDoubleClick={onRowDoubleClick}
+              />
+            )}
+
+            {!loading && rows.length === 0 && <Placeholder height={540} message={placeholderMessage} title={placeholderTitle} />}
+          </LayoutScroll>
         </Box>
 
         <LoaderOverlay opened={loading} />

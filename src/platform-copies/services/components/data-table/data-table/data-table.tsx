@@ -7,6 +7,7 @@ import type { IBaseEntity, ISortSettings } from '@platform/services/client';
 import { FractalPagination, Placeholder, SORT_DIRECTION, Box, Gap, useDebounce, LoaderOverlay, SettingsForm } from '@platform/ui';
 import { FractalSelectedRowsInfo } from '../../fractal-selected-rows-info';
 import { CellSelectionAndExpand, HeaderSelectionAndExpand, TableHeader } from '../components';
+import { SettingsButton } from '../components/settings-button';
 import {
   DEFAULT_PAGINATION_STATE,
   SCROLLER_SETTING_TYPE,
@@ -140,6 +141,7 @@ export const DataTable = <T extends IBaseEntity>({
 
   const {
     getTableProps,
+    headerGroups,
     pageCount,
     state: { sortBy, columnResizing, selectedRowIds },
     selectedFlatRows,
@@ -221,14 +223,17 @@ export const DataTable = <T extends IBaseEntity>({
 
   return (
     <Box className={css.wrapper}>
-      <Box {...tableProps}>
-        <TableHeader<T>
-          originalColumns={columns}
-          setSettingsColumns={setSettingsColumns}
-          settingColumns={settingColumns}
-          showSettingsButton={showSettingsButton}
-          tableInstance={tableInstance}
-        />
+      <Box className={css.table} {...tableProps}>
+        {showSettingsButton && (
+          <SettingsButton<T>
+            originalColumns={columns}
+            setSettingsColumns={setSettingsColumns}
+            settingColumns={settingColumns}
+            tableInstance={tableInstance}
+          />
+        )}
+
+        <TableHeader headerGroups={headerGroups} />
 
         {rows.length > 0 && (
           <TableBody<T>
