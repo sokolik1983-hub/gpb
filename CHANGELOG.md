@@ -1,3 +1,10 @@
+# [2.14.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.1...v2.14.0-release.2) (2022-10-12)
+
+
+### Bug Fixes
+
+* GBO-35347 добавлен запрос периода дат перед запросом выписки ([b39bf88](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b39bf88c5691e1d2e44d6e0fbf60eb7ac9c69dde))
+
 # [2.14.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0...v2.14.0-release.1) (2022-10-12)
 
 
