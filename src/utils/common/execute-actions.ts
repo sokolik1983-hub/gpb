@@ -3,6 +3,9 @@ import { DATE_PERIODS } from 'interfaces';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/common/classificators';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
+import { statementService } from 'services/client';
+import { showCommonErrorMessage } from 'utils/common/common';
+import { to } from '@platform/core';
 
 /** Свойства создания выписки из других сервисов. */
 interface ExternalCreateStatement {
@@ -13,6 +16,9 @@ interface ExternalCreateStatement {
   /** URL страницы, с которой был создан запрос. */
   refererPage: string;
 }
+
+/** Эксекутер. */
+const executor = getExecutor();
 
 /** Данные для запроса на выписку. */
 const baseDoc: Partial<ICreateRequestStatementDto> = {
@@ -35,30 +41,24 @@ const baseDoc: Partial<ICreateRequestStatementDto> = {
 };
 
 /** Создать выписку с типом "Скрытый запрос просмотра" из другого сервиса. */
-export const executeCreateStatementHidden = ({ accountIds, refererPage }: ExternalCreateStatement): void => {
-  const executor = getExecutor();
+export const executeCreateStatementHidden = async ({ accountIds, refererPage }: ExternalCreateStatement) => {
+  const periodType = DATE_PERIODS.YESTERDAY;
+
+  const [datePeriod, error] = await to(statementService.getDatePeriod({ periodType }));
+
+  if (error || !datePeriod) {
+    showCommonErrorMessage();
+
+    return;
+  }
 
   const doc: Partial<ICreateRequestStatementDto> = {
     ...baseDoc,
-    type: TYPE.HIDDEN_VIEW,
-    periodType: DATE_PERIODS.YESTERDAY,
-    accountsIds: accountIds,
-    sourcePage: refererPage,
-  };
-
-  void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
-};
-
-/** Создать выписку с типом "Разовый запрос" из другого сервиса. */
-export const executeCreateStatementOneTime = ({ accountIds, periodType, refererPage }: ExternalCreateStatement): void => {
-  const executor = getExecutor();
-
-  const doc: Partial<ICreateRequestStatementDto> = {
-    ...baseDoc,
-    type: TYPE.ONETIME,
     accountsIds: accountIds,
     periodType,
     sourcePage: refererPage,
+    type: TYPE.HIDDEN_VIEW,
+    ...datePeriod,
   };
 
   void executor.execute(createStatement(EXPORT_PARAMS_USE_CASES.SEVENTEEN), [doc]);
