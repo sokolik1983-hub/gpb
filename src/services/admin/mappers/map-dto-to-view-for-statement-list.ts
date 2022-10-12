@@ -1,5 +1,5 @@
 import { DATE_PERIODS } from 'interfaces';
-import type { Organization, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import type { AccountOrganization, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
@@ -37,7 +37,7 @@ const getDateAndTime = (fullDate: string): { date: string; time: string } => {
 /**
  * Мап dto в представление запросов выписок для скроллера Истории запросов выписок.
  *
- * @param statements - Запросы выписок.
+ * @param statements - Список запросов выписок.
  */
 export const mapDtoToViewForStatementList = (statements: StatementHistoryResponseDto[]): StatementHistoryRow[] =>
   statements.map(
@@ -59,7 +59,7 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
       const { accountNumbers, accountsIds, organizations, serviceBranches } = accounts.reduce<{
         accountNumbers: string[];
         accountsIds: string[];
-        organizations: Organization[];
+        organizations: AccountOrganization[];
         serviceBranches: string[];
       }>(
         (prevValue, { filialName, id: accountId, number, organization }) => ({

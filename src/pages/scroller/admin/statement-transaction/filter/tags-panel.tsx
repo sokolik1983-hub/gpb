@@ -1,7 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks/common';
-import type { ITagsPanelProps } from 'interfaces/client';
+import type { ITagsPanelProps } from 'interfaces';
 import { useFormState } from 'react-final-form';
 import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { orderTags, stringifyCounterparty } from 'utils/common';

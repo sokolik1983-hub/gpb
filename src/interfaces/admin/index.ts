@@ -10,3 +10,4 @@ export * from './statement-history-response-dto';
 export * from './user';
 export * from './user-type';
 export * from './quick-filter-panel';
+export * from './service-branch';

@@ -12,3 +12,4 @@ export * from './user-device-info';
 export * from './table';
 export * from './statement-relevance-statuses';
 export * from './statement-type';
+export * from './tags-panel';

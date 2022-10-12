@@ -411,7 +411,7 @@
     "ru": "Статус запроса"
   },
   "admin.historyScroller.filter.labels.statementStatus": {
-    "ru": "Статус выписки"
+    "ru": "Статус выписки / справки"
   },
   "admin.historyScroller.filter.labels.signaturePresence": {
     "ru": "Электронная подпись"
@@ -422,11 +422,14 @@
   "admin.historyScroller.filter.labels.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.filter.placeholders.account": {
+  "admin.historyScroller.filter.placeholder.account": {
     "ru": "Счет"
   },
+  "admin.historyScroller.filter.placeholder.organization": {
+    "ru": "Название или ИНН"
+  },
   "admin.historyScroller.filter.labels.statementType": {
-    "ru": "Выписка/Справка"
+    "ru": "Выписка/справка"
   },
   "admin.historyScroller.filter.labels.user": {
     "ru": "Пользователь"

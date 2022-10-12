@@ -35,3 +35,23 @@ export interface ICreateAttachmentResponse {
   /** Информация об ошибке. */
   error?: string;
 }
+
+/** Ответ сервера с данными. */
+export interface ServerResponseData<T> {
+  /** Данные ответа. */
+  data: T;
+}
+
+/** Ответ сервера со страницей. */
+export interface ServerResponsePage<T> {
+  /** Данные страницы. */
+  page: T;
+}
+
+/** Ответ сервера со списком. */
+export interface ServerResponseList<T> {
+  /** Список данных. */
+  list: T[];
+  /** Общее количество записей. */
+  total: number;
+}
