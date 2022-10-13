@@ -1,3 +1,10 @@
+# [2.14.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.2...v2.14.0-release.3) (2022-10-13)
+
+
+### Features
+
+* GBO-34830 Область с фильтрами скроллера проводок ([35fd075](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/35fd075ea905f8f8f669300e7c30899ee3a5d066))
+
 # [2.14.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.1...v2.14.0-release.2) (2022-10-12)
 
 
