@@ -589,6 +589,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Дата проводки
+			 */
+			get transactionDate() {
+				return t('transactionsScroller.labels.transactionDate');
+			},
+			/**
+			 * @ru
 			 * Операция
 			 */
 			get transactionType() {
@@ -607,6 +614,27 @@ export default {
 			 */
 			get counterparty() {
 				return t('transactionsScroller.labels.counterparty');
+			},
+			/**
+			 * @ru
+			 * Счёт контрагента
+			 */
+			get counterpartyAccountNumber() {
+				return t('transactionsScroller.labels.counterpartyAccountNumber');
+			},
+			/**
+			 * @ru
+			 * Клиент
+			 */
+			get client() {
+				return t('transactionsScroller.labels.client');
+			},
+			/**
+			 * @ru
+			 * Счёт клиента
+			 */
+			get clientAccountNumber() {
+				return t('transactionsScroller.labels.clientAccountNumber');
 			},
 			/**
 			 * @ru
@@ -734,6 +762,27 @@ export default {
 			 */
 			get counterparty() {
 				return t('transactionsScroller.tags.counterparty');
+			},
+			/**
+			 * @ru
+			 * Счёт контрагента:
+			 */
+			get counterpartyAccountNumber() {
+				return t('transactionsScroller.tags.counterpartyAccountNumber');
+			},
+			/**
+			 * @ru
+			 * Клиент:
+			 */
+			get client() {
+				return t('transactionsScroller.tags.client');
+			},
+			/**
+			 * @ru
+			 * Счёт клиента:
+			 */
+			get clientAccountNumber() {
+				return t('transactionsScroller.tags.clientAccountNumber');
 			},
 		},
 		headers: {

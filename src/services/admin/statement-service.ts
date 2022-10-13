@@ -1,6 +1,7 @@
 import type { IScrollerResponceDto, FORMAT } from 'interfaces';
 import type { StatementHistoryRow, StatementHistoryResponseDto, IFileDataResponse } from 'interfaces/admin';
 import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
+import type { IClientBankResponseDto } from 'interfaces/dto/admin';
 import { mapDtoToViewForStatementList } from 'services/admin/mappers';
 import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse } from '@platform/services';
@@ -77,4 +78,14 @@ export const statementService = {
 
     return resp;
   },
+  /** Возвращает список контрагентов и их счетов в выписке. */
+  getCounterparties: (id: string): Promise<IClientBankResponseDto[]> =>
+    request<IServerDataResp<IClientBankResponseDto[]>>({
+      url: `${STATEMENT_BANK_URL}/get-counterparties/${id}`,
+    }).then(r => r.data.data),
+  /** Возвращает список клиентов и их счетов в выписке. */
+  getClients: (id: string): Promise<IClientBankResponseDto[]> =>
+    request<IServerDataResp<IClientBankResponseDto[]>>({
+      url: `${STATEMENT_BANK_URL}/get-clients/${id}`,
+    }).then(r => r.data.data),
 };

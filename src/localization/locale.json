@@ -112,6 +112,9 @@
   "transactionsScroller.labels.paymentDate": {
     "ru": "Дата платежа"
   },
+  "transactionsScroller.labels.transactionDate": {
+    "ru": "Дата проводки"
+  },
   "transactionsScroller.labels.transactionType": {
     "ru": "Операция"
   },
@@ -120,6 +123,15 @@
   },
   "transactionsScroller.labels.counterparty": {
     "ru": "Контрагент"
+  },
+  "transactionsScroller.labels.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента"
+  },
+  "transactionsScroller.labels.client": {
+    "ru": "Клиент"
+  },
+  "transactionsScroller.labels.clientAccountNumber": {
+    "ru": "Счёт клиента"
   },
   "transactionsScroller.labels.counterpartyInn": {
     "@inn": "string",
@@ -142,6 +154,15 @@
   },
   "transactionsScroller.tags.counterparty": {
     "ru": "Контрагент:"
+  },
+  "transactionsScroller.tags.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента:"
+  },
+  "transactionsScroller.tags.client": {
+    "ru": "Клиент:"
+  },
+  "transactionsScroller.tags.clientAccountNumber": {
+    "ru": "Счёт клиента:"
   },
   "transactionsScroller.table.total": {
     "ru": "Операций"
