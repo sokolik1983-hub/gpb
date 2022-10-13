@@ -1,6 +1,5 @@
 import { TRANSACTION_TYPES } from 'interfaces';
 import { locale } from 'localization';
-import { bankClientFieldFormatter } from 'pages/scroller/admin/statement-transaction/filter/utils';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { ECO_STATEMENT, EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { pathGenerator } from '@platform/core';
@@ -8,6 +7,7 @@ import type { IFilterField } from '@platform/services';
 import { filterFields } from '@platform/services';
 import type { IOption } from '@platform/ui';
 import type { IFormState } from './interfaces';
+import { bankClientFieldFormatter } from './utils';
 
 /** Возвращает имя поля формы. Улучшает типизацию. */
 export const getPath = pathGenerator<IFormState>();

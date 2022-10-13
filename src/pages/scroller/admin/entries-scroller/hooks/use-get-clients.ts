@@ -11,7 +11,7 @@ export const useGetClients = () => {
   const { id } = useParams<IUrlParams>();
 
   const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<IClientBankResponseDto[]>({
-    queryKey: ['@eco/statement', 'counterparty', id],
+    queryKey: ['@eco/statement', 'clients', id],
     queryFn: () => statementService.getClients(id),
     retry: false,
   });

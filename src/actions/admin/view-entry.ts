@@ -10,7 +10,7 @@ import type { context } from './executor';
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440049
  */
-export const viewTransaction: IActionConfig<typeof context, Promise<void>> = {
+export const viewEntry: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: IBaseEntity[], statementId: string) => {
     showLoader();
 

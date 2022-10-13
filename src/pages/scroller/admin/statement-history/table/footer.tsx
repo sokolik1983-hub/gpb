@@ -13,7 +13,7 @@ interface FooterProps {
 /** Футер скроллера Истории запросов выписок. */
 export const Footer: FC<FooterProps> = ({ selectedRows }) => (
   <Horizon>
-    <Typography.P>{locale.transactionsScroller.footer.selected}</Typography.P>
+    <Typography.P>{locale.admin.entryScroller.footer.selected}</Typography.P>
     <Gap.XS />
     <Typography.PBold data-field={'selectedRows.length'}>{selectedRows.length}</Typography.PBold>
   </Horizon>

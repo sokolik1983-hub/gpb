@@ -6,7 +6,7 @@ import type { IActionConfig } from '@platform/services';
 /** Показать журнал запросов выписки. */
 export const showStatementRequestScroller: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done }, { router }) => async ({ refererPage }: StatementRequest) => {
-    router.push(`${ADMIN_STREAM_URL.STATEMENT_REQUESTS}`, { refererPage });
+    router.push(`${ADMIN_STREAM_URL.STATEMENT_HISTORY}`, { refererPage });
 
     done();
 

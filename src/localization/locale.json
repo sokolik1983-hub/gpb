@@ -168,7 +168,7 @@
     "ru": "Операций"
   },
   "transactionsScroller.headers.operationDate": {
-    "ru": "Дата опер."
+    "ru": "Дата проводки"
   },
   "transactionsScroller.headers.documentInfo": {
     "ru": "Документ"
@@ -960,6 +960,75 @@
   "common.creationParams.warnings.withSign": {
     "ru": "Электронной подписью Банка может быть подписана только выписка по закрытым периодам"
   },
+  "admin.entryScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.entryScroller.columns.account": {
+    "ru": "Счёт клиент"
+  },
+  "admin.entryScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.entryScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.entryScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.entryScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.entryScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.entryScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.entryScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.entryScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.entryScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.entryScroller.groupBy.WITHOUT": {
+    "ru": "Без группировки"
+  },
+  "admin.entryScroller.groupBy.BY_ACCOUNT": {
+    "ru": "По счетам"
+  },
+  "admin.entryScroller.columns.aggregate.account": {
+    "ru": "Счёт {accountNumber}",
+    "@accountNumber": "string"
+  },
+  "admin.entryScroller.columns.aggregate.organization": {
+    "ru": "{currencyCode} {organizationName}",
+    "@currencyCode": "string",
+    "@organizationName": "string"
+  },
+  "admin.entryScroller.total": {
+    "ru": "Операций"
+  },
+  "admin.entryScroller.showOnlySelectedRows": {
+    "ru": "Показать только выбранные"
+  },
+  "admin.entryScroller.aggregate.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.entryScroller.aggregate.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "admin.entryScroller.aggregate.outcome": {
+    "@count": "number",
+    "ru": "{count} списаний"
+  },
+  "admin.entryScroller.aggregate.income": {
+    "@count": "number",
+    "ru": "{count} поступлений"
+  },
   "banner.serviceEvaluation.title": {
     "ru": "Оцените сервис запроса и получения выписок"
   },
@@ -971,5 +1040,11 @@
   },
   "banner.serviceEvaluation.button.forward": {
     "ru": "Пройти опрос"
+  },
+  "admin.entryScroller.footer.export": {
+    "ru": "Экспорт документов"
+  },
+  "admin.entryScroller.footer.print": {
+    "ru": "Печать документов"
   }
 }

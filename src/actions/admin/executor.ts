@@ -8,7 +8,7 @@ export const context = {
   service: statementService,
 };
 
-/** Экзекутор клиента. */
+/** Экзекутор раздела администратора. */
 export const executor = createExecuter(context);
 
 /** Метод получения экзекутора. */
