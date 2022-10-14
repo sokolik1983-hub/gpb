@@ -9,13 +9,13 @@ import css from './styles.scss';
 export const ServiceEvaluation: FC = () => {
   /** Переход на опрос оценки сервиса. */
   const handleForward = useCallback(() => {
-    window.location.href = 'https://oprosso.net/p/2ACoGJozpDFvy4dXQ/checking';
+    window.open('https://oprosso.net/p/2ACoGJozpDFvy4dXQ/checking', '_blank');
   }, []);
 
   return (
     <Box className={css['service-evaluation']} fill="FAINT">
       <Adjust className={css['service-evaluation__content']} pad={['XL', null]}>
-        <Pattern className="PatternInterview">
+        <Pattern>
           <Pattern.Span size={9}>
             <Typography.H3 className={css['service-evaluation__title']}>{locale.banner.serviceEvaluation.title}</Typography.H3>
             {[0, 1].map(item => (
