@@ -4,7 +4,8 @@ import { DebitParams } from 'components/common/form/debit-params';
 import { Row } from 'components/common/form/row';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'stream-constants/form';
-import { Box, Fields, Gap, Horizon, Typography } from '@platform/ui';
+import { Box, Fields, Gap, Pattern, Typography } from '@platform/ui';
+import css from './styles.scss';
 import { useDetailDocumentsParams } from './use-detail-documents-params';
 import { useDetailDocumentsParamsVisible } from './use-detail-documents-params-visible';
 
@@ -35,18 +36,18 @@ export const DetailDocumentsParams: React.FC<DetailDocumentsParamsProps> = ({ di
           options={options}
         />
         <Gap />
-        <Horizon>
-          <Box>
+        <Pattern className={css.container}>
+          <Pattern.Span size={6}>
             <Typography.SmallText>{locale.common.debitParams.label}</Typography.SmallText>
             <Gap.SM />
             <DebitParams disabled={disabled} />
-          </Box>
-          <Box>
+          </Pattern.Span>
+          <Pattern.Span size={6}>
             <Typography.SmallText>{locale.common.creditParams.label}</Typography.SmallText>
             <Gap.SM />
             <CreditParams disabled={disabled} />
-          </Box>
-        </Horizon>
+          </Pattern.Span>
+        </Pattern>
       </Box>
     </Row>
   );
