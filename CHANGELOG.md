@@ -1,3 +1,10 @@
+# [2.14.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.5...v2.14.0-release.6) (2022-10-14)
+
+
+### Features
+
+* **banner:** GBO-35482 открытие опроса в новом окне браузера ([f384569](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f384569704ca1a312786587b64eac74860cff746))
+
 # [2.14.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.4...v2.14.0-release.5) (2022-10-14)
 
 
