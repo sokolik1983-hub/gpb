@@ -1,3 +1,10 @@
+# [2.14.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.4...v2.14.0-release.5) (2022-10-14)
+
+
+### Features
+
+* **banner:** GBO-35482 добавлен баннер опроса сервиса с QR-кодом на скроллер ОСВ ([779299c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/779299ca443d1c0e41b1cbd6207aee0b08c13bbb))
+
 # [2.14.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.3...v2.14.0-release.4) (2022-10-14)
 
 
