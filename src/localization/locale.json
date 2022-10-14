@@ -943,5 +943,17 @@
   },
   "common.creationParams.warnings.withSign": {
     "ru": "Электронной подписью Банка может быть подписана только выписка по закрытым периодам"
+  },
+  "banner.serviceEvaluation.title": {
+    "ru": "Оцените сервис запроса и получения выписок"
+  },
+  "banner.serviceEvaluation.text.0": {
+    "ru": "Опрос займет не более 5-ти минут. Мы обновили раздел и хотим узнать ваше мнение."
+  },
+  "banner.serviceEvaluation.text.1": {
+    "ru": "Для участия пройдите по кнопке ниже или QR-коду"
+  },
+  "banner.serviceEvaluation.button.forward": {
+    "ru": "Пройти опрос"
   }
 }

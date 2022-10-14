@@ -1,0 +1,17 @@
+.service-evaluation {
+  border-radius: 4px;
+
+  &__content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  &__title {
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+
+  &__buttons {
+    margin-top: 32px;
+  }
+}

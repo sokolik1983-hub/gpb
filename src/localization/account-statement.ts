@@ -2344,4 +2344,40 @@ export default {
 			return t('column.tooltip');
 		},
 	},
+	banner: {
+		serviceEvaluation: {
+			/**
+			 * @ru
+			 * Оцените сервис запроса и получения выписок
+			 */
+			get title() {
+				return t('banner.serviceEvaluation.title');
+			},
+			text: {
+				/**
+				 * @ru
+				 * Опрос займет не более 5-ти минут. Мы обновили раздел и хотим узнать ваше мнение.
+				 */
+				get 0() {
+					return t('banner.serviceEvaluation.text.0');
+				},
+				/**
+				 * @ru
+				 * Для участия пройдите по кнопке ниже или QR-коду
+				 */
+				get 1() {
+					return t('banner.serviceEvaluation.text.1');
+				},
+			},
+			button: {
+				/**
+				 * @ru
+				 * Пройти опрос
+				 */
+				get forward() {
+					return t('banner.serviceEvaluation.button.forward');
+				},
+			},
+		},
+	},
 };
