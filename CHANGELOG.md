@@ -1,3 +1,10 @@
+# [2.14.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.3...v2.14.0-release.4) (2022-10-14)
+
+
+### Bug Fixes
+
+* **визард:** GBO-35501 исправление флагов комплекта документов ([c0e9eaa](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c0e9eaa44c6cb8a8cbd08436a0ab02f5d9553b89))
+
 # [2.14.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.2...v2.14.0-release.3) (2022-10-13)
 
 
