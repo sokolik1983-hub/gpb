@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { ServiceEvaluation } from 'components/client';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusNode, FocusTree } from 'components/common/focus-tree';
@@ -9,7 +10,7 @@ import type { Sorting, IFilterPanel } from 'interfaces';
 import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TURNOVERS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { FatalErrorContent, MainLayout, useFilter, useNotifications } from '@platform/services/client';
-import { Line } from '@platform/ui';
+import { Adjust, Box, LayoutScroll, Line } from '@platform/ui';
 import { fields, labels, Filter } from './filter';
 import type { IFormState } from './filter/interfaces';
 import { useGroupByForRender, useTurnovers } from './hooks';
@@ -105,22 +106,29 @@ export const StatementTurnoverScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout
-              categoryTabs={tabsProps}
-              headerProps={headerProps}
-              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
-              loading={!dataFetched}
-            >
-              <FocusNode hidden nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
-                <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
-                  <Filter />
-                </ContentLoader>
-              </FocusNode>
-              {!accountsFetched && <Line fill="FAINT" />}
-              <ContentLoader height={tableHeight} loading={!turnoversFetched}>
-                <TurnoversTable />
-              </ContentLoader>
-            </ScrollerPageLayout>
+            <Box style={{ height }}>
+              <LayoutScroll>
+                <Adjust pad={['XL', 'XL', 'XS', 'XL']}>
+                  <ServiceEvaluation />
+                </Adjust>
+                <ScrollerPageLayout
+                  categoryTabs={tabsProps}
+                  headerProps={headerProps}
+                  importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+                  loading={!dataFetched}
+                >
+                  <FocusNode hidden nodeId={TURNOVERS_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                    <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
+                      <Filter />
+                    </ContentLoader>
+                  </FocusNode>
+                  {!accountsFetched && <Line fill="FAINT" />}
+                  <ContentLoader height={tableHeight} loading={!turnoversFetched}>
+                    <TurnoversTable />
+                  </ContentLoader>
+                </ScrollerPageLayout>
+              </LayoutScroll>
+            </Box>
           </FocusTree>
         </FocusLock>
       </MainLayout>
