@@ -105,3 +105,10 @@ export const addMaxWidthField = <T extends Record<string, any>, P extends Record
     maxWidth: Number.POSITIVE_INFINITY,
     ...column,
   }));
+
+/**
+ * Возвращает значение для ячейки.
+ *
+ * @param row - Строка скроллера.
+ */
+export const accessor = row => row;

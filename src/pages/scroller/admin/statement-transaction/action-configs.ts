@@ -1,4 +1,5 @@
-import { getExportStatementAttachment, getPrintStatementAttachment } from 'actions/admin';
+import { getExportStatementAttachment } from 'actions/admin/export-statement-attachement';
+import { getPrintStatementAttachment } from 'actions/admin/print-statement-attachement';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { locale } from 'localization';
 import { BUTTON, Icons } from '@platform/ui';
