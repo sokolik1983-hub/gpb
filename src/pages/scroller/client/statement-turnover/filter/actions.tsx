@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 import { executor } from 'actions/client';
-import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/client';
+import { ACTION, CREATION_TYPE, OPERATIONS, TYPE } from 'interfaces/common';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { EXPORT_ACTION, PRINT_ACTION } from 'pages/scroller/client/statement-turnover/action-configs';
 import type { IFormState } from 'pages/scroller/client/statement-turnover/filter/interfaces';
 import { useFormState } from 'react-final-form';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/client';
 import { Box, Gap, Horizon, Link } from '@platform/ui';
 import css from './styles.scss';

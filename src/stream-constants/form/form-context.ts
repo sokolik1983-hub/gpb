@@ -1,6 +1,7 @@
 import { createContext } from 'react';
-import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
-import { FORMAT } from 'interfaces/client/classificators/format';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { ACTION } from 'interfaces/common';
+import { FORMAT } from 'interfaces/common/classificators/format';
 import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { defaultFormState } from './form-state';
 

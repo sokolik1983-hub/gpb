@@ -1,7 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AdminFormPage renders 1`] = `
-<t>
-  Админская форма
-</t>
+<Component>
+  <FocusLock>
+    <n
+      autoHeight={true}
+      autoHeightMax="100vh"
+    >
+      <CreateStatementForm />
+    </n>
+  </FocusLock>
+</Component>
 `;

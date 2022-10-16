@@ -1,8 +1,8 @@
-import { showOutdatedStatementDialog } from 'components/export-params-dialog';
+import { showOutdatedStatementDialog } from 'components/client/export-params-dialog';
 import { STATEMENT_RELEVANCE_STATUS } from 'interfaces';
-import type { ACTION } from 'interfaces/client';
+import type { ACTION } from 'interfaces/common';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { fatalHandler } from 'utils';
+import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';

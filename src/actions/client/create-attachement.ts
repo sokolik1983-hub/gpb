@@ -1,17 +1,17 @@
-import { showStatementParamsDialog } from 'components/export-params-dialog';
+import { showStatementParamsDialog } from 'components/client/export-params-dialog';
 import type { IStatementHistoryRow } from 'interfaces/client';
-import { ACTION, EXPORT_PARAMS_USE_CASES, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/client';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { ACTION, FORMAT, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, ICreateAttachmentRequestDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import {
   alwaysSentParamsCasesWithoutUI,
   convertToCreationParams,
   convertToExtendedCreationParams,
-  fatalHandler,
   fileFormatShowCases,
-  getUserDeviceInfo,
   hideExportParamsDialogCases,
-} from 'utils';
+} from 'utils/client';
+import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { DATE_FORMAT } from '@platform/services';

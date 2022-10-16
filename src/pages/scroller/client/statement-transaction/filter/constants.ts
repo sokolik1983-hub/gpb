@@ -3,7 +3,7 @@ import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { ECO_STATEMENT, EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
-import { parseCounterparty } from 'utils';
+import { parseCounterparty } from 'utils/common';
 import { pathGenerator } from '@platform/core';
 import type { IFilterField } from '@platform/services';
 import { filterFields } from '@platform/services';

@@ -3,7 +3,7 @@ import type { IFilterPanel, IPagination, ITagsPanel } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { DEFAULT_PAGINATION } from 'stream-constants';
-import { noop } from 'utils';
+import { noop } from 'utils/common';
 import type { ISortSettings } from '@platform/services/common/dist-types/interfaces';
 import { SORT_DIRECTION } from '@platform/services/common/dist-types/interfaces';
 import type { IFormState } from './filter/interfaces';

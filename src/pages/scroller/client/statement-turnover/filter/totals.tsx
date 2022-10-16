@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { ScrollerLoadingOverlay } from 'components';
+import { ScrollerLoadingOverlay } from 'components/common';
 import { locale } from 'localization';
 import { TurnoverScrollerContext } from 'pages/scroller/client/statement-turnover/turnover-scroller-context';
 import { Box, useToggle, Typography, Gap } from '@platform/ui';

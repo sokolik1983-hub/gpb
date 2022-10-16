@@ -5,7 +5,7 @@ import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { getActiveActionButtons } from 'utils';
+import { getActiveActionButtons } from 'utils/common';
 import { useRedirect, DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';

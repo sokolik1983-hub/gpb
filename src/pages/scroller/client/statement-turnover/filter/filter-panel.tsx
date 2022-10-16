@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { DatePeriodField, AccountsField } from 'components';
-import { DateRange } from 'components/form/date-range';
+import { DatePeriodField, AccountsField } from 'components/common';
+import { DateRange } from 'components/common/form/date-range';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';

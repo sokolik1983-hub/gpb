@@ -1,6 +1,6 @@
 import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
-import { ACTION } from 'interfaces/client';
+import { ACTION } from 'interfaces/common';
 
 /**
  * Гард для контроля доступности экспорта выписки.

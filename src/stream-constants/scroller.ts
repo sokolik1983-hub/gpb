@@ -1,4 +1,4 @@
-import { PAGE_SIZES } from 'components/pagination';
+import { PAGE_SIZES } from 'components/common/pagination';
 import type { IPagination } from 'interfaces';
 
 /** Состояние пагинации по умолчанию. */

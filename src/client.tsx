@@ -6,9 +6,9 @@ import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-t
 import { ID_URL_PARAMETER } from 'stream-constants';
 import { COMMON_STREAM_URL, PRIVILEGE } from 'stream-constants/client';
 import { GuardRoute } from '@platform/services/client';
-import './utils/ie-matches-polyfill';
+import './utils/common/ie-matches-polyfill';
 
-export { executeCreateStatementHidden, executeCreateStatementOneTime } from 'utils/execute-actions';
+export { executeCreateStatementHidden } from 'utils/common/execute-actions';
 
 export const routes = [
   <GuardRoute

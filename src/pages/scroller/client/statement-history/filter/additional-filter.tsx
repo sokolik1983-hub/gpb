@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React from 'react';
-import { FilterFormElement } from 'components';
+import { FilterFormElement } from 'components/common';
 import { locale } from 'localization';
 import { Pattern, Fields } from '@platform/ui';
 import { DATE_PERIOD_OPTIONS, FORM_FIELDS, STATUS_OPTIONS } from './constants';

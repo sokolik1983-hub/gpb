@@ -27,3 +27,6 @@ export const LINE_HEIGHT = 2;
 
 /** Валюта рубль. */
 export const RUB_CURRENCY = 'RUB';
+
+/** Опция "Все" (для мультиселекта). */
+export const ALL_VALUE = 'ALL';

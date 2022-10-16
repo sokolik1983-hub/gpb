@@ -1,10 +1,10 @@
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import { TYPE } from 'interfaces/client';
+import { TYPE } from 'interfaces/common';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { showAwaitingForm } from 'pages/form/client/components/awaiting-form';
 import type { IFormState } from 'stream-constants/form';
-import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils';
+import { fatalHandler, statementRequestValidationSchema, getUserDeviceInfo } from 'utils/common';
 import type { ValidationError } from 'yup';
 import { to, singleAction } from '@platform/core';
 import type { IActionConfig } from '@platform/services';

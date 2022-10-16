@@ -1,4 +1,8 @@
-/** Статусы сущности "Запроса выписки". */
+/**
+ * Статусы сущности "Запроса выписки".
+ *
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32247432
+ * */
 export enum STATEMENT_REQUEST_STATUSES {
   /** Документ заполнен, контроли пройдены. Документ ожидает отправки. */
   NEW = 'NEW',
@@ -12,4 +16,6 @@ export enum STATEMENT_REQUEST_STATUSES {
   EXECUTED = 'EXECUTED',
   /** Отклонен. */
   DENIED = 'DENIED',
+  /** Документ отменен клиентом. */
+  CANCELED = 'CANCELED',
 }

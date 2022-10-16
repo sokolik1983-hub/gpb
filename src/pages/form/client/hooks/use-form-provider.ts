@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useAccounts } from 'hooks/use-accounts';
-import type { EXPORT_PARAMS_USE_CASES, ACTION } from 'interfaces/client';
-import { FORMAT } from 'interfaces/client/classificators/format';
+import { useAccounts } from 'hooks/common/use-accounts';
+import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import type { ACTION } from 'interfaces/common';
+import { FORMAT } from 'interfaces/common/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { useFormState } from 'react-final-form';

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import React, { useMemo, useContext } from 'react';
 import { executor } from 'actions/client/executor';
-import { HightlightText, StopPropagation } from 'components';
+import { HightlightText, StopPropagation } from 'components/common';
 import type { IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { DATA_ACTION } from 'interfaces/data-action';
@@ -9,7 +9,7 @@ import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
 import { RUB_CURRENCY } from 'stream-constants';
-import { getActiveActionButtons, formatToMask } from 'utils';
+import { getActiveActionButtons, formatToMask } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services';
 import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';

@@ -1,7 +1,13 @@
 import React, { useMemo, useState } from 'react';
-import { ContentLoader, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerLoadingOverlay, ScrollerPageLayout } from 'components';
-import { FocusLock } from 'components/focus-lock';
-import { FocusNode, FocusTree } from 'components/focus-tree';
+import {
+  ContentLoader,
+  FilterLayout,
+  SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT,
+  ScrollerLoadingOverlay,
+  ScrollerPageLayout,
+} from 'components/common';
+import { FocusLock } from 'components/common/focus-lock';
+import { FocusNode, FocusTree } from 'components/common/focus-tree';
 import {
   useAccounts,
   useIsFetchedData,
@@ -9,15 +15,15 @@ import {
   useScrollerTabsProps,
   useStreamContentHeight,
   useTurnoverScrollerHeaderProps,
-} from 'hooks';
-import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
+} from 'hooks/common';
+import { useMetricPageListener } from 'hooks/common/metric/use-metric-page-listener';
 import type { IFilterPanel } from 'interfaces';
 import { Table } from 'pages/scroller/client/statement-history/table';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DEFAULT_PAGINATION, LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import type { ISortSettings } from '@platform/services';
-import { FatalErrorContent, MainLayout } from '@platform/services/client';
+import { FatalErrorContent, MainLayout, useNotifications } from '@platform/services/client';
 import { Line } from '@platform/ui';
 import { validate } from '@platform/validation';
 import type { IFormState } from './filter';
@@ -79,6 +85,8 @@ export const StatementHistoryScrollerPage = () => {
 
   const isLoading = isAccountsFetching || isStatementsFetching;
 
+  const { showImportantNotification, importantNotificationMessage } = useNotifications();
+
   const contextValue: IHistoryScrollerContext = useMemo(
     () => ({
       hasError: hasError || isAccountsError || isStatementsError,
@@ -131,7 +139,12 @@ export const StatementHistoryScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={!dataFetched}>
+            <ScrollerPageLayout
+              categoryTabs={tabsProps}
+              headerProps={{ ...headerProps }}
+              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+              loading={!dataFetched}
+            >
               <FocusNode hidden nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
                 <ContentLoader height={FILTER_HEIGHT} loading={!accountsFetched}>
                   <FilterLayout

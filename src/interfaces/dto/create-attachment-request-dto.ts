@@ -1,4 +1,4 @@
-import type { ACTION, FORMAT } from 'interfaces/client';
+import type { ACTION, FORMAT } from 'interfaces';
 import type { IUserDeviceInfo } from 'interfaces/user-device-info';
 
 /** ДТО запроса на создание вложения. */

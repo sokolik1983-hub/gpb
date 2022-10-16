@@ -1,10 +1,10 @@
 import React, { useContext, useMemo } from 'react';
-import { TagsPanelView } from 'components';
-import { useFilterTags } from 'hooks';
+import { TagsPanelView } from 'components/common';
+import { useFilterTags } from 'hooks/common';
 import type { ITagsPanelProps } from 'interfaces/client';
 import { useFormState } from 'react-final-form';
 import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
-import { orderTags, stringifyCounterparty } from 'utils';
+import { orderTags, stringifyCounterparty } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
 import { Gap } from '@platform/ui';

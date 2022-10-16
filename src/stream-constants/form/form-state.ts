@@ -1,11 +1,7 @@
 import { DATE_PERIODS } from 'interfaces';
-import { FORMAT, OPERATIONS } from 'interfaces/client';
-import type { ACTION, EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import type { ILatestStatementDto } from 'interfaces/dto';
-import { CREATION_PARAMS } from 'interfaces/form/creation-params';
+import { OPERATIONS, FORMAT } from 'interfaces/common';
+import type { ACTION } from 'interfaces/common';
 import { locale } from 'localization';
-import { mapDtoToForm } from 'utils/actions';
-import { alwaysSendParamCasesFromUI } from 'utils/export-params-dialog';
 
 /** Состояние формы запроса на выписку. */
 export interface IFormState {
@@ -38,57 +34,6 @@ export const defaultFormState: IFormState = {
   format: FORMAT.PDF,
   operations: OPERATIONS.ALL,
   periodType: DATE_PERIODS.YESTERDAY,
-};
-
-/** Конфиг начального состояния формы. */
-export interface IStateConfig {
-  /** Вариант вызова диалога. */
-  useCase?: EXPORT_PARAMS_USE_CASES;
-  /** Предыдущий запрос на выписку. */
-  latestStatement?: ILatestStatementDto;
-  /** Дата начала периода. */
-  dateFrom?: string;
-  /** Дата окончания периода. */
-  dateTo?: string;
-  /** Предзаполненные поля формы при запросе выписки с другого сервиса. */
-  prefilledFormValues?: IFormState;
-}
-
-/** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = ({
-  latestStatement,
-  useCase,
-  dateFrom,
-  dateTo,
-  prefilledFormValues,
-}: IStateConfig): Partial<IFormState> => {
-  if (prefilledFormValues) {
-    return { ...defaultFormState, ...prefilledFormValues };
-  }
-
-  if (!latestStatement) {
-    const creationParams: string[] = [];
-    const documentsSetParams: string[] = [];
-
-    if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
-      creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
-    }
-
-    return { ...defaultFormState, creationParams, documentsSetParams, dateFrom, dateTo };
-  }
-
-  // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
-  const formState = mapDtoToForm(latestStatement);
-
-  const form = Object.keys(defaultFormState).reduce((acc, key) => {
-    if (!acc[key]) {
-      acc[key] = defaultFormState[key];
-    }
-
-    return acc;
-  }, formState);
-
-  return form;
 };
 
 /** Поля на форме. */

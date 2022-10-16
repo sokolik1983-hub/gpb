@@ -14,7 +14,7 @@ import { InfiniteDataTable } from 'platform-copies/services';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { PRIVILEGE } from 'stream-constants/client';
-import { getActiveActionButtons, isFunctionAvailability } from 'utils';
+import { getActiveActionButtons, isFunctionAvailability } from 'utils/common';
 import { useAuth } from '@platform/services/client';
 import { Box, Checkbox, Gap, Horizon, Typography } from '@platform/ui';
 import { SettingsForm } from '../settings-form';

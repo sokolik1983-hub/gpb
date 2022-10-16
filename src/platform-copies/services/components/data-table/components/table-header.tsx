@@ -1,43 +1,25 @@
+import type { FC } from 'react';
 import React from 'react';
-import { FocusNode, NODE_TYPE } from 'components/focus-tree';
+import { FocusNode, NODE_TYPE } from 'components/common/focus-tree';
 import { locale } from 'localization';
-import type { TableInstance } from 'react-table';
+import type { HeaderGroup } from 'react-table';
 import { COMMON_SCROLLER_NODE, DATA_TABLE_COLUMN_NODE } from 'stream-constants/a11y-nodes';
-import type { IColumnsStorageObject } from '@platform/core';
-import type { IBaseEntity } from '@platform/services';
 import { ACTIONS, Box, Gap, Horizon, ROLE, ServiceIcons, Typography, WithClickable, WithInfoTooltip } from '@platform/ui';
 import { MIN_WIDTH } from '../constants';
 import css from '../styles.scss';
-import type { RecordCell, TableColumn } from '../types';
+import type { RecordCell } from '../types';
 import { HEADER_ALIGN } from '../types';
-import { SettingsButton } from './settings-button';
 
 /** Свойства хедера таблицы. */
-interface TableHeaderProps<T extends IBaseEntity> {
-  /** Параметры оригинальных колонок. */
-  originalColumns: TableColumn<T>;
+interface TableHeaderProps {
+  /** Группа заголовков таблицы. */
+  headerGroups: Array<HeaderGroup<RecordCell>>;
   /** Коллбэк-реф хедера таблицы. */
   refCallback?: React.RefCallback<HTMLElement>;
-  /** Функция изменения настроек для колонок. */
-  setSettingsColumns(value: IColumnsStorageObject[]): void;
-  /** Настройки для колонок. */
-  settingColumns: IColumnsStorageObject[];
-  /** Флаг отображения кнопки настроек колонок таблицы. */
-  showSettingsButton?: boolean;
-  /** Экземпляр таблицы. */
-  tableInstance: TableInstance<RecordCell>;
 }
 
 /** Хедер таблицы. */
-export const TableHeader = <T extends IBaseEntity>({
-  originalColumns,
-  refCallback,
-  settingColumns,
-  setSettingsColumns,
-  tableInstance,
-  tableInstance: { headerGroups },
-  showSettingsButton,
-}: TableHeaderProps<T>) => (
+export const TableHeader: FC<TableHeaderProps> = ({ headerGroups, refCallback }) => (
   <div ref={refCallback}>
     {headerGroups.map(headerGroup => (
       // eslint-disable-next-line react/jsx-key
@@ -124,14 +106,6 @@ export const TableHeader = <T extends IBaseEntity>({
             </FocusNode>
           );
         })}
-        {showSettingsButton && (
-          <SettingsButton<T>
-            originalColumns={originalColumns}
-            setSettingsColumns={setSettingsColumns}
-            settingColumns={settingColumns}
-            tableInstance={tableInstance}
-          />
-        )}
       </Box>
     ))}
   </div>

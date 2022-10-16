@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components';
-import { FocusLock } from 'components/focus-lock';
-import { FocusNode, FocusTree } from 'components/focus-tree';
-import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks';
-import { useMetricPageListener } from 'hooks/metric/use-metric-page-listener';
+import { ContentLoader, ScrollerPageLayout, FilterLayout, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components/common';
+import { FocusLock } from 'components/common/focus-lock';
+import { FocusNode, FocusTree } from 'components/common/focus-tree';
+import { useIsFetchedData, usePrevious, useStreamContentHeight } from 'hooks/common';
+import { useMetricPageListener } from 'hooks/common/metric/use-metric-page-listener';
 import type { IFilterPanel, IUrlParams } from 'interfaces';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import {
@@ -30,12 +30,12 @@ import { useDebounce } from 'platform-copies/hooks';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
-import { statementService } from 'services';
+import { statementService } from 'services/client';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, TRANSACTIONS_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
-import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils';
-import { FatalErrorContent, MainLayout, useFilter } from '@platform/services/client';
+import { convertTablePaginationToMetaData, convertTableSortByMap } from 'utils/common';
+import { FatalErrorContent, MainLayout, useFilter, useNotifications } from '@platform/services/client';
 import type { IMetaData } from '@platform/services/client';
 import { Box, Gap, Line } from '@platform/ui';
 import { validate } from '@platform/validation';
@@ -133,6 +133,8 @@ export const StatementTransactionScrollerPage = () => {
   const prevTransactionsFetching = usePrevious(transactionsFetching);
   const isNationalCurrency = !!statementSummaryInfo?.nationalCurrency;
 
+  const { showImportantNotification, importantNotificationMessage } = useNotifications();
+
   const contextValue: ITransactionScrollerContext = useMemo(
     () => ({
       counterparties,
@@ -175,7 +177,11 @@ export const StatementTransactionScrollerPage = () => {
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout headerProps={{ ...headerProps }} loading={!dataFetched}>
+            <ScrollerPageLayout
+              headerProps={{ ...headerProps }}
+              importantNotification={Boolean(showImportantNotification && importantNotificationMessage)}
+              loading={!dataFetched}
+            >
               <ContentLoader height={STATEMENT_INFO_HEIGHT} loading={!statementSummaryInfoFetched}>
                 <StatementInfo />
               </ContentLoader>
