@@ -1,3 +1,33 @@
+# [2.14.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0...v2.14.0) (2022-10-16)
+
+
+### Bug Fixes
+
+* **визард:** GBO-35501 исправление флагов комплекта документов ([c0e9eaa](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c0e9eaa44c6cb8a8cbd08436a0ab02f5d9553b89))
+* GBO-35278 поправлен параметр `accountIds`, передаваемый из др.сервисов ([b49b7c2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b49b7c2e0ea195bcd9557cbdd17b3d0795838a42))
+* GBO-35347 добавлен запрос периода дат перед запросом выписки ([b39bf88](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b39bf88c5691e1d2e44d6e0fbf60eb7ac9c69dde))
+
+
+### Features
+
+* **banner:** GBO-35482 добавлен баннер опроса сервиса с QR-кодом на скроллер ОСВ ([779299c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/779299ca443d1c0e41b1cbd6207aee0b08c13bbb))
+* **banner:** GBO-35482 открытие опроса в новом окне браузера ([f384569](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f384569704ca1a312786587b64eac74860cff746))
+* GBO-33526 Реализация действия формирования ПФ "Список запросов" ([3d8c89f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3d8c89f1d5ec5137e96fcb7024992f33af1c3aaa))
+* GBO-34830 Область с фильтрами скроллера проводок ([35fd075](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/35fd075ea905f8f8f669300e7c30899ee3a5d066))
+* **скроллер:** GBO-33529 доработки `InfiniteDataTable` ([7f946b4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7f946b423f236c585b0c3150553b6bff896723dd))
+* GBO-33526 Реализация действия формирования ПФ "Список запросов" ([947eee6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/947eee6fabfc1dec5e6e9fdc1766918fabcf02ce))
+* **скроллер:** GBO-33529 добавлена ЭФ Банка "Журнал запросов выписки" ([902b61b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/902b61b788943dd1e397807a5ad653a724740135))
+* **скроллер:** GBO-33529 добавлена ЭФ Банка "Журнал запросов выписки" (убрана цикл. зависимость) ([3ddd4d8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3ddd4d83d59ba3641be5bbfc29b506015e1546df))
+* GBO-33412 Разработка ЭФ параметров выписки и документов ([2d8015f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2d8015f8ca017431333aad7d5ab652b600e65dbc))
+* GBO-33412 Разработка ЭФ параметров выписки и документов ([6f06111](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6f061119267a3cf7926bc211098628a6244a1da9))
+* GBO-33412 Разработка ЭФ параметров выписки и документов ([f45be9b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f45be9b021eadadd62368098465a456b4e31a48f))
+* GBO-33528 Реализация действия просмотра проводки ([4b62a0e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4b62a0e1a0b743a4e536113d061bb7f21c96e079))
+* GBO-33533 Разработка ЭФ карточки проводки ([cd0b85c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cd0b85c08ad50ff64db98a335931e4958577c4fb))
+* GBO-33533 Разработка ЭФ карточки проводки ([bf4b24f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bf4b24f8884d9fd8504337ed5eed0124236fd883))
+* GBO-33534 Разработка ЭФ карточки запроса выписки ([e5980da](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e5980dafa1596b060c60015d48829686a2b8cccb))
+* GBO-34828 Область с суммарной информацией выписки (остатки и обороты) на скроллере проводок ([2d4efa3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2d4efa39a6443761cc2466dee96e89769994bd18))
+* GBO-34828 Область с суммарной информацией выписки (остатки и обороты) на скроллере проводок ([7e5c3ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7e5c3ef1556f1039c7f062dc1a6dabc2d4ee37e1))
+
 # [2.14.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0-release.5...v2.14.0-release.6) (2022-10-14)
 
 
