@@ -1,5 +1,5 @@
 import type { STATEMENT_REQUEST_STATUSES, DATE_PERIODS, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
-import type { Organization, USER } from 'interfaces/admin';
+import type { AccountOrganization, StatementUser } from 'interfaces/admin';
 import type { FORMAT, ACTION } from 'interfaces/common/classificators';
 
 /** Строка скроллера Истории запросов выписок. */
@@ -22,7 +22,7 @@ export interface StatementHistoryRow {
   /** Идентификатор запроса выписки. */
   id: string;
   /** Наименование организаций. */
-  organizations: Organization[];
+  organizations: AccountOrganization[];
   /** Дата периода. */
   periodDate: string;
   /** Тип периода. */
@@ -38,5 +38,5 @@ export interface StatementHistoryRow {
   /** Статус выписки. */
   statementStatus: STATEMENT_STATUSES;
   /** Пользователь. */
-  user: USER;
+  user: StatementUser;
 }

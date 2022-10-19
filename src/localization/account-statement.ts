@@ -209,7 +209,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Статус выписки
+					 * Статус выписки / справки
 					 */
 					get statementStatus() {
 						return t('admin.historyScroller.filter.labels.statementStatus');
@@ -237,7 +237,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Выписка/Справка
+					 * Выписка/справка
 					 */
 					get statementType() {
 						return t('admin.historyScroller.filter.labels.statementType');
@@ -257,13 +257,20 @@ export default {
 						return t('admin.historyScroller.filter.labels.serviceBranch');
 					},
 				},
-				placeholders: {
+				placeholder: {
 					/**
 					 * @ru
 					 * Счет
 					 */
 					get account() {
-						return t('admin.historyScroller.filter.placeholders.account');
+						return t('admin.historyScroller.filter.placeholder.account');
+					},
+					/**
+					 * @ru
+					 * Название или ИНН
+					 */
+					get organization() {
+						return t('admin.historyScroller.filter.placeholder.organization');
 					},
 				},
 			},

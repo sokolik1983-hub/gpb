@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import React, { useEffect } from 'react';
 import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto, IGetDatePeriodRequestDto } from 'interfaces/dto';
-import { statementService } from 'services/client/statement-service';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { noop } from 'utils/common';
 import { to } from '@platform/core';
@@ -11,6 +10,8 @@ import { Fields } from '@platform/ui';
 
 /** Свойства компонента DatePeriodField. */
 export interface IDatePeriodFieldProps {
+  /** Метод запроса к серверу. */
+  fetchDatePeriod(data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto>;
   /** Путь до поля в форме. */
   name: string;
   /** Выполняется перед стартом запроса. */
@@ -22,17 +23,25 @@ export interface IDatePeriodFieldProps {
 }
 
 /** Селект выбора периода. */
-export const DatePeriodField: FC<IDatePeriodFieldProps> = ({ name, onErrorFetching = noop, onStartFetching, onSuccessFetching }) => {
+export const DatePeriodField: FC<IDatePeriodFieldProps> = ({
+  fetchDatePeriod,
+  name,
+  onErrorFetching = noop,
+  onStartFetching,
+  onSuccessFetching,
+}) => {
   const getPeriod = async (period: IGetDatePeriodRequestDto['periodType']) => {
     onStartFetching();
 
-    const [res, err] = await to(statementService.getDatePeriod({ periodType: period }));
+    const [res, err] = await to(fetchDatePeriod({ periodType: period }));
 
-    if (err) {
+    if (err || !res) {
       onErrorFetching(err);
-    } else {
-      onSuccessFetching(res!);
+
+      return;
     }
+
+    onSuccessFetching(res);
   };
 
   const handleOnChange: OnChangeType<DATE_PERIODS> = ({ value: period }) => {

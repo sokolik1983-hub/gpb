@@ -12,20 +12,16 @@ import { AccountOption } from './account-option';
 /**
  * Возвращает опцию.
  *
- * @param account - Счтёт.
+ * @param account - Счет.
  */
 const getAccountOption = (account: IGetAccountsResponseDto): IAccountOption => {
-  const {
-    id,
-    accountNumber,
-    bankClient: { shortName, fullName },
-  } = account;
+  const { id, accountNumber, bankClient } = account;
 
   return {
     value: id,
     label: formatAccountCode(accountNumber), // Лейбл тегов выбранных значений
     accountNumber,
-    orgName: shortName ?? fullName,
+    orgName: bankClient?.shortName || bankClient?.fullName,
   };
 };
 

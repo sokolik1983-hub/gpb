@@ -1,14 +1,27 @@
-import type { IScrollerResponceDto, FORMAT } from 'interfaces';
-import type { StatementHistoryRow, StatementHistoryResponseDto, IFileDataResponse } from 'interfaces/admin';
-import type { RequestPeriodType, IGetTransactionCardResponseDto } from 'interfaces/dto';
-import type { IClientBankResponseDto } from 'interfaces/dto/admin';
-import { mapDtoToViewForStatementList } from 'services/admin/mappers';
+import type { IScrollerResponceDto, FORMAT, ServerResponseList, ServerResponseData, ServerResponsePage } from 'interfaces';
+import type {
+  Account,
+  StatementHistoryRow,
+  StatementHistoryResponseDto,
+  IFileDataResponse,
+  Organization,
+  ServiceBranch,
+  User,
+} from 'interfaces/admin';
+import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
+import type { IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import {
+  mapDtoToViewForAccountList,
+  mapDtoToViewForOrganizationList,
+  mapDtoToViewForServiceBranchList,
+  mapDtoToViewForStatementList,
+  mapDtoToViewForUserList,
+} from 'services/admin/mappers';
 import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse } from '@platform/services';
 import { DATE_FORMAT } from '@platform/services';
 import { metadataToRequestParams, request } from '@platform/services/admin';
-import type { IServerDataResp } from '@platform/services/client';
-import type { IMetaData } from '@platform/services/client/dist-types/interfaces/common';
+import type { IMetaData, IServerDataResp, IServerResp } from '@platform/services/admin';
 import { formatDateTime } from '@platform/tools/date-time';
 
 /** Базовый URL сервиса "Выписки". */
@@ -16,6 +29,18 @@ const BASE_URL = '/api';
 
 /** URL сервиса выписок. */
 const STATEMENT_BANK_URL = `${BASE_URL}/statement-bank`;
+
+/** URL сервиса справочника клиентов (банковская часть). */
+const CLIENT_DICTIONARY_BANK_URL = `${BASE_URL}/client-dictionary-bank/internal/dictionary/client`;
+
+/** URL сервиса аутентификации и авторизации (банковская часть). */
+const UAA_BANK_URL = `${BASE_URL}/uaa-bank`;
+
+/** URL пользователей типа CLIENT. */
+const CLIENTUSER_URL = `${UAA_BANK_URL}/admin/clientuser`;
+
+/** URL вспомогательных методов сервиса Выписки. */
+const STATEMENT_SUPPORT_URL = `${STATEMENT_BANK_URL}/statement/support`;
 
 /** Сервис выписок админа. */
 export const statementService = {
@@ -29,15 +54,18 @@ export const statementService = {
   getTransaction: ({ accountingEntryId }: { accountingEntryId: string }): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
     asyncNoop(),
   /** Возвращает временной период. */
-  // TODO убрать eslint-disable после реализации метода
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getDatePeriod: ({ periodType }: { periodType: RequestPeriodType }) => asyncNoop,
+  getDatePeriod: (data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> =>
+    request<IServerDataResp<IGetDatePeriodResponseDto>>({
+      method: 'POST',
+      data,
+      url: `${STATEMENT_SUPPORT_URL}/calculate-period`,
+    }).then(result => result.data.data),
   /** Возвращает список выписок истории запросов. */
   getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
     request<IServerDataResp<IScrollerResponceDto<StatementHistoryResponseDto>>>({
-      url: `${STATEMENT_BANK_URL}/statement/request/page`,
-      method: 'POST',
       data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/statement/request/page`,
     })
       .then(response => {
         if (response.data.error?.code) {
@@ -88,4 +116,52 @@ export const statementService = {
     request<IServerDataResp<IClientBankResponseDto[]>>({
       url: `${STATEMENT_BANK_URL}/get-clients/${id}`,
     }).then(r => r.data.data),
+  /** Возвращает список счетов. */
+  getAccountList: (metaData: IMetaData): Promise<Account[]> =>
+    request<IServerResp<ServerResponsePage<ServerResponseList<Account>>>>({
+      data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/account/get-page`,
+    }).then(response => mapDtoToViewForAccountList(response.data.data.page.list)),
+  /** Возвращает список счетов по переданным идентификаторам. */
+  getAccountListByIds: (data: { ids: string[] }): Promise<Account[]> =>
+    request<IServerResp<ServerResponseData<Account[]>>>({
+      data,
+      method: 'POST',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/account/list`,
+    }).then(response => mapDtoToViewForAccountList(response.data.data.data)),
+  /** Возвращает список организаций. */
+  getOrganizationList: (metaData: IMetaData): Promise<Organization[]> =>
+    request<IServerResp<ServerResponsePage<ServerResponseList<Organization>>>>({
+      data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/bank-client/get-page`,
+    }).then(response => mapDtoToViewForOrganizationList(response.data.data.page.list)),
+  /** Возвращает список организаций по переданным идентификаторам. */
+  getOrganizationListByIds: (data: { list: string[] }): Promise<Organization[]> =>
+    request<IServerResp<Organization[]>>({
+      data,
+      method: 'POST',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/bank-client/list`,
+    }).then(response => mapDtoToViewForOrganizationList(response.data.data)),
+  /** Возвращает список подразделений обслуживания. */
+  getServiceBranchList: (): Promise<ServiceBranch[]> =>
+    request<ServerResponseList<ServiceBranch>>({
+      method: 'GET',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/branch/v2/filial-branches`,
+    }).then(response => mapDtoToViewForServiceBranchList(response.data.list)),
+  /** Возвращает список пользователей. */
+  getUserList: (metaData: IMetaData): Promise<User[]> =>
+    request<IServerResp<ServerResponsePage<ServerResponseList<User>>>>({
+      data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${CLIENTUSER_URL}/get-page`,
+    }).then(response => mapDtoToViewForUserList(response.data.data.page.list)),
+  /** Возвращает список пользователей по ФИО. */
+  getUserListByFio: (data: UserRequestDto): Promise<User[]> =>
+    request<IServerDataResp<User[]>>({
+      data,
+      method: 'POST',
+      url: `${CLIENTUSER_URL}/find/fio`,
+    }).then(response => response.data.data),
 };
