@@ -52,6 +52,7 @@ const DEBOUNCE_DELAY = 300;
  */
 export const StatementHistoryScrollerPage = () => {
   const [totalStatements, setTotalStatements] = useState(0);
+  const [statements, setStatements] = useState<StatementHistoryRow[]>([]);
   const [statementsInitialed, setStatementsInitialed] = useState(false);
   const [accountSearchValue, setAccountSearchValue] = useState('');
   const [organizationSearchValue, setOrganizationSearchValue] = useState('');
@@ -118,6 +119,7 @@ export const StatementHistoryScrollerPage = () => {
 
         const { data: rows, total } = await statementService.getStatementList(metaData);
 
+        setStatements(rows);
         setTotalStatements(total);
 
         return { rows, pageCount: Math.ceil(total / pageSize) };
@@ -134,9 +136,17 @@ export const StatementHistoryScrollerPage = () => {
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [{ id: '#' }]), [
-    getAvailableActions,
-  ]);
+  const actions = useMemo(
+    () =>
+      getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [
+        {
+          dateFrom: filterPanel.values[FORM_FIELDS.DATE_FROM],
+          dateTo: filterPanel.values[FORM_FIELDS.DATE_TO],
+          statements,
+        },
+      ]),
+    [filterPanel, getAvailableActions, statements]
+  );
 
   const headerProps = {
     actions,

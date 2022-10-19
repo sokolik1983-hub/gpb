@@ -1,3 +1,4 @@
+import type { IUserDeviceInfo } from 'interfaces';
 import { getDeviceInfo } from '@platform/services';
 
 const FAKE_DATA = 'fake';
@@ -5,7 +6,7 @@ const FAKE_DATA = 'fake';
 /**
  * Возвращает мак-адрес и отпечаток устройства.
  */
-export const getUserDeviceInfo = async () => {
+export const getUserDeviceInfo = async (): Promise<IUserDeviceInfo> => {
   const deviceInfo = await getDeviceInfo();
 
   // 'fake' добавлено для того, чтобы при разработке локально с заглушкой криптоплагина

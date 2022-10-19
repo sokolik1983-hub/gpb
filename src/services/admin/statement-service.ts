@@ -1,6 +1,7 @@
 import type { IScrollerResponceDto, FORMAT, ServerResponseList, ServerResponseData, ServerResponsePage } from 'interfaces';
 import type {
   Account,
+  CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
   IFileDataResponse,
@@ -19,10 +20,8 @@ import {
 } from 'services/admin/mappers';
 import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse } from '@platform/services';
-import { DATE_FORMAT } from '@platform/services';
 import { metadataToRequestParams, request } from '@platform/services/admin';
 import type { IMetaData, IServerDataResp, IServerResp } from '@platform/services/admin';
-import { formatDateTime } from '@platform/tools/date-time';
 
 /** Базовый URL сервиса "Выписки". */
 const BASE_URL = '/api';
@@ -82,30 +81,27 @@ export const statementService = {
         total: 0,
       })),
   /** Генерация ПФ Список запросов выписки. */
-  generateReport: async ({
-    statementIds,
+  generateStatementsReport: ({
     dateFrom,
     dateTo,
     format,
+    statementRequestIds,
   }: {
-    statementIds: string[];
-    dateFrom: Date;
-    dateTo: Date;
+    dateFrom: string;
+    dateTo: string;
     format: FORMAT.EXCEL | FORMAT.PDF;
-  }) => {
-    const { data: resp } = await request<IFileDataResponse>({
-      url: `${STATEMENT_BANK_URL}/statement/request/generate-report`,
-      method: 'POST',
+    statementRequestIds: string[];
+  }): Promise<IFileDataResponse> =>
+    request<IServerDataResp<IFileDataResponse>>({
       data: {
-        statementIds,
-        dateFrom: formatDateTime(dateFrom, { keepLocalTime: false, format: DATE_FORMAT }),
-        dateTo: formatDateTime(dateTo, { keepLocalTime: false, format: DATE_FORMAT }),
+        statementRequestIds,
+        dateFrom,
+        dateTo,
         format,
       },
-    });
-
-    return resp;
-  },
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/statement/request/generate-report`,
+    }).then(response => response.data.data),
   /** Возвращает список контрагентов и их счетов в выписке. */
   getCounterparties: (id: string): Promise<IClientBankResponseDto[]> =>
     request<IServerDataResp<IClientBankResponseDto[]>>({
@@ -163,5 +159,11 @@ export const statementService = {
       data,
       method: 'POST',
       url: `${CLIENTUSER_URL}/find/fio`,
+    }).then(response => response.data.data),
+  createStatementAttachment: (data: CreateStatementAttachmentRequestDto): Promise<IFileDataResponse> =>
+    request<IServerDataResp<IFileDataResponse>>({
+      data,
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/statement/create-attachment`,
     }).then(response => response.data.data),
 };
