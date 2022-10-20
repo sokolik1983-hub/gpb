@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks/common';
 import type { ITagsPanelProps } from 'interfaces';
@@ -23,12 +23,18 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
   const {
     filterPanel: { values: storageValues },
     organizations,
+    selectedOrganizations,
+    selectedUsers,
     serviceBranches,
     tagsPanel: { tags },
     users,
   } = useContext(StatementHistoryScrollerContext);
 
   const values = valid ? storageValues : formValues;
+
+  const allOrganizations = useMemo(() => [...selectedOrganizations, ...organizations], [organizations, selectedOrganizations]);
+
+  const allUsers = useMemo(() => [...selectedUsers, ...users], [selectedUsers, users]);
 
   const { onOpenAdditionalFilter, onRemoveTag, onRemoveAllTags } = useFilterTags<FilterValues>({
     defaultAdditionalFilterValues,
@@ -47,14 +53,19 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
     const value = formState[name];
 
     switch (name) {
-      case FORM_FIELDS.ORGANIZATION_IDS:
+      case FORM_FIELDS.ORGANIZATION_IDS: {
+        if (allOrganizations.length === 0) {
+          return '';
+        }
+
         return (value as string[])
           .map(item => {
-            const { fullName = '', shortName = '' } = organizations.find(({ id }) => id === item) || {};
+            const { fullName = '', shortName = '' } = allOrganizations.find(({ id }) => id === item) || {};
 
             return shortName || fullName;
           })
           .join(separator);
+      }
       case FORM_FIELDS.PERIOD:
         return (value as string[]).map(item => DATE_PERIOD_SCROLLER_LABELS[item]).join(separator);
       case FORM_FIELDS.REQUEST_STATUS: {
@@ -68,7 +79,11 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
       }
       case FORM_FIELDS.SIGNED:
         return '';
-      case FORM_FIELDS.SERVICE_BRANCH_IDS:
+      case FORM_FIELDS.SERVICE_BRANCH_IDS: {
+        if (serviceBranches.length === 0) {
+          return '';
+        }
+
         return (value as string[])
           .map(item => {
             const { filialName = '' } = serviceBranches.find(({ id }) => id === item) || {};
@@ -76,6 +91,7 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
             return filialName;
           })
           .join(separator);
+      }
       case FORM_FIELDS.STATEMENT_STATUS: {
         const statementStatuses = value as string[];
 
@@ -87,14 +103,19 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
       }
       case FORM_FIELDS.STATEMENT_TYPE:
         return STATEMENT_TYPE_OPTIONS.find(option => option.value === (value as string))!.label;
-      case FORM_FIELDS.USER_IDS:
+      case FORM_FIELDS.USER_IDS: {
+        if (allUsers.length === 0) {
+          return '';
+        }
+
         return (value as string[])
           .map(item => {
-            const { familyName = '', firstName = '', middleName = '' } = users.find(({ id }) => id === item) || {};
+            const { familyName = '', firstName = '', middleName = '' } = allUsers.find(({ id }) => id === item) || {};
 
             return getFullName([familyName, firstName, middleName]);
           })
           .join(separator);
+      }
       default:
         return value as string[] | string;
     }
@@ -104,12 +125,16 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
   const preparedTags = orderTags(tags, ADDITIONAL_FORM_FIELDS).filter(tag => {
     const value = values[tag.value];
 
-    if (Array.isArray(value) && value.length === 0) {
+    if (Array.isArray(value) && (value.length === 0 || value.includes(ALL_VALUE))) {
       return false;
     }
 
     return Boolean(value);
   });
+
+  if (preparedTags.length === 0) {
+    return null;
+  }
 
   return (
     <>
