@@ -15,7 +15,7 @@ import { formatAccountCode } from '@platform/tools/localization';
 const getPeriodDate = ({ periodEnd, periodStart, periodType }: { periodType: DATE_PERIODS; periodStart: string; periodEnd: string }) =>
   [DATE_PERIODS.YESTERDAY, DATE_PERIODS.TODAY].includes(periodType)
     ? formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT })
-    : `${formatDateTime(periodEnd, { keepLocalTime: true, format: DATE_FORMAT })}–${formatDateTime(periodStart, {
+    : `${formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT })}–${formatDateTime(periodEnd, {
         keepLocalTime: true,
         format: DATE_FORMAT,
       })}`;
