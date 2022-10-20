@@ -131,7 +131,8 @@ export const StatementHistoryScrollerPage = () => {
         }
       }
     },
-    [filterValuesDebounced, statementsInitialed]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filterValuesDebounced]
   );
 
   const { getAvailableActions } = useAuth();
