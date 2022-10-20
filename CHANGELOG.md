@@ -1,3 +1,22 @@
+# [2.15.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0...v2.15.0-release.1) (2022-10-20)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-35379 поправлен период дат начала и окончания ([4a29086](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4a29086785337bc7dc94772ea0e8706f559bc6ad))
+* **скроллер:** GBO-35909 поправлена работа панели тегов скроллера Историиз запросов выписок ([f65e7c1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f65e7c1191336b43f4976f46ac9b61fd8f3dcceb))
+* **скроллер:** GBO-35922 поправлена верстка ячейки "Организация" ([c2acc44](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c2acc4484c54f15fdf024df10f349a3146c579e7))
+* **скроллер:** GBO-35925 исправлено - при иницилизации одни запрос выписок дергается ([3c11f71](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3c11f7183e8913d5c54dbc779fe7995bc1a4a6fb))
+* **скроллер:** GBO-35925 поправлено обновлени общего количества запросов выписок ([c9b8558](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c9b8558d6188053c9a30ffac0ad4d29d00c304d7))
+* **скроллер:** GBO-35978 заменена `е` на `ё` ([ebb2bc6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ebb2bc67a4ad17479c72d6cbef0732459b1acae2))
+* **скроллер:** GBO-36016 поправлен заголовок столбца 'Период запроса' на 'Период' ([0d0379a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0d0379a03eeda8d0f7b5b22e840483887fc2a7d3))
+
+
+### Features
+
+* **скроллер:** GBO-33520 добавлены экшены в скроллер Истории запросов выписок ([7f1c372](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7f1c372ecbce77774c610c3f3656aacfa8f6c324))
+* **скроллер:** GBO-33529 разработка фильтра скроллера Истории запросов выписок ([cb69dba](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cb69dbacce9490ed65615bee8de1a5eefeeb69a2))
+
 # [2.14.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.13.0...v2.14.0) (2022-10-16)
 
 
