@@ -299,7 +299,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Период запроса
+					 * Период
 					 */
 					get requestPeriod() {
 						return t('admin.historyScroller.table.header.requestPeriod');

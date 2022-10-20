@@ -144,7 +144,7 @@
   "admin.historyScroller.table.header.createdAt": "Дата запроса",
   "admin.historyScroller.table.header.accountNumber": "Счёт",
   "admin.historyScroller.table.header.organization": "Организация",
-  "admin.historyScroller.table.header.requestPeriod": "Период запроса",
+  "admin.historyScroller.table.header.requestPeriod": "Период",
   "admin.historyScroller.table.header.format": "Формат",
   "admin.historyScroller.table.header.requestStatus": "Статус запроса",
   "admin.historyScroller.table.header.user": "Пользователь",
