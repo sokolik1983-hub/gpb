@@ -260,7 +260,7 @@ export default {
 				placeholder: {
 					/**
 					 * @ru
-					 * Счет
+					 * Счёт
 					 */
 					get account() {
 						return t('admin.historyScroller.filter.placeholder.account');
@@ -285,7 +285,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Счет
+					 * Счёт
 					 */
 					get accountNumber() {
 						return t('admin.historyScroller.table.header.accountNumber');

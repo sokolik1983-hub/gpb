@@ -423,7 +423,7 @@
     "ru": "Организация"
   },
   "admin.historyScroller.filter.placeholder.account": {
-    "ru": "Счет"
+    "ru": "Счёт"
   },
   "admin.historyScroller.filter.placeholder.organization": {
     "ru": "Название или ИНН"
@@ -441,7 +441,7 @@
     "ru": "Дата запроса"
   },
   "admin.historyScroller.table.header.accountNumber": {
-    "ru": "Счет"
+    "ru": "Счёт"
   },
   "admin.historyScroller.table.header.organization": {
     "ru": "Организация"
