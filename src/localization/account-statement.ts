@@ -424,6 +424,38 @@ export default {
 					return t('admin.historyScroller.footer.selected');
 				},
 			},
+			dialog: {
+				exportRegistryStatement: {
+					/**
+					 * @ru
+					 * Документы: {count}
+					 */
+					header: (p: { count: number }) => t('admin.historyScroller.dialog.exportRegistryStatement.header', p),
+					/**
+					 * @ru
+					 * Экспорт реестра
+					 */
+					get content() {
+						return t('admin.historyScroller.dialog.exportRegistryStatement.content');
+					},
+					button: {
+						/**
+						 * @ru
+						 * Excel
+						 */
+						get excel() {
+							return t('admin.historyScroller.dialog.exportRegistryStatement.button.excel');
+						},
+						/**
+						 * @ru
+						 * PDF
+						 */
+						get pdf() {
+							return t('admin.historyScroller.dialog.exportRegistryStatement.button.pdf');
+						},
+					},
+				},
+			},
 		},
 		form: {
 			/**

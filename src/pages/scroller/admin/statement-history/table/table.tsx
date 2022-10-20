@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useCallback, useContext, useState } from 'react';
-import { executor, viewQueryParams } from 'actions/admin';
+import { executor, viewStatementRequestCard } from 'actions/admin';
 import type { StatementHistoryRow } from 'interfaces/admin';
 import { locale } from 'localization';
 import { InfiniteDataTable } from 'platform-copies/services';
@@ -10,7 +10,7 @@ import { Box, Gap, Horizon, Typography } from '@platform/ui';
 import { FOOTER_ACTIONS } from '../action-configs';
 import type { StatementHistoryScrollerContextProps } from '../context';
 import { StatementHistoryScrollerContext } from '../context';
-import { STORAGE_KEY } from '../filter';
+import { FORM_FIELDS, STORAGE_KEY } from '../filter';
 import { columns } from './columns';
 import { Footer } from './footer';
 
@@ -18,19 +18,25 @@ import { Footer } from './footer';
 export const Table: FC = () => {
   const [selectedRows, setSelectedRows] = useState<StatementHistoryRow[]>([]);
 
-  const { fetchStatements, totalStatements } = useContext<StatementHistoryScrollerContextProps>(StatementHistoryScrollerContext);
+  const {
+    fetchStatements,
+    filterPanel: { values },
+    totalStatements,
+  } = useContext<StatementHistoryScrollerContextProps>(StatementHistoryScrollerContext);
 
   const { getAvailableActions } = useAuth();
 
   const footerActions = useCallback(
-    scrollerExecutor => (rows: StatementHistoryRow[]) =>
-      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows]),
-    [getAvailableActions]
+    scrollerExecutor => (statements: StatementHistoryRow[]) =>
+      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [
+        { dateFrom: values[FORM_FIELDS.DATE_FROM], dateTo: values[FORM_FIELDS.DATE_TO], statements },
+      ]),
+    [getAvailableActions, values]
   );
 
   /** Обработчик клика по строке скроллера. */
-  const handRowClick = useCallback((row: StatementHistoryRow) => {
-    void executor.execute(viewQueryParams, [row]);
+  const handRowClick = useCallback((statement: StatementHistoryRow) => {
+    void executor.execute(viewStatementRequestCard, statement);
   }, []);
 
   return (

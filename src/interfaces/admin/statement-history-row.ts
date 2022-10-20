@@ -7,7 +7,7 @@ export interface StatementHistoryRow {
   /** Номера счетов. */
   accountNumbers: string[];
   /** Идентификаторы счетов. */
-  accountsIds: string[];
+  accountIds: string[];
   /** Тип действия. */
   action: ACTION;
   /** Дата запроса. */
@@ -25,6 +25,10 @@ export interface StatementHistoryRow {
   organizations: AccountOrganization[];
   /** Дата периода. */
   periodDate: string;
+  /** Дата конца периода. */
+  periodEnd: string;
+  /** Дата начала периода. */
+  periodStart: string;
   /** Тип периода. */
   periodType: DATE_PERIODS;
   /** Статус запроса. */

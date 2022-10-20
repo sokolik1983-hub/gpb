@@ -497,6 +497,19 @@
   "admin.historyScroller.footer.selected": {
     "ru": "Выбрано:"
   },
+  "admin.historyScroller.dialog.exportRegistryStatement.header": {
+    "@count": "number",
+    "ru": "Документы: {count}"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.content": {
+    "ru": "Экспорт реестра"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.button.excel": {
+    "ru": "Excel"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": {
+    "ru": "PDF"
+  },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
   },

@@ -56,21 +56,21 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
       status,
       user,
     }) => {
-      const { accountNumbers, accountsIds, organizations, serviceBranches } = accounts.reduce<{
+      const { accountNumbers, accountIds, organizations, serviceBranches } = accounts.reduce<{
         accountNumbers: string[];
-        accountsIds: string[];
+        accountIds: string[];
         organizations: AccountOrganization[];
         serviceBranches: string[];
       }>(
         (prevValue, { filialName, id: accountId, number, organization }) => ({
           accountNumbers: [...prevValue.accountNumbers, number],
-          accountsIds: [...prevValue.accountsIds, accountId],
+          accountIds: [...prevValue.accountIds, accountId],
           organizations: [...prevValue.organizations, organization],
           serviceBranches: [...prevValue.serviceBranches, filialName],
         }),
         {
           accountNumbers: [],
-          accountsIds: [],
+          accountIds: [],
           organizations: [],
           serviceBranches: [],
         }
@@ -78,13 +78,15 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
 
       return {
         accountNumbers: accountNumbers.map(item => formatAccountCode(item)),
-        accountsIds,
+        accountIds,
         action,
         createdAt: getDateAndTime(createdAt),
         format,
         id,
         organizations,
         periodDate: getPeriodDate({ periodEnd, periodStart, periodType }),
+        periodEnd,
+        periodStart,
         periodType,
         requestStatus: status,
         serviceBranches,
