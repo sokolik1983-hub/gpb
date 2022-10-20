@@ -65,21 +65,16 @@ export const statementService = {
       data: metadataToRequestParams(metaData),
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/statement/request/page`,
-    })
-      .then(response => {
-        if (response.data.error?.code) {
-          throw response.data.error.message;
-        }
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw response.data.error.message;
+      }
 
-        return {
-          data: mapDtoToViewForStatementList(response.data.data.page),
-          total: response.data.data.size,
-        };
-      })
-      .catch(() => ({
-        data: [],
-        total: 0,
-      })),
+      return {
+        data: mapDtoToViewForStatementList(response.data.data.page),
+        total: response.data.data.size,
+      };
+    }),
   /** Генерация ПФ Список запросов выписки. */
   generateStatementsReport: ({
     dateFrom,
