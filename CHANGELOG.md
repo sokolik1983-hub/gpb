@@ -1,3 +1,10 @@
+# [2.15.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.8...v2.15.0-release.9) (2022-10-21)
+
+
+### Features
+
+* **скроллер:** GBO-35506 добавлена сводная информаци по выписке ([57a8326](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/57a8326e3ea91c433c499512681c97d6c8756643))
+
 # [2.15.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.7...v2.15.0-release.8) (2022-10-21)
 
 
