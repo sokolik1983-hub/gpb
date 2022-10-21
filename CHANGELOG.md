@@ -1,3 +1,10 @@
+# [2.15.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.6...v2.15.0-release.7) (2022-10-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36174 исправление сортировки ([ab540ef](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ab540efac21575a664c19bcd6a6c941e343af5c0))
+
 # [2.15.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.5...v2.15.0-release.6) (2022-10-21)
 
 
