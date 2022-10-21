@@ -5,6 +5,7 @@
   "client.statementStatuses.received": "Доставлен",
   "client.statementStatuses.executed": "Исполнен",
   "client.statementStatuses.denied": "Отклонен",
+  "client.statementStatuses.canceled": "Отменен",
   "admin.requestStatus.new": "Запрос сформирован",
   "admin.requestStatus.delivered": "Доставлен",
   "admin.requestStatus.detailsValid": "Реквизиты верны",

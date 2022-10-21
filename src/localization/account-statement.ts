@@ -49,6 +49,13 @@ export default {
 			get denied() {
 				return t('client.statementStatuses.denied');
 			},
+			/**
+			 * @ru
+			 * Отменен
+			 */
+			get canceled() {
+				return t('client.statementStatuses.canceled');
+			},
 		},
 		scroller: {
 			/**

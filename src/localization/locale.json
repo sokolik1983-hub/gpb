@@ -17,6 +17,9 @@
   "client.statementStatuses.denied": {
     "ru": "Отклонен"
   },
+  "client.statementStatuses.canceled": {
+    "ru": "Отменен"
+  },
   "admin.requestStatus.new": {
     "ru": "Запрос сформирован"
   },
