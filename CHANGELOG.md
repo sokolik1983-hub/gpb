@@ -1,3 +1,10 @@
+# [2.15.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.1...v2.15.0-release.2) (2022-10-21)
+
+
+### Features
+
+* **скроллер:** GBO-33530 реализация ЭФ скроллера проводок ([e7be14f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e7be14fad3b9771b13421edb9c253b4b3233e6b6))
+
 # [2.15.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0...v2.15.0-release.1) (2022-10-20)
 
 
