@@ -1,3 +1,10 @@
+# [2.15.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.7...v2.15.0-release.8) (2022-10-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36197 исправление маппинга для счета ([9eef11a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9eef11a4dd6288fdf4a1bdecdc4d5b0b8706909b))
+
 # [2.15.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.6...v2.15.0-release.7) (2022-10-21)
 
 
