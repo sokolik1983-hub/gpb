@@ -1,31 +1,29 @@
-import { pathGenerator } from '@platform/core';
-import type { TableValues } from './types';
-
-/** Возвращает имя поля формы. Улучшает типизацию. */
-export const getPath = pathGenerator<TableValues>();
-
-/** Имена колонок таблицы Истории запросов выписок. */
+/**
+ * Имена колонок таблицы Истории запросов выписок.
+ *
+ * Для сортируемых полей, значениями должны совпадать со значениями, которые бэкенд использует для сортировки.
+ * */
 export const COLUMN_NAMES = {
   /** Номера счетов. */
-  ACCOUNT_NUMBERS: getPath('accountNumbers'),
+  ACCOUNT_NUMBERS: 'accountNumbers',
   /** Колонка с действиями. */
-  ACTIONS: getPath('ACTIONS'),
+  ACTIONS: 'ACTIONS',
   /** Дата запроса. */
-  CREATED_AT: getPath('createdAt'),
+  CREATED_AT: 'createdAt',
   /** Формат выписки. */
-  FORMAT: getPath('format'),
+  FORMAT: 'format',
   /** Организации. */
-  ORGANIZATIONS: getPath('organizations'),
+  ORGANIZATIONS: 'organizations',
   /** Тип периода. */
-  PERIOD_TYPE: getPath('periodType'),
+  PERIOD_TYPE: 'periodType',
   /** Статус запроса. */
-  REQUEST_STATUS: getPath('requestStatus'),
+  REQUEST_STATUS: 'status',
   /** Филиалы обслуживания. */
-  SERVICE_BRANCHES: getPath('serviceBranches'),
+  SERVICE_BRANCHES: 'serviceBranches',
   /** Тип выписки. */
-  STATEMENT_TYPE: getPath('statementType'),
+  STATEMENT_TYPE: 'statementType',
   /** Статус выписки. */
-  STATEMENT_STATUS: getPath('statementStatus'),
+  STATEMENT_STATUS: 'getStatementStatus',
   /** Пользователь. */
-  USER: getPath('user'),
+  USER: 'userId',
 };
