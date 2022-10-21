@@ -1,6 +1,6 @@
 import type {
   IExpandedCollectionResponse,
-  IScrollerResponceDto,
+  IScrollerResponseDto,
   ICreateAttachmentResponse,
   FieldsRequired,
   IExpandedScrollerResponceDto,
@@ -65,7 +65,7 @@ export const statementService = {
     }).then(result => result.data.data),
   /** Возвращает список выписок для скроллера истории запросов. */
   getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<IStatementHistoryRow>> =>
-    request<IServerDataResp<IScrollerResponceDto<IStatementHistoryRow>>>({
+    request<IServerDataResp<IScrollerResponseDto<IStatementHistoryRow>>>({
       url: `${STATEMENT_REQUEST_URL}/get-page`,
       method: 'POST',
       data: metadataToRequestParams(metaData),

@@ -43,4 +43,14 @@ export const CARD_FOOTER_ACTIONS = [
   { ...getPrintStatementConfig(), label: locale.transactionCard.buttons.print },
 ];
 
-export const CARD_FOOTER_DROPDOWN_ACTIONS = [];
+/** Набор экшонов футера скроллера. */
+export const FOOTER_ACTIONS = [
+  { ...getPrintStatementConfig(), label: locale.admin.entryScroller.footer.print },
+  { ...getExportStatementConfig(), label: locale.admin.entryScroller.footer.export },
+];
+
+/** Набор экшонов хэдера скроллера. */
+export const HEADER_ACTIONS = [
+  { ...getPrintStatementConfig(), label: locale.transactionCard.buttons.print },
+  { ...getExportStatementConfig(), label: locale.transactionCard.buttons.export, buttonType: BUTTON.PRIMARY },
+];

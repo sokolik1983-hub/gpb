@@ -72,6 +72,6 @@ ExportStatementsHistoryDialog.displayName = 'ExportStatementsHistoryDialog';
 
 /** Показать диалог экспрорта реестра выписок. */
 export const showExportStatementsHistoryDialog = (statementCount: number) =>
-  new Promise((resolve, reject) =>
+  new Promise<FORMAT>((resolve, reject) =>
     dialog.show('exportStatementsHistoryDialog', ExportStatementsHistoryDialog, { onSelect: resolve, statementCount }, () => reject(true))
   );

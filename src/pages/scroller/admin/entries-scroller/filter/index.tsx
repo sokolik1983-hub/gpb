@@ -7,6 +7,7 @@ import { useLocation, useParams } from 'react-router-dom';
 import { getDateRangeValidationScheme } from 'schemas';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { LINE_HEIGHT } from 'stream-constants';
+import type { IFilters } from '@platform/core';
 import { useFilter } from '@platform/services/admin';
 import { validate } from '@platform/validation';
 import { useGetCounterparties, useGetClients } from '../hooks';
@@ -29,11 +30,15 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PA
 /** Поля фильтра для ручного ввода (необходимо для определения задержки запроса). */
 const manualEntryFields = [FORM_FIELDS.TABLE_SEARCH, FORM_FIELDS.DOC_NUMBER, FORM_FIELDS.AMOUNT_FROM, FORM_FIELDS.AMOUNT_TO];
 
+/** Свойства для компонента с фильтром. */
 interface IProps {
-  setFilters(values: any): void;
+  /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (скроллер проводок). */
+  setFilters: React.Dispatch<React.SetStateAction<IFilters | undefined>>;
+  /** Признак окончания загрузки проводки. */
   fetchedNewTransactions: boolean;
 }
 
+/** Компонент с фильтром для скроллера. */
 export const Filter: React.FC<IProps> = ({ setFilters, fetchedNewTransactions }) => {
   const { id } = useParams<IUrlParams>();
 
@@ -78,7 +83,8 @@ export const Filter: React.FC<IProps> = ({ setFilters, fetchedNewTransactions })
   );
 
   if (isClientsError || isCounterpartiesError) {
-    return null;
+    // FIXME: разобраться в 500 ошибке
+    // return null;
   }
 
   return (

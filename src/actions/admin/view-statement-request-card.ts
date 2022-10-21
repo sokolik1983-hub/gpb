@@ -11,7 +11,7 @@ import type { IActionConfig } from '@platform/services';
  * */
 export const viewStatementRequestCard: IActionConfig<typeof context, unknown> = {
   action: ({ done }, { router }) => ({ id }: StatementHistoryRow) => {
-    router.push(`${ADMIN_STREAM_URL.STATEMENT_CARD}/${id}`);
+    router.push(`${ADMIN_STREAM_URL.STATEMENT}/${id}`);
 
     done();
 

@@ -8,6 +8,6 @@ export * from './export-statements-history';
 export * from './print-statement-attachement';
 export * from './repeat-statement';
 export * from './view-modified-transactions';
-export * from './view-transaction';
 export * from './view-statement-request-card';
 export * from './view-transactions-scroller';
+export * from './view-entry';

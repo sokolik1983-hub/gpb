@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { executor } from 'actions/admin/executor';
 import { TransactionCard as TransactionCardContent } from 'components/common/transaction-card';
 import type { IGetTransactionCardResponseDto } from 'interfaces/dto';
-import { CARD_FOOTER_ACTIONS, CARD_FOOTER_DROPDOWN_ACTIONS } from 'pages/scroller/admin/statement-transaction/action-configs';
+import { CARD_FOOTER_ACTIONS, CARD_ROW_ACTIONS } from 'pages/scroller/admin/entries-scroller/action-configs';
 import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/admin';
 import { dialog } from '@platform/ui';
@@ -33,7 +33,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, s
   ]);
 
   const otherActions = useMemo(() => {
-    const activeActionButtons = getActiveActionButtons(getAvailableActions(CARD_FOOTER_DROPDOWN_ACTIONS), executor, [[doc], statementId]);
+    const activeActionButtons = getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [[doc], statementId]);
 
     return activeActionButtons.map(({ icon, ...restButtonProps }) => ({ ...restButtonProps }));
   }, [getAvailableActions, doc, statementId]);

@@ -10,7 +10,7 @@ import { Box, Gap, Pattern, Typography, WithInfoTooltip } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента общей информации по выписке. */
-interface StatmentInfoContentProps {
+interface StatementInfoContentProps {
   /** Счёт. */
   accountNumber: string;
   /** Организация. */
@@ -61,7 +61,7 @@ export const StatementInfoContent = ({
   outgoingBalanceNatCurr,
   isNationalCurrency,
   currencyCode,
-}: StatmentInfoContentProps) => (
+}: StatementInfoContentProps) => (
   <Box className={css.statementInfoWrapper}>
     <Gap.SM />
     <Pattern gap={'X2L'}>

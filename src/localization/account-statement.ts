@@ -493,6 +493,172 @@ export default {
 				return t('admin.scroller.title');
 			},
 		},
+		entryScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get date() {
+					return t('admin.entryScroller.columns.date');
+				},
+				/**
+				 * @ru
+				 * Счёт клиент
+				 */
+				get account() {
+					return t('admin.entryScroller.columns.account');
+				},
+				/**
+				 * @ru
+				 * Документ
+				 */
+				get document() {
+					return t('admin.entryScroller.columns.document');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.entryScroller.columns.counterparty');
+				},
+				/**
+				 * @ru
+				 * Поступления
+				 */
+				get income() {
+					return t('admin.entryScroller.columns.income');
+				},
+				/**
+				 * @ru
+				 * Списания
+				 */
+				get outcome() {
+					return t('admin.entryScroller.columns.outcome');
+				},
+				/**
+				 * @ru
+				 * Сумма
+				 */
+				get summary() {
+					return t('admin.entryScroller.columns.summary');
+				},
+				aggregate: {
+					/**
+					 * @ru
+					 * Счёт {accountNumber}
+					 */
+					account: (p: { accountNumber: string }) => t('admin.entryScroller.columns.aggregate.account', p),
+					/**
+					 * @ru
+					 * {currencyCode} {organizationName}
+					 */
+					organization: (p: { currencyCode: string; organizationName: string }) =>
+						t('admin.entryScroller.columns.aggregate.organization', p),
+				},
+			},
+			cells: {
+				/**
+				 * @ru
+				 * от {date}
+				 */
+				documentDate: (p: { date: string }) => t('admin.entryScroller.cells.documentDate', p),
+			},
+			footer: {
+				/**
+				 * @ru
+				 * Выбрано:
+				 */
+				get selected() {
+					return t('admin.entryScroller.footer.selected');
+				},
+				/**
+				 * @ru
+				 * Поступления:
+				 */
+				get income() {
+					return t('admin.entryScroller.footer.income');
+				},
+				/**
+				 * @ru
+				 * Списания:
+				 */
+				get outcome() {
+					return t('admin.entryScroller.footer.outcome');
+				},
+				/**
+				 * @ru
+				 * Экспорт документов
+				 */
+				get export() {
+					return t('admin.entryScroller.footer.export');
+				},
+				/**
+				 * @ru
+				 * Печать документов
+				 */
+				get print() {
+					return t('admin.entryScroller.footer.print');
+				},
+			},
+			groupBy: {
+				/**
+				 * @ru
+				 * Без группировки
+				 */
+				get WITHOUT() {
+					return t('admin.entryScroller.groupBy.WITHOUT');
+				},
+				/**
+				 * @ru
+				 * По счетам
+				 */
+				get BY_ACCOUNT() {
+					return t('admin.entryScroller.groupBy.BY_ACCOUNT');
+				},
+			},
+			/**
+			 * @ru
+			 * Операций
+			 */
+			get total() {
+				return t('admin.entryScroller.total');
+			},
+			/**
+			 * @ru
+			 * Показать только выбранные
+			 */
+			get showOnlySelectedRows() {
+				return t('admin.entryScroller.showOnlySelectedRows');
+			},
+			aggregate: {
+				/**
+				 * @ru
+				 * Входящий остаток
+				 */
+				get incomingBalance() {
+					return t('admin.entryScroller.aggregate.incomingBalance');
+				},
+				/**
+				 * @ru
+				 * Исходящий остаток
+				 */
+				get outgoingBalance() {
+					return t('admin.entryScroller.aggregate.outgoingBalance');
+				},
+				/**
+				 * @ru
+				 * {count} списаний
+				 */
+				outcome: (p: { count: number }) => t('admin.entryScroller.aggregate.outcome', p),
+				/**
+				 * @ru
+				 * {count} поступлений
+				 */
+				income: (p: { count: number }) => t('admin.entryScroller.aggregate.income', p),
+			},
+		},
 	},
 	scroller: {
 		tags: {
@@ -827,7 +993,7 @@ export default {
 		headers: {
 			/**
 			 * @ru
-			 * Дата опер.
+			 * Дата проводки
 			 */
 			get operationDate() {
 				return t('transactionsScroller.headers.operationDate');
