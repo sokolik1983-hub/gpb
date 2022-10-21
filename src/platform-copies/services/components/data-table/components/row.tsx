@@ -56,7 +56,14 @@ export const Row = <T,>({
 
   const fastActionGetter = useMemo(() => (typeof fastActions === 'function' ? fastActions : () => fastActions), [fastActions]);
 
-  const handleRowClick = React.useCallback(item => () => onRowClick(item.original), [onRowClick]);
+  const handleRowClick = React.useCallback(
+    item => (e: React.SyntheticEvent) => {
+      e.stopPropagation();
+
+      onRowClick(item.original);
+    },
+    [onRowClick]
+  );
 
   const handleRowDoubleClick = React.useCallback(item => () => onRowDoubleClick(item.original), [onRowDoubleClick]);
 

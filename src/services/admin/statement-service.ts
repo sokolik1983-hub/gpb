@@ -28,7 +28,6 @@ import {
   mapDtoToViewForStatementList,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
-import { asyncNoop } from 'utils/common';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -75,10 +74,10 @@ export const statementService = {
       url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
     }).then(r => r.data),
   /** Возвращает проводку. */
-  // TODO убрать eslint-disable после реализации метода
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
-    asyncNoop(),
+  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }) =>
+    request<IServerDataResp<IGetTransactionCardResponseDto>>({
+      url: `${STATEMENT_BANK_URL}/entry/${accountingEntryId}`,
+    }).then(r => r.data),
   /** Возвращает временной период. */
   getDatePeriod: (data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> =>
     request<IServerDataResp<IGetDatePeriodResponseDto>>({
@@ -182,7 +181,7 @@ export const statementService = {
       method: 'POST',
       url: `${CLIENT_USER_URL}/find/fio`,
     }).then(response => response.data.data),
-  createStatementAttachment: (data: CreateStatementAttachmentRequestDto): Promise<IFileDataResponse> =>
+  createStatementAttachment: (data: CreateStatementAttachmentRequestDto) =>
     request<IServerDataResp<IFileDataResponse>>({
       data,
       method: 'POST',

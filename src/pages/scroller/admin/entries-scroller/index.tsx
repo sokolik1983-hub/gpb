@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { executor } from 'actions/admin';
+import { executor, viewEntry } from 'actions/admin';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
@@ -13,7 +13,7 @@ import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
 import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
-import { convertTablePaginationToMetaData, convertTableSortByMap, getActiveActionButtons, noop } from 'utils/common';
+import { convertTablePaginationToMetaData, convertTableSortByMap, getActiveActionButtons } from 'utils/common';
 import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services';
 import { DATE_FORMAT } from '@platform/services';
@@ -101,7 +101,7 @@ export const EntriesScrollerPage: React.FC = () => {
     [getAvailableActions, id]
   );
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [{ id }]), [getAvailableActions, id]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
 
   const headerProps = {
     actions,
@@ -114,6 +114,13 @@ export const EntriesScrollerPage: React.FC = () => {
   const height = useStreamContentHeight();
 
   const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - TAB_HEIGHT - FILTER_HEIGHT - TURNOVER_TOTAL_HEIGHT;
+
+  const handRowClick = useCallback(
+    row => {
+      void executor.execute(viewEntry, [row], id);
+    },
+    [id]
+  );
 
   return (
     <MainLayout>
@@ -141,7 +148,7 @@ export const EntriesScrollerPage: React.FC = () => {
                       storageKey={STORAGE_KEY}
                       visibleOnlySelectedRows={visibleOnlySelectedRows}
                       withGrouping={groupBy !== GROUP_BY.WITHOUT}
-                      onRowClick={noop}
+                      onRowClick={handRowClick}
                       onSelectedRowsChange={setSelectedRows}
                     />
                   </ContentLoader>

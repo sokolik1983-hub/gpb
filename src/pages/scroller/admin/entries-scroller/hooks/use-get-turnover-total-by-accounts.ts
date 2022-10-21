@@ -8,11 +8,11 @@ import { statementService } from 'services/admin';
 export const useGetTurnoverTotalByAccounts = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data, isError, isFetched, isFetching } = useQuery<BankTurnoverCard[]>({
+  const { isError, isFetched, isFetching } = useQuery<BankTurnoverCard[]>({
     queryKey: ['@eco/statement', 'turnoverTotalByAccount', id],
     queryFn: () => statementService.turnoverTotalByAccounts(id),
     retry: false,
   });
 
-  return { data, isError, isFetched, isFetching };
+  return { data: {}, isError, isFetched, isFetching };
 };

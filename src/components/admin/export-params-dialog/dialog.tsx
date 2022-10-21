@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import { ACTION } from 'interfaces/common';
-import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { Form } from 'react-final-form';
-import { useQueryClient } from 'react-query';
 import { getInitialFormState } from 'stream-constants/admin/form';
 import type { IFormState } from 'stream-constants/form';
 import { dialog } from '@platform/ui';
@@ -16,11 +14,6 @@ import { DialogContext } from './dialog-context';
 interface StatementParamsDialogResponse {
   /** Данные формы. */
   formState: IFormState;
-  /** Информация по выписке. */
-  statementInfo: {
-    income?: number;
-    outcome?: number;
-  };
 }
 
 /** Свойства ЭФ с параметрами выписки и документов. */
@@ -39,15 +32,11 @@ export interface IExportParamsDialogProps {
 
 /** Компонент "ЭФ параметров выписки и документов". */
 export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action, statementId }) => {
-  const queryClient = useQueryClient();
-
-  const statementSummary = queryClient.getQueryData<IStatementSummaryInfoResponseDto>(['@eco/statement', 'statement', statementId]);
-
-  const initialFormState = getInitialFormState({ useCase, dateFrom: statementSummary?.dateFrom, dateTo: statementSummary?.dateTo });
+  const initialFormState = getInitialFormState({ useCase, dateFrom: '', dateTo: '' });
 
   const handleSubmit = (formState: IFormState) => {
     onClose();
-    onSubmit({ formState, statementInfo: { income: statementSummary?.income, outcome: statementSummary?.outcome } });
+    onSubmit({ formState });
   };
 
   const value: IDialogContext = useMemo(

@@ -2,7 +2,7 @@ import type { CreateStatementAttachmentRequestDto, StatementHistoryRow } from 'i
 import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { showFile } from '@platform/services/client';
+import { showFile } from '@platform/services/admin';
 import type { context } from './executor';
 
 /**
