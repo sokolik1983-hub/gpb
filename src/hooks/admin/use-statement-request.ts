@@ -1,10 +1,12 @@
 import { useMemo, useState } from 'react';
 import type { IUrlParams } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
-import type { ILatestStatementDto, RequestPeriodType } from 'interfaces/dto';
+import type { RequestPeriodType } from 'interfaces/dto';
+import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
+import { NEW_ENTITY_ID } from 'stream-constants';
 import { ERROR } from '@platform/services/admin';
 
 /**
@@ -16,16 +18,27 @@ import { ERROR } from '@platform/services/admin';
  * Иначе подразумевается, что форма открыта на копирование,
  * и предзаполняентся значениями выписки, id которой указан в УРЛе.
  */
-export const useInitialStatementRequest = (): {
-  initialStatementRequest: ILatestStatementDto | undefined;
-  isInitialLoading: boolean;
-  isInitialError: boolean;
+export const useStatementRequest = (): {
+  statementRequest: IStatementRequestCardDto | undefined;
+  isLoading: boolean;
+  isError: boolean;
   isForbidden;
 } => {
   const { id } = useParams<IUrlParams>();
   const [isForbidden, setIsForbidden] = useState(false);
 
-  const statementRequestFetcher = useMemo(() => () => statementService.getStatementRequest(id), [id]);
+  const statementRequestFetcher = useMemo(
+    () => () => {
+      const isNewStatement = id === NEW_ENTITY_ID;
+
+      if (isNewStatement) {
+        return new Error('Creating a new statement is unavailable for bank employee.');
+      }
+
+      return statementService.getStatementRequest(id);
+    },
+    [id]
+  );
 
   const { data: statementRequestResp, isLoading: isStatementRequestLoading, isError: isStatementRequestLoadingError } = useQuery<any>({
     queryKey: ['@eco/statement', 'get-statement-request', id],
@@ -63,9 +76,9 @@ export const useInitialStatementRequest = (): {
   }
 
   return {
-    initialStatementRequest: statementRequest,
-    isInitialLoading: isStatementRequestLoading || isPeriodLoading,
-    isInitialError: isStatementRequestLoadingError || isPeriodLoadingError,
+    statementRequest,
+    isLoading: isStatementRequestLoading || isPeriodLoading,
+    isError: isStatementRequestLoadingError || isPeriodLoadingError,
     isForbidden,
   };
 };
