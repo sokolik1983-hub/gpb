@@ -1,5 +1,6 @@
 import type { context } from 'actions/admin';
 import type { StatementRequest } from 'interfaces/admin';
+import { generatePath } from 'react-router-dom';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 import type { IActionConfig } from '@platform/services';
 
@@ -10,7 +11,7 @@ import type { IActionConfig } from '@platform/services';
  * */
 export const showStatementRequestForm: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done }, { router }) => ({ id, refererPage }: StatementRequest) => {
-    router.push(`${ADMIN_STREAM_URL.STATEMENT_REQUEST}/${id}`, { refererPage });
+    router.push(generatePath(ADMIN_STREAM_URL.STATEMENT_REQUEST, { id }), { refererPage });
 
     done();
 

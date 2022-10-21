@@ -1,5 +1,6 @@
 import type { context } from 'actions/admin';
 import type { StatementHistoryRow } from 'interfaces/admin';
+import { generatePath } from 'react-router-dom';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 import { singleAction } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
@@ -11,7 +12,7 @@ import type { IActionConfig } from '@platform/services';
  * */
 export const viewStatementRequestCard: IActionConfig<typeof context, unknown> = {
   action: ({ done }, { router }) => ({ id }: StatementHistoryRow) => {
-    router.push(`${ADMIN_STREAM_URL.STATEMENT_REQUEST}/${id}`);
+    router.push(generatePath(ADMIN_STREAM_URL.STATEMENT_REQUEST, { id }));
 
     done();
 

@@ -12,5 +12,5 @@ export const routes = [
   /** Путь до скроллера проводок на основании запроса. */
   <Route key="entries-scroller" component={EntriesScrollerPage} path={`${ADMIN_STREAM_URL.STATEMENT_ENTRY}/:id`} />,
   /** Путь до ЭФ просмотра параметров запроса на выписку. */
-  <Route key="entries-scroller" component={AdminFormPage} path={`${ADMIN_STREAM_URL.STATEMENT_REQUEST}/:id`} />,
+  <Route key="entries-scroller" component={AdminFormPage} path={ADMIN_STREAM_URL.STATEMENT_REQUEST} />,
 ];
