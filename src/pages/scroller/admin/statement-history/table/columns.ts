@@ -84,8 +84,8 @@ export const columns = addMaxWidthField<StatementHistoryRow, { isVisible: boolea
     accessor,
     id: COLUMN_NAMES.USER,
     isVisible: false,
-    maxWidth: 300,
-    minWidth: 150,
+    maxWidth: 350,
+    minWidth: 200,
     width: 250,
   },
   {

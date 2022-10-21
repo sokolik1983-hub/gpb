@@ -23,7 +23,7 @@ import { useDebounce } from 'platform-copies/hooks';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { getDateRangeValidationScheme } from 'schemas';
 import { statementService } from 'services/admin';
-import { ALL_VALUE, LINE_HEIGHT } from 'stream-constants';
+import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, getActiveActionButtons } from 'utils/common';
 import { useFilter } from '@platform/services';
@@ -95,24 +95,8 @@ export const StatementHistoryScrollerPage = () => {
   const fetchStatements = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<StatementHistoryRow>> => {
       try {
-        const filters = Object.keys(filterValuesDebounced)
-          .filter(
-            item =>
-              !(
-                [FORM_FIELDS.REQUEST_STATUS, FORM_FIELDS.STATEMENT_STATUS].includes(item) &&
-                (filterValuesDebounced[item].value as string[]).includes(ALL_VALUE)
-              )
-          )
-          .reduce(
-            (prevValue, item) =>
-              [FORM_FIELDS.PERIOD_TYPE, FORM_FIELDS.STATEMENT_TYPE].includes(item)
-                ? prevValue
-                : { ...prevValue, [item]: filterValuesDebounced[item] },
-            {}
-          );
-
         const metaData: IMetaData = {
-          filters,
+          filters: filterValuesDebounced,
           multiSort,
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };

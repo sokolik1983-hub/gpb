@@ -9,8 +9,8 @@ import { ACTION } from 'interfaces/common';
 import { locale } from 'localization';
 import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/history-scroller-context';
 import type { CellProps } from 'react-table';
-import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants';
-import { STATUS_COLOR, STATUS_LABELS } from 'stream-constants/client';
+import { DATE_PERIOD_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS, STATEMENT_REQUEST_STATUS_FOR_CLIENT_LABEL } from 'stream-constants';
+import { STATUS_COLOR } from 'stream-constants/client';
 import { getActiveActionButtons } from 'utils/common';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { useAuth } from '@platform/services/client';
@@ -118,7 +118,7 @@ export const Status: FC<HistoryCellProps> = ({ value: doc }) => {
     <Horizon align="TOP">
       <StatusMarker className={css.status} type={STATUS_COLOR[status]} />
       <Typography.P data-field={'status'} line="BREAK">
-        {STATUS_LABELS[status]}
+        {STATEMENT_REQUEST_STATUS_FOR_CLIENT_LABEL[status]}
       </Typography.P>
     </Horizon>
   );
