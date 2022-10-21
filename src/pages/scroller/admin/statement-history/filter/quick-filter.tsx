@@ -77,9 +77,10 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
 
       void submit();
 
-      setDatePeriodFetched();
-
       setDatePeriodLoading(false);
+
+      // Необходимо, чтобы данные на форме обновились
+      setTimeout(() => setDatePeriodFetched(), 0);
     },
     [batch, change, setDatePeriodFetched, submit]
   );
