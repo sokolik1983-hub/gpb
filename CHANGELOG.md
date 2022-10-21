@@ -1,3 +1,11 @@
+# [2.15.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.3...v2.15.0-release.4) (2022-10-21)
+
+
+### Features
+
+* GBO-35991 Разработка ЭФ просмотра параметров запроса выписки ([da51467](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/da5146713e1940dd3ed96527ff8ea08ccf9ab597))
+* GBO-35991 Разработка ЭФ просмотра параметров запроса выписки ([b4a2f64](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b4a2f64893b7f15a44e6b144f0d4b3118fd44b67))
+
 # [2.15.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.2...v2.15.0-release.3) (2022-10-21)
 
 
