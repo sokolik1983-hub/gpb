@@ -36,14 +36,19 @@ EntryDateCell.displayName = 'EntryDateCell';
 
 /** Компонент для отображения информации по счету клиента. */
 export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const { organizationName, number } = value;
+  const {
+    account: {
+      bankClient: { name },
+    },
+    number,
+  } = value;
 
   return (
     <>
-      <WithInfoTooltip extraSmall text={organizationName}>
+      <WithInfoTooltip extraSmall text={name}>
         {ref => (
           <Typography.P innerRef={ref} line={'COLLAPSE'}>
-            {organizationName}
+            {name}
           </Typography.P>
         )}
       </WithInfoTooltip>

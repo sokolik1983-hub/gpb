@@ -29,7 +29,7 @@ export const Footer: React.FC<FooterProps> = ({ selectedRows }) => {
   const queryClient = useQueryClient();
 
   const total = queryClient.getQueryData<BankAccountingEntryGroupAggregate[]>(['@eco/statement', 'turnoverTotalByAccount', id]);
-  const currencyLetterCode = total?.[0]?.account?.currencyLetterCode ?? '';
+  const currencyLetterCode = total?.[0]?.account?.currency?.letterCode ?? '';
 
   // суммарный входящий остаток по выбранным проводкам
   const incomeTotal = useMemo(() => getIncomeTotal(selectedRows), [selectedRows]);

@@ -20,9 +20,8 @@ export const AggregateByAccountData: React.FC<AggregateByAccountDataProps> = ({ 
   }
 
   const { aggregate } = original as BankAccountingEntryGroup;
-  const { incomingBalance, outgoingBalance, amountCredit, amountDebit, totalCount } = aggregate;
-  // eslint-disable-next-line unicorn/consistent-destructuring
-  const currencyCode = aggregate?.account?.currencyLetterCode ?? 'RUB';
+  const { incomingBalance, outgoingBalance, amountCredit, amountDebit, totalCount, account } = aggregate;
+  const currencyCode = account?.currency?.letterCode ?? '';
 
   return (
     <Box className={css.container} fill="FAINT">
