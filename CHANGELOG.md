@@ -1,3 +1,11 @@
+# [2.15.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.4...v2.15.0-release.5) (2022-10-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-35256 по дефолту всегда тип периода "Вчера" ([a5f7b2c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a5f7b2c9740acdffdc640964f7e2ab9cc0149438))
+* **скроллер:** GBO-36063 поправлены названия колнок таблицы для корректной сортировки ([3eab8c3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3eab8c3e8487f6e079ddf0bdfabd8f670e9be1ba))
+
 # [2.15.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.3...v2.15.0-release.4) (2022-10-21)
 
 
