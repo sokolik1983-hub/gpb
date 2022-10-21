@@ -1,5 +1,6 @@
 import type React from 'react';
 import { createContext } from 'react';
+import type { TotalTurnover } from 'interfaces/admin';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { noop } from 'utils/common';
 import { GROUP_BY } from './constants';
@@ -20,6 +21,8 @@ export interface IEntriesScrollerContext {
   visibleOnlySelectedRows: boolean;
   /** Устанавливает признак отображения только выбранных строк. */
   setVisibleOnlySelectedRows: React.Dispatch<React.SetStateAction<boolean>>;
+  /** Сводная информация по выписке. */
+  totalTurnovers: TotalTurnover[];
 }
 
 /** Значение по-умолчанию контекста скроллера проводок. */
@@ -31,6 +34,7 @@ export const defaultValue: IEntriesScrollerContext = {
   setGroupBy: noop,
   visibleOnlySelectedRows: false,
   setVisibleOnlySelectedRows: noop,
+  totalTurnovers: [],
 };
 
 /** Контекст скроллера проводок. */
