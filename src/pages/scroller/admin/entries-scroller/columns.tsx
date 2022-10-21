@@ -31,6 +31,7 @@ export const columns = addMaxWidthField<BankAccountingEntryCard, { isVisible: bo
     width: 255,
     isVisible: true,
     accessor,
+    disableSortBy: true,
   },
   {
     Header: locale.admin.entryScroller.columns.document,
