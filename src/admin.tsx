@@ -1,4 +1,5 @@
 import React from 'react';
+import { CreateStatementForm } from 'pages/form/admin/views/create-statement-form';
 import { EntriesScrollerPage } from 'pages/scroller/admin/entries-scroller';
 import { StatementHistoryScrollerPage } from 'pages/scroller/admin/statement-history';
 import { Route } from 'react-router-dom';
@@ -10,4 +11,6 @@ export const routes = [
   <Route key="history-scroller" component={StatementHistoryScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_HISTORY} />,
   /** Путь до скроллера проводок на основании запроса. */
   <Route key="entries-scroller" component={EntriesScrollerPage} path={`${ADMIN_STREAM_URL.STATEMENT_ENTRY}/:id`} />,
+  /** Путь до ЭФ просмотра параметров запроса на выписку. */
+  <Route key="entries-scroller" component={CreateStatementForm} path={`${ADMIN_STREAM_URL.STATEMENT_REQUEST}/:id`} />,
 ];

@@ -1,6 +1,6 @@
 export * from './use-accounts';
 export * from './use-accounts-by-ids';
-export * from './use-initial-statement-request';
+export * from './use-statement-request';
 export * from './use-organizations';
 export * from './use-organizations-by-ids';
 export * from './use-service-branches';

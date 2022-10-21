@@ -19,7 +19,7 @@ import type {
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { BankTurnoverCard } from 'interfaces/admin/dto/bank-turnover-card';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { IStatementRequestCardDto, IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
@@ -70,9 +70,10 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получить сущность "Запрос выписки". */
-  // TODO убрать eslint-disable после реализации метода
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getStatementRequest: (id: string) => asyncNoop,
+  getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
+    request<IServerDataResp<IStatementRequestCardDto>>({
+      url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
+    }).then(r => r.data),
   /** Возвращает проводку. */
   // TODO убрать eslint-disable после реализации метода
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

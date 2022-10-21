@@ -1,6 +1,7 @@
 import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import type { ICreateRequestStatementDto, ILatestStatementDto } from 'interfaces/dto';
+import type { ICreateRequestStatementDto } from 'interfaces/dto';
+import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
 import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 import type { IFormState } from 'stream-constants/form';
@@ -71,12 +72,12 @@ export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE
   operations: formState.operations,
   periodType: formState.periodType,
   format: formState.format,
-  sourcePage: ADMIN_STREAM_URL.STATEMENT,
+  sourcePage: ADMIN_STREAM_URL.STATEMENT_REQUEST,
   type: TYPE.ONETIME,
 });
 
 /** Функция для преобразования ДТО ответа для последний выписки в значения формы. */
-export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
+export const mapDtoToForm = (dto: IStatementRequestCardDto): Partial<IFormState> => {
   const creditParams: string[] = [];
   const debitParams: string[] = [];
   const creationParams: string[] = [];
@@ -133,12 +134,12 @@ export const mapDtoToForm = (dto: ILatestStatementDto): Partial<IFormState> => {
   }
 
   return {
-    accountIds: dto.accountsIds,
+    accountIds: dto.accountNumbers,
     dateFrom: dto.periodStart,
     dateTo: dto.periodEnd,
-    format: dto.statementFormat,
+    format: dto.format,
     periodType: dto.periodType,
-    operations: dto.statementOperationDto,
+    operations: dto.operations,
     creationParams,
     creditParams,
     debitParams,

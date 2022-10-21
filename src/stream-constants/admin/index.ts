@@ -2,8 +2,8 @@ import { ADMIN_STREAM_URL as PLATFORM_ADMIN_STREAM_URL } from '@platform/service
 
 export const ADMIN_STREAM_URL = {
   ...PLATFORM_ADMIN_STREAM_URL,
-  /** ЭФ создания нового запроса на выписку. */
-  STATEMENT: '/account-statement/:id',
+  /** ЭФ просмотра параметров запроса на выписку. */
+  STATEMENT_REQUEST: '/account-statement',
   /** Скроллер проводок на основании запроса. */
   STATEMENT_ENTRY: '/account-statement/entry',
   /** Скроллер истории запросов выписок. */

@@ -10,7 +10,7 @@ import type { IActionConfig } from '@platform/services';
  * */
 export const showStatementRequestForm: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done }, { router }) => ({ id, refererPage }: StatementRequest) => {
-    router.push(`${ADMIN_STREAM_URL.STATEMENT}/${id}`, { refererPage });
+    router.push(`${ADMIN_STREAM_URL.STATEMENT_REQUEST}/${id}`, { refererPage });
 
     done();
 
