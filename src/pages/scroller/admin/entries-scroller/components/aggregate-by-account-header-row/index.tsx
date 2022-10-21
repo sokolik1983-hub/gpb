@@ -17,11 +17,10 @@ interface AggregateHeaderProps {
 /** Компонент для отображения заголовка подстрок при группировке по счетам. */
 const AggregateByAccountHeader: React.FC<AggregateHeaderProps> = ({ account }) => {
   const formattedAccountNumber = locale.admin.entryScroller.columns.aggregate.account({
-    accountNumber: formatAccountCode(account?.number ?? '40702810500440170961'),
+    accountNumber: formatAccountCode(account?.number),
   });
-  const currencyCode = account?.currencyLetterCode ?? 'RUB';
-  // eslint-disable-next-line @eco/no-missing-localization
-  const organizationName = account?.organizationName ?? 'ООО «Банк Софт Системс»';
+  const currencyCode = account?.currency?.letterCode ?? '';
+  const organizationName = account?.bankClient.name ?? '';
 
   return (
     <>
