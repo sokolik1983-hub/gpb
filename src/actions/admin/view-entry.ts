@@ -1,8 +1,7 @@
 import { showTransactionCard } from 'components/admin/transaction-card';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
-import type { IActionConfig } from '@platform/services';
-import type { IBaseEntity } from '@platform/services/admin';
+import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
 
 /**
