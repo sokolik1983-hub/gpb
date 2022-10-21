@@ -1,3 +1,10 @@
+# [2.15.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.5...v2.15.0-release.6) (2022-10-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36101 добавил печать, экспорт и отображение проводки ([28d284f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/28d284f79e152a0c28fa08c613f3d2a96dcad2ea))
+
 # [2.15.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.4...v2.15.0-release.5) (2022-10-21)
 
 
