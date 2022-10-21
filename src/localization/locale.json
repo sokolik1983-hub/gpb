@@ -57,10 +57,10 @@
     "ru": "Справка"
   },
   "admin.userType.bank": {
-    "ru": "Сотрудник Банка"
+    "ru": "Сотрудник банка"
   },
   "admin.userType.client": {
-    "ru": "Сотрудник Клиента"
+    "ru": "Сотрудник клиента"
   },
   "admin.userType.technical": {
     "ru": "Технический пользователь"
@@ -456,7 +456,7 @@
     "ru": "Статус запроса"
   },
   "admin.historyScroller.table.header.user": {
-    "ru": "Пользователь"
+    "ru": "Пользователь, сформировавший запрос"
   },
   "admin.historyScroller.table.header.serviceBranch": {
     "ru": "Филиал обслуживания"
@@ -465,7 +465,7 @@
     "ru": "Признак сформированной выписки"
   },
   "admin.historyScroller.table.header.statementStatus": {
-    "ru": "Статус выписки"
+    "ru": "Статус сформированной выписки"
   },
   "admin.historyScroller.table.cell.inn": {
     "ru": "ИНН"

@@ -170,14 +170,14 @@ export default {
 		userType: {
 			/**
 			 * @ru
-			 * Сотрудник Банка
+			 * Сотрудник банка
 			 */
 			get bank() {
 				return t('admin.userType.bank');
 			},
 			/**
 			 * @ru
-			 * Сотрудник Клиента
+			 * Сотрудник клиента
 			 */
 			get client() {
 				return t('admin.userType.client');
@@ -320,7 +320,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Пользователь
+					 * Пользователь, сформировавший запрос
 					 */
 					get user() {
 						return t('admin.historyScroller.table.header.user');
@@ -341,7 +341,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Статус выписки
+					 * Статус сформированной выписки
 					 */
 					get statementStatus() {
 						return t('admin.historyScroller.table.header.statementStatus');
