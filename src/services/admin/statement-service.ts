@@ -14,10 +14,11 @@ import type {
   IFileDataResponse,
   Organization,
   ServiceBranch,
+  StatementSummary,
+  TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
-import type { BankTurnoverCard } from 'interfaces/admin/dto/bank-turnover-card';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
 import type { IStatementRequestCardDto, IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
@@ -26,6 +27,7 @@ import {
   mapDtoToViewForOrganizationList,
   mapDtoToViewForServiceBranchList,
   mapDtoToViewForStatementList,
+  mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
@@ -187,9 +189,9 @@ export const statementService = {
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/statement/create-attachment`,
     }).then(response => response.data.data),
-  /** Получение суммарных остатков и оборотов по идентификатору выписки сгруппированных по счетам. */
-  turnoverTotalByAccounts: (statementId: string): Promise<BankTurnoverCard[]> =>
-    request<IServerResp<BankTurnoverCard[]>>({
-      url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/by-accounts`,
-    }).then(x => x.data.data),
+  /** Возвращает сводную информацию по выписке. */
+  getStatementSummary: (statementId: string): Promise<StatementSummary> =>
+    request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
+      url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
+    }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
 };

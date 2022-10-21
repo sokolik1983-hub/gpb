@@ -12,3 +12,4 @@ export * from './user';
 export * from './user-type';
 export * from './quick-filter-panel';
 export * from './service-branch';
+export * from './total-turnover-grouped-by-currency';

@@ -30,7 +30,7 @@ export const StatementInfo: FC = () => {
 
   return (
     <StatementInfoContent
-      accountNumber={accountNumber}
+      accountNumbers={[accountNumber]}
       currencyCode={currencyCode}
       income={income}
       incomeNatCurr={incomeNatCurr}
@@ -38,7 +38,7 @@ export const StatementInfo: FC = () => {
       incomingBalance={incomingBalance}
       incomingBalanceNatCurr={incomingBalanceNatCurr}
       isNationalCurrency={isNationalCurrency}
-      organizationName={organizationName}
+      organizationNames={[organizationName]}
       outcome={outcome}
       outcomeNatCurr={outcomeNatCurr}
       outcomesCount={outcomesCount}

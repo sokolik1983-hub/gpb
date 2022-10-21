@@ -8,6 +8,7 @@ import type { IUrlParams } from 'interfaces';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { locale } from 'localization';
 import { TableRowsInfo } from 'pages/scroller/admin/entries-scroller/components/table-rows-info';
+import { useStatementSummary } from 'pages/scroller/admin/entries-scroller/hooks';
 import type { IFetchDataParams } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
@@ -82,6 +83,11 @@ export const EntriesScrollerPage: React.FC = () => {
     [filters, groupBy, id]
   );
 
+  const {
+    data: { groups: totalTurnovers, statement },
+    isFetching: isTotalTurnoversFetching,
+  } = useStatementSummary();
+
   const contextValue: IEntriesScrollerContext = useMemo(
     () => ({
       selectedRows,
@@ -91,8 +97,9 @@ export const EntriesScrollerPage: React.FC = () => {
       setGroupBy,
       visibleOnlySelectedRows,
       setVisibleOnlySelectedRows,
+      totalTurnovers,
     }),
-    [groupBy, selectedRows, visibleOnlySelectedRows]
+    [groupBy, selectedRows, totalTurnovers, visibleOnlySelectedRows]
   );
 
   const footerActions = useCallback(
@@ -106,8 +113,8 @@ export const EntriesScrollerPage: React.FC = () => {
   const headerProps = {
     actions,
     header: locale.transactionsScroller.title({
-      dateFrom: formatDateTime('', { keepLocalTime: true, format: DATE_FORMAT }),
-      dateTo: formatDateTime('', { keepLocalTime: true, format: DATE_FORMAT }),
+      dateFrom: formatDateTime(statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
+      dateTo: formatDateTime(statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
     }),
   };
 
@@ -129,8 +136,10 @@ export const EntriesScrollerPage: React.FC = () => {
           <EntriesScrollerContext.Provider value={contextValue}>
             <Box style={{ height }}>
               <LayoutScroll>
-                <ScrollerPageLayout headerProps={headerProps}>
-                  <TurnoverTotal />
+                <ScrollerPageLayout headerProps={headerProps} loading={isTotalTurnoversFetching}>
+                  <ContentLoader height={TURNOVER_TOTAL_HEIGHT} loading={isTotalTurnoversFetching}>
+                    <TurnoverTotal />
+                  </ContentLoader>
                   <Filter fetchedNewTransactions setFilters={setFilters} />
                   <ContentLoader height={tableHeight}>
                     <TableRowsInfo />
