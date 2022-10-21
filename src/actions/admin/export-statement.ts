@@ -28,7 +28,7 @@ export const exportStatement: IActionConfig<typeof context, unknown> = {
 
     const [file, error] = await to(service.createStatementAttachment(data));
 
-    if (error || !file || (file?.content && ((file?.content as unknown) as ArrayBuffer).byteLength === 0)) {
+    if (error || !file || file.content.length === 0) {
       hideLoader();
 
       fatal('error');

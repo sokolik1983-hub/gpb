@@ -38,7 +38,7 @@ export const exportStatementsHistory: IActionConfig<typeof context, unknown> = {
       service.generateStatementsReport({ dateFrom, dateTo, format: fileFormat as FORMAT.EXCEL | FORMAT.PDF, statementRequestIds })
     );
 
-    if (generateError || !file || (file?.content && ((file?.content as unknown) as ArrayBuffer).byteLength === 0)) {
+    if (generateError || !file || file.content.length === 0) {
       hideLoader();
 
       fatal('error');
