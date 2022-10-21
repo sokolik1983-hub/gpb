@@ -1,3 +1,16 @@
+# [2.15.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.2...v2.15.0-release.3) (2022-10-21)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-35371 исправлено - опции выбора поля "Статус запроса" клиентские ([4c7331e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4c7331e18a9bad08e6a7313910102b3daa4a6547))
+* **скроллер:** GBO-36064 правки колонок "Пользователь" и "Статус выписки" ([fbbd4df](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fbbd4dfae96d991073c64298a50c8f5a2c2f8c86))
+
+
+### Features
+
+* **скроллер:** GBO-33520 поправка к условию скачивания файла ([0d75051](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0d750515d304801bfeb3027251b39d64260be1e7))
+
 # [2.15.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.1...v2.15.0-release.2) (2022-10-21)
 
 
