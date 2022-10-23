@@ -35,7 +35,7 @@ export const getCreateAttachment = (
       format: FORMAT.PDF,
       genStatement: isGenerateStatement,
       statementId: statementId!,
-      accountingEntriesIds: isGenerateStatement ? [] : docs.map(x => Number(x.id)),
+      accountingEntriesIds: isGenerateStatement ? [] : docs.map(x => x && Number(x.id)).filter(x => x),
     };
     let otherParams: Partial<CreateStatementAttachmentRequestDto> = {};
 

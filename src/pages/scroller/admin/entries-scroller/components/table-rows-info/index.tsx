@@ -20,14 +20,17 @@ export const TableRowsInfo: React.FC = () => {
         <Horizon.Spacer />
         <GroupBy />
         {selectedRows.length > 0 && (
-          <Checkbox
-            extraSmall
-            dimension="SM"
-            label={locale.admin.entryScroller.showOnlySelectedRows}
-            name="onlySelectedRowsCheckbox"
-            value={visibleOnlySelectedRows}
-            onChange={() => setVisibleOnlySelectedRows(!visibleOnlySelectedRows)}
-          />
+          <>
+            <Gap />
+            <Checkbox
+              extraSmall
+              dimension="SM"
+              label={locale.admin.entryScroller.showOnlySelectedRows}
+              name="onlySelectedRowsCheckbox"
+              value={visibleOnlySelectedRows}
+              onChange={() => setVisibleOnlySelectedRows(!visibleOnlySelectedRows)}
+            />
+          </>
         )}
         <Gap />
         <Gap />

@@ -46,12 +46,6 @@ export const FOOTER_ACTIONS = [
   { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.FOUR, true), label: locale.transactionCard.buttons.print },
 ];
 
-/** Действия строки скроллера в выпадающем списке. */
-export const ROW_DROPDOWN_ACTIONS = [
-  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.SEVEN), label: locale.transactionsScroller.rowAction.export },
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), label: locale.transactionsScroller.rowAction.print },
-];
-
 /** Действия в строке вкладки "Вложения" карточки проводки. */
 export const CARD_ROW_ACTIONS = [
   { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.TWELVE), icon: Icons.Download },
