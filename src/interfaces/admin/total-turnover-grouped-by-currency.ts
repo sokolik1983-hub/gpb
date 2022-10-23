@@ -1,20 +1,12 @@
-/** Данные валюты. */
-interface Currency {
-  /** Буквенный код. */
-  letterCode: string;
-}
+import type { BankClientCard } from 'interfaces/admin/dto/bank-client-card';
+import type { CurrencyCard } from 'interfaces/admin/dto/currency-card';
 
 /** Счет. */
 interface Account {
   /** Организация. */
-  bankClient: {
-    /** ИНН. */
-    inn: string;
-    /** Название организации. */
-    name: string;
-  };
+  bankClient: BankClientCard;
   /** Данные валюты. */
-  currency: Currency;
+  currency: CurrencyCard;
   /** Идентификатор. */
   id: string;
   /** Номер. */
@@ -42,7 +34,7 @@ interface CurrencyGroup extends TurnoverAmounts {
   /** Список счетов. */
   accounts: Account[];
   /** Данные валюты. */
-  currency: Currency;
+  currency: CurrencyCard;
 }
 
 /** Данные выписки. */
