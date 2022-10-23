@@ -19,7 +19,6 @@ export const TableRowsInfo: React.FC = () => {
         <Typography.Text>{total}</Typography.Text>
         <Horizon.Spacer />
         <GroupBy />
-        <Gap />
         {selectedRows.length > 0 && (
           <Checkbox
             extraSmall

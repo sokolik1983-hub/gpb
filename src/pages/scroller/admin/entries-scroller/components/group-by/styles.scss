@@ -1,0 +1,23 @@
+.important.right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.wrapper {
+  width: 240px;
+  min-width: 240px;
+}
+
+.select {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  & * {
+    font-size: 14px;
+  }
+  & svg {
+    width: 20px;
+    height: 20px;
+  }
+}

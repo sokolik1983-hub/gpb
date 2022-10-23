@@ -5,7 +5,10 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'fieldWrapper': string;
+    'important': string;
+    'right': string;
+    'select': string;
+    'wrapper': string;
   }
 }
 
