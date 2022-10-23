@@ -42,6 +42,14 @@ export const getExportStatementAttachment = (
 
     const { content, mimeType, fileName } = data;
 
+    if (!content) {
+      hideLoader();
+
+      fatal('error');
+
+      return;
+    }
+
     showFile(content, fileName, mimeType);
 
     hideLoader();

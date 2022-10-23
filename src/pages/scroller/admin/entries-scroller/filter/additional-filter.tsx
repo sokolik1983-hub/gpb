@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { FilterFormElement, InputWithHistory } from 'components/common';
+import { FilterFormElement } from 'components/common';
 import { DateRange } from 'components/common/form/date-range';
 import { locale } from 'localization';
 import { Pattern, Fields } from '@platform/ui';
@@ -42,7 +42,9 @@ export const AdditionalFilter: FC = () => {
         <FilterFormElement label={locale.transactionsScroller.labels.client} labelWidth={150}>
           {/** Счёт клиента. */}
           <div className={css.counterpartyField}>
-            <InputWithHistory
+            <Fields.MultiSelect
+              extraSmall
+              withSearch
               name={FORM_FIELDS.CLIENT_ACCOUNT}
               options={clientsAccounts.map(account => ({ label: account, value: account }))}
             />
@@ -54,7 +56,9 @@ export const AdditionalFilter: FC = () => {
         <FilterFormElement label={locale.transactionsScroller.labels.counterpartyAccountNumber} labelWidth={150}>
           {/** Счёт контрагента. */}
           <div className={css.counterpartyField}>
-            <InputWithHistory
+            <Fields.MultiSelect
+              extraSmall
+              withSearch
               name={FORM_FIELDS.COUNTERPARTY_ACCOUNT}
               options={counterpartiesAccounts.map(account => ({ label: account, value: account }))}
             />

@@ -12,12 +12,12 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=69874143
  * */
 export const exportStatement: IActionConfig<typeof context, unknown> = {
-  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (statement: StatementHistoryRow) => {
+  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (doc: StatementHistoryRow) => {
     showLoader();
 
     const userDeviceInfo = await getUserDeviceInfo();
 
-    const { action, format, statementId } = statement;
+    const { action, format, statementId } = doc;
 
     const data: CreateStatementAttachmentRequestDto = {
       action,
