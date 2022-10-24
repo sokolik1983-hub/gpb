@@ -1,3 +1,13 @@
+# [2.15.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.9...v2.15.0-release.10) (2022-10-24)
+
+
+### Bug Fixes
+
+* **визард:** GBO-36201 исправлено условие отображения валютных флагов на ЭФ ([0538116](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0538116959ed7de16aaedde466e046d19b1baa72))
+* **скроллер:** GBO-36100 реализация возможности выделения подгрупп ([a97b847](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a97b8471a39991422c88fd9f23b2950f135e7ae8))
+* **скроллер:** GBO-36174 исправление замечаний по UI скроллера проводок ([c53fb33](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c53fb33b968545cf04a571354c2a2319ebb13d98))
+* **скроллер:** GBO-36199 исправление фильтров скроллера проводок ([a9b4b61](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a9b4b61a6e6f9eabdf8a12966aeae0d06fcd8975))
+
 # [2.15.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.8...v2.15.0-release.9) (2022-10-21)
 
 
