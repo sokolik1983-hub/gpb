@@ -14,11 +14,6 @@ interface AggregateByAccountDataProps {
 
 /** Комопонент с аггрегирующими данным для группы проводок. */
 export const AggregateByAccountData: React.FC<AggregateByAccountDataProps> = ({ row: { original } }) => {
-  // TODO: удалить после исправления
-  if (!original.aggregate) {
-    return null;
-  }
-
   const { aggregate } = original as BankAccountingEntryGroup;
   const { incomingBalance, outgoingBalance, amountCredit, amountDebit, totalCount, account } = aggregate;
   const currencyCode = account?.currency?.letterCode ?? '';

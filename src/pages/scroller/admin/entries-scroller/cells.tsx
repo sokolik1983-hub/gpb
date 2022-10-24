@@ -39,8 +39,8 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ 
   const {
     account: {
       bankClient: { name },
+      number,
     },
-    number,
   } = value;
 
   return (

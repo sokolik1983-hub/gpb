@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import type { BankAccountingEntryAccount } from 'interfaces/admin/dto/bank-accounting-entry-account';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import { locale } from 'localization';
 import type { RecordCell } from 'platform-copies/services';
+import { StopPropagation } from 'platform-copies/services/components/data-table/components';
 import type { Row } from 'react-table';
 import { formatAccountCode } from '@platform/tools/localization';
-import { Gap, Horizon, ServiceIcons, Typography, WithClickable } from '@platform/ui';
+import { Checkbox, Gap, Horizon, ServiceIcons, Typography, WithClickable } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента для отображения заголовка. */
@@ -43,7 +44,23 @@ interface AggregateByAccountRowProps {
 
 /** Компонент для строки с аггрегированными данными по группе. */
 export const AggregateByAccountHeaderRow: React.FC<AggregateByAccountRowProps> = ({ row }) => {
-  const { original, getRowProps, isExpanded } = row;
+  const { original, getRowProps, isExpanded, getToggleRowSelectedProps, subRows } = row;
+  const { checked, indeterminate, onChange } = getToggleRowSelectedProps();
+
+  const toggleSubRowsSelect = useCallback(() => {
+    subRows.forEach(subRow => {
+      subRow.toggleRowSelected(!checked);
+    });
+  }, [checked, subRows]);
+
+  const handleChange = React.useCallback(
+    (_, e) => {
+      onChange?.((e as unknown) as React.ChangeEvent);
+      toggleSubRowsSelect();
+    },
+    [onChange, toggleSubRowsSelect]
+  );
+
   const { aggregate } = original as BankAccountingEntryGroup;
   const { key, ...rowProps } = getRowProps();
 
@@ -53,6 +70,10 @@ export const AggregateByAccountHeaderRow: React.FC<AggregateByAccountRowProps> =
     <WithClickable>
       {ref => (
         <Horizon {...rowProps} ref={ref} className={css.container}>
+          <StopPropagation>
+            <Checkbox extraSmall dimension="SM" indeterminate={indeterminate} name="collapse-all" value={checked} onChange={handleChange} />
+          </StopPropagation>
+          <Gap.SM />
           <AggregateByAccountHeader account={aggregate?.account} />
           <Gap />
           <Icon fill="FAINT" scale="MD" />

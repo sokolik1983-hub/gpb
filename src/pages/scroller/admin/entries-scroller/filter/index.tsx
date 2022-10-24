@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ContentLoader, FilterLayout } from 'components/common';
 import { useIsFetchedData } from 'hooks/common';
 import type { IUrlParams } from 'interfaces';
@@ -22,13 +22,13 @@ import { mapClientBankResponseToFieldData } from './utils';
 /** Высота фильтра. Минус разделитель снизу и вверху фильтра. */
 const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
 
+/** Задержка установки состояния фильтров. */
+const SET_FILTER_STATE_DELAY = 500;
+
 /**
  * Схема валидации формы фильтра ЭФ "Журнал проводок".
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
-
-/** Поля фильтра для ручного ввода (необходимо для определения задержки запроса). */
-const manualEntryFields = [FORM_FIELDS.TABLE_SEARCH, FORM_FIELDS.DOC_NUMBER, FORM_FIELDS.AMOUNT_FROM, FORM_FIELDS.AMOUNT_TO];
 
 /** Свойства для компонента с фильтром. */
 interface IProps {
@@ -39,11 +39,10 @@ interface IProps {
 }
 
 /** Компонент с фильтром для скроллера. */
-export const Filter: React.FC<IProps> = ({ setFilters, fetchedNewTransactions }) => {
+export const Filter: React.FC<IProps> = ({ setFilters }) => {
   const { id } = useParams<IUrlParams>();
 
   const { state: { entrySourceView } = {} } = useLocation<{ entrySourceView?: typeof ENTRY_SOURCE_VIEW }>();
-  const [activeFieldAndValue, setActiveFieldAndValue] = useState<[string, unknown]>();
   const fields = getFields(entrySourceView);
   const { filterPanel, filterValues, tagsPanel } = useFilter({
     fields,
@@ -51,12 +50,11 @@ export const Filter: React.FC<IProps> = ({ setFilters, fetchedNewTransactions })
     storageKey: `${STORAGE_KEY}-${id}`,
   });
 
-  const delay = activeFieldAndValue && manualEntryFields.includes(activeFieldAndValue[0]) && activeFieldAndValue[1] ? 1500 : 200;
-  const filterValuesDebounced = useDebounce(filterValues, delay);
+  const filterValuesDebounced = useDebounce(filterValues, SET_FILTER_STATE_DELAY);
   // Вызывается один раз.
-  const { data: counterpartiesResponse, isError: isCounterpartiesError, isFetched: isCounterpartiesFetched } = useGetCounterparties();
+  const { data: counterpartiesResponse, isFetched: isCounterpartiesFetched } = useGetCounterparties();
   // Вызывается один раз.
-  const { data: clientsResponse, isError: isClientsError, isFetched: isClientsFetched } = useGetClients();
+  const { data: clientsResponse, isFetched: isClientsFetched } = useGetClients();
 
   const counterpartiesFetched = useIsFetchedData(isCounterpartiesFetched);
   const clientsFetched = useIsFetchedData(isClientsFetched);
@@ -82,22 +80,16 @@ export const Filter: React.FC<IProps> = ({ setFilters, fetchedNewTransactions })
     [clientsData.accounts, clientsData.bankClients, counterpartiesData.accounts, counterpartiesData.bankClients, filterPanel, tagsPanel]
   );
 
-  if (isClientsError || isCounterpartiesError) {
-    // FIXME: разобраться в 500 ошибке
-    // return null;
-  }
-
   return (
     <FilterContext.Provider value={contextValue}>
       <ContentLoader height={FILTER_HEIGHT} loading={!dataFetched}>
         <FilterLayout
           AdditionalFilter={AdditionalFilter}
-          QuickFilter={props => <QuickFilter {...props} fetchedNewTransactions={fetchedNewTransactions} />}
+          QuickFilter={QuickFilter}
           TagsPanel={TagsPanel}
           additionalFilterFields={ADDITIONAL_FORM_FIELDS}
           filterFields={fields}
           filterState={filterPanel}
-          setActiveFieldAndValue={setActiveFieldAndValue}
           tagsState={tagsPanel}
           validate={validate(validationSchema)}
         />

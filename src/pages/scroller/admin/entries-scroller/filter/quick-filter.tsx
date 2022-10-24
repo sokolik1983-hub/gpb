@@ -1,12 +1,12 @@
 import type { FC } from 'react';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import type { QuickFilterPanelProps } from 'interfaces/admin';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
 import { ECO_STATEMENT } from 'stream-constants';
 import { useLocalStorage } from '@platform/services';
 import type { IOption } from '@platform/ui';
-import { Pattern, Fields, Typography, Gap, Horizon, Box } from '@platform/ui';
+import { Pattern, Fields, Typography, Gap, Horizon, Box, debounce } from '@platform/ui';
 import { FORM_FIELDS } from './constants';
 import type { IFilterContext } from './filter-context';
 import { FilterContext } from './filter-context';
@@ -16,6 +16,9 @@ import css from './styles.scss';
 
 /** Максимальный размер истории. */
 const MAX_HISTORY_SIZE = 5;
+
+/** Задержка ввода данных перед фиксацией состояния (в миллисекундах). */
+const INPUT_DELAY = 300;
 
 /**
  * Поля фильтра которые всегда видны на форме фильтрации.
@@ -28,14 +31,14 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ fetchedNewTransactions 
   } = useFormState<IFormState>();
 
   const [valueOfQueryString, setValueOfQueryString] = useState(queryString);
-
   const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
   const { counterparties, clients } = useContext<IFilterContext>(FilterContext);
 
-  useEffect(() => {
-    void submit();
+  const debouncedSubmit = useMemo(() => debounce(submit, INPUT_DELAY), [submit]);
 
+  useEffect(() => {
+    debouncedSubmit();
     // values не включён в массив зависимостей хука т.к запрос на сервер при изменении значения фильтра
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
@@ -44,7 +47,7 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ fetchedNewTransactions 
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены все доп. данные.
-    void submit();
+    debouncedSubmit();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [counterparties, clients]);
 

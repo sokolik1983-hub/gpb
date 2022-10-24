@@ -25,9 +25,9 @@ export const TableBodySubRows = <R extends IBaseEntity>({
       {subRows.map((subRow, rowIndex) => {
         prepareRow(subRow);
 
-        const { key } = subRow.getRowProps();
-
-        const visibleRow = visibleOnlySelectedRows ? subRow.isSelected : true;
+        const { getRowProps, isSelected } = subRow;
+        const { key } = getRowProps();
+        const visibleRow = visibleOnlySelectedRows ? isSelected : true;
 
         return (
           visibleRow && (

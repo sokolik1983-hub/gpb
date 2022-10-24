@@ -79,7 +79,7 @@ export const Table = <T extends IBaseEntity, R extends IBaseEntity>({
   const columnsWithDefaultValues = useColumnsWithDefaultValues<R>(columns, settingColumns);
 
   /** Список скрытых по умолчанию колонок по признаку isVisible === false. */
-  const defaultHiddenColumns = useDefaultHiddenColumns<T>(settingColumns);
+  const defaultHiddenColumns = useDefaultHiddenColumns<R>(settingColumns);
 
   /** Массив данных для сортировки. */
   const defaultSortBy = useMemo(

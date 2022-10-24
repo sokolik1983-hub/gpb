@@ -109,7 +109,7 @@ export const FIELDS_WITH_TAGS = [
 ];
 
 /** Ключ в Session Storage по которому хранится состояние фильтрации. */
-export const STORAGE_KEY = 'statement-transactions-filer-scroller';
+export const STORAGE_KEY = 'bank:entry-scroller:filter';
 
 /** Опции селекта типа платежа. */
 export const TRANSACTION_TYPE_OPTIONS: Array<IOption<TRANSACTION_TYPES | typeof EMPTY_VALUE>> = [
