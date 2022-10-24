@@ -1,3 +1,10 @@
+# [2.15.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.10...v2.15.0-release.11) (2022-10-24)
+
+
+### Features
+
+* **скроллер:** GBO-36103 добавлен ContentLoader для секций скроллера проводок ([b33e259](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b33e2593abace2d3845d25e0569a2f4c7c0e608c))
+
 # [2.15.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.9...v2.15.0-release.10) (2022-10-24)
 
 
