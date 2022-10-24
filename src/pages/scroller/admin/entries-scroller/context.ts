@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import type { TotalTurnover } from 'interfaces/admin';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { noop } from 'utils/common';
+import type { IFilters } from '@platform/core';
 import { GROUP_BY } from './constants';
 
 /** Контекст скроллера проводок. */
@@ -23,6 +24,8 @@ export interface IEntriesScrollerContext {
   setVisibleOnlySelectedRows: React.Dispatch<React.SetStateAction<boolean>>;
   /** Сводная информация по выписке. */
   totalTurnovers: TotalTurnover[];
+  /** Свойства формы фильтрации. */
+  filters: IFilters;
 }
 
 /** Значение по-умолчанию контекста скроллера проводок. */
@@ -35,6 +38,7 @@ export const defaultValue: IEntriesScrollerContext = {
   visibleOnlySelectedRows: false,
   setVisibleOnlySelectedRows: noop,
   totalTurnovers: [],
+  filters: {},
 };
 
 /** Контекст скроллера проводок. */
