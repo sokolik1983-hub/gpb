@@ -1,3 +1,10 @@
+# [2.15.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.11...v2.15.0-release.12) (2022-10-24)
+
+
+### Features
+
+* **скроллер:** GBO-36256 добавлена подсветка поиска по таблице проводок ([b528909](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b5289096227e9d0459d2499f5699d0faa8f8782a))
+
 # [2.15.0-release.11](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.10...v2.15.0-release.11) (2022-10-24)
 
 
