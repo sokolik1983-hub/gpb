@@ -1757,6 +1757,22 @@ export default {
 		 */
 		positive: (p: { amount: string; currencyCode: string }) => t('moneyString.positive', p),
 	},
+	entriesScroller: {
+		footer: {
+			/**
+			 * @ru
+			 * {currencies} и ещё {amount}
+			 */
+			collapsedCurrencies: (p: { amount: string; currencies: string }) => t('entriesScroller.footer.collapsedCurrencies', p),
+			/**
+			 * @ru
+			 * на сумму:
+			 */
+			get tooltip() {
+				return t('entriesScroller.footer.tooltip');
+			},
+		},
+	},
 	action: {
 		labels: {
 			/**

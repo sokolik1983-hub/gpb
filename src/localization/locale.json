@@ -634,6 +634,14 @@
     "@currencyCode": "string",
     "ru": "+{amount, money} {currencyCode}"
   },
+  "entriesScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "entriesScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
   "client.form.title": {
     "ru": "Клиентская форма"
   },

@@ -206,6 +206,8 @@
   "moneyString.unsigned": "{amount, money} {currencyCode}",
   "moneyString.negative": "-{amount, money} {currencyCode}",
   "moneyString.positive": "+{amount, money} {currencyCode}",
+  "entriesScroller.footer.collapsedCurrencies": "{currencies} и ещё {amount}",
+  "entriesScroller.footer.tooltip": "на сумму:",
   "client.form.title": "Клиентская форма",
   "admin.form.title": "Админская форма",
   "admin.form.header": "Параметры запроса",
