@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { executor } from 'actions/admin/executor';
-import { StopPropagation } from 'components/common';
+import { HightlightText, StopPropagation } from 'components/common';
 import type { IUrlParams } from 'interfaces';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { DATA_ACTION } from 'interfaces/data-action';
@@ -14,18 +14,20 @@ import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Gap, Horizon, RegularButton, ServiceIcons, Typography, WithDropDown, WithInfoTooltip } from '@platform/ui';
 import { CARD_ROW_ACTIONS } from './action-configs';
+import { useQueryString } from './hooks';
 import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
-export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const { entryDate } = value;
+export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { entryDate } }) => {
   const formattedEntryDate = formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT });
+
+  const queryString = useQueryString();
 
   return (
     <WithInfoTooltip text={formattedEntryDate}>
       {ref => (
         <Typography.P data-field={'entryDate'} innerRef={ref} line={'COLLAPSE'}>
-          {formattedEntryDate}
+          <HightlightText searchWords={queryString} textToHightlight={formattedEntryDate} />
         </Typography.P>
       )}
     </WithInfoTooltip>
@@ -35,24 +37,28 @@ export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ va
 EntryDateCell.displayName = 'EntryDateCell';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const {
+export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+  value: {
     account: {
       bankClient: { name },
       number,
     },
-  } = value;
+  },
+}) => {
+  const queryString = useQueryString();
 
   return (
     <>
       <WithInfoTooltip extraSmall text={name}>
         {ref => (
           <Typography.P innerRef={ref} line={'COLLAPSE'}>
-            {name}
+            <HightlightText searchWords={queryString} textToHightlight={name} />
           </Typography.P>
         )}
       </WithInfoTooltip>
-      <Typography.Text>{formatAccountCode(number)}</Typography.Text>
+      <Typography.Text>
+        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(number)} />
+      </Typography.Text>
     </>
   );
 };
@@ -60,22 +66,25 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ 
 AccountInfoCell.displayName = 'AccountInfoCell';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const { documentDate, documentNumber } = value;
+export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ documentDate, documentNumber }) => {
+  const queryString = useQueryString();
 
   return (
     <>
       <WithInfoTooltip text={documentNumber}>
         {ref => (
           <Typography.P data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
-            {documentNumber}
+            <HightlightText searchWords={queryString} textToHightlight={documentNumber} />
           </Typography.P>
         )}
       </WithInfoTooltip>
       <Typography.Text data-field={'documentDate'}>
-        {locale.admin.entryScroller.cells.documentDate({
-          date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
-        })}
+        <HightlightText
+          searchWords={queryString}
+          textToHightlight={locale.admin.entryScroller.cells.documentDate({
+            date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
+          })}
+        />
       </Typography.Text>
     </>
   );
@@ -84,35 +93,44 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 DocumentInfoCell.displayName = 'DocumentInfoCell';
 
 /** Компонент с ячейкой для отображения информации о контрагенте. */
-export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const { counterpartyName, counterpartyAccountNumber } = value;
+export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+  value: { counterpartyName, counterpartyAccountNumber },
+}) => {
+  const queryString = useQueryString();
 
   return (
     <>
       <WithInfoTooltip extraSmall text={counterpartyName}>
         {ref => (
           <Typography.P innerRef={ref} line={'COLLAPSE'}>
-            {counterpartyName}
+            <HightlightText searchWords={queryString} textToHightlight={counterpartyName} />
           </Typography.P>
         )}
       </WithInfoTooltip>
-      <Typography.Text>{formatAccountCode(counterpartyAccountNumber)}</Typography.Text>
+      <Typography.Text>
+        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(counterpartyAccountNumber)} />
+      </Typography.Text>
     </>
   );
 };
 
 CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
 
-/** Компонент с ячейкой для отображения суммы постапления. */
-export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const {
+/** Компонент с ячейкой для отображения суммы поступления. */
+export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+  value: {
     incomingBalance,
     account: { currencyLetterCode },
-  } = value;
+  },
+}) => {
+  const queryString = useQueryString();
 
   return (
     <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
-      {locale.moneyString.positive({ amount: String(incomingBalance), currencyCode: currencyLetterCode })}
+      <HightlightText
+        searchWords={queryString}
+        textToHightlight={locale.moneyString.positive({ amount: String(incomingBalance), currencyCode: currencyLetterCode })}
+      />
     </Typography.P>
   );
 };
@@ -120,15 +138,20 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value
 IncomeCell.displayName = 'IncomeCell';
 
 /** Компонент с ячейкой для отображения суммы списания. */
-export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
-  const {
+export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+  value: {
     outgoingBalance,
     account: { currencyLetterCode },
-  } = value;
+  },
+}) => {
+  const queryString = useQueryString();
 
   return (
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
-      {locale.moneyString.negative({ amount: String(outgoingBalance), currencyCode: currencyLetterCode })}
+      <HightlightText
+        searchWords={queryString}
+        textToHightlight={locale.moneyString.negative({ amount: String(outgoingBalance), currencyCode: currencyLetterCode })}
+      />
     </Typography.P>
   );
 };

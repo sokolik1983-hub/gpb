@@ -49,7 +49,7 @@ export const EntriesScrollerPage: React.FC = () => {
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(defaultValue.visibleOnlySelectedRows);
   const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>(defaultValue.selectedRows);
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
-  const [filters, setFilters] = useState<IFilters>();
+  const [filters, setFilters] = useState<IFilters>({});
   const [entriesInitialed, setEntriesInitialed] = useState(false);
 
   useEffect(() => {
@@ -104,8 +104,9 @@ export const EntriesScrollerPage: React.FC = () => {
       visibleOnlySelectedRows,
       setVisibleOnlySelectedRows,
       totalTurnovers,
+      filters,
     }),
-    [groupBy, selectedRows, totalTurnovers, visibleOnlySelectedRows]
+    [filters, groupBy, selectedRows, totalTurnovers, visibleOnlySelectedRows]
   );
 
   const footerActions = useCallback(
