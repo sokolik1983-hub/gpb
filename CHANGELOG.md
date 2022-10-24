@@ -1,3 +1,10 @@
+# [2.15.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.12...v2.15.0-release.13) (2022-10-24)
+
+
+### Features
+
+* GBO-36107 Добавить тултип в футер скроллера проводок ([2e2c097](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2e2c0975a86911114be1276b524a16e1965d8175))
+
 # [2.15.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.11...v2.15.0-release.12) (2022-10-24)
 
 
