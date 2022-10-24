@@ -12,7 +12,7 @@ import { useStatementSummary } from 'pages/scroller/admin/entries-scroller/hooks
 import type { IFetchDataParams } from 'platform-copies/services';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
-import { LINE_HEIGHT, TAB_HEIGHT } from 'stream-constants';
+import { LINE_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData, convertTableSortByMap, getActiveActionButtons } from 'utils/common';
 import type { IFilters } from '@platform/core';
@@ -50,6 +50,7 @@ export const EntriesScrollerPage: React.FC = () => {
   const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>(defaultValue.selectedRows);
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
   const [filters, setFilters] = useState<IFilters>();
+  const [entriesInitialed, setEntriesInitialed] = useState(false);
 
   useEffect(() => {
     if (selectedRows.length === 0) {
@@ -76,10 +77,15 @@ export const EntriesScrollerPage: React.FC = () => {
           rows: rowsWithIds(page),
           pageCount: Math.ceil(size / pageSize),
         };
-      } catch (e) {
+      } catch {
         return { rows: [], pageCount: 0 };
+      } finally {
+        if (!entriesInitialed) {
+          setEntriesInitialed(true);
+        }
       }
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [filters, groupBy, id]
   );
 
@@ -120,7 +126,7 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - TAB_HEIGHT - FILTER_HEIGHT - TURNOVER_TOTAL_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - TURNOVER_TOTAL_HEIGHT;
 
   const handRowClick = useCallback(
     row => {
@@ -141,7 +147,10 @@ export const EntriesScrollerPage: React.FC = () => {
                     <TurnoverTotal />
                   </ContentLoader>
                   <Filter fetchedNewTransactions setFilters={setFilters} />
-                  <ContentLoader height={tableHeight}>
+                  <ContentLoader height={tableHeight} loading={!entriesInitialed}>
+                    <Box />
+                  </ContentLoader>
+                  <>
                     <TableRowsInfo />
                     <Table<BankAccountingEntryGroup, BankAccountingEntryCard>
                       columns={columns}
@@ -160,7 +169,7 @@ export const EntriesScrollerPage: React.FC = () => {
                       onRowClick={handRowClick}
                       onSelectedRowsChange={setSelectedRows}
                     />
-                  </ContentLoader>
+                  </>
                 </ScrollerPageLayout>
               </LayoutScroll>
             </Box>
