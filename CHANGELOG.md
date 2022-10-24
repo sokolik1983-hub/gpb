@@ -1,3 +1,10 @@
+# [2.15.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.13...v2.15.0-release.14) (2022-10-24)
+
+
+### Features
+
+* **скроллер:** GBO-26256 обновлено дто ответа, содержащего результаты операций по проводкам ([ca5f39b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ca5f39ba52452ad806bd44962400abe5b928f912))
+
 # [2.15.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.12...v2.15.0-release.13) (2022-10-24)
 
 
