@@ -1,3 +1,10 @@
+# [2.15.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.18...v2.15.0-release.19) (2022-10-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36315 кумулятивное исправление дефектов ([8e79aa4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8e79aa485752c8112a4738b3d8b9465f43e57b5b))
+
 # [2.15.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.17...v2.15.0-release.18) (2022-10-25)
 
 
