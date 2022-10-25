@@ -1,3 +1,4 @@
+import { statementExport } from 'actions/admin/guardians';
 import type { CreateStatementAttachmentRequestDto, StatementHistoryRow } from 'interfaces/admin';
 import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { singleAction, to } from '@platform/core';
@@ -43,5 +44,5 @@ export const exportStatement: IActionConfig<typeof context, unknown> = {
     done();
   },
   fatalHandler,
-  guardians: [singleAction],
+  guardians: [singleAction, statementExport],
 };
