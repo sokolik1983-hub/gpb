@@ -32,7 +32,7 @@ export const exportStatementsHistory: IActionConfig<typeof context, unknown> = {
 
     showLoader();
 
-    const statementRequestIds = statements.map(statement => statement.statementId);
+    const statementRequestIds = statements.map(statement => statement.id);
 
     const [file, generateError] = await to(
       service.generateStatementsReport({ dateFrom, dateTo, format: fileFormat as FORMAT.EXCEL | FORMAT.PDF, statementRequestIds })
