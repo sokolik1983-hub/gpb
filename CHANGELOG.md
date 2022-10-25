@@ -1,3 +1,10 @@
+# [2.15.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.14...v2.15.0-release.15) (2022-10-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36342 убраны стили высоты лейбла фильтра ([fd8f798](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fd8f798f3490340e0c12981e1f033f6413f210f9))
+
 # [2.15.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.13...v2.15.0-release.14) (2022-10-24)
 
 
