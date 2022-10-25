@@ -1,3 +1,10 @@
+# [2.15.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.15...v2.15.0-release.16) (2022-10-25)
+
+
+### Bug Fixes
+
+* GBO-36288 Если включен чек-бокс "Показать только выбранные", выбранные проводки отображаются ([c1196cf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c1196cfbe01a84508c074216dcbc2523362b1197))
+
 # [2.15.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.14...v2.15.0-release.15) (2022-10-25)
 
 
