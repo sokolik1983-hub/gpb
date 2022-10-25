@@ -36,7 +36,7 @@ export const TableBodyWithGrouping = <R extends IBaseEntity>({
             const { subRows, getRowProps, isExpanded, toggleRowExpanded, isSelected } = row;
 
             const { key } = getRowProps();
-            const visibleRow = visibleOnlySelectedRows ? isSelected : true;
+            const visibleRow = visibleOnlySelectedRows ? isSelected || subRows.some(subRow => subRow.isSelected) : true;
 
             if (visibleRow && !withGrouping) {
               return (
