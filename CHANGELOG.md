@@ -1,3 +1,11 @@
+# [2.15.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.16...v2.15.0-release.17) (2022-10-25)
+
+
+### Bug Fixes
+
+* GBO-36175 Выгружаются пустые файлы по кнопке Экспорт реестра ([1a6d2a4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/1a6d2a43cce48dbbf26d9a8e177b4e679fd6a293))
+* **скроллер:** GBO-35583 поправлено условие отображения чекбокса "Отдельный файл по каждому счету" ([179e30d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/179e30d01bc9283a5bf2e78372452223b6c9bb11))
+
 # [2.15.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.15...v2.15.0-release.16) (2022-10-25)
 
 
