@@ -1,3 +1,10 @@
+# [2.15.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.17...v2.15.0-release.18) (2022-10-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36421 добавлен гард контроля экспорта выписки ([bc618f4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/bc618f4c22336bacdde56966d5b63693b709fafe))
+
 # [2.15.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.16...v2.15.0-release.17) (2022-10-25)
 
 
