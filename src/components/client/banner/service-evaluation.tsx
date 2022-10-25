@@ -9,7 +9,7 @@ import css from './styles.scss';
 export const ServiceEvaluation: FC = () => {
   /** Переход на опрос оценки сервиса. */
   const handleForward = useCallback(() => {
-    window.open('https://oprosso.net/p/2ACoGJozpDFvy4dXQ/checking', '_blank');
+    window.open('https://oprosso.net/p/dJYqd8eT5QwXG3scR', '_blank');
   }, []);
 
   return (

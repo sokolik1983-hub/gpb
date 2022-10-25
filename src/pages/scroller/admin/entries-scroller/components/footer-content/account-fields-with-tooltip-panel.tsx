@@ -48,7 +48,7 @@ const RowAccountField: React.FC<ITooltipPanelAccounts> = ({ currency, count, amo
  *
  * @example <AccountFieldsWithTooltipPanel payments={payments} />
  */
-export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPanelProps> = ({ payments, isDebit = [] }) => {
+export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPanelProps> = ({ payments, isDebit }) => {
   const [show, setShow] = useState(false);
 
   const filteredPayments = useMemo(() => payments.filter(payment => payment.debitSign === isDebit), [isDebit, payments]);

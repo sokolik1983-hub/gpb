@@ -37,5 +37,5 @@ export interface CreateStatementAttachmentRequestDto {
   /** Проводки переоценки. */
   revaluationAccountingEntry?: boolean;
   /** Данные устройства пользователя. */
-  userDeviceInfo: IUserDeviceInfo;
+  userDeviceInfo?: IUserDeviceInfo;
 }

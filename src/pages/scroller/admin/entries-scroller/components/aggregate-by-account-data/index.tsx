@@ -15,7 +15,7 @@ interface AggregateByAccountDataProps {
 /** Комопонент с аггрегирующими данным для группы проводок. */
 export const AggregateByAccountData: React.FC<AggregateByAccountDataProps> = ({ row: { original } }) => {
   const { aggregate } = original as BankAccountingEntryGroup;
-  const { incomingBalance, outgoingBalance, amountCredit, amountDebit, totalCount, account } = aggregate;
+  const { incomingBalance, outgoingBalance, amountCredit, amountDebit, incomingCount, outgoingCount, account } = aggregate;
   const currencyCode = account?.currency?.letterCode ?? '';
 
   return (
@@ -26,11 +26,11 @@ export const AggregateByAccountData: React.FC<AggregateByAccountDataProps> = ({ 
           <Typography.P>{locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode })}</Typography.P>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.income({ count: totalCount })}</Typography.Text>
+          <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.outcome({ count: outgoingCount })}</Typography.Text>
           <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(amountCredit), currencyCode })}</Typography.P>
         </Pattern.Span>
         <Pattern.Span size={3}>
-          <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.outcome({ count: totalCount })}</Typography.Text>
+          <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.income({ count: incomingCount })}</Typography.Text>
           <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(amountDebit), currencyCode })}</Typography.P>
         </Pattern.Span>
         <Pattern.Span size={3}>
