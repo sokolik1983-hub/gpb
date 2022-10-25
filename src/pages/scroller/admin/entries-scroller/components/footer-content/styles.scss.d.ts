@@ -5,14 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'borderedRow': string;
-    'headerRow': string;
-    'headerRowWrapper': string;
-    'placeholderOverlay': string;
-    'row__action-button': string;
-    'scrollIconBox': string;
-    'sortIconWrapper': string;
-    'table': string;
+    'container': string;
   }
 }
 

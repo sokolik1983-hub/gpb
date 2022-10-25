@@ -12,7 +12,7 @@ import {
   fileFormatShowCases,
   hideExportParamsDialogCases,
 } from 'utils/admin';
-import { fatalHandler, getUserDeviceInfo } from 'utils/common';
+import { fatalHandler } from 'utils/common';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import { DATE_FORMAT } from '@platform/services';
@@ -100,9 +100,7 @@ export const getCreateAttachment = (
 
     showLoader();
 
-    const userDeviceInfo = await getUserDeviceInfo();
-
-    const dto: CreateStatementAttachmentRequestDto = { ...params, ...otherParams, userDeviceInfo };
+    const dto: CreateStatementAttachmentRequestDto = { ...params, ...otherParams };
     const [data, err] = await to(service.createStatementAttachment(dto));
 
     hideLoader();

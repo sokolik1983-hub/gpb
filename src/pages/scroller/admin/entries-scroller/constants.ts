@@ -24,7 +24,7 @@ export const enum COLUMN_NAMES {
 
 /** Состояние сортровки по умолчанию. */
 export const DEFAULT_SORT = {
-  [COLUMN_NAMES.DOCUMENT]: SORT_DIRECTION.DESC,
+  [COLUMN_NAMES.DATE]: SORT_DIRECTION.DESC,
 };
 
 /** Ключ в SessionStorage для хранения состояние фильтрации. */

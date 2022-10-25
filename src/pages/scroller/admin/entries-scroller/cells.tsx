@@ -66,7 +66,7 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 AccountInfoCell.displayName = 'AccountInfoCell';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ documentDate, documentNumber }) => {
+export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { documentDate, documentNumber } }) => {
   const queryString = useQueryString();
 
   return (
@@ -119,7 +119,7 @@ CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
 /** Компонент с ячейкой для отображения суммы поступления. */
 export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   value: {
-    incomingBalance,
+    amountDebit,
     account: { currencyLetterCode },
   },
 }) => {
@@ -129,7 +129,7 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
     <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.positive({ amount: String(incomingBalance), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.positive({ amount: String(amountDebit), currencyCode: currencyLetterCode })}
       />
     </Typography.P>
   );
@@ -140,7 +140,7 @@ IncomeCell.displayName = 'IncomeCell';
 /** Компонент с ячейкой для отображения суммы списания. */
 export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   value: {
-    outgoingBalance,
+    amountCredit,
     account: { currencyLetterCode },
   },
 }) => {
@@ -150,7 +150,7 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.negative({ amount: String(outgoingBalance), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountCredit), currencyCode: currencyLetterCode })}
       />
     </Typography.P>
   );
