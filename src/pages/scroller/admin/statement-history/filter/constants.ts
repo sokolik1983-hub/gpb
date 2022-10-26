@@ -65,7 +65,7 @@ export const fields: Record<string, IFilterField> = {
   [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, 'createdAt', value => dateWithStartOfDay(value as string)),
   [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, 'createdAt', value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.ORGANIZATION_IDS]: filterFields.in([], 'organizationId'),
-  [FORM_FIELDS.PERIOD]: filterFields.in([], 'type'),
+  [FORM_FIELDS.PERIOD]: filterFields.in([], 'periodType'),
   [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq(DATE_PERIODS.YESTERDAY, '', () => ''),
   [FORM_FIELDS.REQUEST_STATUS]: filterFields.in([ALL_VALUE], 'status', value => {
     const requestStatuses = value as Array<keyof typeof STATEMENT_REQUEST_STATUS_FOR_CLIENT_BY_SELECTED | typeof ALL_VALUE>;
