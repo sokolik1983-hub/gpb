@@ -1,3 +1,10 @@
+# [2.15.0-release.22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.21...v2.15.0-release.22) (2022-10-26)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36097 поправлено название поле фильтра для запроса на сервер ([d09f6a6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d09f6a609bceda9d3a509e522e9e01206b47492a))
+
 # [2.15.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.20...v2.15.0-release.21) (2022-10-26)
 
 
