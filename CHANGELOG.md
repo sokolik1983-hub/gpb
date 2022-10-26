@@ -1,3 +1,10 @@
+# [2.15.0-release.24](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.23...v2.15.0-release.24) (2022-10-26)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36315 исправления экшонов для строки проводки скроллера ([ec6e202](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ec6e2025e8f2f2387c95c32dc9ef6ef700fcfdd3))
+
 # [2.15.0-release.23](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.22...v2.15.0-release.23) (2022-10-26)
 
 
