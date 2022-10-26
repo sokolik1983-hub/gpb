@@ -2,6 +2,8 @@
 export interface AccountOrganization {
   /** Наименование. */
   name: string;
+  /** Идентификатор. */
+  id: string;
   /** ИНН. */
   inn: string;
 }
