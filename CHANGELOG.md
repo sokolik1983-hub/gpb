@@ -1,3 +1,10 @@
+# [2.15.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.19...v2.15.0-release.20) (2022-10-26)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36447 исправление логики флагов детальных параметров документов ([e184494](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e184494431918a4d412b5463c6aff4900c15df3f))
+
 # [2.15.0-release.19](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.18...v2.15.0-release.19) (2022-10-25)
 
 
