@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 import { CreationParams } from 'components/admin/form/creation-params';
+import { DetailDocumentsParams } from 'components/admin/form/detail-documents-params';
 import { FocusLock } from 'components/common/focus-lock';
-import { DetailDocumentsParams } from 'components/common/form/detail-documents-params';
 import { FileFormats } from 'components/common/form/file-formats';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
