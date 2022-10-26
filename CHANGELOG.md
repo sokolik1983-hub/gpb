@@ -1,3 +1,10 @@
+# [2.15.0-release.21](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.20...v2.15.0-release.21) (2022-10-26)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36090 изменен контракт получения истории выписок ([9a46369](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9a46369f8c4daa76d45cd9e8db3f792e6b593731))
+
 # [2.15.0-release.20](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.19...v2.15.0-release.20) (2022-10-26)
 
 
