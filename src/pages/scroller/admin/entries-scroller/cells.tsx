@@ -13,7 +13,7 @@ import { useAuth } from '@platform/services/admin';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Gap, Horizon, RegularButton, ServiceIcons, Typography, WithDropDown, WithInfoTooltip } from '@platform/ui';
-import { CARD_ROW_ACTIONS } from './action-configs';
+import { ROW_ACTIONS } from './action-configs';
 import { useQueryString } from './hooks';
 import css from './styles.scss';
 
@@ -181,7 +181,7 @@ export const ActionsCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ valu
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(CARD_ROW_ACTIONS), executor, [[value], id]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value], id]), [
     getAvailableActions,
     value,
     id,
