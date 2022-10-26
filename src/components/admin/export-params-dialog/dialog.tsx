@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
-import { ACTION } from 'interfaces/common';
-import { locale } from 'localization';
+import type { ACTION } from 'interfaces/common';
 import { Form } from 'react-final-form';
 import { getInitialFormState } from 'stream-constants/admin/form';
 import type { IFormState } from 'stream-constants/form';
@@ -61,20 +60,4 @@ ExportParamsDialog.displayName = 'StatementParamsDialog';
 export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION, statementId) =>
   new Promise<StatementParamsDialogResponse>((resolve, reject) =>
     dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve, statementId }, () => reject(true))
-  );
-
-/** Заголовок диалога неактуальности выписки по способу вызова / возможному действию. */
-const dialogTitleByAction: Record<ACTION.DOWNLOAD | ACTION.VIEW, string> = {
-  [ACTION.DOWNLOAD]: locale.exportParamsDialog.exportOutdatedStatement.label,
-  [ACTION.VIEW]: locale.exportParamsDialog.viewOutdatedStatement.label,
-};
-
-/** Диалог неактуальности выписки. */
-export const showOutdatedStatementDialog = (action: ACTION) =>
-  new Promise<void>((resolve, reject) =>
-    dialog.showConfirmation(dialogTitleByAction[action], resolve, {
-      cancelButtonText: locale.exportParamsDialog.buttons.cancel.label,
-      okButtonText: locale.exportParamsDialog.buttons.ok.label,
-      onClose: () => reject(true),
-    })
   );
