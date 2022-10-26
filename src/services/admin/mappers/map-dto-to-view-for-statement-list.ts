@@ -62,7 +62,7 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
         organizations: AccountOrganization[];
         serviceBranches: string[];
       }>(
-        (prevValue, { filialName, id: accountId, number, organization }) => ({
+        (prevValue, { branch: { filialName }, id: accountId, number, bankClient: organization }) => ({
           accountNumbers: [...prevValue.accountNumbers, number],
           accountIds: [...prevValue.accountIds, accountId],
           organizations: [...prevValue.organizations, organization],
