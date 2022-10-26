@@ -1,3 +1,10 @@
+# [2.15.0-release.23](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.22...v2.15.0-release.23) (2022-10-26)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36605 исправление карточки проводки + значений для сумм ([5a5eb8c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5a5eb8c9521566c7d7ba95d4f5eb46b958d10bef))
+
 # [2.15.0-release.22](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.21...v2.15.0-release.22) (2022-10-26)
 
 
