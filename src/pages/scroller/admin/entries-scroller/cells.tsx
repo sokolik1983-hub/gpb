@@ -125,6 +125,10 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 }) => {
   const queryString = useQueryString();
 
+  if (!amountDebit) {
+    return null;
+  }
+
   return (
     <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
       <HightlightText
@@ -145,6 +149,10 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   },
 }) => {
   const queryString = useQueryString();
+
+  if (!amountCredit) {
+    return null;
+  }
 
   return (
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>

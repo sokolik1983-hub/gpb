@@ -48,8 +48,8 @@ export const FOOTER_ACTIONS = [
 
 /** Действия в строке вкладки "Вложения" карточки проводки. */
 export const CARD_ROW_ACTIONS = [
-  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.TWELVE), icon: Icons.Download },
-  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.THIRTEEN), icon: Icons.PrintFile },
+  { ...getExportStatementConfig(EXPORT_PARAMS_USE_CASES.SIX), icon: Icons.Download },
+  { ...getPrintStatementConfig(EXPORT_PARAMS_USE_CASES.SEVEN), icon: Icons.PrintFile },
 ];
 
 /** Действия футера карточки проводки. */
