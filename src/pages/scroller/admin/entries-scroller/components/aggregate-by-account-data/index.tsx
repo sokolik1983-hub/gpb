@@ -27,11 +27,11 @@ export const AggregateByAccountData: React.FC<AggregateByAccountDataProps> = ({ 
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.outcome({ count: outgoingCount })}</Typography.Text>
-          <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(amountCredit), currencyCode })}</Typography.P>
+          <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(amountDebit), currencyCode })}</Typography.P>
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.income({ count: incomingCount })}</Typography.Text>
-          <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(amountDebit), currencyCode })}</Typography.P>
+          <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(amountCredit), currencyCode })}</Typography.P>
         </Pattern.Span>
         <Pattern.Span size={3}>
           <Typography.Text className={css.item}>{locale.admin.entryScroller.aggregate.outgoingBalance}</Typography.Text>
