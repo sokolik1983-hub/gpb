@@ -1,3 +1,10 @@
+# [2.15.0-release.27](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.26...v2.15.0-release.27) (2022-10-27)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36537 поправлены параметры списаний и поступлений ([a22f61f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a22f61fcdb7f69fb1c370cb106a74730f9b15537))
+
 # [2.15.0-release.26](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.25...v2.15.0-release.26) (2022-10-27)
 
 
