@@ -166,6 +166,8 @@
   "admin.historyScroller.dialog.exportRegistryStatement.content": "Экспорт реестра",
   "admin.historyScroller.dialog.exportRegistryStatement.button.excel": "Excel",
   "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": "PDF",
+  "admin.entriesScroller.statementSummary.buttons.showTotals": "Все валюты",
+  "admin.entriesScroller.statementSummary.buttons.hideTotals": "Скрыть валюты",
   "turnoverScroller.filter.tags.dateFrom": "Дата от:",
   "turnoverScroller.filter.tags.dateTo": "Дата до:",
   "turnoverScroller.filter.tags.accounts": "Счёт:",

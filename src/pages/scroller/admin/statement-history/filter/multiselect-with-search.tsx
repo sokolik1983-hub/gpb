@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
+import { uniqBy } from 'utils/common';
 import type { IOption, OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
-import { uniqBy } from './utils';
 
 /** Свойства мультиселекта с поиском. */
 interface MultiselectWithSearchProps {

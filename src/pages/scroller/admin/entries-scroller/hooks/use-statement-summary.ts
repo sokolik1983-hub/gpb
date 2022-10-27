@@ -9,7 +9,19 @@ import { PREFIX } from 'stream-constants/admin';
 export const useStatementSummary = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data = { groups: [], statement: { dateFrom: '', dateTo: '' } }, isError, isFetched, isFetching } = useQuery<StatementSummary>({
+  const {
+    data = {
+      accountNumbers: [],
+      currencyGroups: [],
+      incomingCount: 0,
+      organizationNames: [],
+      outgoingCount: 0,
+      statement: { dateFrom: '', dateTo: '', id: '' },
+    },
+    isError,
+    isFetched,
+    isFetching,
+  } = useQuery<StatementSummary>({
     queryKey: [PREFIX, '@eco/statement', 'statementSummary', id],
     queryFn: () => statementService.getStatementSummary(id),
     retry: false,

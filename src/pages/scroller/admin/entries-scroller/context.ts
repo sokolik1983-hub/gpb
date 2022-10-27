@@ -1,6 +1,6 @@
 import type React from 'react';
 import { createContext } from 'react';
-import type { TotalTurnover } from 'interfaces/admin';
+import type { StatementSummary } from 'interfaces/admin';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { noop } from 'utils/common';
 import type { IFilters } from '@platform/core';
@@ -23,7 +23,7 @@ export interface IEntriesScrollerContext {
   /** Устанавливает признак отображения только выбранных строк. */
   setVisibleOnlySelectedRows: React.Dispatch<React.SetStateAction<boolean>>;
   /** Сводная информация по выписке. */
-  totalTurnovers: TotalTurnover[];
+  statementSummary: StatementSummary;
   /** Свойства формы фильтрации. */
   filters: IFilters;
 }
@@ -37,7 +37,14 @@ export const defaultValue: IEntriesScrollerContext = {
   setGroupBy: noop,
   visibleOnlySelectedRows: false,
   setVisibleOnlySelectedRows: noop,
-  totalTurnovers: [],
+  statementSummary: {
+    accountNumbers: [],
+    currencyGroups: [],
+    incomingCount: 0,
+    organizationNames: [],
+    outgoingCount: 0,
+    statement: { dateFrom: '', dateTo: '', id: '' },
+  },
   filters: {},
 };
 

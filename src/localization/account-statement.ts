@@ -464,6 +464,26 @@ export default {
 				},
 			},
 		},
+		entriesScroller: {
+			statementSummary: {
+				buttons: {
+					/**
+					 * @ru
+					 * Все валюты
+					 */
+					get showTotals() {
+						return t('admin.entriesScroller.statementSummary.buttons.showTotals');
+					},
+					/**
+					 * @ru
+					 * Скрыть валюты
+					 */
+					get hideTotals() {
+						return t('admin.entriesScroller.statementSummary.buttons.hideTotals');
+					},
+				},
+			},
+		},
 		form: {
 			/**
 			 * @ru
