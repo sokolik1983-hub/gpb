@@ -1058,6 +1058,9 @@
   "banner.serviceEvaluation.button.forward": {
     "ru": "Пройти опрос"
   },
+  "banner.serviceEvaluation.button.skip": {
+    "ru": "Скрыть"
+  },
   "admin.entryScroller.footer.export": {
     "ru": "Экспорт документов"
   },

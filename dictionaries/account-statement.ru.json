@@ -341,6 +341,7 @@
   "banner.serviceEvaluation.text.0": "Опрос займет не более 5-ти минут. Мы обновили раздел и хотим узнать ваше мнение.",
   "banner.serviceEvaluation.text.1": "Для участия пройдите по кнопке ниже или QR-коду",
   "banner.serviceEvaluation.button.forward": "Пройти опрос",
+  "banner.serviceEvaluation.button.skip": "Скрыть",
   "admin.entryScroller.footer.export": "Экспорт документов",
   "admin.entryScroller.footer.print": "Печать документов"
 }

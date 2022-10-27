@@ -2625,6 +2625,13 @@ export default {
 				get forward() {
 					return t('banner.serviceEvaluation.button.forward');
 				},
+				/**
+				 * @ru
+				 * Скрыть
+				 */
+				get skip() {
+					return t('banner.serviceEvaluation.button.skip');
+				},
 			},
 		},
 	},
