@@ -1,3 +1,15 @@
+# [2.15.0-release.25](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.24...v2.15.0-release.25) (2022-10-27)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36586 исправлено - отображаются все валюты в сводной инфо выписки ([c58d344](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c58d3447631be4db4e528dc1db0832c0a531b9a0))
+
+
+### Features
+
+* GBO-36086 Доработать баннер с учетом настройки ([e176bcc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e176bcc5ce895747d8fe802d707bdafa14ce08e3))
+
 # [2.15.0-release.24](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.23...v2.15.0-release.24) (2022-10-26)
 
 
