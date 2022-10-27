@@ -50,6 +50,14 @@ export const hideExportParamsDialogCases = [
   EXPORT_PARAMS_USE_CASES.FOURTEEN,
 ];
 
+/** Набор случаев, при которых детальные параметры комплекта документов (дебетовы, кредитовые) выбраны по умолчанию. */
+export const checkedDebitAndCreditParams = [
+  EXPORT_PARAMS_USE_CASES.THREE,
+  EXPORT_PARAMS_USE_CASES.FOUR,
+  EXPORT_PARAMS_USE_CASES.SIX,
+  EXPORT_PARAMS_USE_CASES.SEVEN,
+];
+
 /** Получить набор случаев, при которых скрываем флаг "С электронной подписью Банка в формате PDF". */
 export const getHideEsignCases = (action: ACTION) => {
   if (action === ACTION.PRINT) {
