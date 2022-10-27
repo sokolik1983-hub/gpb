@@ -75,9 +75,9 @@ export const StatementTransactionScrollerPage = () => {
   const [selectedRows, setSelectedRows] = useState<IStatementTransactionRow[]>([]);
   const [transactionsFetching, setTransactionsFetching] = useState(false);
   const [activeFieldAndValue, setActiveFieldAndValue] = useState<[string, unknown]>();
+  const [totalTransactions, setTotalTransactions] = useState(0);
 
   const transactionsInitialed = useRef(false);
-  const totalTransactions = useRef(0);
 
   // Вызывается один раз.
   const { data: counterparties, isError: isCounterpartiesError, isFetched: isCounterpartiesFetched } = useGetCounterparties();
@@ -87,7 +87,7 @@ export const StatementTransactionScrollerPage = () => {
     isError: isStatementSummaryInfoError,
     isFetched: isStatementSummaryInfoFetched,
   } = useGetStatementSummaryInfo();
-  const headerProps = useScrollerHeaderProps(statementSummaryInfo);
+  const headerProps = useScrollerHeaderProps(statementSummaryInfo, totalTransactions);
 
   // Для улучшения типизации. Типу Record<string, unknown> нельзя присвоить интерфейс
   // у которого не определена "index signatures".
@@ -110,7 +110,7 @@ export const StatementTransactionScrollerPage = () => {
 
         const { data: rows, totalCount: total } = await statementService.getTransactionList(requestDto, id);
 
-        totalTransactions.current = total;
+        setTotalTransactions(total);
 
         return { rows, pageCount: Math.ceil(total / pageSize) };
       } catch {
@@ -142,7 +142,7 @@ export const StatementTransactionScrollerPage = () => {
       filterPanel: properlyTypedFilterPanel,
       tagsPanel,
       transactionsUpdating: transactionsInitialed.current && transactionsFetching,
-      totalTransactions: totalTransactions.current,
+      totalTransactions,
       selectedRows,
       setSelectedRows,
       statementSummaryInfo,
@@ -154,6 +154,7 @@ export const StatementTransactionScrollerPage = () => {
       transactionsFetching,
       properlyTypedFilterPanel,
       tagsPanel,
+      totalTransactions,
       selectedRows,
       statementSummaryInfo,
       isNationalCurrency,
