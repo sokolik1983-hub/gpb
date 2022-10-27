@@ -20,11 +20,11 @@ export const Footer: React.FC<FooterProps> = ({ selectedRows }) => (
       <Gap.XL />
       <Typography.P> {locale.admin.entryScroller.footer.outcome}</Typography.P>
       <Gap.XS />
-      <AccountFieldsWithTooltipPanel isDebit={false} payments={selectedRows} />
+      <AccountFieldsWithTooltipPanel isDebit payments={selectedRows} />
       <Gap.XL />
       <Typography.P> {locale.admin.entryScroller.footer.income}</Typography.P>
       <Gap.XS />
-      <AccountFieldsWithTooltipPanel isDebit payments={selectedRows} />
+      <AccountFieldsWithTooltipPanel isDebit={false} payments={selectedRows} />
     </Horizon>
   </Box>
 );
