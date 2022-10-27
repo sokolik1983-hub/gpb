@@ -1,3 +1,10 @@
+# [2.15.0-release.26](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.25...v2.15.0-release.26) (2022-10-27)
+
+
+### Bug Fixes
+
+* GBO-36447 добавлены кейсы, при которых "Детальные пар-ры комплекта док-тов" выбраны по дефолту ([849b4fb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/849b4fbeaebe38657339baa4f8c7ebc6481a34b6))
+
 # [2.15.0-release.25](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.24...v2.15.0-release.25) (2022-10-27)
 
 
