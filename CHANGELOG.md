@@ -1,3 +1,10 @@
+# [2.15.0-release.28](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.27...v2.15.0-release.28) (2022-10-27)
+
+
+### Features
+
+* GBO-36721 условия отображения Печати и Экспорта выписки ([15580dd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/15580dd0bfe7216546a7470aec0613f85defef25))
+
 # [2.15.0-release.27](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.26...v2.15.0-release.27) (2022-10-27)
 
 
