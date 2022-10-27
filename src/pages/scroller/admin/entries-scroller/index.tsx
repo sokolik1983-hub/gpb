@@ -25,7 +25,7 @@ import { FOOTER_ACTIONS, HEADER_ACTIONS } from './action-configs';
 import { columns } from './columns';
 import { Footer } from './components/footer-content';
 import { PaymentPurposeRow } from './components/payment-purpose-row';
-import { TURNOVER_TOTAL_HEIGHT, TurnoverTotal } from './components/turnover-total';
+import { STATEMENT_SUMMARY_HEIGHT, StatementSummary } from './components/statement-summary';
 import { DEFAULT_SORT, GROUP_BY, SORTING_MAP, STORAGE_KEY } from './constants';
 import type { IEntriesScrollerContext } from './context';
 import { defaultValue, EntriesScrollerContext } from './context';
@@ -89,10 +89,7 @@ export const EntriesScrollerPage: React.FC = () => {
     [filters, groupBy, id]
   );
 
-  const {
-    data: { groups: totalTurnovers, statement },
-    isFetching: isTotalTurnoversFetching,
-  } = useStatementSummary();
+  const { data: statementSummary, isFetching: isTotalTurnoversFetching } = useStatementSummary();
 
   const contextValue: IEntriesScrollerContext = useMemo(
     () => ({
@@ -103,10 +100,10 @@ export const EntriesScrollerPage: React.FC = () => {
       setGroupBy,
       visibleOnlySelectedRows,
       setVisibleOnlySelectedRows,
-      totalTurnovers,
+      statementSummary,
       filters,
     }),
-    [filters, groupBy, selectedRows, totalTurnovers, visibleOnlySelectedRows]
+    [filters, groupBy, selectedRows, statementSummary, visibleOnlySelectedRows]
   );
 
   const footerActions = useCallback(
@@ -120,14 +117,14 @@ export const EntriesScrollerPage: React.FC = () => {
   const headerProps = {
     actions,
     header: locale.transactionsScroller.title({
-      dateFrom: formatDateTime(statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
-      dateTo: formatDateTime(statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
+      dateFrom: formatDateTime(statementSummary.statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
+      dateTo: formatDateTime(statementSummary.statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
     }),
   };
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - TURNOVER_TOTAL_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
 
   const handRowClick = useCallback(
     row => {
@@ -144,8 +141,8 @@ export const EntriesScrollerPage: React.FC = () => {
             <Box style={{ height }}>
               <LayoutScroll>
                 <ScrollerPageLayout headerProps={headerProps} loading={isTotalTurnoversFetching}>
-                  <ContentLoader height={TURNOVER_TOTAL_HEIGHT} loading={isTotalTurnoversFetching}>
-                    <TurnoverTotal />
+                  <ContentLoader height={STATEMENT_SUMMARY_HEIGHT} loading={isTotalTurnoversFetching}>
+                    <StatementSummary />
                   </ContentLoader>
                   <Filter fetchedNewTransactions setFilters={setFilters} />
                   <ContentLoader height={tableHeight} loading={!entriesInitialed}>

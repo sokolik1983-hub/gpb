@@ -61,3 +61,17 @@ export const showCommonErrorMessage = () => {
  */
 export const getActiveActionButtons = (actions: IExtendedActionWebInfo[], executor: IExecuter<any>, params: any[]) =>
   getActionButtons(actions, executor, params).filter(item => !item.disabled);
+
+/**
+ * Возвращает уникальные значения массива по переданному полю.
+ *
+ * @param values - Входящий массив значений.
+ * @param prop - Поле, по которому произойдет фильтрация на уникальность.
+ */
+export const uniqBy = <T>(values: T[], prop: keyof T): T[] => {
+  const set = new Set();
+
+  values.forEach(item => set.add(item[prop]));
+
+  return Array.from(set).map(item => values.find(value => value[prop] === item) as T);
+};

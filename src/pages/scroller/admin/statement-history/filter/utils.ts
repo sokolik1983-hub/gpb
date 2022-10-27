@@ -67,17 +67,3 @@ export const getUserOption = ({ familyName, firstName, id, middleName }: User): 
  * @param value - Входящая строка.
  */
 export const addColon = (value: string): string => `${value}:`;
-
-/**
- * Возвращает уникальные значения массива по переданному полю.
- *
- * @param values - Входящий массив значений.
- * @param prop - Поле, по которому произойдет фильрация на уникальность.
- */
-export const uniqBy = <T>(values: T[], prop: keyof T): T[] => {
-  const set = new Set();
-
-  values.forEach(item => set.add(item[prop]));
-
-  return Array.from(set).map(item => values.find(value => value[prop] === item) as T);
-};

@@ -18,7 +18,7 @@ export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTI
   const { values } = useFormState<IFormState>();
 
   const summary = queryClient.getQueryData<StatementSummary>([PREFIX, '@eco/statement', 'statementSummary', statementId]);
-  const hasForeignCurrency = summary?.groups.some(x => x.currencyCode !== RUB_CURRENCY);
+  const hasForeignCurrency = summary?.currencyGroups.some(x => x.currencyCode !== RUB_CURRENCY);
   const hasAccounts = true;
 
   useEffect(() => {

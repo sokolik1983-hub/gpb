@@ -513,6 +513,12 @@
   "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": {
     "ru": "PDF"
   },
+  "admin.entriesScroller.statementSummary.buttons.showTotals": {
+    "ru": "Все валюты"
+  },
+  "admin.entriesScroller.statementSummary.buttons.hideTotals": {
+    "ru": "Скрыть валюты"
+  },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
   },

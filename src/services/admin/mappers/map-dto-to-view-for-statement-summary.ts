@@ -1,4 +1,5 @@
-import type { StatementSummary, TotalTurnover, TotalTurnoverGroupedByCurrencyResponseDto } from 'interfaces/admin';
+import type { AccountOrganization, StatementSummary, TotalTurnoverGroupedByCurrencyResponseDto } from 'interfaces/admin';
+import { uniqBy } from 'utils/common';
 import { formatAccountCode } from '@platform/tools/localization';
 
 /**
@@ -8,31 +9,59 @@ import { formatAccountCode } from '@platform/tools/localization';
  * @param totalTurnovers.groups - Список групп.
  * @param totalTurnovers.statement - Данные выписки.
  */
-export const mapDtoToViewForStatementSummary = ({ groups, statement }: TotalTurnoverGroupedByCurrencyResponseDto): StatementSummary => ({
-  groups: groups.map(
-    ({ accounts, currency, incomingBalance, incomingCount, outgoingBalance, outgoingCount, turnoverCredit, turnoverDebit }) => {
-      const { accountNumbers, organizationNames } = accounts.reduce<Pick<TotalTurnover, 'accountNumbers' | 'organizationNames'>>(
-        (prevValue, { bankClient: { name }, number }) => ({
-          ...prevValue,
-          accountNumbers: [...prevValue.accountNumbers, formatAccountCode(number)],
-          organizationNames: [...prevValue.organizationNames, name],
+export const mapDtoToViewForStatementSummary = ({ groups, statement }: TotalTurnoverGroupedByCurrencyResponseDto): StatementSummary => {
+  const { organizations, ...otherProps } = groups.reduce<
+    Omit<StatementSummary, 'organizationNames'> & { organizations: AccountOrganization[] }
+  >(
+    (
+      prevValue,
+      {
+        accounts,
+        currency: { letterCode: currencyCode },
+        incomingBalance,
+        incomingCount,
+        outgoingBalance,
+        outgoingCount,
+        turnoverCredit,
+        turnoverDebit,
+      }
+    ) => {
+      const { accountNumberList, organizationList } = accounts.reduce<{
+        accountNumberList: string[];
+        organizationList: AccountOrganization[];
+      }>(
+        (prevAccountValue, { bankClient, number }) => ({
+          ...prevAccountValue,
+          accountNumberList: [...prevAccountValue.accountNumberList, formatAccountCode(number)],
+          organizationList: [...prevAccountValue.organizationList, bankClient],
         }),
-        { accountNumbers: [], organizationNames: [] }
+        { accountNumberList: [], organizationList: [] }
       );
 
       return {
-        accountNumbers,
-        currencyCode: currency.letterCode,
-        incomingBalance,
-        incomingCount,
-        organizationNames,
-        outgoingBalance,
-        outgoingCount,
-        statement,
-        turnoverCredit,
-        turnoverDebit,
+        ...prevValue,
+        accountNumbers: [...prevValue.accountNumbers, ...accountNumberList],
+        incomingCount: prevValue.incomingCount + incomingCount,
+        currencyGroups: [
+          ...prevValue.currencyGroups,
+          { currencyCode, incomingBalance, incomingCount, outgoingBalance, outgoingCount, turnoverCredit, turnoverDebit },
+        ],
+        organizations: [...prevValue.organizations, ...organizationList],
+        outgoingCount: prevValue.outgoingCount + outgoingCount,
       };
+    },
+    {
+      accountNumbers: [],
+      incomingCount: 0,
+      currencyGroups: [],
+      organizations: [],
+      outgoingCount: 0,
+      statement,
     }
-  ),
-  statement,
-});
+  );
+
+  return {
+    organizationNames: uniqBy<AccountOrganization>(organizations, 'id').map(({ name }) => name),
+    ...otherProps,
+  };
+};

@@ -1,10 +1,10 @@
-import type { BankClientCard } from 'interfaces/admin/dto/bank-client-card';
+import type { AccountOrganization } from 'interfaces/admin';
 import type { CurrencyCard } from 'interfaces/admin/dto/currency-card';
 
 /** Счет. */
 interface Account {
   /** Организация. */
-  bankClient: BankClientCard;
+  bankClient: AccountOrganization;
   /** Данные валюты. */
   currency: CurrencyCard;
   /** Идентификатор. */
@@ -57,20 +57,22 @@ export interface TotalTurnoverGroupedByCurrencyResponseDto {
 
 /** Суммарные остатки и обороты.  */
 export interface TotalTurnover extends TurnoverAmounts {
-  /** Номера счетов. */
-  accountNumbers: string[];
   /** Код валюты. */
   currencyCode: string;
-  /** Название организаций. */
-  organizationNames: string[];
-  /** Данные выписки. */
-  statement: Statement;
 }
 
 /** Сводная информация по выписке. */
 export interface StatementSummary {
-  /** Группы по валютам. */
-  groups: TotalTurnover[];
+  /** Номера счетов. */
+  accountNumbers: string[];
+  /** Суммарный оборот сгруппированный по валюте. */
+  currencyGroups: TotalTurnover[];
+  /** Общее количество поступлений. */
+  incomingCount: number;
+  /** Название организаций. */
+  organizationNames: string[];
+  /** Общее количество списаний. */
+  outgoingCount: number;
   /** Данные выписки. */
   statement: Statement;
 }
