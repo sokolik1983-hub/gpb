@@ -1,3 +1,11 @@
+# [2.15.0-release.32](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.31...v2.15.0-release.32) (2022-10-28)
+
+
+### Bug Fixes
+
+* GBO-36485 [Админка] [Журнал проводок] Не работает контекстный поиск по таблице ([e1b0f50](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e1b0f50cdb6854385e48bc99185c88b2645fbd1d))
+* GBO-36652 [Админка] [Журнал проводок] Не фильтруется по доп фильтру Контрагент ([a897aeb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/a897aeb4c9bc9fbb7bfa5ff029adc9128d65b679))
+
 # [2.15.0-release.31](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.30...v2.15.0-release.31) (2022-10-28)
 
 
