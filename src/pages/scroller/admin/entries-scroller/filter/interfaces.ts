@@ -3,19 +3,19 @@ import type { TRANSACTION_TYPES } from 'interfaces';
 /** Стейт формы фильтрации. */
 export interface IFormState {
   /** Дата. */
-  queryString?: string;
+  textSearch?: string;
   /** Сумма от. */
   amountFrom?: string;
   /** Сумма по. */
   amountTo?: string;
   /** Контрагенты. */
-  counterparties?: string[];
+  counterparty?: string[];
   /** Счета контрагентов. */
-  counterpartyAccountNumbers?: string[];
+  counterpartyAccountNumber?: string[];
   /** Клиенты. */
-  clients?: string[];
+  client?: string[];
   /** Счета клиентов. */
-  clientAccountNumbers?: string[];
+  clientAccountNumber?: string[];
   /** Номер документа. */
   documentNumber?: string;
   /** Дата платежа. */

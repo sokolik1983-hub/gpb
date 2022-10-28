@@ -27,10 +27,10 @@ const INPUT_DELAY = 300;
 export const QuickFilter: FC<QuickFilterPanelProps> = ({ fetchedNewTransactions }) => {
   const { submit } = useForm();
   const {
-    values: { amountFrom, amountTo, queryString },
+    values: { amountFrom, amountTo, textSearch },
   } = useFormState<IFormState>();
 
-  const [valueOfQueryString, setValueOfQueryString] = useState(queryString);
+  const [valueOfQueryString, setValueOfQueryString] = useState(textSearch);
   const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
   const { counterparties, clients } = useContext<IFilterContext>(FilterContext);
@@ -43,7 +43,7 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ fetchedNewTransactions 
     // необходимо делать только при изменении полей в быстрых фильтрах.
     // Они перечисленны в пассиве зависимостей.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [amountFrom, amountTo, queryString]);
+  }, [amountFrom, amountTo, textSearch]);
 
   useEffect(() => {
     // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены все доп. данные.

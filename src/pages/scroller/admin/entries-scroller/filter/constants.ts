@@ -15,7 +15,7 @@ export const getPath = pathGenerator<IFormState>();
 /** Поля формы фильтра. */
 export const FORM_FIELDS = {
   /** Поиск по таблице. */
-  TABLE_SEARCH: getPath('queryString'),
+  TABLE_SEARCH: getPath('textSearch'),
   /** Сумма. */
   AMOUNT: 'amount',
   /** Сумма от. */
@@ -23,13 +23,13 @@ export const FORM_FIELDS = {
   /** Сумма по. */
   AMOUNT_TO: getPath('amountTo'),
   /** Контрагент. */
-  COUNTERPARTY: getPath('counterparties'),
+  COUNTERPARTY: getPath('counterparty'),
   /** Счёт контрагента. */
-  COUNTERPARTY_ACCOUNT: getPath('counterpartyAccountNumbers'),
+  COUNTERPARTY_ACCOUNT: getPath('counterpartyAccountNumber'),
   /** Клиент. */
-  CLIENT: getPath('clients'),
+  CLIENT: getPath('client'),
   /** Счёт клиента. */
-  CLIENT_ACCOUNT: getPath('clientAccountNumbers'),
+  CLIENT_ACCOUNT: getPath('clientAccountNumber'),
   /** Номер документа. */
   DOC_NUMBER: getPath('documentNumber'),
   /** Дата платежа. */
