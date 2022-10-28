@@ -119,31 +119,6 @@ CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
 /** Компонент с ячейкой для отображения суммы поступления. */
 export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   value: {
-    amountDebit,
-    account: { currencyLetterCode },
-  },
-}) => {
-  const queryString = useQueryString();
-
-  if (!amountDebit) {
-    return null;
-  }
-
-  return (
-    <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
-      <HightlightText
-        searchWords={queryString}
-        textToHightlight={locale.moneyString.positive({ amount: String(amountDebit), currencyCode: currencyLetterCode })}
-      />
-    </Typography.P>
-  );
-};
-
-IncomeCell.displayName = 'IncomeCell';
-
-/** Компонент с ячейкой для отображения суммы списания. */
-export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
-  value: {
     amountCredit,
     account: { currencyLetterCode },
   },
@@ -155,10 +130,35 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   }
 
   return (
+    <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
+      <HightlightText
+        searchWords={queryString}
+        textToHightlight={locale.moneyString.positive({ amount: String(amountCredit), currencyCode: currencyLetterCode })}
+      />
+    </Typography.P>
+  );
+};
+
+IncomeCell.displayName = 'IncomeCell';
+
+/** Компонент с ячейкой для отображения суммы списания. */
+export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+  value: {
+    amountDebit,
+    account: { currencyLetterCode },
+  },
+}) => {
+  const queryString = useQueryString();
+
+  if (!amountDebit) {
+    return null;
+  }
+
+  return (
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.negative({ amount: String(amountCredit), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountDebit), currencyCode: currencyLetterCode })}
       />
     </Typography.P>
   );
