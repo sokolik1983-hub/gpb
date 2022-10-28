@@ -1,3 +1,10 @@
+# [2.15.0-release.30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.29...v2.15.0-release.30) (2022-10-28)
+
+
+### Bug Fixes
+
+* GBO-36547 исправлено - не учитывается группа проводок в выбранных строках ([dc99a1b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dc99a1b3377e70f86880c5aa268e6485e7d65195))
+
 # [2.15.0-release.29](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.28...v2.15.0-release.29) (2022-10-28)
 
 
