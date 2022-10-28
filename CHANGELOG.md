@@ -1,3 +1,10 @@
+# [2.15.0-release.31](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.30...v2.15.0-release.31) (2022-10-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36537 исправлено - вывод дебет и кредет ([850c341](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/850c34169007a4040a820d5a26c1d62b59fe49c0))
+
 # [2.15.0-release.30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.29...v2.15.0-release.30) (2022-10-28)
 
 
