@@ -1,3 +1,11 @@
+# [2.15.0-release.29](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.28...v2.15.0-release.29) (2022-10-28)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36370 добавлена фильтраци уникальности значений Организаций и Филиалов ([f38fcb3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f38fcb3a7a94fffeb90f5fb9fce2930bfc85e4f1))
+* GBO-36190 исправлено - оперирование пользователем по полю `uaaId` ([9bf528f](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/9bf528f441bd9979a181d6a4375f1b7662a30218))
+
 # [2.15.0-release.28](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0-release.27...v2.15.0-release.28) (2022-10-27)
 
 
