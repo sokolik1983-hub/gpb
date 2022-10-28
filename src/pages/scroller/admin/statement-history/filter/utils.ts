@@ -53,12 +53,12 @@ export const getServiceBranchOption = ({ filialName, id }: ServiceBranch): IOpti
  * @param user - Пользователь.
  * @param user.familyName - Фамилия.
  * @param user.firstName - Имя.
- * @param user.id - Идентификатор.
+ * @param user.uaaId - UAA идентификатор пользователя.
  * @param user.middleName - Отчество.
  */
-export const getUserOption = ({ familyName, firstName, id, middleName }: User): IOption => ({
+export const getUserOption = ({ familyName, firstName, middleName, uaaId }: User): IOption => ({
   label: getFullName([familyName, firstName, middleName]),
-  value: id,
+  value: uaaId,
 });
 
 /**

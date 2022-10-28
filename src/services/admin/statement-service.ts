@@ -8,6 +8,7 @@ import type {
 } from 'interfaces';
 import type {
   Account,
+  ClientUserDto,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
@@ -171,7 +172,7 @@ export const statementService = {
     }).then(response => mapDtoToViewForServiceBranchList(response.data.list)),
   /** Возвращает список пользователей. */
   getUserList: (metaData: IMetaData): Promise<User[]> =>
-    request<IServerResp<ServerResponsePage<ServerResponseList<User>>>>({
+    request<IServerResp<ServerResponsePage<ServerResponseList<ClientUserDto>>>>({
       data: metadataToRequestParams(metaData),
       method: 'POST',
       url: `${CLIENT_USER_URL}/get-page`,

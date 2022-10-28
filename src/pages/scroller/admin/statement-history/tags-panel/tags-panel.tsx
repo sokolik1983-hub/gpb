@@ -110,7 +110,7 @@ export const TagsPanel: FC<ITagsPanelProps> = ({ defaultAdditionalFilterValues, 
 
         return (value as string[])
           .map(item => {
-            const { familyName = '', firstName = '', middleName = '' } = allUsers.find(({ id }) => id === item) || {};
+            const { familyName = '', firstName = '', middleName = '' } = allUsers.find(({ uaaId }) => uaaId === item) || {};
 
             return getFullName([familyName, firstName, middleName]);
           })
