@@ -5,6 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
+    'accounts': string;
     'form': string;
   }
 }

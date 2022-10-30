@@ -16,7 +16,7 @@ export const useUsers = (filter: { ids: string[] }) => {
       id: {
         value: filter.ids,
         condition: 'in',
-        fieldName: 'id',
+        fieldName: 'uaaUserId',
       },
     },
     offset: 0,

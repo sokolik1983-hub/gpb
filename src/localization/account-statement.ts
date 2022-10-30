@@ -49,6 +49,13 @@ export default {
 			get denied() {
 				return t('client.statementStatuses.denied');
 			},
+			/**
+			 * @ru
+			 * Отменен
+			 */
+			get canceled() {
+				return t('client.statementStatuses.canceled');
+			},
 		},
 		scroller: {
 			/**
@@ -170,14 +177,14 @@ export default {
 		userType: {
 			/**
 			 * @ru
-			 * Сотрудник Банка
+			 * Сотрудник банка
 			 */
 			get bank() {
 				return t('admin.userType.bank');
 			},
 			/**
 			 * @ru
-			 * Сотрудник Клиента
+			 * Сотрудник клиента
 			 */
 			get client() {
 				return t('admin.userType.client');
@@ -320,7 +327,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Пользователь
+					 * Пользователь, сформировавший запрос
 					 */
 					get user() {
 						return t('admin.historyScroller.table.header.user');
@@ -341,7 +348,7 @@ export default {
 					},
 					/**
 					 * @ru
-					 * Статус выписки
+					 * Статус сформированной выписки
 					 */
 					get statementStatus() {
 						return t('admin.historyScroller.table.header.statementStatus');
@@ -457,6 +464,26 @@ export default {
 				},
 			},
 		},
+		entriesScroller: {
+			statementSummary: {
+				buttons: {
+					/**
+					 * @ru
+					 * Все валюты
+					 */
+					get showTotals() {
+						return t('admin.entriesScroller.statementSummary.buttons.showTotals');
+					},
+					/**
+					 * @ru
+					 * Скрыть валюты
+					 */
+					get hideTotals() {
+						return t('admin.entriesScroller.statementSummary.buttons.hideTotals');
+					},
+				},
+			},
+		},
 		form: {
 			/**
 			 * @ru
@@ -491,6 +518,172 @@ export default {
 			 */
 			get title() {
 				return t('admin.scroller.title');
+			},
+		},
+		entryScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get date() {
+					return t('admin.entryScroller.columns.date');
+				},
+				/**
+				 * @ru
+				 * Счёт клиент
+				 */
+				get account() {
+					return t('admin.entryScroller.columns.account');
+				},
+				/**
+				 * @ru
+				 * Документ
+				 */
+				get document() {
+					return t('admin.entryScroller.columns.document');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.entryScroller.columns.counterparty');
+				},
+				/**
+				 * @ru
+				 * Поступления
+				 */
+				get income() {
+					return t('admin.entryScroller.columns.income');
+				},
+				/**
+				 * @ru
+				 * Списания
+				 */
+				get outcome() {
+					return t('admin.entryScroller.columns.outcome');
+				},
+				/**
+				 * @ru
+				 * Сумма
+				 */
+				get summary() {
+					return t('admin.entryScroller.columns.summary');
+				},
+				aggregate: {
+					/**
+					 * @ru
+					 * Счёт {accountNumber}
+					 */
+					account: (p: { accountNumber: string }) => t('admin.entryScroller.columns.aggregate.account', p),
+					/**
+					 * @ru
+					 * {currencyCode} {organizationName}
+					 */
+					organization: (p: { currencyCode: string; organizationName: string }) =>
+						t('admin.entryScroller.columns.aggregate.organization', p),
+				},
+			},
+			cells: {
+				/**
+				 * @ru
+				 * от {date}
+				 */
+				documentDate: (p: { date: string }) => t('admin.entryScroller.cells.documentDate', p),
+			},
+			footer: {
+				/**
+				 * @ru
+				 * Выбрано:
+				 */
+				get selected() {
+					return t('admin.entryScroller.footer.selected');
+				},
+				/**
+				 * @ru
+				 * Поступления:
+				 */
+				get income() {
+					return t('admin.entryScroller.footer.income');
+				},
+				/**
+				 * @ru
+				 * Списания:
+				 */
+				get outcome() {
+					return t('admin.entryScroller.footer.outcome');
+				},
+				/**
+				 * @ru
+				 * Экспорт документов
+				 */
+				get export() {
+					return t('admin.entryScroller.footer.export');
+				},
+				/**
+				 * @ru
+				 * Печать документов
+				 */
+				get print() {
+					return t('admin.entryScroller.footer.print');
+				},
+			},
+			groupBy: {
+				/**
+				 * @ru
+				 * Без группировки
+				 */
+				get WITHOUT() {
+					return t('admin.entryScroller.groupBy.WITHOUT');
+				},
+				/**
+				 * @ru
+				 * По счетам
+				 */
+				get BY_ACCOUNT() {
+					return t('admin.entryScroller.groupBy.BY_ACCOUNT');
+				},
+			},
+			/**
+			 * @ru
+			 * Операций
+			 */
+			get total() {
+				return t('admin.entryScroller.total');
+			},
+			/**
+			 * @ru
+			 * Показать только выбранные
+			 */
+			get showOnlySelectedRows() {
+				return t('admin.entryScroller.showOnlySelectedRows');
+			},
+			aggregate: {
+				/**
+				 * @ru
+				 * Входящий остаток
+				 */
+				get incomingBalance() {
+					return t('admin.entryScroller.aggregate.incomingBalance');
+				},
+				/**
+				 * @ru
+				 * Исходящий остаток
+				 */
+				get outgoingBalance() {
+					return t('admin.entryScroller.aggregate.outgoingBalance');
+				},
+				/**
+				 * @ru
+				 * {count} списаний
+				 */
+				outcome: (p: { count: number }) => t('admin.entryScroller.aggregate.outcome', p),
+				/**
+				 * @ru
+				 * {count} поступлений
+				 */
+				income: (p: { count: number }) => t('admin.entryScroller.aggregate.income', p),
 			},
 		},
 	},
@@ -827,7 +1020,7 @@ export default {
 		headers: {
 			/**
 			 * @ru
-			 * Дата опер.
+			 * Дата проводки
 			 */
 			get operationDate() {
 				return t('transactionsScroller.headers.operationDate');
@@ -1584,6 +1777,22 @@ export default {
 		 */
 		positive: (p: { amount: string; currencyCode: string }) => t('moneyString.positive', p),
 	},
+	entriesScroller: {
+		footer: {
+			/**
+			 * @ru
+			 * {currencies} и ещё {amount}
+			 */
+			collapsedCurrencies: (p: { amount: string; currencies: string }) => t('entriesScroller.footer.collapsedCurrencies', p),
+			/**
+			 * @ru
+			 * на сумму:
+			 */
+			get tooltip() {
+				return t('entriesScroller.footer.tooltip');
+			},
+		},
+	},
 	action: {
 		labels: {
 			/**
@@ -2261,6 +2470,15 @@ export default {
 				return t('errors.periodEnd.dateLessRestriction');
 			},
 		},
+		printStatement: {
+			/**
+			 * @ru
+			 * Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл
+			 */
+			get content() {
+				return t('errors.printStatement.content');
+			},
+		},
 		datatable: {
 			/**
 			 * @ru
@@ -2415,6 +2633,13 @@ export default {
 				 */
 				get forward() {
 					return t('banner.serviceEvaluation.button.forward');
+				},
+				/**
+				 * @ru
+				 * Скрыть
+				 */
+				get skip() {
+					return t('banner.serviceEvaluation.button.skip');
 				},
 			},
 		},

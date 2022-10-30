@@ -24,4 +24,23 @@ export interface User {
   id: string;
   /** Отчество. */
   middleName: string;
+  /** UAA идентификатор. */
+  uaaId: string;
+}
+
+/** ДТО клиентского пользователя. */
+export interface ClientUserDto {
+  /** Фамилия. */
+  familyName: string;
+  /** Имя. */
+  firstName: string;
+  /** Идентификатор. */
+  id: string;
+  /** Отчество. */
+  middleName: string;
+  /** UAA пользователь. */
+  uaaUser: {
+    /** Идентификатор. */
+    id: string;
+  };
 }

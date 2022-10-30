@@ -4,7 +4,7 @@ import type { StatementHistoryRow } from 'interfaces/admin';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { showFile } from '@platform/services/client';
+import { showFile } from '@platform/services/admin';
 import type { context } from './executor';
 
 /**
@@ -32,13 +32,13 @@ export const exportStatementsHistory: IActionConfig<typeof context, unknown> = {
 
     showLoader();
 
-    const statementRequestIds = statements.map(statement => statement.statementId);
+    const statementRequestIds = statements.map(statement => statement.id);
 
     const [file, generateError] = await to(
       service.generateStatementsReport({ dateFrom, dateTo, format: fileFormat as FORMAT.EXCEL | FORMAT.PDF, statementRequestIds })
     );
 
-    if (generateError || !file || (file?.content && ((file?.content as unknown) as ArrayBuffer).byteLength === 0)) {
+    if (generateError || !file || file.content.length === 0) {
       hideLoader();
 
       fatal('error');

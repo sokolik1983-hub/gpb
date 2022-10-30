@@ -1,5 +1,6 @@
 import { DATE_PERIODS } from 'interfaces';
-import type { AccountOrganization, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import type { AccountOrganization, ServiceBranch, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import { uniqBy } from 'utils/common';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
@@ -60,13 +61,13 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
         accountNumbers: string[];
         accountIds: string[];
         organizations: AccountOrganization[];
-        serviceBranches: string[];
+        serviceBranches: ServiceBranch[];
       }>(
-        (prevValue, { filialName, id: accountId, number, organization }) => ({
+        (prevValue, { branch, id: accountId, number, bankClient: organization }) => ({
           accountNumbers: [...prevValue.accountNumbers, number],
           accountIds: [...prevValue.accountIds, accountId],
           organizations: [...prevValue.organizations, organization],
-          serviceBranches: [...prevValue.serviceBranches, filialName],
+          serviceBranches: [...prevValue.serviceBranches, branch],
         }),
         {
           accountNumbers: [],
@@ -83,13 +84,13 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
         createdAt: getDateAndTime(createdAt),
         format,
         id,
-        organizations,
+        organizations: uniqBy(organizations, 'id'),
         periodDate: getPeriodDate({ periodEnd, periodStart, periodType }),
         periodEnd,
         periodStart,
         periodType,
         requestStatus: status,
-        serviceBranches,
+        serviceBranches: uniqBy<ServiceBranch>(serviceBranches, 'id').map(({ filialName }) => filialName),
         statementId,
         statementType,
         statementStatus,

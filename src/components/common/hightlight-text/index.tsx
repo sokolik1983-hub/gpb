@@ -67,14 +67,14 @@ export const HightlightText: React.FC<IHightlightText> = ({
     return defaultResult;
   }
 
-  const index = textToHightlight.toLowerCase().indexOf(searchWords.toLowerCase().trimEnd());
+  const index = String(textToHightlight).toLowerCase().indexOf(searchWords.toLowerCase().trimEnd());
 
   // Если совпадение найдено
   if (index !== -1) {
     const lastIndex = index + searchWords.trimEnd().length;
-    const startText = textToHightlight.slice(0, index);
-    const endText = textToHightlight.slice(lastIndex);
-    const hightlighted = textToHightlight.slice(index, lastIndex);
+    const startText = String(textToHightlight).slice(0, index);
+    const endText = String(textToHightlight).slice(lastIndex);
+    const hightlighted = String(textToHightlight).slice(index, lastIndex);
 
     return (
       <span>

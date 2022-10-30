@@ -34,6 +34,11 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
   const prevValid = usePrevious(valid);
 
   useEffect(() => {
+    change(FORM_FIELDS.PERIOD_TYPE, DATE_PERIODS.YESTERDAY);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (valid) {
       applyMixValuesFormAndStorage(Boolean(prevValid));
 
@@ -77,9 +82,10 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
 
       void submit();
 
-      setDatePeriodFetched();
-
       setDatePeriodLoading(false);
+
+      // Необходимо, чтобы данные на форме обновились
+      setTimeout(() => setDatePeriodFetched(), 0);
     },
     [batch, change, setDatePeriodFetched, submit]
   );

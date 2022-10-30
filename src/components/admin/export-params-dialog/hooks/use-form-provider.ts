@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
+import type { EXPORT_PARAMS_USE_CASES, StatementSummary } from 'interfaces/admin';
 import type { ACTION } from 'interfaces/common';
 import { FORMAT } from 'interfaces/common';
-import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { useFormState } from 'react-final-form';
 import { useQueryClient } from 'react-query';
 import { RUB_CURRENCY } from 'stream-constants';
+import { PREFIX } from 'stream-constants/admin';
 import type { IFormContext, IFormState } from 'stream-constants/form';
 import { defaultFormContextValue } from 'stream-constants/form';
 
@@ -17,8 +17,8 @@ export const useFormProvider = (useCase?: EXPORT_PARAMS_USE_CASES, action?: ACTI
   const [value, setValue] = useState<IFormContext>({ ...defaultFormContextValue, useCase, action });
   const { values } = useFormState<IFormState>();
 
-  const summary = queryClient.getQueryData<IStatementSummaryInfoResponseDto>(['@eco/statement', 'statement', statementId]);
-  const hasForeignCurrency = summary?.currencyCode !== RUB_CURRENCY;
+  const summary = queryClient.getQueryData<StatementSummary>([PREFIX, '@eco/statement', 'statementSummary', statementId]);
+  const hasForeignCurrency = summary?.currencyGroups.some(x => x.currencyCode !== RUB_CURRENCY);
   const hasAccounts = true;
 
   useEffect(() => {

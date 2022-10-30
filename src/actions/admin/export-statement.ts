@@ -1,8 +1,9 @@
+import { statementExport } from 'actions/admin/guardians';
 import type { CreateStatementAttachmentRequestDto, StatementHistoryRow } from 'interfaces/admin';
 import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
-import { showFile } from '@platform/services/client';
+import { showFile } from '@platform/services/admin';
 import type { context } from './executor';
 
 /**
@@ -12,12 +13,12 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=69874143
  * */
 export const exportStatement: IActionConfig<typeof context, unknown> = {
-  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (statement: StatementHistoryRow) => {
+  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (doc: StatementHistoryRow) => {
     showLoader();
 
     const userDeviceInfo = await getUserDeviceInfo();
 
-    const { action, format, statementId } = statement;
+    const { action, format, statementId } = doc;
 
     const data: CreateStatementAttachmentRequestDto = {
       action,
@@ -28,7 +29,7 @@ export const exportStatement: IActionConfig<typeof context, unknown> = {
 
     const [file, error] = await to(service.createStatementAttachment(data));
 
-    if (error || !file || (file?.content && ((file?.content as unknown) as ArrayBuffer).byteLength === 0)) {
+    if (error || !file || file.content.length === 0) {
       hideLoader();
 
       fatal('error');
@@ -43,5 +44,5 @@ export const exportStatement: IActionConfig<typeof context, unknown> = {
     done();
   },
   fatalHandler,
-  guardians: [singleAction],
+  guardians: [singleAction, statementExport],
 };

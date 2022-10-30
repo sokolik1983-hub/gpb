@@ -11,7 +11,7 @@ import type { IActionConfig } from '@platform/services';
  * */
 export const viewTransactionsScroller: IActionConfig<typeof context, Promise<void>> = {
   action: ({ done }, { router }) => ({ statementId }: StatementHistoryRow) => {
-    router.push(`${ADMIN_STREAM_URL.TRANSACTION_REQUESTS}/${statementId}`);
+    router.push(`${ADMIN_STREAM_URL.STATEMENT_ENTRY}/${statementId}`);
 
     done();
 

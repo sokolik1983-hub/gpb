@@ -80,6 +80,12 @@ export const Filter: React.FC<IFilterProperties> = ({
     return true;
   }, [currentStateValues, defaultAdditionalFilterValues, values, visibleAdditionalFilter]);
 
+  /** Обрабоботчик нажатия кнопки применения фильтров. */
+  const handleApply = useCallback(() => {
+    void submit();
+    handleToggle();
+  }, [handleToggle, submit]);
+
   return (
     <>
       <Box className={css.filterWrapper}>
@@ -106,7 +112,7 @@ export const Filter: React.FC<IFilterProperties> = ({
             <AdditionalFilter />
           </Box>
           <Line fill="FAINT" />
-          <FilterFooter disabled={pristine} onApply={submit} onReset={handleReset} />
+          <FilterFooter disabled={pristine} onApply={handleApply} onReset={handleReset} />
           <Line fill="FAINT" />
         </Box>
       )}

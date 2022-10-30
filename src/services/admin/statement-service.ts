@@ -1,57 +1,86 @@
-import type { IScrollerResponceDto, FORMAT, ServerResponseList, ServerResponseData, ServerResponsePage } from 'interfaces';
+import type {
+  FORMAT,
+  ServerResponseList,
+  ServerResponseData,
+  ServerResponsePage,
+  ScrollerResponseDto,
+  IScrollerResponseDto,
+} from 'interfaces';
 import type {
   Account,
+  ClientUserDto,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
   IFileDataResponse,
   Organization,
   ServiceBranch,
+  StatementSummary,
+  TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
+import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { IStatementRequestCardDto, IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
   mapDtoToViewForOrganizationList,
   mapDtoToViewForServiceBranchList,
   mapDtoToViewForStatementList,
+  mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
-import { asyncNoop } from 'utils/common';
-import type { ICollectionResponse } from '@platform/services';
+import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
+import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
-import type { IMetaData, IServerDataResp, IServerResp } from '@platform/services/admin';
 
-/** Базовый URL сервиса "Выписки". */
-const BASE_URL = '/api';
+/** Префикс для любого URL любого сервиса. */
+const API_PREFIX = '/api';
 
 /** URL сервиса выписок. */
-const STATEMENT_BANK_URL = `${BASE_URL}/statement-bank`;
+const STATEMENT_BANK_URL = `${API_PREFIX}/statement-bank`;
 
 /** URL сервиса справочника клиентов (банковская часть). */
-const CLIENT_DICTIONARY_BANK_URL = `${BASE_URL}/client-dictionary-bank/internal/dictionary/client`;
+const CLIENT_DICTIONARY_BANK_URL = `${API_PREFIX}/client-dictionary-bank/internal/dictionary/client`;
 
 /** URL сервиса аутентификации и авторизации (банковская часть). */
-const UAA_BANK_URL = `${BASE_URL}/uaa-bank`;
+const UAA_BANK_URL = `${API_PREFIX}/uaa-bank`;
 
 /** URL пользователей типа CLIENT. */
-const CLIENTUSER_URL = `${UAA_BANK_URL}/admin/clientuser`;
+const CLIENT_USER_URL = `${UAA_BANK_URL}/admin/clientuser`;
 
 /** URL вспомогательных методов сервиса Выписки. */
 const STATEMENT_SUPPORT_URL = `${STATEMENT_BANK_URL}/statement/support`;
 
-/** Сервис выписок админа. */
+/**
+ * Сервисы администратора Банка.
+ *
+ * @see http://api-gateway.sandbox.gboteam.ru/statement-bank/swagger-ui.html
+ * @see http://api-gateway.stage.gboteam.ru/statement-bank/swagger-ui.html
+ */
 export const statementService = {
+  /** Получение страницы бухгалтерских проводок по идентификатору выписки. */
+  getEntries: (metaData: IMetaData, statementId: string, groupBy: GROUP_BY): Promise<ScrollerResponseDto<BankAccountingEntryGroup>> => {
+    const { params } = metadataToRequestParams(metaData);
+    const { multiSort, ...rest } = params;
+
+    return request<IServerResp<ScrollerResponseDto<BankAccountingEntryGroup>>>({
+      url: `${STATEMENT_BANK_URL}/entry/${statementId}/page`,
+      method: 'POST',
+      data: { ...rest, grouping: groupBy, sorting: multiSort },
+    }).then(x => x.data.data);
+  },
   /** Получить сущность "Запрос выписки". */
-  // TODO убрать eslint-disable после реализации метода
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getStatementRequest: (id: string) => asyncNoop,
+  getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
+    request<IServerDataResp<IStatementRequestCardDto>>({
+      url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
+    }).then(r => r.data),
   /** Возвращает проводку. */
-  // TODO убрать eslint-disable после реализации метода
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }): Promise<IServerDataResp<IGetTransactionCardResponseDto>> =>
-    asyncNoop(),
+  getTransaction: ({ accountingEntryId }: { accountingEntryId: string }) =>
+    request<IServerDataResp<IGetTransactionCardResponseDto>>({
+      url: `${STATEMENT_BANK_URL}/entry/${accountingEntryId}`,
+    }).then(r => r.data),
   /** Возвращает временной период. */
   getDatePeriod: (data: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> =>
     request<IServerDataResp<IGetDatePeriodResponseDto>>({
@@ -61,7 +90,7 @@ export const statementService = {
     }).then(result => result.data.data),
   /** Возвращает список выписок истории запросов. */
   getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
-    request<IServerDataResp<IScrollerResponceDto<StatementHistoryResponseDto>>>({
+    request<IServerDataResp<IScrollerResponseDto<StatementHistoryResponseDto>>>({
       data: metadataToRequestParams(metaData),
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/statement/request/page`,
@@ -100,12 +129,12 @@ export const statementService = {
   /** Возвращает список контрагентов и их счетов в выписке. */
   getCounterparties: (id: string): Promise<IClientBankResponseDto[]> =>
     request<IServerDataResp<IClientBankResponseDto[]>>({
-      url: `${STATEMENT_BANK_URL}/get-counterparties/${id}`,
+      url: `${STATEMENT_BANK_URL}/statement/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список клиентов и их счетов в выписке. */
   getClients: (id: string): Promise<IClientBankResponseDto[]> =>
     request<IServerDataResp<IClientBankResponseDto[]>>({
-      url: `${STATEMENT_BANK_URL}/get-clients/${id}`,
+      url: `${STATEMENT_BANK_URL}/statement/get-clients/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список счетов. */
   getAccountList: (metaData: IMetaData): Promise<Account[]> =>
@@ -143,22 +172,27 @@ export const statementService = {
     }).then(response => mapDtoToViewForServiceBranchList(response.data.list)),
   /** Возвращает список пользователей. */
   getUserList: (metaData: IMetaData): Promise<User[]> =>
-    request<IServerResp<ServerResponsePage<ServerResponseList<User>>>>({
+    request<IServerResp<ServerResponsePage<ServerResponseList<ClientUserDto>>>>({
       data: metadataToRequestParams(metaData),
       method: 'POST',
-      url: `${CLIENTUSER_URL}/get-page`,
+      url: `${CLIENT_USER_URL}/get-page`,
     }).then(response => mapDtoToViewForUserList(response.data.data.page.list)),
   /** Возвращает список пользователей по ФИО. */
   getUserListByFio: (data: UserRequestDto): Promise<User[]> =>
     request<IServerDataResp<User[]>>({
       data,
       method: 'POST',
-      url: `${CLIENTUSER_URL}/find/fio`,
+      url: `${CLIENT_USER_URL}/find/fio`,
     }).then(response => response.data.data),
-  createStatementAttachment: (data: CreateStatementAttachmentRequestDto): Promise<IFileDataResponse> =>
+  createStatementAttachment: (data: CreateStatementAttachmentRequestDto) =>
     request<IServerDataResp<IFileDataResponse>>({
       data,
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/statement/create-attachment`,
     }).then(response => response.data.data),
+  /** Возвращает сводную информацию по выписке. */
+  getStatementSummary: (statementId: string): Promise<StatementSummary> =>
+    request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
+      url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
+    }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
 };

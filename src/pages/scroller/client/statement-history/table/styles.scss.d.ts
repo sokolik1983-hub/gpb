@@ -12,11 +12,11 @@ declare namespace StylesScssModule {
     'totalWrapper': string;
     'zLayerContainer': string;
     'zLayerControl': string;
+    'zLayerDrag_n_drop': string;
     'zLayerFix': string;
     'zLayerFluid': string;
     'zLayerMessage': string;
     'zLayerModal': string;
-    'zLayerOverlay': string;
     'zLayerSidebar': string;
     'zLayerSpecific_element': string;
     'zLayerSpecific_element_accent': string;

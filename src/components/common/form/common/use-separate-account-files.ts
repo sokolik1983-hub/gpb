@@ -5,7 +5,7 @@ import { useForm, useFormState } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form/form-state';
 import { FORM_FIELDS } from 'stream-constants/form/form-state';
 
-/** Хук установки / измнения состояния флага "Отдельный файл по каждому счету". */
+/** Хук установки/изменения состояния флага "Отдельный файл по каждому счету". */
 export const useSeparateAccountFiles = () => {
   const { change } = useForm();
   const { values } = useFormState<IFormState>();

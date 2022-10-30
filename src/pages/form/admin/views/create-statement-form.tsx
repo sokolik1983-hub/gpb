@@ -1,12 +1,13 @@
 import React from 'react';
 import { CreationParams } from 'components/admin/form/creation-params';
 import { ForbiddenContent } from 'components/common';
-import { Accounts } from 'components/common/form/accounts';
+import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DetailDocumentsParams } from 'components/common/form/detail-documents-params';
 import { FileFormats } from 'components/common/form/file-formats';
 import { Operations } from 'components/common/form/operations';
 import { Period } from 'components/common/form/period';
-import { useInitialStatementRequest } from 'hooks/admin';
+import { Row } from 'components/common/form/row';
+import { useStatementRequest } from 'hooks/admin';
 import type { ExternalStatementRequest } from 'interfaces/form';
 import { locale } from 'localization';
 import { Footer } from 'pages/form/admin/components/footer';
@@ -15,10 +16,10 @@ import { Form } from 'react-final-form';
 import { useHistory, useLocation } from 'react-router-dom';
 import { getInitialFormState } from 'stream-constants/admin/form';
 import type { IFormState } from 'stream-constants/form';
-import { FORM_FIELD_LABELS } from 'stream-constants/form';
+import { FORM_FIELD_LABELS, FORM_FIELDS } from 'stream-constants/form';
 import { asyncNoop } from 'utils/common';
 import { NotFoundContent } from '@platform/services';
-import { Box, ServiceIcons, DATA_TYPE, FormValidation, Link, LoaderOverlay, Pattern, Typography, Gap } from '@platform/ui';
+import { Box, ServiceIcons, DATA_TYPE, FormValidation, Link, LoaderOverlay, Pattern, Typography, Gap, Fields } from '@platform/ui';
 import css from './styles.scss';
 
 /**
@@ -29,13 +30,13 @@ import css from './styles.scss';
 export const CreateStatementForm: React.FC = () => {
   const { state } = useLocation<ExternalStatementRequest>();
 
-  const prefilledFormValues: IFormState = state?.formValues || {};
+  const prefilledFormValues: IFormState = state?.formValues;
 
   const { goBack } = useHistory();
 
-  const { initialStatementRequest: latestStatementRequest, isInitialLoading, isInitialError, isForbidden } = useInitialStatementRequest();
+  const { statementRequest, isLoading, isError, isForbidden } = useStatementRequest();
 
-  if (isInitialLoading) {
+  if (isLoading) {
     return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
   }
 
@@ -43,11 +44,11 @@ export const CreateStatementForm: React.FC = () => {
     return <ForbiddenContent />;
   }
 
-  if (isInitialError) {
+  if (isError) {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState({ latestStatement: latestStatementRequest, prefilledFormValues });
+  const initialFormState = getInitialFormState({ statement: statementRequest, prefilledFormValues });
 
   return (
     <Box className={css.form} fill={'FAINT'}>
@@ -63,7 +64,21 @@ export const CreateStatementForm: React.FC = () => {
                 <Typography.H2>{locale.admin.form.header}</Typography.H2>
                 <Gap.LG />
                 <Period disabled />
-                <Accounts disabled />
+                <Row label={locale.common.accounts.label}>
+                  <Box className={css.accounts}>
+                    <Fields.MultiSelect
+                      disabled
+                      extraSmall
+                      name={FORM_FIELDS.ACCOUNTS}
+                      optionTemplate={AccountOption}
+                      options={(statementRequest?.accountNumbers || []).map(accountNumber => ({
+                        label: accountNumber,
+                        value: accountNumber,
+                        accountNumber,
+                      }))}
+                    />
+                  </Box>
+                </Row>
                 <Operations disabled />
                 <FileFormats disabled />
                 <CreationParams disabled />
