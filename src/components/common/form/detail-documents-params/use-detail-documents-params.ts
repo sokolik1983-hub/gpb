@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, defaultDocumentsSetParamsOptions, FORM_FIELDS, FormContext } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
+import { checkedDebitAndCreditParams } from 'utils/admin';
 import { creationParamsShowCases } from 'utils/client';
 import type { ICheckboxOption } from '@platform/ui';
 
@@ -19,6 +20,11 @@ export const useDetailDocumentsParams = (): [ICheckboxOption[]] => {
         batch(() => {
           change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS]);
           change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS]);
+        });
+      } else if (checkedDebitAndCreditParams.includes(useCase)) {
+        batch(() => {
+          change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS, CREDIT_PARAMS.INCLUDE_ORDERS]);
+          change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS, DEBIT_PARAMS.INCLUDE_ORDERS]);
         });
       } else {
         batch(() => {

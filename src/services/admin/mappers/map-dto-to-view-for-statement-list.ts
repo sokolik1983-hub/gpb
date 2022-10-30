@@ -1,5 +1,6 @@
 import { DATE_PERIODS } from 'interfaces';
-import type { Organization, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import type { AccountOrganization, ServiceBranch, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import { uniqBy } from 'utils/common';
 import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
@@ -15,7 +16,7 @@ import { formatAccountCode } from '@platform/tools/localization';
 const getPeriodDate = ({ periodEnd, periodStart, periodType }: { periodType: DATE_PERIODS; periodStart: string; periodEnd: string }) =>
   [DATE_PERIODS.YESTERDAY, DATE_PERIODS.TODAY].includes(periodType)
     ? formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT })
-    : `${formatDateTime(periodEnd, { keepLocalTime: true, format: DATE_FORMAT })}–${formatDateTime(periodStart, {
+    : `${formatDateTime(periodStart, { keepLocalTime: true, format: DATE_FORMAT })}–${formatDateTime(periodEnd, {
         keepLocalTime: true,
         format: DATE_FORMAT,
       })}`;
@@ -37,7 +38,7 @@ const getDateAndTime = (fullDate: string): { date: string; time: string } => {
 /**
  * Мап dto в представление запросов выписок для скроллера Истории запросов выписок.
  *
- * @param statements - Запросы выписок.
+ * @param statements - Список запросов выписок.
  */
 export const mapDtoToViewForStatementList = (statements: StatementHistoryResponseDto[]): StatementHistoryRow[] =>
   statements.map(
@@ -56,21 +57,21 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
       status,
       user,
     }) => {
-      const { accountNumbers, accountsIds, organizations, serviceBranches } = accounts.reduce<{
+      const { accountNumbers, accountIds, organizations, serviceBranches } = accounts.reduce<{
         accountNumbers: string[];
-        accountsIds: string[];
-        organizations: Organization[];
-        serviceBranches: string[];
+        accountIds: string[];
+        organizations: AccountOrganization[];
+        serviceBranches: ServiceBranch[];
       }>(
-        (prevValue, { filialName, id: accountId, number, organization }) => ({
+        (prevValue, { branch, id: accountId, number, bankClient: organization }) => ({
           accountNumbers: [...prevValue.accountNumbers, number],
-          accountsIds: [...prevValue.accountsIds, accountId],
+          accountIds: [...prevValue.accountIds, accountId],
           organizations: [...prevValue.organizations, organization],
-          serviceBranches: [...prevValue.serviceBranches, filialName],
+          serviceBranches: [...prevValue.serviceBranches, branch],
         }),
         {
           accountNumbers: [],
-          accountsIds: [],
+          accountIds: [],
           organizations: [],
           serviceBranches: [],
         }
@@ -78,16 +79,18 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
 
       return {
         accountNumbers: accountNumbers.map(item => formatAccountCode(item)),
-        accountsIds,
+        accountIds,
         action,
         createdAt: getDateAndTime(createdAt),
         format,
         id,
-        organizations,
+        organizations: uniqBy(organizations, 'id'),
         periodDate: getPeriodDate({ periodEnd, periodStart, periodType }),
+        periodEnd,
+        periodStart,
         periodType,
         requestStatus: status,
-        serviceBranches,
+        serviceBranches: uniqBy<ServiceBranch>(serviceBranches, 'id').map(({ filialName }) => filialName),
         statementId,
         statementType,
         statementStatus,

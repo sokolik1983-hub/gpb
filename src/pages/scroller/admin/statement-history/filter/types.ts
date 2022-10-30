@@ -1,11 +1,9 @@
 import type { DATE_PERIODS, STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
 
-/** Свойства полей формы фильтрации скроллера Истории запросов выпискок. */
+/** Свойства полей формы фильтрации скроллера Истории запросов выписок. */
 export interface FilterValues {
   /** Счета. */
   accountIds: string[];
-  /** Дата создания запроса. */
-  createdAt: string;
   /** Начало периода. */
   dateFrom?: string;
   /** Конец периода. */

@@ -17,6 +17,9 @@
   "client.statementStatuses.denied": {
     "ru": "Отклонен"
   },
+  "client.statementStatuses.canceled": {
+    "ru": "Отменен"
+  },
   "admin.requestStatus.new": {
     "ru": "Запрос сформирован"
   },
@@ -57,10 +60,10 @@
     "ru": "Справка"
   },
   "admin.userType.bank": {
-    "ru": "Сотрудник Банка"
+    "ru": "Сотрудник банка"
   },
   "admin.userType.client": {
-    "ru": "Сотрудник Клиента"
+    "ru": "Сотрудник клиента"
   },
   "admin.userType.technical": {
     "ru": "Технический пользователь"
@@ -168,7 +171,7 @@
     "ru": "Операций"
   },
   "transactionsScroller.headers.operationDate": {
-    "ru": "Дата опер."
+    "ru": "Дата проводки"
   },
   "transactionsScroller.headers.documentInfo": {
     "ru": "Документ"
@@ -411,7 +414,7 @@
     "ru": "Статус запроса"
   },
   "admin.historyScroller.filter.labels.statementStatus": {
-    "ru": "Статус выписки"
+    "ru": "Статус выписки / справки"
   },
   "admin.historyScroller.filter.labels.signaturePresence": {
     "ru": "Электронная подпись"
@@ -422,11 +425,14 @@
   "admin.historyScroller.filter.labels.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.filter.placeholders.account": {
-    "ru": "Счет"
+  "admin.historyScroller.filter.placeholder.account": {
+    "ru": "Счёт"
+  },
+  "admin.historyScroller.filter.placeholder.organization": {
+    "ru": "Название или ИНН"
   },
   "admin.historyScroller.filter.labels.statementType": {
-    "ru": "Выписка/Справка"
+    "ru": "Выписка/справка"
   },
   "admin.historyScroller.filter.labels.user": {
     "ru": "Пользователь"
@@ -438,13 +444,13 @@
     "ru": "Дата запроса"
   },
   "admin.historyScroller.table.header.accountNumber": {
-    "ru": "Счет"
+    "ru": "Счёт"
   },
   "admin.historyScroller.table.header.organization": {
     "ru": "Организация"
   },
   "admin.historyScroller.table.header.requestPeriod": {
-    "ru": "Период запроса"
+    "ru": "Период"
   },
   "admin.historyScroller.table.header.format": {
     "ru": "Формат"
@@ -453,7 +459,7 @@
     "ru": "Статус запроса"
   },
   "admin.historyScroller.table.header.user": {
-    "ru": "Пользователь"
+    "ru": "Пользователь, сформировавший запрос"
   },
   "admin.historyScroller.table.header.serviceBranch": {
     "ru": "Филиал обслуживания"
@@ -462,7 +468,7 @@
     "ru": "Признак сформированной выписки"
   },
   "admin.historyScroller.table.header.statementStatus": {
-    "ru": "Статус выписки"
+    "ru": "Статус сформированной выписки"
   },
   "admin.historyScroller.table.cell.inn": {
     "ru": "ИНН"
@@ -493,6 +499,25 @@
   },
   "admin.historyScroller.footer.selected": {
     "ru": "Выбрано:"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.header": {
+    "@count": "number",
+    "ru": "Документы: {count}"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.content": {
+    "ru": "Экспорт реестра"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.button.excel": {
+    "ru": "Excel"
+  },
+  "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": {
+    "ru": "PDF"
+  },
+  "admin.entriesScroller.statementSummary.buttons.showTotals": {
+    "ru": "Все валюты"
+  },
+  "admin.entriesScroller.statementSummary.buttons.hideTotals": {
+    "ru": "Скрыть валюты"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
@@ -614,6 +639,14 @@
     "@amount": "string",
     "@currencyCode": "string",
     "ru": "+{amount, money} {currencyCode}"
+  },
+  "entriesScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "entriesScroller.footer.tooltip": {
+    "ru": "на сумму:"
   },
   "client.form.title": {
     "ru": "Клиентская форма"
@@ -885,6 +918,9 @@
   "errors.periodEnd.dateLessRestriction": {
     "ru": "Дата окончания периода не может быть меньше даты начала"
   },
+  "errors.printStatement.content": {
+    "ru": "Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл"
+  },
   "exportParamsDialog.buttons.download.label": {
     "ru": "Экспорт"
   },
@@ -944,6 +980,75 @@
   "common.creationParams.warnings.withSign": {
     "ru": "Электронной подписью Банка может быть подписана только выписка по закрытым периодам"
   },
+  "admin.entryScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.entryScroller.columns.account": {
+    "ru": "Счёт клиент"
+  },
+  "admin.entryScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.entryScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.entryScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.entryScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.entryScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.entryScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.entryScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.entryScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.entryScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.entryScroller.groupBy.WITHOUT": {
+    "ru": "Без группировки"
+  },
+  "admin.entryScroller.groupBy.BY_ACCOUNT": {
+    "ru": "По счетам"
+  },
+  "admin.entryScroller.columns.aggregate.account": {
+    "ru": "Счёт {accountNumber}",
+    "@accountNumber": "string"
+  },
+  "admin.entryScroller.columns.aggregate.organization": {
+    "ru": "{currencyCode} {organizationName}",
+    "@currencyCode": "string",
+    "@organizationName": "string"
+  },
+  "admin.entryScroller.total": {
+    "ru": "Операций"
+  },
+  "admin.entryScroller.showOnlySelectedRows": {
+    "ru": "Показать только выбранные"
+  },
+  "admin.entryScroller.aggregate.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.entryScroller.aggregate.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "admin.entryScroller.aggregate.outcome": {
+    "@count": "number",
+    "ru": "{count} списаний"
+  },
+  "admin.entryScroller.aggregate.income": {
+    "@count": "number",
+    "ru": "{count} поступлений"
+  },
   "banner.serviceEvaluation.title": {
     "ru": "Оцените сервис запроса и получения выписок"
   },
@@ -955,5 +1060,14 @@
   },
   "banner.serviceEvaluation.button.forward": {
     "ru": "Пройти опрос"
+  },
+  "banner.serviceEvaluation.button.skip": {
+    "ru": "Скрыть"
+  },
+  "admin.entryScroller.footer.export": {
+    "ru": "Экспорт документов"
+  },
+  "admin.entryScroller.footer.print": {
+    "ru": "Печать документов"
   }
 }

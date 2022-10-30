@@ -1,20 +1,20 @@
 import React from 'react';
+import { ItemWithRestInPopUp } from 'components/common/item-with-rest-in-pop-up';
 import { NationalCurrencyText } from 'components/common/statement-info-content/national-currency-text';
 import {
   NationalCurrencyTransactionSummary,
   SUMMARY_TYPE,
 } from 'components/common/statement-info-content/national-currency-transaction-summary';
 import { locale } from 'localization';
-import { formatAccountCode } from '@platform/tools/localization';
-import { Box, Gap, Pattern, Typography, WithInfoTooltip } from '@platform/ui';
+import { Box, Gap, Pattern, Typography } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства компонента общей информации по выписке. */
-interface StatmentInfoContentProps {
-  /** Счёт. */
-  accountNumber: string;
-  /** Организация. */
-  organizationName: string;
+interface StatementInfoContentProps {
+  /** Список счетов. */
+  accountNumbers: string[];
+  /** Список организаций. */
+  organizationNames: string[];
   /** Иностранная ли валюта (Нужен рублёвый эквивалент). */
   isNationalCurrency: boolean;
   /** Входящий остаток. */
@@ -47,8 +47,8 @@ interface StatmentInfoContentProps {
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=28675666
  * */
 export const StatementInfoContent = ({
-  accountNumber,
-  organizationName,
+  accountNumbers,
+  organizationNames,
   incomingBalance,
   outcome,
   income,
@@ -61,22 +61,16 @@ export const StatementInfoContent = ({
   outgoingBalanceNatCurr,
   isNationalCurrency,
   currencyCode,
-}: StatmentInfoContentProps) => (
+}: StatementInfoContentProps) => (
   <Box className={css.statementInfoWrapper}>
     <Gap.SM />
     <Pattern gap={'X2L'}>
       <Pattern.Span size={4}>
         <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.accountNumber}</Typography.Text>
-        <Typography.P>{formatAccountCode(accountNumber)}</Typography.P>
+        <ItemWithRestInPopUp component={Typography.P} items={accountNumbers} />
         <Gap.XS />
         <Typography.Text className={css.titleStatementInfoItem}>{locale.transactionsScroller.labels.organizationName}</Typography.Text>
-        <WithInfoTooltip text={organizationName}>
-          {ref => (
-            <Typography.P innerRef={ref} line={'COLLAPSE'}>
-              {organizationName}
-            </Typography.P>
-          )}
-        </WithInfoTooltip>
+        <ItemWithRestInPopUp component={Typography.P} items={organizationNames} />
       </Pattern.Span>
       <Pattern.Span size={2}>
         <Typography.Text align={'RIGHT'} className={css.titleStatementInfoItem}>

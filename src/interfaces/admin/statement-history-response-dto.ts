@@ -1,11 +1,11 @@
 import type { ACTION, DATE_PERIODS, FORMAT, STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
-import type { Account } from 'interfaces/admin/account';
-import type { USER } from 'interfaces/admin/user';
+import type { StatementAccount } from 'interfaces/admin/account';
+import type { StatementUser } from 'interfaces/admin/user';
 
 /** Дто ответа сервера по выписке. */
 export interface StatementHistoryResponseDto {
   /** Список счетов. */
-  accounts: Account[];
+  accounts: StatementAccount[];
   /** Тип действия. */
   action: ACTION;
   /** Дата запроса. */
@@ -29,5 +29,5 @@ export interface StatementHistoryResponseDto {
   /** Статус запроса. */
   status: STATEMENT_REQUEST_STATUSES;
   /** Пользователь. */
-  user: USER;
+  user: StatementUser;
 }

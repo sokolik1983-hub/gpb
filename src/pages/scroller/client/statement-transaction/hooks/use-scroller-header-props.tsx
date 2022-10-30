@@ -15,8 +15,9 @@ import { HEADER_ACTIONS } from '../action-configs';
 /** Возвращает свойства для заголовка скроллера.
  *
  * @param info - Информация о выписке, проводки которой отображаются в скроллере.
+ * @param totalTransactions - Общее количество проводок.
  */
-export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto): IScrollerHeader => {
+export const useScrollerHeaderProps = (info: IStatementSummaryInfoResponseDto | undefined, totalTransactions: number): IScrollerHeader => {
   const { id } = useParams<IUrlParams>();
 
   const redirectToMainPage = useRedirect(COMMON_STREAM_URL.MAINPAGE);
@@ -24,7 +25,10 @@ export const useScrollerHeaderProps = (info?: IStatementSummaryInfoResponseDto):
 
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
+  const actions = useMemo(
+    () => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id, undefined, totalTransactions]),
+    [getAvailableActions, id, totalTransactions]
+  );
 
   const headerProps: IScrollerHeader = {
     onHomeClick: redirectToMainPage,

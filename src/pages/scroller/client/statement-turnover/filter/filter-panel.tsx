@@ -5,6 +5,7 @@ import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodResponseDto } from 'interfaces/dto';
 import { locale } from 'localization';
 import { useForm } from 'react-final-form';
+import { statementService } from 'services/client';
 import { Pattern, Adjust } from '@platform/ui';
 import type { ITurnoverScrollerContext } from '../turnover-scroller-context';
 import { TurnoverScrollerContext } from '../turnover-scroller-context';
@@ -49,6 +50,7 @@ export const FilterPanel = () => {
               <Adjust pad={[null, 'X2S', null, null]}>
                 {/* Выбор периода. */}
                 <DatePeriodField
+                  fetchDatePeriod={statementService.getDatePeriod}
                   name={FORM_FIELDS.DATE_PERIOD}
                   onErrorFetching={handleErrorPeriodFetching}
                   onStartFetching={handleStartPeriodFetching}

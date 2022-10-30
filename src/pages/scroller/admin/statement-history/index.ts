@@ -1,1 +1,1 @@
-export * from './statement-history-scroller-page';
+export * from './history-scroller-page';

@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks/common';
-import type { ITagsPanelProps } from 'interfaces/client';
+import type { ITagsPanelProps } from 'interfaces';
 import { useFormState } from 'react-final-form';
-import { DATE_PERIOD_OPTIONS } from 'stream-constants';
-import { STATUS_LABELS } from 'stream-constants/client';
+import { DATE_PERIOD_OPTIONS, STATEMENT_REQUEST_STATUS_FOR_CLIENT_LABEL } from 'stream-constants';
 import { orderTags } from 'utils/common';
 import { Gap } from '@platform/ui';
 import { HistoryScrollerContext } from '../history-scroller-context';
@@ -29,7 +28,7 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
       case FORM_FIELDS.PERIOD_TYPE:
         return DATE_PERIOD_OPTIONS.find(item => item.value === value)!.label;
       case FORM_FIELDS.STATUS:
-        return STATUS_LABELS[value as string];
+        return STATEMENT_REQUEST_STATUS_FOR_CLIENT_LABEL[value as string];
       case FORM_FIELDS.SIGNED:
         return '';
       default:

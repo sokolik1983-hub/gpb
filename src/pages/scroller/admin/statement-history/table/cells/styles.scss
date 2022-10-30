@@ -4,3 +4,23 @@
   margin: 0 4px;
   padding: 0;
 }
+
+@mixin clamp {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.organization-name {
+  @include clamp;
+}
+
+.user {
+  &__name {
+    @include clamp;
+  }
+
+  &__id {
+    @include clamp;
+  }
+}

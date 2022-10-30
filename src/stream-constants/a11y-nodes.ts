@@ -15,3 +15,8 @@ export const TURNOVERS_SCROLLER_ROW_NODE = 'turnovers-scroller-row-node';
 
 // Узлы для скроллера проводок
 export const TRANSACTIONS_SCROLLER_FILTER_NODE = 'transactions-scroller-filter-node';
+
+// Узлы для скроллера проводок в админке
+export const ADMIN_TRANSACTIONS_SCROLLER_ROW_CATEGORY_NODE = 'admin-transactions-scroller-row-category-node';
+export const ADMIN_TRANSACTIONS_SCROLLER_ROW_SUBCATEGORY_NODE = 'admin-transactions-scroller-row-subcategory-node';
+export const ADMIN_TRANSACTIONS_SCROLLER_ROW_NODE = 'admin-transactions-scroller-row-node';

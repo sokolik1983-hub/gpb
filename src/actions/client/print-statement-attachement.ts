@@ -1,12 +1,22 @@
 import { getCreateAttachment } from 'actions/client/create-attachement';
+import { totalDocs } from 'actions/client/guardians';
 import type { ICreateAttachmentResponse } from 'interfaces';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/common';
 import { ACTION } from 'interfaces/common';
 import { printBase64 } from 'platform-copies/utils';
 import { fatalHandler } from 'utils/common';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
 import type { context } from './executor';
+
+/** Вернуть набор гардов для печати выписки. */
+const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
+  if (useCase === EXPORT_PARAMS_USE_CASES.TWO) {
+    return [totalDocs];
+  }
+
+  return [];
+};
 
 /**
  * [Выписки_ЗВ] Клиент: Функция печати документа.
@@ -44,5 +54,6 @@ export const getPrintStatementAttachment = (
 
     done();
   },
+  guardians: getGuardians(useCase),
   fatalHandler,
 });

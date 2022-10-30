@@ -6,6 +6,9 @@
 declare namespace StylesScssModule {
   export interface IStylesScss {
     'action': string;
+    'organization-name': string;
+    'user__id': string;
+    'user__name': string;
   }
 }
 

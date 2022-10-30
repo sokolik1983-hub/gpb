@@ -31,16 +31,8 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
-          if (!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) {
-            if (hasMoreThenOneAccounts) {
-              acc.push(x);
-
-              break;
-            }
-
-            if (values.format === FORMAT.EXCEL || values.format === FORMAT.TXT) {
-              acc.push({ ...x, disabled: true });
-            }
+          if ((!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) && hasMoreThenOneAccounts) {
+            acc.push({ ...x, disabled: values.format === FORMAT.EXCEL || values.format === FORMAT.TXT });
           }
 
           break;

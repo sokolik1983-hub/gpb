@@ -1,6 +1,6 @@
 {
   "name": "@eco/account-statement",
-  "version": "2.14.0",
+  "version": "2.15.0-release.32",
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
@@ -17,7 +17,7 @@
     "build:admin": "npm run locale && NODE_ENV=production webpack --progress --config webpack.config.admin.js",
     "update": "rm -rf node_modules/@platform && rm -f package-lock.json && npm i",
     "please": "rm -rf node_modules && rm -f package-lock.json && npm i",
-    "start": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.client.js --host=0.0.0.0 --no-client-overlay",
+    "start": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.client.js --no-client-overlay",
     "start:admin": "cross-env MODE=spa NODE_ENV=DEVELOPMENT webpack-dev-server --progress --config webpack.config.admin.js --no-client-overlay",
     "rc": "cross-env DEV_ENV=stage npm start",
     "prod": "cross-env DEV_ENV=release npm start",
@@ -45,7 +45,7 @@
     "node": "12.x"
   },
   "devDependencies": {
-    "@platform/services": "13.6.0-release.8",
+    "@platform/services": "13.8.0",
     "@types/clamp-js-main": "0.11.2",
     "@types/react-table": "7.7.8"
   },

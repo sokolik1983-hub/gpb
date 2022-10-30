@@ -1,9 +1,13 @@
 import type { ILatestStatementDto } from 'interfaces/dto';
+import { locale } from 'localization';
 import { printBase64 } from 'platform-copies/utils';
-import { checkEmptyStatement, fatalHandler } from 'utils/common';
+import { checkEmptyStatement } from 'utils/common';
 import { singleAction, to } from '@platform/core';
-import type { IActionConfig } from '@platform/services';
+import type { IActionConfig, IBaseContext } from '@platform/services';
 import type { context } from './executor';
+
+/** Обработчик фатальной ошибки печати. */
+const fatalHandler = ({ showError }: IBaseContext) => showError(locale.errors.progressErrorHeader, locale.errors.printStatement.content);
 
 /**
  * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки.

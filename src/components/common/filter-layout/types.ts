@@ -1,7 +1,7 @@
 import type React from 'react';
 import type { ValidationErrors } from 'final-form';
-import type { IFilterPanel, ITagsPanel } from 'interfaces';
-import type { ITagsPanelProps, QuickFilterPanelProps } from 'interfaces/client';
+import type { IFilterPanel, ITagsPanel, ITagsPanelProps } from 'interfaces';
+import type { QuickFilterPanelProps } from 'interfaces/client';
 import type { IFilterField } from '@platform/services';
 
 /** Пропсы фильтра. */

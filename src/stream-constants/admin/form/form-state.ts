@@ -1,5 +1,5 @@
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
-import type { ILatestStatementDto } from 'interfaces/dto';
+import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import type { IFormState } from 'stream-constants/form';
 import { defaultFormState } from 'stream-constants/form';
@@ -10,8 +10,8 @@ import { alwaysSendParamCasesFromUI } from 'utils/admin/export-params-dialog';
 export interface IStateConfig {
   /** Вариант вызова диалога. */
   useCase?: EXPORT_PARAMS_USE_CASES;
-  /** Предыдущий запрос на выписку. */
-  latestStatement?: ILatestStatementDto;
+  /** Запрос на выписку. */
+  statement?: IStatementRequestCardDto;
   /** Дата начала периода. */
   dateFrom?: string;
   /** Дата окончания периода. */
@@ -21,18 +21,12 @@ export interface IStateConfig {
 }
 
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = ({
-  latestStatement,
-  useCase,
-  dateFrom,
-  dateTo,
-  prefilledFormValues,
-}: IStateConfig): Partial<IFormState> => {
+export const getInitialFormState = ({ statement, useCase, dateFrom, dateTo, prefilledFormValues }: IStateConfig): Partial<IFormState> => {
   if (prefilledFormValues) {
     return { ...defaultFormState, ...prefilledFormValues };
   }
 
-  if (!latestStatement) {
+  if (!statement) {
     const creationParams: string[] = [];
     const documentsSetParams: string[] = [];
 
@@ -44,7 +38,7 @@ export const getInitialFormState = ({
   }
 
   // TODO посмотреть вариант с хранением стейта формы по тому, который приходит с BE
-  const formState = mapDtoToForm(latestStatement);
+  const formState = mapDtoToForm(statement);
 
   const form = Object.keys(defaultFormState).reduce((acc, key) => {
     if (!acc[key]) {
