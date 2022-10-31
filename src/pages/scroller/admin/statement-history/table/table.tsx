@@ -12,6 +12,7 @@ import type { StatementHistoryScrollerContextProps } from '../context';
 import { StatementHistoryScrollerContext } from '../context';
 import { FORM_FIELDS, STORAGE_KEY } from '../filter';
 import { columns } from './columns';
+import { DEFAULT_SORT } from './constants';
 import { Footer } from './footer';
 
 /** Компонент таблицы "История запросов выписок". */
@@ -55,6 +56,7 @@ export const Table: FC = () => {
 
       <InfiniteDataTable<StatementHistoryRow>
         columns={columns}
+        defaultSort={DEFAULT_SORT}
         executor={executor}
         fetchData={fetchStatements}
         footerActionsGetter={footerActions}
