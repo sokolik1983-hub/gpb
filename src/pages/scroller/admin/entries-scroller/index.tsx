@@ -133,6 +133,20 @@ export const EntriesScrollerPage: React.FC = () => {
     [id]
   );
 
+  const filteredColumns = useMemo(
+    () =>
+      columns.filter(column => {
+        switch (groupBy) {
+          case GROUP_BY.BY_ACCOUNT:
+            return column.id !== COLUMN_NAMES.ACCOUNT;
+          case GROUP_BY.WITHOUT:
+          default:
+            return true;
+        }
+      }),
+    [groupBy]
+  );
+
   return (
     <MainLayout>
       <FocusLock>
@@ -151,15 +165,7 @@ export const EntriesScrollerPage: React.FC = () => {
                   <>
                     <TableRowsInfo />
                     <Table<BankAccountingEntryGroup, BankAccountingEntryCard>
-                      columns={columns.filter(column => {
-                        switch (groupBy) {
-                          case GROUP_BY.BY_ACCOUNT:
-                            return column.id !== COLUMN_NAMES.ACCOUNT;
-                          case GROUP_BY.WITHOUT:
-                          default:
-                            return true;
-                        }
-                      })}
+                      columns={filteredColumns}
                       customSettingsForm={SettingsForm}
                       defaultSort={DEFAULT_SORT}
                       executor={executor}
