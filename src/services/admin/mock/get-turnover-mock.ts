@@ -1,11 +1,11 @@
+import type { ScrollerResponseDto } from 'interfaces';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
-import type { IServerResp } from '@platform/services';
 
 /** Заглушка с информацией об остатках и оборотах. */
-export const getTurnoversMock = (): Promise<IServerResp<ITurnoverMockDto[]>> =>
+export const getTurnoversMock = (): Promise<ScrollerResponseDto<ITurnoverMockDto>> =>
   Promise.resolve({
-    data: Array(9).fill([
-      {
+    data: {
+      page: Array(9).fill({
         id: '465f91be-1814-4e89-9a59-2394f11636d2',
         account: {
           id: '0a40198d-14f0-4d83-bc2b-5c1db766f60d',
@@ -35,6 +35,7 @@ export const getTurnoversMock = (): Promise<IServerResp<ITurnoverMockDto[]>> =>
         outgoingBalance: 100_000_000,
         turnoverCredit: 5_000_000,
         turnoverDebit: 1500,
-      },
-    ]),
-  });
+      }),
+      size: 9,
+    },
+  }).then(x => x.data);

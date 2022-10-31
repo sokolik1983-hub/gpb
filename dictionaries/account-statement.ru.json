@@ -353,5 +353,15 @@
   "banner.serviceEvaluation.button.forward": "Пройти опрос",
   "banner.serviceEvaluation.button.skip": "Скрыть",
   "admin.entryScroller.footer.export": "Экспорт документов",
-  "admin.entryScroller.footer.print": "Печать документов"
+  "admin.entryScroller.footer.print": "Печать документов",
+  "admin.turnoverScroller.columns.operationDate": "Операционная дата",
+  "admin.turnoverScroller.columns.accountNumber": "№ счёта",
+  "admin.turnoverScroller.columns.organization": "Организация",
+  "admin.turnoverScroller.columns.accountBranch": "Филиал баланса счёта",
+  "admin.turnoverScroller.columns.serviceBranch": "Филиал обслуживания",
+  "admin.turnoverScroller.aggregateRow.incomingBalance": "Входящий остаток",
+  "admin.turnoverScroller.aggregateRow.turnoverDebit": "Обороты Дт",
+  "admin.turnoverScroller.aggregateRow.turnoverCredit": "Обороты Кт",
+  "admin.turnoverScroller.aggregateRow.outgoingBalance": "Исходящий остаток",
+  "admin.turnoverScroller.inn": "ИНН: {inn}"
 }

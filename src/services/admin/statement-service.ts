@@ -204,7 +204,8 @@ export const statementService = {
       url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
   /** Вернуть информацию об остатках и оборотах. */
-  getTurnovers: (): Promise<IServerResp<ITurnoverMockDto[]>> => getTurnoversMock(),
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getTurnovers: (metaData: IMetaData): Promise<ScrollerResponseDto<ITurnoverMockDto>> => getTurnoversMock(),
   /** Возвращает закрытые дни. */
   getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
     // TODO: Для целевого использования.

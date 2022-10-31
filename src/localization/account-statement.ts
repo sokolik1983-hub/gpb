@@ -759,6 +759,80 @@ export default {
 				income: (p: { count: number }) => t('admin.entryScroller.aggregate.income', p),
 			},
 		},
+		turnoverScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Операционная дата
+				 */
+				get operationDate() {
+					return t('admin.turnoverScroller.columns.operationDate');
+				},
+				/**
+				 * @ru
+				 * № счёта
+				 */
+				get accountNumber() {
+					return t('admin.turnoverScroller.columns.accountNumber');
+				},
+				/**
+				 * @ru
+				 * Организация
+				 */
+				get organization() {
+					return t('admin.turnoverScroller.columns.organization');
+				},
+				/**
+				 * @ru
+				 * Филиал баланса счёта
+				 */
+				get accountBranch() {
+					return t('admin.turnoverScroller.columns.accountBranch');
+				},
+				/**
+				 * @ru
+				 * Филиал обслуживания
+				 */
+				get serviceBranch() {
+					return t('admin.turnoverScroller.columns.serviceBranch');
+				},
+			},
+			aggregateRow: {
+				/**
+				 * @ru
+				 * Входящий остаток
+				 */
+				get incomingBalance() {
+					return t('admin.turnoverScroller.aggregateRow.incomingBalance');
+				},
+				/**
+				 * @ru
+				 * Обороты Дт
+				 */
+				get turnoverDebit() {
+					return t('admin.turnoverScroller.aggregateRow.turnoverDebit');
+				},
+				/**
+				 * @ru
+				 * Обороты Кт
+				 */
+				get turnoverCredit() {
+					return t('admin.turnoverScroller.aggregateRow.turnoverCredit');
+				},
+				/**
+				 * @ru
+				 * Исходящий остаток
+				 */
+				get outgoingBalance() {
+					return t('admin.turnoverScroller.aggregateRow.outgoingBalance');
+				},
+			},
+			/**
+			 * @ru
+			 * ИНН: {inn}
+			 */
+			inn: (p: { inn: string }) => t('admin.turnoverScroller.inn', p),
+		},
 	},
 	scroller: {
 		tags: {

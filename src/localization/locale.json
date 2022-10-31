@@ -1098,5 +1098,36 @@
   },
   "admin.entryScroller.footer.print": {
     "ru": "Печать документов"
+  },
+  "admin.turnoverScroller.columns.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.turnoverScroller.columns.accountNumber": {
+    "ru": "№ счёта"
+  },
+  "admin.turnoverScroller.columns.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.columns.accountBranch": {
+    "ru": "Филиал баланса счёта"
+  },
+  "admin.turnoverScroller.columns.serviceBranch": {
+    "ru": "Филиал обслуживания"
+  },
+  "admin.turnoverScroller.aggregateRow.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverDebit": {
+    "ru": "Обороты Дт"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverCredit": {
+    "ru": "Обороты Кт"
+  },
+  "admin.turnoverScroller.aggregateRow.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "admin.turnoverScroller.inn": {
+    "@inn": "string",
+    "ru": "ИНН: {inn}"
   }
 }
