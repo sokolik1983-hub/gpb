@@ -90,3 +90,5 @@ export const columns = addMaxWidthField<BankAccountingEntryCard, { isVisible: bo
     accessor,
   },
 ]);
+
+export const columnsGroupedByAccount = columns.filter(column => column.id !== COLUMN_NAMES.ACCOUNT);

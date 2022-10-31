@@ -318,7 +318,7 @@
   "errors.datatable.paginationModeError": "Нельзя менять режим работы пейджинации в DataGrid во время работы. Используйте paginationState для controlled режима, а defaultPaginationState для uncontrolled.",
   "common.creationParams.warnings.withSign": "Электронной подписью Банка может быть подписана только выписка по закрытым периодам",
   "admin.entryScroller.columns.date": "Дата проводки",
-  "admin.entryScroller.columns.account": "Счёт клиент",
+  "admin.entryScroller.columns.account": "Клиент банка",
   "admin.entryScroller.columns.document": "Документ",
   "admin.entryScroller.columns.counterparty": "Контрагент",
   "admin.entryScroller.columns.income": "Поступления",
