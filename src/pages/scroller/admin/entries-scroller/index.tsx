@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { executor, viewEntry } from 'actions/admin';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
@@ -44,8 +44,8 @@ const getSubRows = (originalRow: any) => originalRow.entries ?? [];
 /** Компонент страницы со скрллером проводок. */
 export const EntriesScrollerPage: React.FC = () => {
   const { id } = useParams<IUrlParams>();
-  const total = useRef<number>(0);
 
+  const [total, setTotal] = useState(0);
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(defaultValue.visibleOnlySelectedRows);
   const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>(defaultValue.selectedRows);
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
@@ -71,7 +71,7 @@ export const EntriesScrollerPage: React.FC = () => {
       try {
         const { page, size } = await statementService.getEntries(metaData, id, groupBy);
 
-        total.current = size;
+        setTotal(size);
 
         return {
           rows: rowsWithIds(page),
@@ -95,7 +95,7 @@ export const EntriesScrollerPage: React.FC = () => {
     () => ({
       selectedRows,
       setSelectedRows,
-      total: total.current,
+      total,
       groupBy,
       setGroupBy,
       visibleOnlySelectedRows,
@@ -103,7 +103,7 @@ export const EntriesScrollerPage: React.FC = () => {
       statementSummary,
       filters,
     }),
-    [filters, groupBy, selectedRows, statementSummary, visibleOnlySelectedRows]
+    [filters, groupBy, selectedRows, statementSummary, total, visibleOnlySelectedRows]
   );
 
   const footerActions = useCallback(
