@@ -531,7 +531,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Счёт клиент
+				 * Клиент банка
 				 */
 				get account() {
 					return t('admin.entryScroller.columns.account');

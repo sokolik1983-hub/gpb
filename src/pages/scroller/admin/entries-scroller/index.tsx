@@ -26,7 +26,7 @@ import { columns } from './columns';
 import { Footer } from './components/footer-content';
 import { PaymentPurposeRow } from './components/payment-purpose-row';
 import { STATEMENT_SUMMARY_HEIGHT, StatementSummary } from './components/statement-summary';
-import { DEFAULT_SORT, GROUP_BY, SORTING_MAP, STORAGE_KEY } from './constants';
+import { COLUMN_NAMES, DEFAULT_SORT, GROUP_BY, SORTING_MAP, STORAGE_KEY } from './constants';
 import type { IEntriesScrollerContext } from './context';
 import { defaultValue, EntriesScrollerContext } from './context';
 import { Filter } from './filter';
@@ -151,7 +151,15 @@ export const EntriesScrollerPage: React.FC = () => {
                   <>
                     <TableRowsInfo />
                     <Table<BankAccountingEntryGroup, BankAccountingEntryCard>
-                      columns={columns}
+                      columns={columns.filter(column => {
+                        switch (groupBy) {
+                          case GROUP_BY.BY_ACCOUNT:
+                            return column.id !== COLUMN_NAMES.ACCOUNT;
+                          case GROUP_BY.WITHOUT:
+                          default:
+                            return true;
+                        }
+                      })}
                       customSettingsForm={SettingsForm}
                       defaultSort={DEFAULT_SORT}
                       executor={executor}

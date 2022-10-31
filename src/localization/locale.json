@@ -984,7 +984,7 @@
     "ru": "Дата проводки"
   },
   "admin.entryScroller.columns.account": {
-    "ru": "Счёт клиент"
+    "ru": "Клиент банка"
   },
   "admin.entryScroller.columns.document": {
     "ru": "Документ"
