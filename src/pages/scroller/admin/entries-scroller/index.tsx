@@ -22,11 +22,11 @@ import { MainLayout, useAuth } from '@platform/services/admin';
 import { formatDateTime } from '@platform/tools/date-time';
 import { LayoutScroll, Box } from '@platform/ui';
 import { FOOTER_ACTIONS, HEADER_ACTIONS } from './action-configs';
-import { columns } from './columns';
+import { columns, columnsGroupedByAccount } from './columns';
 import { Footer } from './components/footer-content';
 import { PaymentPurposeRow } from './components/payment-purpose-row';
 import { STATEMENT_SUMMARY_HEIGHT, StatementSummary } from './components/statement-summary';
-import { COLUMN_NAMES, DEFAULT_SORT, GROUP_BY, SORTING_MAP, STORAGE_KEY } from './constants';
+import { DEFAULT_SORT, GROUP_BY, SORTING_MAP, STORAGE_KEY } from './constants';
 import type { IEntriesScrollerContext } from './context';
 import { defaultValue, EntriesScrollerContext } from './context';
 import { Filter } from './filter';
@@ -133,19 +133,16 @@ export const EntriesScrollerPage: React.FC = () => {
     [id]
   );
 
-  const filteredColumns = useMemo(
-    () =>
-      columns.filter(column => {
-        switch (groupBy) {
-          case GROUP_BY.BY_ACCOUNT:
-            return column.id !== COLUMN_NAMES.ACCOUNT;
-          case GROUP_BY.WITHOUT:
-          default:
-            return true;
-        }
-      }),
-    [groupBy]
-  );
+  const filteredColumns = useMemo(() => {
+    switch (groupBy) {
+      case GROUP_BY.BY_ACCOUNT:
+        return columnsGroupedByAccount;
+      case GROUP_BY.WITHOUT:
+        return columns;
+      default:
+        return columns;
+    }
+  }, [groupBy]);
 
   return (
     <MainLayout>
