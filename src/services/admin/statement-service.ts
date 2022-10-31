@@ -21,6 +21,7 @@ import type {
   User,
 } from 'interfaces/admin';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
+import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
 import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
@@ -33,6 +34,7 @@ import {
   mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
+import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -197,4 +199,6 @@ export const statementService = {
     request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
       url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
+  /** Вернуть информацию об остатках и оборотах. */
+  getTurnovers: (): Promise<IServerResp<ITurnoverMockDto[]>> => getTurnoversMock(),
 };
