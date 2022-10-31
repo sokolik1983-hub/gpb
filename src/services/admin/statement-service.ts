@@ -9,6 +9,7 @@ import type {
 import type {
   Account,
   ClientUserDto,
+  Counterparty,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
@@ -20,8 +21,9 @@ import type {
   User,
 } from 'interfaces/admin';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
+import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IStatementRequestCardDto, IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
@@ -127,13 +129,13 @@ export const statementService = {
       url: `${STATEMENT_BANK_URL}/statement/request/generate-report`,
     }).then(response => response.data.data),
   /** Возвращает список контрагентов и их счетов в выписке. */
-  getCounterparties: (id: string): Promise<IClientBankResponseDto[]> =>
-    request<IServerDataResp<IClientBankResponseDto[]>>({
+  getCounterparties: (id: string): Promise<Counterparty[]> =>
+    request<IServerDataResp<Counterparty[]>>({
       url: `${STATEMENT_BANK_URL}/statement/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список клиентов и их счетов в выписке. */
-  getClients: (id: string): Promise<IClientBankResponseDto[]> =>
-    request<IServerDataResp<IClientBankResponseDto[]>>({
+  getClients: (id: string): Promise<BankClient[]> =>
+    request<IServerDataResp<BankClient[]>>({
       url: `${STATEMENT_BANK_URL}/statement/get-clients/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список счетов. */

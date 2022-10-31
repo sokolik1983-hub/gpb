@@ -1,7 +1,9 @@
 import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel } from 'interfaces';
+import type { Counterparty } from 'interfaces/admin';
+import type { BankClient } from 'interfaces/common';
 import { noop } from 'utils/common';
-import type { IBankClient, IFormState } from './interfaces';
+import type { IFormState } from './interfaces';
 
 /** Контекст скроллера "Проводки". */
 export interface IFilterContext {
@@ -10,21 +12,15 @@ export interface IFilterContext {
   /** Свойства тегов. */
   tagsPanel: ITagsPanel;
   /** Контрагенты. */
-  counterparties: IBankClient[];
-  /** Счета контрагентов. */
-  counterpartiesAccounts: string[];
+  counterparties: Counterparty[];
   /** Клиенты. */
-  clients: IBankClient[];
-  /** Счета клиентов. */
-  clientsAccounts: string[];
+  clients: BankClient[];
 }
 
 /** Дефолтное состояние контекста скроллера. */
 const DEFAULT_CONTEXT_VALUE: IFilterContext = {
   clients: [],
-  clientsAccounts: [],
   counterparties: [],
-  counterpartiesAccounts: [],
   tagsPanel: {
     tags: [],
     onRemoveAllTags: noop,

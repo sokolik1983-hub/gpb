@@ -1,5 +1,5 @@
 import type { IUrlParams } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
+import type { Counterparty } from 'interfaces/common';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/client';
@@ -10,7 +10,7 @@ const DEFAULT_COUNTERPARTY = [];
 export const useGetCounterparties = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<IGetCounterpartiesResponseDto[]>({
+  const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<Counterparty[]>({
     queryKey: ['@eco/statement', 'counterparty', id],
     queryFn: () => statementService.getCounterparties(id),
     retry: false,
