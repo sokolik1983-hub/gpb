@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { locale } from 'localization';
-import { RUB_CURRENCY } from 'stream-constants';
 import { formatMoney } from '@platform/tools/big-number';
 import { CONTAINER_POSITION, Gap, Horizon, Link, Tooltip, Typography, WithTooltip } from '@platform/ui';
 
@@ -53,16 +52,10 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
 
   const filteredPayments = useMemo(() => payments.filter(payment => payment.debitSign === isDebit), [isDebit, payments]);
 
-  const handleMouseEnter = useCallback(() => {
-    if (filteredPayments.length > 0) {
-      setShow(true);
-    }
-  }, [filteredPayments.length]);
-  const handleMouseLeave = useCallback(() => {
-    if (filteredPayments.length > 0) {
-      setShow(false);
-    }
-  }, [filteredPayments.length]);
+  const handleMouseEnter = useCallback(() => setShow(true), []);
+
+  const handleMouseLeave = useCallback(() => setShow(false), []);
+
   const currenciesSet = useMemo(
     () => filteredPayments.reduce<Set<string>>((result, payment) => result.add(payment.account.currency.letterCode), new Set()),
     [filteredPayments]
@@ -73,7 +66,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
   if (currenciesSet.size === 0) {
     labelText = locale.moneyString.unsigned({
       amount: String(0),
-      currencyCode: RUB_CURRENCY,
+      currencyCode: '',
     });
   } else if (currenciesSet.size === 1) {
     const amount = filteredPayments.reduce((summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit), 0);
@@ -101,26 +94,36 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
       positioningOrder={[CONTAINER_POSITION.TOP_CENTER]}
       tooltip={({ position }) => (
         <Tooltip inverse fieldName="accountList" position={position}>
-          {Array.from(currenciesSet.values()).reduce<any[]>((paymentRows, currency, index) => {
-            const currencyPayments = filteredPayments.filter(payment => payment.account.currency.letterCode === currency);
-            const amount = currencyPayments.reduce(
-              (summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit),
-              0
-            );
+          {currenciesSet.size === 0 ? (
+            <>
+              <Typography.Text fill={'FAINT'}>
+                {isDebit ? locale.admin.entryScroller.footer.income : locale.admin.entryScroller.footer.outcome}
+              </Typography.Text>
+              <Gap.XS />
+              <RowAccountField amount={String(0)} count={0} currency="" />
+            </>
+          ) : (
+            Array.from(currenciesSet.values()).reduce<React.ReactElement[]>((paymentRows, currency, index) => {
+              const currencyPayments = filteredPayments.filter(payment => payment.account.currency.letterCode === currency);
+              const amount = currencyPayments.reduce(
+                (summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit),
+                0
+              );
 
-            paymentRows.push(
-              <>
-                <Typography.Text fill={'FAINT'}>
-                  {isDebit ? locale.admin.entryScroller.footer.income : locale.admin.entryScroller.footer.outcome}
-                </Typography.Text>
-                <Gap.XS />
-                <RowAccountField key={currency} amount={String(amount)} count={currencyPayments.length} currency={currency} />
-                {currenciesSet.size - 1 > index && <Gap.XL />}
-              </>
-            );
+              paymentRows.push(
+                <>
+                  <Typography.Text fill={'FAINT'}>
+                    {isDebit ? locale.admin.entryScroller.footer.income : locale.admin.entryScroller.footer.outcome}
+                  </Typography.Text>
+                  <Gap.XS />
+                  <RowAccountField key={currency} amount={String(amount)} count={currencyPayments.length} currency={currency} />
+                  {currenciesSet.size - 1 > index && <Gap.XL />}
+                </>
+              );
 
-            return paymentRows;
-          }, [])}
+              return paymentRows;
+            }, [])
+          )}
         </Tooltip>
       )}
       visible={show}
