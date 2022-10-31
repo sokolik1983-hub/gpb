@@ -1,32 +1,26 @@
-import type { IClientBankResponseDto } from 'interfaces/dto/admin';
+import type { IAccountOption } from 'components/common/accounts-field/account-option';
+import type { Counterparty } from 'interfaces/admin';
+import type { BankClient } from 'interfaces/common';
 import { parseCounterparty } from 'utils/common';
-import type { IBankClient, IBankClientFieldData } from './interfaces';
+import { formatAccountCode } from '@platform/tools/localization';
 
-/**
- * Преобразовывает список пар "Клиент банка"-"Счёт клиента" в отдельные массивы уникальных значений для фильтров.
- * */
-export const mapClientBankResponseToFieldData = (response: IClientBankResponseDto[]) =>
-  response.reduce<IBankClientFieldData>(
-    ({ bankClients, accounts }, bankClient) => {
-      if (!bankClients.some(value => value.inn === bankClient.inn)) {
-        bankClients.push({
-          inn: bankClient.inn,
-          name: bankClient.name,
-        });
-      }
-
-      if (!accounts.includes(bankClient.accountNumber)) {
-        accounts.push(bankClient.accountNumber);
-      }
-
-      return { bankClients, accounts };
-    },
-    { bankClients: [], accounts: [] }
-  );
-
-export const bankClientFieldFormatter = (value: unknown): IBankClient[] => {
+export const bankClientFieldFormatter = (value: unknown): Array<{ inn: string; name: string }> => {
   // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
   const selectedCounterparties = value as string[];
 
   return selectedCounterparties.map(item => parseCounterparty(item));
 };
+
+/**
+ * Возвращает опцию выбора счета.
+ *
+ * @param client - Клиент.
+ * @param client.accountNumber - Номер счета.
+ * @param client.name - Наименование клиента.
+ */
+export const getAccountOption = ({ accountNumber, name }: BankClient | Counterparty): IAccountOption => ({
+  accountNumber,
+  label: formatAccountCode(accountNumber),
+  orgName: name,
+  value: accountNumber,
+});

@@ -17,7 +17,6 @@ import type { IFilterContext } from './filter-context';
 import { FilterContext } from './filter-context';
 import { QuickFilter } from './quick-filter';
 import { TagsPanel } from './tags-panel';
-import { mapClientBankResponseToFieldData } from './utils';
 
 /** Высота фильтра. Минус разделитель снизу и вверху фильтра. */
 const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
@@ -52,9 +51,9 @@ export const Filter: React.FC<IProps> = ({ setFilters }) => {
 
   const filterValuesDebounced = useDebounce(filterValues, SET_FILTER_STATE_DELAY);
   // Вызывается один раз.
-  const { data: counterpartiesResponse, isFetched: isCounterpartiesFetched } = useGetCounterparties();
+  const { data: counterparties, isFetched: isCounterpartiesFetched } = useGetCounterparties();
   // Вызывается один раз.
-  const { data: clientsResponse, isFetched: isClientsFetched } = useGetClients();
+  const { data: clients, isFetched: isClientsFetched } = useGetClients();
 
   const counterpartiesFetched = useIsFetchedData(isCounterpartiesFetched);
   const clientsFetched = useIsFetchedData(isClientsFetched);
@@ -65,19 +64,14 @@ export const Filter: React.FC<IProps> = ({ setFilters }) => {
     setFilters(filterValuesDebounced);
   }, [setFilters, filterValuesDebounced]);
 
-  const counterpartiesData = mapClientBankResponseToFieldData(counterpartiesResponse);
-  const clientsData = mapClientBankResponseToFieldData(clientsResponse);
-
   const contextValue: IFilterContext = useMemo<IFilterContext>(
     () => ({
-      counterparties: counterpartiesData.bankClients,
-      counterpartiesAccounts: counterpartiesData.accounts,
-      clients: clientsData.bankClients,
-      clientsAccounts: clientsData.accounts,
+      clients,
+      counterparties,
       filterPanel,
       tagsPanel,
     }),
-    [clientsData.accounts, clientsData.bankClients, counterpartiesData.accounts, counterpartiesData.bankClients, filterPanel, tagsPanel]
+    [clients, counterparties, filterPanel, tagsPanel]
   );
 
   return (

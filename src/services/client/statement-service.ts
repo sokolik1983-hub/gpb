@@ -6,12 +6,12 @@ import type {
   IExpandedScrollerResponceDto,
 } from 'interfaces';
 import type { IStatementHistoryRow, IStatementTransactionRow, IStatement } from 'interfaces/client';
+import type { Counterparty } from 'interfaces/common';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
   IGetTurnoversResponseDto,
   IGetTurnoversRequestDto,
-  IGetCounterpartiesResponseDto,
   IGetStatusResponceDto,
   IGetTransactionCardResponseDto,
   ICreateRequestStatementDto,
@@ -74,8 +74,8 @@ export const statementService = {
       total: res.data.data.size,
     })),
   /** Возвращает список контрагентов. */
-  getCounterparties: (id: string): Promise<IGetCounterpartiesResponseDto[]> =>
-    request<IServerDataResp<IGetCounterpartiesResponseDto[]>>({
+  getCounterparties: (id: string): Promise<Counterparty[]> =>
+    request<IServerDataResp<Counterparty[]>>({
       url: `${STATEMENT_URL}/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список проводок. */

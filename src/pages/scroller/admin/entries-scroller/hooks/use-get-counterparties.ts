@@ -1,8 +1,9 @@
 import type { IUrlParams } from 'interfaces';
-import type { IClientBankResponseDto } from 'interfaces/dto/admin';
+import type { Counterparty } from 'interfaces/admin';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
+import { PREFIX } from 'stream-constants/admin';
 
 const DEFAULT_COUNTERPARTY = [];
 
@@ -10,8 +11,8 @@ const DEFAULT_COUNTERPARTY = [];
 export const useGetCounterparties = () => {
   const { id } = useParams<IUrlParams>();
 
-  const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<IClientBankResponseDto[]>({
-    queryKey: ['@eco/statement', 'counterparty', id],
+  const { data = DEFAULT_COUNTERPARTY, isError, isFetched, isFetching } = useQuery<Counterparty[]>({
+    queryKey: [PREFIX, '@eco/statement', 'counterparty', id],
     queryFn: () => statementService.getCounterparties(id),
     retry: false,
   });

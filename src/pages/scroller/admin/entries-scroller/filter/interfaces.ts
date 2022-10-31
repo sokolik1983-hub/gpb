@@ -29,13 +29,3 @@ export interface IFormState {
   /** Источник вызова скроллера проводок. */
   source?: string;
 }
-
-export interface IBankClient {
-  inn: string;
-  name: string;
-}
-
-export interface IBankClientFieldData {
-  bankClients: IBankClient[];
-  accounts: string[];
-}
