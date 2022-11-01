@@ -484,6 +484,79 @@ export default {
 				},
 			},
 		},
+		closedDaysScroller: {
+			/**
+			 * @ru
+			 * Закрытые дни
+			 */
+			get pageTitle() {
+				return t('admin.closedDaysScroller.pageTitle');
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.closedDaysScroller.table.total');
+				},
+				header: {
+					/**
+					 * @ru
+					 * Операционная дата
+					 */
+					get operationDate() {
+						return t('admin.closedDaysScroller.table.header.operationDate');
+					},
+					/**
+					 * @ru
+					 * Филиал
+					 */
+					get branch() {
+						return t('admin.closedDaysScroller.table.header.branch');
+					},
+					/**
+					 * @ru
+					 * Закрытие второй фазы
+					 */
+					get secondPhase() {
+						return t('admin.closedDaysScroller.table.header.secondPhase');
+					},
+					/**
+					 * @ru
+					 * Закрытие третьей фазы
+					 */
+					get thirdPhase() {
+						return t('admin.closedDaysScroller.table.header.thirdPhase');
+					},
+				},
+				cell: {
+					phase: {
+						/**
+						 * @ru
+						 * {date} в {time}
+						 */
+						dateTime: (p: { date: string; time: string }) => t('admin.closedDaysScroller.table.cell.phase.dateTime', p),
+					},
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.closedDaysScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.closedDaysScroller.table.placeholder.message');
+					},
+				},
+			},
+		},
 		form: {
 			/**
 			 * @ru

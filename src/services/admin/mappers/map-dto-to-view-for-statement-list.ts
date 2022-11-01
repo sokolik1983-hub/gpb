@@ -1,7 +1,8 @@
 import { DATE_PERIODS } from 'interfaces';
 import type { AccountOrganization, ServiceBranch, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import { getDateAndTime } from 'services/admin/mappers/utils';
 import { uniqBy } from 'utils/common';
-import { DATE_FORMAT, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
+import { DATE_FORMAT } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 
@@ -20,20 +21,6 @@ const getPeriodDate = ({ periodEnd, periodStart, periodType }: { periodType: DAT
         keepLocalTime: true,
         format: DATE_FORMAT,
       })}`;
-
-/**
- * Получить дату и время из полной даты.
- *
- * @param fullDate - Полная дата.
- */
-const getDateAndTime = (fullDate: string): { date: string; time: string } => {
-  const [date, time] = formatDateTime(fullDate, {
-    keepLocalTime: true,
-    format: DATE_TIME_FORMAT_WITHOUT_SEC,
-  }).split(' ');
-
-  return { date, time };
-};
 
 /**
  * Мап dto в представление запросов выписок для скроллера Истории запросов выписок.
