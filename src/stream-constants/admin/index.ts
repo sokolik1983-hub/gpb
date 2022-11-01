@@ -10,6 +10,8 @@ export const ADMIN_STREAM_URL = {
   STATEMENT_ENTRY: '/account-statement/entry',
   /** Скроллер истории запросов выписок. */
   STATEMENT_HISTORY: '/account-statement/history',
+  /** Скроллер остатков и оборотов. */
+  STATEMENT_TURNOVERS: '/account-statement/turnovers',
 };
 
 /** Префикс для использования в ключах для хранилищ и т.п. */
