@@ -1,4 +1,5 @@
 export * from './map-dto-to-view-for-account-list';
+export * from './map-dto-to-view-for-closed-days';
 export * from './map-dto-to-view-for-organization-list';
 export * from './map-dto-to-view-for-service-branch-list';
 export * from './map-dto-to-view-for-statement-list';
