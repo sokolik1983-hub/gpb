@@ -9,6 +9,7 @@ import type {
 import type {
   Account,
   ClientUserDto,
+  ClosedDay,
   Counterparty,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
@@ -28,12 +29,14 @@ import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/ad
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
+  mapDtoToViewForClosedDays,
   mapDtoToViewForOrganizationList,
   mapDtoToViewForServiceBranchList,
   mapDtoToViewForStatementList,
   mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
+import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
@@ -201,4 +204,26 @@ export const statementService = {
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
   /** Вернуть информацию об остатках и оборотах. */
   getTurnovers: (): Promise<IServerResp<ITurnoverMockDto[]>> => getTurnoversMock(),
+  /** Возвращает закрытые дни. */
+  getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDay>> =>
+    // TODO: Для целевого использования.
+    // request<IServerDataResp<IScrollerResponseDto<ClosedDay>>>({
+    //   data: metadataToRequestParams(metaData),
+    //   method: 'POST',
+    //   url: `${API_PREFIX}/closed-days/page`,
+    // })
+    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ClosedDay>> }>(resolve => {
+      console.log(metaData);
+
+      resolve({ data: mockClosedDaysData });
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
+
+      return {
+        data: mapDtoToViewForClosedDays(response.data.data.page),
+        total: response.data.data.size,
+      };
+    }),
 };
