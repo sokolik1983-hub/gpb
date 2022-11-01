@@ -1,5 +1,8 @@
 import React from 'react';
 import { RequestStatementForm } from 'pages/form/client';
+import { ScheduleConfirmPage } from 'pages/scroller/client/schedule-confirm';
+import { ScheduleHistoryScrollerPage } from 'pages/scroller/client/schedule-history';
+import { ScheduleNewPage } from 'pages/scroller/client/schedule-new';
 import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-history';
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
@@ -24,6 +27,27 @@ export const routes = [
     authority={PRIVILEGE.TURNOVER_SUMMARY_VIEW}
     component={StatementHistoryScrollerPage}
     path={COMMON_STREAM_URL.STATEMENT_HISTORY}
+  />,
+  <GuardRoute
+    key="client-schedule-history-scroller"
+    exact
+    authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
+    component={ScheduleHistoryScrollerPage}
+    path={COMMON_STREAM_URL.STATEMENT_SCHEDULE_HISTORY}
+  />,
+  <GuardRoute
+    key="client-schedule-statement-new"
+    exact
+    authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
+    component={ScheduleNewPage}
+    path={COMMON_STREAM_URL.STATEMENT_SCHEDULE_NEW}
+  />,
+  <GuardRoute
+    key="client-schedule-statement-confirm"
+    exact
+    authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
+    component={ScheduleConfirmPage}
+    path={COMMON_STREAM_URL.STATEMENT_SCHEDULE_CONFIRM}
   />,
   <GuardRoute
     key="client-statement-transactions-scroller"

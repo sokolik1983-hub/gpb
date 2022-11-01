@@ -21,3 +21,4 @@ export * from './counterparty-field';
 export * from './lines-ellipsis';
 export * from './select-with-search';
 export * from './table-with-total';
+export * from './page-header';
