@@ -9,7 +9,8 @@ import type {
 import type {
   Account,
   ClientUserDto,
-  ClosedDay,
+  ClosedDayResponseDto,
+  ClosedDayRow,
   Counterparty,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
@@ -205,14 +206,14 @@ export const statementService = {
   /** Вернуть информацию об остатках и оборотах. */
   getTurnovers: (): Promise<IServerResp<ITurnoverMockDto[]>> => getTurnoversMock(),
   /** Возвращает закрытые дни. */
-  getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDay>> =>
+  getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
     // TODO: Для целевого использования.
-    // request<IServerDataResp<IScrollerResponseDto<ClosedDay>>>({
+    // request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
     //   data: metadataToRequestParams(metaData),
     //   method: 'POST',
     //   url: `${API_PREFIX}/closed-days/page`,
     // })
-    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ClosedDay>> }>(resolve => {
+    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>> }>(resolve => {
       console.log(metaData);
 
       resolve({ data: mockClosedDaysData });

@@ -1,5 +1,5 @@
 import type { IScrollerResponseDto } from 'interfaces';
-import type { ClosedDay } from 'interfaces/admin';
+import type { ClosedDayResponseDto } from 'interfaces/admin';
 import type { IServerDataResp } from '@platform/services/admin';
 
 const closedDayList = Array(30).fill({
@@ -15,12 +15,12 @@ const closedDayList = Array(30).fill({
     messageId: '7c5f87d0-3fe8-11ed-b878-0242ac120002',
   },
   thirdPhase: {
-    date: '2022-08-16T22:10:41.027916Z',
+    date: '2022-08-17T22:10:41.027916Z',
     messageId: '7c5f87d0-3fe8-11ed-b878-0242ac120002',
   },
 });
 
-export const mockClosedDaysData: IServerDataResp<IScrollerResponseDto<ClosedDay>> = {
+export const mockClosedDaysData: IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>> = {
   data: {
     page: closedDayList,
     size: closedDayList.length,

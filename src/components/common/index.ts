@@ -18,3 +18,4 @@ export * from './content-loader';
 export * from './multiselect-with-option-all-field';
 export * from './statement-info-content';
 export * from './counterparty-field';
+export * from './lines-ellipsis';

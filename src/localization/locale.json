@@ -519,6 +519,35 @@
   "admin.entriesScroller.statementSummary.buttons.hideTotals": {
     "ru": "Скрыть валюты"
   },
+  "admin.closedDaysScroller.pageTitle": {
+    "ru": "Закрытые дни"
+  },
+  "admin.closedDaysScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.closedDaysScroller.table.header.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.closedDaysScroller.table.header.branch": {
+    "ru": "Филиал"
+  },
+  "admin.closedDaysScroller.table.header.secondPhase": {
+    "ru": "Закрытие второй фазы"
+  },
+  "admin.closedDaysScroller.table.header.thirdPhase": {
+    "ru": "Закрытие третьей фазы"
+  },
+  "admin.closedDaysScroller.table.cell.phase.dateTime": {
+    "@date": "string",
+    "@time": "string",
+    "ru": "{date} в {time}"
+  },
+  "admin.closedDaysScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.closedDaysScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
   },

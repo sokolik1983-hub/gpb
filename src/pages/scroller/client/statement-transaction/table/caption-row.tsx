@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
-import { HightlightText } from 'components/common';
-import { LinesEllipsis } from 'components/common/lines-ellipsis';
+import { HightlightText, LinesEllipsis } from 'components/common';
 import type { IStatementTransactionRow } from 'interfaces/client';
 import { TransactionScrollerContext } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import { Box, Typography, WithInfoTooltip, CONTAINER_POSITION } from '@platform/ui';
