@@ -1,3 +1,14 @@
+## [2.15.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0...v2.15.1-release.1) (2022-11-02)
+
+
+### Bug Fixes
+
+* GBO-36420 [Запрос выписки] По умолчанию выполнять сортировку по убыванию по "Дата запроса" ([e9bf7e1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e9bf7e1b713f3cb238a116f02c7d2bde318b2164))
+* GBO-36554 Поменять название поля скроллера, изменить отображение в зависимости от группировки ([928ce75](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/928ce7513dd00cb983e2046ec0f7bb7bb38e3cbe))
+* **скроллер:** GBO-36526 исправлено - отображение счетов в фильтре ([4f243da](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4f243dacfdc1a2be19d9dd8cc88f173d092c2169))
+* **скроллер:** GBO-36632 исправлено - отображение тултипа при сумме `0` ([cfdeadf](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cfdeadf8204849d8e3352d39a6d50016faef1270))
+* **скроллер:** GBO-36779 исправлено - при первом рендере правильное количество проводок ([8c36c30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/8c36c303275016d39705aa91e4c0f6c2c343fdcf))
+
 # [2.15.0](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.14.0...v2.15.0) (2022-10-30)
 
 
