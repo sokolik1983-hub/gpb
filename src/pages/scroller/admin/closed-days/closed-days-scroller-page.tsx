@@ -4,16 +4,13 @@ import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout }
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
-import type { ClosedDayRow } from 'interfaces/admin';
 import { locale } from 'localization';
 import type { ClosedDaysContextProps } from 'pages/scroller/admin/closed-days/context';
 import { ClosedDaysContext } from 'pages/scroller/admin/closed-days/context';
+import { Filter, FILTER_HEIGHT } from 'pages/scroller/admin/closed-days/filter';
 import { Table } from 'pages/scroller/admin/closed-days/table';
-import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
-import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
-import { convertTablePaginationToMetaData } from 'utils/common';
-import type { IMetaData } from '@platform/services/admin';
+import type { IFilters } from '@platform/core';
 import { MainLayout } from '@platform/services/admin';
 import { Box } from '@platform/ui';
 
@@ -23,43 +20,34 @@ import { Box } from '@platform/ui';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440041
  */
 export const ClosedDaysScrollerPage: FC = () => {
-  const [total, setTotal] = useState(0);
-  const [tableDataInitialed, setTableDataInitialed] = useState(false);
+  const [datePeriodInitialed, setDatePeriodInitialed] = useState(false);
+  const [tableInitialed, setTableInitialed] = useState(false);
+  const [filter, setFilter] = useState<IFilters>({});
 
   const height = useStreamContentHeight();
-
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT;
 
   const headerProps = {
     header: locale.admin.closedDaysScroller.pageTitle,
   };
 
-  /** Метод делает запрос закрытых дней на сервер. */
-  const fetch = useCallback(async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<
-    IFetchDataResponse<ClosedDayRow>
-  > => {
-    try {
-      const metaData: IMetaData = {
-        multiSort,
-        ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
-      };
-
-      const { data: rows, total: totalItems } = await statementService.getClosedDays(metaData);
-
-      setTotal(totalItems);
-
-      return { rows, pageCount: totalItems };
-    } catch {
-      return { rows: [], pageCount: 0 };
-    } finally {
-      if (!tableDataInitialed) {
-        setTableDataInitialed(true);
-      }
+  /** Метод срабатывает при получении периода дат по типу.
+   * Устанавливает признак получения периода дат (получение первых данных). */
+  const setDatePeriodFetched = useCallback(() => {
+    if (!datePeriodInitialed) {
+      setDatePeriodInitialed(true);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [datePeriodInitialed]);
 
-  const contextValue: ClosedDaysContextProps = useMemo(() => ({ fetch, total }), [fetch, total]);
+  /** Метод срабатывает при получении данных таблицы.
+   * Устанавливает признак инициализации таблицы (получение первых данных). */
+  const setDataTableFetched = useCallback(() => {
+    if (!tableInitialed) {
+      setTableInitialed(true);
+    }
+  }, [tableInitialed]);
+
+  const contextValue: ClosedDaysContextProps = useMemo(() => ({ setDatePeriodFetched }), [setDatePeriodFetched]);
 
   return (
     <ClosedDaysContext.Provider value={contextValue}>
@@ -67,10 +55,11 @@ export const ClosedDaysScrollerPage: FC = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
-              <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
+              <Filter setFilter={setFilter} />
+              <ContentLoader height={tableHeight} loading={!tableInitialed}>
                 <Box />
               </ContentLoader>
-              <Table />
+              {datePeriodInitialed && <Table filter={filter} setDataTableFetched={setDataTableFetched} />}
             </ScrollerPageLayout>
           </FocusTree>
         </FocusLock>

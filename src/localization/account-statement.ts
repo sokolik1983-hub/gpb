@@ -492,6 +492,17 @@ export default {
 			get pageTitle() {
 				return t('admin.closedDaysScroller.pageTitle');
 			},
+			filter: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Филиал
+					 */
+					get branch() {
+						return t('admin.closedDaysScroller.filter.placeholder.branch');
+					},
+				},
+			},
 			table: {
 				/**
 				 * @ru
