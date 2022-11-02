@@ -833,6 +833,117 @@ export default {
 			 */
 			inn: (p: { inn: string }) => t('admin.turnoverScroller.inn', p),
 		},
+		transactionsScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get date() {
+					return t('admin.transactionsScroller.columns.date');
+				},
+				/**
+				 * @ru
+				 * Клиент банка
+				 */
+				get account() {
+					return t('admin.transactionsScroller.columns.account');
+				},
+				/**
+				 * @ru
+				 * Документ
+				 */
+				get document() {
+					return t('admin.transactionsScroller.columns.document');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.transactionsScroller.columns.counterparty');
+				},
+				/**
+				 * @ru
+				 * Поступления
+				 */
+				get income() {
+					return t('admin.transactionsScroller.columns.income');
+				},
+				/**
+				 * @ru
+				 * Списания
+				 */
+				get outcome() {
+					return t('admin.transactionsScroller.columns.outcome');
+				},
+				/**
+				 * @ru
+				 * Сумма
+				 */
+				get summary() {
+					return t('admin.transactionsScroller.columns.summary');
+				},
+			},
+			cells: {
+				/**
+				 * @ru
+				 * от {date}
+				 */
+				documentDate: (p: { date: string }) => t('admin.transactionsScroller.cells.documentDate', p),
+			},
+			footer: {
+				/**
+				 * @ru
+				 * Выбрано:
+				 */
+				get selected() {
+					return t('admin.transactionsScroller.footer.selected');
+				},
+				/**
+				 * @ru
+				 * Поступления:
+				 */
+				get income() {
+					return t('admin.transactionsScroller.footer.income');
+				},
+				/**
+				 * @ru
+				 * Списания:
+				 */
+				get outcome() {
+					return t('admin.transactionsScroller.footer.outcome');
+				},
+				/**
+				 * @ru
+				 * на сумму:
+				 */
+				get tooltip() {
+					return t('admin.transactionsScroller.footer.tooltip');
+				},
+				/**
+				 * @ru
+				 * {currencies} и ещё {amount}
+				 */
+				collapsedCurrencies: (p: { amount: string; currencies: string }) => t('admin.transactionsScroller.footer.collapsedCurrencies', p),
+			},
+			/**
+			 * @ru
+			 * Проводки
+			 */
+			get pageTitle() {
+				return t('admin.transactionsScroller.pageTitle');
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.transactionsScroller.table.total');
+				},
+			},
+		},
 	},
 	scroller: {
 		tags: {

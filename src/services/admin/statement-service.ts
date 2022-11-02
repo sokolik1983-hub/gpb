@@ -22,6 +22,7 @@ import type {
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
+import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { BankClient } from 'interfaces/common';
@@ -39,6 +40,7 @@ import {
 } from 'services/admin/mappers';
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
+import { mockTransactionsPageData } from 'services/admin/mock/transactions-page';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -78,6 +80,14 @@ export const statementService = {
       method: 'POST',
       data: { ...rest, grouping: groupBy, sorting: multiSort },
     }).then(x => x.data.data);
+  },
+  /** Получение страницы бухгалтерских проводок. */
+  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> => {
+    console.log(metaData);
+
+    const result = mockTransactionsPageData;
+
+    return Promise.resolve(result).then(value => value.data);
   },
   /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>

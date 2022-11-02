@@ -8,6 +8,8 @@ export const ADMIN_STREAM_URL = {
   STATEMENT_REQUEST: '/account-statement/:id',
   /** Скроллер проводок на основании запроса. */
   STATEMENT_ENTRY: '/account-statement/entry',
+  /** Скроллер проводок. */
+  STATEMENT_TRANSACTIONS: '/account-statement/transactions',
   /** Скроллер истории запросов выписок. */
   STATEMENT_HISTORY: '/account-statement/history',
   /** Скроллер остатков и оборотов. */
