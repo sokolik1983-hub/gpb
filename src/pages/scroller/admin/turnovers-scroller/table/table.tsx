@@ -1,18 +1,23 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { executor } from 'actions/admin';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
-import { convertTablePaginationToMetaData } from 'utils/common';
+import { convertTablePaginationToMetaData, getActiveActionButtons } from 'utils/common';
 import type { IMetaData } from '@platform/services';
+import { useAuth } from '@platform/services/admin';
+import { FOOTER_ACTIONS } from '../action-config';
 import { AggregateRow } from '../aggregate-row';
+import { ScrollerContext } from '../context';
+import { Footer } from '../footer';
 import { columns } from './columns';
 import { DEFAULT_SORT, STORAGE_KEY } from './constants';
 
 /** Таблица скроллера. */
 export const Table: React.FC = () => {
-  const [selectedRows, setSelectedRows] = useState<ITurnoverMockDto[]>([]);
+  const { getAvailableActions } = useAuth();
+  const { selectedRows, setSelectedRows } = useContext(ScrollerContext);
 
   const fetchData = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<ITurnoverMockDto>> => {
@@ -34,6 +39,12 @@ export const Table: React.FC = () => {
     []
   );
 
+  const footerActions = useCallback(
+    scrollerExecutor => (rows: ITurnoverMockDto[]) =>
+      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, '', '']),
+    [getAvailableActions]
+  );
+
   return (
     <InfiniteDataTable<ITurnoverMockDto>
       columns={columns}
@@ -41,6 +52,8 @@ export const Table: React.FC = () => {
       executor={executor}
       expandedRowComponent={AggregateRow}
       fetchData={fetchData}
+      footerActionsGetter={footerActions}
+      footerContent={Footer}
       selectedRows={selectedRows}
       storageKey={STORAGE_KEY}
       onSelectedRowsChange={setSelectedRows}

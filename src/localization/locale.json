@@ -1126,7 +1126,7 @@
   "admin.turnoverScroller.aggregateRow.outgoingBalance": {
     "ru": "Исходящий остаток"
   },
-  "admin.turnoverScroller.inn": {
+  "common.inn": {
     "@inn": "string",
     "ru": "ИНН: {inn}"
   },
@@ -1177,5 +1177,20 @@
   },
   "admin.transactionsScroller.table.total": {
     "ru": "Операций"
+  },
+  "common.formats.PDF": {
+    "ru": "PDF"
+  },
+  "common.formats.Excel": {
+    "ru": "Excel"
+  },
+  "admin.turnoverScroller.actions.exportTurnovers": {
+    "ru": "Экспорт"
+  },
+  "admin.turnoverScroller.title": {
+    "ru": "Остатки и обороты"
+  },
+  "common.footer.selected": {
+    "ru": "Выбрано:"
   }
 }
