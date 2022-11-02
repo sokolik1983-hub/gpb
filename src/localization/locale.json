@@ -1129,5 +1129,53 @@
   "admin.turnoverScroller.inn": {
     "@inn": "string",
     "ru": "ИНН: {inn}"
+  },
+  "admin.transactionsScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.transactionsScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.transactionsScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.transactionsScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.transactionsScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.transactionsScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.transactionsScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.transactionsScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.transactionsScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.transactionsScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.transactionsScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.transactionsScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.transactionsScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.transactionsScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.transactionsScroller.table.total": {
+    "ru": "Операций"
   }
 }

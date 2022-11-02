@@ -1,0 +1,42 @@
+.scrollIconBox {
+  position: absolute;
+  right: 50px;
+  bottom: 17px;
+  z-index: getIndex(control);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  opacity: 0.4;
+}
+
+.table {
+  position: relative;
+}
+
+.sortIconWrapper {
+  height: 16px;
+}
+
+.placeholderOverlay {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerRowWrapper {
+  padding: 0 32px;
+}
+
+.headerRow {
+  position: relative;
+  border-bottom: 1px solid #e3e5ec;
+}
+
+.borderedRow {
+  border-bottom: 1px solid var(--box-lightdown-fill-faint-weak);
+}
