@@ -522,6 +522,9 @@
   "admin.closedDaysScroller.pageTitle": {
     "ru": "Закрытые дни"
   },
+  "admin.closedDaysScroller.filter.placeholder.branch": {
+    "ru": "Филиал"
+  },
   "admin.closedDaysScroller.table.total": {
     "ru": "Операций"
   },

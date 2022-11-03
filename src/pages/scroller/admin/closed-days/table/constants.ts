@@ -1,3 +1,4 @@
+import { PREFIX } from 'stream-constants/admin';
 import { SORT_DIRECTION } from '@platform/services';
 
 /**
@@ -20,3 +21,6 @@ export const COLUMN_NAMES = {
 export const DEFAULT_SORT = {
   [COLUMN_NAMES.OPERATION_DATA]: SORT_DIRECTION.DESC,
 };
+
+/** Ключ в Session Storage, по которому хранится состояние таблицы. */
+export const STORAGE_KEY = `${PREFIX}-closed-days-scroller-page-table`;

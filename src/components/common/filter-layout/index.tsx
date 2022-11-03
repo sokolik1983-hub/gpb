@@ -12,7 +12,7 @@ export const FilterLayout: FC<Omit<IFilterProperties, 'applyMixValuesFormAndStor
   QuickFilter,
   TagsPanel,
   filterState,
-  additionalFilterFields,
+  additionalFilterFields = [],
   filterFields,
   setActiveFieldAndValue,
   tagsState,

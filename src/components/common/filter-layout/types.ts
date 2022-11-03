@@ -7,13 +7,13 @@ import type { IFilterField } from '@platform/services';
 /** Пропсы фильтра. */
 export interface IFilterProperties {
   /** Компонент с дополнительными полями фильтрации. */
-  AdditionalFilter: React.ComponentType;
+  AdditionalFilter?: React.ComponentType;
   /** Компонент с основными полями фильтрации. */
   QuickFilter: React.ComponentType<QuickFilterPanelProps>;
   /** Компонент с тегами фильтрации. */
-  TagsPanel: React.ComponentType<ITagsPanelProps>;
+  TagsPanel?: React.ComponentType<ITagsPanelProps>;
   /** Дополнительные поля фильтрации. */
-  additionalFilterFields: string[];
+  additionalFilterFields?: string[];
   /** Значения полей и условия фильтрации. */
   filterFields: Record<string, IFilterField>;
   /** Объект, который возвращается платформенным хуком useFilter в поле "filterPanel". */
@@ -23,7 +23,7 @@ export interface IFilterProperties {
   /** Функция установки активного поля и его значения. */
   setActiveFieldAndValue?(fieldAndValue?: [string, unknown]): void;
   /** Объект, который возвращается платформенным хуком useFilter в поле "tagsPanel". */
-  tagsState: ITagsPanel;
+  tagsState?: ITagsPanel;
   /** Функция валидации значений формы. */
   validate?(values: any): Promise<ValidationErrors> | ValidationErrors;
 }

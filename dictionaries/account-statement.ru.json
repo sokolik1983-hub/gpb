@@ -169,6 +169,7 @@
   "admin.entriesScroller.statementSummary.buttons.showTotals": "Все валюты",
   "admin.entriesScroller.statementSummary.buttons.hideTotals": "Скрыть валюты",
   "admin.closedDaysScroller.pageTitle": "Закрытые дни",
+  "admin.closedDaysScroller.filter.placeholder.branch": "Филиал",
   "admin.closedDaysScroller.table.total": "Операций",
   "admin.closedDaysScroller.table.header.operationDate": "Операционная дата",
   "admin.closedDaysScroller.table.header.branch": "Филиал",

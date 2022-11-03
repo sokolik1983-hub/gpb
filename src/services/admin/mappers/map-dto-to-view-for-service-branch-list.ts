@@ -6,4 +6,4 @@ import type { ServiceBranch } from 'interfaces/admin';
  * @param serviceBranches - Список подразделений обслуживания.
  */
 export const mapDtoToViewForServiceBranchList = (serviceBranches: ServiceBranch[]): ServiceBranch[] =>
-  serviceBranches.map(({ filialName, id }) => ({ filialName, id }));
+  serviceBranches.map(({ absNumber, filialName, id }) => ({ absNumber, filialName, id }));
