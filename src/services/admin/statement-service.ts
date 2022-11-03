@@ -17,6 +17,8 @@ import type {
   StatementHistoryResponseDto,
   IFileDataResponse,
   Organization,
+  ReconciliationTurnoverDto,
+  ReconciliationTurnover,
   ServiceBranch,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
@@ -33,6 +35,7 @@ import {
   mapDtoToViewForAccountList,
   mapDtoToViewForClosedDays,
   mapDtoToViewForOrganizationList,
+  mapDtoToViewForReconciliationTurnovers,
   mapDtoToViewForServiceBranchList,
   mapDtoToViewForStatementList,
   mapDtoToViewForStatementSummary,
@@ -40,6 +43,7 @@ import {
 } from 'services/admin/mappers';
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
+import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
 import { mockTransactionsPageData } from 'services/admin/mock/transactions-page';
 import { getTurnoversReportMock } from 'services/admin/mock/turnovers-report-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
@@ -265,4 +269,25 @@ export const statementService = {
       //   method: 'POST',
       //   url: `${STATEMENT_BANK_URL}/statement/generate-turnovers-report`,
     }).then(response => response.data),
+  /** Возвращает сверку остатков/оборотов. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getReconciliationTurnovers: (metaData: IMetaData): Promise<ICollectionResponse<ReconciliationTurnover>> =>
+    // TODO: Для целевого использования.
+    // request<IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>>>({
+    //   data: metadataToRequestParams(metaData),
+    //   method: 'POST',
+    //   url: `${API_PREFIX}/reconciliation-turnovers/page`,
+    // })
+    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>> }>(resolve => {
+      resolve({ data: mockReconciliationTurnoversData });
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
+
+      return {
+        data: mapDtoToViewForReconciliationTurnovers(response.data.data.page),
+        total: response.data.data.size,
+      };
+    }),
 };

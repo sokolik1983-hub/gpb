@@ -14,3 +14,6 @@ export * from './service-branch';
 export * from './total-turnover-grouped-by-currency';
 export * from './counterparty';
 export * from './closed-day';
+export * from './reconciliation-turnovers';
+export * from './record-source';
+export * from './reconciliation-status';
