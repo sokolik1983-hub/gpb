@@ -41,6 +41,7 @@ import {
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockTransactionsPageData } from 'services/admin/mock/transactions-page';
+import { getTurnoversReportMock } from 'services/admin/mock/turnovers-report-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -217,6 +218,7 @@ export const statementService = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTurnovers: (metaData: IMetaData): Promise<ScrollerResponseDto<ITurnoverMockDto>> => getTurnoversMock(),
   /** Возвращает закрытые дни. */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
     // TODO: Для целевого использования.
     // request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
@@ -225,8 +227,6 @@ export const statementService = {
     //   url: `${API_PREFIX}/closed-days/page`,
     // })
     new Promise<{ data: IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>> }>(resolve => {
-      console.log(metaData);
-
       resolve({ data: mockClosedDaysData });
     }).then(response => {
       if (response.data.error?.code) {
@@ -238,4 +238,31 @@ export const statementService = {
         total: response.data.data.size,
       };
     }),
+  /** Генерация ПФ журнала остатков и оборотов. */
+  generateTurnoversReport: ({
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    dateFrom,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    dateTo,
+    format,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    statementIds,
+  }: {
+    dateFrom: string;
+    dateTo: string;
+    format: FORMAT.EXCEL | FORMAT.PDF;
+    statementIds: string[];
+  }): Promise<IFileDataResponse> =>
+    new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
+      resolve(getTurnoversReportMock(format));
+      // request<IServerDataResp<IFileDataResponse>>({
+      //   data: {
+      //     statementId,
+      //     dateFrom,
+      //     dateTo,
+      //     format,
+      //   },
+      //   method: 'POST',
+      //   url: `${STATEMENT_BANK_URL}/statement/generate-turnovers-report`,
+    }).then(response => response.data),
 };

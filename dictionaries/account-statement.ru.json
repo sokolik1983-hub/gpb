@@ -363,7 +363,7 @@
   "admin.turnoverScroller.aggregateRow.turnoverDebit": "Обороты Дт",
   "admin.turnoverScroller.aggregateRow.turnoverCredit": "Обороты Кт",
   "admin.turnoverScroller.aggregateRow.outgoingBalance": "Исходящий остаток",
-  "admin.turnoverScroller.inn": "ИНН: {inn}",
+  "common.inn": "ИНН: {inn}",
   "admin.transactionsScroller.columns.date": "Дата проводки",
   "admin.transactionsScroller.columns.account": "Клиент банка",
   "admin.transactionsScroller.columns.document": "Документ",
@@ -378,5 +378,10 @@
   "admin.transactionsScroller.footer.tooltip": "на сумму:",
   "admin.transactionsScroller.footer.collapsedCurrencies": "{currencies} и ещё {amount}",
   "admin.transactionsScroller.pageTitle": "Проводки",
-  "admin.transactionsScroller.table.total": "Операций"
+  "admin.transactionsScroller.table.total": "Операций",
+  "common.formats.PDF": "PDF",
+  "common.formats.Excel": "Excel",
+  "admin.turnoverScroller.actions.exportTurnovers": "Экспорт",
+  "admin.turnoverScroller.title": "Остатки и обороты",
+  "common.footer.selected": "Выбрано:"
 }

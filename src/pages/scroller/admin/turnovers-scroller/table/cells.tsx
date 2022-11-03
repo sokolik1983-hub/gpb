@@ -5,8 +5,8 @@ import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
-import { getActiveActionButtons } from 'utils/common';
-import { DATE_FORMAT, useAuth } from '@platform/services';
+import { getActionButtons } from '@platform/core';
+import { DATE_FORMAT, useAuth } from '@platform/services/admin';
 import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Gap, Horizon, RegularButton, ServiceIcons, Typography, WithDropDown } from '@platform/ui';
@@ -44,7 +44,7 @@ export const OrganizationCell: React.FC<CellProps<ITurnoverMockDto>> = ({
   },
 }) => (
   <>
-    <Typography.P line="COLLAPSE">{locale.admin.turnoverScroller.inn({ inn })}</Typography.P>
+    <Typography.P line="COLLAPSE">{locale.common.inn({ inn })}</Typography.P>
     <Typography.Text>{name}</Typography.Text>
   </>
 );
@@ -81,10 +81,11 @@ export const ServiceBranchCell: React.FC<CellProps<ITurnoverMockDto>> = ({
 ServiceBranchCell.displayName = 'ServiceBranchCell';
 
 /** Компонент с ячейкой для экшонов для строки. */
-export const ActionsCell: React.FC<CellProps<ITurnoverMockDto>> = ({ value }) => {
+export const ActionsCell: React.FC<CellProps<ITurnoverMockDto>> = ({ row: { original: doc } }) => {
   const { getAvailableActions } = useAuth();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [value]), [getAvailableActions, value]);
+  const params = useMemo(() => [[doc], '', ''], [doc]);
+  const actions = useMemo(() => getActionButtons(getAvailableActions(ROW_ACTIONS), executor, params), [getAvailableActions, params]);
 
   if (actions.length === 0) {
     return null;

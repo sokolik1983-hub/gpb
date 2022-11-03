@@ -827,11 +827,22 @@ export default {
 					return t('admin.turnoverScroller.aggregateRow.outgoingBalance');
 				},
 			},
+			actions: {
+				/**
+				 * @ru
+				 * Экспорт
+				 */
+				get exportTurnovers() {
+					return t('admin.turnoverScroller.actions.exportTurnovers');
+				},
+			},
 			/**
 			 * @ru
-			 * ИНН: {inn}
+			 * Остатки и обороты
 			 */
-			inn: (p: { inn: string }) => t('admin.turnoverScroller.inn', p),
+			get title() {
+				return t('admin.turnoverScroller.title');
+			},
 		},
 		transactionsScroller: {
 			columns: {
@@ -2469,6 +2480,36 @@ export default {
 			 */
 			get error() {
 				return t('common.checkAuthority.error');
+			},
+		},
+		/**
+		 * @ru
+		 * ИНН: {inn}
+		 */
+		inn: (p: { inn: string }) => t('common.inn', p),
+		formats: {
+			/**
+			 * @ru
+			 * PDF
+			 */
+			get PDF() {
+				return t('common.formats.PDF');
+			},
+			/**
+			 * @ru
+			 * Excel
+			 */
+			get Excel() {
+				return t('common.formats.Excel');
+			},
+		},
+		footer: {
+			/**
+			 * @ru
+			 * Выбрано:
+			 */
+			get selected() {
+				return t('common.footer.selected');
 			},
 		},
 	},
