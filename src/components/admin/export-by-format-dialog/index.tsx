@@ -6,7 +6,7 @@ import { locale } from 'localization';
 import { Box, BUTTON, DATA_TYPE, dialog, DialogTemplate, Gap, Typography } from '@platform/ui';
 import css from './styles.scss';
 
-/** Свойства диалога кспорта ПФ. */
+/** Свойства диалога экспорта ПФ. */
 interface ExportByFormatDialogProps {
   /** Коллбэк при закрытии диалога. */
   onClose(): void;
