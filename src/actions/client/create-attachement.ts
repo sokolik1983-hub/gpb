@@ -14,9 +14,10 @@ import {
 import { fatalHandler, getUserDeviceInfo } from 'utils/common';
 import { to } from '@platform/core';
 import type { IActionConfig, IBaseEntity } from '@platform/services';
-import { DATE_FORMAT } from '@platform/services';
+import { DATE_FORMAT, getAppConfigItem } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
 import { dialog } from '@platform/ui';
+import { createAttachmentAsync } from './create-attachment-async';
 import type { context } from './executor';
 
 /** Вспомогательная функция формирования файла выписки или документа. */
@@ -25,7 +26,10 @@ export const getCreateAttachment = (
   action: ACTION,
   documentType?: TRANSACTION_ATTACHMENT_TYPES
 ): IActionConfig<typeof context, unknown> => ({
-  action: ({ done, fatal, addSucceeded }, { showLoader, hideLoader, service }) => async (docs: IBaseEntity[], statementId?: string) => {
+  action: ({ done, fatal, addSucceeded, execute, addFailed }, { showLoader, hideLoader, service }) => async (
+    docs: IBaseEntity[],
+    statementId?: string
+  ) => {
     const isGenerateStatement = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO, EXPORT_PARAMS_USE_CASES.FOURTEEN].includes(
       useCase
     );
@@ -123,16 +127,35 @@ export const getCreateAttachment = (
     const userDeviceInfo = await getUserDeviceInfo();
 
     const dto: ICreateAttachmentRequestDto = { ...params, ...otherParams, userDeviceInfo };
-    const [data, err] = await to(service.createAttachment(dto));
 
-    hideLoader();
+    if (getAppConfigItem('createAttach.old')) {
+      const [resp, err] = await to(service.createAttachment(dto));
 
-    fatal(data?.error);
-    fatal(err);
+      fatal(resp?.error);
+      fatal(err);
 
-    addSucceeded(data);
+      addSucceeded(resp);
+      done();
+    } else {
+      const {
+        succeeded: [data],
+        failed: [error],
+      } = await execute(createAttachmentAsync, dto, action);
 
-    done();
+      fatal(error);
+
+      if (!data) {
+        hideLoader();
+        addFailed();
+        done();
+
+        return;
+      }
+
+      fatal(error);
+      addSucceeded(data);
+      done();
+    }
   },
   guardians: [],
   fatalHandler,
