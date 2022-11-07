@@ -8,7 +8,7 @@ import { DEFAULT_SORT, STORAGE_KEY } from 'pages/scroller/admin/closed-days/tabl
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
-import { convertTablePaginationToMetaData } from 'utils/common';
+import { convertTablePaginationToMetaData, getPageCount } from 'utils/common';
 import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services/admin';
 import { Box, Gap, Horizon, Typography } from '@platform/ui';
@@ -39,7 +39,7 @@ export const Table: FC<TableProps> = ({ filter, setDataTableFetched }) => {
 
         setTotal(totalItems);
 
-        return { rows, pageCount: totalItems };
+        return { rows, pageCount: getPageCount(totalItems, pageSize) };
       } catch {
         return { rows: [], pageCount: 0 };
       } finally {

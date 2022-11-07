@@ -68,6 +68,24 @@
   "admin.userType.technical": {
     "ru": "Технический пользователь"
   },
+  "admin.turnoverReconciliationRecordSource.closingOfDay": {
+    "ru": "Закрытие дня"
+  },
+  "admin.turnoverReconciliationRecordSource.changingSetOfEntries": {
+    "ru": "Пересчет дня в связи с изменением набора проводок"
+  },
+  "admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod": {
+    "ru": "Пересчет дня в связи с изменением набора проводок предыдущего периода"
+  },
+  "admin.turnoverReconciliationStatus.difference": {
+    "ru": "Есть расхождения"
+  },
+  "admin.turnoverReconciliationStatus.notAvailable": {
+    "ru": "Сверка не проводилась"
+  },
+  "admin.turnoverReconciliationStatus.noDifference": {
+    "ru": "Расхождений нет"
+  },
   "scroller.tags.labels.resetAll": {
     "ru": "Сбросить всё"
   },
@@ -550,6 +568,36 @@
   },
   "admin.closedDaysScroller.table.placeholder.message": {
     "ru": "чтобы получить результат"
+  },
+  "admin.reconciliationTurnoversScroller.pageTitle": {
+    "ru": "Сверка остатков и оборотов"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.accountNumber": {
+    "ru": "№ счёта"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.reconciliationDate": {
+    "ru": "Дата сверки"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.recordSource": {
+    "ru": "Источник записи"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.status": {
+    "ru": "Статус сверки"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.turnoverDebit": {
+    "ru": "Обороты Дт"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.turnoverCredit": {
+    "ru": "Обороты Кт"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"

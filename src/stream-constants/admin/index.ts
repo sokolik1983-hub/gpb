@@ -4,6 +4,8 @@ export const ADMIN_STREAM_URL = {
   ...PLATFORM_ADMIN_STREAM_URL,
   /** Скроллер журнала закрытых дней. */
   CLOSED_DAYS: '/account-statement/closed-days',
+  /** Скроллер журнала сверки остатков/оборотов. */
+  RECONCILIATION_TURNOVERS: '/account-statement/reconciliation-turnovers',
   /** ЭФ просмотра параметров запроса на выписку. */
   STATEMENT_REQUEST: '/account-statement/:id',
   /** Скроллер проводок на основании запроса. */

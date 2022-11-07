@@ -1,5 +1,5 @@
 import { STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
-import { USER_TYPE } from 'interfaces/admin';
+import { RECONCILIATION_STATUS, RECORD_SOURCE, USER_TYPE } from 'interfaces/admin';
 import { locale } from 'localization';
 import { DOCUMENT_STATUS_TYPE } from '@platform/ui';
 
@@ -77,4 +77,34 @@ export const STATEMENT_STATUS_COLOR = {
   [STATEMENT_STATUSES.ERROR]: DOCUMENT_STATUS_TYPE.ERROR,
   /** Данные не актуальны. */
   [STATEMENT_STATUSES.NOT_RELEVANT]: DOCUMENT_STATUS_TYPE.ERROR,
+};
+
+/** Лейблы источника записи сверки. */
+export const TURNOVER_RECONCILIATION_RECORD_SOURCE_LABEL = {
+  /** Закрытие дня. */
+  [RECORD_SOURCE.CLOSING_OF_DAY]: locale.admin.turnoverReconciliationRecordSource.closingOfDay,
+  /** Пересчет дня в связи с изменением набора проводок. */
+  [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntries,
+  /** Пересчет дня в связи с изменением набора проводок предыдущего периода. */
+  [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES_OF_PREV_PERIOD]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod,
+};
+
+/** Цвета статусов сверки остатков/оборотов. */
+export const TURNOVER_RECONCILIATION_STATUS_COLOR = {
+  /** Есть расхождения. */
+  [RECONCILIATION_STATUS.DIFFERENCE]: DOCUMENT_STATUS_TYPE.ERROR,
+  /** Сверка не проводилась. */
+  [RECONCILIATION_STATUS.NOT_AVAILABLE]: DOCUMENT_STATUS_TYPE.INPROGRESS,
+  /** Расхождений нет. */
+  [RECONCILIATION_STATUS.NO_DIFFERENCE]: DOCUMENT_STATUS_TYPE.SUCCESS,
+};
+
+/** Лейблы статусов сверки остатков/оборотов. */
+export const TURNOVER_RECONCILIATION_STATUS_LABEL = {
+  /** Есть расхождения. */
+  [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
+  /** Сверка не проводилась. */
+  [RECONCILIATION_STATUS.NOT_AVAILABLE]: locale.admin.turnoverReconciliationStatus.notAvailable,
+  /** Расхождений нет. */
+  [RECONCILIATION_STATUS.NO_DIFFERENCE]: locale.admin.turnoverReconciliationStatus.noDifference,
 };

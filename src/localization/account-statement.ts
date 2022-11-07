@@ -197,6 +197,52 @@ export default {
 				return t('admin.userType.technical');
 			},
 		},
+		turnoverReconciliationRecordSource: {
+			/**
+			 * @ru
+			 * Закрытие дня
+			 */
+			get closingOfDay() {
+				return t('admin.turnoverReconciliationRecordSource.closingOfDay');
+			},
+			/**
+			 * @ru
+			 * Пересчет дня в связи с изменением набора проводок
+			 */
+			get changingSetOfEntries() {
+				return t('admin.turnoverReconciliationRecordSource.changingSetOfEntries');
+			},
+			/**
+			 * @ru
+			 * Пересчет дня в связи с изменением набора проводок предыдущего периода
+			 */
+			get changingSetOfEntriesOfPrevPeriod() {
+				return t('admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod');
+			},
+		},
+		turnoverReconciliationStatus: {
+			/**
+			 * @ru
+			 * Есть расхождения
+			 */
+			get difference() {
+				return t('admin.turnoverReconciliationStatus.difference');
+			},
+			/**
+			 * @ru
+			 * Сверка не проводилась
+			 */
+			get notAvailable() {
+				return t('admin.turnoverReconciliationStatus.notAvailable');
+			},
+			/**
+			 * @ru
+			 * Расхождений нет
+			 */
+			get noDifference() {
+				return t('admin.turnoverReconciliationStatus.noDifference');
+			},
+		},
 		historyScroller: {
 			/**
 			 * @ru
@@ -564,6 +610,82 @@ export default {
 					 */
 					get message() {
 						return t('admin.closedDaysScroller.table.placeholder.message');
+					},
+				},
+			},
+		},
+		reconciliationTurnoversScroller: {
+			/**
+			 * @ru
+			 * Сверка остатков и оборотов
+			 */
+			get pageTitle() {
+				return t('admin.reconciliationTurnoversScroller.pageTitle');
+			},
+			table: {
+				header: {
+					/**
+					 * @ru
+					 * Операционная дата
+					 */
+					get operationDate() {
+						return t('admin.reconciliationTurnoversScroller.table.header.operationDate');
+					},
+					/**
+					 * @ru
+					 * № счёта
+					 */
+					get accountNumber() {
+						return t('admin.reconciliationTurnoversScroller.table.header.accountNumber');
+					},
+					/**
+					 * @ru
+					 * Дата сверки
+					 */
+					get reconciliationDate() {
+						return t('admin.reconciliationTurnoversScroller.table.header.reconciliationDate');
+					},
+					/**
+					 * @ru
+					 * Источник записи
+					 */
+					get recordSource() {
+						return t('admin.reconciliationTurnoversScroller.table.header.recordSource');
+					},
+					/**
+					 * @ru
+					 * Статус сверки
+					 */
+					get status() {
+						return t('admin.reconciliationTurnoversScroller.table.header.status');
+					},
+					/**
+					 * @ru
+					 * Входящий остаток
+					 */
+					get incomingBalance() {
+						return t('admin.reconciliationTurnoversScroller.table.header.incomingBalance');
+					},
+					/**
+					 * @ru
+					 * Исходящий остаток
+					 */
+					get outgoingBalance() {
+						return t('admin.reconciliationTurnoversScroller.table.header.outgoingBalance');
+					},
+					/**
+					 * @ru
+					 * Обороты Дт
+					 */
+					get turnoverDebit() {
+						return t('admin.reconciliationTurnoversScroller.table.header.turnoverDebit');
+					},
+					/**
+					 * @ru
+					 * Обороты Кт
+					 */
+					get turnoverCredit() {
+						return t('admin.reconciliationTurnoversScroller.table.header.turnoverCredit');
 					},
 				},
 			},

@@ -24,8 +24,9 @@ export interface ReconciliationTurnoverDto extends IBaseEntity {
   turnoverDebit: number;
 }
 
-/** Сверка остатков/оборотов. */
-export interface ReconciliationTurnover extends Omit<ReconciliationTurnoverDto, 'reconciliationDate'> {
+/** Сверка остатков/оборотов в строке таблицы. */
+export interface ReconciliationTurnoverRow extends Omit<ReconciliationTurnoverDto, 'reconciliationDate'> {
+  /** Дата сверки. */
   reconciliationDate: {
     /** Дата. */
     date: string;

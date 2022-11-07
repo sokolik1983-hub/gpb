@@ -18,7 +18,7 @@ import type {
   IFileDataResponse,
   Organization,
   ReconciliationTurnoverDto,
-  ReconciliationTurnover,
+  ReconciliationTurnoverRow,
   ServiceBranch,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
@@ -271,7 +271,7 @@ export const statementService = {
     }).then(response => response.data),
   /** Возвращает сверку остатков/оборотов. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getReconciliationTurnovers: (metaData: IMetaData): Promise<ICollectionResponse<ReconciliationTurnover>> =>
+  getReconciliationTurnovers: (metaData: IMetaData): Promise<ICollectionResponse<ReconciliationTurnoverRow>> =>
     // TODO: Для целевого использования.
     // request<IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>>>({
     //   data: metadataToRequestParams(metaData),
