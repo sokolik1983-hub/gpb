@@ -484,6 +484,90 @@ export default {
 				},
 			},
 		},
+		closedDaysScroller: {
+			/**
+			 * @ru
+			 * Закрытые дни
+			 */
+			get pageTitle() {
+				return t('admin.closedDaysScroller.pageTitle');
+			},
+			filter: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Филиал
+					 */
+					get branch() {
+						return t('admin.closedDaysScroller.filter.placeholder.branch');
+					},
+				},
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.closedDaysScroller.table.total');
+				},
+				header: {
+					/**
+					 * @ru
+					 * Операционная дата
+					 */
+					get operationDate() {
+						return t('admin.closedDaysScroller.table.header.operationDate');
+					},
+					/**
+					 * @ru
+					 * Филиал
+					 */
+					get branch() {
+						return t('admin.closedDaysScroller.table.header.branch');
+					},
+					/**
+					 * @ru
+					 * Закрытие второй фазы
+					 */
+					get secondPhase() {
+						return t('admin.closedDaysScroller.table.header.secondPhase');
+					},
+					/**
+					 * @ru
+					 * Закрытие третьей фазы
+					 */
+					get thirdPhase() {
+						return t('admin.closedDaysScroller.table.header.thirdPhase');
+					},
+				},
+				cell: {
+					phase: {
+						/**
+						 * @ru
+						 * {date} в {time}
+						 */
+						dateTime: (p: { date: string; time: string }) => t('admin.closedDaysScroller.table.cell.phase.dateTime', p),
+					},
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.closedDaysScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.closedDaysScroller.table.placeholder.message');
+					},
+				},
+			},
+		},
 		form: {
 			/**
 			 * @ru
@@ -684,6 +768,202 @@ export default {
 				 * {count} поступлений
 				 */
 				income: (p: { count: number }) => t('admin.entryScroller.aggregate.income', p),
+			},
+		},
+		turnoverScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Операционная дата
+				 */
+				get operationDate() {
+					return t('admin.turnoverScroller.columns.operationDate');
+				},
+				/**
+				 * @ru
+				 * № счёта
+				 */
+				get accountNumber() {
+					return t('admin.turnoverScroller.columns.accountNumber');
+				},
+				/**
+				 * @ru
+				 * Организация
+				 */
+				get organization() {
+					return t('admin.turnoverScroller.columns.organization');
+				},
+				/**
+				 * @ru
+				 * Филиал баланса счёта
+				 */
+				get accountBranch() {
+					return t('admin.turnoverScroller.columns.accountBranch');
+				},
+				/**
+				 * @ru
+				 * Филиал обслуживания
+				 */
+				get serviceBranch() {
+					return t('admin.turnoverScroller.columns.serviceBranch');
+				},
+			},
+			aggregateRow: {
+				/**
+				 * @ru
+				 * Входящий остаток
+				 */
+				get incomingBalance() {
+					return t('admin.turnoverScroller.aggregateRow.incomingBalance');
+				},
+				/**
+				 * @ru
+				 * Обороты Дт
+				 */
+				get turnoverDebit() {
+					return t('admin.turnoverScroller.aggregateRow.turnoverDebit');
+				},
+				/**
+				 * @ru
+				 * Обороты Кт
+				 */
+				get turnoverCredit() {
+					return t('admin.turnoverScroller.aggregateRow.turnoverCredit');
+				},
+				/**
+				 * @ru
+				 * Исходящий остаток
+				 */
+				get outgoingBalance() {
+					return t('admin.turnoverScroller.aggregateRow.outgoingBalance');
+				},
+			},
+			actions: {
+				/**
+				 * @ru
+				 * Экспорт
+				 */
+				get exportTurnovers() {
+					return t('admin.turnoverScroller.actions.exportTurnovers');
+				},
+			},
+			/**
+			 * @ru
+			 * Остатки и обороты
+			 */
+			get title() {
+				return t('admin.turnoverScroller.title');
+			},
+		},
+		transactionsScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get date() {
+					return t('admin.transactionsScroller.columns.date');
+				},
+				/**
+				 * @ru
+				 * Клиент банка
+				 */
+				get account() {
+					return t('admin.transactionsScroller.columns.account');
+				},
+				/**
+				 * @ru
+				 * Документ
+				 */
+				get document() {
+					return t('admin.transactionsScroller.columns.document');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.transactionsScroller.columns.counterparty');
+				},
+				/**
+				 * @ru
+				 * Поступления
+				 */
+				get income() {
+					return t('admin.transactionsScroller.columns.income');
+				},
+				/**
+				 * @ru
+				 * Списания
+				 */
+				get outcome() {
+					return t('admin.transactionsScroller.columns.outcome');
+				},
+				/**
+				 * @ru
+				 * Сумма
+				 */
+				get summary() {
+					return t('admin.transactionsScroller.columns.summary');
+				},
+			},
+			cells: {
+				/**
+				 * @ru
+				 * от {date}
+				 */
+				documentDate: (p: { date: string }) => t('admin.transactionsScroller.cells.documentDate', p),
+			},
+			footer: {
+				/**
+				 * @ru
+				 * Выбрано:
+				 */
+				get selected() {
+					return t('admin.transactionsScroller.footer.selected');
+				},
+				/**
+				 * @ru
+				 * Поступления:
+				 */
+				get income() {
+					return t('admin.transactionsScroller.footer.income');
+				},
+				/**
+				 * @ru
+				 * Списания:
+				 */
+				get outcome() {
+					return t('admin.transactionsScroller.footer.outcome');
+				},
+				/**
+				 * @ru
+				 * на сумму:
+				 */
+				get tooltip() {
+					return t('admin.transactionsScroller.footer.tooltip');
+				},
+				/**
+				 * @ru
+				 * {currencies} и ещё {amount}
+				 */
+				collapsedCurrencies: (p: { amount: string; currencies: string }) => t('admin.transactionsScroller.footer.collapsedCurrencies', p),
+			},
+			/**
+			 * @ru
+			 * Проводки
+			 */
+			get pageTitle() {
+				return t('admin.transactionsScroller.pageTitle');
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.transactionsScroller.table.total');
+				},
 			},
 		},
 	},
@@ -2211,6 +2491,36 @@ export default {
 			 */
 			get error() {
 				return t('common.checkAuthority.error');
+			},
+		},
+		/**
+		 * @ru
+		 * ИНН: {inn}
+		 */
+		inn: (p: { inn: string }) => t('common.inn', p),
+		formats: {
+			/**
+			 * @ru
+			 * PDF
+			 */
+			get PDF() {
+				return t('common.formats.PDF');
+			},
+			/**
+			 * @ru
+			 * Excel
+			 */
+			get Excel() {
+				return t('common.formats.Excel');
+			},
+		},
+		footer: {
+			/**
+			 * @ru
+			 * Выбрано:
+			 */
+			get selected() {
+				return t('common.footer.selected');
 			},
 		},
 	},

@@ -519,6 +519,38 @@
   "admin.entriesScroller.statementSummary.buttons.hideTotals": {
     "ru": "Скрыть валюты"
   },
+  "admin.closedDaysScroller.pageTitle": {
+    "ru": "Закрытые дни"
+  },
+  "admin.closedDaysScroller.filter.placeholder.branch": {
+    "ru": "Филиал"
+  },
+  "admin.closedDaysScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.closedDaysScroller.table.header.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.closedDaysScroller.table.header.branch": {
+    "ru": "Филиал"
+  },
+  "admin.closedDaysScroller.table.header.secondPhase": {
+    "ru": "Закрытие второй фазы"
+  },
+  "admin.closedDaysScroller.table.header.thirdPhase": {
+    "ru": "Закрытие третьей фазы"
+  },
+  "admin.closedDaysScroller.table.cell.phase.dateTime": {
+    "@date": "string",
+    "@time": "string",
+    "ru": "{date} в {time}"
+  },
+  "admin.closedDaysScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.closedDaysScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
   },
@@ -1069,5 +1101,99 @@
   },
   "admin.entryScroller.footer.print": {
     "ru": "Печать документов"
+  },
+  "admin.turnoverScroller.columns.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.turnoverScroller.columns.accountNumber": {
+    "ru": "№ счёта"
+  },
+  "admin.turnoverScroller.columns.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.columns.accountBranch": {
+    "ru": "Филиал баланса счёта"
+  },
+  "admin.turnoverScroller.columns.serviceBranch": {
+    "ru": "Филиал обслуживания"
+  },
+  "admin.turnoverScroller.aggregateRow.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverDebit": {
+    "ru": "Обороты Дт"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverCredit": {
+    "ru": "Обороты Кт"
+  },
+  "admin.turnoverScroller.aggregateRow.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "common.inn": {
+    "@inn": "string",
+    "ru": "ИНН: {inn}"
+  },
+  "admin.transactionsScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.transactionsScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.transactionsScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.transactionsScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.transactionsScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.transactionsScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.transactionsScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.transactionsScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.transactionsScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.transactionsScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.transactionsScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.transactionsScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.transactionsScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.transactionsScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.transactionsScroller.table.total": {
+    "ru": "Операций"
+  },
+  "common.formats.PDF": {
+    "ru": "PDF"
+  },
+  "common.formats.Excel": {
+    "ru": "Excel"
+  },
+  "admin.turnoverScroller.actions.exportTurnovers": {
+    "ru": "Экспорт"
+  },
+  "admin.turnoverScroller.title": {
+    "ru": "Остатки и обороты"
+  },
+  "common.footer.selected": {
+    "ru": "Выбрано:"
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { LinesEllipsis } from 'components/common/lines-ellipsis';
+import { LinesEllipsis } from 'components/common';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { Box, Typography, WithInfoTooltip, CONTAINER_POSITION } from '@platform/ui';
 import css from './styles.scss';
