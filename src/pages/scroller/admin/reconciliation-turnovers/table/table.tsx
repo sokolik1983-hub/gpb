@@ -5,6 +5,7 @@ import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT } from 'components/co
 import { useStreamContentHeight } from 'hooks/common';
 import type { ReconciliationTurnoverRow } from 'interfaces/admin';
 import { locale } from 'localization';
+import { FILTER_HEIGHT } from 'pages/scroller/admin/reconciliation-turnovers/filter';
 import { AdditionalInfo } from 'pages/scroller/admin/reconciliation-turnovers/table/additional-info';
 import { columns } from 'pages/scroller/admin/reconciliation-turnovers/table/columns';
 import { DEFAULT_SORT, STORAGE_KEY } from 'pages/scroller/admin/reconciliation-turnovers/table/constants';
@@ -62,7 +63,7 @@ export const Table: FC<TableProps> = ({ filter }) => {
   );
 
   const height = useStreamContentHeight();
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT;
 
   return (
     <>

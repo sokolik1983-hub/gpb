@@ -1,0 +1,62 @@
+import type { FC } from 'react';
+import React, { useContext, useEffect, useMemo } from 'react';
+import { SelectWithSearch } from 'components/common';
+import { AccountOption } from 'components/common/accounts-field/account-option';
+import { DateRange } from 'components/common/form/date-range';
+import { locale } from 'localization';
+import { FORM_FIELDS, RECONCILIATION_STATUS_OPTIONS } from 'pages/scroller/admin/reconciliation-turnovers/filter/constants';
+import { FilterContext } from 'pages/scroller/admin/reconciliation-turnovers/filter/context';
+import type { FilterValues } from 'pages/scroller/admin/reconciliation-turnovers/filter/types';
+import { useForm, useFormState } from 'react-final-form';
+import { getAccountOption } from 'utils/common';
+import { Fields, Gap, Horizon, Pattern, Typography } from '@platform/ui';
+
+/** Основной фильтр. Изменения значений этих полей вызывают обновление скроллера. */
+export const QuickFilter: FC = () => {
+  const { accounts, selectedAccounts, setAccountSearchValue } = useContext(FilterContext);
+
+  const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
+  const selectedAccountOptions = useMemo(() => selectedAccounts.map(getAccountOption), [selectedAccounts]);
+
+  const { submit } = useForm();
+  const { valid, values } = useFormState<FilterValues>();
+
+  useEffect(() => {
+    if (valid) {
+      void submit();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
+
+  return (
+    <Pattern gap={'MD'}>
+      <Pattern.Span size={6}>
+        <Horizon>
+          <Typography.P fill={'FAINT'}>{locale.admin.reconciliationTurnoversScroller.filter.label.operationDate}</Typography.P>
+          <Gap.XS />
+          <DateRange name={[FORM_FIELDS.DATE_FROM, FORM_FIELDS.DATE_TO]} />
+        </Horizon>
+      </Pattern.Span>
+      <Pattern.Span size={3}>
+        <Fields.Select
+          extraSmall
+          name={FORM_FIELDS.STATUS}
+          options={RECONCILIATION_STATUS_OPTIONS}
+          placeholder={locale.admin.reconciliationTurnoversScroller.filter.placeholder.status}
+        />
+      </Pattern.Span>
+      <Pattern.Span size={3}>
+        <SelectWithSearch
+          name={FORM_FIELDS.ACCOUNT_ID}
+          optionTemplate={AccountOption}
+          placeholder={locale.admin.reconciliationTurnoversScroller.filter.placeholder.account}
+          searchOptions={accountOptions}
+          selectedOptions={selectedAccountOptions}
+          setSearchValue={setAccountSearchValue}
+        />
+      </Pattern.Span>
+    </Pattern>
+  );
+};
+
+QuickFilter.displayName = 'QuickFilter';

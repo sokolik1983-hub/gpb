@@ -101,10 +101,10 @@ export const TURNOVER_RECONCILIATION_STATUS_COLOR = {
 
 /** Лейблы статусов сверки остатков/оборотов. */
 export const TURNOVER_RECONCILIATION_STATUS_LABEL = {
-  /** Есть расхождения. */
-  [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
   /** Сверка не проводилась. */
   [RECONCILIATION_STATUS.NOT_AVAILABLE]: locale.admin.turnoverReconciliationStatus.notAvailable,
   /** Расхождений нет. */
   [RECONCILIATION_STATUS.NO_DIFFERENCE]: locale.admin.turnoverReconciliationStatus.noDifference,
+  /** Есть расхождения. */
+  [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
 };

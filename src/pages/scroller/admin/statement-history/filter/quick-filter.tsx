@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
-import { DatePeriodField } from 'components/common';
+import { DatePeriodField, SelectWithSearch } from 'components/common';
 import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DateRange } from 'components/common/form/date-range';
 import { usePrevious } from 'hooks/common';
@@ -11,11 +11,10 @@ import { locale } from 'localization';
 import type { FilterValues } from 'pages/scroller/admin/statement-history/filter/types';
 import { useForm, useFormState } from 'react-final-form';
 import { statementService } from 'services/admin';
+import { getAccountOption } from 'utils/common';
 import { Pattern } from '@platform/ui';
 import { StatementHistoryScrollerContext } from '../context';
 import { FORM_FIELDS } from './constants';
-import { MultiselectWithSearch } from './multiselect-with-search';
-import { getAccountOption } from './utils';
 
 /**
  * Основной фильтр, который всегда виден.
@@ -119,7 +118,8 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
         </Pattern>
       </Pattern.Span>
       <Pattern.Span size={4}>
-        <MultiselectWithSearch
+        <SelectWithSearch
+          multi
           name={FORM_FIELDS.ACCOUNT_IDS}
           optionTemplate={AccountOption}
           placeholder={locale.admin.historyScroller.filter.placeholder.account}

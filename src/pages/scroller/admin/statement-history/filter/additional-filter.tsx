@@ -1,12 +1,11 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
-import { FilterFormElement, MultiselectWithOptionAllField } from 'components/common';
+import { FilterFormElement, MultiselectWithOptionAllField, SelectWithSearch } from 'components/common';
 import { locale } from 'localization';
 import { StatementHistoryScrollerContext } from 'pages/scroller/admin/statement-history/context';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
 import { Pattern, Fields } from '@platform/ui';
 import { FORM_FIELDS, REQUEST_STATUS_OPTIONS, STATEMENT_STATUS_OPTIONS, STATEMENT_TYPE_OPTIONS } from './constants';
-import { MultiselectWithSearch } from './multiselect-with-search';
 import { OrganizationOption } from './organization-option';
 import { getOrganizationOption, getServiceBranchOption, getUserOption } from './utils';
 
@@ -35,7 +34,8 @@ export const AdditionalFilter: FC = () => {
       <Pattern gap={'XL'}>
         <Pattern.Span size={6}>
           <FilterFormElement label={locale.admin.historyScroller.filter.labels.organization}>
-            <MultiselectWithSearch
+            <SelectWithSearch
+              multi
               name={FORM_FIELDS.ORGANIZATION_IDS}
               optionTemplate={OrganizationOption}
               placeholder={locale.admin.historyScroller.filter.placeholder.organization}
@@ -82,7 +82,8 @@ export const AdditionalFilter: FC = () => {
       <Pattern gap={'XL'}>
         <Pattern.Span size={6}>
           <FilterFormElement label={locale.admin.historyScroller.filter.labels.user}>
-            <MultiselectWithSearch
+            <SelectWithSearch
+              multi
               name={FORM_FIELDS.USER_IDS}
               searchOptions={userOptions}
               selectedOptions={selectedUserOptions}
