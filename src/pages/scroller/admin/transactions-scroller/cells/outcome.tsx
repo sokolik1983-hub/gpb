@@ -6,24 +6,24 @@ import type { CellProps } from 'react-table';
 import { Typography } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
-/** Компонент с ячейкой для отображения суммы поступления. */
-export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
-  value: { amountByCredit, currencyNumericCodeByCredit },
+/** Компонент с ячейкой для отображения суммы списания. */
+export const Outcome: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+  value: { amountByDebit, currencyNumericCodeByDebit },
 }) => {
   const queryString = useQueryString();
 
-  if (!amountByCredit) {
+  if (!amountByDebit) {
     return null;
   }
 
   return (
-    <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
+    <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.positive({ amount: String(amountByCredit), currencyCode: currencyNumericCodeByCredit })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountByDebit), currencyCode: currencyNumericCodeByDebit })}
       />
     </Typography.P>
   );
 };
 
-IncomeCell.displayName = 'IncomeCell';
+Outcome.displayName = 'Outcome';

@@ -18,7 +18,9 @@ import { useQueryString } from './hooks';
 import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
-export const EntryDateCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value: { entryDate } }) => {
+export const EntryDateCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
+  value: { entryDate },
+}) => {
   const formattedEntryDate = formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT });
 
   const queryString = useQueryString();
@@ -37,7 +39,7 @@ export const EntryDateCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>>
 EntryDateCell.displayName = 'EntryDateCell';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
+export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
   value: {
     account: {
       bankClient: { name },
@@ -66,7 +68,9 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard
 AccountInfoCell.displayName = 'AccountInfoCell';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value: { documentDate, documentNumber } }) => {
+export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
+  value: { documentDate, documentNumber },
+}) => {
   const queryString = useQueryString();
 
   return (
@@ -74,7 +78,7 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCar
       <WithInfoTooltip text={documentNumber}>
         {ref => (
           <Typography.P data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
-            <HightlightText searchWords={queryString} textToHightlight={documentNumber} />
+            <HightlightText searchWords={queryString} textToHightlight={String(documentNumber)} />
           </Typography.P>
         )}
       </WithInfoTooltip>
@@ -93,7 +97,7 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCar
 DocumentInfoCell.displayName = 'DocumentInfoCell';
 
 /** Компонент с ячейкой для отображения информации о контрагенте. */
-export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
+export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
   value: { counterpartyName, counterpartyAccountNumber },
 }) => {
   const queryString = useQueryString();
@@ -117,15 +121,17 @@ export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryTurnove
 CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
 
 /** Компонент с ячейкой для отображения суммы поступления. */
-export const IncomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
+export const IncomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
   value: {
-    amountCredit,
-    account: { currencyLetterCode },
+    amountByCredit,
+    account: {
+      currency: { letterCode },
+    },
   },
 }) => {
   const queryString = useQueryString();
 
-  if (!amountCredit) {
+  if (!amountByCredit) {
     return null;
   }
 
@@ -133,7 +139,7 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = 
     <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.positive({ amount: String(amountCredit), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.positive({ amount: String(amountByCredit), currencyCode: letterCode })}
       />
     </Typography.P>
   );
@@ -142,15 +148,17 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = 
 IncomeCell.displayName = 'IncomeCell';
 
 /** Компонент с ячейкой для отображения суммы списания. */
-export const OutcomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
+export const OutcomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
   value: {
-    amountDebit,
-    account: { currencyLetterCode },
+    amountByDebit,
+    account: {
+      currency: { letterCode },
+    },
   },
 }) => {
   const queryString = useQueryString();
 
-  if (!amountDebit) {
+  if (!amountByDebit) {
     return null;
   }
 
@@ -158,7 +166,7 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> =
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.negative({ amount: String(amountDebit), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountByDebit), currencyCode: letterCode })}
       />
     </Typography.P>
   );
@@ -167,7 +175,7 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> =
 OutcomeCell.displayName = 'OutcomeCell';
 
 /** Компонент с ячейкой для отображения суммы поступления и списания. */
-export const SummaryCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = props => (
+export const SummaryCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = props => (
   <>
     <IncomeCell {...props} />
     <OutcomeCell {...props} />
@@ -177,7 +185,7 @@ export const SummaryCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> =
 SummaryCell.displayName = 'SummaryCell';
 
 /** Компонент с ячейкой с действиями для строки скроллера. */
-export const ActionsCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value }) => {
+export const ActionsCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({ value }) => {
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 

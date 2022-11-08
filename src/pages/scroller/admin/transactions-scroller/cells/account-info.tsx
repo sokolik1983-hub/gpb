@@ -7,7 +7,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const AccountInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
   value: { bankClientName, bankClientAccountNumber },
 }) => {
   const queryString = useQueryString();
@@ -28,4 +28,4 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankAc
   );
 };
 
-AccountInfoCell.displayName = 'AccountInfoCell';
+AccountInfo.displayName = 'AccountInfo';

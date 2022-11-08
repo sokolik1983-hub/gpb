@@ -9,7 +9,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const DocumentInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
   value: { documentDate, documentNumber },
 }) => {
   const queryString = useQueryString();
@@ -35,4 +35,4 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankA
   );
 };
 
-DocumentInfoCell.displayName = 'DocumentInfoCell';
+DocumentInfo.displayName = 'DocumentInfo';

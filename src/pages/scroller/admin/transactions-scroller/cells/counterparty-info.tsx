@@ -7,7 +7,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о контрагенте. */
-export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const CounterpartyInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
   value: { counterpartyName, counterpartyAccountNumber },
 }) => {
   const queryString = useQueryString();
@@ -28,4 +28,4 @@ export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard, B
   );
 };
 
-CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
+CounterpartyInfo.displayName = 'CounterpartyInfo';

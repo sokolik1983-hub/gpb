@@ -31,8 +31,6 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ fetchedNewTransactions 
   const [valueOfQueryString, setValueOfQueryString] = useState(textSearch);
   const [historyOptions, setHistoryOptions] = useLocalStorage<IOption[]>(`${ECO_STATEMENT}/${FORM_FIELDS.TABLE_SEARCH}`, []);
 
-  // const { counterparties, clients } = useContext<IFilterContext>(FilterContext);
-
   const debouncedSubmit = useMemo(() => debounce(submit, INPUT_DELAY), [submit]);
 
   useEffect(() => {
