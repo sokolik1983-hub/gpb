@@ -572,6 +572,15 @@
   "admin.reconciliationTurnoversScroller.pageTitle": {
     "ru": "Сверка остатков и оборотов"
   },
+  "admin.reconciliationTurnoversScroller.filter.label.operationDate": {
+    "ru": "Опер. дата"
+  },
+  "admin.reconciliationTurnoversScroller.filter.placeholder.account": {
+    "ru": "Счёт"
+  },
+  "admin.reconciliationTurnoversScroller.filter.placeholder.status": {
+    "ru": "Статус сверки"
+  },
   "admin.reconciliationTurnoversScroller.table.header.operationDate": {
     "ru": "Операционная дата"
   },

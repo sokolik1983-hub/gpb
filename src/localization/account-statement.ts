@@ -622,6 +622,33 @@ export default {
 			get pageTitle() {
 				return t('admin.reconciliationTurnoversScroller.pageTitle');
 			},
+			filter: {
+				label: {
+					/**
+					 * @ru
+					 * Опер. дата
+					 */
+					get operationDate() {
+						return t('admin.reconciliationTurnoversScroller.filter.label.operationDate');
+					},
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Счёт
+					 */
+					get account() {
+						return t('admin.reconciliationTurnoversScroller.filter.placeholder.account');
+					},
+					/**
+					 * @ru
+					 * Статус сверки
+					 */
+					get status() {
+						return t('admin.reconciliationTurnoversScroller.filter.placeholder.status');
+					},
+				},
+			},
 			table: {
 				header: {
 					/**

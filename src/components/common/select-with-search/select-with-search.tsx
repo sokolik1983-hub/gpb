@@ -4,10 +4,12 @@ import { uniqBy } from 'utils/common';
 import type { IOption, OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
 
-/** Свойства мультиселекта с поиском. */
-interface MultiselectWithSearchProps {
+/** Свойства выбора из списка с поиском. */
+interface SelectWithSearchProps {
   /** Имя поля на форме. */
   name: string;
+  /** Признак множественного выбора. */
+  multi?: boolean;
   /** Компонент опции выбора. */
   optionTemplate?: React.ComponentType<any>;
   /** Подсказывающий текст. */
@@ -20,9 +22,10 @@ interface MultiselectWithSearchProps {
   setSearchValue(value: string): void;
 }
 
-/** Мультиселект с поиском. */
-export const MultiselectWithSearch: FC<MultiselectWithSearchProps> = ({
+/** Выбор из списка с поиском. */
+export const SelectWithSearch: FC<SelectWithSearchProps> = ({
   name,
+  multi,
   optionTemplate,
   placeholder,
   searchOptions,
@@ -62,8 +65,10 @@ export const MultiselectWithSearch: FC<MultiselectWithSearchProps> = ({
     selectedOptions,
   ]);
 
+  const Field = multi ? Fields.MultiSelect : Fields.Select;
+
   return (
-    <Fields.MultiSelect
+    <Field
       extraSmall
       withSearch
       filterFn={handleSearch}
@@ -76,4 +81,4 @@ export const MultiselectWithSearch: FC<MultiselectWithSearchProps> = ({
   );
 };
 
-MultiselectWithSearch.displayName = 'MultiselectWithSearch';
+SelectWithSearch.displayName = 'SelectWithSearch';
