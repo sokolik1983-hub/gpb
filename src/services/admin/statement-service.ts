@@ -44,7 +44,6 @@ import {
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
-import { mockTransactionsPageData } from 'services/admin/mock/transactions-page';
 import { getTurnoversReportMock } from 'services/admin/mock/turnovers-report-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
@@ -87,13 +86,18 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получение страницы бухгалтерских проводок. */
-  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> => {
-    console.log(metaData);
+  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> =>
+    request<IServerDataResp<ScrollerResponseDto<BankAccountingEntryCard>>>({
+      url: `${STATEMENT_BANK_URL}/entry/page`,
+      method: 'POST',
+      data: metadataToRequestParams(metaData),
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
 
-    const result = mockTransactionsPageData;
-
-    return Promise.resolve(result).then(value => value.data);
-  },
+      return response.data.data;
+    }),
   /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
     request<IServerDataResp<IStatementRequestCardDto>>({

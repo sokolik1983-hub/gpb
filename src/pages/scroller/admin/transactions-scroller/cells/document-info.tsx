@@ -9,7 +9,9 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { documentDate, documentNumber } }) => {
+export const DocumentInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+  value: { documentDate, documentNumber },
+}) => {
   const queryString = useQueryString();
 
   return (
@@ -17,7 +19,7 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
       <WithInfoTooltip text={documentNumber}>
         {ref => (
           <Typography.P data-field={'documentNumber'} innerRef={ref} line={'COLLAPSE'}>
-            <HightlightText searchWords={queryString} textToHightlight={documentNumber} />
+            <HightlightText searchWords={queryString} textToHightlight={String(documentNumber)} />
           </Typography.P>
         )}
       </WithInfoTooltip>
@@ -33,4 +35,4 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
   );
 };
 
-DocumentInfoCell.displayName = 'DocumentInfoCell';
+DocumentInfo.displayName = 'DocumentInfo';

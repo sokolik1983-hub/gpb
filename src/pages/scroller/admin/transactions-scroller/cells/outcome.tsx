@@ -7,15 +7,12 @@ import { Typography } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения суммы списания. */
-export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
-  value: {
-    amountDebit,
-    account: { currencyLetterCode },
-  },
+export const Outcome: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+  value: { amountByDebit, currencyNumericCodeByDebit },
 }) => {
   const queryString = useQueryString();
 
-  if (!amountDebit) {
+  if (!amountByDebit) {
     return null;
   }
 
@@ -23,10 +20,10 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.negative({ amount: String(amountDebit), currencyCode: currencyLetterCode })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountByDebit), currencyCode: currencyNumericCodeByDebit })}
       />
     </Typography.P>
   );
 };
 
-OutcomeCell.displayName = 'OutcomeCell';
+Outcome.displayName = 'Outcome';

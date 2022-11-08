@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { Typography, Box, Horizon, Gap } from '@platform/ui';
 import { AccountFieldsWithTooltipPanel } from './account-fields-with-tooltip-panel';
@@ -9,7 +9,7 @@ import css from './styles.scss';
 /** Свойства компонета с футером скроллера проводок. */
 interface FooterProps {
   /** Набор выбранных проводок. */
-  selectedRows: BankAccountingEntryCard[];
+  selectedRows: BankAccountingEntryTurnoverCard[];
 }
 
 /**
@@ -17,7 +17,7 @@ interface FooterProps {
  *
  * @param value - Карточка бухгалтерской проводки или группа бухгалтерских проводок.
  */
-const isEntryCard = (value: BankAccountingEntryCard | BankAccountingEntryGroup): value is BankAccountingEntryCard =>
+const isEntryCard = (value: BankAccountingEntryGroup | BankAccountingEntryTurnoverCard): value is BankAccountingEntryTurnoverCard =>
   !(value as BankAccountingEntryGroup).entries;
 
 /** Компонент для вывода футера скроллера проводок. */

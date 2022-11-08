@@ -1,15 +1,15 @@
 import React from 'react';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { CellProps } from 'react-table';
-import { IncomeCell } from './income-cell';
-import { OutcomeCell } from './outcome-cell';
+import { Income } from './income';
+import { Outcome } from './outcome';
 
 /** Компонент с ячейкой для отображения суммы поступления и списания. */
-export const SummaryCell: React.FC<CellProps<BankAccountingEntryCard>> = props => (
+export const Summary: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = props => (
   <>
-    <IncomeCell {...props} />
-    <OutcomeCell {...props} />
+    <Income {...props} />
+    <Outcome {...props} />
   </>
 );
 
-SummaryCell.displayName = 'SummaryCell';
+Summary.displayName = 'Summary';

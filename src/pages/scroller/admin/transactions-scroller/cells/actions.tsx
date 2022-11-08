@@ -13,7 +13,7 @@ import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Компонент с ячейкой с действиями для строки скроллера. */
-export const ActionsCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
+export const Actions: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({ value }) => {
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 
@@ -68,4 +68,4 @@ export const ActionsCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ valu
   );
 };
 
-ActionsCell.displayName = 'ActionsCell';
+Actions.displayName = 'Actions';

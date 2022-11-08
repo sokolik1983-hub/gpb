@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import React, { useContext, useEffect, useMemo } from 'react';
-import { SelectWithSearch } from 'components/common';
 import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DateRange } from 'components/common/form/date-range';
+import { SelectWithSearch } from 'components/common/select-with-search';
 import { locale } from 'localization';
 import { FORM_FIELDS, RECONCILIATION_STATUS_OPTIONS } from 'pages/scroller/admin/reconciliation-turnovers/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/reconciliation-turnovers/filter/context';

@@ -6,26 +6,26 @@ import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
-/** Компонент с ячейкой для отображения информации о контрагенте. */
-export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
-  value: { counterpartyName, counterpartyAccountNumber },
+/** Компонент для отображения информации по счету клиента. */
+export const AccountInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+  value: { bankClientName, bankClientAccountNumber },
 }) => {
   const queryString = useQueryString();
 
   return (
     <>
-      <WithInfoTooltip extraSmall text={counterpartyName}>
+      <WithInfoTooltip extraSmall text={bankClientName}>
         {ref => (
           <Typography.P innerRef={ref} line={'COLLAPSE'}>
-            <HightlightText searchWords={queryString} textToHightlight={counterpartyName} />
+            <HightlightText searchWords={queryString} textToHightlight={bankClientName} />
           </Typography.P>
         )}
       </WithInfoTooltip>
       <Typography.Text>
-        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(counterpartyAccountNumber)} />
+        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(bankClientAccountNumber)} />
       </Typography.Text>
     </>
   );
 };
 
-CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
+AccountInfo.displayName = 'AccountInfo';

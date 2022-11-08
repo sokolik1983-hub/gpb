@@ -6,6 +6,8 @@ import { Fields } from '@platform/ui';
 
 /** Свойства выбора из списка с поиском. */
 interface SelectWithSearchProps {
+  /** Подгружаются ли данные в текущий момент. */
+  isLoading?: boolean;
   /** Имя поля на форме. */
   name: string;
   /** Признак множественного выбора. */
@@ -24,6 +26,7 @@ interface SelectWithSearchProps {
 
 /** Выбор из списка с поиском. */
 export const SelectWithSearch: FC<SelectWithSearchProps> = ({
+  isLoading,
   name,
   multi,
   optionTemplate,
@@ -72,6 +75,7 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
       extraSmall
       withSearch
       filterFn={handleSearch}
+      isLoading={isLoading}
       name={name}
       optionTemplate={optionTemplate}
       options={options}

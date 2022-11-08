@@ -8,7 +8,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о дате. */
-export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { entryDate } }) => {
+export const EntryDate: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({ value: { entryDate } }) => {
   const formattedEntryDate = formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT });
 
   const queryString = useQueryString();
@@ -24,4 +24,4 @@ export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ va
   );
 };
 
-EntryDateCell.displayName = 'EntryDateCell';
+EntryDate.displayName = 'EntryDate';

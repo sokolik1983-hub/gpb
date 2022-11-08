@@ -1,11 +1,11 @@
 import React from 'react';
 import { LinesEllipsis } from 'components/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { Box, Typography, WithInfoTooltip, CONTAINER_POSITION } from '@platform/ui';
 import css from './styles.scss';
 
 /** Комипонент для отображении строки с назначением платежа. */
-export const PaymentPurposeRow: React.FC<{ row: BankAccountingEntryCard }> = ({ row }) => {
+export const PaymentPurposeRow: React.FC<{ row: BankAccountingEntryTurnoverCard }> = ({ row }) => {
   const { paymentPurpose } = row;
 
   return (

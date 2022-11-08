@@ -3,19 +3,19 @@ import { SORT_DIRECTION } from '@platform/services';
 /** Названия колонок для подстрок таблицы. */
 export const enum COLUMN_NAMES {
   /** Дата проводки. */
-  DATE = 'documentDate',
+  DATE = 'ENTRY_DATE',
   /** Счёт клиента. */
-  ACCOUNT = 'accountNumber',
+  ACCOUNT = 'BANK_CLIENT_NAME',
   /** Номер документа. */
-  DOCUMENT = 'documentNumber',
+  DOCUMENT = 'DOCUMENT_NUMBER',
   /** Контрагент. */
-  COUNTERPARTY = 'counterpartyName',
+  COUNTERPARTY = 'COUNTERPARTY_NAME',
   /** Сумма списаний и поступлений. */
-  SUMMARY = 'SUMMARY',
+  SUMMARY = 'AMOUNT',
   /** Сумма поступлений. */
-  INCOME = 'incomingBalance',
+  INCOME = 'AMOUNT_BY_CREDIT',
   /** Сумма списаний. */
-  OUTCOME = 'outgoingBalance',
+  OUTCOME = 'AMOUNT_BY_DEBIT',
   /** Экшоны. */
   ACTIONS = 'ACTIONS',
 }
