@@ -5,7 +5,7 @@ import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import type { IUrlParams } from 'interfaces';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { TableRowsInfo } from 'pages/scroller/admin/entries-scroller/components/table-rows-info';
 import { useStatementSummary } from 'pages/scroller/admin/entries-scroller/hooks';
@@ -47,7 +47,7 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const [total, setTotal] = useState(0);
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(defaultValue.visibleOnlySelectedRows);
-  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>(defaultValue.selectedRows);
+  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryTurnoverCard[]>(defaultValue.selectedRows);
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
   const [filters, setFilters] = useState<IFilters>({});
   const [entriesInitialed, setEntriesInitialed] = useState(false);
@@ -107,7 +107,7 @@ export const EntriesScrollerPage: React.FC = () => {
   );
 
   const footerActions = useCallback(
-    scrollerExecutor => (rows: BankAccountingEntryCard[]) =>
+    scrollerExecutor => (rows: BankAccountingEntryTurnoverCard[]) =>
       getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, id]),
     [getAvailableActions, id]
   );
@@ -161,7 +161,7 @@ export const EntriesScrollerPage: React.FC = () => {
                   </ContentLoader>
                   <>
                     <TableRowsInfo />
-                    <Table<BankAccountingEntryGroup, BankAccountingEntryCard>
+                    <Table<BankAccountingEntryGroup, BankAccountingEntryTurnoverCard>
                       columns={filteredColumns}
                       customSettingsForm={SettingsForm}
                       defaultSort={DEFAULT_SORT}

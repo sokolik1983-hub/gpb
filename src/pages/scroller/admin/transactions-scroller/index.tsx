@@ -11,13 +11,16 @@ import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/servi
 import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData } from 'utils/common';
+import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services/admin';
 import { MainLayout } from '@platform/services/admin';
 import { Box } from '@platform/ui';
+import { Filter } from './filter';
 import { Table } from './table';
 
 /** Компонент страницы со скрллером проводок. */
 export const TransactionsScrollerPage: React.FC = () => {
+  const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
@@ -29,29 +32,30 @@ export const TransactionsScrollerPage: React.FC = () => {
     header: locale.admin.transactionsScroller.pageTitle,
   };
 
-  const fetch = useCallback(async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<
-    IFetchDataResponse<BankAccountingEntryCard>
-  > => {
-    try {
-      const metaData: IMetaData = {
-        multiSort,
-        ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
-      };
+  const fetch = useCallback(
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
+      try {
+        const metaData: IMetaData = {
+          filters,
+          multiSort,
+          ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
+        };
 
-      const { page: rows, size: totalItems } = await statementService.getTransactionsPage(metaData);
+        const { page: rows, size: totalItems } = await statementService.getTransactionsPage(metaData);
 
-      setTotal(totalItems);
+        setTotal(totalItems);
 
-      return { rows, pageCount: totalItems };
-    } catch {
-      return { rows: [], pageCount: 0 };
-    } finally {
-      if (!tableDataInitialed) {
-        setTableDataInitialed(true);
+        return { rows, pageCount: totalItems };
+      } catch {
+        return { rows: [], pageCount: 0 };
+      } finally {
+        if (!tableDataInitialed) {
+          setTableDataInitialed(true);
+        }
       }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    },
+    [filters, tableDataInitialed]
+  );
 
   const contextValue: ITransactionsScrollerContext = useMemo<ITransactionsScrollerContext>(
     () => ({
@@ -71,6 +75,7 @@ export const TransactionsScrollerPage: React.FC = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
+              <Filter setFilters={setFilters} />
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>

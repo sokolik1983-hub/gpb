@@ -7,27 +7,22 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
-  value: {
-    account: {
-      bankClient: { name },
-      number,
-    },
-  },
+export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+  value: { bankClientName, bankClientAccountNumber },
 }) => {
   const queryString = useQueryString();
 
   return (
     <>
-      <WithInfoTooltip extraSmall text={name}>
+      <WithInfoTooltip extraSmall text={bankClientName}>
         {ref => (
           <Typography.P innerRef={ref} line={'COLLAPSE'}>
-            <HightlightText searchWords={queryString} textToHightlight={name} />
+            <HightlightText searchWords={queryString} textToHightlight={bankClientName} />
           </Typography.P>
         )}
       </WithInfoTooltip>
       <Typography.Text>
-        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(number)} />
+        <HightlightText searchWords={queryString} textToHightlight={formatAccountCode(bankClientAccountNumber)} />
       </Typography.Text>
     </>
   );

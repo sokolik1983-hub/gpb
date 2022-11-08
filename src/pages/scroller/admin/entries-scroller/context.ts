@@ -1,7 +1,7 @@
 import type React from 'react';
 import { createContext } from 'react';
 import type { StatementSummary } from 'interfaces/admin';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { noop } from 'utils/common';
 import type { IFilters } from '@platform/core';
 import { GROUP_BY } from './constants';
@@ -11,9 +11,9 @@ export interface IEntriesScrollerContext {
   /** Общее количество проводок. */
   total: number;
   /** Выбранные строки в таблице скроллера. */
-  selectedRows: BankAccountingEntryCard[];
+  selectedRows: BankAccountingEntryTurnoverCard[];
   /** Устанавливает выбранные строки в таблице скроллера. */
-  setSelectedRows: React.Dispatch<React.SetStateAction<BankAccountingEntryCard[]>>;
+  setSelectedRows: React.Dispatch<React.SetStateAction<BankAccountingEntryTurnoverCard[]>>;
   /** Тип группировки проводок в таблице. */
   groupBy: GROUP_BY;
   /** Установливает новое значение группировки. */

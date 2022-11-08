@@ -1,7 +1,10 @@
 import type { IBaseEntity } from '@platform/services';
+import type { BankAccountingEntryAccount } from './bank-accounting-entry-account';
 
-/** Карточка бухгалтерской проводки для ‘bank’ модуля. */
-export interface BankAccountingEntryCard extends IBaseEntity {
+/** Карточка бухгалтерской проводки с данными оборота для ‘bank’ модуля. */
+export interface BankAccountingEntryTurnoverCard extends IBaseEntity {
+  /** Счет бухгалтерской проводки для ‘bank’ модуля. */
+  account: BankAccountingEntryAccount;
   /** Сумма по кредиту. */
   amountByCredit: number;
   /** Сумма по дебету. */
@@ -28,12 +31,4 @@ export interface BankAccountingEntryCard extends IBaseEntity {
   turnoverByCredit: number;
   /** Обороты по дебету. */
   turnoverByDebit: number;
-  /** Цифровой код валюты по дебету. */
-  currencyNumericCodeByDebit: string;
-  /** Цифровой код валюты по кредиту. */
-  currencyNumericCodeByCredit: string;
-  /** Номер счета клиента банка. */
-  bankClientAccountNumber: string;
-  /** Наименование клиента банка. */
-  bankClientName: string;
 }

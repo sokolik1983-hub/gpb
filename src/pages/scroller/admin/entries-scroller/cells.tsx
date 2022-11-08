@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { executor } from 'actions/admin/executor';
 import { HightlightText, StopPropagation } from 'components/common';
 import type { IUrlParams } from 'interfaces';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
 import { useParams } from 'react-router-dom';
@@ -18,7 +18,7 @@ import { useQueryString } from './hooks';
 import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
-export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { entryDate } }) => {
+export const EntryDateCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value: { entryDate } }) => {
   const formattedEntryDate = formatDateTime(entryDate, { keepLocalTime: true, format: DATE_FORMAT });
 
   const queryString = useQueryString();
@@ -37,7 +37,7 @@ export const EntryDateCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ va
 EntryDateCell.displayName = 'EntryDateCell';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
   value: {
     account: {
       bankClient: { name },
@@ -66,7 +66,7 @@ export const AccountInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 AccountInfoCell.displayName = 'AccountInfoCell';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value: { documentDate, documentNumber } }) => {
+export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value: { documentDate, documentNumber } }) => {
   const queryString = useQueryString();
 
   return (
@@ -93,7 +93,7 @@ export const DocumentInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 DocumentInfoCell.displayName = 'DocumentInfoCell';
 
 /** Компонент с ячейкой для отображения информации о контрагенте. */
-export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
   value: { counterpartyName, counterpartyAccountNumber },
 }) => {
   const queryString = useQueryString();
@@ -117,7 +117,7 @@ export const CounterpartyInfoCell: React.FC<CellProps<BankAccountingEntryCard>> 
 CounterpartyInfoCell.displayName = 'CounterpartyInfoCell';
 
 /** Компонент с ячейкой для отображения суммы поступления. */
-export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+export const IncomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
   value: {
     amountCredit,
     account: { currencyLetterCode },
@@ -142,7 +142,7 @@ export const IncomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 IncomeCell.displayName = 'IncomeCell';
 
 /** Компонент с ячейкой для отображения суммы списания. */
-export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
+export const OutcomeCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({
   value: {
     amountDebit,
     account: { currencyLetterCode },
@@ -167,7 +167,7 @@ export const OutcomeCell: React.FC<CellProps<BankAccountingEntryCard>> = ({
 OutcomeCell.displayName = 'OutcomeCell';
 
 /** Компонент с ячейкой для отображения суммы поступления и списания. */
-export const SummaryCell: React.FC<CellProps<BankAccountingEntryCard>> = props => (
+export const SummaryCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = props => (
   <>
     <IncomeCell {...props} />
     <OutcomeCell {...props} />
@@ -177,7 +177,7 @@ export const SummaryCell: React.FC<CellProps<BankAccountingEntryCard>> = props =
 SummaryCell.displayName = 'SummaryCell';
 
 /** Компонент с ячейкой с действиями для строки скроллера. */
-export const ActionsCell: React.FC<CellProps<BankAccountingEntryCard>> = ({ value }) => {
+export const ActionsCell: React.FC<CellProps<BankAccountingEntryTurnoverCard>> = ({ value }) => {
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 

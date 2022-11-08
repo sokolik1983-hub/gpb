@@ -57,8 +57,12 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
   const handleMouseLeave = useCallback(() => setShow(false), []);
 
   const currenciesSet = useMemo(
-    () => filteredPayments.reduce<Set<string>>((result, payment) => result.add(payment.account.currency.letterCode), new Set()),
-    [filteredPayments]
+    () =>
+      filteredPayments.reduce<Set<string>>(
+        (result, payment) => result.add(isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit),
+        new Set()
+      ),
+    [filteredPayments, isDebit]
   );
 
   let labelText = '';
@@ -69,11 +73,11 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
       currencyCode: '',
     });
   } else if (currenciesSet.size === 1) {
-    const amount = filteredPayments.reduce((summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit), 0);
+    const amount = filteredPayments.reduce((summary, payment) => summary + (isDebit ? payment.amountByDebit : payment.amountByCredit), 0);
 
     labelText = locale.moneyString.unsigned({
       amount: String(amount),
-      currencyCode: filteredPayments[0].account.currency.letterCode,
+      currencyCode: isDebit ? filteredPayments[0].currencyNumericCodeByDebit : filteredPayments[0].currencyNumericCodeByCredit,
     });
   } else {
     const currencies = Array.from(currenciesSet.values());
@@ -104,9 +108,13 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
             </>
           ) : (
             Array.from(currenciesSet.values()).reduce<React.ReactElement[]>((paymentRows, currency, index) => {
-              const currencyPayments = filteredPayments.filter(payment => payment.account.currency.letterCode === currency);
+              const currencyPayments = filteredPayments.filter(payment => {
+                const paymentCurrency = isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit;
+
+                return paymentCurrency === currency;
+              });
               const amount = currencyPayments.reduce(
-                (summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit),
+                (summary, payment) => summary + (isDebit ? payment.amountByDebit : payment.amountByCredit),
                 0
               );
 
