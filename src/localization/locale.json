@@ -581,6 +581,9 @@
   "admin.reconciliationTurnoversScroller.filter.placeholder.status": {
     "ru": "Статус сверки"
   },
+  "admin.reconciliationTurnoversScroller.table.total": {
+    "ru": "Операций"
+  },
   "admin.reconciliationTurnoversScroller.table.header.operationDate": {
     "ru": "Операционная дата"
   },
@@ -607,6 +610,30 @@
   },
   "admin.reconciliationTurnoversScroller.table.header.turnoverCredit": {
     "ru": "Обороты Кт"
+  },
+  "admin.currencyRatesScroller.pageTitle": {
+    "ru": "Курсы валют"
+  },
+  "admin.currencyRatesScroller.table.total": {
+    "ru": "Курсы валют"
+  },
+  "admin.currencyRatesScroller.filter.label.rateDate": {
+    "ru": "Дата курса"
+  },
+  "admin.currencyRatesScroller.filter.placeholder.currencyCode": {
+    "ru": "Код"
+  },
+  "admin.currencyRatesScroller.table.header.letterCode": {
+    "ru": "Код"
+  },
+  "admin.currencyRatesScroller.table.header.units": {
+    "ru": "Единиц"
+  },
+  "admin.currencyRatesScroller.table.header.rateValue": {
+    "ru": "Курс"
+  },
+  "admin.currencyRatesScroller.table.header.rateDate": {
+    "ru": "Дата курса"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"

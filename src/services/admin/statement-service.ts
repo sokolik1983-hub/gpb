@@ -1,4 +1,4 @@
-import type { IScrollerResponseDto, ScrollerResponseDto, ServerResponseData, ServerResponseList, ServerResponsePage } from 'interfaces';
+import type { ServerResponseList, ServerResponseData, ServerResponsePage, ScrollerResponseDto, IScrollerResponseDto } from 'interfaces';
 import { FORMAT } from 'interfaces';
 import type {
   Account,
@@ -7,13 +7,16 @@ import type {
   ClosedDayRow,
   Counterparty,
   CreateStatementAttachmentRequestDto,
+  Currency,
+  CurrencyRateDto,
+  CurrencyRateRow,
+  StatementHistoryRow,
+  StatementHistoryResponseDto,
   IFileDataResponse,
   Organization,
   ReconciliationTurnoverDto,
   ReconciliationTurnoverRow,
   ServiceBranch,
-  StatementHistoryResponseDto,
-  StatementHistoryRow,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
@@ -22,12 +25,14 @@ import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounti
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { BankClient } from 'interfaces/common';
-import type { IGetDatePeriodRequestDto, IGetDatePeriodResponseDto, IGetTransactionCardResponseDto } from 'interfaces/dto';
+import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
 import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
   mapDtoToViewForClosedDays,
+  mapDtoToViewForCurrencyList,
+  mapDtoToViewForCurrencyRates,
   mapDtoToViewForOrganizationList,
   mapDtoToViewForReconciliationTurnovers,
   mapDtoToViewForServiceBranchList,
@@ -299,4 +304,27 @@ export const statementService = {
     new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
       resolve(getEmptyFileMock(FORMAT.PDF));
     }).then(response => response.data),
+  /** Возвращает список курсов валют. */
+  getCurrencyRates: (metaData: IMetaData): Promise<ICollectionResponse<CurrencyRateRow>> =>
+    request<IServerDataResp<IScrollerResponseDto<CurrencyRateDto>>>({
+      data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/currency/rate/page`,
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
+
+      return {
+        data: mapDtoToViewForCurrencyRates(response.data.data.page),
+        total: response.data.data.size,
+      };
+    }),
+  /** Возвращает список валют. */
+  getCurrencies: (metaData: IMetaData): Promise<Currency[]> =>
+    request<IServerResp<ServerResponsePage<ServerResponseList<Currency>>>>({
+      data: metadataToRequestParams(metaData),
+      method: 'POST',
+      url: `${CLIENT_DICTIONARY_BANK_URL}/currency/get-page`,
+    }).then(response => (response.data.errorInfo?.code ? [] : mapDtoToViewForCurrencyList(response.data.data.page.list))),
 };

@@ -3,7 +3,7 @@ import { ERROR } from '@platform/services';
 export * from './bank-client';
 export * from './classificators';
 export * from './counterparty';
-export * from './filter';
+export * from './scroller';
 
 /** Распарсеные параметры УРЛа. */
 export interface IUrlParams {

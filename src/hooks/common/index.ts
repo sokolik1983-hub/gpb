@@ -9,3 +9,5 @@ export * from './use-is-fetched-data';
 export * from './use-stream-content-height';
 export * from './use-filter-tags';
 export * from './use-date-period';
+export * from './use-data-table';
+export * from './use-submit-quick-filter';

@@ -650,6 +650,13 @@ export default {
 				},
 			},
 			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.reconciliationTurnoversScroller.table.total');
+				},
 				header: {
 					/**
 					 * @ru
@@ -713,6 +720,74 @@ export default {
 					 */
 					get turnoverCredit() {
 						return t('admin.reconciliationTurnoversScroller.table.header.turnoverCredit');
+					},
+				},
+			},
+		},
+		currencyRatesScroller: {
+			/**
+			 * @ru
+			 * Курсы валют
+			 */
+			get pageTitle() {
+				return t('admin.currencyRatesScroller.pageTitle');
+			},
+			table: {
+				/**
+				 * @ru
+				 * Курсы валют
+				 */
+				get total() {
+					return t('admin.currencyRatesScroller.table.total');
+				},
+				header: {
+					/**
+					 * @ru
+					 * Код
+					 */
+					get letterCode() {
+						return t('admin.currencyRatesScroller.table.header.letterCode');
+					},
+					/**
+					 * @ru
+					 * Единиц
+					 */
+					get units() {
+						return t('admin.currencyRatesScroller.table.header.units');
+					},
+					/**
+					 * @ru
+					 * Курс
+					 */
+					get rateValue() {
+						return t('admin.currencyRatesScroller.table.header.rateValue');
+					},
+					/**
+					 * @ru
+					 * Дата курса
+					 */
+					get rateDate() {
+						return t('admin.currencyRatesScroller.table.header.rateDate');
+					},
+				},
+			},
+			filter: {
+				label: {
+					/**
+					 * @ru
+					 * Дата курса
+					 */
+					get rateDate() {
+						return t('admin.currencyRatesScroller.filter.label.rateDate');
+					},
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Код
+					 */
+					get currencyCode() {
+						return t('admin.currencyRatesScroller.filter.placeholder.currencyCode');
 					},
 				},
 			},

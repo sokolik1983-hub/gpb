@@ -17,3 +17,4 @@ export * from './closed-day';
 export * from './reconciliation-turnovers';
 export * from './record-source';
 export * from './reconciliation-status';
+export * from './currency';

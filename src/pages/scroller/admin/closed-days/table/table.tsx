@@ -1,80 +1,47 @@
 import type { FC } from 'react';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { executor } from 'actions/admin';
+import { ContentLoader, DataTableWithTotal } from 'components/common';
+import { useDataTable } from 'hooks/common';
+import type { ScrollerTable } from 'interfaces';
 import type { ClosedDayRow } from 'interfaces/admin';
 import { locale } from 'localization';
 import { columns } from 'pages/scroller/admin/closed-days/table/columns';
 import { DEFAULT_SORT, STORAGE_KEY } from 'pages/scroller/admin/closed-days/table/constants';
-import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
-import { convertTablePaginationToMetaData, getPageCount } from 'utils/common';
-import type { IFilters } from '@platform/core';
-import type { IMetaData } from '@platform/services/admin';
-import { Box, Gap, Horizon, Typography } from '@platform/ui';
+import { Box } from '@platform/ui';
 
 /** Свойства таблицы журнала закрытых дней. */
-interface TableProps {
-  /** Значения формы фильтрации. */
-  filter: IFilters;
-  /** Метод установки признака загрузки данных для таблицы. */
-  setDataTableFetched(): void;
+interface TableProps extends ScrollerTable {
+  /** Признак, что можно показать таблицу. */
+  show: boolean;
 }
 
 /** Таблица журнала закрытых дней. */
-export const Table: FC<TableProps> = ({ filter, setDataTableFetched }) => {
-  const [total, setTotal] = useState(0);
-
-  /** Метод делает запрос закрытых дней на сервер. */
-  const fetch = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<ClosedDayRow>> => {
-      try {
-        const metaData: IMetaData = {
-          filters: filter,
-          multiSort,
-          ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
-        };
-
-        const { data: rows, total: totalItems } = await statementService.getClosedDays(metaData);
-
-        setTotal(totalItems);
-
-        return { rows, pageCount: getPageCount(totalItems, pageSize) };
-      } catch {
-        return { rows: [], pageCount: 0 };
-      } finally {
-        setDataTableFetched();
-      }
-    },
-    // Должно срабатывать только при изменении фильтра.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filter]
-  );
+export const Table: FC<TableProps> = ({ filter, height, show }) => {
+  const { fetch, initialed, total } = useDataTable<ClosedDayRow>({ apiMethod: statementService.getClosedDays, filter });
 
   return (
     <>
-      <Box>
-        <Gap.XS />
-        <Horizon>
-          <Gap />
-          <Gap />
-          <Typography.TextBold>{locale.admin.closedDaysScroller.table.total}</Typography.TextBold>
-          <Gap.SM />
-          <Typography.Text data-field={'total'}>{total}</Typography.Text>
-        </Horizon>
-        <Gap.XS />
-      </Box>
+      <ContentLoader height={height} loading={!initialed}>
+        <Box />
+      </ContentLoader>
 
-      <InfiniteDataTable<ClosedDayRow>
-        columns={columns}
-        defaultSort={DEFAULT_SORT}
-        executor={executor}
-        fetchData={fetch}
-        placeholderMessage={locale.admin.closedDaysScroller.table.placeholder.message}
-        placeholderTitle={locale.admin.closedDaysScroller.table.placeholder.title}
-        showSettingsButton={false}
-        storageKey={STORAGE_KEY}
-      />
+      {show && (
+        <DataTableWithTotal label={locale.admin.closedDaysScroller.table.total} total={total}>
+          <InfiniteDataTable<ClosedDayRow>
+            columns={columns}
+            defaultSort={DEFAULT_SORT}
+            executor={executor}
+            fetchData={fetch}
+            placeholderMessage={locale.admin.closedDaysScroller.table.placeholder.message}
+            placeholderTitle={locale.admin.closedDaysScroller.table.placeholder.title}
+            showSettingsButton={false}
+            storageKey={STORAGE_KEY}
+          />
+        </DataTableWithTotal>
+      )}
     </>
   );
 };
