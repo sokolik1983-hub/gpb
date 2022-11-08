@@ -10,3 +10,4 @@ export * from './get-turnovers-dto';
 export * from './latest-statement-dto';
 export * from './statement-summary-info-request-dto';
 export * from './statement-summary-info-response-dto';
+export * from './statement-attachment-status-dto';
