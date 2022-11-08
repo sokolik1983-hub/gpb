@@ -1,3 +1,10 @@
+## [2.15.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.1...v2.15.1-release.2) (2022-11-08)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-37296 переход на асинхронную загрузку вложений ([3752aeb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3752aebf4a6e58c9a3e7e49ac58386b44508aad4))
+
 ## [2.15.1-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0...v2.15.1-release.1) (2022-11-02)
 
 
