@@ -12,6 +12,7 @@ import { columns } from '../columns';
 import { STORAGE_KEY } from '../constants';
 import { TransactionsScrollerContext } from '../context';
 import { Footer } from './footer-content';
+import { SettingsForm } from './settings-form';
 import css from './styles.scss';
 
 export const Table = () => {
@@ -45,6 +46,7 @@ export const Table = () => {
       </Box>
       <InfiniteDataTable<BankAccountingEntryCard>
         columns={columns}
+        customSettingsForm={SettingsForm}
         executor={executor}
         fetchData={fetch}
         footerContent={Footer}
