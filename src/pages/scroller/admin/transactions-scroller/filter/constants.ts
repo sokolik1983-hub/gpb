@@ -39,7 +39,7 @@ export const FORM_FIELDS = {
   /** Дата платежа по. */
   PAYMENT_DATE_TO: getPath('paymentDateTo'),
   /** Тип операции. */
-  TRANSACTION_TYPE: getPath('transactionType'),
+  TRANSACTION_TYPE: getPath('entryType'),
   /** Источник вызова скроллера проводок. */
   SOURCE: getPath('source'),
 };

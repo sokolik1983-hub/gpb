@@ -5,7 +5,10 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
+    'actionsContainer': string;
     'container': string;
+    'contentContainer': string;
+    'footer': string;
   }
 }
 
