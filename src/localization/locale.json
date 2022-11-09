@@ -1232,6 +1232,12 @@
     "@currencies": "string",
     "ru": "{currencies} и ещё {amount}"
   },
+  "admin.transactionsScroller.footer.printAction": {
+    "ru": "Печать документа"
+  },
+  "admin.transactionsScroller.footer.exportAction": {
+    "ru": "Экспорт документа"
+  },
   "admin.transactionsScroller.pageTitle": {
     "ru": "Проводки"
   },

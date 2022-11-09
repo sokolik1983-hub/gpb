@@ -72,11 +72,3 @@
 .margin {
   padding: 0 32px;
 }
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  // 120px - ширина бокового меню.
-  width: calc(100% - 120px);
-  max-width: 1392px;
-}

@@ -1,11 +1,5 @@
-import type {
-  FORMAT,
-  ServerResponseList,
-  ServerResponseData,
-  ServerResponsePage,
-  ScrollerResponseDto,
-  IScrollerResponseDto,
-} from 'interfaces';
+import type { IScrollerResponseDto, ScrollerResponseDto, ServerResponseData, ServerResponseList, ServerResponsePage } from 'interfaces';
+import { FORMAT } from 'interfaces';
 import type {
   Account,
   ClientUserDto,
@@ -13,13 +7,13 @@ import type {
   ClosedDayRow,
   Counterparty,
   CreateStatementAttachmentRequestDto,
-  StatementHistoryRow,
-  StatementHistoryResponseDto,
   IFileDataResponse,
   Organization,
   ReconciliationTurnoverDto,
   ReconciliationTurnoverRow,
   ServiceBranch,
+  StatementHistoryResponseDto,
+  StatementHistoryRow,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
@@ -28,7 +22,7 @@ import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounti
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { BankClient } from 'interfaces/common';
-import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
+import type { IGetDatePeriodRequestDto, IGetDatePeriodResponseDto, IGetTransactionCardResponseDto } from 'interfaces/dto';
 import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
@@ -42,9 +36,9 @@ import {
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
+import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
-import { getTurnoversReportMock } from 'services/admin/mock/turnovers-report-mock';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -86,18 +80,22 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получение страницы бухгалтерских проводок. */
-  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> =>
-    request<IServerDataResp<ScrollerResponseDto<BankAccountingEntryCard>>>({
+  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> => {
+    const { params } = metadataToRequestParams(metaData);
+    const { multiSort, ...rest } = params;
+
+    return request<IServerDataResp<ScrollerResponseDto<BankAccountingEntryCard>>>({
       url: `${STATEMENT_BANK_URL}/entry/page`,
       method: 'POST',
-      data: metadataToRequestParams(metaData),
+      data: { ...rest, sorting: multiSort },
     }).then(response => {
       if (response.data.error?.code) {
         throw new Error(response.data.error.message);
       }
 
       return response.data.data;
-    }),
+    });
+  },
   /** Получить сущность "Запрос выписки". */
   getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
     request<IServerDataResp<IStatementRequestCardDto>>({
@@ -262,7 +260,7 @@ export const statementService = {
     statementIds: string[];
   }): Promise<IFileDataResponse> =>
     new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
-      resolve(getTurnoversReportMock(format));
+      resolve(getEmptyFileMock(format));
       // request<IServerDataResp<IFileDataResponse>>({
       //   data: {
       //     statementId,
@@ -294,4 +292,11 @@ export const statementService = {
         total: response.data.data.size,
       };
     }),
+  /** Генерация ПФ журнала остатков и оборотов. */
+  // TODO Убрать после реализации API
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  exportEntries: ({ entriesIds }: { entriesIds: string[] }): Promise<IFileDataResponse> =>
+    new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
+      resolve(getEmptyFileMock(FORMAT.PDF));
+    }).then(response => response.data),
 };

@@ -1097,6 +1097,20 @@ export default {
 				 * {currencies} и ещё {amount}
 				 */
 				collapsedCurrencies: (p: { amount: string; currencies: string }) => t('admin.transactionsScroller.footer.collapsedCurrencies', p),
+				/**
+				 * @ru
+				 * Печать документа
+				 */
+				get printAction() {
+					return t('admin.transactionsScroller.footer.printAction');
+				},
+				/**
+				 * @ru
+				 * Экспорт документа
+				 */
+				get exportAction() {
+					return t('admin.transactionsScroller.footer.exportAction');
+				},
 			},
 			/**
 			 * @ru

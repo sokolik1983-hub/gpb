@@ -19,13 +19,13 @@ export interface IFormState {
   /** Номер документа. */
   documentNumber?: string;
   /** Дата платежа. */
-  paymentDate?: string;
+  entryDate?: string;
   /** Дата платежа с. */
   paymentDateFrom?: string;
   /** Дата платежа по. */
   paymentDateTo?: string;
   /** Тип операции. */
-  transactionType?: TRANSACTION_TYPES;
+  entryType?: TRANSACTION_TYPES;
   /** Источник вызова скроллера проводок. */
   source?: string;
 }

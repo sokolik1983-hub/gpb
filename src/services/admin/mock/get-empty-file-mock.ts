@@ -3,7 +3,7 @@ import type { IFileDataResponse } from 'interfaces/admin';
 import type { IServerDataResp } from '@platform/services/admin';
 
 /** Заглушка с пустым контентом для отчета с остатками и оборотами. */
-export const getTurnoversReportMock = (format: FORMAT.EXCEL | FORMAT.PDF): Promise<IServerDataResp<IFileDataResponse>> =>
+export const getEmptyFileMock = (format: FORMAT.EXCEL | FORMAT.PDF): Promise<IServerDataResp<IFileDataResponse>> =>
   Promise.resolve({
     data: {
       content: '',
