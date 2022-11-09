@@ -293,9 +293,10 @@ export const statementService = {
       };
     }),
   /** Генерация ПФ журнала остатков и оборотов. */
+  // TODO Убрать после реализации API
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   exportEntries: ({ entriesIds }: { entriesIds: string[] }): Promise<IFileDataResponse> =>
     new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
-      console.log('exportEntries service called', entriesIds);
       resolve(getEmptyFileMock(FORMAT.PDF));
     }).then(response => response.data),
 };
