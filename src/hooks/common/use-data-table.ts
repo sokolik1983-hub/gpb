@@ -2,8 +2,7 @@ import { useCallback, useState } from 'react';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { convertTablePaginationToMetaData, getPageCount } from 'utils/common';
 import type { IFilters } from '@platform/core';
-import type { ICollectionResponse } from '@platform/services';
-import type { IMetaData } from '@platform/services/admin';
+import type { ICollectionResponse, IMetaData } from '@platform/services';
 
 /** Входные данные хука useDataTable. */
 interface UseDataTableRequest<R> {

@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react';
 import React from 'react';
 import type { DataTableProps, InfiniteScrollDataTableProps } from 'platform-copies/services';
-import type { IBaseEntity } from '@platform/services/admin';
+import type { IBaseEntity } from '@platform/services';
 import { Box, Gap, Horizon, Typography } from '@platform/ui';
 
 /** Свойства компонента рендера переданной таблицы с отображением общего количества записей. */
