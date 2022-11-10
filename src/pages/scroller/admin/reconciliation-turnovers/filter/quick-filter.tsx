@@ -1,13 +1,14 @@
 import type { FC } from 'react';
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DateRange } from 'components/common/form/date-range';
 import { SelectWithSearch } from 'components/common/select-with-search';
+import { useSubmitQuickFilter } from 'hooks/common';
 import { locale } from 'localization';
 import { FORM_FIELDS, RECONCILIATION_STATUS_OPTIONS } from 'pages/scroller/admin/reconciliation-turnovers/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/reconciliation-turnovers/filter/context';
 import type { FilterValues } from 'pages/scroller/admin/reconciliation-turnovers/filter/types';
-import { useForm, useFormState } from 'react-final-form';
+import { useFormState } from 'react-final-form';
 import { getAccountOption } from 'utils/common';
 import { Fields, Gap, Horizon, Pattern, Typography } from '@platform/ui';
 
@@ -18,15 +19,9 @@ export const QuickFilter: FC = () => {
   const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
   const selectedAccountOptions = useMemo(() => selectedAccounts.map(getAccountOption), [selectedAccounts]);
 
-  const { submit } = useForm();
-  const { valid, values } = useFormState<FilterValues>();
+  const { values } = useFormState<FilterValues>();
 
-  useEffect(() => {
-    if (valid) {
-      void submit();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [values]);
+  useSubmitQuickFilter(values);
 
   return (
     <Pattern gap={'MD'}>

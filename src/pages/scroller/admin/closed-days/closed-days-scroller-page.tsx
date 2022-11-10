@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -12,7 +12,6 @@ import { Table } from 'pages/scroller/admin/closed-days/table';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import type { IFilters } from '@platform/core';
 import { MainLayout } from '@platform/services/admin';
-import { Box } from '@platform/ui';
 
 /**
  * [Выписки_ЗВ] ЭФ Банка "Журнал закрытых дней".
@@ -21,7 +20,6 @@ import { Box } from '@platform/ui';
  */
 export const ClosedDaysScrollerPage: FC = () => {
   const [datePeriodInitialed, setDatePeriodInitialed] = useState(false);
-  const [tableInitialed, setTableInitialed] = useState(false);
   const [filter, setFilter] = useState<IFilters>({});
 
   const height = useStreamContentHeight();
@@ -39,14 +37,6 @@ export const ClosedDaysScrollerPage: FC = () => {
     }
   }, [datePeriodInitialed]);
 
-  /** Метод срабатывает при получении данных таблицы.
-   * Устанавливает признак инициализации таблицы (получение первых данных). */
-  const setDataTableFetched = useCallback(() => {
-    if (!tableInitialed) {
-      setTableInitialed(true);
-    }
-  }, [tableInitialed]);
-
   const contextValue: ClosedDaysContextProps = useMemo(() => ({ setDatePeriodFetched }), [setDatePeriodFetched]);
 
   return (
@@ -56,10 +46,7 @@ export const ClosedDaysScrollerPage: FC = () => {
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
               <Filter setFilter={setFilter} />
-              <ContentLoader height={tableHeight} loading={!tableInitialed}>
-                <Box />
-              </ContentLoader>
-              {datePeriodInitialed && <Table filter={filter} setDataTableFetched={setDataTableFetched} />}
+              <Table filter={filter} height={tableHeight} show={datePeriodInitialed} />
             </ScrollerPageLayout>
           </FocusTree>
         </FocusLock>

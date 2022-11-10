@@ -30,3 +30,6 @@ export const RUB_CURRENCY = 'RUB';
 
 /** Опция "Все" (для мультиселекта). */
 export const ALL_VALUE = 'ALL';
+
+/** Задержка с мс по умолчанию. */
+export const DELAY = 300;

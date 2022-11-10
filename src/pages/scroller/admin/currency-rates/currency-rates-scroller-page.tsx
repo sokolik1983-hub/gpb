@@ -4,25 +4,25 @@ import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import { locale } from 'localization';
-import { FILTER_HEIGHT, Filter } from 'pages/scroller/admin/reconciliation-turnovers/filter';
-import { Table } from 'pages/scroller/admin/reconciliation-turnovers/table';
+import { Filter, FILTER_HEIGHT } from 'pages/scroller/admin/currency-rates/filter';
+import { Table } from 'pages/scroller/admin/currency-rates/table';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import type { IFilters } from '@platform/core';
 import { MainLayout } from '@platform/services/admin';
 
 /**
- * [Выписки_ЗВ] ЭФ Банка "Журнал сверки остатков/оборотов".
+ * [СпрВалКур] ЭФ Банка "Справочник курсов валют".
  *
- * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=76415533
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=69873275
  */
-export const ReconciliationTurnoversScrollerPage = () => {
+export const CurrencyRatesScrollerPage = () => {
   const [filter, setFilter] = useState<IFilters>({});
 
   const contentHeight = useStreamContentHeight();
   const tableHeight = contentHeight - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT;
 
   const headerProps = {
-    header: locale.admin.reconciliationTurnoversScroller.pageTitle,
+    header: locale.admin.currencyRatesScroller.pageTitle,
   };
 
   return (
@@ -39,4 +39,4 @@ export const ReconciliationTurnoversScrollerPage = () => {
   );
 };
 
-ReconciliationTurnoversScrollerPage.displayName = 'ReconciliationTurnoversScrollerPage';
+CurrencyRatesScrollerPage.displayName = 'CurrencyRatesScrollerPage';

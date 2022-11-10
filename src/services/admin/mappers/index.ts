@@ -1,5 +1,7 @@
 export * from './map-dto-to-view-for-account-list';
 export * from './map-dto-to-view-for-closed-days';
+export * from './map-dto-to-view-for-currency-list';
+export * from './map-dto-to-view-for-currency-rates';
 export * from './map-dto-to-view-for-organization-list';
 export * from './map-dto-to-view-for-reconciliation-turnovers';
 export * from './map-dto-to-view-for-service-branch-list';

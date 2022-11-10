@@ -6,6 +6,8 @@ export const ADMIN_STREAM_URL = {
   CLOSED_DAYS: '/account-statement/closed-days',
   /** Скроллер журнала сверки остатков/оборотов. */
   RECONCILIATION_TURNOVERS: '/account-statement/reconciliation-turnovers',
+  /** Скроллер журнала курсов валют. */
+  CURRENCY_RATES: '/account-statement/currency-rates',
   /** ЭФ просмотра параметров запроса на выписку. */
   STATEMENT_REQUEST: '/account-statement/:id',
   /** Скроллер проводок на основании запроса. */

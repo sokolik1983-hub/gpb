@@ -1,13 +1,12 @@
 import type { FC } from 'react';
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { ContentLoader, FilterLayout } from 'components/common';
-import { useServiceBranches } from 'hooks/admin';
-import type { FilterProps } from 'interfaces';
+import { useDebounceFilter, useServiceBranches } from 'hooks/admin';
+import type { ScrollerFilter } from 'interfaces';
 import { FORM_FIELDS, STORAGE_KEY, fields } from 'pages/scroller/admin/closed-days/filter/constants';
 import type { FilterContextProps } from 'pages/scroller/admin/closed-days/filter/context';
 import { FilterContext } from 'pages/scroller/admin/closed-days/filter/context';
 import { QuickFilter } from 'pages/scroller/admin/closed-days/filter/quick-filter';
-import { useDebounce } from 'platform-copies/hooks';
 import { getDateRangeValidationScheme } from 'schemas';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
@@ -19,15 +18,10 @@ export const FILTER_HEIGHT = 58;
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
 
 /** Форма фильтрации скроллера закрытых дней. */
-export const Filter: FC<FilterProps> = ({ setFilter }) => {
+export const Filter: FC<ScrollerFilter> = ({ setFilter }) => {
   const { filterPanel, filterValues } = useFilter({ fields, labels: {}, storageKey: STORAGE_KEY });
 
-  const filterValuesDebounced = useDebounce(filterValues, 300);
-
-  useEffect(() => {
-    setFilter(filterValuesDebounced);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [filterValuesDebounced]);
+  useDebounceFilter({ filterValues, setFilter });
 
   const { data: branches, isFetching: isBranchesFetching } = useServiceBranches();
 
