@@ -134,6 +134,7 @@ export const getCreateAttachment = (
       fatal(resp?.error);
       fatal(err);
 
+      hideLoader();
       addSucceeded(resp);
       done();
     } else {
@@ -152,7 +153,7 @@ export const getCreateAttachment = (
         return;
       }
 
-      fatal(error);
+      hideLoader();
       addSucceeded(data);
       done();
     }
