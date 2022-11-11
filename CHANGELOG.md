@@ -1,3 +1,10 @@
+## [2.15.1-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.3...v2.15.1-release.4) (2022-11-11)
+
+
+### Bug Fixes
+
+* GBO-36579 исправлено - проверка счетов на закрытый день ([438a120](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/438a1205c69915c8d8cded929d41a75b1307de8e))
+
 ## [2.15.1-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.2...v2.15.1-release.3) (2022-11-11)
 
 
