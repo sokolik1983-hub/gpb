@@ -1,3 +1,10 @@
+## [2.15.1-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.4...v2.15.1-release.5) (2022-11-11)
+
+
+### Bug Fixes
+
+* GBO-37094 исправление дефолного значения для onlyActiveAccounts ([180b1dc](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/180b1dcc192025c54397b9b07a4f6029f8b25008))
+
 ## [2.15.1-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.3...v2.15.1-release.4) (2022-11-11)
 
 
