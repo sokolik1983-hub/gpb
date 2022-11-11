@@ -5,13 +5,13 @@ import { Typography, Box, Horizon, Gap } from '@platform/ui';
 import { AccountFieldsWithTooltipPanel } from './account-fields-with-tooltip-panel';
 import css from './styles.scss';
 
-/** Свойства компонета с футером скроллера проводок. */
+/** Свойства компонета с футером ЭФ Банка "Журнал проводок удаленных/добавленных". */
 interface ContentProps {
   /** Набор выбранных проводок. */
   selectedRows: BankAccountingChangedEntry[];
 }
 
-/** Компонент для вывода футера скроллера проводок. */
+/** Компонент для вывода футера ЭФ Банка "Журнал проводок удаленных/добавленных". */
 export const Content: React.FC<ContentProps> = ({ selectedRows }) => (
   <Box className={css.container} fill="BASE">
     <Horizon>

@@ -25,13 +25,13 @@ const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
 const SET_FILTER_STATE_DELAY = 500;
 
 /**
- * Схема валидации формы фильтра ЭФ "Журнал проводок".
+ * Схема валидации формы фильтра ЭФ Банка "Журнал проводок удаленных/добавленных".
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
 
 /** Свойства для компонента с фильтром. */
 interface IProps {
-  /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (скроллер проводок). */
+  /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (ЭФ Банка "Журнал проводок удаленных/добавленных"). */
   setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
   /** Признак окончания загрузки проводки. */
   fetchedNewTransactions: boolean;

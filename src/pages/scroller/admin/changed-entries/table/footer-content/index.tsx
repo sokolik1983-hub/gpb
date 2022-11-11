@@ -9,13 +9,13 @@ import { Actions } from './actions';
 import { Content } from './content';
 import css from './styles.scss';
 
-/** Свойства компонета с футером скроллера проводок. */
+/** Свойства компонета с футером ЭФ Банка "Журнал проводок удаленных/добавленных". */
 interface FooterProps {
   /** Набор выбранных проводок. */
   selectedRows: BankAccountingChangedEntry[];
 }
 
-/** Компонент для вывода футера скроллера проводок. */
+/** Компонент для вывода футера ЭФ Банка "Журнал проводок удаленных/добавленных". */
 export const Footer: React.FC<FooterProps> = ({ selectedRows }) => {
   const { getAvailableActions } = useAuth();
 

@@ -21,7 +21,7 @@ import { COLUMN_NAMES } from '../../constants';
 import type { IFormSettingsState } from './interfaces';
 import css from './style.scss';
 
-/** ЭФ настроек колонок скроллера проводок. */
+/** ЭФ настроек колонок ЭФ Банка "Журнал проводок удаленных/добавленных". */
 const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: string[]; onReset?(): void }> = ({
   columns,
   defaultColumns,
@@ -119,7 +119,7 @@ const FormView: React.FC<Pick<SettingsFormProps, 'columns'> & { defaultColumns: 
 };
 
 /**
- * Диалог ЭФ настроек колонок скроллера проводок.
+ * Диалог ЭФ настроек колонок ЭФ Банка "Журнал проводок удаленных/добавленных".
  *
  * @example dialog.show('Settings', SettingsForm, { onSubmit: ()=> {}, columns: columns, values: [] }, () => reject(true))
  */

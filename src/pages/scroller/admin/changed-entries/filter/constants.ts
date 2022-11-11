@@ -44,7 +44,7 @@ export const FORM_FIELDS = {
   TRANSACTION_TYPE: getPath('transactionType'),
   /** Статус операции. */
   STATUS: getPath('status'),
-  /** Источник вызова скроллера проводок. */
+  /** Источник вызова ЭФ Банка "Журнал проводок удаленных/добавленных". */
   SOURCE: getPath('source'),
 };
 

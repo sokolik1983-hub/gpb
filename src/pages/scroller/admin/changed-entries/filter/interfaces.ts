@@ -29,6 +29,6 @@ export interface IFormState {
   transactionType?: TRANSACTION_TYPES;
   /** Статус проводки. */
   status?: CHANGED_ENTRY_STATUSES;
-  /** Источник вызова скроллера проводок. */
+  /** Источник вызова ЭФ Банка "Журнал проводок удаленных/добавленных". */
   source?: string;
 }
