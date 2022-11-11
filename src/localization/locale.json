@@ -1285,5 +1285,68 @@
   },
   "common.footer.selected": {
     "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.changedEntriesScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.changedEntriesScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.columns.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.changedEntriesScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.changedEntriesScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.changedEntriesScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.changedEntryStatus.added": {
+    "ru": "Добавлена"
+  },
+  "admin.changedEntryStatus.removed": {
+    "ru": "Удалена"
+  },
+  "admin.changedEntriesScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.changedEntriesScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.changedEntriesScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.changedEntriesScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.changedEntriesScroller.footer.printAction": {
+    "ru": "Печать документа"
+  },
+  "admin.changedEntriesScroller.footer.exportAction": {
+    "ru": "Экспорт документа"
+  },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.changedEntriesScroller.table.total": {
+    "ru": "Операций"
   }
 }

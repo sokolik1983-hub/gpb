@@ -1,5 +1,6 @@
 import React from 'react';
 import { AdminFormPage } from 'pages/form/admin';
+import { ChangedEntriesScrollerPage } from 'pages/scroller/admin/changed-entries';
 import { ClosedDaysScrollerPage } from 'pages/scroller/admin/closed-days';
 import { CurrencyRatesScrollerPage } from 'pages/scroller/admin/currency-rates';
 import { EntriesScrollerPage } from 'pages/scroller/admin/entries-scroller';
@@ -16,6 +17,8 @@ export const routes = [
   <Route key="history-scroller" component={StatementHistoryScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_HISTORY} />,
   /** Путь до скроллера просмотра остатков и оборотов. */
   <Route key="turnovers-scroller" component={TurnoversScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TURNOVERS} />,
+  /** Путь до ЭФ просмотра журнала удаленных или добавленных проводок. */
+  <Route key="changed-entries" component={ChangedEntriesScrollerPage} path={ADMIN_STREAM_URL.CHANGED_ENTRIES} />,
   /** Путь до скроллера проводок на основании запроса. */
   <Route key="entries-scroller" component={EntriesScrollerPage} path={`${ADMIN_STREAM_URL.STATEMENT_ENTRY}/:id`} />,
   /** Путь до ЭФ журнала закрытых дней. */

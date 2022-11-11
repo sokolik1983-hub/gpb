@@ -1204,6 +1204,154 @@ export default {
 				},
 			},
 		},
+		changedEntriesScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get date() {
+					return t('admin.changedEntriesScroller.columns.date');
+				},
+				/**
+				 * @ru
+				 * Клиент банка
+				 */
+				get account() {
+					return t('admin.changedEntriesScroller.columns.account');
+				},
+				/**
+				 * @ru
+				 * Документ
+				 */
+				get document() {
+					return t('admin.changedEntriesScroller.columns.document');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.changedEntriesScroller.columns.counterparty');
+				},
+				/**
+				 * @ru
+				 * Статус
+				 */
+				get status() {
+					return t('admin.changedEntriesScroller.columns.status');
+				},
+				/**
+				 * @ru
+				 * Поступления
+				 */
+				get income() {
+					return t('admin.changedEntriesScroller.columns.income');
+				},
+				/**
+				 * @ru
+				 * Списания
+				 */
+				get outcome() {
+					return t('admin.changedEntriesScroller.columns.outcome');
+				},
+				/**
+				 * @ru
+				 * Сумма
+				 */
+				get summary() {
+					return t('admin.changedEntriesScroller.columns.summary');
+				},
+			},
+			cells: {
+				/**
+				 * @ru
+				 * от {date}
+				 */
+				documentDate: (p: { date: string }) => t('admin.changedEntriesScroller.cells.documentDate', p),
+			},
+			footer: {
+				/**
+				 * @ru
+				 * Выбрано:
+				 */
+				get selected() {
+					return t('admin.changedEntriesScroller.footer.selected');
+				},
+				/**
+				 * @ru
+				 * Поступления:
+				 */
+				get income() {
+					return t('admin.changedEntriesScroller.footer.income');
+				},
+				/**
+				 * @ru
+				 * Списания:
+				 */
+				get outcome() {
+					return t('admin.changedEntriesScroller.footer.outcome');
+				},
+				/**
+				 * @ru
+				 * на сумму:
+				 */
+				get tooltip() {
+					return t('admin.changedEntriesScroller.footer.tooltip');
+				},
+				/**
+				 * @ru
+				 * {currencies} и ещё {amount}
+				 */
+				collapsedCurrencies: (p: { amount: string; currencies: string }) => t('admin.changedEntriesScroller.footer.collapsedCurrencies', p),
+				/**
+				 * @ru
+				 * Печать документа
+				 */
+				get printAction() {
+					return t('admin.changedEntriesScroller.footer.printAction');
+				},
+				/**
+				 * @ru
+				 * Экспорт документа
+				 */
+				get exportAction() {
+					return t('admin.changedEntriesScroller.footer.exportAction');
+				},
+			},
+			/**
+			 * @ru
+			 * Проводки
+			 */
+			get pageTitle() {
+				return t('admin.changedEntriesScroller.pageTitle');
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.changedEntriesScroller.table.total');
+				},
+			},
+		},
+		changedEntryStatus: {
+			/**
+			 * @ru
+			 * Добавлена
+			 */
+			get added() {
+				return t('admin.changedEntryStatus.added');
+			},
+			/**
+			 * @ru
+			 * Удалена
+			 */
+			get removed() {
+				return t('admin.changedEntryStatus.removed');
+			},
+		},
 	},
 	scroller: {
 		tags: {
