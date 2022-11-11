@@ -1270,6 +1270,13 @@ export default {
 				 */
 				documentDate: (p: { date: string }) => t('admin.changedEntriesScroller.cells.documentDate', p),
 			},
+			/**
+			 * @ru
+			 * Проводки
+			 */
+			get pageTitle() {
+				return t('admin.changedEntriesScroller.pageTitle');
+			},
 			footer: {
 				/**
 				 * @ru
@@ -1319,13 +1326,6 @@ export default {
 					return t('admin.changedEntriesScroller.footer.exportAction');
 				},
 			},
-			/**
-			 * @ru
-			 * Проводки
-			 */
-			get pageTitle() {
-				return t('admin.changedEntriesScroller.pageTitle');
-			},
 			table: {
 				/**
 				 * @ru
@@ -1333,6 +1333,143 @@ export default {
 				 */
 				get total() {
 					return t('admin.changedEntriesScroller.table.total');
+				},
+			},
+			tags: {
+				/**
+				 * @ru
+				 * Номер документа:
+				 */
+				get docNumber() {
+					return t('admin.changedEntriesScroller.tags.docNumber');
+				},
+				/**
+				 * @ru
+				 * Дата платежа c:
+				 */
+				get dateFrom() {
+					return t('admin.changedEntriesScroller.tags.dateFrom');
+				},
+				/**
+				 * @ru
+				 * Дата платежа по:
+				 */
+				get dateTo() {
+					return t('admin.changedEntriesScroller.tags.dateTo');
+				},
+				/**
+				 * @ru
+				 * Операция:
+				 */
+				get transactionType() {
+					return t('admin.changedEntriesScroller.tags.transactionType');
+				},
+				/**
+				 * @ru
+				 * Статус:
+				 */
+				get status() {
+					return t('admin.changedEntriesScroller.tags.status');
+				},
+				/**
+				 * @ru
+				 * Контрагент:
+				 */
+				get counterparty() {
+					return t('admin.changedEntriesScroller.tags.counterparty');
+				},
+				/**
+				 * @ru
+				 * Счёт контрагента:
+				 */
+				get counterpartyAccountNumber() {
+					return t('admin.changedEntriesScroller.tags.counterpartyAccountNumber');
+				},
+				/**
+				 * @ru
+				 * Клиент:
+				 */
+				get client() {
+					return t('admin.changedEntriesScroller.tags.client');
+				},
+				/**
+				 * @ru
+				 * Счёт клиента:
+				 */
+				get clientAccountNumber() {
+					return t('admin.changedEntriesScroller.tags.clientAccountNumber');
+				},
+			},
+			labels: {
+				/**
+				 * @ru
+				 * Номер документа
+				 */
+				get docNumber() {
+					return t('admin.changedEntriesScroller.labels.docNumber');
+				},
+				/**
+				 * @ru
+				 * Дата платежа
+				 */
+				get paymentDate() {
+					return t('admin.changedEntriesScroller.labels.paymentDate');
+				},
+				/**
+				 * @ru
+				 * Дата проводки
+				 */
+				get transactionDate() {
+					return t('admin.changedEntriesScroller.labels.transactionDate');
+				},
+				/**
+				 * @ru
+				 * Операция
+				 */
+				get transactionType() {
+					return t('admin.changedEntriesScroller.labels.transactionType');
+				},
+				/**
+				 * @ru
+				 * Статус
+				 */
+				get status() {
+					return t('admin.changedEntriesScroller.labels.status');
+				},
+				/**
+				 * @ru
+				 * Недавние запросы
+				 */
+				get recentRequests() {
+					return t('admin.changedEntriesScroller.labels.recentRequests');
+				},
+				/**
+				 * @ru
+				 * Контрагент
+				 */
+				get counterparty() {
+					return t('admin.changedEntriesScroller.labels.counterparty');
+				},
+				/**
+				 * @ru
+				 * Счёт контрагента
+				 */
+				get counterpartyAccountNumber() {
+					return t('admin.changedEntriesScroller.labels.counterpartyAccountNumber');
+				},
+				/**
+				 * @ru
+				 * Клиент
+				 */
+				get client() {
+					return t('admin.changedEntriesScroller.labels.client');
+				},
+				/**
+				 * @ru
+				 * Счёт клиента
+				 */
+				get clientAccountNumber() {
+					return t('admin.changedEntriesScroller.labels.clientAccountNumber');
 				},
 			},
 		},

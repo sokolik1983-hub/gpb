@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { executor } from 'actions/admin';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/admin';
 import { Box, Horizon, FILL, SHADOW, Adjust, SIZE } from '@platform/ui';
@@ -12,7 +12,7 @@ import css from './styles.scss';
 /** Свойства компонета с футером скроллера проводок. */
 interface FooterProps {
   /** Набор выбранных проводок. */
-  selectedRows: BankAccountingEntryCard[];
+  selectedRows: BankAccountingChangedEntry[];
 }
 
 /** Компонент для вывода футера скроллера проводок. */

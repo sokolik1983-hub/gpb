@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { executor, viewEntry } from 'actions/admin';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { Box, Gap, Horizon, Typography } from '@platform/ui';
@@ -11,10 +11,10 @@ import { Footer } from './footer-content';
 import { SettingsForm } from './settings-form';
 
 export const Table = () => {
-  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>([]);
+  const [selectedRows, setSelectedRows] = useState<BankAccountingChangedEntry[]>([]);
   const { fetch, total } = useContext(ChangedEntriesScrollerContext);
   /** Обработчик клика по строке скроллера. */
-  const handleRowClick = useCallback((statement: BankAccountingEntryCard) => {
+  const handleRowClick = useCallback((statement: BankAccountingChangedEntry) => {
     void executor.execute(viewEntry, [statement]);
   }, []);
 
@@ -31,7 +31,7 @@ export const Table = () => {
         </Horizon>
         <Gap.XS />
       </Box>
-      <InfiniteDataTable<BankAccountingEntryCard>
+      <InfiniteDataTable<BankAccountingChangedEntry>
         columns={columns}
         customSettingsForm={SettingsForm}
         executor={executor}

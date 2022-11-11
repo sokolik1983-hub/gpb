@@ -1,6 +1,6 @@
 import React from 'react';
 import { HightlightText } from 'components/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { DATE_FORMAT } from '@platform/services';
@@ -9,7 +9,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const DocumentInfo: React.FC<CellProps<BankAccountingChangedEntry, BankAccountingChangedEntry>> = ({
   value: { documentDate, documentNumber },
 }) => {
   const queryString = useQueryString();
@@ -26,7 +26,7 @@ export const DocumentInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccou
       <Typography.Text data-field={'documentDate'}>
         <HightlightText
           searchWords={queryString}
-          textToHightlight={locale.admin.transactionsScroller.cells.documentDate({
+          textToHightlight={locale.admin.changedEntriesScroller.cells.documentDate({
             date: formatDateTime(documentDate, { keepLocalTime: true, format: DATE_FORMAT }),
           })}
         />

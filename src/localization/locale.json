@@ -1320,6 +1320,9 @@
   "admin.changedEntryStatus.removed": {
     "ru": "Удалена"
   },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Удаленные/добавленные проводки"
+  },
   "admin.changedEntriesScroller.footer.selected": {
     "ru": "Выбрано:"
   },
@@ -1348,5 +1351,62 @@
   },
   "admin.changedEntriesScroller.table.total": {
     "ru": "Операций"
+  },
+  "admin.changedEntriesScroller.tags.docNumber": {
+    "ru": "Номер документа:"
+  },
+  "admin.changedEntriesScroller.tags.dateFrom": {
+    "ru": "Дата платежа c:"
+  },
+  "admin.changedEntriesScroller.tags.dateTo": {
+    "ru": "Дата платежа по:"
+  },
+  "admin.changedEntriesScroller.tags.transactionType": {
+    "ru": "Операция:"
+  },
+  "admin.changedEntriesScroller.tags.status": {
+    "ru": "Статус:"
+  },
+  "admin.changedEntriesScroller.tags.counterparty": {
+    "ru": "Контрагент:"
+  },
+  "admin.changedEntriesScroller.tags.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента:"
+  },
+  "admin.changedEntriesScroller.tags.client": {
+    "ru": "Клиент:"
+  },
+  "admin.changedEntriesScroller.tags.clientAccountNumber": {
+    "ru": "Счёт клиента:"
+  },
+  "admin.changedEntriesScroller.labels.docNumber": {
+    "ru": "Номер документа"
+  },
+  "admin.changedEntriesScroller.labels.paymentDate": {
+    "ru": "Дата платежа"
+  },
+  "admin.changedEntriesScroller.labels.transactionDate": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.labels.transactionType": {
+    "ru": "Операция"
+  },
+  "admin.changedEntriesScroller.labels.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.labels.recentRequests": {
+    "ru": "Недавние запросы"
+  },
+  "admin.changedEntriesScroller.labels.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.labels.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента"
+  },
+  "admin.changedEntriesScroller.labels.client": {
+    "ru": "Клиент"
+  },
+  "admin.changedEntriesScroller.labels.clientAccountNumber": {
+    "ru": "Счёт клиента"
   }
 }

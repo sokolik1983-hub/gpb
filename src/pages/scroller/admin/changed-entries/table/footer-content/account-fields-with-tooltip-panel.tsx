@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import { formatMoney } from '@platform/tools/big-number';
 import { CONTAINER_POSITION, Gap, Horizon, Link, Tooltip, Typography, WithTooltip } from '@platform/ui';
@@ -19,7 +19,7 @@ export interface IAccountFieldsWithTooltipPanelProps {
   /** Выводить списания(true для списаний, false для поступлений). */
   isDebit: boolean;
   /** Список счетов. */
-  payments: BankAccountingEntryCard[];
+  payments: BankAccountingChangedEntry[];
 }
 
 /**

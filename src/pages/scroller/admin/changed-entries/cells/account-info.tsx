@@ -1,13 +1,13 @@
 import React from 'react';
 import { HightlightText } from 'components/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { CellProps } from 'react-table';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент для отображения информации по счету клиента. */
-export const AccountInfo: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const AccountInfo: React.FC<CellProps<BankAccountingChangedEntry, BankAccountingChangedEntry>> = ({
   value: { bankClientName, bankClientAccountNumber },
 }) => {
   const queryString = useQueryString();

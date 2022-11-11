@@ -1,5 +1,5 @@
 import React from 'react';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import { Typography, Box, Horizon, Gap } from '@platform/ui';
 import { AccountFieldsWithTooltipPanel } from './account-fields-with-tooltip-panel';
@@ -8,7 +8,7 @@ import css from './styles.scss';
 /** Свойства компонета с футером скроллера проводок. */
 interface ContentProps {
   /** Набор выбранных проводок. */
-  selectedRows: BankAccountingEntryCard[];
+  selectedRows: BankAccountingChangedEntry[];
 }
 
 /** Компонент для вывода футера скроллера проводок. */

@@ -1,13 +1,13 @@
 import React from 'react';
 import { HightlightText } from 'components/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { Typography } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения суммы поступления. */
-export const Income: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
+export const Income: React.FC<CellProps<BankAccountingChangedEntry, BankAccountingChangedEntry>> = ({
   value: { amountByCredit, currencyNumericCodeByCredit },
 }) => {
   const queryString = useQueryString();

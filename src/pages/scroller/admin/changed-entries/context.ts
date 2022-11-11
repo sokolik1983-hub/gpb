@@ -1,12 +1,12 @@
 import { createContext } from 'react';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { asyncNoop } from 'utils/common';
 
 /** Контекст ЭФ Банка "Журнал проводок удаленных/добавленных". */
 export interface IChangedEntriesScrollerContext {
   /** Метод получения проводок. */
-  fetch(params: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>>;
+  fetch(params: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>>;
   /** Общее количество проводок. */
   total: number;
 }

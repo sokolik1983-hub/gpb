@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { executor } from 'actions/admin/executor';
 import { StopPropagation } from 'components/common';
 import type { IUrlParams } from 'interfaces';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { DATA_ACTION } from 'interfaces/data-action';
 import { useParams } from 'react-router-dom';
 import type { CellProps } from 'react-table';
@@ -13,7 +13,7 @@ import { ROW_ACTIONS } from '../action-configs';
 import css from './styles.scss';
 
 /** Компонент с ячейкой с действиями для строки скроллера. */
-export const Actions: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({ value }) => {
+export const Actions: React.FC<CellProps<BankAccountingChangedEntry, BankAccountingChangedEntry>> = ({ value }) => {
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 

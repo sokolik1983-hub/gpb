@@ -4,17 +4,19 @@ import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout }
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import type { IFetchDataResponse, IFetchDataParams } from 'platform-copies/services';
 import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData } from 'utils/common';
+import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services';
 import { MainLayout } from '@platform/services/admin';
 import { Box } from '@platform/ui';
 import { ChangedEntriesScrollerContext } from './context';
 import type { IChangedEntriesScrollerContext } from './context';
+import { Filter } from './filter';
 import { Table } from './table';
 
 /**
@@ -23,17 +25,19 @@ import { Table } from './table';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=80646436
  */
 export const ChangedEntriesScrollerPage: FC = () => {
+  const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
   const headerProps = {
-    header: locale.admin.transactionsScroller.pageTitle,
+    header: locale.admin.changedEntriesScroller.pageTitle,
   };
 
   const fetch = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>> => {
       try {
         const metaData: IMetaData = {
+          filters,
           multiSort,
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
@@ -51,7 +55,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
         }
       }
     },
-    [tableDataInitialed]
+    [filters, tableDataInitialed]
   );
 
   const contextValue: IChangedEntriesScrollerContext = useMemo<IChangedEntriesScrollerContext>(
@@ -72,6 +76,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
+              <Filter fetchedNewTransactions setFilters={setFilters} />
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>
