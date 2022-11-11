@@ -22,6 +22,7 @@ import type {
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
@@ -42,6 +43,7 @@ import {
   mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
+import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
 import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
@@ -306,6 +308,22 @@ export const statementService = {
     new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
       resolve(getEmptyFileMock(FORMAT.PDF));
     }).then(response => response.data),
+  /** Получение данных скроллера добавленных/удалённых проводок. */
+  // TODO Убрать после реализации API
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getChangedEntries: (metaData: IMetaData): Promise<ICollectionResponse<BankAccountingChangedEntry>> =>
+    new Promise<{ data: IServerDataResp<IScrollerResponseDto<BankAccountingChangedEntry>> }>(resolve => {
+      resolve({ data: mockChangedEntriesData });
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
+
+      return {
+        data: response.data.data.page,
+        total: response.data.data.size,
+      };
+    }),
   /** Возвращает список курсов валют. */
   getCurrencyRates: (metaData: IMetaData): Promise<ICollectionResponse<CurrencyRateRow>> =>
     request<IServerDataResp<IScrollerResponseDto<CurrencyRateDto>>>({

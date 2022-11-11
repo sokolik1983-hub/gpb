@@ -6,8 +6,11 @@ import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { locale } from 'localization';
-import type { IFetchDataResponse } from 'platform-copies/services';
+import type { IFetchDataResponse, IFetchDataParams } from 'platform-copies/services';
+import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
+import { convertTablePaginationToMetaData } from 'utils/common';
+import type { IMetaData } from '@platform/services';
 import { MainLayout } from '@platform/services/admin';
 import { Box } from '@platform/ui';
 import { ChangedEntriesScrollerContext } from './context';
@@ -27,21 +30,29 @@ export const ChangedEntriesScrollerPage: FC = () => {
     header: locale.admin.transactionsScroller.pageTitle,
   };
 
-  const fetch = useCallback(async (): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
-    try {
-      setTotal(0);
+  const fetch = useCallback(
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
+      try {
+        const metaData: IMetaData = {
+          multiSort,
+          ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
+        };
 
-      const { rows, pageCount } = await Promise.resolve({ rows: [], pageCount: 0 });
+        setTotal(0);
 
-      return { rows, pageCount };
-    } catch {
-      return { rows: [], pageCount: 0 };
-    } finally {
-      if (!tableDataInitialed) {
-        setTableDataInitialed(true);
+        const { data: rows, total: pageCount } = await statementService.getChangedEntries(metaData);
+
+        return { rows, pageCount };
+      } catch {
+        return { rows: [], pageCount: 0 };
+      } finally {
+        if (!tableDataInitialed) {
+          setTableDataInitialed(true);
+        }
       }
-    }
-  }, [tableDataInitialed]);
+    },
+    [tableDataInitialed]
+  );
 
   const contextValue: IChangedEntriesScrollerContext = useMemo<IChangedEntriesScrollerContext>(
     () => ({
