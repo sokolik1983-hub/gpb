@@ -3,7 +3,6 @@ import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-requ
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
 import { useForm, useFormState } from 'react-final-form';
-import { statementService } from 'services/client';
 import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS, FormContext } from 'stream-constants/form';
 import { to } from '@platform/core';
@@ -14,8 +13,11 @@ const defaultOption: ICheckboxOption = {
   value: CREATION_PARAMS.WITH_PDF_SIGN,
 };
 
+/** Api-метод проверки существования записи о закрытом дне. */
+type FetchHasClosedDay = (value: IHasClosedDayRequestDto) => Promise<boolean>;
+
 /** Хук для управления флагом "С электронной подписью в формате PDF". */
-export const useWithPdfEsign = (): [ICheckboxOption] => {
+export const useWithPdfEsign = (fetchHasClosedDay: FetchHasClosedDay): [ICheckboxOption] => {
   const {
     hasValidationErrors,
     validating,
@@ -60,7 +62,7 @@ export const useWithPdfEsign = (): [ICheckboxOption] => {
       };
 
       // проверяем на закрытый день
-      const [hasClosedDay, err] = await to(statementService.hasClosedDay(dto));
+      const [hasClosedDay, err] = await to(fetchHasClosedDay(dto));
 
       if (err) {
         setDisabled(true);

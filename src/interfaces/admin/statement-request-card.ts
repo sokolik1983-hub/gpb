@@ -1,7 +1,8 @@
 import type { DATE_PERIODS, OPERATIONS, FORMAT } from 'interfaces';
+import type { StatementAccount } from 'interfaces/admin/account';
 
 /** Параметры формирования комплекта документов. */
-export interface IDocumentOptionsDto {
+interface DocumentOptions {
   /** Кредитовые документы основания. */
   includeCreditOrders: boolean;
   /** Кредитовые документы выписки. */
@@ -15,9 +16,9 @@ export interface IDocumentOptionsDto {
 }
 
 /** Карточка запроса выписки. */
-export interface IStatementRequestCardDto {
+export interface StatementRequestCard {
   /** Номера счетов. */
-  accountNumbers: string[];
+  accounts: StatementAccount[];
   /** Только документы выписки. */
   onlyStatementDocuments: boolean;
   /** С комплектом документов. */
@@ -37,7 +38,7 @@ export interface IStatementRequestCardDto {
   /** Формат выписки. */
   format: FORMAT;
   /** Параметры формирования комплекта документов. */
-  documentOptionsDto: IDocumentOptionsDto;
+  documentOptionsDto: DocumentOptions;
   /** Отдельный файл по каждому счету. */
   separateAccountsFiles: boolean;
   /** Признак того, необходимо ли подписывать выписку. */

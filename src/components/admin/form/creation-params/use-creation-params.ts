@@ -3,6 +3,7 @@ import { useWithPdfEsign } from 'components/common/form/common/use-with-pdf-esig
 import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { useForm, useFormState } from 'react-final-form';
+import { statementService } from 'services/admin';
 import type { IFormState } from 'stream-constants/form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, FORM_FIELDS, FormContext } from 'stream-constants/form';
 import { withDocumentsSetCases } from 'utils/admin';
@@ -19,7 +20,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
   const { values } = useFormState<IFormState>();
 
   const [options, setOptions] = useState<ICheckboxOption[]>([]);
-  const [withPdfEsignOption] = useWithPdfEsign();
+  const [withPdfEsignOption] = useWithPdfEsign(statementService.hasClosedDay);
 
   useEffect(() => {
     const hasMoreThenOneAccounts = values.accountIds.length > 1;
