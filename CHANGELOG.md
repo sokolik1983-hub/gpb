@@ -1,3 +1,10 @@
+## [2.15.1-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.2...v2.15.1-release.3) (2022-11-11)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-37714 исправление лоадера ([792d2a6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/792d2a63b27294e3bfb1ddb498c2b836d0e35209))
+
 ## [2.15.1-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1-release.1...v2.15.1-release.2) (2022-11-08)
 
 
