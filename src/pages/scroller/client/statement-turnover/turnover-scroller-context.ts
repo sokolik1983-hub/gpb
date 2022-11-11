@@ -46,7 +46,7 @@ const DEFAULT_CONTEXT_VALUE: ITurnoverScrollerContext = {
   filterPanel: {
     values: {
       accounts: [],
-      onlyActiveAccounts: true,
+      onlyActiveAccounts: false,
       groupBy: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
       datePeriod: DATE_PERIODS.YESTERDAY,
       dateTo: '',
