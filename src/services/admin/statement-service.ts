@@ -16,6 +16,7 @@ import type {
   IFileDataResponse,
   Organization,
   ServiceBranch,
+  StatementRequestCard,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
@@ -23,7 +24,8 @@ import type {
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { UserRequestDto } from 'interfaces/dto/admin';
+import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
@@ -74,8 +76,8 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получить сущность "Запрос выписки". */
-  getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
-    request<IServerDataResp<IStatementRequestCardDto>>({
+  getStatementRequest: (id: string): Promise<IServerDataResp<StatementRequestCard>> =>
+    request<IServerDataResp<StatementRequestCard>>({
       url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
     }).then(r => r.data),
   /** Возвращает проводку. */
@@ -197,4 +199,11 @@ export const statementService = {
     request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
       url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
+  /** Проверить на закрытый день. */
+  hasClosedDay: (dto: IHasClosedDayRequestDto): Promise<boolean> =>
+    request<IServerDataResp<boolean>>({
+      url: `${STATEMENT_SUPPORT_URL}/has-closed-day`,
+      method: 'POST',
+      data: dto,
+    }).then(x => x.data.data),
 };

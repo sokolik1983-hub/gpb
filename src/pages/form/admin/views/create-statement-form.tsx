@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { CreationParams } from 'components/admin/form/creation-params';
 import { ForbiddenContent } from 'components/common';
-import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DetailDocumentsParams } from 'components/common/form/detail-documents-params';
 import { FileFormats } from 'components/common/form/file-formats';
 import { Operations } from 'components/common/form/operations';
@@ -36,6 +35,15 @@ export const CreateStatementForm: React.FC = () => {
 
   const { statementRequest, isLoading, isError, isForbidden } = useStatementRequest();
 
+  const accountOptions = useMemo(
+    () =>
+      (statementRequest?.accounts || []).map(({ id, number }) => ({
+        label: number,
+        value: id,
+      })),
+    [statementRequest?.accounts]
+  );
+
   if (isLoading) {
     return <LoaderOverlay opened data-type={DATA_TYPE.LOADER_LOCAL} />;
   }
@@ -66,17 +74,7 @@ export const CreateStatementForm: React.FC = () => {
                 <Period disabled />
                 <Row label={locale.common.accounts.label}>
                   <Box className={css.accounts}>
-                    <Fields.MultiSelect
-                      disabled
-                      extraSmall
-                      name={FORM_FIELDS.ACCOUNTS}
-                      optionTemplate={AccountOption}
-                      options={(statementRequest?.accountNumbers || []).map(accountNumber => ({
-                        label: accountNumber,
-                        value: accountNumber,
-                        accountNumber,
-                      }))}
-                    />
+                    <Fields.MultiSelect disabled extraSmall name={FORM_FIELDS.ACCOUNTS} options={accountOptions} />
                   </Box>
                 </Row>
                 <Operations disabled />
