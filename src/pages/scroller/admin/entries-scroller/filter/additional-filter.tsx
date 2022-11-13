@@ -1,17 +1,21 @@
 import type { FC } from 'react';
-import React, { useContext } from 'react';
-import { FilterFormElement } from 'components/common';
+import React, { useContext, useMemo } from 'react';
+import { CounterpartyField, FilterFormElement } from 'components/common';
+import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DateRange } from 'components/common/form/date-range';
 import { locale } from 'localization';
 import { Pattern, Fields } from '@platform/ui';
 import { FORM_FIELDS, TRANSACTION_TYPE_OPTIONS } from './constants';
-import { CounterpartyField } from './counterparty-field';
 import type { IFilterContext } from './filter-context';
 import { FilterContext } from './filter-context';
+import { getAccountOption } from './utils';
 
 /** Дополнительные фильтры. */
 export const AdditionalFilter: FC = () => {
-  const { counterparties, counterpartiesAccounts, clients, clientsAccounts } = useContext<IFilterContext>(FilterContext);
+  const { counterparties, clients } = useContext<IFilterContext>(FilterContext);
+
+  const accountOptions = useMemo(() => clients.map(getAccountOption), [clients]);
+  const counterpartyOptions = useMemo(() => counterparties.map(getAccountOption), [counterparties]);
 
   return (
     <>
@@ -44,7 +48,8 @@ export const AdditionalFilter: FC = () => {
               extraSmall
               withSearch
               name={FORM_FIELDS.CLIENT_ACCOUNT}
-              options={clientsAccounts.map(account => ({ label: account, value: account }))}
+              optionTemplate={AccountOption}
+              options={accountOptions}
             />
           </FilterFormElement>
         </Pattern.Span>
@@ -64,7 +69,8 @@ export const AdditionalFilter: FC = () => {
               extraSmall
               withSearch
               name={FORM_FIELDS.COUNTERPARTY_ACCOUNT}
-              options={counterpartiesAccounts.map(account => ({ label: account, value: account }))}
+              optionTemplate={AccountOption}
+              options={counterpartyOptions}
             />
           </FilterFormElement>
         </Pattern.Span>

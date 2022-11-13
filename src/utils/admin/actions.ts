@@ -1,7 +1,7 @@
 import { CREATION_TYPE, TRANSACTION_ATTACHMENT_TYPES, TYPE } from 'interfaces';
+import type { StatementRequestCard } from 'interfaces/admin';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import type { ICreateRequestStatementDto } from 'interfaces/dto';
-import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
 import { CREATION_PARAMS, DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 import type { IFormState } from 'stream-constants/form';
@@ -77,7 +77,7 @@ export const mapFormToDto = (formState: IFormState, creationType = CREATION_TYPE
 });
 
 /** Функция для преобразования ДТО ответа для последний выписки в значения формы. */
-export const mapDtoToForm = (dto: IStatementRequestCardDto): Partial<IFormState> => {
+export const mapDtoToForm = (dto: StatementRequestCard): Partial<IFormState> => {
   const creditParams: string[] = [];
   const debitParams: string[] = [];
   const creationParams: string[] = [];
@@ -134,7 +134,7 @@ export const mapDtoToForm = (dto: IStatementRequestCardDto): Partial<IFormState>
   }
 
   return {
-    accountIds: dto.accountNumbers,
+    accountIds: dto.accounts.map(({ id }) => id),
     dateFrom: dto.periodStart,
     dateTo: dto.periodEnd,
     format: dto.format,

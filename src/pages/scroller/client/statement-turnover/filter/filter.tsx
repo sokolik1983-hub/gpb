@@ -11,7 +11,7 @@ import { FilterFormView } from './filter-form-view';
 
 const INITIAL_FORM_VALUES = {
   groupBy: GROUPING_VALUES.ORGANIZATIONS_AND_CURRENCIES,
-  onlyActiveAccounts: true,
+  onlyActiveAccounts: false,
   datePeriod: DATE_PERIODS.YESTERDAY,
   dateTo: '',
   dateFrom: '',

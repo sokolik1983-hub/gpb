@@ -6,12 +6,12 @@ import type {
   IExpandedScrollerResponceDto,
 } from 'interfaces';
 import type { IStatementHistoryRow, IStatementTransactionRow, IStatement } from 'interfaces/client';
+import type { Counterparty } from 'interfaces/common';
 import type {
   IGetDatePeriodResponseDto,
   IGetDatePeriodRequestDto,
   IGetTurnoversResponseDto,
   IGetTurnoversRequestDto,
-  IGetCounterpartiesResponseDto,
   IGetStatusResponceDto,
   IGetTransactionCardResponseDto,
   ICreateRequestStatementDto,
@@ -24,7 +24,8 @@ import type {
   IGetAccountsResponseDto,
 } from 'interfaces/dto';
 import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
-import type { ICollectionResponse } from '@platform/services';
+import type { StatementAttachmentStatusDto } from 'interfaces/dto/statement-attachment-status-dto';
+import type { ICollectionResponse, IServerResp } from '@platform/services';
 import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
 
@@ -74,8 +75,8 @@ export const statementService = {
       total: res.data.data.size,
     })),
   /** Возвращает список контрагентов. */
-  getCounterparties: (id: string): Promise<IGetCounterpartiesResponseDto[]> =>
-    request<IServerDataResp<IGetCounterpartiesResponseDto[]>>({
+  getCounterparties: (id: string): Promise<Counterparty[]> =>
+    request<IServerDataResp<Counterparty[]>>({
       url: `${STATEMENT_URL}/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список проводок. */
@@ -182,6 +183,27 @@ export const statementService = {
     });
 
     return resp.data;
+  },
+  /** Методы для асинхронной работы с вложениями. */
+  createAttachmentAsync: {
+    /** Асинхронно сформировать запрос для экспорта или печати. */
+    createAttachment: async (data: ICreateAttachmentRequestDto) =>
+      request<IServerResp<string>>({
+        url: `${STATEMENT_URL}/create-attachment/create-attachment`,
+        method: 'POST',
+        data,
+        headers: AUTH_REQUEST_CONFIG.headers,
+      }).then(r => r.data),
+    /** Получить статус запроса для экспорта или печати. */
+    getStatus: (id: string) =>
+      request<IServerResp<StatementAttachmentStatusDto>>({
+        url: `${STATEMENT_URL}/create-attachment/get-status/${id}`,
+      }).then(r => r.data),
+    /** Возвращает Id файла и токен для экспорта или печатипо Id запроса выписки для дальнейшей загрузки через file storage. */
+    generateTokenAndFileId: async (id: string) =>
+      request<IServerResp<{ token: string; fileId: string }>>({
+        url: `${STATEMENT_URL}/create-attachment/generate-download-token/${id}`,
+      }).then(r => r.data),
   },
   /** Получить статус актуальности выписки. */
   getStatementRelevanceStatus: (statementRequestId: string): Promise<IServerDataResp<IGetStatementRelevanceStatus>> =>

@@ -1,5 +1,5 @@
 import type { IPagination, Sorting } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
+import type { Counterparty } from 'interfaces/common';
 import type { Column } from 'react-table';
 import { SORT_DIRECTION } from '@platform/core';
 import type { IMetaData, ISortSettings } from '@platform/services';
@@ -74,7 +74,7 @@ export const convertTablePaginationToMetaData = ({ pageSize, pageIndex }: IPagin
  *
  * @param counterparty - Контрагент.
  */
-export const stringifyCounterparty = (counterparty: IGetCounterpartiesResponseDto): string => {
+export const stringifyCounterparty = (counterparty: Counterparty): string => {
   const { inn, name } = counterparty;
 
   return JSON.stringify([inn, name]);
@@ -85,7 +85,7 @@ export const stringifyCounterparty = (counterparty: IGetCounterpartiesResponseDt
  *
  * @param stringifiedCounterparty - Сериализованый контрагент.
  */
-export const parseCounterparty = (stringifiedCounterparty: string): IGetCounterpartiesResponseDto => {
+export const parseCounterparty = (stringifiedCounterparty: string): Counterparty => {
   const [inn, name] = JSON.parse(stringifiedCounterparty);
 
   return { inn, name };

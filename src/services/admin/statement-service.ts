@@ -9,19 +9,23 @@ import type {
 import type {
   Account,
   ClientUserDto,
+  Counterparty,
   CreateStatementAttachmentRequestDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
   IFileDataResponse,
   Organization,
   ServiceBranch,
+  StatementRequestCard,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
+import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IStatementRequestCardDto, IClientBankResponseDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { UserRequestDto } from 'interfaces/dto/admin';
+import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
@@ -72,8 +76,8 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получить сущность "Запрос выписки". */
-  getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
-    request<IServerDataResp<IStatementRequestCardDto>>({
+  getStatementRequest: (id: string): Promise<IServerDataResp<StatementRequestCard>> =>
+    request<IServerDataResp<StatementRequestCard>>({
       url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
     }).then(r => r.data),
   /** Возвращает проводку. */
@@ -127,13 +131,13 @@ export const statementService = {
       url: `${STATEMENT_BANK_URL}/statement/request/generate-report`,
     }).then(response => response.data.data),
   /** Возвращает список контрагентов и их счетов в выписке. */
-  getCounterparties: (id: string): Promise<IClientBankResponseDto[]> =>
-    request<IServerDataResp<IClientBankResponseDto[]>>({
+  getCounterparties: (id: string): Promise<Counterparty[]> =>
+    request<IServerDataResp<Counterparty[]>>({
       url: `${STATEMENT_BANK_URL}/statement/get-counterparties/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список клиентов и их счетов в выписке. */
-  getClients: (id: string): Promise<IClientBankResponseDto[]> =>
-    request<IServerDataResp<IClientBankResponseDto[]>>({
+  getClients: (id: string): Promise<BankClient[]> =>
+    request<IServerDataResp<BankClient[]>>({
       url: `${STATEMENT_BANK_URL}/statement/get-clients/${id}`,
     }).then(r => r.data.data),
   /** Возвращает список счетов. */
@@ -195,4 +199,11 @@ export const statementService = {
     request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
       url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
+  /** Проверить на закрытый день. */
+  hasClosedDay: (dto: IHasClosedDayRequestDto): Promise<boolean> =>
+    request<IServerDataResp<boolean>>({
+      url: `${STATEMENT_SUPPORT_URL}/has-closed-day`,
+      method: 'POST',
+      data: dto,
+    }).then(x => x.data.data),
 };

@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import type { IUrlParams } from 'interfaces';
 import { DATE_PERIODS } from 'interfaces';
+import type { StatementRequestCard } from 'interfaces/admin';
 import type { RequestPeriodType } from 'interfaces/dto';
-import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
@@ -19,7 +19,7 @@ import { ERROR } from '@platform/services/admin';
  * и предзаполняентся значениями выписки, id которой указан в УРЛе.
  */
 export const useStatementRequest = (): {
-  statementRequest: IStatementRequestCardDto | undefined;
+  statementRequest: StatementRequestCard | undefined;
   isLoading: boolean;
   isError: boolean;
   isForbidden;

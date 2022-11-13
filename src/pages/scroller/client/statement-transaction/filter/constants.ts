@@ -1,5 +1,5 @@
 import { TRANSACTION_TYPES } from 'interfaces';
-import type { IGetCounterpartiesResponseDto } from 'interfaces/dto';
+import type { Counterparty } from 'interfaces/common';
 import { locale } from 'localization';
 import type { ENTRY_SOURCE_VIEW } from 'stream-constants';
 import { ECO_STATEMENT, EMPTY_VALUE, TRANSACTION_TYPE_LABELS } from 'stream-constants';
@@ -62,7 +62,7 @@ export const getFields = (entrySourceView?: typeof ENTRY_SOURCE_VIEW): Record<st
     [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.PAYMENT_DATE),
     [FORM_FIELDS.DOC_NUMBER]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.DOC_NUMBER),
     [FORM_FIELDS.TRANSACTION_TYPE]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.TRANSACTION_TYPE),
-    [FORM_FIELDS.COUNTERPARTY]: filterFields.in([], FORM_FIELDS.COUNTERPARTY, (value): IGetCounterpartiesResponseDto[] => {
+    [FORM_FIELDS.COUNTERPARTY]: filterFields.in([], FORM_FIELDS.COUNTERPARTY, (value): Counterparty[] => {
       // Присвоение делается для улучшения типизации т.к. параметр функции не удаётся типизировать.
       const selectedCounterparties = value as string[];
 

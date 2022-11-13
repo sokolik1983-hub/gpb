@@ -1,13 +1,12 @@
 import type { FC } from 'react';
 import React, { useContext } from 'react';
-import { FilterFormElement } from 'components/common';
+import { CounterpartyField, FilterFormElement } from 'components/common';
 import { DateRange } from 'components/common/form/date-range';
 import { locale } from 'localization';
 import { Pattern, Fields } from '@platform/ui';
 import type { ITransactionScrollerContext } from '../transaction-scroller-context';
 import { TransactionScrollerContext } from '../transaction-scroller-context';
 import { FORM_FIELDS, TRANSACTION_TYPE_OPTIONS } from './constants';
-import { CounterpartyField } from './counterparty-field';
 import css from './styles.scss';
 
 /** Дополнительные фильтры. */

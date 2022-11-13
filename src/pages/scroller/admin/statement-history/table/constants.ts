@@ -1,3 +1,5 @@
+import { SORT_DIRECTION } from '@platform/services';
+
 /**
  * Имена колонок таблицы Истории запросов выписок.
  *
@@ -26,4 +28,9 @@ export const COLUMN_NAMES = {
   STATEMENT_STATUS: 'getStatementStatus',
   /** Пользователь. */
   USER: 'userId',
+};
+
+/** Состояние сортровки по умолчанию. */
+export const DEFAULT_SORT = {
+  [COLUMN_NAMES.CREATED_AT]: SORT_DIRECTION.DESC,
 };
