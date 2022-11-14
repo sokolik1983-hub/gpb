@@ -80,4 +80,4 @@ export const DATE_PERIOD_OPTIONS: Array<IOption<DATE_PERIODS | typeof EMPTY_VALU
 ];
 
 /** Ключ в Session Storage по которому хранится состояние фильтрации. */
-export const STORAGE_KEY = 'statement-history-filer-scroller';
+export const STORAGE_KEY = 'statements-filer-scroller';

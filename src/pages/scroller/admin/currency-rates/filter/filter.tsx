@@ -10,12 +10,9 @@ import type { FilterContextProps } from 'pages/scroller/admin/currency-rates/fil
 import { QuickFilter } from 'pages/scroller/admin/currency-rates/filter/quick-filter';
 import { useDebounce } from 'platform-copies/hooks';
 import { getDateRangeValidationScheme } from 'schemas';
-import { DELAY } from 'stream-constants';
+import { DELAY, QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
-
-/** Высота фильтра. */
-export const FILTER_HEIGHT = 58;
 
 /** Схема валидации формы фильтра. */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
@@ -48,7 +45,7 @@ export const Filter: FC<ScrollerFilter> = ({ setFilter }) => {
 
   return (
     <FilterContext.Provider value={contextValue}>
-      <ContentLoader height={FILTER_HEIGHT} loading={!(currenciesFetched && selectedCurrenciesFetched)}>
+      <ContentLoader height={QUICK_FILTER_HEIGHT} loading={!(currenciesFetched && selectedCurrenciesFetched)}>
         <FilterLayout QuickFilter={QuickFilter} filterFields={fields} filterState={filterPanel} validate={validate(validationSchema)} />
       </ContentLoader>
     </FilterContext.Provider>

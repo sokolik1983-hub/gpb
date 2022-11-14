@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import React, { useContext } from 'react';
 import { SelectWithSearch } from 'components/common';
 import { DateRange } from 'components/common/form/date-range';
-import { useSubmitQuickFilter } from 'hooks/common';
+import { useSubmitScrollerFilter } from 'hooks/common';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'pages/scroller/admin/currency-rates/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/currency-rates/filter/context';
@@ -15,7 +15,7 @@ import { Gap, Horizon, Pattern, Typography } from '@platform/ui';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<FilterValues>();
 
-  useSubmitQuickFilter(values);
+  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
 
   const { currencies, selectedCurrencies, setCurrencyCodeSearchValue } = useContext(FilterContext);
 

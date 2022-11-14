@@ -18,6 +18,8 @@ export const ADMIN_STREAM_URL = {
   STATEMENT_TRANSACTIONS: '/account-statement/transactions',
   /** Скроллер истории запросов выписок. */
   STATEMENT_HISTORY: '/account-statement/history',
+  /** Скроллер связанных запросов. */
+  RELATED_QUERIES: '/account-statement/related-queries',
   /** Скроллер остатков и оборотов. */
   STATEMENT_TURNOVERS: '/account-statement/turnovers',
 };

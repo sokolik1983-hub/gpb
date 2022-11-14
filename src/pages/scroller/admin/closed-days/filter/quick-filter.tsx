@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
-import { useDatePeriod, useSubmitQuickFilter } from 'hooks/common';
+import { useDatePeriod, useSubmitScrollerFilter } from 'hooks/common';
 import { locale } from 'localization';
 import { ClosedDaysContext } from 'pages/scroller/admin/closed-days/context';
 import { BranchOption } from 'pages/scroller/admin/closed-days/filter/branch-option';
@@ -16,7 +16,7 @@ import { Fields, Pattern } from '@platform/ui';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<FilterValues>();
 
-  useSubmitQuickFilter(values);
+  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
 
   const { branches } = useContext(FilterContext);
   const { setDatePeriodFetched } = useContext(ClosedDaysContext);

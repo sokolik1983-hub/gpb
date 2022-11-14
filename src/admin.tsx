@@ -5,7 +5,7 @@ import { ClosedDaysScrollerPage } from 'pages/scroller/admin/closed-days';
 import { CurrencyRatesScrollerPage } from 'pages/scroller/admin/currency-rates';
 import { EntriesScrollerPage } from 'pages/scroller/admin/entries-scroller';
 import { ReconciliationTurnoversScrollerPage } from 'pages/scroller/admin/reconciliation-turnovers';
-import { StatementHistoryScrollerPage } from 'pages/scroller/admin/statement-history';
+import { RelatedQueriesScrollerPage, StatementHistoryScrollerPage } from 'pages/scroller/admin/statements';
 import { TransactionsScrollerPage } from 'pages/scroller/admin/transactions-scroller';
 import { TurnoversScrollerPage } from 'pages/scroller/admin/turnovers-scroller/page';
 import { Route } from 'react-router-dom';
@@ -15,6 +15,8 @@ import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 export const routes = [
   /** Путь до скроллера истории запросов выписок. */
   <Route key="history-scroller" component={StatementHistoryScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_HISTORY} />,
+  /** Путь до скроллера связанных запросов. */
+  <Route key="history-scroller" component={RelatedQueriesScrollerPage} path={ADMIN_STREAM_URL.RELATED_QUERIES} />,
   /** Путь до скроллера просмотра остатков и оборотов. */
   <Route key="turnovers-scroller" component={TurnoversScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TURNOVERS} />,
   /** Путь до ЭФ просмотра журнала удаленных или добавленных проводок. */

@@ -1,1 +1,1 @@
-export * from './export-statements-history-dialog';
+export * from './export-statements-report-dialog';

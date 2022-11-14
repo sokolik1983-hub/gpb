@@ -243,14 +243,7 @@ export default {
 				return t('admin.turnoverReconciliationStatus.noDifference');
 			},
 		},
-		historyScroller: {
-			/**
-			 * @ru
-			 * Запросы выписки
-			 */
-			get pageTitle() {
-				return t('admin.historyScroller.pageTitle');
-			},
+		statementScroller: {
 			filter: {
 				labels: {
 					/**
@@ -258,56 +251,56 @@ export default {
 					 * Статус запроса
 					 */
 					get requestStatus() {
-						return t('admin.historyScroller.filter.labels.requestStatus');
+						return t('admin.statementScroller.filter.labels.requestStatus');
 					},
 					/**
 					 * @ru
 					 * Статус выписки / справки
 					 */
 					get statementStatus() {
-						return t('admin.historyScroller.filter.labels.statementStatus');
+						return t('admin.statementScroller.filter.labels.statementStatus');
 					},
 					/**
 					 * @ru
 					 * Электронная подпись
 					 */
 					get signaturePresence() {
-						return t('admin.historyScroller.filter.labels.signaturePresence');
+						return t('admin.statementScroller.filter.labels.signaturePresence');
 					},
 					/**
 					 * @ru
 					 * Период
 					 */
 					get period() {
-						return t('admin.historyScroller.filter.labels.period');
+						return t('admin.statementScroller.filter.labels.period');
 					},
 					/**
 					 * @ru
 					 * Организация
 					 */
 					get organization() {
-						return t('admin.historyScroller.filter.labels.organization');
+						return t('admin.statementScroller.filter.labels.organization');
 					},
 					/**
 					 * @ru
 					 * Выписка/справка
 					 */
 					get statementType() {
-						return t('admin.historyScroller.filter.labels.statementType');
+						return t('admin.statementScroller.filter.labels.statementType');
 					},
 					/**
 					 * @ru
 					 * Пользователь
 					 */
 					get user() {
-						return t('admin.historyScroller.filter.labels.user');
+						return t('admin.statementScroller.filter.labels.user');
 					},
 					/**
 					 * @ru
 					 * Подразделение обслуживания
 					 */
 					get serviceBranch() {
-						return t('admin.historyScroller.filter.labels.serviceBranch');
+						return t('admin.statementScroller.filter.labels.serviceBranch');
 					},
 				},
 				placeholder: {
@@ -316,14 +309,14 @@ export default {
 					 * Счёт
 					 */
 					get account() {
-						return t('admin.historyScroller.filter.placeholder.account');
+						return t('admin.statementScroller.filter.placeholder.account');
 					},
 					/**
 					 * @ru
 					 * Название или ИНН
 					 */
 					get organization() {
-						return t('admin.historyScroller.filter.placeholder.organization');
+						return t('admin.statementScroller.filter.placeholder.organization');
 					},
 				},
 			},
@@ -334,70 +327,70 @@ export default {
 					 * Дата запроса
 					 */
 					get createdAt() {
-						return t('admin.historyScroller.table.header.createdAt');
+						return t('admin.statementScroller.table.header.createdAt');
 					},
 					/**
 					 * @ru
 					 * Счёт
 					 */
 					get accountNumber() {
-						return t('admin.historyScroller.table.header.accountNumber');
+						return t('admin.statementScroller.table.header.accountNumber');
 					},
 					/**
 					 * @ru
 					 * Организация
 					 */
 					get organization() {
-						return t('admin.historyScroller.table.header.organization');
+						return t('admin.statementScroller.table.header.organization');
 					},
 					/**
 					 * @ru
 					 * Период
 					 */
 					get requestPeriod() {
-						return t('admin.historyScroller.table.header.requestPeriod');
+						return t('admin.statementScroller.table.header.requestPeriod');
 					},
 					/**
 					 * @ru
 					 * Формат
 					 */
 					get format() {
-						return t('admin.historyScroller.table.header.format');
+						return t('admin.statementScroller.table.header.format');
 					},
 					/**
 					 * @ru
 					 * Статус запроса
 					 */
 					get requestStatus() {
-						return t('admin.historyScroller.table.header.requestStatus');
+						return t('admin.statementScroller.table.header.requestStatus');
 					},
 					/**
 					 * @ru
 					 * Пользователь, сформировавший запрос
 					 */
 					get user() {
-						return t('admin.historyScroller.table.header.user');
+						return t('admin.statementScroller.table.header.user');
 					},
 					/**
 					 * @ru
 					 * Филиал обслуживания
 					 */
 					get serviceBranch() {
-						return t('admin.historyScroller.table.header.serviceBranch');
+						return t('admin.statementScroller.table.header.serviceBranch');
 					},
 					/**
 					 * @ru
 					 * Признак сформированной выписки
 					 */
 					get statementType() {
-						return t('admin.historyScroller.table.header.statementType');
+						return t('admin.statementScroller.table.header.statementType');
 					},
 					/**
 					 * @ru
 					 * Статус сформированной выписки
 					 */
 					get statementStatus() {
-						return t('admin.historyScroller.table.header.statementStatus');
+						return t('admin.statementScroller.table.header.statementStatus');
 					},
 				},
 				cell: {
@@ -406,7 +399,7 @@ export default {
 					 * ИНН
 					 */
 					get inn() {
-						return t('admin.historyScroller.table.cell.inn');
+						return t('admin.statementScroller.table.cell.inn');
 					},
 				},
 				/**
@@ -414,7 +407,7 @@ export default {
 				 * Запросы
 				 */
 				get total() {
-					return t('admin.historyScroller.table.total');
+					return t('admin.statementScroller.table.total');
 				},
 			},
 			action: {
@@ -423,49 +416,49 @@ export default {
 				 * Запросить выписку
 				 */
 				get createStatement() {
-					return t('admin.historyScroller.action.createStatement');
+					return t('admin.statementScroller.action.createStatement');
 				},
 				/**
 				 * @ru
 				 * Экспорт реестра
 				 */
 				get exportRegistryStatements() {
-					return t('admin.historyScroller.action.exportRegistryStatements');
+					return t('admin.statementScroller.action.exportRegistryStatements');
 				},
 				/**
 				 * @ru
 				 * Повторить выписку
 				 */
 				get repeatStatement() {
-					return t('admin.historyScroller.action.repeatStatement');
+					return t('admin.statementScroller.action.repeatStatement');
 				},
 				/**
 				 * @ru
 				 * Экспорт выписки
 				 */
 				get exportStatement() {
-					return t('admin.historyScroller.action.exportStatement');
+					return t('admin.statementScroller.action.exportStatement');
 				},
 				/**
 				 * @ru
 				 * Просмотреть измененные проводки
 				 */
 				get viewModifiedTransactions() {
-					return t('admin.historyScroller.action.viewModifiedTransactions');
+					return t('admin.statementScroller.action.viewModifiedTransactions');
 				},
 				/**
 				 * @ru
 				 * Просмотреть выписку
 				 */
 				get viewTransactions() {
-					return t('admin.historyScroller.action.viewTransactions');
+					return t('admin.statementScroller.action.viewTransactions');
 				},
 				/**
 				 * @ru
 				 * Просмотреть параметры запроса
 				 */
 				get viewQueryParams() {
-					return t('admin.historyScroller.action.viewQueryParams');
+					return t('admin.statementScroller.action.viewQueryParams');
 				},
 			},
 			footer: {
@@ -474,7 +467,7 @@ export default {
 				 * Выбрано:
 				 */
 				get selected() {
-					return t('admin.historyScroller.footer.selected');
+					return t('admin.statementScroller.footer.selected');
 				},
 			},
 			dialog: {
@@ -483,13 +476,13 @@ export default {
 					 * @ru
 					 * Документы: {count}
 					 */
-					header: (p: { count: number }) => t('admin.historyScroller.dialog.exportRegistryStatement.header', p),
+					header: (p: { count: number }) => t('admin.statementScroller.dialog.exportRegistryStatement.header', p),
 					/**
 					 * @ru
 					 * Экспорт реестра
 					 */
 					get content() {
-						return t('admin.historyScroller.dialog.exportRegistryStatement.content');
+						return t('admin.statementScroller.dialog.exportRegistryStatement.content');
 					},
 					button: {
 						/**
@@ -497,15 +490,51 @@ export default {
 						 * Excel
 						 */
 						get excel() {
-							return t('admin.historyScroller.dialog.exportRegistryStatement.button.excel');
+							return t('admin.statementScroller.dialog.exportRegistryStatement.button.excel');
 						},
 						/**
 						 * @ru
 						 * PDF
 						 */
 						get pdf() {
-							return t('admin.historyScroller.dialog.exportRegistryStatement.button.pdf');
+							return t('admin.statementScroller.dialog.exportRegistryStatement.button.pdf');
 						},
+					},
+				},
+			},
+		},
+		historyScroller: {
+			/**
+			 * @ru
+			 * Запросы выписки
+			 */
+			get pageTitle() {
+				return t('admin.historyScroller.pageTitle');
+			},
+		},
+		relatedQueriesScroller: {
+			/**
+			 * @ru
+			 * Связанные запросы
+			 */
+			get pageTitle() {
+				return t('admin.relatedQueriesScroller.pageTitle');
+			},
+			table: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.relatedQueriesScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.relatedQueriesScroller.table.placeholder.message');
 					},
 				},
 			},

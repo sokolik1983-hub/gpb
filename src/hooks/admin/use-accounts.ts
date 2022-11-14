@@ -1,3 +1,4 @@
+import { PAGE_SIZES } from 'components/common/pagination';
 import type { Account } from 'interfaces/admin';
 import { useQuery } from 'react-query';
 import { statementService } from 'services/admin';
@@ -40,7 +41,7 @@ export const useAccounts = (value = '') => {
   const metaData: IMetaData = {
     filters: getFilters(value),
     offset: 0,
-    pageSize: 100,
+    pageSize: PAGE_SIZES.PER_25,
   };
 
   const { data = [], isError, isFetched, isFetching, isSuccess } = useQuery<Account[]>({

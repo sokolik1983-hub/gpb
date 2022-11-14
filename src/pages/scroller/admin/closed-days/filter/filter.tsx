@@ -8,11 +8,9 @@ import type { FilterContextProps } from 'pages/scroller/admin/closed-days/filter
 import { FilterContext } from 'pages/scroller/admin/closed-days/filter/context';
 import { QuickFilter } from 'pages/scroller/admin/closed-days/filter/quick-filter';
 import { getDateRangeValidationScheme } from 'schemas';
+import { QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
-
-/** Высота фильтра. */
-export const FILTER_HEIGHT = 58;
 
 /** Схема валидации формы фильтра. */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO });
@@ -29,7 +27,7 @@ export const Filter: FC<ScrollerFilter> = ({ setFilter }) => {
 
   return (
     <FilterContext.Provider value={contextValue}>
-      <ContentLoader height={FILTER_HEIGHT} loading={isBranchesFetching}>
+      <ContentLoader height={QUICK_FILTER_HEIGHT} loading={isBranchesFetching}>
         <FilterLayout QuickFilter={QuickFilter} filterFields={fields} filterState={filterPanel} validate={validate(validationSchema)} />
       </ContentLoader>
     </FilterContext.Provider>
