@@ -7,15 +7,25 @@ import { locale } from 'localization';
 export interface IFormState {
   /** Тип периода. */
   periodType: DATE_PERIODS;
+  /** Дата начала периода. */
   dateFrom: string;
+  /** Дата окончания периода. */
   dateTo: string;
+  /** Идентификаторы счетов. */
   accountIds: string[];
+  /** Формат файла выписки. */
   format: FORMAT;
+  /** Операции выписки. */
   operations: OPERATIONS;
+  /** Параметры создания выписки. */
   creationParams: string[];
+  /** Параметры комплекта документов. */
   documentsSetParams: string[];
+  /** Дебетовые параметры комплекта документов. */
   debitParams: string[];
+  /** Кредитовые параметры комплекта документов. */
   creditParams: string[];
+  /** Адрес электронной почты. */
   email?: string;
   /** Действие. */
   action?: ACTION;

@@ -18,3 +18,4 @@ export * from './reconciliation-turnovers';
 export * from './record-source';
 export * from './reconciliation-status';
 export * from './currency';
+export * from './statement-request-card';

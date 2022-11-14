@@ -1,5 +1,4 @@
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
-import type { IStatementRequestCardDto } from 'interfaces/dto/admin';
+import type { EXPORT_PARAMS_USE_CASES, StatementRequestCard } from 'interfaces/admin';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import type { IFormState } from 'stream-constants/form';
 import { defaultFormState } from 'stream-constants/form';
@@ -11,7 +10,7 @@ export interface IStateConfig {
   /** Вариант вызова диалога. */
   useCase?: EXPORT_PARAMS_USE_CASES;
   /** Запрос на выписку. */
-  statement?: IStatementRequestCardDto;
+  statement?: StatementRequestCard;
   /** Дата начала периода. */
   dateFrom?: string;
   /** Дата окончания периода. */

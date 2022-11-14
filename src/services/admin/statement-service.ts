@@ -17,6 +17,7 @@ import type {
   ReconciliationTurnoverDto,
   ReconciliationTurnoverRow,
   ServiceBranch,
+  StatementRequestCard,
   StatementSummary,
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
@@ -26,7 +27,8 @@ import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-account
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
 import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
-import type { IStatementRequestCardDto, UserRequestDto } from 'interfaces/dto/admin';
+import type { UserRequestDto } from 'interfaces/dto/admin';
+import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { GROUP_BY } from 'pages/scroller/admin/entries-scroller/constants';
 import {
   mapDtoToViewForAccountList,
@@ -102,8 +104,8 @@ export const statementService = {
     });
   },
   /** Получить сущность "Запрос выписки". */
-  getStatementRequest: (id: string): Promise<IServerDataResp<IStatementRequestCardDto>> =>
-    request<IServerDataResp<IStatementRequestCardDto>>({
+  getStatementRequest: (id: string): Promise<IServerDataResp<StatementRequestCard>> =>
+    request<IServerDataResp<StatementRequestCard>>({
       url: `${STATEMENT_BANK_URL}/statement/request/card/${id}`,
     }).then(r => r.data),
   /** Возвращает проводку. */
@@ -327,4 +329,11 @@ export const statementService = {
       method: 'POST',
       url: `${CLIENT_DICTIONARY_BANK_URL}/currency/get-page`,
     }).then(response => (response.data.errorInfo?.code ? [] : mapDtoToViewForCurrencyList(response.data.data.page.list))),
+  /** Проверить на закрытый день. */
+  hasClosedDay: (dto: IHasClosedDayRequestDto): Promise<boolean> =>
+    request<IServerDataResp<boolean>>({
+      url: `${STATEMENT_SUPPORT_URL}/has-closed-day`,
+      method: 'POST',
+      data: dto,
+    }).then(x => x.data.data),
 };
