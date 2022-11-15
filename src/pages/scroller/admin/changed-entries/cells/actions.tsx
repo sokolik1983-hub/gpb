@@ -34,15 +34,7 @@ export const Actions: React.FC<CellProps<BankAccountingChangedEntry, BankAccount
     <StopPropagation>
       <Horizon allHeight={false}>
         {visibleActions.map(({ icon, name, onClick }) => (
-          <RegularButton
-            key={name}
-            extraSmall
-            className={css['row__action-button']}
-            data-action={name}
-            dimension={'MC'}
-            icon={icon}
-            onClick={onClick}
-          />
+          <RegularButton key={name} extraSmall className={css.action} data-action={name} dimension={'MC'} icon={icon} onClick={onClick} />
         ))}
 
         {dropDownActions.length > 0 && (
@@ -53,7 +45,7 @@ export const Actions: React.FC<CellProps<BankAccountingChangedEntry, BankAccount
                 <RegularButton
                   ref={ref}
                   extraSmall
-                  className={css['row__action-button']}
+                  className={css.action}
                   data-action={DATA_ACTION.MORE}
                   dimension={'MC'}
                   icon={ServiceIcons.ActionMenuHorizontal}

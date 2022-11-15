@@ -9,12 +9,15 @@ export interface IChangedEntriesScrollerContext {
   fetch(params: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>>;
   /** Общее количество проводок. */
   total: number;
+  /** Строка поиска из фильтра. */
+  searchQuery: string;
 }
 
 /** Значение по-умолчанию контекста ЭФ Банка "Журнал проводок удаленных/добавленных". */
 export const defaultValue: IChangedEntriesScrollerContext = {
   fetch: asyncNoop,
   total: 0,
+  searchQuery: '',
 };
 
 /** Контекст ЭФ Банка "Журнал проводок удаленных/добавленных". */

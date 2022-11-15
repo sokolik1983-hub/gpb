@@ -5,7 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'row__action-button': string;
+    'action': string;
   }
 }
 

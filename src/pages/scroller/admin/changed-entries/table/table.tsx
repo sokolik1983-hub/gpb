@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { executor, viewEntry } from 'actions/admin';
+import { DataTableWithTotal } from 'components/common';
 import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import { InfiniteDataTable } from 'platform-copies/services';
-import { Box, Gap, Horizon, Typography } from '@platform/ui';
 import { columns } from '../columns';
 import { STORAGE_KEY } from '../constants';
 import { ChangedEntriesScrollerContext } from '../context';
@@ -19,30 +19,21 @@ export const Table = () => {
   }, []);
 
   return (
-    <>
-      <Box>
-        <Gap.XS />
-        <Horizon>
-          <Gap />
-          <Gap />
-          <Typography.TextBold>{locale.admin.transactionsScroller.table.total}</Typography.TextBold>
-          <Gap.SM />
-          <Typography.Text data-field={'total'}>{total}</Typography.Text>
-        </Horizon>
-        <Gap.XS />
-      </Box>
-      <InfiniteDataTable<BankAccountingChangedEntry>
-        columns={columns}
-        customSettingsForm={SettingsForm}
-        executor={executor}
-        fetchData={fetch}
-        selectedRows={selectedRows}
-        storageKey={STORAGE_KEY}
-        onRowClick={handleRowClick}
-        onSelectedRowsChange={setSelectedRows}
-      />
-      {selectedRows.length > 0 && <Footer selectedRows={selectedRows} />}
-    </>
+    <DataTableWithTotal label={locale.admin.transactionsScroller.table.total} total={total}>
+      <>
+        <InfiniteDataTable<BankAccountingChangedEntry>
+          columns={columns}
+          customSettingsForm={SettingsForm}
+          executor={executor}
+          fetchData={fetch}
+          selectedRows={selectedRows}
+          storageKey={STORAGE_KEY}
+          onRowClick={handleRowClick}
+          onSelectedRowsChange={setSelectedRows}
+        />
+        {selectedRows.length > 0 && <Footer selectedRows={selectedRows} />}
+      </>
+    </DataTableWithTotal>
   );
 };
 

@@ -5,6 +5,7 @@ import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { locale } from 'localization/index';
+import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
 import type { ITransactionsScrollerContext } from 'pages/scroller/admin/transactions-scroller/context';
 import { TransactionsScrollerContext } from 'pages/scroller/admin/transactions-scroller/context';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
@@ -20,6 +21,7 @@ import { Table } from './table';
 
 /** Компонент страницы со скрллером проводок. */
 export const TransactionsScrollerPage: React.FC = () => {
+  const [searchString, setSearchString] = useState<string>('');
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
@@ -30,6 +32,11 @@ export const TransactionsScrollerPage: React.FC = () => {
   const headerProps = {
     actions,
     header: locale.admin.transactionsScroller.pageTitle,
+  };
+
+  const handleSetFilters = (filtersValue: IFilters) => {
+    setSearchString(filtersValue[FORM_FIELDS.TABLE_SEARCH]?.value || '');
+    setFilters(filtersValue);
   };
 
   const fetch = useCallback(
@@ -61,8 +68,9 @@ export const TransactionsScrollerPage: React.FC = () => {
     () => ({
       fetch,
       total,
+      searchQuery: searchString,
     }),
-    [fetch, total]
+    [fetch, searchString, total]
   );
 
   const height = useStreamContentHeight();
@@ -75,7 +83,7 @@ export const TransactionsScrollerPage: React.FC = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
-              <Filter setFilters={setFilters} />
+              <Filter setFilters={handleSetFilters} />
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>

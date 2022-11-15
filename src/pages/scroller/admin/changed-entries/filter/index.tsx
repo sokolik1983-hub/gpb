@@ -32,7 +32,7 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PA
 /** Свойства для компонента с фильтром. */
 interface IProps {
   /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (ЭФ Банка "Журнал проводок удаленных/добавленных"). */
-  setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
+  setFilters(value: IFilters): void;
   /** Признак окончания загрузки проводки. */
   fetchedNewTransactions: boolean;
 }

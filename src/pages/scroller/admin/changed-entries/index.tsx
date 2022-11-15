@@ -6,6 +6,7 @@ import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
+import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
 import type { IFetchDataResponse, IFetchDataParams } from 'platform-copies/services';
 import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
@@ -25,12 +26,18 @@ import { Table } from './table';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=80646436
  */
 export const ChangedEntriesScrollerPage: FC = () => {
+  const [searchString, setSearchString] = useState<string>('');
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
   const headerProps = {
     header: locale.admin.changedEntriesScroller.pageTitle,
+  };
+
+  const handleSetFilters = (filtersValue: IFilters) => {
+    setSearchString(filtersValue[FORM_FIELDS.TABLE_SEARCH]?.value || '');
+    setFilters(filtersValue);
   };
 
   const fetch = useCallback(
@@ -62,8 +69,9 @@ export const ChangedEntriesScrollerPage: FC = () => {
     () => ({
       fetch,
       total,
+      searchQuery: searchString,
     }),
-    [fetch, total]
+    [fetch, searchString, total]
   );
 
   const height = useStreamContentHeight();
@@ -76,7 +84,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
-              <Filter fetchedNewTransactions setFilters={setFilters} />
+              <Filter fetchedNewTransactions setFilters={handleSetFilters} />
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>

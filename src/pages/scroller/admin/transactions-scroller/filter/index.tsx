@@ -30,7 +30,7 @@ const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PA
 /** Свойства для компонента с фильтром. */
 interface IProps {
   /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (скроллер проводок). */
-  setFilters: React.Dispatch<React.SetStateAction<IFilters>>;
+  setFilters(value: IFilters): void;
 }
 
 /** Компонент с фильтром для скроллера. */
