@@ -9,12 +9,15 @@ export interface ITransactionsScrollerContext {
   fetch(params: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>>;
   /** Общее количество проводок. */
   total: number;
+  /** Строка поиска из фильтра. */
+  searchQuery: string;
 }
 
 /** Значение по-умолчанию контекста скроллера проводок. */
 export const defaultValue: ITransactionsScrollerContext = {
   fetch: asyncNoop,
   total: 0,
+  searchQuery: '',
 };
 
 /** Контекст скроллера проводок. */

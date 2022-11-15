@@ -10,6 +10,8 @@ export const ADMIN_STREAM_URL = {
   CURRENCY_RATES: '/account-statement/currency-rates',
   /** ЭФ просмотра параметров запроса на выписку. */
   STATEMENT_REQUEST: '/account-statement/:id',
+  /** ЭФ просмотра журнала удаленных или добавленных проводок. */
+  CHANGED_ENTRIES: '/account-statement/:id/changed-entries',
   /** Скроллер проводок на основании запроса. */
   STATEMENT_ENTRY: '/account-statement/entry',
   /** Скроллер проводок. */

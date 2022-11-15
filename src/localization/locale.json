@@ -1285,5 +1285,128 @@
   },
   "common.footer.selected": {
     "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.changedEntriesScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.changedEntriesScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.columns.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.changedEntriesScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.changedEntriesScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.changedEntriesScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.changedEntryStatus.added": {
+    "ru": "Добавлена"
+  },
+  "admin.changedEntryStatus.removed": {
+    "ru": "Удалена"
+  },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Удаленные/добавленные проводки"
+  },
+  "admin.changedEntriesScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.changedEntriesScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.changedEntriesScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.changedEntriesScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.changedEntriesScroller.footer.printAction": {
+    "ru": "Печать документа"
+  },
+  "admin.changedEntriesScroller.footer.exportAction": {
+    "ru": "Экспорт документа"
+  },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.changedEntriesScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.changedEntriesScroller.tags.docNumber": {
+    "ru": "Номер документа:"
+  },
+  "admin.changedEntriesScroller.tags.dateFrom": {
+    "ru": "Дата платежа c:"
+  },
+  "admin.changedEntriesScroller.tags.dateTo": {
+    "ru": "Дата платежа по:"
+  },
+  "admin.changedEntriesScroller.tags.transactionType": {
+    "ru": "Операция:"
+  },
+  "admin.changedEntriesScroller.tags.status": {
+    "ru": "Статус:"
+  },
+  "admin.changedEntriesScroller.tags.counterparty": {
+    "ru": "Контрагент:"
+  },
+  "admin.changedEntriesScroller.tags.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента:"
+  },
+  "admin.changedEntriesScroller.tags.client": {
+    "ru": "Клиент:"
+  },
+  "admin.changedEntriesScroller.tags.clientAccountNumber": {
+    "ru": "Счёт клиента:"
+  },
+  "admin.changedEntriesScroller.labels.docNumber": {
+    "ru": "Номер документа"
+  },
+  "admin.changedEntriesScroller.labels.paymentDate": {
+    "ru": "Дата платежа"
+  },
+  "admin.changedEntriesScroller.labels.transactionDate": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.labels.transactionType": {
+    "ru": "Операция"
+  },
+  "admin.changedEntriesScroller.labels.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.labels.recentRequests": {
+    "ru": "Недавние запросы"
+  },
+  "admin.changedEntriesScroller.labels.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.labels.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента"
+  },
+  "admin.changedEntriesScroller.labels.client": {
+    "ru": "Клиент"
+  },
+  "admin.changedEntriesScroller.labels.clientAccountNumber": {
+    "ru": "Счёт клиента"
   }
 }

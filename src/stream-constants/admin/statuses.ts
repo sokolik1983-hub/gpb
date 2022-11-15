@@ -1,5 +1,6 @@
 import { STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
 import { RECONCILIATION_STATUS, RECORD_SOURCE, USER_TYPE } from 'interfaces/admin';
+import { CHANGED_ENTRY_STATUSES } from 'interfaces/changed-entry-statuses';
 import { locale } from 'localization';
 import { DOCUMENT_STATUS_TYPE } from '@platform/ui';
 
@@ -107,4 +108,20 @@ export const TURNOVER_RECONCILIATION_STATUS_LABEL = {
   [RECONCILIATION_STATUS.NO_DIFFERENCE]: locale.admin.turnoverReconciliationStatus.noDifference,
   /** Есть расхождения. */
   [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
+};
+
+/** Цвета статусов добавленных/удалённых проводок. */
+export const CHANGED_ENTRIES_STATUS_COLOR = {
+  /** Добавлена. */
+  [CHANGED_ENTRY_STATUSES.ADDED]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** Удалена. */
+  [CHANGED_ENTRY_STATUSES.REMOVED]: DOCUMENT_STATUS_TYPE.ERROR,
+};
+
+/** Лейблы статусов добавленных/удалённых проводок. */
+export const CHANGED_ENTRIES_STATUS_LABEL = {
+  /** Добавлена. */
+  [CHANGED_ENTRY_STATUSES.ADDED]: locale.admin.changedEntryStatus.added,
+  /** Удалена. */
+  [CHANGED_ENTRY_STATUSES.REMOVED]: locale.admin.changedEntryStatus.removed,
 };

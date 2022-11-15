@@ -1,37 +1,38 @@
+import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
 import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
-import { locale } from 'localization/index';
+import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import { locale } from 'localization';
 import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
-import type { ITransactionsScrollerContext } from 'pages/scroller/admin/transactions-scroller/context';
-import { TransactionsScrollerContext } from 'pages/scroller/admin/transactions-scroller/context';
-import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
+import type { IFetchDataResponse, IFetchDataParams } from 'platform-copies/services';
 import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData } from 'utils/common';
 import type { IFilters } from '@platform/core';
-import type { IMetaData } from '@platform/services/admin';
+import type { IMetaData } from '@platform/services';
 import { MainLayout } from '@platform/services/admin';
 import { Box } from '@platform/ui';
+import { ChangedEntriesScrollerContext } from './context';
+import type { IChangedEntriesScrollerContext } from './context';
 import { Filter } from './filter';
 import { Table } from './table';
 
-/** Компонент страницы со скрллером проводок. */
-export const TransactionsScrollerPage: React.FC = () => {
+/**
+ * [Выписки_ЗВ] ЭФ Банка "Журнал проводок удаленных/добавленных".
+ *
+ * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=80646436
+ */
+export const ChangedEntriesScrollerPage: FC = () => {
   const [searchString, setSearchString] = useState<string>('');
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
-  // TODO Добавить действия заголовка
-  const actions = useMemo(() => [], []);
-
   const headerProps = {
-    actions,
-    header: locale.admin.transactionsScroller.pageTitle,
+    header: locale.admin.changedEntriesScroller.pageTitle,
   };
 
   const handleSetFilters = (filtersValue: IFilters) => {
@@ -40,7 +41,7 @@ export const TransactionsScrollerPage: React.FC = () => {
   };
 
   const fetch = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>> => {
       try {
         const metaData: IMetaData = {
           filters,
@@ -48,11 +49,11 @@ export const TransactionsScrollerPage: React.FC = () => {
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
 
-        const { page: rows, size: totalItems } = await statementService.getTransactionsPage(metaData);
+        setTotal(0);
 
-        setTotal(totalItems);
+        const { data: rows, total: pageCount } = await statementService.getChangedEntries(metaData);
 
-        return { rows, pageCount: totalItems };
+        return { rows, pageCount };
       } catch {
         return { rows: [], pageCount: 0 };
       } finally {
@@ -64,7 +65,7 @@ export const TransactionsScrollerPage: React.FC = () => {
     [filters, tableDataInitialed]
   );
 
-  const contextValue: ITransactionsScrollerContext = useMemo<ITransactionsScrollerContext>(
+  const contextValue: IChangedEntriesScrollerContext = useMemo<IChangedEntriesScrollerContext>(
     () => ({
       fetch,
       total,
@@ -78,12 +79,12 @@ export const TransactionsScrollerPage: React.FC = () => {
   const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT;
 
   return (
-    <TransactionsScrollerContext.Provider value={contextValue}>
+    <ChangedEntriesScrollerContext.Provider value={contextValue}>
       <MainLayout>
         <FocusLock>
           <FocusTree treeId={COMMON_SCROLLER_NODE}>
             <ScrollerPageLayout headerProps={headerProps}>
-              <Filter setFilters={handleSetFilters} />
+              <Filter fetchedNewTransactions setFilters={handleSetFilters} />
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>
@@ -92,8 +93,8 @@ export const TransactionsScrollerPage: React.FC = () => {
           </FocusTree>
         </FocusLock>
       </MainLayout>
-    </TransactionsScrollerContext.Provider>
+    </ChangedEntriesScrollerContext.Provider>
   );
 };
 
-TransactionsScrollerPage.displayName = 'TransactionsScrollerPage';
+ChangedEntriesScrollerPage.displayName = 'ChangedEntriesScrollerPage';

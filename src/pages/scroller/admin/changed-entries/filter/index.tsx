@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { ContentLoader, FilterLayout } from 'components/common';
+import { useIsFetchedData } from 'hooks/common';
 import type { IUrlParams } from 'interfaces';
 import { useDebounce } from 'platform-copies/hooks';
 import { useLocation, useParams } from 'react-router-dom';
@@ -9,6 +10,7 @@ import { LINE_HEIGHT } from 'stream-constants';
 import type { IFilters } from '@platform/core';
 import { useFilter } from '@platform/services/admin';
 import { validate } from '@platform/validation';
+import { useGetCounterparties, useGetClients } from '../hooks';
 import { AdditionalFilter } from './additional-filter';
 import { FORM_FIELDS, getFields, STORAGE_KEY, tagLabels, ADDITIONAL_FORM_FIELDS } from './constants';
 import type { IFilterContext } from './filter-context';
@@ -23,14 +25,16 @@ const FILTER_HEIGHT = 58 - LINE_HEIGHT * 2;
 const SET_FILTER_STATE_DELAY = 500;
 
 /**
- * Схема валидации формы фильтра ЭФ "Журнал проводок".
+ * Схема валидации формы фильтра ЭФ Банка "Журнал проводок удаленных/добавленных".
  */
 const validationSchema = getDateRangeValidationScheme({ dateFrom: FORM_FIELDS.PAYMENT_DATE_FROM, dateTo: FORM_FIELDS.PAYMENT_DATE_TO });
 
 /** Свойства для компонента с фильтром. */
 interface IProps {
-  /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (скроллер проводок). */
+  /** Устанавливает новое состояние фильтров. Используется в потребителе фильтра (ЭФ Банка "Журнал проводок удаленных/добавленных"). */
   setFilters(value: IFilters): void;
+  /** Признак окончания загрузки проводки. */
+  fetchedNewTransactions: boolean;
 }
 
 /** Компонент с фильтром для скроллера. */
@@ -46,6 +50,14 @@ export const Filter: React.FC<IProps> = ({ setFilters }) => {
   });
 
   const filterValuesDebounced = useDebounce(filterValues, SET_FILTER_STATE_DELAY);
+  // Вызывается один раз.
+  const { data: counterparties, isFetched: isCounterpartiesFetched } = useGetCounterparties();
+  // Вызывается один раз.
+  const { data: clients, isFetched: isClientsFetched } = useGetClients();
+
+  const counterpartiesFetched = useIsFetchedData(isCounterpartiesFetched);
+  const clientsFetched = useIsFetchedData(isClientsFetched);
+  const dataFetched = counterpartiesFetched && clientsFetched;
 
   /** Функция передачи фильтров в родительский компонент. */
   useEffect(() => {
@@ -54,15 +66,17 @@ export const Filter: React.FC<IProps> = ({ setFilters }) => {
 
   const contextValue: IFilterContext = useMemo<IFilterContext>(
     () => ({
+      clients,
+      counterparties,
       filterPanel,
       tagsPanel,
     }),
-    [filterPanel, tagsPanel]
+    [clients, counterparties, filterPanel, tagsPanel]
   );
 
   return (
     <FilterContext.Provider value={contextValue}>
-      <ContentLoader height={FILTER_HEIGHT}>
+      <ContentLoader height={FILTER_HEIGHT} loading={!dataFetched}>
         <FilterLayout
           AdditionalFilter={AdditionalFilter}
           QuickFilter={QuickFilter}

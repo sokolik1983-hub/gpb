@@ -1,0 +1,24 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  // 120px - ширина бокового меню.
+  width: calc(100% - 120px);
+  max-width: 1392px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  height: 72px;
+  padding-left: 8px;
+}
+
+.contentContainer {
+  position: relative;
+  padding: 16px 0;
+}
+
+.actionsContainer {
+  display: inline-flex;
+  align-items: center;
+}
