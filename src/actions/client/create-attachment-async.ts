@@ -1,11 +1,12 @@
 import { ACTION } from 'interfaces';
 import type { ICreateAttachmentRequestDto, StatementAttachmentStatusDto } from 'interfaces/dto';
 import { STATEMENT_ATTACHMENT_STATUS } from 'interfaces/dto';
+import { getPublicDownloadUrl } from 'utils/client';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IServerResp } from '@platform/services';
 import { callStreamAction } from '@platform/services';
-import { attachmentService, ERROR, errorHandler, polling, showFile } from '@platform/services/client';
+import { attachmentService, ERROR, errorHandler, polling } from '@platform/services/client';
 import type { context } from './executor';
 
 /** Вспомогательная функция асинхронного формирования файла выписки или документа. */
@@ -46,6 +47,11 @@ export const createAttachmentAsync: IActionConfig<typeof context, Promise<void>>
 
     const { fileId, token } = tokenAndFileId!.data;
 
+    if (action === ACTION.DOWNLOAD) {
+      window.open(getPublicDownloadUrl(token));
+      done();
+    }
+
     attachmentService
       .download(fileId, token)
       .then(file => {
@@ -55,15 +61,11 @@ export const createAttachmentAsync: IActionConfig<typeof context, Promise<void>>
           return;
         }
 
-        if (action === ACTION.DOWNLOAD) {
-          showFile(file.data, file.fileName, file.type);
-        } else {
-          void callStreamAction('pdf-preview', 'previewFile', {
-            data: file.data,
-            fileName: file.fileName,
-            type: 'application/pdf',
-          });
-        }
+        void callStreamAction('pdf-preview', 'previewFile', {
+          data: file.data,
+          fileName: file.fileName,
+          type: 'application/pdf',
+        });
 
         addSucceeded();
       })
