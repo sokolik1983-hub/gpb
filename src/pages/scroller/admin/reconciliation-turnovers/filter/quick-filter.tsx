@@ -3,7 +3,7 @@ import React, { useContext, useMemo } from 'react';
 import { AccountOption } from 'components/common/accounts-field/account-option';
 import { DateRange } from 'components/common/form/date-range';
 import { SelectWithSearch } from 'components/common/select-with-search';
-import { useSubmitQuickFilter } from 'hooks/common';
+import { useSubmitScrollerFilter } from 'hooks/common';
 import { locale } from 'localization';
 import { FORM_FIELDS, RECONCILIATION_STATUS_OPTIONS } from 'pages/scroller/admin/reconciliation-turnovers/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/reconciliation-turnovers/filter/context';
@@ -21,7 +21,7 @@ export const QuickFilter: FC = () => {
 
   const { values } = useFormState<FilterValues>();
 
-  useSubmitQuickFilter(values);
+  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
 
   return (
     <Pattern gap={'MD'}>

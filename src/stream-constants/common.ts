@@ -33,3 +33,6 @@ export const ALL_VALUE = 'ALL';
 
 /** Задержка с мс по умолчанию. */
 export const DELAY = 300;
+
+/** Высота основного фильтра скроллера по умолчанию. */
+export const QUICK_FILTER_HEIGHT = 58;

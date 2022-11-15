@@ -425,111 +425,120 @@
   "historyScroller.statementFormat.labels.multicash": {
     "ru": "Multicash"
   },
-  "admin.historyScroller.pageTitle": {
-    "ru": "Запросы выписки"
-  },
-  "admin.historyScroller.filter.labels.requestStatus": {
+  "admin.statementScroller.filter.labels.requestStatus": {
     "ru": "Статус запроса"
   },
-  "admin.historyScroller.filter.labels.statementStatus": {
+  "admin.statementScroller.filter.labels.statementStatus": {
     "ru": "Статус выписки / справки"
   },
-  "admin.historyScroller.filter.labels.signaturePresence": {
+  "admin.statementScroller.filter.labels.signaturePresence": {
     "ru": "Электронная подпись"
   },
-  "admin.historyScroller.filter.labels.period": {
+  "admin.statementScroller.filter.labels.period": {
     "ru": "Период"
   },
-  "admin.historyScroller.filter.labels.organization": {
+  "admin.statementScroller.filter.labels.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.filter.placeholder.account": {
+  "admin.statementScroller.filter.placeholder.account": {
     "ru": "Счёт"
   },
-  "admin.historyScroller.filter.placeholder.organization": {
+  "admin.statementScroller.filter.placeholder.organization": {
     "ru": "Название или ИНН"
   },
-  "admin.historyScroller.filter.labels.statementType": {
+  "admin.statementScroller.filter.labels.statementType": {
     "ru": "Выписка/справка"
   },
-  "admin.historyScroller.filter.labels.user": {
+  "admin.statementScroller.filter.labels.user": {
     "ru": "Пользователь"
   },
-  "admin.historyScroller.filter.labels.serviceBranch": {
+  "admin.statementScroller.filter.labels.serviceBranch": {
     "ru": "Подразделение обслуживания"
   },
-  "admin.historyScroller.table.header.createdAt": {
+  "admin.statementScroller.table.header.createdAt": {
     "ru": "Дата запроса"
   },
-  "admin.historyScroller.table.header.accountNumber": {
+  "admin.statementScroller.table.header.accountNumber": {
     "ru": "Счёт"
   },
-  "admin.historyScroller.table.header.organization": {
+  "admin.statementScroller.table.header.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.table.header.requestPeriod": {
+  "admin.statementScroller.table.header.requestPeriod": {
     "ru": "Период"
   },
-  "admin.historyScroller.table.header.format": {
+  "admin.statementScroller.table.header.format": {
     "ru": "Формат"
   },
-  "admin.historyScroller.table.header.requestStatus": {
+  "admin.statementScroller.table.header.requestStatus": {
     "ru": "Статус запроса"
   },
-  "admin.historyScroller.table.header.user": {
+  "admin.statementScroller.table.header.user": {
     "ru": "Пользователь, сформировавший запрос"
   },
-  "admin.historyScroller.table.header.serviceBranch": {
+  "admin.statementScroller.table.header.serviceBranch": {
     "ru": "Филиал обслуживания"
   },
-  "admin.historyScroller.table.header.statementType": {
+  "admin.statementScroller.table.header.statementType": {
     "ru": "Признак сформированной выписки"
   },
-  "admin.historyScroller.table.header.statementStatus": {
+  "admin.statementScroller.table.header.statementStatus": {
     "ru": "Статус сформированной выписки"
   },
-  "admin.historyScroller.table.cell.inn": {
+  "admin.statementScroller.table.cell.inn": {
     "ru": "ИНН"
   },
-  "admin.historyScroller.table.total": {
+  "admin.statementScroller.table.total": {
     "ru": "Запросы"
   },
-  "admin.historyScroller.action.createStatement": {
+  "admin.statementScroller.action.createStatement": {
     "ru": "Запросить выписку"
   },
-  "admin.historyScroller.action.exportRegistryStatements": {
+  "admin.statementScroller.action.exportRegistryStatements": {
     "ru": "Экспорт реестра"
   },
-  "admin.historyScroller.action.repeatStatement": {
+  "admin.statementScroller.action.repeatStatement": {
     "ru": "Повторить выписку"
   },
-  "admin.historyScroller.action.exportStatement": {
+  "admin.statementScroller.action.exportStatement": {
     "ru": "Экспорт выписки"
   },
-  "admin.historyScroller.action.viewModifiedTransactions": {
+  "admin.statementScroller.action.viewModifiedTransactions": {
     "ru": "Просмотреть измененные проводки"
   },
-  "admin.historyScroller.action.viewTransactions": {
+  "admin.statementScroller.action.viewTransactions": {
     "ru": "Просмотреть выписку"
   },
-  "admin.historyScroller.action.viewQueryParams": {
+  "admin.statementScroller.action.viewQueryParams": {
     "ru": "Просмотреть параметры запроса"
   },
-  "admin.historyScroller.footer.selected": {
+  "admin.statementScroller.footer.selected": {
     "ru": "Выбрано:"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.header": {
+  "admin.statementScroller.dialog.exportRegistryStatement.header": {
     "@count": "number",
     "ru": "Документы: {count}"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.content": {
+  "admin.statementScroller.dialog.exportRegistryStatement.content": {
     "ru": "Экспорт реестра"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.button.excel": {
+  "admin.statementScroller.dialog.exportRegistryStatement.button.excel": {
     "ru": "Excel"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": {
+  "admin.statementScroller.dialog.exportRegistryStatement.button.pdf": {
     "ru": "PDF"
+  },
+  "admin.historyScroller.pageTitle": {
+    "ru": "Запросы выписки"
+  },
+  "admin.relatedQueriesScroller.pageTitle": {
+    "ru": "Связанные запросы"
+  },
+  "admin.relatedQueriesScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.relatedQueriesScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
   },
   "admin.entriesScroller.statementSummary.buttons.showTotals": {
     "ru": "Все валюты"

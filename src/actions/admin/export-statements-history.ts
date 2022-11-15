@@ -1,4 +1,4 @@
-import { showExportStatementsHistoryDialog } from 'components/admin';
+import { showExportStatementsReportDialog } from 'components/admin';
 import type { FORMAT } from 'interfaces';
 import type { StatementHistoryRow } from 'interfaces/admin';
 import { fatalHandler } from 'utils/common';
@@ -22,7 +22,7 @@ export const exportStatementsHistory: IActionConfig<typeof context, unknown> = {
     dateTo: string;
     statements: StatementHistoryRow[];
   }) => {
-    const [fileFormat, dialogClose] = await to(showExportStatementsHistoryDialog(statements.length));
+    const [fileFormat, dialogClose] = await to(showExportStatementsReportDialog(statements.length));
 
     if (dialogClose) {
       done();

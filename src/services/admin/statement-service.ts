@@ -39,7 +39,6 @@ import {
   mapDtoToViewForOrganizationList,
   mapDtoToViewForReconciliationTurnovers,
   mapDtoToViewForServiceBranchList,
-  mapDtoToViewForStatementList,
   mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
@@ -48,6 +47,7 @@ import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
+import { getStatementList } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -123,21 +123,19 @@ export const statementService = {
       url: `${STATEMENT_SUPPORT_URL}/calculate-period`,
     }).then(result => result.data.data),
   /** Возвращает список выписок истории запросов. */
-  getStatementList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
+  getStatementHistoryList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
     request<IServerDataResp<IScrollerResponseDto<StatementHistoryResponseDto>>>({
       data: metadataToRequestParams(metaData),
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/statement/request/page`,
-    }).then(response => {
-      if (response.data.error?.code) {
-        throw response.data.error.message;
-      }
-
-      return {
-        data: mapDtoToViewForStatementList(response.data.data.page),
-        total: response.data.data.size,
-      };
-    }),
+    }).then(({ data }) => getStatementList(data)),
+  /** Возвращает список связанных запросов. */
+  getRelatedQueryList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
+    request<IServerDataResp<IScrollerResponseDto<StatementHistoryResponseDto>>>({
+      data: metadataToRequestParams(metaData),
+      url: `${STATEMENT_BANK_URL}/statement/request/page`,
+      method: 'POST',
+    }).then(({ data }) => getStatementList(data)),
   /** Генерация ПФ Список запросов выписки. */
   generateStatementsReport: ({
     dateFrom,

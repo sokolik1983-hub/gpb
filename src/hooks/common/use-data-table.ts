@@ -18,14 +18,20 @@ interface UseDataTableResponse<R> {
   fetch(params: IFetchDataParams): Promise<IFetchDataResponse<R>>;
   /** Признак инициализации таблицы. */
   initialed: boolean;
+  /** Данные таблицы. */
+  items: R[];
+  /** Признак процесса запроса данных на сервер. */
+  loading: boolean;
   /** Общее количество записей. */
   total: number;
 }
 
 /** Хук для таблиц скроллеров. */
 export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): UseDataTableResponse<R> => {
-  const [total, setTotal] = useState(0);
   const [initialed, setInitialed] = useState(false);
+  const [items, setItems] = useState<R[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [total, setTotal] = useState(0);
 
   /** Метод срабатывает при получении данных таблицы.
    * Устанавливает признак инициализации таблицы (получение первых данных). */
@@ -39,6 +45,8 @@ export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): 
   const fetch = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<any>> => {
       try {
+        setLoading(true);
+
         const metaData: IMetaData = {
           filters: filter,
           multiSort,
@@ -47,12 +55,15 @@ export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): 
 
         const { data: rows, total: totalItems } = await apiMethod(metaData);
 
+        setItems(rows);
         setTotal(totalItems);
 
         return { rows, pageCount: getPageCount(totalItems, pageSize) };
       } catch {
         return { rows: [], pageCount: 0 };
       } finally {
+        setLoading(false);
+
         setDataTableFetched();
       }
     },
@@ -64,6 +75,8 @@ export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): 
   return {
     fetch,
     initialed,
+    items,
+    loading,
     total,
   };
 };

@@ -14,7 +14,7 @@ interface UseDebounceFilterRequest {
 }
 
 /** Хук изменения значений фильтра с задержкой. */
-export const useDebounceFilter = ({ delay = DELAY, filterValues, setFilter }: UseDebounceFilterRequest) => {
+export const useDebounceFilter = ({ delay = DELAY, filterValues, setFilter }: UseDebounceFilterRequest): void => {
   const filterValuesDebounced = useDebounce(filterValues, delay);
 
   useEffect(() => {

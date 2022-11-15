@@ -1,3 +1,4 @@
+import { PAGE_SIZES } from 'components/common/pagination';
 import type { User } from 'interfaces/admin';
 import { useQuery } from 'react-query';
 import { statementService } from 'services/admin';
@@ -20,7 +21,7 @@ export const useUsers = (filter: { ids: string[] }) => {
       },
     },
     offset: 0,
-    pageSize: filter.ids.length > 0 ? filter.ids.length : 25,
+    pageSize: filter.ids.length > 0 ? filter.ids.length : PAGE_SIZES.PER_25,
   };
 
   const { data = [], isError, isFetched, isFetching, isSuccess } = useQuery<User[]>({

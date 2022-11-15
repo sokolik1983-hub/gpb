@@ -7,8 +7,9 @@ import { useStreamContentHeight } from 'hooks/common';
 import { locale } from 'localization';
 import type { ClosedDaysContextProps } from 'pages/scroller/admin/closed-days/context';
 import { ClosedDaysContext } from 'pages/scroller/admin/closed-days/context';
-import { Filter, FILTER_HEIGHT } from 'pages/scroller/admin/closed-days/filter';
+import { Filter } from 'pages/scroller/admin/closed-days/filter';
 import { Table } from 'pages/scroller/admin/closed-days/table';
+import { QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import type { IFilters } from '@platform/core';
 import { MainLayout } from '@platform/services/admin';
@@ -23,7 +24,7 @@ export const ClosedDaysScrollerPage: FC = () => {
   const [filter, setFilter] = useState<IFilters>({});
 
   const height = useStreamContentHeight();
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - QUICK_FILTER_HEIGHT;
 
   const headerProps = {
     header: locale.admin.closedDaysScroller.pageTitle,
