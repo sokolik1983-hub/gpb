@@ -2,6 +2,7 @@ import type { ServerResponseList, ServerResponseData, ServerResponsePage, Scroll
 import { FORMAT } from 'interfaces';
 import type {
   Account,
+  Branch,
   ClientUserDto,
   ClosedDayResponseDto,
   ClosedDayRow,
@@ -43,11 +44,10 @@ import {
   mapDtoToViewForUserList,
 } from 'services/admin/mappers';
 import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
-import { mockClosedDaysData } from 'services/admin/mock/closed-days';
 import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
-import { getStatementList } from 'services/admin/utils';
+import { getStatementList, metadataToRequestCustomParams } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -202,6 +202,12 @@ export const statementService = {
       method: 'GET',
       url: `${CLIENT_DICTIONARY_BANK_URL}/branch/v2/filial-branches`,
     }).then(response => mapDtoToViewForServiceBranchList(response.data.list)),
+  /** Возвращает все филиалы. */
+  getAllBranches: (): Promise<Branch[]> =>
+    request<IServerDataResp<Branch[]>>({
+      method: 'GET',
+      url: `${STATEMENT_BANK_URL}/branch/all`,
+    }).then(response => (response.data.error?.code ? [] : response.data.data)),
   /** Возвращает список пользователей. */
   getUserList: (metaData: IMetaData): Promise<User[]> =>
     request<IServerResp<ServerResponsePage<ServerResponseList<ClientUserDto>>>>({
@@ -231,16 +237,11 @@ export const statementService = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getTurnovers: (metaData: IMetaData): Promise<ScrollerResponseDto<ITurnoverMockDto>> => getTurnoversMock(),
   /** Возвращает закрытые дни. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
-    // TODO: Для целевого использования.
-    // request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
-    //   data: metadataToRequestParams(metaData),
-    //   method: 'POST',
-    //   url: `${API_PREFIX}/closed-days/page`,
-    // })
-    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>> }>(resolve => {
-      resolve({ data: mockClosedDaysData });
+    request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
+      data: metadataToRequestCustomParams(metaData),
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/closed-day/get-page`,
     }).then(response => {
       if (response.data.error?.code) {
         throw new Error(response.data.error.message);
