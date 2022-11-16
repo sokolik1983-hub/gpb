@@ -2,8 +2,8 @@ import type { DATE_PERIODS } from 'interfaces';
 
 /** Свойства полей формы фильтрации скроллера журнала закрытых дней. */
 export interface FilterValues {
-  /** Филиал. */
-  branchId: string;
+  /** Код филиала. */
+  branchCode: string;
   /** Начало периода. */
   dateFrom: string;
   /** Конец периода. */

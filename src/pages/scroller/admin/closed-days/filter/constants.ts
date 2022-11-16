@@ -13,7 +13,7 @@ export const getPath = pathGenerator<FilterValues>();
 /** Поля формы фильтра. */
 export const FORM_FIELDS = {
   /** Филиал. */
-  BRANCH_ID: getPath('branchId'),
+  BRANCH_CODE: getPath('branchCode'),
   /** Начало периода. */
   DATE_FROM: getPath('dateFrom'),
   /** Конец периода. */
@@ -24,7 +24,7 @@ export const FORM_FIELDS = {
 
 /** Значения полей и условия фильтрации (для useFilter). */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.BRANCH_ID]: filterFields.eq(EMPTY_VALUE, 'branchId'),
+  [FORM_FIELDS.BRANCH_CODE]: filterFields.eq(EMPTY_VALUE, 'branchCode'),
   [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, 'createdAt', value => dateWithStartOfDay(value as string)),
   [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, 'createdAt', value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.PERIOD_TYPE]: filterFields.eq(DATE_PERIODS.YESTERDAY, '', () => ''),
