@@ -1,3 +1,30 @@
+# [2.16.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1...v2.16.0-release.1) (2022-11-16)
+
+
+### Features
+
+* **скроллер:** GBO-36596 добавлена ЭФ связанных запросов ([4c74289](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4c74289ce979a957331144ba10f272287d14d806))
+* GBO-35561 изменена логика экспорта выписок на клиенте ([b2fe282](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b2fe2826af00a8638b341afb6ee6121b8bb1e3c9))
+* GBO-36538 [Скроллер проводок] ДТО + тестовые данные ([3dd55e9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3dd55e92e7ed1bd5acc9ece83dc31869e403325a))
+* GBO-36539 [FE] [Скроллер проводок] Фильтры ([f6ab09c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f6ab09cef4df5386c2987a67c13db6f0742075c9))
+* GBO-36541 [Скроллер проводок] Таблица ([154115d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/154115dfdef46ef40beec5229f64c6f66bff4927))
+* GBO-36543 [FE] [Скроллер проводок] Компонент настройки столбцов ([4118efe](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4118efed8f9860838e8583db0685fc3fbfade07b))
+* GBO-36544 [FE] [Скроллер проводок] Экшоны печати и экспорта ([2aca6ae](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2aca6ae7ebdd3dd90a00849b6afdb5af05ee073c))
+* GBO-36575 добавлены - метод в сервисе и тест. данные закрытых дней ([abe2752](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/abe2752f4cbf211886446cfbec6c44fb664a4378))
+* GBO-36578 метод в сервисе и тест данные сверки остатков/оборотов ([b747691](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b747691fe733da99f18596735897b31ab861d98d))
+* GBO-36589 [FE] [Cкроллер добавленных и удаленных проводок] ДТО + тестовые данные ([3cd8a9d](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/3cd8a9dac3c10427218784938e0bcfac97021f6b))
+* GBO-36590 [FE] [Cкроллер добавленных и удаленных проводок] Фильтры ([79f21b9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/79f21b99b724bbfeaa6346e9759509d2c4c5d88d))
+* GBO-36591 [FE] [Скроллер связанных запросов] Таблица ([d268483](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/d26848395dc91aa9f73987c55d16b299c6b908d6))
+* GBO-36592 [Cкроллер добавленных и удаленных проводок] Компонент настройки ([c38a4e6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c38a4e68d9dec23d9e2aec99b4bb6c16ea7e77c7))
+* **скроллер:** GBO-36545 таблица скроллера ([6c0730c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/6c0730c1663ed5dd3d8089bfa398dffd1ae496a9))
+* **скроллер:** GBO-36560 ДТО и тестовые данные по остаткам и оборотам ([b71ee8c](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/b71ee8c51d9a1a181b69c4080ed01b9d1f6b60d0))
+* **скроллер:** GBO-36573 реализация экшона экспорта ПФ остатков и оборотов ([528cd9b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/528cd9b7ac1cb4d2f04138eec492fa7a68e7f9de))
+* **скроллер:** GBO-36576 добавлен фильтр журнала закрытых дней ([dc83294](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/dc83294a4f1c73f7624b044afa8ff0d8a315e5e2))
+* **скроллер:** GBO-36577 добавлена таблица закрытых дней ([f79954b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/f79954b1d37bcab0f41cd3540ddef1afdab9b15b))
+* **скроллер:** GBO-36580 добавлен фильтр журнала сверки остатков/оборотов ([902ad30](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/902ad307c5febc85b5ca395b3bc5a511c20f7b0a))
+* **скроллер:** GBO-36581 добавлена таблица журнала сверки остатков/оборотов ([fee1217](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/fee1217686f6d5381cabfe202ebc9dc3d1d0ce1a))
+* **скроллер:** GBO-36583 добавлена ЭФ Курсов валют ([4915d1a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4915d1abd41eba52dbd0e9b99d67d56f8c4b638e))
+
 ## [2.15.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.0...v2.15.1) (2022-11-13)
 
 
