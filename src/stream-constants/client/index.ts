@@ -10,6 +10,12 @@ export const COMMON_STREAM_URL = {
   STATEMENT_HISTORY: '/account-statement/history',
   /** [Выписки] Проводки. */
   STATEMENT_TRANSACTIONS: '/account-statement/transaction',
+  /** [Выписки по расписанию] История запросов. */
+  STATEMENT_SCHEDULE_HISTORY: '/account-statement/schedule-history',
+  /** [Выписки по расписанию] Новый запрос. */
+  STATEMENT_SCHEDULE_NEW: '/account-statement/schedule-new',
+  /** [Выписки по расписанию] Нередактируемая форма. */
+  STATEMENT_SCHEDULE_CONFIRM: '/account-statement/schedule-confirm',
 };
 
 export * from './statuses';

@@ -75,6 +75,56 @@ export default {
 				return t('client.form.title');
 			},
 		},
+		breadcrumbs: {
+			/**
+			 * @ru
+			 * К главной
+			 */
+			get toMainPage() {
+				return t('client.breadcrumbs.toMainPage');
+			},
+			/**
+			 * @ru
+			 * К выпискам
+			 */
+			get toRequestsListPage() {
+				return t('client.breadcrumbs.toRequestsListPage');
+			},
+			/**
+			 * @ru
+			 * К запросу
+			 */
+			get toRequestPage() {
+				return t('client.breadcrumbs.toRequestPage');
+			},
+		},
+		scheduleNewPage: {
+			/**
+			 * @ru
+			 * Запрос на выписку по расписанию
+			 */
+			get title() {
+				return t('client.scheduleNewPage.title');
+			},
+		},
+		scheduleHistoryScrollerPage: {
+			/**
+			 * @ru
+			 * Реестр запросов на выписку по расписанию
+			 */
+			get title() {
+				return t('client.scheduleHistoryScrollerPage.title');
+			},
+		},
+		buttons: {
+			/**
+			 * @ru
+			 * Создать
+			 */
+			get createSchedule() {
+				return t('client.buttons.createSchedule');
+			},
+		},
 	},
 	admin: {
 		requestStatus: {

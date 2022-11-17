@@ -456,5 +456,15 @@
   "admin.changedEntriesScroller.labels.counterparty": "Контрагент",
   "admin.changedEntriesScroller.labels.counterpartyAccountNumber": "Счёт контрагента",
   "admin.changedEntriesScroller.labels.client": "Клиент",
-  "admin.changedEntriesScroller.labels.clientAccountNumber": "Счёт клиента"
+  "admin.changedEntriesScroller.labels.clientAccountNumber": "Счёт клиента",
+  "client.pages.historyTitle": "Реестр запросов на выписку по расписанию",
+  "client.pages.newScheduleTitle": "Запрос на выписку по расписанию",
+  "client.breadcrumbs.toMainPage": "К главной",
+  "client.breadcrumbs.toRequestsPage": "К выпискам",
+  "client.breadcrumbs.toConfirmPage": "К запросу",
+  "client.breadcrumbs.toRequestsListPage": "К выпискам",
+  "client.breadcrumbs.toRequestPage": "К запросу",
+  "client.scheduleNewPage.title": "Запрос на выписку по расписанию",
+  "client.scheduleHistoryScrollerPage.title": "Реестр запросов на выписку по расписанию",
+  "client.buttons.createSchedule": "Создать"
 }

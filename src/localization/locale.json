@@ -1355,9 +1355,6 @@
   "admin.changedEntriesScroller.footer.exportAction": {
     "ru": "Экспорт документа"
   },
-  "admin.changedEntriesScroller.pageTitle": {
-    "ru": "Проводки"
-  },
   "admin.changedEntriesScroller.table.total": {
     "ru": "Операций"
   },
@@ -1417,5 +1414,35 @@
   },
   "admin.changedEntriesScroller.labels.clientAccountNumber": {
     "ru": "Счёт клиента"
+  },
+  "client.pages.historyTitle": {
+    "ru": "Реестр запросов на выписку по расписанию"
+  },
+  "client.pages.newScheduleTitle": {
+    "ru": "Запрос на выписку по расписанию"
+  },
+  "client.breadcrumbs.toMainPage": {
+    "ru": "К главной"
+  },
+  "client.breadcrumbs.toRequestsPage": {
+    "ru": "К выпискам"
+  },
+  "client.breadcrumbs.toConfirmPage": {
+    "ru": "К запросу"
+  },
+  "client.buttons.createSchedule": {
+    "ru": "Создать"
+  },
+  "client.breadcrumbs.toRequestsListPage": {
+    "ru": "К выпискам"
+  },
+  "client.breadcrumbs.toRequestPage": {
+    "ru": "К запросу"
+  },
+  "client.scheduleNewPage.title": {
+    "ru": "Запрос на выписку по расписанию"
+  },
+  "client.scheduleHistoryScrollerPage.title": {
+    "ru": "Реестр запросов на выписку по расписанию"
   }
 }

@@ -2,7 +2,7 @@
   "name": "@eco/account-statement",
   "version": "2.15.1",
   "scripts": {
-    "test": "jest",
+    "test": "jest --passWithNoTests",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
     "test:update": "jest --updateSnapshot",
