@@ -1,3 +1,10 @@
+# [2.16.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.1...v2.16.0-release.2) (2022-11-17)
+
+
+### Features
+
+* **скроллер:** GBO-38145 интеграция с BE ЭФ Журнала закрытых дней ([e2ec04a](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/e2ec04a0f9a1a61d7ef340fb60f58b623ff73263))
+
 # [2.16.0-release.1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.15.1...v2.16.0-release.1) (2022-11-16)
 
 
