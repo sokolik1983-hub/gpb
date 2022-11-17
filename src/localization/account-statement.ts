@@ -197,6 +197,38 @@ export default {
 				return t('admin.userType.technical');
 			},
 		},
+		maintenanceType: {
+			/**
+			 * @ru
+			 * Начало технических работ на Ф1
+			 */
+			get start() {
+				return t('admin.maintenanceType.start');
+			},
+			/**
+			 * @ru
+			 * Окончание технических работ на Ф1
+			 */
+			get end() {
+				return t('admin.maintenanceType.end');
+			},
+		},
+		maintenanceStatus: {
+			/**
+			 * @ru
+			 * Начаты
+			 */
+			get start() {
+				return t('admin.maintenanceStatus.start');
+			},
+			/**
+			 * @ru
+			 * Закончены
+			 */
+			get end() {
+				return t('admin.maintenanceStatus.end');
+			},
+		},
 		turnoverReconciliationRecordSource: {
 			/**
 			 * @ru
@@ -817,6 +849,67 @@ export default {
 					 */
 					get currencyCode() {
 						return t('admin.currencyRatesScroller.filter.placeholder.currencyCode');
+					},
+				},
+			},
+		},
+		maintenanceScroller: {
+			/**
+			 * @ru
+			 * Технические работы Ф1
+			 */
+			get pageTitle() {
+				return t('admin.maintenanceScroller.pageTitle');
+			},
+			filter: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Технические работы
+					 */
+					get maintenanceType() {
+						return t('admin.maintenanceScroller.filter.placeholder.maintenanceType');
+					},
+				},
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.maintenanceScroller.table.total');
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.maintenanceScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.maintenanceScroller.table.placeholder.message');
+					},
+				},
+				header: {
+					/**
+					 * @ru
+					 * Дата и время
+					 */
+					get creationDate() {
+						return t('admin.maintenanceScroller.table.header.creationDate');
+					},
+					/**
+					 * @ru
+					 * Технические работы
+					 */
+					get maintenanceType() {
+						return t('admin.maintenanceScroller.table.header.maintenanceType');
 					},
 				},
 			},

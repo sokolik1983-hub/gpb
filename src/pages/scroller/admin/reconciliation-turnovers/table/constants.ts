@@ -10,7 +10,7 @@ export const COLUMN_NAMES = {
   /** Номер счета. */
   ACCOUNT_NUMBER: 'accountNumber',
   /** Операционная дата. */
-  OPERATION_DATA: 'operationDate',
+  OPERATION_DATE: 'operationDate',
   /** Дата сверки. */
   RECONCILIATION_DATE: 'reconciliationDate',
   /** Источник записи. */
@@ -21,7 +21,7 @@ export const COLUMN_NAMES = {
 
 /** Состояние сортировки по умолчанию. */
 export const DEFAULT_SORT = {
-  [COLUMN_NAMES.OPERATION_DATA]: SORT_DIRECTION.DESC,
+  [COLUMN_NAMES.OPERATION_DATE]: SORT_DIRECTION.DESC,
 };
 
 /** Ключ в Session Storage, по которому хранится состояние таблицы. */

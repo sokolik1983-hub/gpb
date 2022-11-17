@@ -13,4 +13,6 @@ export interface ScrollerTable {
   filter: IFilters;
   /** Занимаемая высота таблицей. */
   height: number;
+  /** Признак, что можно показать таблицу. */
+  show?: boolean;
 }

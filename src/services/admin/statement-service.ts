@@ -11,6 +11,8 @@ import type {
   Currency,
   CurrencyRateDto,
   CurrencyRateRow,
+  MaintenanceRow,
+  MaintenanceResponseDto,
   StatementHistoryRow,
   StatementHistoryResponseDto,
   IFileDataResponse,
@@ -37,6 +39,7 @@ import {
   mapDtoToViewForClosedDays,
   mapDtoToViewForCurrencyList,
   mapDtoToViewForCurrencyRates,
+  mapDtoToViewForMaintenanceList,
   mapDtoToViewForOrganizationList,
   mapDtoToViewForReconciliationTurnovers,
   mapDtoToViewForServiceBranchList,
@@ -353,4 +356,20 @@ export const statementService = {
       method: 'POST',
       data: dto,
     }).then(x => x.data.data),
+  /** Получить страницу журнала технических работ. */
+  getMaintenance: (metaData: IMetaData): Promise<ICollectionResponse<MaintenanceRow>> =>
+    request<IServerDataResp<ScrollerResponseDto<MaintenanceResponseDto>>>({
+      data: metadataToRequestParamsWithCustomFilter(metaData),
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/maintenance/get-page`,
+    }).then(response => {
+      if (response.data.error?.code) {
+        throw new Error(response.data.error.message);
+      }
+
+      return {
+        data: mapDtoToViewForMaintenanceList(response.data.data.page),
+        total: response.data.data.size,
+      };
+    }),
 };

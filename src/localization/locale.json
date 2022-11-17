@@ -68,6 +68,18 @@
   "admin.userType.technical": {
     "ru": "Технический пользователь"
   },
+  "admin.maintenanceType.start": {
+    "ru": "Начало технических работ на Ф1"
+  },
+  "admin.maintenanceType.end": {
+    "ru": "Окончание технических работ на Ф1"
+  },
+  "admin.maintenanceStatus.start": {
+    "ru": "Начаты"
+  },
+  "admin.maintenanceStatus.end": {
+    "ru": "Закончены"
+  },
   "admin.turnoverReconciliationRecordSource.closingOfDay": {
     "ru": "Закрытие дня"
   },
@@ -643,6 +655,27 @@
   },
   "admin.currencyRatesScroller.table.header.rateDate": {
     "ru": "Дата курса"
+  },
+  "admin.maintenanceScroller.pageTitle": {
+    "ru": "Технические работы Ф1"
+  },
+  "admin.maintenanceScroller.filter.placeholder.maintenanceType": {
+    "ru": "Технические работы"
+  },
+  "admin.maintenanceScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.maintenanceScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.maintenanceScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.maintenanceScroller.table.header.creationDate": {
+    "ru": "Дата и время"
+  },
+  "admin.maintenanceScroller.table.header.maintenanceType": {
+    "ru": "Технические работы"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
