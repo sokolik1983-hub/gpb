@@ -7,18 +7,18 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 /** Ячейка таблицы с филиалом. */
 export const Branch: FC<ClosedDayCellProps> = ({
   value: {
-    branch: { code, filialName },
+    branch: { code, name },
   },
 }) => (
   <>
     <Typography.P>{code}</Typography.P>
-    <WithInfoTooltip extraSmall text={filialName}>
+    <WithInfoTooltip extraSmall text={name}>
       {ref => (
         <Typography.SmallText fill={'FAINT'} innerRef={ref}>
           <LinesEllipsis maxLines={1}>
             {(elementRef, clamped) => (
               <div ref={elementRef} style={{ textOverflow: clamped ? undefined : 'ellipsis', overflow: 'hidden' }}>
-                {filialName}
+                {name}
               </div>
             )}
           </LinesEllipsis>

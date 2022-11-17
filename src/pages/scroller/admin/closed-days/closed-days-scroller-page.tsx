@@ -1,12 +1,10 @@
 import type { FC } from 'react';
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import { locale } from 'localization';
-import type { ClosedDaysContextProps } from 'pages/scroller/admin/closed-days/context';
-import { ClosedDaysContext } from 'pages/scroller/admin/closed-days/context';
 import { Filter } from 'pages/scroller/admin/closed-days/filter';
 import { Table } from 'pages/scroller/admin/closed-days/table';
 import { QUICK_FILTER_HEIGHT } from 'stream-constants';
@@ -38,21 +36,17 @@ export const ClosedDaysScrollerPage: FC = () => {
     }
   }, [datePeriodInitialed]);
 
-  const contextValue: ClosedDaysContextProps = useMemo(() => ({ setDatePeriodFetched }), [setDatePeriodFetched]);
-
   return (
-    <ClosedDaysContext.Provider value={contextValue}>
-      <MainLayout>
-        <FocusLock>
-          <FocusTree treeId={COMMON_SCROLLER_NODE}>
-            <ScrollerPageLayout headerProps={headerProps}>
-              <Filter setFilter={setFilter} />
-              <Table filter={filter} height={tableHeight} show={datePeriodInitialed} />
-            </ScrollerPageLayout>
-          </FocusTree>
-        </FocusLock>
-      </MainLayout>
-    </ClosedDaysContext.Provider>
+    <MainLayout>
+      <FocusLock>
+        <FocusTree treeId={COMMON_SCROLLER_NODE}>
+          <ScrollerPageLayout headerProps={headerProps}>
+            <Filter setDatePeriodFetched={setDatePeriodFetched} setFilter={setFilter} />
+            <Table filter={filter} height={tableHeight} show={datePeriodInitialed} />
+          </ScrollerPageLayout>
+        </FocusTree>
+      </FocusLock>
+    </MainLayout>
   );
 };
 

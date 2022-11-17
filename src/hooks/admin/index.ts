@@ -1,5 +1,6 @@
 export * from './use-accounts';
 export * from './use-accounts-by-ids';
+export * from './use-all-branches';
 export * from './use-currencies';
 export * from './use-debounce-filter';
 export * from './use-statement-request';

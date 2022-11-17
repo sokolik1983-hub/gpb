@@ -2,7 +2,8 @@ import type { IScrollerResponseDto } from 'interfaces';
 import type { StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
 import { mapDtoToViewForStatementList } from 'services/admin/mappers';
 import type { ICollectionResponse } from '@platform/services';
-import type { IServerDataResp } from '@platform/services/admin';
+import type { IMetaData, IServerDataResp } from '@platform/services/admin';
+import { metadataToRequestParams } from '@platform/services/admin';
 
 /**
  * Утилита обработки ответа сервера данных по выпискам.
@@ -20,5 +21,33 @@ export const getStatementList = (
   return {
     data: mapDtoToViewForStatementList(response.data.page),
     total: response.data.size,
+  };
+};
+
+/**
+ * Получить параметры запроса на сервер.
+ * Кастомная обертка над платформенным методом metadataToRequestParams.
+ *
+ * @param metaData - Данные для формирования параметров запроса на сервер.
+ */
+export const metadataToRequestCustomParams = (metaData: IMetaData) => {
+  if (!metaData.filters) {
+    return metadataToRequestParams(metaData);
+  }
+
+  return {
+    params: {
+      ...metadataToRequestParams(metaData).params,
+      filter: Object.keys(metaData.filters || {}).reduce(
+        (prevValue, item) =>
+          metaData.filters?.[item].value
+            ? {
+                ...prevValue,
+                [item]: metaData.filters[item].value,
+              }
+            : prevValue,
+        {}
+      ),
+    },
   };
 };
