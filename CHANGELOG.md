@@ -1,3 +1,10 @@
+# [2.16.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.2...v2.16.0-release.3) (2022-11-17)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-37987 исправлен фильтр запроса курсов валют ([911a4a7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/911a4a761a2ea60029d69690b11b42c6df345e50))
+
 # [2.16.0-release.2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.1...v2.16.0-release.2) (2022-11-17)
 
 
