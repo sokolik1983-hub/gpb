@@ -7,3 +7,11 @@ export interface ServiceBranch {
   /** Идентификатор. */
   id: string;
 }
+
+/** Филиал. */
+export interface Branch {
+  /** Код филиала. */
+  branchCode: string;
+  /** Наименование филиала. */
+  branchName: string;
+}

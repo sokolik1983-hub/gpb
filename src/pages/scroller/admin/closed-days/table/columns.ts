@@ -20,6 +20,7 @@ export const columns = addMaxWidthField<ClosedDayRow, { isVisible: boolean }>([
     Cell: Branch,
     Header: locale.admin.closedDaysScroller.table.header.branch,
     accessor,
+    disableSortBy: true,
     id: COLUMN_NAMES.BRANCH,
     isVisible: true,
     maxWidth: 430,
