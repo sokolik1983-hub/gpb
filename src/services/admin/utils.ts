@@ -25,12 +25,12 @@ export const getStatementList = (
 };
 
 /**
- * Получить параметры запроса на сервер.
+ * Получить параметры запроса на сервер с измененным фильтром.
  * Кастомная обертка над платформенным методом metadataToRequestParams.
  *
  * @param metaData - Данные для формирования параметров запроса на сервер.
  */
-export const metadataToRequestCustomParams = (metaData: IMetaData) => {
+export const metadataToRequestParamsWithCustomFilter = (metaData: IMetaData) => {
   if (!metaData.filters) {
     return metadataToRequestParams(metaData);
   }
@@ -48,6 +48,23 @@ export const metadataToRequestCustomParams = (metaData: IMetaData) => {
             : prevValue,
         {}
       ),
+    },
+  };
+};
+
+/**
+ * Получить параметры запроса на сервер с измененной сортировкой.
+ * Кастомная обертка над платформенным методом metadataToRequestParams.
+ *
+ * @param metaData - Данные для формирования параметров запроса на сервер.
+ */
+export const metadataToRequestParamsWithCustomSort = (metaData: IMetaData) => {
+  const { multiSort, ...rest } = metadataToRequestParams(metaData).params;
+
+  return {
+    params: {
+      ...rest,
+      sorting: multiSort,
     },
   };
 };

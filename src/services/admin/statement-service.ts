@@ -47,7 +47,7 @@ import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
 import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
-import { getStatementList, metadataToRequestCustomParams } from 'services/admin/utils';
+import { getStatementList, metadataToRequestParamsWithCustomFilter, metadataToRequestParamsWithCustomSort } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import type { IServerDataResp } from '@platform/services/admin';
 import { metadataToRequestParams, request } from '@platform/services/admin';
@@ -231,7 +231,7 @@ export const statementService = {
   /** Возвращает сводную информацию по выписке. */
   getStatementSummary: (statementId: string): Promise<StatementSummary> =>
     request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
-      url: `${STATEMENT_BANK_URL}/statement/${statementId}/turnover/total/grouped-by-currency`,
+      url: `${STATEMENT_BANK_URL}/statement/turnover/${statementId}/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
   /** Вернуть информацию об остатках и оборотах. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -239,7 +239,7 @@ export const statementService = {
   /** Возвращает закрытые дни. */
   getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
     request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
-      data: metadataToRequestCustomParams(metaData),
+      data: metadataToRequestParamsWithCustomFilter(metaData),
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/closed-day/get-page`,
     }).then(response => {
@@ -326,7 +326,7 @@ export const statementService = {
   /** Возвращает список курсов валют. */
   getCurrencyRates: (metaData: IMetaData): Promise<ICollectionResponse<CurrencyRateRow>> =>
     request<IServerDataResp<IScrollerResponseDto<CurrencyRateDto>>>({
-      data: metadataToRequestParams(metaData),
+      data: metadataToRequestParamsWithCustomSort(metaData).params,
       method: 'POST',
       url: `${STATEMENT_BANK_URL}/currency/rate/page`,
     }).then(response => {
