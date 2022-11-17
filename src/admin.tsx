@@ -4,6 +4,7 @@ import { ChangedEntriesScrollerPage } from 'pages/scroller/admin/changed-entries
 import { ClosedDaysScrollerPage } from 'pages/scroller/admin/closed-days';
 import { CurrencyRatesScrollerPage } from 'pages/scroller/admin/currency-rates';
 import { EntriesScrollerPage } from 'pages/scroller/admin/entries-scroller';
+import { MaintenanceScrollerPage } from 'pages/scroller/admin/maintenance';
 import { ReconciliationTurnoversScrollerPage } from 'pages/scroller/admin/reconciliation-turnovers';
 import { RelatedQueriesScrollerPage, StatementHistoryScrollerPage } from 'pages/scroller/admin/statements';
 import { TransactionsScrollerPage } from 'pages/scroller/admin/transactions-scroller';
@@ -31,6 +32,8 @@ export const routes = [
   <Route key="closed-days-scroller" component={CurrencyRatesScrollerPage} path={ADMIN_STREAM_URL.CURRENCY_RATES} />,
   /** Путь до скроллера проводок. */
   <Route key="transactions-scroller" component={TransactionsScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TRANSACTIONS} />,
+  /** Путь до ЭФ журнала технических работ. */
+  <Route key="maintenance" component={MaintenanceScrollerPage} path={ADMIN_STREAM_URL.MAINTENANCE} />,
   /** Путь до ЭФ просмотра параметров запроса на выписку. */
   <Route key="statement-request" component={AdminFormPage} path={ADMIN_STREAM_URL.STATEMENT_REQUEST} />,
 ];

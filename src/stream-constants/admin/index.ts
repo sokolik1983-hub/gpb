@@ -22,6 +22,8 @@ export const ADMIN_STREAM_URL = {
   RELATED_QUERIES: '/account-statement/related-queries',
   /** Скроллер остатков и оборотов. */
   STATEMENT_TURNOVERS: '/account-statement/turnovers',
+  /** Скроллер технических работ. */
+  MAINTENANCE: '/account-statement/maintenance',
 };
 
 /** Префикс для использования в ключах для хранилищ и т.п. */

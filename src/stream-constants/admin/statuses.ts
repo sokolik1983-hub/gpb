@@ -1,5 +1,5 @@
 import { STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
-import { RECONCILIATION_STATUS, RECORD_SOURCE, USER_TYPE } from 'interfaces/admin';
+import { MAINTENANCE_TYPE, RECONCILIATION_STATUS, RECORD_SOURCE, USER_TYPE } from 'interfaces/admin';
 import { CHANGED_ENTRY_STATUSES } from 'interfaces/changed-entry-statuses';
 import { locale } from 'localization';
 import { DOCUMENT_STATUS_TYPE } from '@platform/ui';
@@ -124,4 +124,28 @@ export const CHANGED_ENTRIES_STATUS_LABEL = {
   [CHANGED_ENTRY_STATUSES.ADDED]: locale.admin.changedEntryStatus.added,
   /** Удалена. */
   [CHANGED_ENTRY_STATUSES.REMOVED]: locale.admin.changedEntryStatus.removed,
+};
+
+/** Лейблы типов технических работ. */
+export const MAINTENANCE_TYPE_LABEL = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: locale.admin.maintenanceType.end,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: locale.admin.maintenanceType.start,
+};
+
+/** Лейблы статусов технических работ. */
+export const MAINTENANCE_STATUS_LABEL = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: locale.admin.maintenanceStatus.end,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: locale.admin.maintenanceStatus.start,
+};
+
+/** Цвета статусов технических работ. */
+export const MAINTENANCE_STATUS_COLOR = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: DOCUMENT_STATUS_TYPE.INPROGRESS,
 };

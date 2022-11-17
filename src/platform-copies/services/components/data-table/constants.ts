@@ -1,2 +1,2 @@
 /** Минимальная ширина таблицы. */
-export const MIN_WIDTH = 1000;
+export const MIN_WIDTH = '100%';

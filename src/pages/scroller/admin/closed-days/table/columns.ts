@@ -10,7 +10,7 @@ export const columns = addMaxWidthField<ClosedDayRow, { isVisible: boolean }>([
     Cell: OperationDate,
     Header: locale.admin.closedDaysScroller.table.header.operationDate,
     accessor,
-    id: COLUMN_NAMES.OPERATION_DATA,
+    id: COLUMN_NAMES.OPERATION_DATE,
     isVisible: true,
     maxWidth: 258,
     minWidth: 138,
