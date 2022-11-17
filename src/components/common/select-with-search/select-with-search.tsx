@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
+import { useForm } from 'react-final-form';
 import { uniqBy } from 'utils/common';
 import type { IOption, OnChangeType } from '@platform/ui';
 import { Fields } from '@platform/ui';
@@ -37,6 +38,8 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
 }) => {
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<IOption[]>([]);
 
+  const { change } = useForm();
+
   /** Обработчик изменения подстроки поиска. */
   const handleSearch = useCallback(
     value => {
@@ -47,7 +50,7 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
     [searchOptions, setSearchValue]
   );
 
-  /** Обработчик изменения значения мультиселекта. */
+  /** Обработчик изменения значения выбора. */
   const handleChange = useCallback<OnChangeType<string[]>>(
     event => {
       const selectedValues = event.value;
@@ -62,6 +65,9 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
     [currentSelectedOptions]
   );
 
+  /** Обработчие очищения поля выбора. */
+  const handleClear = useCallback(() => change(name, ''), [change, name]);
+
   const options = useMemo(() => uniqBy<IOption>([...currentSelectedOptions, ...selectedOptions, ...searchOptions], 'value'), [
     currentSelectedOptions,
     searchOptions,
@@ -73,6 +79,8 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
   return (
     <Field
       extraSmall
+      useClearBtn
+      useClearBtnInSearch
       withSearch
       filterFn={handleSearch}
       isLoading={isLoading}
@@ -81,6 +89,9 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
       options={options}
       placeholder={placeholder}
       onChange={handleChange}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onClearClick={handleClear}
     />
   );
 };
