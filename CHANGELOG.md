@@ -1,3 +1,10 @@
+# [2.16.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.3...v2.16.0-release.4) (2022-11-17)
+
+
+### Features
+
+* **скроллер:** GBO-38295 добавлена ЭФ Технических работ Ф1 ([13839b5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/13839b50e01ca8cfdbced0de23b256dfbd7039e3))
+
 # [2.16.0-release.3](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.2...v2.16.0-release.3) (2022-11-17)
 
 
