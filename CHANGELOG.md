@@ -1,3 +1,10 @@
+# [2.16.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.4...v2.16.0-release.5) (2022-11-18)
+
+
+### Features
+
+* **скроллер:** GBO-36603 добавлен лэаут скроллера админки ([955e37e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/955e37e5977826469d1a296c875bf4f29e497f3a))
+
 # [2.16.0-release.4](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.3...v2.16.0-release.4) (2022-11-17)
 
 
