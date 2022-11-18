@@ -1,6 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { executor, viewEntry } from 'actions/admin';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { executor, viewEntry, viewStatementHistoryScroller } from 'actions/admin';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
+import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -114,17 +116,19 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
+    backButtonTitle: locale.common.button.toStatementRequests,
     header: locale.transactionsScroller.title({
       dateFrom: formatDateTime(statementSummary.statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
       dateTo: formatDateTime(statementSummary.statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
     }),
+    onBack: () => void executor.execute(viewStatementHistoryScroller),
   };
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.WITH_BACK_BUTTON - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
 
   const handRowClick = useCallback(
     row => {

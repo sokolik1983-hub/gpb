@@ -545,12 +545,23 @@ export default {
 			},
 		},
 		relatedQueriesScroller: {
-			/**
-			 * @ru
-			 * Связанные запросы
-			 */
-			get pageTitle() {
-				return t('admin.relatedQueriesScroller.pageTitle');
+			header: {
+				button: {
+					/**
+					 * @ru
+					 * Запросы выписки
+					 */
+					get back() {
+						return t('admin.relatedQueriesScroller.header.button.back');
+					},
+				},
+				/**
+				 * @ru
+				 * Связанные запросы
+				 */
+				get title() {
+					return t('admin.relatedQueriesScroller.header.title');
+				},
 			},
 			table: {
 				placeholder: {
@@ -3127,6 +3138,15 @@ export default {
 			 */
 			get label() {
 				return t('common.email.label');
+			},
+		},
+		button: {
+			/**
+			 * @ru
+			 * К запросу выписок
+			 */
+			get toStatementRequests() {
+				return t('common.button.toStatementRequests');
 			},
 		},
 		checkAuthority: {
