@@ -543,7 +543,10 @@
   "admin.historyScroller.pageTitle": {
     "ru": "Запросы выписки"
   },
-  "admin.relatedQueriesScroller.pageTitle": {
+  "admin.relatedQueriesScroller.header.button.back": {
+    "ru": "Запросы выписки"
+  },
+  "admin.relatedQueriesScroller.header.title": {
     "ru": "Связанные запросы"
   },
   "admin.relatedQueriesScroller.table.placeholder.title": {
@@ -943,6 +946,9 @@
   },
   "common.email.label": {
     "ru": "Адрес электронной почты"
+  },
+  "common.button.toStatementRequests": {
+    "ru": "К запросу выписок"
   },
   "form.buttons.download.label": {
     "ru": "Экспорт"

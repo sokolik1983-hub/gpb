@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { executor } from 'actions/admin';
-import { ScrollerPageLayout } from 'components/common';
+import { ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';

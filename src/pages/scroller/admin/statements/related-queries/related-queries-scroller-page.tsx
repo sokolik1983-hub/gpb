@@ -1,5 +1,7 @@
 import React from 'react';
-import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { executor, viewStatementHistoryScroller } from 'actions/admin';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -27,9 +29,11 @@ export const RelatedQueriesScrollerPage = () => {
     statements,
   });
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
-    header: locale.admin.relatedQueriesScroller.pageTitle,
+    header: locale.admin.relatedQueriesScroller.header.title,
+    backButtonTitle: locale.admin.relatedQueriesScroller.header.button.back,
+    onBack: () => void executor.execute(viewStatementHistoryScroller),
   };
 
   const height = useStreamContentHeight();
@@ -43,7 +47,7 @@ export const RelatedQueriesScrollerPage = () => {
             <Table
               apiMethod={statementService.getRelatedQueryList}
               filter={filter}
-              height={height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - QUICK_FILTER_HEIGHT}
+              height={height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.WITH_BACK_BUTTON - QUICK_FILTER_HEIGHT}
               placeholderMessage={locale.admin.relatedQueriesScroller.table.placeholder.message}
               placeholderTitle={locale.admin.relatedQueriesScroller.table.placeholder.title}
               setStatements={setStatements}

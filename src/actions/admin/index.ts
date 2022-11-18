@@ -11,3 +11,4 @@ export * from './view-transactions-scroller';
 export * from './view-entry';
 export * from './export-statement';
 export * from './create-attachement';
+export * from './view-statement-history-scroller';

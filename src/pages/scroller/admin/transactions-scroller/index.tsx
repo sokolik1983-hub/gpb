@@ -1,5 +1,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
+import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -29,7 +31,7 @@ export const TransactionsScrollerPage: React.FC = () => {
   // TODO Добавить действия заголовка
   const actions = useMemo(() => [], []);
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
     header: locale.admin.transactionsScroller.pageTitle,
   };
@@ -75,7 +77,7 @@ export const TransactionsScrollerPage: React.FC = () => {
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.BASE;
 
   return (
     <TransactionsScrollerContext.Provider value={contextValue}>
