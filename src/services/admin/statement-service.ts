@@ -243,7 +243,7 @@ export const statementService = {
       request<IServerDataResp<IScrollerResponseDto<TurnoverCard>>>({
         data: metadataToRequestParams(metaData),
         method: 'POST',
-        url: `${STATEMENT_BANK_URL}/turnover/page`,
+        url: `${STATEMENT_BANK_URL}/statement/turnover/page`,
       }).then(x => {
         if (x.data.error?.code) {
           throw new Error(x.data.error.message);
@@ -259,7 +259,7 @@ export const statementService = {
       request<IServerDataResp<IFileDataResponse>>({
         data: dto,
         method: 'POST',
-        url: `${STATEMENT_BANK_URL}/turnover/generate-report`,
+        url: `${STATEMENT_BANK_URL}/statement/turnover/generate-report`,
       }).then(x => x.data.data),
   },
   /** Возвращает закрытые дни. */

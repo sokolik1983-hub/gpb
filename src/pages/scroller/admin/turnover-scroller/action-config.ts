@@ -9,7 +9,7 @@ const EXPORT_TURNOVERS: IExtendedIActionWithAuth = {
   action: exportTurnovers,
   authorities: [],
   dataAction: DATA_ACTION.EXPORT,
-  icon: Icons.Export,
+  icon: Icons.Download,
   label: locale.admin.turnoverScroller.actions.exportTurnovers,
   name: 'EXPORT_TURNOVERS',
 };
