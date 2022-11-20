@@ -1337,6 +1337,9 @@
   "admin.turnoverScroller.actions.exportTurnovers": {
     "ru": "Экспорт"
   },
+  "admin.turnoverScroller.labels.format": {
+    "ru": "Формат:"
+  },
   "admin.turnoverScroller.title": {
     "ru": "Остатки и обороты"
   },

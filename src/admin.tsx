@@ -8,7 +8,7 @@ import { MaintenanceScrollerPage } from 'pages/scroller/admin/maintenance';
 import { ReconciliationTurnoversScrollerPage } from 'pages/scroller/admin/reconciliation-turnovers';
 import { RelatedQueriesScrollerPage, StatementHistoryScrollerPage } from 'pages/scroller/admin/statements';
 import { TransactionsScrollerPage } from 'pages/scroller/admin/transactions-scroller';
-import { TurnoversScrollerPage } from 'pages/scroller/admin/turnovers-scroller/page';
+import { TurnoverScrollerPage } from 'pages/scroller/admin/turnover-scroller/page';
 import { Route } from 'react-router-dom';
 import { ADMIN_STREAM_URL } from 'stream-constants/admin';
 
@@ -18,8 +18,8 @@ export const routes = [
   <Route key="history-scroller" component={StatementHistoryScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_HISTORY} />,
   /** Путь до скроллера связанных запросов. */
   <Route key="related-queries-scroller" component={RelatedQueriesScrollerPage} path={ADMIN_STREAM_URL.RELATED_QUERIES} />,
-  /** Путь до скроллера просмотра остатков и оборотов. */
-  <Route key="turnovers-scroller" component={TurnoversScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TURNOVERS} />,
+  /** Роут скроллера остатков и оборотов. */
+  <Route key="turnover-scroller" component={TurnoverScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TURNOVER} />,
   /** Путь до ЭФ просмотра журнала удаленных или добавленных проводок. */
   <Route key="changed-entries-scroller" component={ChangedEntriesScrollerPage} path={ADMIN_STREAM_URL.CHANGED_ENTRIES} />,
   /** Путь до скроллера проводок на основании запроса. */

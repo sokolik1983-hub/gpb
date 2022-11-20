@@ -3,7 +3,7 @@ import { executor } from 'actions/admin';
 import { ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import { locale } from 'localization';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { getActiveActionButtons } from 'utils/common';
@@ -16,11 +16,11 @@ import { Filter } from './filter';
 import { Table } from './table';
 
 /** Скроллер остатков и оборотов. */
-export const TurnoversScrollerPage: React.FC = () => {
+export const TurnoverScrollerPage: React.FC = () => {
   const { getAvailableActions } = useAuth();
   const [filters, setFilters] = useState<IFilters>({});
 
-  const [selectedRows, setSelectedRows] = useState<ITurnoverMockDto[]>(defaultValue.selectedRows);
+  const [selectedRows, setSelectedRows] = useState<TurnoverCard[]>(defaultValue.selectedRows);
   const contextValue: ScrollerContextProps = useMemo(
     () => ({
       selectedRows,
@@ -58,4 +58,4 @@ export const TurnoversScrollerPage: React.FC = () => {
   );
 };
 
-TurnoversScrollerPage.displayName = 'TurnoversScrollerPage';
+TurnoverScrollerPage.displayName = 'TurnoverScrollerPage';

@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { executor } from 'actions/admin';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
@@ -21,17 +21,17 @@ export const Table: React.FC = () => {
   const { selectedRows, setSelectedRows, filters } = useContext(ScrollerContext);
 
   const fetchData = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<ITurnoverMockDto>> => {
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<TurnoverCard>> => {
       try {
         const metaData: IMetaData = {
           filters,
-          multiSort,
+          sort: multiSort ? multiSort : DEFAULT_SORT,
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
 
-        const { page: rows, size } = await statementService.getTurnovers(metaData);
+        const { data, total } = await statementService.turnover.page(metaData);
 
-        return { rows, pageCount: Math.ceil(size / pageSize) };
+        return { rows: data, pageCount: Math.ceil(total / pageSize) };
       } catch {
         return { rows: [], pageCount: 0 };
       }
@@ -40,13 +40,13 @@ export const Table: React.FC = () => {
   );
 
   const footerActions = useCallback(
-    scrollerExecutor => (rows: ITurnoverMockDto[]) =>
+    scrollerExecutor => (rows: TurnoverCard[]) =>
       getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, '', '']),
     [getAvailableActions]
   );
 
   return (
-    <InfiniteDataTable<ITurnoverMockDto>
+    <InfiniteDataTable<TurnoverCard>
       columns={columns}
       defaultSort={DEFAULT_SORT}
       executor={executor}

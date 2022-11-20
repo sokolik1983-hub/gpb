@@ -5,7 +5,7 @@ export interface FilterValues {
   /** Конец периода. */
   dateTo?: string;
   /** Организации. */
-  organizationIds?: string[];
+  bankClientIds?: string[];
   /** Счета. */
-  accountIds?: string[];
+  accountNumbers: string[];
 }

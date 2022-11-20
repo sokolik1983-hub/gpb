@@ -29,7 +29,7 @@ export const Filter: React.FC<ScrollerFilter> = ({ setFilter }) => {
   useDebounceFilter({ filterValues, setFilter });
 
   // Получение счетов.
-  const selectedAccountIds = filterValues?.[FORM_FIELDS.ACCOUNT_IDS]?.value || [];
+  const selectedAccountIds = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]?.value || [];
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountIds);
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
@@ -39,7 +39,7 @@ export const Filter: React.FC<ScrollerFilter> = ({ setFilter }) => {
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);
 
   // Получение организаций.
-  const selectedOrganizationIds = filterValues?.[FORM_FIELDS.ORGANIZATION_IDS]?.value || [];
+  const selectedOrganizationIds = filterValues?.[FORM_FIELDS.BANK_CLIENT_IDS]?.value || [];
   const { data: selectedOrganizations } = useOrganizationsByIds(selectedOrganizationIds);
 
   const organizationSearchValueDebounced = useDebounce(organizationSearchValue, DELAY);

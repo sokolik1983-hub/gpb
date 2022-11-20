@@ -1,17 +1,18 @@
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import { locale } from 'localization';
 import { accessor, addMaxWidthField } from 'utils/common';
 import { OperationDateCell, AccountNumberCell, OrganizationCell, AccountBranchCell, ServiceBranchCell, ActionsCell } from './cells';
 import { COLUMN_NAMES } from './constants';
 
 /** Колонки таблмцы. */
-export const columns = addMaxWidthField<ITurnoverMockDto, { isVisible: boolean }>([
+export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
   {
     Cell: OperationDateCell,
     Header: locale.admin.turnoverScroller.columns.operationDate,
     accessor,
     id: COLUMN_NAMES.CREATION_DATE,
     width: 132,
+    disableSortBy: true,
     isVisible: true,
   },
   {
@@ -28,6 +29,7 @@ export const columns = addMaxWidthField<ITurnoverMockDto, { isVisible: boolean }
     accessor,
     id: COLUMN_NAMES.ORGANIZATION,
     width: 216,
+    disableSortBy: true,
     isVisible: true,
   },
   {
@@ -36,6 +38,7 @@ export const columns = addMaxWidthField<ITurnoverMockDto, { isVisible: boolean }
     accessor,
     id: COLUMN_NAMES.ACCOUNT_BRANCH,
     width: 200,
+    disableSortBy: true,
     isVisible: true,
   },
   {
@@ -44,6 +47,7 @@ export const columns = addMaxWidthField<ITurnoverMockDto, { isVisible: boolean }
     accessor,
     id: COLUMN_NAMES.SERVICE_BRANCH,
     width: 200,
+    disableSortBy: true,
     isVisible: true,
   },
   {

@@ -28,7 +28,7 @@ import type {
 import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { CreateReportFileDto, TurnoverCard } from 'interfaces/admin/dto/turnover';
 import type { BankClient } from 'interfaces/common';
 import type { IGetTransactionCardResponseDto, IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
 import type { UserRequestDto } from 'interfaces/dto/admin';
@@ -45,10 +45,10 @@ import {
   mapDtoToViewForServiceBranchList,
   mapDtoToViewForStatementSummary,
   mapDtoToViewForUserList,
+  mapForTurnovers,
 } from 'services/admin/mappers';
 import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
 import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
-import { getTurnoversMock } from 'services/admin/mock/get-turnover-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
 import { getStatementList, metadataToRequestParamsWithCustomFilter, metadataToRequestParamsWithCustomSort } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
@@ -236,9 +236,32 @@ export const statementService = {
     request<IServerResp<TotalTurnoverGroupedByCurrencyResponseDto>>({
       url: `${STATEMENT_BANK_URL}/statement/turnover/${statementId}/total/grouped-by-currency`,
     }).then(x => mapDtoToViewForStatementSummary(x.data.data)),
-  /** Вернуть информацию об остатках и оборотах. */
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getTurnovers: (metaData: IMetaData): Promise<ScrollerResponseDto<ITurnoverMockDto>> => getTurnoversMock(),
+  /** API остатков и оборотов. */
+  turnover: {
+    /** Получение страницы остатков и оборотов. */
+    page: (metaData: IMetaData) =>
+      request<IServerDataResp<IScrollerResponseDto<TurnoverCard>>>({
+        data: metadataToRequestParams(metaData),
+        method: 'POST',
+        url: `${STATEMENT_BANK_URL}/turnover/page`,
+      }).then(x => {
+        if (x.data.error?.code) {
+          throw new Error(x.data.error.message);
+        }
+
+        return {
+          data: mapForTurnovers(x.data.data.page),
+          total: x.data.data.size,
+        };
+      }),
+    /** Генерация ПФ журнала остатков и оборотов. */
+    generateReport: (dto: CreateReportFileDto) =>
+      request<IServerDataResp<IFileDataResponse>>({
+        data: dto,
+        method: 'POST',
+        url: `${STATEMENT_BANK_URL}/turnover/generate-report`,
+      }).then(x => x.data.data),
+  },
   /** Возвращает закрытые дни. */
   getClosedDays: (metaData: IMetaData): Promise<ICollectionResponse<ClosedDayRow>> =>
     request<IServerDataResp<IScrollerResponseDto<ClosedDayResponseDto>>>({
@@ -255,33 +278,6 @@ export const statementService = {
         total: response.data.data.size,
       };
     }),
-  /** Генерация ПФ журнала остатков и оборотов. */
-  generateTurnoversReport: ({
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateFrom,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    dateTo,
-    format,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    statementIds,
-  }: {
-    dateFrom: string;
-    dateTo: string;
-    format: FORMAT.EXCEL | FORMAT.PDF;
-    statementIds: string[];
-  }): Promise<IFileDataResponse> =>
-    new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
-      resolve(getEmptyFileMock(format));
-      // request<IServerDataResp<IFileDataResponse>>({
-      //   data: {
-      //     statementId,
-      //     dateFrom,
-      //     dateTo,
-      //     format,
-      //   },
-      //   method: 'POST',
-      //   url: `${STATEMENT_BANK_URL}/statement/generate-turnovers-report`,
-    }).then(response => response.data),
   /** Возвращает сверку остатков/оборотов. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getReconciliationTurnovers: (metaData: IMetaData): Promise<ICollectionResponse<ReconciliationTurnoverRow>> =>

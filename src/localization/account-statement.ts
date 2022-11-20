@@ -1231,6 +1231,15 @@ export default {
 					return t('admin.turnoverScroller.actions.exportTurnovers');
 				},
 			},
+			labels: {
+				/**
+				 * @ru
+				 * Формат:
+				 */
+				get format() {
+					return t('admin.turnoverScroller.labels.format');
+				},
+			},
 			/**
 			 * @ru
 			 * Остатки и обороты

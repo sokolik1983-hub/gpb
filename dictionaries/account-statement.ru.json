@@ -432,6 +432,7 @@
   "common.formats.PDF": "PDF",
   "common.formats.Excel": "Excel",
   "admin.turnoverScroller.actions.exportTurnovers": "Экспорт",
+  "admin.turnoverScroller.labels.format": "Формат:",
   "admin.turnoverScroller.title": "Остатки и обороты",
   "common.footer.selected": "Выбрано:",
   "admin.changedEntriesScroller.columns.date": "Дата проводки",
