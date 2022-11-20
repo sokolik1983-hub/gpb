@@ -17,11 +17,11 @@ export const routes = [
   /** Путь до скроллера истории запросов выписок. */
   <Route key="history-scroller" component={StatementHistoryScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_HISTORY} />,
   /** Путь до скроллера связанных запросов. */
-  <Route key="history-scroller" component={RelatedQueriesScrollerPage} path={ADMIN_STREAM_URL.RELATED_QUERIES} />,
+  <Route key="related-queries-scroller" component={RelatedQueriesScrollerPage} path={ADMIN_STREAM_URL.RELATED_QUERIES} />,
   /** Путь до скроллера просмотра остатков и оборотов. */
   <Route key="turnovers-scroller" component={TurnoversScrollerPage} path={ADMIN_STREAM_URL.STATEMENT_TURNOVERS} />,
   /** Путь до ЭФ просмотра журнала удаленных или добавленных проводок. */
-  <Route key="changed-entries" component={ChangedEntriesScrollerPage} path={ADMIN_STREAM_URL.CHANGED_ENTRIES} />,
+  <Route key="changed-entries-scroller" component={ChangedEntriesScrollerPage} path={ADMIN_STREAM_URL.CHANGED_ENTRIES} />,
   /** Путь до скроллера проводок на основании запроса. */
   <Route key="entries-scroller" component={EntriesScrollerPage} path={`${ADMIN_STREAM_URL.STATEMENT_ENTRY}/:id`} />,
   /** Путь до ЭФ журнала закрытых дней. */

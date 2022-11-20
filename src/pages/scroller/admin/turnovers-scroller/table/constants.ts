@@ -1,8 +1,5 @@
 import { SORT_DIRECTION } from '@platform/services';
 
-/** Ключ в sessionStorage для хранения фильтров. */
-export const STORAGE_KEY = '';
-
 /** Названия колонок скроллера. */
 export const COLUMN_NAMES = {
   /** Операционная дата. */

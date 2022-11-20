@@ -9,21 +9,22 @@ import type { IMetaData } from '@platform/services';
 import { useAuth } from '@platform/services/admin';
 import { FOOTER_ACTIONS } from '../action-config';
 import { AggregateRow } from '../aggregate-row';
+import { STORAGE_KEY } from '../constants';
 import { ScrollerContext } from '../context';
 import { Footer } from '../footer';
 import { columns } from './columns';
-import { DEFAULT_SORT, STORAGE_KEY } from './constants';
+import { DEFAULT_SORT } from './constants';
 
 /** Таблица скроллера. */
 export const Table: React.FC = () => {
   const { getAvailableActions } = useAuth();
-  const { selectedRows, setSelectedRows } = useContext(ScrollerContext);
+  const { selectedRows, setSelectedRows, filters } = useContext(ScrollerContext);
 
   const fetchData = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<ITurnoverMockDto>> => {
       try {
         const metaData: IMetaData = {
-          filters: {},
+          filters,
           multiSort,
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
@@ -35,8 +36,7 @@ export const Table: React.FC = () => {
         return { rows: [], pageCount: 0 };
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    [filters]
   );
 
   const footerActions = useCallback(
