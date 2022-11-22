@@ -15,39 +15,30 @@ import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
 export const OperationDateCell: React.FC<CellProps<TurnoverCard>> = ({ value: { turnoverDate } }) => {
-  const formattedEntryDate = formatDateTime(turnoverDate, { keepLocalTime: true, format: DATE_FORMAT });
+  const formattedDate = formatDateTime(turnoverDate, { keepLocalTime: true, format: DATE_FORMAT });
 
-  return <Typography.P line="COLLAPSE">{formattedEntryDate}</Typography.P>;
+  return <Typography.P line="COLLAPSE">{formattedDate}</Typography.P>;
 };
 
 OperationDateCell.displayName = 'OperationDateCell';
 
 /** Компонент с ячейкой для отображения номера счета. */
-export const AccountNumberCell: React.FC<CellProps<TurnoverCard>> = ({
-  value: {
-    account: { number },
-  },
-}) => {
-  const accountNumber = formatAccountCode(number);
+export const AccountNumberCell: React.FC<CellProps<TurnoverCard>> = ({ value: { account } }) => {
+  const accountNumber = formatAccountCode(account?.number);
 
-  return <Typography.P line={'COLLAPSE'}>{accountNumber}</Typography.P>;
+  return account ? <Typography.P line={'COLLAPSE'}>{accountNumber}</Typography.P> : null;
 };
 
 AccountNumberCell.displayName = 'AccountNumberCell';
 
 /** Компонент с ячейкой для отображения информации об организации. */
-export const OrganizationCell: React.FC<CellProps<TurnoverCard>> = ({
-  value: {
-    account: {
-      bankClient: { inn, name },
-    },
-  },
-}) => (
-  <>
-    <Typography.P line="COLLAPSE">{locale.common.inn({ inn })}</Typography.P>
-    <Typography.Text>{name}</Typography.Text>
-  </>
-);
+export const OrganizationCell: React.FC<CellProps<TurnoverCard>> = ({ value: { account } }) =>
+  account ? (
+    <>
+      <Typography.P line="COLLAPSE">{locale.common.inn({ inn: account?.bankClient?.inn })}</Typography.P>
+      <Typography.Text>{account?.bankClient?.name}</Typography.Text>
+    </>
+  ) : null;
 
 OrganizationCell.displayName = 'OrganizationCell';
 

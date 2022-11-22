@@ -17,47 +17,58 @@ export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = 
     outgoingBalanceInNationalCurrency,
     turnoverByCreditInNationalCurrency,
     turnoverByDebitInNationalCurrency,
-    account: {
-      currency: { letterCode },
-    },
+    account,
   },
-}) => (
-  <Box className={css.container} fill="FAINT">
-    <Pattern>
-      <Pattern.Span size={3}>
-        <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.incomingBalance}</Typography.Text>
-        <Typography.P>{locale.moneyString.unsigned({ amount: String(incomingBalance), currencyCode: letterCode })}</Typography.P>
-        <Typography.P className={css.unsigned}>
-          {locale.moneyString.unsigned({ amount: String(incomingBalanceInNationalCurrency), currencyCode: RUB_CURRENCY })}
-        </Typography.P>
-      </Pattern.Span>
-      <Pattern.Span size={3}>
-        <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverDebit}</Typography.Text>
-        <Typography.P fill="CRITIC">
-          {locale.moneyString.negative({ amount: String(turnoverByCredit), currencyCode: letterCode })}
-        </Typography.P>
-        <Typography.P className={css.negative} fill="CRITIC">
-          {locale.moneyString.negative({ amount: String(turnoverByCreditInNationalCurrency), currencyCode: RUB_CURRENCY })}
-        </Typography.P>
-      </Pattern.Span>
-      <Pattern.Span size={3}>
-        <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverCredit}</Typography.Text>
-        <Typography.P fill="SUCCESS">
-          {locale.moneyString.positive({ amount: String(turnoverByDebit), currencyCode: letterCode })}
-        </Typography.P>
-        <Typography.P className={css.positive} fill="SUCCESS">
-          {locale.moneyString.positive({ amount: String(turnoverByDebitInNationalCurrency), currencyCode: RUB_CURRENCY })}
-        </Typography.P>
-      </Pattern.Span>
-      <Pattern.Span size={3}>
-        <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.outgoingBalance}</Typography.Text>
-        <Typography.P>{locale.moneyString.unsigned({ amount: String(outgoingBalance), currencyCode: letterCode })}</Typography.P>
-        <Typography.P className={css.unsigned}>
-          {locale.moneyString.unsigned({ amount: String(outgoingBalanceInNationalCurrency), currencyCode: RUB_CURRENCY })}
-        </Typography.P>
-      </Pattern.Span>
-    </Pattern>
-  </Box>
-);
+}) => {
+  const currencyCode = account?.currency?.letterCode ?? RUB_CURRENCY;
+
+  return (
+    <Box className={css.container} fill="FAINT">
+      <Pattern>
+        <Pattern.Span size={3}>
+          <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.incomingBalance}</Typography.Text>
+          <Typography.P>
+            {locale.moneyString.unsigned({
+              amount: String(incomingBalance),
+              currencyCode,
+            })}
+          </Typography.P>
+          <Typography.P className={css.unsigned}>
+            {locale.moneyString.unsigned({ amount: String(incomingBalanceInNationalCurrency), currencyCode: RUB_CURRENCY })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={3}>
+          <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverDebit}</Typography.Text>
+          <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(turnoverByCredit), currencyCode })}</Typography.P>
+          <Typography.P className={css.negative} fill="CRITIC">
+            {locale.moneyString.negative({
+              amount: String(turnoverByCreditInNationalCurrency),
+              currencyCode: RUB_CURRENCY,
+            })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={3}>
+          <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverCredit}</Typography.Text>
+          <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(turnoverByDebit), currencyCode })}</Typography.P>
+          <Typography.P className={css.positive} fill="SUCCESS">
+            {locale.moneyString.positive({ amount: String(turnoverByDebitInNationalCurrency), currencyCode: RUB_CURRENCY })}
+          </Typography.P>
+        </Pattern.Span>
+        <Pattern.Span size={3}>
+          <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.outgoingBalance}</Typography.Text>
+          <Typography.P>
+            {locale.moneyString.unsigned({
+              amount: String(outgoingBalance),
+              currencyCode,
+            })}
+          </Typography.P>
+          <Typography.P className={css.unsigned}>
+            {locale.moneyString.unsigned({ amount: String(outgoingBalanceInNationalCurrency), currencyCode: RUB_CURRENCY })}
+          </Typography.P>
+        </Pattern.Span>
+      </Pattern>
+    </Box>
+  );
+};
 
 AggregateRow.displayName = 'AggregateRow';

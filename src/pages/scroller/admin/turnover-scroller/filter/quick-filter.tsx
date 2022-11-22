@@ -30,9 +30,9 @@ export const QuickFilter: React.FC<QuickFilterPanelProps> = ({ applyMixValuesFor
 
   const { values } = useFormState<FilterValues>();
 
-  const { accountNumbers, dateFrom, dateTo } = values;
+  const { accountNumbers, dateFrom, dateTo, bankClientIds } = values;
 
-  useSubmitScrollerFilter({ applyMixValuesFormAndStorage, submitDep: { accountNumbers, dateFrom, dateTo } });
+  useSubmitScrollerFilter({ applyMixValuesFormAndStorage, submitDep: { accountNumbers, dateFrom, dateTo, bankClientIds } });
 
   const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
   const selectedAccountOptions = useMemo(() => selectedAccounts.map(getAccountOption), [selectedAccounts]);
