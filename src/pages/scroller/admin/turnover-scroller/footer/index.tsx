@@ -1,13 +1,13 @@
 import React from 'react';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import { locale } from 'localization';
 import { Typography, Box, Horizon, Gap } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства футера скроллера. */
 interface FooterProps {
-  /** Выбранные записи в скроллере. */
-  selectedRows: ITurnoverMockDto[];
+  /** Выбранные записи. */
+  selectedRows: TurnoverCard[];
 }
 
 /** Компонент для вывода футера скроллера проводок. */

@@ -1234,6 +1234,15 @@
   "admin.entryScroller.footer.print": {
     "ru": "Печать документов"
   },
+  "admin.turnoverScroller.filter.labels.operationDate": {
+    "ru": "Опер. дата"
+  },
+  "admin.turnoverScroller.filter.placeholders.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.filter.placeholders.account": {
+    "ru": "Счёт"
+  },
   "admin.turnoverScroller.columns.operationDate": {
     "ru": "Операционная дата"
   },
@@ -1327,6 +1336,9 @@
   },
   "admin.turnoverScroller.actions.exportTurnovers": {
     "ru": "Экспорт"
+  },
+  "admin.turnoverScroller.labels.format": {
+    "ru": "Формат:"
   },
   "admin.turnoverScroller.title": {
     "ru": "Остатки и обороты"

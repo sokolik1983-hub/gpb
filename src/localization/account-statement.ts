@@ -1128,6 +1128,33 @@ export default {
 			},
 		},
 		turnoverScroller: {
+			filter: {
+				labels: {
+					/**
+					 * @ru
+					 * Опер. дата
+					 */
+					get operationDate() {
+						return t('admin.turnoverScroller.filter.labels.operationDate');
+					},
+				},
+				placeholders: {
+					/**
+					 * @ru
+					 * Организация
+					 */
+					get organization() {
+						return t('admin.turnoverScroller.filter.placeholders.organization');
+					},
+					/**
+					 * @ru
+					 * Счёт
+					 */
+					get account() {
+						return t('admin.turnoverScroller.filter.placeholders.account');
+					},
+				},
+			},
 			columns: {
 				/**
 				 * @ru
@@ -1202,6 +1229,15 @@ export default {
 				 */
 				get exportTurnovers() {
 					return t('admin.turnoverScroller.actions.exportTurnovers');
+				},
+			},
+			labels: {
+				/**
+				 * @ru
+				 * Формат:
+				 */
+				get format() {
+					return t('admin.turnoverScroller.labels.format');
 				},
 			},
 			/**

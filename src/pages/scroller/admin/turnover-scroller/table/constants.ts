@@ -1,7 +1,5 @@
+import type { ISortSettings } from '@platform/services';
 import { SORT_DIRECTION } from '@platform/services';
-
-/** Ключ в sessionStorage для хранения фильтров. */
-export const STORAGE_KEY = '';
 
 /** Названия колонок скроллера. */
 export const COLUMN_NAMES = {
@@ -20,6 +18,6 @@ export const COLUMN_NAMES = {
 };
 
 /** Состояние сортровки по умолчанию. */
-export const DEFAULT_SORT = {
-  [COLUMN_NAMES.CREATION_DATE]: SORT_DIRECTION.DESC,
+export const DEFAULT_SORT: ISortSettings = {
+  [COLUMN_NAMES.ACCOUNT_NUMBER]: SORT_DIRECTION.DESC,
 };

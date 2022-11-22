@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { executor } from 'actions/admin';
 import { StopPropagation } from 'components/common';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
@@ -14,8 +14,8 @@ import { ROW_ACTIONS } from '../action-config';
 import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
-export const OperationDateCell: React.FC<CellProps<ITurnoverMockDto>> = ({ value: { operationDate } }) => {
-  const formattedEntryDate = formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT });
+export const OperationDateCell: React.FC<CellProps<TurnoverCard>> = ({ value: { turnoverDate } }) => {
+  const formattedEntryDate = formatDateTime(turnoverDate, { keepLocalTime: true, format: DATE_FORMAT });
 
   return <Typography.P line="COLLAPSE">{formattedEntryDate}</Typography.P>;
 };
@@ -23,7 +23,7 @@ export const OperationDateCell: React.FC<CellProps<ITurnoverMockDto>> = ({ value
 OperationDateCell.displayName = 'OperationDateCell';
 
 /** Компонент с ячейкой для отображения номера счета. */
-export const AccountNumberCell: React.FC<CellProps<ITurnoverMockDto>> = ({
+export const AccountNumberCell: React.FC<CellProps<TurnoverCard>> = ({
   value: {
     account: { number },
   },
@@ -36,7 +36,7 @@ export const AccountNumberCell: React.FC<CellProps<ITurnoverMockDto>> = ({
 AccountNumberCell.displayName = 'AccountNumberCell';
 
 /** Компонент с ячейкой для отображения информации об организации. */
-export const OrganizationCell: React.FC<CellProps<ITurnoverMockDto>> = ({
+export const OrganizationCell: React.FC<CellProps<TurnoverCard>> = ({
   value: {
     account: {
       bankClient: { inn, name },
@@ -52,36 +52,21 @@ export const OrganizationCell: React.FC<CellProps<ITurnoverMockDto>> = ({
 OrganizationCell.displayName = 'OrganizationCell';
 
 /** Компонент с ячейкой для отображения о филиале баланса счёта. */
-export const AccountBranchCell: React.FC<CellProps<ITurnoverMockDto>> = ({
-  value: {
-    serviceBranch: { absCode, filialName },
-  },
-}) => (
-  <>
-    <Typography.P line="COLLAPSE">{absCode}</Typography.P>
-    <Typography.Text>{filialName}</Typography.Text>
-  </>
+export const AccountBranchCell: React.FC<CellProps<TurnoverCard>> = ({ value: { balanceBranchCode } }) => (
+  <Typography.P line="COLLAPSE">{balanceBranchCode}</Typography.P>
 );
 
 AccountBranchCell.displayName = 'AccountBranchCell';
 
 /** Компонент с ячейкой для отображения информации о филиале обслуживания. */
-export const ServiceBranchCell: React.FC<CellProps<ITurnoverMockDto>> = ({
-  value: {
-    accountBranch: { absCode, filialName },
-  },
-  // eslint-disable-next-line sonarjs/no-identical-functions
-}) => (
-  <>
-    <Typography.P line="COLLAPSE">{absCode}</Typography.P>
-    <Typography.Text>{filialName}</Typography.Text>
-  </>
+export const ServiceBranchCell: React.FC<CellProps<TurnoverCard>> = ({ value: { serviceBranchCode } }) => (
+  <Typography.P line="COLLAPSE">{serviceBranchCode}</Typography.P>
 );
 
 ServiceBranchCell.displayName = 'ServiceBranchCell';
 
 /** Компонент с ячейкой для экшонов для строки. */
-export const ActionsCell: React.FC<CellProps<ITurnoverMockDto>> = ({ row: { original: doc } }) => {
+export const ActionsCell: React.FC<CellProps<TurnoverCard>> = ({ row: { original: doc } }) => {
   const { getAvailableActions } = useAuth();
 
   const params = useMemo(() => [[doc], '', ''], [doc]);

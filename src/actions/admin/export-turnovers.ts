@@ -1,5 +1,5 @@
 import { showExportByFormatDialog } from 'components/admin/export-by-format-dialog';
-import type { ITurnoverMockDto } from 'interfaces/admin/dto/turnover-mock-dto';
+import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
 import { fatalHandler } from 'utils/common';
 import { to } from '@platform/core';
 import type { IActionConfig } from '@platform/services';
@@ -12,7 +12,7 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=77694063
  * */
 export const exportTurnovers: IActionConfig<typeof context, unknown> = {
-  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (docs: ITurnoverMockDto[], dateFrom: string, dateTo: string) => {
+  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (docs: TurnoverCard[], dateFrom: string, dateTo: string) => {
     const [format, cancel] = await to(showExportByFormatDialog());
 
     if (cancel) {
@@ -24,11 +24,11 @@ export const exportTurnovers: IActionConfig<typeof context, unknown> = {
     showLoader();
 
     const [file, error] = await to(
-      service.generateTurnoversReport({
+      service.turnover.generateReport({
         dateFrom,
         dateTo,
         format: format!,
-        statementIds: docs.map(x => x.id),
+        ids: docs.map(x => x.id),
       })
     );
 

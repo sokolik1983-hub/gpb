@@ -9,3 +9,4 @@ export * from './map-dto-to-view-for-service-branch-list';
 export * from './map-dto-to-view-for-statement-list';
 export * from './map-dto-to-view-for-statement-summary';
 export * from './map-dto-to-view-for-user-list';
+export * from './map-for-turnovers';
