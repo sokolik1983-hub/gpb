@@ -1,3 +1,11 @@
+# [2.16.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.5...v2.16.0-release.6) (2022-11-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-36569 реализация фильтра для скроллера остатков и оборотов ([70210dd](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/70210ddbc18d30755b7e1cab40735ab115a03096))
+* **скроллер:** GBO-38487 интеграция с BE ([cf0b5fb](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cf0b5fb20c0ef0c34693920dd25143b9d24ce4cf))
+
 # [2.16.0-release.5](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.4...v2.16.0-release.5) (2022-11-18)
 
 
