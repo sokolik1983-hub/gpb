@@ -1,3 +1,10 @@
+# [2.16.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.6...v2.16.0-release.7) (2022-11-22)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-38487 интеграция с BE ([c48dfd2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c48dfd288f4c08c8c543b13c5d0ef6fb1a116c63))
+
 # [2.16.0-release.6](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.5...v2.16.0-release.6) (2022-11-22)
 
 
