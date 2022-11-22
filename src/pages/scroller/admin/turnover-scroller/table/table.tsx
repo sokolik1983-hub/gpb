@@ -1,6 +1,8 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { executor } from 'actions/admin';
+import { DataTableWithTotal } from 'components/common';
 import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
+import { locale } from 'localization';
 import type { IFetchDataParams, IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
@@ -8,10 +10,11 @@ import { convertTablePaginationToMetaData, getActiveActionButtons } from 'utils/
 import type { IMetaData } from '@platform/services';
 import { useAuth } from '@platform/services/admin';
 import { FOOTER_ACTIONS } from '../action-config';
-import { AggregateRow } from '../aggregate-row';
 import { STORAGE_KEY } from '../constants';
 import { ScrollerContext } from '../context';
+import { FORM_FIELDS } from '../filter/constants';
 import { Footer } from '../footer';
+import { SummaryRow } from '../summary-row';
 import { columns } from './columns';
 import { DEFAULT_SORT } from './constants';
 
@@ -19,6 +22,7 @@ import { DEFAULT_SORT } from './constants';
 export const Table: React.FC = () => {
   const { getAvailableActions } = useAuth();
   const { selectedRows, setSelectedRows, filters } = useContext(ScrollerContext);
+  const [total, setTotal] = useState<number>();
 
   const fetchData = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<TurnoverCard>> => {
@@ -29,9 +33,11 @@ export const Table: React.FC = () => {
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
 
-        const { data, total } = await statementService.turnover.page(metaData);
+        const { data, total: totalCount } = await statementService.turnover.page(metaData);
 
-        return { rows: data, pageCount: Math.ceil(total / pageSize) };
+        setTotal(totalCount);
+
+        return { rows: data, pageCount: Math.ceil(totalCount / pageSize) };
       } catch {
         return { rows: [], pageCount: 0 };
       }
@@ -41,23 +47,29 @@ export const Table: React.FC = () => {
 
   const footerActions = useCallback(
     scrollerExecutor => (rows: TurnoverCard[]) =>
-      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, '', '']),
-    [getAvailableActions]
+      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [
+        rows,
+        filters[FORM_FIELDS.DATE_FROM]?.value,
+        filters[FORM_FIELDS.DATE_TO]?.value,
+      ]),
+    [filters, getAvailableActions]
   );
 
   return (
-    <InfiniteDataTable<TurnoverCard>
-      columns={columns}
-      defaultSort={DEFAULT_SORT}
-      executor={executor}
-      expandedRowComponent={AggregateRow}
-      fetchData={fetchData}
-      footerActionsGetter={footerActions}
-      footerContent={Footer}
-      selectedRows={selectedRows}
-      storageKey={STORAGE_KEY}
-      onSelectedRowsChange={setSelectedRows}
-    />
+    <DataTableWithTotal label={locale.admin.transactionsScroller.table.total} total={total}>
+      <InfiniteDataTable<TurnoverCard>
+        columns={columns}
+        defaultSort={DEFAULT_SORT}
+        executor={executor}
+        expandedRowComponent={SummaryRow}
+        fetchData={fetchData}
+        footerActionsGetter={footerActions}
+        footerContent={Footer}
+        selectedRows={selectedRows}
+        storageKey={STORAGE_KEY}
+        onSelectedRowsChange={setSelectedRows}
+      />
+    </DataTableWithTotal>
   );
 };
 

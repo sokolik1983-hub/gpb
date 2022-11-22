@@ -7,7 +7,7 @@ import { Box, Pattern, Typography } from '@platform/ui';
 import css from './styles.scss';
 
 /** Строка с агррегирующей информацей по записи остатков и оборотов. */
-export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = ({
+export const SummaryRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = ({
   row: {
     incomingBalance,
     outgoingBalance,
@@ -25,7 +25,7 @@ export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = 
   return (
     <Box className={css.container} fill="FAINT">
       <Pattern>
-        <Pattern.Span size={3}>
+        <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.incomingBalance}</Typography.Text>
           <Typography.P>
             {locale.moneyString.unsigned({
@@ -37,7 +37,7 @@ export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = 
             {locale.moneyString.unsigned({ amount: String(incomingBalanceInNationalCurrency), currencyCode: RUB_CURRENCY })}
           </Typography.P>
         </Pattern.Span>
-        <Pattern.Span size={3}>
+        <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverDebit}</Typography.Text>
           <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(turnoverByCredit), currencyCode })}</Typography.P>
           <Typography.P className={css.negative} fill="CRITIC">
@@ -47,14 +47,14 @@ export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = 
             })}
           </Typography.P>
         </Pattern.Span>
-        <Pattern.Span size={3}>
+        <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverCredit}</Typography.Text>
           <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(turnoverByDebit), currencyCode })}</Typography.P>
           <Typography.P className={css.positive} fill="SUCCESS">
             {locale.moneyString.positive({ amount: String(turnoverByDebitInNationalCurrency), currencyCode: RUB_CURRENCY })}
           </Typography.P>
         </Pattern.Span>
-        <Pattern.Span size={3}>
+        <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.outgoingBalance}</Typography.Text>
           <Typography.P>
             {locale.moneyString.unsigned({
@@ -71,4 +71,4 @@ export const AggregateRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = 
   );
 };
 
-AggregateRow.displayName = 'AggregateRow';
+SummaryRow.displayName = 'SummaryRow';

@@ -11,8 +11,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Header: locale.admin.turnoverScroller.columns.operationDate,
     accessor,
     id: COLUMN_NAMES.CREATION_DATE,
-    width: 132,
-    disableSortBy: true,
+    width: 230,
     isVisible: true,
   },
   {
@@ -20,7 +19,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Header: locale.admin.turnoverScroller.columns.accountNumber,
     accessor,
     id: COLUMN_NAMES.ACCOUNT_NUMBER,
-    width: 216,
+    width: 250,
     isVisible: true,
   },
   {
@@ -28,8 +27,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Header: locale.admin.turnoverScroller.columns.organization,
     accessor,
     id: COLUMN_NAMES.ORGANIZATION,
-    width: 216,
-    disableSortBy: true,
+    width: 250,
     isVisible: true,
   },
   {
@@ -37,8 +35,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Header: locale.admin.turnoverScroller.columns.accountBranch,
     accessor,
     id: COLUMN_NAMES.ACCOUNT_BRANCH,
-    width: 200,
-    disableSortBy: true,
+    width: 240,
     isVisible: true,
   },
   {
@@ -46,8 +43,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Header: locale.admin.turnoverScroller.columns.serviceBranch,
     accessor,
     id: COLUMN_NAMES.SERVICE_BRANCH,
-    width: 200,
-    disableSortBy: true,
+    width: 240,
     isVisible: true,
   },
   {

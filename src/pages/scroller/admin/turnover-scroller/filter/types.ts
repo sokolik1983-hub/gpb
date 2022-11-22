@@ -7,5 +7,5 @@ export interface FilterValues {
   /** Организации. */
   bankClientIds?: string[];
   /** Счета. */
-  accountNumbers: string[];
+  accountNumbers?: string[];
 }

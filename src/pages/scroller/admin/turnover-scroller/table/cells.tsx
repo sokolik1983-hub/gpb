@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { executor } from 'actions/admin';
 import { StopPropagation } from 'components/common';
 import type { TurnoverCard } from 'interfaces/admin/dto/turnover';
@@ -11,6 +11,9 @@ import { formatDateTime } from '@platform/tools/date-time';
 import { formatAccountCode } from '@platform/tools/localization';
 import { Gap, Horizon, RegularButton, ServiceIcons, Typography, WithDropDown } from '@platform/ui';
 import { ROW_ACTIONS } from '../action-config';
+import type { ScrollerContextProps } from '../context';
+import { ScrollerContext } from '../context';
+import { FORM_FIELDS } from '../filter/constants';
 import css from './styles.scss';
 
 /** Компонент с ячейкой для отображения информации о дате. */
@@ -59,8 +62,9 @@ ServiceBranchCell.displayName = 'ServiceBranchCell';
 /** Компонент с ячейкой для экшонов для строки. */
 export const ActionsCell: React.FC<CellProps<TurnoverCard>> = ({ row: { original: doc } }) => {
   const { getAvailableActions } = useAuth();
+  const { filters } = useContext<ScrollerContextProps>(ScrollerContext);
 
-  const params = useMemo(() => [[doc], '', ''], [doc]);
+  const params = useMemo(() => [[doc], filters[FORM_FIELDS.DATE_FROM]?.value, filters[FORM_FIELDS.DATE_TO]?.value], [doc, filters]);
   const actions = useMemo(() => getActionButtons(getAvailableActions(ROW_ACTIONS), executor, params), [getAvailableActions, params]);
 
   if (actions.length === 0) {
