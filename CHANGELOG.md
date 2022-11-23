@@ -1,3 +1,10 @@
+# [2.16.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.7...v2.16.0-release.8) (2022-11-23)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-38705 кумулятивное исправление дефектов ([c8e1d58](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c8e1d58842aa4f8e2247f5e3b0ddd53d850d70b4))
+
 # [2.16.0-release.7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.6...v2.16.0-release.7) (2022-11-22)
 
 
