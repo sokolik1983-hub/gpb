@@ -11,7 +11,7 @@ interface DataTableWithTotalProps<T extends IBaseEntity> {
   /** Лейбл. */
   label: string;
   /** Общее количество записей. */
-  total: number;
+  total?: number;
 }
 
 /** Рендер переданной таблицы с выводом общего количества записей. */

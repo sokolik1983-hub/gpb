@@ -13,12 +13,13 @@ import { HEADER_ACTIONS } from './action-config';
 import type { ScrollerContextProps } from './context';
 import { defaultValue, ScrollerContext } from './context';
 import { Filter } from './filter';
+import { FORM_FIELDS } from './filter/constants';
 import { Table } from './table';
 
 /** Скроллер остатков и оборотов. */
 export const TurnoverScrollerPage: React.FC = () => {
   const { getAvailableActions } = useAuth();
-  const [filters, setFilters] = useState<IFilters>({});
+  const [filters, setFilters] = useState<IFilters>(defaultValue.filters);
 
   const [selectedRows, setSelectedRows] = useState<TurnoverCard[]>(defaultValue.selectedRows);
   const contextValue: ScrollerContextProps = useMemo(
@@ -31,7 +32,10 @@ export const TurnoverScrollerPage: React.FC = () => {
     [filters, selectedRows]
   );
 
-  const params = useMemo(() => [selectedRows, '', ''], [selectedRows]);
+  const params = useMemo(() => [selectedRows, filters[FORM_FIELDS.DATE_FROM]?.value, filters[FORM_FIELDS.DATE_TO]?.value], [
+    filters,
+    selectedRows,
+  ]);
 
   const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, params), [
     getAvailableActions,

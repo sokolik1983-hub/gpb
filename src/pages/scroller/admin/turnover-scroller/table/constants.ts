@@ -4,15 +4,15 @@ import { SORT_DIRECTION } from '@platform/services';
 /** Названия колонок скроллера. */
 export const COLUMN_NAMES = {
   /** Операционная дата. */
-  CREATION_DATE: 'creationDate',
+  CREATION_DATE: 'turnoverDate',
   /** Номер счёта. */
-  ACCOUNT_NUMBER: 'account.number',
+  ACCOUNT_NUMBER: 'accountNumber',
   /** Организация. */
-  ORGANIZATION: 'account.bankClient.name',
-  /** Филиал баланса счёта. */
-  ACCOUNT_BRANCH: 'accountBranch',
-  /** Филиал обслуживания. */
-  SERVICE_BRANCH: 'serviceBranch',
+  ORGANIZATION: 'bankClientId',
+  /** Код филиала (баланс). */
+  ACCOUNT_BRANCH: 'balanceBranchCode',
+  /** Код филиала (обслуживание). */
+  SERVICE_BRANCH: 'serviceBranchCode',
   /** Колонка с экшонами. */
   ACTIONS: 'ACTIONS',
 };
