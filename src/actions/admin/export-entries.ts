@@ -1,5 +1,4 @@
 import { showEntriesParamsDialog } from 'components/admin/entries-params-dialog';
-import { FIELD_NAME } from 'components/admin/entries-params-dialog/constants';
 import { ACTION, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces';
 import type { AccountingEntryAttachmentRequest } from 'interfaces/admin/accounting-entry-attachment-request';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
@@ -44,7 +43,7 @@ export const getExportEntries = (action: ACTION.DOWNLOAD | ACTION.PRINT, hideDia
         return;
       }
 
-      const { [FIELD_NAME]: formState } = response!;
+      const formState = response!;
 
       requestParams.includeCreditOrders = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_BASE_DOCUMENTS);
       requestParams.includeDebitOrders = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_BASE_DOCUMENTS);
@@ -63,11 +62,7 @@ export const getExportEntries = (action: ACTION.DOWNLOAD | ACTION.PRINT, hideDia
       }
     }
 
-    const [file, error] = await to(
-      service.exportEntries({
-        entriesIds,
-      })
-    );
+    const [file, error] = await to(service.exportEntries(requestParams));
 
     if (error || !file || file.content.length === 0) {
       hideLoader();

@@ -18,4 +18,6 @@ export const options = [
   },
 ];
 
-export const initialValues = {};
+export const initialValues = {
+  [FIELD_NAME]: [],
+};

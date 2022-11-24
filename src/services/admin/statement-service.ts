@@ -1,5 +1,11 @@
-import type { ServerResponseList, ServerResponseData, ServerResponsePage, ScrollerResponseDto, IScrollerResponseDto } from 'interfaces';
-import { FORMAT } from 'interfaces';
+import type {
+  FORMAT,
+  ServerResponseList,
+  ServerResponseData,
+  ServerResponsePage,
+  ScrollerResponseDto,
+  IScrollerResponseDto,
+} from 'interfaces';
 import type {
   Account,
   Branch,
@@ -25,6 +31,7 @@ import type {
   TotalTurnoverGroupedByCurrencyResponseDto,
   User,
 } from 'interfaces/admin';
+import type { AccountingEntryAttachmentRequest } from 'interfaces/admin/accounting-entry-attachment-request';
 import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
@@ -48,7 +55,6 @@ import {
   mapForTurnovers,
 } from 'services/admin/mappers';
 import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
-import { getEmptyFileMock } from 'services/admin/mock/get-empty-file-mock';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
 import { getStatementList, metadataToRequestParamsWithCustomFilter, metadataToRequestParamsWithCustomSort } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
@@ -299,13 +305,13 @@ export const statementService = {
         total: response.data.data.size,
       };
     }),
-  /** Генерация ПФ журнала остатков и оборотов. */
-  // TODO Убрать после реализации API
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  exportEntries: ({ entriesIds }: { entriesIds: string[] }): Promise<IFileDataResponse> =>
-    new Promise<IServerDataResp<IFileDataResponse>>(resolve => {
-      resolve(getEmptyFileMock(FORMAT.PDF));
-    }).then(response => response.data),
+  /** Сформировать документы выписки/основания без привязки к выписке. */
+  exportEntries: (requestData: AccountingEntryAttachmentRequest): Promise<IFileDataResponse> =>
+    request<IServerDataResp<IFileDataResponse>>({
+      data: requestData,
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/entry/create-attachment`,
+    }).then(x => x.data.data),
   /** Получение данных скроллера добавленных/удалённых проводок. */
   // TODO Убрать после реализации API
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

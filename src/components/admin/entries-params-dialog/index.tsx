@@ -2,8 +2,7 @@ import React, { useMemo } from 'react';
 import type { ACTION } from 'interfaces';
 import { Form } from 'react-final-form';
 import { dialog } from '@platform/ui';
-import type { FIELD_NAME } from './constants';
-import { initialValues } from './constants';
+import { FIELD_NAME, initialValues } from './constants';
 import { Content } from './content';
 import type { IDialogContext } from './dialog-context';
 import { DialogContext } from './dialog-context';
@@ -17,7 +16,7 @@ export interface IExportParamsDialogProps {
   /** Обработчик закрытия формы. */
   onClose(): void;
   /** Обработчик отправки формы. */
-  onSubmit(value: IParamsFormState): void;
+  onSubmit(value: string[]): void;
 }
 
 export interface IParamsFormState {
@@ -28,7 +27,7 @@ export interface IParamsFormState {
 export const EntriesParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, action, amount }) => {
   const handleSubmit = (value: IParamsFormState) => {
     onClose();
-    onSubmit(value);
+    onSubmit(value[FIELD_NAME]);
   };
 
   const value: IDialogContext = useMemo(
@@ -50,6 +49,6 @@ export const EntriesParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClos
 EntriesParamsDialog.displayName = 'EntriesParamsDialog';
 
 export const showEntriesParamsDialog = (params: Omit<IExportParamsDialogProps, 'onClose' | 'onSubmit'>) =>
-  new Promise<IParamsFormState>((resolve, reject) =>
+  new Promise<string[]>((resolve, reject) =>
     dialog.show('statementParamsDialog', EntriesParamsDialog, { onSubmit: resolve, ...params }, () => reject(true))
   );
