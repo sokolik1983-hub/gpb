@@ -1,4 +1,4 @@
-import type { AccountOrganization, ServiceBranch } from 'interfaces/admin';
+import type { AccountOrganization, Branch } from 'interfaces/admin';
 import type { IAccountV2 } from '@platform/services/admin';
 
 /** Свойства счета выписки. */
@@ -12,8 +12,8 @@ export interface StatementAccount {
   /** Организация. */
   bankClient: AccountOrganization;
   /** Филиал обслуживания. */
-  branch: ServiceBranch;
+  branch: Branch;
 }
 
 /** Свойства счета. */
-export type Account = Pick<IAccountV2, 'accountNumber' | 'bankClient' | 'id'>;
+export type Account = Pick<IAccountV2, 'accountNumber' | 'accountType' | 'bankClient' | 'branch' | 'id'>;

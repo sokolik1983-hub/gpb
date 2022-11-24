@@ -10,7 +10,7 @@ import css from './styles.scss';
 export interface ScrollerPageLayoutProps {
   /** Свойства категорий. */
   categoryTabs?: ICategoryTabsProps;
-  /** Свойства заголовока скроллера. */
+  /** Свойства заголовка скроллера. */
   headerProps: ScrollerHeaderProps & { loading?: boolean };
   /** Признак загрузки скроллера. */
   loading?: boolean;

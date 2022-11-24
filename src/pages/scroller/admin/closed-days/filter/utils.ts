@@ -1,4 +1,4 @@
-import type { Branch } from 'interfaces/admin';
+import type { StatementBranch } from 'interfaces/admin';
 import type { BranchOptionProps } from 'pages/scroller/admin/closed-days/filter/branch-option';
 
 /**
@@ -8,7 +8,7 @@ import type { BranchOptionProps } from 'pages/scroller/admin/closed-days/filter/
  * @param branch.branchCode - Код филиала.
  * @param branch.branchName - Название филиала.
  */
-export const getBranchOption = ({ branchCode, branchName }: Branch): BranchOptionProps => ({
+export const getBranchOption = ({ branchCode, branchName }: StatementBranch): BranchOptionProps => ({
   branchCode,
   label: branchName,
   value: branchCode,

@@ -1,22 +1,6 @@
-import type { Organization, ServiceBranch, User } from 'interfaces/admin';
-import type { OrganizationOptionProps } from 'pages/scroller/admin/statements/components/filter/organization-option';
+import type { Branch, User } from 'interfaces/admin';
 import { getFullName } from 'utils/common';
 import type { IOption } from '@platform/ui';
-
-/**
- * Возвращает опцию выбора организации.
- *
- * @param organization - Организация.
- * @param organization.fullName - Полное наименование.
- * @param organization.id - Идентификатор.
- * @param organization.innKio - ИНН.
- * @param organization.shortName - Короткое наименование.
- */
-export const getOrganizationOption = ({ fullName, id, innKio, shortName }: Organization): OrganizationOptionProps => ({
-  inn: innKio,
-  label: shortName || fullName,
-  value: id,
-});
 
 /**
  * Возвращает опцию выбора подразделения обслуживания.
@@ -25,7 +9,7 @@ export const getOrganizationOption = ({ fullName, id, innKio, shortName }: Organ
  * @param serviceBranch.filialName - Название филиала.
  * @param serviceBranch.id - Идентификатор.
  */
-export const getServiceBranchOption = ({ filialName, id }: ServiceBranch): IOption => ({
+export const getServiceBranchOption = ({ filialName, id }: Branch): IOption => ({
   label: filialName,
   value: id,
 });

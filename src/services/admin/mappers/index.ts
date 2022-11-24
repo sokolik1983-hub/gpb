@@ -10,3 +10,4 @@ export * from './map-dto-to-view-for-statement-list';
 export * from './map-dto-to-view-for-statement-summary';
 export * from './map-dto-to-view-for-user-list';
 export * from './map-for-turnovers';
+export * from './map-dto-to-view-statement-request-card';

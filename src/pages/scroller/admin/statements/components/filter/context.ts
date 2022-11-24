@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 import type { IFilterPanel, ITagsPanel } from 'interfaces';
-import type { Account, Organization, ServiceBranch, User } from 'interfaces/admin';
+import type { Account, Organization, Branch, User } from 'interfaces/admin';
 import type { FilterValues } from 'pages/scroller/admin/statements/components/filter/types';
 import { noop } from '@platform/ui';
 
@@ -19,7 +19,7 @@ export interface FilterContextProps {
   /** Выбранные пользователи (из Session Storage). */
   selectedUsers: User[];
   /** Подразделения обслуживания. */
-  serviceBranches: ServiceBranch[];
+  serviceBranches: Branch[];
   /** Установить подстроку поиска счета. */
   setAccountSearchValue(value: string): void;
   /** Устанавливает признак завершения расчитывания периода. */

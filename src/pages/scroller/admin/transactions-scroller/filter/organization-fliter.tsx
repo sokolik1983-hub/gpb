@@ -4,6 +4,7 @@ import { useOrganizations } from 'hooks/admin';
 import type { Organization } from 'interfaces/admin';
 import { useDebounce } from 'platform-copies/hooks';
 import { useFormState } from 'react-final-form';
+import { getOrganizationSearchFilter } from 'utils/admin';
 import { stringifyCounterparty } from 'utils/common';
 import { OrganizationOption } from './organization-option';
 
@@ -40,7 +41,7 @@ export const OrganizationFilter: React.FC<IProps> = ({ name, placeholder }: IPro
   const [searchString, setSearchString] = useState('');
 
   const searchValueDebounced = useDebounce(searchString, DEBOUNCE_DELAY);
-  const { data: accounts, isFetched } = useOrganizations(searchValueDebounced);
+  const { data: accounts, isFetched } = useOrganizations(getOrganizationSearchFilter(searchValueDebounced));
 
   const options = useMemo(() => accounts.map(getOrganizationOption), [accounts]);
   const selectedOptions = useMemo(() => formOptions.map(getOrganizationOption), [formOptions]);

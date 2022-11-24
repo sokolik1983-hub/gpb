@@ -961,6 +961,70 @@ export default {
 				return t('admin.scroller.title');
 			},
 		},
+		button: {
+			/**
+			 * @ru
+			 * К запросу выписок
+			 */
+			get toStatementRequest() {
+				return t('admin.button.toStatementRequest');
+			},
+			/**
+			 * @ru
+			 * К запросам выписок
+			 */
+			get toStatementRequests() {
+				return t('admin.button.toStatementRequests');
+			},
+		},
+		statementRequestCard: {
+			/**
+			 * @ru
+			 * Параметры запроса
+			 */
+			get pageTitle() {
+				return t('admin.statementRequestCard.pageTitle');
+			},
+		},
+		statementRequestForm: {
+			/**
+			 * @ru
+			 * Запрос выписки
+			 */
+			get pageTitle() {
+				return t('admin.statementRequestForm.pageTitle');
+			},
+			label: {
+				/**
+				 * @ru
+				 * Организация
+				 */
+				get organization() {
+					return t('admin.statementRequestForm.label.organization');
+				},
+				/**
+				 * @ru
+				 * Подразделение обслуживания
+				 */
+				get serviceBranch() {
+					return t('admin.statementRequestForm.label.serviceBranch');
+				},
+				/**
+				 * @ru
+				 * Счёт
+				 */
+				get account() {
+					return t('admin.statementRequestForm.label.account');
+				},
+				/**
+				 * @ru
+				 * Тип счёта
+				 */
+				get accountType() {
+					return t('admin.statementRequestForm.label.accountType');
+				},
+			},
+		},
 		entryScroller: {
 			columns: {
 				/**
@@ -3213,15 +3277,6 @@ export default {
 			 */
 			get label() {
 				return t('common.email.label');
-			},
-		},
-		button: {
-			/**
-			 * @ru
-			 * К запросу выписок
-			 */
-			get toStatementRequests() {
-				return t('common.button.toStatementRequests');
 			},
 		},
 		checkAuthority: {
