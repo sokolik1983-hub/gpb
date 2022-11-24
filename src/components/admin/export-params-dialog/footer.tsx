@@ -1,20 +1,20 @@
 import React, { useContext } from 'react';
+import { ACTION } from 'interfaces';
 import { locale } from 'localization';
-import { downloadButtonShowCases, printButtonShowCases } from 'utils/admin/export-params-dialog';
-import { Adjust, Gap, Horizon, PrimaryButton, RegularButton, ACTIONS } from '@platform/ui';
-import { DialogContext } from './dialog-context';
+import { ACTIONS, Adjust, Gap, Horizon, PrimaryButton, RegularButton } from '@platform/ui';
 import type { IDialogContext } from './dialog-context';
+import { DialogContext } from './dialog-context';
 
 // TODO: в рамках ТехДолга переделать футер с использованием actions из DialogTemplate
 
 /** Подвал с кнопками на ЭФ параметров экспорта.  */
 export const Footer: React.FC = () => {
-  const { useCase } = useContext<IDialogContext>(DialogContext);
-  const isDownloadButtonShow = downloadButtonShowCases.includes(useCase!);
+  const { action } = useContext<IDialogContext>(DialogContext);
+  const isDownloadButtonShow = action !== ACTION.PRINT;
   // TODO: для MVP принудительно скрываем, после - восстанавливаем
   // const isSendToEmailButtonShow = sendToEmailButtonShowCases.includes(useCase!);
   const isSendToEmailButtonShow = false;
-  const isPrintButtonShow = printButtonShowCases.includes(useCase!);
+  const isPrintButtonShow = action === ACTION.PRINT;
 
   return (
     <Horizon className={Adjust.getPadClass(['LG', null, null, null])}>

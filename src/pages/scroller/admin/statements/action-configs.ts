@@ -1,11 +1,11 @@
 import {
-  exportStatement,
   exportStatementsHistory,
   repeatStatement,
   showStatementRequestForm,
   viewTransactionsScroller,
   viewModifiedTransactions,
   viewStatementRequestCard,
+  exportExistingStatement,
 } from 'actions/admin';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { DATA_ACTION } from 'interfaces/data-action';
@@ -44,7 +44,7 @@ export const REPEAT_STATEMENT: IExtendedIActionWithAuth = {
 
 /** Экшн экспорта выписки. */
 const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
-  action: exportStatement,
+  action: exportExistingStatement,
   authorities: [],
   dataAction: DATA_ACTION.EXPORT,
   icon: Icons.Export,
