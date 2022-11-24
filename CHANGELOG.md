@@ -1,3 +1,12 @@
+# [2.16.0-release.10](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.9...v2.16.0-release.10) (2022-11-24)
+
+
+### Features
+
+* GBO-36588 Рефактор экспорта/печати выписки ([0792d86](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/0792d86d1df287a4fcd00ab3c32f36d6bcf3a55a))
+* GBO-36593 Действия печати и экспорта документов проводок ([5d9e1ee](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/5d9e1ee6a4ca181640a81a1f656bc35d125ae4e4))
+* GBO-37548 [Скроллер проводок] Интеграция с BE ([4e7cd59](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4e7cd597704a133d81507632cb1d8cc32e822852))
+
 # [2.16.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.8...v2.16.0-release.9) (2022-11-24)
 
 
