@@ -9,5 +9,5 @@ export interface CreateReportFileDto {
   /** Формат. */
   format: FORMAT.EXCEL | FORMAT.PDF;
   /** Список id сущностей для печати. */
-  ids: string[];
+  ids: Array<{ accountNumber: string; balanceBranchCode: string; operationDate: string }>;
 }

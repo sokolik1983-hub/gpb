@@ -435,6 +435,7 @@
   "admin.turnoverScroller.actions.exportTurnovers": "Экспорт",
   "admin.turnoverScroller.labels.format": "Формат:",
   "admin.turnoverScroller.title": "Остатки и обороты",
+  "admin.turnoverScroller.table.total": "Записей",
   "common.footer.selected": "Выбрано:",
   "admin.changedEntriesScroller.columns.date": "Дата проводки",
   "admin.changedEntriesScroller.columns.account": "Клиент банка",

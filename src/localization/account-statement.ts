@@ -1247,6 +1247,15 @@ export default {
 			get title() {
 				return t('admin.turnoverScroller.title');
 			},
+			table: {
+				/**
+				 * @ru
+				 * Записей
+				 */
+				get total() {
+					return t('admin.turnoverScroller.table.total');
+				},
+			},
 		},
 		transactionsScroller: {
 			columns: {
