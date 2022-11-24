@@ -5,7 +5,7 @@ import { getPublicDownloadUrl } from 'utils/client';
 import { fatalHandler } from 'utils/common';
 import { singleAction, to } from '@platform/core';
 import type { IActionConfig, IServerResp } from '@platform/services';
-import { callStreamAction } from '@platform/services';
+import { callStreamAction, getAppConfigItem } from '@platform/services';
 import { attachmentService, ERROR, errorHandler, polling } from '@platform/services/client';
 import type { context } from './executor';
 
@@ -25,8 +25,8 @@ export const createAttachmentAsync: IActionConfig<typeof context, Promise<void>>
       service.createAttachmentAsync.getStatus,
       (res: IServerResp<StatementAttachmentStatusDto>) =>
         [STATEMENT_ATTACHMENT_STATUS.ERROR, STATEMENT_ATTACHMENT_STATUS.EXECUTE].includes(res?.data.status),
-      3 * 1000,
-      30
+      getAppConfigItem('createAttach.interval') ?? 3 * 1000,
+      getAppConfigItem('createAttach.maxCount') ?? 30
     );
 
     const [pollData, pollError] = await to(job(createResp!.data));
