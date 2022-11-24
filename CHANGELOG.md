@@ -1,3 +1,10 @@
+# [2.16.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.12...v2.16.0-release.13) (2022-11-24)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-38912 использование параметров для асинхронной загрузки вложений ([c41b8b2](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c41b8b272cc1785d03f61263f658680e07f71a50))
+
 # [2.16.0-release.12](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.11...v2.16.0-release.12) (2022-11-24)
 
 
