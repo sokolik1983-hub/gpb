@@ -516,7 +516,7 @@
     "ru": "Экспорт выписки"
   },
   "admin.statementScroller.action.viewModifiedTransactions": {
-    "ru": "Просмотреть измененные проводки"
+    "ru": "Просмотр удаленных/добавленных проводок"
   },
   "admin.statementScroller.action.viewTransactions": {
     "ru": "Просмотреть выписку"
@@ -925,6 +925,12 @@
   },
   "common.documentsSetParams.onlyRequestStatementDocuments": {
     "ru": "Только документы выписки"
+  },
+  "common.documentsSetParams.requestStatementDocuments": {
+    "ru": "Документы выписки"
+  },
+  "common.documentsSetParams.requestBaseDocuments": {
+    "ru": "Документы основания"
   },
   "common.debitParams.label": {
     "ru": "Дебетовые"

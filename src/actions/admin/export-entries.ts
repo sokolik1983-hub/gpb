@@ -1,4 +1,8 @@
-import { ACTION } from 'interfaces';
+import { showEntriesParamsDialog } from 'components/admin/entries-params-dialog';
+import { FIELD_NAME } from 'components/admin/entries-params-dialog/constants';
+import { ACTION, TRANSACTION_ATTACHMENT_TYPES } from 'interfaces';
+import type { AccountingEntryAttachmentRequest } from 'interfaces/admin/accounting-entry-attachment-request';
+import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form';
 import { printBase64 } from 'platform-copies/utils';
 import { fatalHandler } from 'utils/common';
 import { to } from '@platform/core';
@@ -11,11 +15,53 @@ import type { context } from './executor';
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=80643158
  * */
-export const getExportEntries = (action: ACTION.DOWNLOAD | ACTION.PRINT): IActionConfig<typeof context, unknown> => ({
-  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (docs: IBaseEntity[]) => {
+export const getExportEntries = (action: ACTION.DOWNLOAD | ACTION.PRINT, hideDialog: boolean): IActionConfig<typeof context, unknown> => ({
+  action: ({ done, fatal }, { hideLoader, service, showLoader }) => async (
+    docs: IBaseEntity[],
+    documentType?: TRANSACTION_ATTACHMENT_TYPES
+  ) => {
     showLoader();
 
     const entriesIds = docs.map(doc => doc.id);
+
+    const requestParams: AccountingEntryAttachmentRequest = {
+      accountingEntryIds: entriesIds,
+      action,
+      includeCreditOrders: false,
+      includeCreditStatements: false,
+      includeDebitOrders: false,
+      includeDebitStatements: false,
+      separateDocumentsFiles: false,
+    };
+
+    if (!hideDialog) {
+      const [response, close] = await to(showEntriesParamsDialog({ action, amount: entriesIds.length }));
+
+      if (close) {
+        hideLoader();
+        done();
+
+        return;
+      }
+
+      const { [FIELD_NAME]: formState } = response!;
+
+      requestParams.includeCreditOrders = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_BASE_DOCUMENTS);
+      requestParams.includeDebitOrders = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_BASE_DOCUMENTS);
+
+      requestParams.includeCreditStatements = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_STATEMENT_DOCUMENTS);
+      requestParams.includeDebitStatements = formState.includes(DETAIL_DOCUMENT_PARAMS.REQUEST_STATEMENT_DOCUMENTS);
+
+      requestParams.separateDocumentsFiles = formState.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
+    } else if (documentType) {
+      if (documentType === TRANSACTION_ATTACHMENT_TYPES.BASE) {
+        requestParams.includeCreditOrders = true;
+        requestParams.includeDebitOrders = true;
+      } else {
+        requestParams.includeCreditStatements = true;
+        requestParams.includeDebitStatements = true;
+      }
+    }
 
     const [file, error] = await to(
       service.exportEntries({

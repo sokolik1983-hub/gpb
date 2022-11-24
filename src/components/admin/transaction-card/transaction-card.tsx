@@ -19,8 +19,6 @@ import css from './styles.scss';
 export interface ITransactionCardProps {
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
-  /** Id запроса на выписку. */
-  statementId: string;
   /** Возможные действия над приложенными файлами. */
   attachmentActions: IExtendedIActionWithAuth[];
   /** Действия кнопок. */
@@ -36,14 +34,7 @@ export interface ITransactionCardProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const TransactionCard: FC<ITransactionCardProps> = ({
-  transaction: doc,
-  statementId,
-  attachmentActions,
-  actions,
-  dropdownActions,
-  onClose,
-}) => {
+export const TransactionCard: FC<ITransactionCardProps> = ({ transaction: doc, attachmentActions, actions, dropdownActions, onClose }) => {
   const [tab, setTab] = useState<TABS>(TABS.REQUISITES);
 
   const { debit, documentNumber, documentName, documentDate } = doc;
@@ -71,7 +62,7 @@ export const TransactionCard: FC<ITransactionCardProps> = ({
                     {tab === TABS.REQUISITES ? (
                       <RequisitesTab transaction={doc} />
                     ) : (
-                      <AttachmentsTab attachmentActions={attachmentActions} statementId={statementId} transaction={doc} />
+                      <AttachmentsTab attachmentActions={attachmentActions} transaction={doc} />
                     )}
                   </Box>
                   <Footer actions={actions} dropdownActions={dropdownActions} />

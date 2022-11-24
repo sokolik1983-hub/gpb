@@ -130,12 +130,9 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.WITH_BACK_BUTTON - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
 
-  const handRowClick = useCallback(
-    row => {
-      void executor.execute(viewEntry, [row], id);
-    },
-    [id]
-  );
+  const handRowClick = useCallback(row => {
+    void executor.execute(viewEntry, [row]);
+  }, []);
 
   const filteredColumns = useMemo(() => {
     switch (groupBy) {

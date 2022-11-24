@@ -5,7 +5,7 @@ export * from './export-statement';
 export * from './export-statements-history';
 export * from './print-statement';
 export * from './repeat-statement';
-export * from './view-modified-transactions';
+export * from './view-changed-entries-scroller';
 export * from './view-statement-request-card';
 export * from './view-transactions-scroller';
 export * from './view-entry';
