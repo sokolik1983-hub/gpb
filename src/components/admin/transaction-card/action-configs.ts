@@ -36,7 +36,7 @@ const getPrintEntriesConfig = (hideDialog: boolean, withoutIcon?: boolean): IExt
 /** Действия в строке вкладки "Вложения" карточки проводки. */
 export const CARD_ROW_ACTIONS = [
   { ...getExportEntriesConfig(true), icon: Icons.Download },
-  { ...getExportEntriesConfig(true), icon: Icons.PrintFile },
+  { ...getPrintEntriesConfig(true), icon: Icons.PrintFile },
 ];
 
 /** Действия футера карточки проводки. */
