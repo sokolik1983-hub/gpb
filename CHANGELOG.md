@@ -1,3 +1,10 @@
+# [2.16.0-release.9](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.8...v2.16.0-release.9) (2022-11-24)
+
+
+### Features
+
+* **скроллер:** GBO-38760 убрана проверка на количество проводок ([4dee2a7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/4dee2a723ad64df747ddbb16c4dc4d0d70a63491))
+
 # [2.16.0-release.8](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.7...v2.16.0-release.8) (2022-11-23)
 
 
