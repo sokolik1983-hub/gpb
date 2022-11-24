@@ -3481,15 +3481,6 @@ export default {
 				return t('errors.periodEnd.dateLessRestriction');
 			},
 		},
-		printStatement: {
-			/**
-			 * @ru
-			 * Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл
-			 */
-			get content() {
-				return t('errors.printStatement.content');
-			},
-		},
 		datatable: {
 			/**
 			 * @ru

@@ -1,7 +1,6 @@
 import { checkOutdatedStatement } from 'actions/client/check-outdated-statement';
 import { getCreateAttachment } from 'actions/client/create-attachement';
 import { exportStatement } from 'actions/client/export-statement';
-import { totalDocs } from 'actions/client/guardians';
 import { rowHistoryExportGuardian } from 'actions/guardians/row-history-export-guardian';
 import type { ICreateAttachmentResponse } from 'interfaces';
 import type { IStatementHistoryRow } from 'interfaces/client';
@@ -14,19 +13,7 @@ import { showFile } from '@platform/services/client';
 import type { context } from './executor';
 
 /** Вернуть набор гардов для экспорта выписки. */
-const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => {
-  switch (useCase) {
-    case EXPORT_PARAMS_USE_CASES.FOURTEEN: {
-      return [rowHistoryExportGuardian];
-    }
-    case EXPORT_PARAMS_USE_CASES.ONE: {
-      return [totalDocs];
-    }
-    default: {
-      return [];
-    }
-  }
-};
+const getGuardians = (useCase: EXPORT_PARAMS_USE_CASES) => (useCase === EXPORT_PARAMS_USE_CASES.FOURTEEN ? [rowHistoryExportGuardian] : []);
 
 /**
  * [Выписки_ЗВ] Клиент: Функция экспорта файла выписки или документа.
