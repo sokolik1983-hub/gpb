@@ -1,6 +1,5 @@
 export * from './account';
 export * from './statement-request';
-export * from './statement-params-use-cases';
 export * from './request-transactions';
 export * from './organization';
 export * from './services';

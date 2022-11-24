@@ -1,30 +1,28 @@
 import React, { useCallback, useContext } from 'react';
-import { CreationParams } from 'components/admin/form/creation-params';
-import { DetailDocumentsParams } from 'components/admin/form/detail-documents-params';
 import { FocusLock } from 'components/common/focus-lock';
-import { FileFormats } from 'components/common/form/file-formats';
+import { Row } from 'components/common/form/row';
 import { ACTION } from 'interfaces';
 import { locale } from 'localization';
 import type { FormRenderProps } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
-import { Box, BUTTON, DATA_TYPE, DialogTemplate } from '@platform/ui';
+import { Box, BUTTON, DATA_TYPE, DialogTemplate, Fields } from '@platform/ui';
+import { FIELD_NAME, options } from './constants';
 import type { IDialogContext } from './dialog-context';
 import { DialogContext } from './dialog-context';
-import { FormProvider } from './form-provider';
 import css from './styles.scss';
 
 /** Функция получения заголовка ЭФ. */
-const getFormHeader = (isExport: boolean, withEntriesList: boolean) => {
+const getFormHeader = (isExport: boolean, amount: number) => {
   if (isExport) {
-    return withEntriesList ? locale.exportParamsDialog.exportStatementDocuments.label : locale.exportParamsDialog.exportStatement.label;
+    return `${locale.exportParamsDialog.exportStatementDocuments.label}: ${amount}`;
   }
 
-  return withEntriesList ? locale.exportParamsDialog.printStatementDocuments.label : locale.exportParamsDialog.printStatement.label;
+  return `${locale.exportParamsDialog.printStatementDocuments.label}: ${amount}`;
 };
 
 /** Содержимое модального окна ЭФ параметров выписки и документов. */
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
-  const { onClose, action, statementId, options } = useContext<IDialogContext>(DialogContext);
+  const { onClose, action, amount } = useContext<IDialogContext>(DialogContext);
   const isExport = action !== ACTION.PRINT;
 
   /** Кнопки модального окна. */
@@ -56,10 +54,7 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
 
   const actions = getActions();
 
-  const header = getFormHeader(isExport, Boolean(options?.withEntriesList));
-
-  const fileFormatsVisible = isExport && !options?.withEntriesList;
-  const creationParamsVisible = !options?.withEntriesList;
+  const header = getFormHeader(isExport, amount);
 
   return (
     <FocusLock>
@@ -68,13 +63,13 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
           extraSmall
           actions={actions}
           content={
-            <FormProvider action={action} statementId={statementId} onSubmit={handleSubmit}>
-              <Box className={css.container}>
-                {fileFormatsVisible && <FileFormats />}
-                {creationParamsVisible && <CreationParams withEntriesList={Boolean(options?.withEntriesList)} />}
-                <DetailDocumentsParams withEntriesList={Boolean(options?.withEntriesList)} />
-              </Box>
-            </FormProvider>
+            <Box className={css.container}>
+              <Row align={'TOP'} label={locale.common.documentsSetParams.label}>
+                <Box>
+                  <Fields.CheckboxGroup extraSmall columns={12} indent="MD" name={FIELD_NAME} options={options} />
+                </Box>
+              </Row>
+            </Box>
           }
           dataType={DATA_TYPE.CONFIRMATION}
           header={header}

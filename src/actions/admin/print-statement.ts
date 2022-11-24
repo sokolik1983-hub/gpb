@@ -1,6 +1,5 @@
-import { getCreateAttachment } from 'actions/admin/create-attachement';
+import { getStatementFile } from 'actions/admin/get-statement-file';
 import type { ICreateAttachmentResponse } from 'interfaces';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import type { TRANSACTION_ATTACHMENT_TYPES } from 'interfaces/common';
 import { ACTION } from 'interfaces/common';
 import { printBase64 } from 'platform-copies/utils';
@@ -13,15 +12,13 @@ import type { context } from './executor';
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=69874143
  */
-export const getPrintStatementAttachment = (
-  useCase: EXPORT_PARAMS_USE_CASES
-): IActionConfig<typeof context, ICreateAttachmentResponse> => ({
+export const printStatement: IActionConfig<typeof context, ICreateAttachmentResponse> = {
   action: ({ done, fatal, addSucceeded, execute }) => async (
+    statementId: string,
     docs: IBaseEntity[],
-    statementId?: string,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
-    const createAttachment = getCreateAttachment(useCase, ACTION.PRINT, documentType);
+    const createAttachment = getStatementFile(ACTION.PRINT, false, documentType);
 
     const {
       succeeded: [data],
@@ -45,4 +42,4 @@ export const getPrintStatementAttachment = (
     done();
   },
   fatalHandler,
-});
+};

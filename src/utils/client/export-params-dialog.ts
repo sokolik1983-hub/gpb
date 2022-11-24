@@ -26,6 +26,14 @@ export const creationParamsCheckboxShowCases = [
   EXPORT_PARAMS_USE_CASES.SEVEN,
 ];
 
+/** Набор случаев, при которых детальные параметры комплекта документов (дебетовы, кредитовые) выбраны по умолчанию. */
+export const checkedDebitAndCreditParams = [
+  EXPORT_PARAMS_USE_CASES.THREE,
+  EXPORT_PARAMS_USE_CASES.FOUR,
+  EXPORT_PARAMS_USE_CASES.SIX,
+  EXPORT_PARAMS_USE_CASES.SEVEN,
+];
+
 /** Набор случаев, при которых показываем блок "Параметры комплекта документов". */
 export const creationParamsShowCases = [EXPORT_PARAMS_USE_CASES.ONE, EXPORT_PARAMS_USE_CASES.TWO];
 

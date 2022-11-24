@@ -11,13 +11,15 @@ import { useDetailDocumentsParamsVisible } from './use-detail-documents-params-v
 
 /** Свойства компонента параметров комплекта документов. */
 interface DetailDocumentsParamsProps {
+  /** WithEntriesList Выписка экспортируется со списком проводок. */
+  withEntriesList: boolean;
   /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 
 /** Компонент параметров комплекта документов. */
-export const DetailDocumentsParams: React.FC<DetailDocumentsParamsProps> = ({ disabled }) => {
-  const [options] = useDetailDocumentsParams();
+export const DetailDocumentsParams: React.FC<DetailDocumentsParamsProps> = ({ withEntriesList, disabled }) => {
+  const [options] = useDetailDocumentsParams(withEntriesList);
   const visible = useDetailDocumentsParamsVisible();
 
   if (!visible) {

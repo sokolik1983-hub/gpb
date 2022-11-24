@@ -21,7 +21,7 @@ const getExportEntriesConfig = (hideDialog: boolean, withoutIcon?: boolean): IEx
 /**
  * Функция для создания конфига действия печати.
  *
- * @param hideDialog Экспорт без окна параметров.
+ * @param hideDialog Печать без окна параметров.
  * @param withoutIcon Флаг экшена без иконки.
  */
 const getPrintEntriesConfig = (hideDialog: boolean, withoutIcon?: boolean): IExtendedIActionWithAuth => ({
@@ -33,26 +33,14 @@ const getPrintEntriesConfig = (hideDialog: boolean, withoutIcon?: boolean): IExt
   authorities: [],
 });
 
-/** Действия в футере скроллера. */
-export const FOOTER_ACTIONS = [
-  { ...getPrintEntriesConfig(false, true), label: locale.admin.transactionsScroller.footer.printAction, buttonType: BUTTON.REGULAR },
-  { ...getExportEntriesConfig(false, true), label: locale.admin.transactionsScroller.footer.exportAction, buttonType: BUTTON.PRIMARY },
-];
-
 /** Действия в строке вкладки "Вложения" карточки проводки. */
 export const CARD_ROW_ACTIONS = [
   { ...getExportEntriesConfig(true), icon: Icons.Download },
-  { ...getPrintEntriesConfig(true), icon: Icons.PrintFile },
-];
-
-/** Действия в строке проводки скроллера. */
-export const ROW_ACTIONS = [
-  { ...getExportEntriesConfig(false), icon: Icons.Download },
-  { ...getPrintEntriesConfig(false), icon: Icons.PrintFile },
+  { ...getExportEntriesConfig(true), icon: Icons.PrintFile },
 ];
 
 /** Действия футера карточки проводки. */
-export const CARD_FOOTER_ACTIONS = [{ ...getExportEntriesConfig(true), label: locale.transactionCard.buttons.export }];
+export const CARD_FOOTER_ACTIONS = [{ ...getExportEntriesConfig(false), label: locale.transactionCard.buttons.export }];
 
 /** Действия футера карточки проводки в выпадающем списке. */
-export const CARD_FOOTER_DROPDOWN_ACTIONS = [{ ...getPrintEntriesConfig(true), label: locale.transactionCard.buttons.print }];
+export const CARD_FOOTER_DROPDOWN_ACTIONS = [{ ...getPrintEntriesConfig(false), label: locale.transactionCard.buttons.print }];

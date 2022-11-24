@@ -1,24 +1,23 @@
 import { createContext } from 'react';
-import type { ACTION } from 'interfaces/common';
+import { ACTION } from 'interfaces/common';
 import { noop } from 'utils/common';
-import type { IDialogOptions } from './dialog';
 
 /** Контекст ЭФ настройки параметров печати / экспорта. */
 export interface IDialogContext {
   /** Обработчик закрытия диалога. */
   onClose(): void;
-  /** Вариант вызова диалога. */
-  options?: IDialogOptions;
   /** Действие. */
-  action?: ACTION;
-  /** Идентификатор выписки. */
-  statementId?: string;
+  action: ACTION;
+  /** Количество выгружаемых выписок. */
+  amount: number;
 }
 
 /** Начальное значение контекста. */
 const defaultValue: IDialogContext = {
   /** Начальное значение обработчика закрытия диалога. */
   onClose: noop,
+  action: ACTION.DOWNLOAD,
+  amount: 1,
 };
 
 /** Экземпляр контекста. */

@@ -473,7 +473,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Просмотреть измененные проводки
+				 * Просмотр удаленных/добавленных проводок
 				 */
 				get viewModifiedTransactions() {
 					return t('admin.statementScroller.action.viewModifiedTransactions');
@@ -3119,6 +3119,20 @@ export default {
 			 */
 			get onlyRequestStatementDocuments() {
 				return t('common.documentsSetParams.onlyRequestStatementDocuments');
+			},
+			/**
+			 * @ru
+			 * Документы выписки
+			 */
+			get requestStatementDocuments() {
+				return t('common.documentsSetParams.requestStatementDocuments');
+			},
+			/**
+			 * @ru
+			 * Документы основания
+			 */
+			get requestBaseDocuments() {
+				return t('common.documentsSetParams.requestBaseDocuments');
 			},
 		},
 		debitParams: {

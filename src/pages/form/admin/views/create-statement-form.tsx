@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { CreationParams } from 'components/admin/form/creation-params';
+import { DetailDocumentsParams } from 'components/admin/form/detail-documents-params';
 import { ForbiddenContent } from 'components/common';
-import { DetailDocumentsParams } from 'components/common/form/detail-documents-params';
 import { FileFormats } from 'components/common/form/file-formats';
 import { Operations } from 'components/common/form/operations';
 import { Period } from 'components/common/form/period';
@@ -56,7 +56,7 @@ export const CreateStatementForm: React.FC = () => {
     return <NotFoundContent />;
   }
 
-  const initialFormState = getInitialFormState({ statement: statementRequest, prefilledFormValues });
+  const initialFormState = getInitialFormState({ statement: statementRequest, prefilledFormValues, withEntriesList: false });
 
   return (
     <Box className={css.form} fill={'FAINT'}>
@@ -79,8 +79,8 @@ export const CreateStatementForm: React.FC = () => {
                 </Row>
                 <Operations disabled />
                 <FileFormats disabled />
-                <CreationParams disabled />
-                <DetailDocumentsParams disabled />
+                <CreationParams disabled withEntriesList={false} />
+                <DetailDocumentsParams disabled withEntriesList={false} />
                 <Footer />
               </Pattern.Span>
               <Pattern.Span size={3}>
