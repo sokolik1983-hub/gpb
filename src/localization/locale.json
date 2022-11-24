@@ -1346,6 +1346,9 @@
   "admin.turnoverScroller.title": {
     "ru": "Остатки и обороты"
   },
+  "admin.turnoverScroller.table.total": {
+    "ru": "Записей"
+  },
   "common.footer.selected": {
     "ru": "Выбрано:"
   },

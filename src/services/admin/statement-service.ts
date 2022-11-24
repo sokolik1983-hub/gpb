@@ -245,9 +245,11 @@ export const statementService = {
   /** API остатков и оборотов. */
   turnover: {
     /** Получение страницы остатков и оборотов. */
-    page: (metaData: IMetaData) =>
-      request<IServerDataResp<IScrollerResponseDto<TurnoverCard>>>({
-        data: metadataToRequestParams(metaData),
+    page: (metaData: IMetaData) => {
+      const { params } = metadataToRequestParams(metaData);
+
+      return request<IServerDataResp<IScrollerResponseDto<TurnoverCard>>>({
+        data: params,
         method: 'POST',
         url: `${STATEMENT_BANK_URL}/statement/turnover/page`,
       }).then(x => {
@@ -259,7 +261,8 @@ export const statementService = {
           data: mapForTurnovers(x.data.data.page),
           total: x.data.data.size,
         };
-      }),
+      });
+    },
     /** Генерация ПФ журнала остатков и оборотов. */
     generateReport: (dto: CreateReportFileDto) =>
       request<IServerDataResp<IFileDataResponse>>({

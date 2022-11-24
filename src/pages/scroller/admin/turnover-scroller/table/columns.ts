@@ -10,7 +10,7 @@ export const columns = addMaxWidthField<TurnoverCard, { isVisible: boolean }>([
     Cell: OperationDateCell,
     Header: locale.admin.turnoverScroller.columns.operationDate,
     accessor,
-    id: COLUMN_NAMES.CREATION_DATE,
+    id: COLUMN_NAMES.TURNOVER_DATE,
     width: 230,
     isVisible: true,
   },

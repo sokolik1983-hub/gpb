@@ -56,7 +56,7 @@ export const Table: React.FC = () => {
   );
 
   return (
-    <DataTableWithTotal label={locale.admin.transactionsScroller.table.total} total={total}>
+    <DataTableWithTotal label={locale.admin.turnoverScroller.table.total} total={total}>
       <InfiniteDataTable<TurnoverCard>
         columns={columns}
         defaultSort={DEFAULT_SORT}

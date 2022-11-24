@@ -28,7 +28,11 @@ export const exportTurnovers: IActionConfig<typeof context, unknown> = {
         dateFrom,
         dateTo,
         format: format!,
-        ids: docs.map(x => x.id),
+        ids: docs.map(x => ({
+          accountNumber: x?.account?.number,
+          balanceBranchCode: x.balanceBranchCode,
+          operationDate: x.turnoverDate,
+        })),
       })
     );
 
