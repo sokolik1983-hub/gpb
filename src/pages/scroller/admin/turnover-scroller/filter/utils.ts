@@ -22,11 +22,12 @@ export const getOrganizationOption = ({ fullName, id, innKio, shortName }: Organ
  *
  * @param account Счет.
  * @param account.accountNumber Номер счета.
+ * @param account.id Id счета.
  * @param account.bankClient Данные организации.
  */
-export const getAccountOption = ({ accountNumber, bankClient }: Account): IAccountOption => ({
+export const getAccountOption = ({ accountNumber, bankClient, id }: Account): IAccountOption => ({
   accountNumber,
   label: formatAccountCode(accountNumber),
   orgName: bankClient?.shortName || bankClient?.fullName,
-  value: accountNumber,
+  value: id,
 });

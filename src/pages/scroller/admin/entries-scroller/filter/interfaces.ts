@@ -13,9 +13,9 @@ export interface IFormState {
   /** Счета контрагентов. */
   counterpartyAccountNumber?: string[];
   /** Клиенты. */
-  client?: string[];
+  bankClient?: string[];
   /** Счета клиентов. */
-  clientAccountNumber?: string[];
+  bankClientAccountNumber?: string[];
   /** Номер документа. */
   documentNumber?: string;
   /** Дата платежа. */

@@ -14,8 +14,9 @@ import type { context } from './executor';
  */
 export const printStatement: IActionConfig<typeof context, ICreateAttachmentResponse> = {
   action: ({ done, fatal, addSucceeded, execute }) => async (
-    statementId: string,
     docs: IBaseEntity[],
+    statementId: string,
+    hideDialog: boolean,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
     const createAttachment = getStatementFile(ACTION.PRINT, false, documentType);
