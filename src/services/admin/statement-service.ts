@@ -178,7 +178,7 @@ export const statementService = {
   }): Promise<IFileDataResponse> =>
     request<IServerDataResp<IFileDataResponse>>({
       data: {
-        statementRequestIds,
+        ids: statementRequestIds,
         dateFrom,
         dateTo,
         format,
