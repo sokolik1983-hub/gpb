@@ -1258,6 +1258,31 @@ export default {
 			},
 		},
 		transactionsScroller: {
+			table: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.transactionsScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.transactionsScroller.table.placeholder.message');
+					},
+				},
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.transactionsScroller.table.total');
+				},
+			},
 			columns: {
 				/**
 				 * @ru
@@ -1371,15 +1396,6 @@ export default {
 			 */
 			get pageTitle() {
 				return t('admin.transactionsScroller.pageTitle');
-			},
-			table: {
-				/**
-				 * @ru
-				 * Операций
-				 */
-				get total() {
-					return t('admin.transactionsScroller.table.total');
-				},
 			},
 		},
 		changedEntriesScroller: {
