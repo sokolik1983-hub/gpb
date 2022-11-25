@@ -23,10 +23,19 @@ export const Table: React.FC = () => {
   const { getAvailableActions } = useAuth();
   const { selectedRows, setSelectedRows, filters } = useContext(ScrollerContext);
   const [total, setTotal] = useState<number>();
+  const [isFiltersEmpty, setIsFiltersEmpty] = useState<boolean>(false);
 
   const fetchData = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<TurnoverCard>> => {
       try {
+        if (Object.values(filters).every(filter => !filter)) {
+          setIsFiltersEmpty(true);
+
+          return { rows: [], pageCount: 0 };
+        }
+
+        setIsFiltersEmpty(false);
+
         const metaData: IMetaData = {
           filters,
           sort: multiSort ? multiSort : DEFAULT_SORT,
@@ -65,6 +74,10 @@ export const Table: React.FC = () => {
         fetchData={fetchData}
         footerActionsGetter={footerActions}
         footerContent={Footer}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        placeholderMessage={isFiltersEmpty ? <b>{locale.admin.turnoverScroller.table.placeholder.message}</b> : undefined}
+        placeholderTitle={isFiltersEmpty ? locale.admin.turnoverScroller.table.placeholder.title : undefined}
         selectedRows={selectedRows}
         storageKey={STORAGE_KEY}
         onSelectedRowsChange={setSelectedRows}

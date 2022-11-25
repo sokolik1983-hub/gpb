@@ -443,6 +443,8 @@
   "common.formats.Excel": "Excel",
   "admin.turnoverScroller.actions.exportTurnovers": "Экспорт",
   "admin.turnoverScroller.labels.format": "Формат:",
+  "admin.turnoverScroller.table.placeholder.title": "Выберите значение в фильтре",
+  "admin.turnoverScroller.table.placeholder.message": "чтобы получить результат",
   "admin.turnoverScroller.title": "Остатки и обороты",
   "admin.turnoverScroller.table.total": "Записей",
   "common.footer.selected": "Выбрано:",
