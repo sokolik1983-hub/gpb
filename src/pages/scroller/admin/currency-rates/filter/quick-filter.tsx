@@ -13,9 +13,11 @@ import { Gap, Horizon, Pattern, Typography } from '@platform/ui';
 
 /** Основной фильтр. Изменения значений этих полей вызывают обновление скроллера. */
 export const QuickFilter: FC = () => {
-  const { values } = useFormState<FilterValues>();
+  const {
+    values: { dateTo, dateFrom, currencyCode },
+  } = useFormState<FilterValues>();
 
-  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
+  useSubmitScrollerFilter<FilterValues>({ submitDep: { dateTo, dateFrom, currencyCode } });
 
   const { currencies, selectedCurrencies, setCurrencyCodeSearchValue } = useContext(FilterContext);
 

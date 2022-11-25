@@ -13,6 +13,7 @@ import { Fields, Pattern } from '@platform/ui';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<FilterValues>();
 
+
   useSubmitScrollerFilter<FilterValues>({
     submitDep: {
       dateTo: values.dateTo || '',
