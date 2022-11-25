@@ -189,7 +189,7 @@ export const ActionsCell: React.FC<CellProps<BankAccountingEntryTurnoverCard, Ba
   const { getAvailableActions } = useAuth();
   const { id } = useParams<IUrlParams>();
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value], id]), [
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[value], id, false]), [
     getAvailableActions,
     value,
     id,

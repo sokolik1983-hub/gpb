@@ -19,7 +19,7 @@ export const printStatement: IActionConfig<typeof context, ICreateAttachmentResp
     hideDialog: boolean,
     documentType?: TRANSACTION_ATTACHMENT_TYPES
   ) => {
-    const createAttachment = getStatementFile(ACTION.PRINT, false, documentType);
+    const createAttachment = getStatementFile(ACTION.PRINT, hideDialog, documentType);
 
     const {
       succeeded: [data],

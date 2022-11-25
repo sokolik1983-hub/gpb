@@ -110,11 +110,14 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const footerActions = useCallback(
     scrollerExecutor => (rows: BankAccountingEntryTurnoverCard[]) =>
-      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, id]),
+      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, id, false]),
     [getAvailableActions, id]
   );
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id, false]), [
+    getAvailableActions,
+    id,
+  ]);
 
   const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,

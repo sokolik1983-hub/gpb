@@ -19,7 +19,7 @@ import { isNeedTotalsOfDay } from 'utils/common';
 export const convertToCreationParams = (formState: IFormState, withEntriesList: boolean, documentType?: TRANSACTION_ATTACHMENT_TYPES) => {
   const separateDocumentsFiles = formState.documentsSetParams.includes(DETAIL_DOCUMENT_PARAMS.SEPARATE_DOCUMENTS_FILES);
 
-  if (withEntriesList) {
+  if (documentType) {
     const generateOrders = documentType === TRANSACTION_ATTACHMENT_TYPES.BASE;
     const generateStatements = documentType === TRANSACTION_ATTACHMENT_TYPES.STATEMENT;
 
