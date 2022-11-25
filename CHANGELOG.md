@@ -1,3 +1,10 @@
+# [2.16.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.14...v2.16.0-release.15) (2022-11-25)
+
+
+### Features
+
+* **визард:** GBO-36600 добавлена форма запроса выписки ([cfefc01](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/cfefc01bf79b2fa9d99a5b90075b93ccac5b81da))
+
 # [2.16.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.13...v2.16.0-release.14) (2022-11-25)
 
 
