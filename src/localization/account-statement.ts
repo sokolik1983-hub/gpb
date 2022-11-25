@@ -1304,14 +1304,23 @@ export default {
 					return t('admin.turnoverScroller.labels.format');
 				},
 			},
-			/**
-			 * @ru
-			 * Остатки и обороты
-			 */
-			get title() {
-				return t('admin.turnoverScroller.title');
-			},
 			table: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.turnoverScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.turnoverScroller.table.placeholder.message');
+					},
+				},
 				/**
 				 * @ru
 				 * Записей
@@ -1319,6 +1328,13 @@ export default {
 				get total() {
 					return t('admin.turnoverScroller.table.total');
 				},
+			},
+			/**
+			 * @ru
+			 * Остатки и обороты
+			 */
+			get title() {
+				return t('admin.turnoverScroller.title');
 			},
 		},
 		transactionsScroller: {
