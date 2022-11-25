@@ -1,3 +1,10 @@
+# [2.16.0-release.14](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.13...v2.16.0-release.14) (2022-11-25)
+
+
+### Bug Fixes
+
+* GBO-38894 Не запрашивать данные проводок в скроллере проводок при отсутствии фильтров ([81a64c7](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/81a64c7e14cbd9b10544d3748bcb0629cdb7e5ab))
+
 # [2.16.0-release.13](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.12...v2.16.0-release.13) (2022-11-24)
 
 
