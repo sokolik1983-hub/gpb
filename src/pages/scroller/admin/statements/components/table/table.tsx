@@ -63,7 +63,7 @@ export const Table: FC<TableProps> = ({
   const footerActions = useCallback(
     scrollerExecutor => (statements: StatementHistoryRow[]) =>
       getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [
-        { dateFrom: filter.dateFrom, dateTo: filter.dateTo, statements },
+        { dateFrom: filter.dateFrom?.value, dateTo: filter.dateTo?.value, statements },
       ]),
     [filter.dateFrom, filter.dateTo, getAvailableActions]
   );
