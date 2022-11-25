@@ -1,3 +1,10 @@
+# [2.16.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.16...v2.16.0-release.17) (2022-11-25)
+
+
+### Bug Fixes
+
+* GBO-38905 исправление передачи значений флагов ([7bfdd1b](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/7bfdd1b9e00549baf541af7210b864e08b6581cd))
+
 # [2.16.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.15...v2.16.0-release.16) (2022-11-25)
 
 
