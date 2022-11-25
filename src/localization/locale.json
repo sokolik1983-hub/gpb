@@ -1277,6 +1277,12 @@
     "@inn": "string",
     "ru": "ИНН: {inn}"
   },
+  "admin.transactionsScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.transactionsScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
   "admin.transactionsScroller.columns.date": {
     "ru": "Дата проводки"
   },

@@ -27,6 +27,7 @@ export const TransactionsScrollerPage: React.FC = () => {
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
+  const [filtersEmpty, setFiltersEmpty] = useState<boolean>(false);
 
   // TODO Добавить действия заголовка
   const actions = useMemo(() => [], []);
@@ -44,6 +45,14 @@ export const TransactionsScrollerPage: React.FC = () => {
   const fetch = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
       try {
+        if (Object.values(filters).every(filterValue => !filterValue)) {
+          setFiltersEmpty(true);
+
+          return { rows: [], pageCount: 0 };
+        }
+
+        setFiltersEmpty(false);
+
         const metaData: IMetaData = {
           filters,
           multiSort,
@@ -89,7 +98,7 @@ export const TransactionsScrollerPage: React.FC = () => {
               <ContentLoader height={tableHeight} loading={!tableDataInitialed}>
                 <Box />
               </ContentLoader>
-              <Table />
+              <Table filtersEmpty={filtersEmpty} />
             </ScrollerPageLayout>
           </FocusTree>
         </FocusLock>

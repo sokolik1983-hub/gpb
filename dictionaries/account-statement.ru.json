@@ -413,6 +413,8 @@
   "admin.turnoverScroller.aggregateRow.turnoverCredit": "Обороты Кт",
   "admin.turnoverScroller.aggregateRow.outgoingBalance": "Исходящий остаток",
   "common.inn": "ИНН: {inn}",
+  "admin.transactionsScroller.table.placeholder.title": "Выберите значение в фильтре",
+  "admin.transactionsScroller.table.placeholder.message": "чтобы получить результат",
   "admin.transactionsScroller.columns.date": "Дата проводки",
   "admin.transactionsScroller.columns.account": "Клиент банка",
   "admin.transactionsScroller.columns.document": "Документ",
