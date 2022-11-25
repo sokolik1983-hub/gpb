@@ -1,3 +1,11 @@
+# [2.16.0-release.16](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.15...v2.16.0-release.16) (2022-11-25)
+
+
+### Bug Fixes
+
+* GBO-38624 Исправлен запрос реестра выписок ([ae8f09e](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/ae8f09eacb6c0cec7dc0fdd9f7af1bc24050d013))
+* GBO-38894 Не запрашивать данные в скроллере при отсутствии фильтров ([c31e9af](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/c31e9afb9cf8ffbc99c358d5cf657ab9f7126b1a))
+
 # [2.16.0-release.15](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.14...v2.16.0-release.15) (2022-11-25)
 
 
