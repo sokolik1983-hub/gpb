@@ -1,3 +1,10 @@
+# [2.16.0-release.18](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.17...v2.16.0-release.18) (2022-11-25)
+
+
+### Bug Fixes
+
+* **скроллер:** GBO-38964 исправление передачи параметров при экспорте ПФ ([2bc43a1](https://bitbucket.gboteam.ru/eco_fe/eco-statement/commit/2bc43a1b7fdc21c529daef7081737816beda2b98))
+
 # [2.16.0-release.17](https://bitbucket.gboteam.ru/eco_fe/eco-statement/compare/v2.16.0-release.16...v2.16.0-release.17) (2022-11-25)
 
 
