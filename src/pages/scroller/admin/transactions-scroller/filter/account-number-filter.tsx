@@ -6,6 +6,7 @@ import { useAccounts } from 'hooks/admin';
 import type { Account } from 'interfaces/admin';
 import { useDebounce } from 'platform-copies/hooks';
 import { useFormState } from 'react-final-form';
+import { getAccountSearchFilter } from 'utils/admin';
 import { formatAccountCode } from '@platform/tools/localization';
 
 /** Задержка изменения данных в мс.  */
@@ -41,7 +42,7 @@ export const AccountNumberFilter: React.FC<IProps> = ({ name, placeholder }: IPr
   const [searchString, setSearchString] = useState('');
 
   const accountSearchValueDebounced = useDebounce(searchString, DEBOUNCE_DELAY);
-  const { data: accounts, isFetched } = useAccounts(accountSearchValueDebounced);
+  const { data: accounts, isFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
 
   const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
   const selectedAccountOptions = useMemo(() => selectedOptions.map(getAccountOption), [selectedOptions]);

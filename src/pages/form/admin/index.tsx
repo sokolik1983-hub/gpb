@@ -1,31 +1,22 @@
 import React from 'react';
 import { FocusLock } from 'components/common/focus-lock';
-import { locale } from 'localization';
-import { ADMIN_STREAM_URL } from 'stream-constants/admin';
+import type { IUrlParams } from 'interfaces';
+import { StatementRequest } from 'pages/form/admin/views/statement-request';
+import { StatementRequestCard } from 'pages/form/admin/views/statement-request-card';
+import { useParams } from 'react-router-dom';
+import { NEW_ENTITY_ID } from 'stream-constants';
 import { MainLayout } from '@platform/services/admin';
-import { useRedirect } from '@platform/services/client';
-import type { IBreadcrumb } from '@platform/ui';
-import { LayoutDocument, LayoutScroll } from '@platform/ui';
-import { CreateStatementForm } from './views/create-statement-form';
+import { LayoutScroll } from '@platform/ui';
 
 export const AdminFormPage = () => {
-  const goHome = useRedirect(ADMIN_STREAM_URL.MAINPAGE);
-  const goToScroller = useRedirect(ADMIN_STREAM_URL.STATEMENT_HISTORY);
-  const breadcrumbs: IBreadcrumb[] = [
-    {
-      label: locale.admin.historyScroller.pageTitle,
-      onClick: goToScroller,
-    },
-  ];
+  const { id } = useParams<IUrlParams>();
 
   return (
     <MainLayout>
       <FocusLock>
-        <LayoutDocument breadcrumbs={breadcrumbs} header={locale.form.newRequestStatement.title} onHomeClick={goHome}>
-          <LayoutScroll autoHeight autoHeightMax="100vh">
-            <CreateStatementForm />
-          </LayoutScroll>
-        </LayoutDocument>
+        <LayoutScroll autoHeight autoHeightMax="100vh">
+          {id === NEW_ENTITY_ID ? <StatementRequest /> : <StatementRequestCard statementId={id} />}
+        </LayoutScroll>
       </FocusLock>
     </MainLayout>
   );

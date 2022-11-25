@@ -118,7 +118,7 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
-    backButtonTitle: locale.common.button.toStatementRequests,
+    backButtonTitle: locale.admin.button.toStatementRequest,
     header: locale.transactionsScroller.title({
       dateFrom: formatDateTime(statementSummary.statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
       dateTo: formatDateTime(statementSummary.statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),

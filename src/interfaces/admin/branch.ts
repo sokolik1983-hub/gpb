@@ -1,5 +1,5 @@
 /** Свойства подразделения обслуживания. */
-export interface ServiceBranch {
+export interface Branch {
   /** Код филиала в РКО Ф1. */
   absNumber: string;
   /** Название филиала. */
@@ -8,8 +8,8 @@ export interface ServiceBranch {
   id: string;
 }
 
-/** Филиал. */
-export interface Branch {
+/** Филиал в выписке. */
+export interface StatementBranch {
   /** Код филиала. */
   branchCode: string;
   /** Наименование филиала. */

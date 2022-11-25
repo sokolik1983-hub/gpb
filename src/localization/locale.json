@@ -953,8 +953,11 @@
   "common.email.label": {
     "ru": "Адрес электронной почты"
   },
-  "common.button.toStatementRequests": {
+  "admin.button.toStatementRequest": {
     "ru": "К запросу выписок"
+  },
+  "admin.button.toStatementRequests": {
+    "ru": "К запросам выписок"
   },
   "form.buttons.download.label": {
     "ru": "Экспорт"
@@ -970,6 +973,24 @@
   },
   "form.buttons.cancel.label": {
     "ru": "Отменить"
+  },
+  "admin.statementRequestCard.pageTitle": {
+    "ru": "Параметры запроса"
+  },
+  "admin.statementRequestForm.pageTitle": {
+    "ru": "Запрос выписки"
+  },
+  "admin.statementRequestForm.label.organization": {
+    "ru": "Организация"
+  },
+  "admin.statementRequestForm.label.serviceBranch": {
+    "ru": "Подразделение обслуживания"
+  },
+  "admin.statementRequestForm.label.account": {
+    "ru": "Счёт"
+  },
+  "admin.statementRequestForm.label.accountType": {
+    "ru": "Тип счёта"
   },
   "table.header.sortInfo": {
     "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"

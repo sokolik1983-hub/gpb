@@ -11,6 +11,7 @@ import { QuickFilter } from 'pages/scroller/admin/reconciliation-turnovers/filte
 import { useDebounce } from 'platform-copies/hooks';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DELAY, QUICK_FILTER_HEIGHT } from 'stream-constants';
+import { getAccountSearchFilter } from 'utils/admin';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
 
@@ -30,7 +31,7 @@ export const Filter: FC<ScrollerFilter> = ({ setFilter }) => {
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountId ? [selectedAccountId] : []);
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
-  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(accountSearchValueDebounced);
+  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);

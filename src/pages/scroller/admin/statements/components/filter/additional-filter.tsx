@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
-import { FilterFormElement, MultiselectWithOptionAllField, SelectWithSearch } from 'components/common';
+import { FilterFormElement, MultiselectWithOptionAllField, OrganizationOption, SelectWithSearch } from 'components/common';
 import { locale } from 'localization';
 import {
   FORM_FIELDS,
@@ -9,9 +9,9 @@ import {
   STATEMENT_TYPE_OPTIONS,
 } from 'pages/scroller/admin/statements/components/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/statements/components/filter/context';
-import { OrganizationOption } from 'pages/scroller/admin/statements/components/filter/organization-option';
-import { getOrganizationOption, getServiceBranchOption, getUserOption } from 'pages/scroller/admin/statements/components/filter/utils';
+import { getServiceBranchOption, getUserOption } from 'pages/scroller/admin/statements/components/filter/utils';
 import { DATE_PERIOD_OPTIONS } from 'stream-constants';
+import { getOrganizationOption } from 'utils/admin/options';
 import { Pattern, Fields } from '@platform/ui';
 
 /** Дополнительный фильтр, который виден при раскрытии формы. */

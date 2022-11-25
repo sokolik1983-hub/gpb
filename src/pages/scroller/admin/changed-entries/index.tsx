@@ -35,7 +35,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
   const headerProps: ScrollerPageLayoutProps['headerProps'] = {
-    backButtonTitle: locale.common.button.toStatementRequests,
+    backButtonTitle: locale.admin.button.toStatementRequest,
     header: locale.admin.changedEntriesScroller.pageTitle,
     onBack: () => void executor.execute(viewStatementHistoryScroller),
   };

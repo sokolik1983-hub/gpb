@@ -53,7 +53,7 @@ const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
 };
 
 /** Экшно создания запроса выписки. */
-export const CREATE_STATEMENT: IExtendedIActionWithAuth = {
+const CREATE_STATEMENT: IExtendedIActionWithAuth = {
   authorities: [],
   action: showStatementRequestForm,
   icon: Icons.Statement,
@@ -61,7 +61,7 @@ export const CREATE_STATEMENT: IExtendedIActionWithAuth = {
   name: 'CREATE_STATEMENT',
 };
 
-/** Экшн просмотра изменных проводок. */
+/** Экшн просмотра измененных проводок. */
 export const VIEW_MODIFIED_TRANSACTIONS: IExtendedIActionWithAuth = {
   authorities: [],
   action: viewChangedEntriesScroller,
@@ -88,11 +88,11 @@ const VIEW_STATEMENT_REQUEST_PARAMS: IExtendedIActionWithAuth = {
   name: ACTION_NAME.VIEW_QUERY_PARAMS,
 };
 
-/** Экшены футера скроллера Истории запросов выписок. */
+/** Экшены футера скроллера. */
 export const FOOTER_ACTIONS = [EXPORT_STATEMENTS_HISTORY];
 
-/** Экшены выписки строки скроллреа Истории запросов выписок. */
+/** Экшены выписки строки скроллера. */
 export const ROW_ACTIONS = [EXPORT_STATEMENT, VIEW_STATEMENT_REQUEST_PARAMS, VIEW_TRANSACTIONS, VIEW_MODIFIED_TRANSACTIONS];
 
-/** Экшены в заголовке скроллера Истории запросов выписок. */
-export const HEADER_ACTIONS = [EXPORT_STATEMENTS_HISTORY];
+/** Экшены в заголовке скроллера. */
+export const HEADER_ACTIONS = [EXPORT_STATEMENTS_HISTORY, CREATE_STATEMENT];
