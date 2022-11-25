@@ -1,12 +1,13 @@
 import type { IBaseEntity } from '@platform/services';
 import type { AccountCard } from './account-card';
+import type { BranchCard } from './branch-card';
 
 /** Карточка остатков и оборотов. */
 export interface TurnoverCard extends IBaseEntity {
   /** Карточка счета. */
   account: AccountCard;
   /** Код филиала (баланс). */
-  balanceBranchCode: string;
+  balanceBranch: BranchCard;
   /** Входящий остаток. */
   incomingBalance: number;
   /** Входящий остаток в нац. Валюте. */
@@ -16,7 +17,7 @@ export interface TurnoverCard extends IBaseEntity {
   /** Исходящий остаток в нац. Валюте. */
   outgoingBalanceInNationalCurrency: number;
   /** Код филиала (обслуживание). */
-  serviceBranchCode: string;
+  serviceBranch: BranchCard;
   /** Оборот по кредиту. */
   turnoverByCredit: number;
   /** Обороты по кредиту в нац. Валюте. */
