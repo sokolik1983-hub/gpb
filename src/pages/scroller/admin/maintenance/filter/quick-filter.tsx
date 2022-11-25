@@ -6,7 +6,7 @@ import { FORM_FIELDS, MAINTENANCE_TYPE_OPTIONS } from 'pages/scroller/admin/main
 import { FilterContext } from 'pages/scroller/admin/maintenance/filter/context';
 import type { FilterValues } from 'pages/scroller/admin/maintenance/filter/types';
 import { useFormState } from 'react-final-form';
-import { statementService } from 'services/admin';
+import { getDatePeriod } from 'utils/common/get-date-period';
 import { Fields, Pattern } from '@platform/ui';
 
 /** Основной фильтр. Изменения значений этих полей вызывают обновление скроллера. */
@@ -25,7 +25,7 @@ export const QuickFilter: FC = () => {
   const { setDatePeriodFetched } = useContext(FilterContext);
 
   const { DateRange, DatePeriodType } = useDatePeriod({
-    fetch: statementService.getDatePeriod,
+    fetch: getDatePeriod,
     fieldName: { dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO, periodType: FORM_FIELDS.PERIOD_TYPE },
     onCalculateFinal: setDatePeriodFetched,
   });

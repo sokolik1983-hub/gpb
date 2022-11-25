@@ -9,8 +9,8 @@ import { FORM_FIELDS } from 'pages/scroller/admin/statements/components/filter/c
 import { FilterContext } from 'pages/scroller/admin/statements/components/filter/context';
 import type { FilterValues } from 'pages/scroller/admin/statements/components/filter/types';
 import { useFormState } from 'react-final-form';
-import { statementService } from 'services/admin';
 import { getAccountOption } from 'utils/common';
+import { getDatePeriod } from 'utils/common/get-date-period';
 import { Pattern } from '@platform/ui';
 
 /**
@@ -25,7 +25,7 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
   const { accountIds, dateFrom, dateTo } = values;
 
   const { DateRange, DatePeriodType } = useDatePeriod({
-    fetch: statementService.getDatePeriod,
+    fetch: getDatePeriod,
     fieldName: { dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO, periodType: FORM_FIELDS.PERIOD_TYPE },
     onCalculateFinal: setDatePeriodFetched,
   });
