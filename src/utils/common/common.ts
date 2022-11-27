@@ -75,3 +75,11 @@ export const uniqBy = <T>(values: T[], prop: keyof T): T[] => {
 
   return Array.from(set).map(item => values.find(value => value[prop] === item) as T);
 };
+
+/**
+ * Рассчитывает количество страниц.
+ *
+ * @param totalItems - Общее количество записей.
+ * @param pageSize - Размерность страницы.
+ */
+export const getPageCount = (totalItems: number, pageSize: number): number => Math.ceil(totalItems / pageSize);

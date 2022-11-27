@@ -1,14 +1,14 @@
 import { createContext } from 'react';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import type { ACTION } from 'interfaces/common';
 import { noop } from 'utils/common';
+import type { IDialogOptions } from './dialog';
 
 /** Контекст ЭФ настройки параметров печати / экспорта. */
 export interface IDialogContext {
   /** Обработчик закрытия диалога. */
   onClose(): void;
   /** Вариант вызова диалога. */
-  useCase?: EXPORT_PARAMS_USE_CASES;
+  options?: IDialogOptions;
   /** Действие. */
   action?: ACTION;
   /** Идентификатор выписки. */

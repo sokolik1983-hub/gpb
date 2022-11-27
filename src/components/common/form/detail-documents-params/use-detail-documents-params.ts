@@ -2,8 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, defaultDocumentsSetParamsOptions, FORM_FIELDS, FormContext } from 'stream-constants/form';
 import type { IFormState } from 'stream-constants/form';
-import { checkedDebitAndCreditParams } from 'utils/admin';
-import { creationParamsShowCases } from 'utils/client';
+import { creationParamsShowCases, checkedDebitAndCreditParams } from 'utils/client';
 import type { ICheckboxOption } from '@platform/ui';
 
 /** Хук с бизнес-логикой для компонента "Детальные параметры комплекта документов". */

@@ -1,0 +1,26 @@
+import { PREFIX } from 'stream-constants/admin';
+import { SORT_DIRECTION } from '@platform/services';
+
+/**
+ * Имена колонок таблицы журнала закрытых дней.
+ *
+ * Для сортируемых полей, значениями должны совпадать со значениями, которые бэкенд использует для сортировки.
+ * */
+export const COLUMN_NAMES = {
+  /** Операционная дата. */
+  OPERATION_DATE: 'operationDate',
+  /** Филиал. */
+  BRANCH: 'branch',
+  /** Вторая фаза. */
+  SECOND_PHASE: 'secondPhase',
+  /** Третья фаза. */
+  THIRD_PHASE: 'thirdPhase',
+};
+
+/** Состояние сортировки по умолчанию. */
+export const DEFAULT_SORT = {
+  [COLUMN_NAMES.OPERATION_DATE]: SORT_DIRECTION.DESC,
+};
+
+/** Ключ в Session Storage, по которому хранится состояние таблицы. */
+export const STORAGE_KEY = `${PREFIX}-closed-days-scroller-page-table`;

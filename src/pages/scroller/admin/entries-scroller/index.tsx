@@ -1,11 +1,13 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import { executor, viewEntry } from 'actions/admin';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { executor, viewEntry, viewStatementHistoryScroller } from 'actions/admin';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
+import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
 import type { IUrlParams } from 'interfaces';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { TableRowsInfo } from 'pages/scroller/admin/entries-scroller/components/table-rows-info';
 import { useStatementSummary } from 'pages/scroller/admin/entries-scroller/hooks';
@@ -47,7 +49,7 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const [total, setTotal] = useState(0);
   const [visibleOnlySelectedRows, setVisibleOnlySelectedRows] = useState<boolean>(defaultValue.visibleOnlySelectedRows);
-  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>(defaultValue.selectedRows);
+  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryTurnoverCard[]>(defaultValue.selectedRows);
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
   const [filters, setFilters] = useState<IFilters>({});
   const [entriesInitialed, setEntriesInitialed] = useState(false);
@@ -107,31 +109,33 @@ export const EntriesScrollerPage: React.FC = () => {
   );
 
   const footerActions = useCallback(
-    scrollerExecutor => (rows: BankAccountingEntryCard[]) =>
-      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, id]),
+    scrollerExecutor => (rows: BankAccountingEntryTurnoverCard[]) =>
+      getActiveActionButtons(getAvailableActions(FOOTER_ACTIONS), scrollerExecutor, [rows, id, false]),
     [getAvailableActions, id]
   );
 
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id]), [getAvailableActions, id]);
+  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(HEADER_ACTIONS), executor, [[], id, false]), [
+    getAvailableActions,
+    id,
+  ]);
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
+    backButtonTitle: locale.admin.button.toStatementRequest,
     header: locale.transactionsScroller.title({
       dateFrom: formatDateTime(statementSummary.statement?.dateFrom, { keepLocalTime: true, format: DATE_FORMAT }),
       dateTo: formatDateTime(statementSummary.statement?.dateTo, { keepLocalTime: true, format: DATE_FORMAT }),
     }),
+    onBack: () => void executor.execute(viewStatementHistoryScroller),
   };
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.WITH_BACK_BUTTON - FILTER_HEIGHT - STATEMENT_SUMMARY_HEIGHT;
 
-  const handRowClick = useCallback(
-    row => {
-      void executor.execute(viewEntry, [row], id);
-    },
-    [id]
-  );
+  const handRowClick = useCallback(row => {
+    void executor.execute(viewEntry, [row]);
+  }, []);
 
   const filteredColumns = useMemo(() => {
     switch (groupBy) {
@@ -161,7 +165,7 @@ export const EntriesScrollerPage: React.FC = () => {
                   </ContentLoader>
                   <>
                     <TableRowsInfo />
-                    <Table<BankAccountingEntryGroup, BankAccountingEntryCard>
+                    <Table<BankAccountingEntryGroup, BankAccountingEntryTurnoverCard>
                       columns={filteredColumns}
                       customSettingsForm={SettingsForm}
                       defaultSort={DEFAULT_SORT}

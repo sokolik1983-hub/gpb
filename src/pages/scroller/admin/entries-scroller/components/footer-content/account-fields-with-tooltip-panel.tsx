@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { formatMoney } from '@platform/tools/big-number';
 import { CONTAINER_POSITION, Gap, Horizon, Link, Tooltip, Typography, WithTooltip } from '@platform/ui';
@@ -19,7 +19,7 @@ export interface IAccountFieldsWithTooltipPanelProps {
   /** Выводить списания(true для списаний, false для поступлений). */
   isDebit: boolean;
   /** Список счетов. */
-  payments: BankAccountingEntryCard[];
+  payments: BankAccountingEntryTurnoverCard[];
 }
 
 /**
@@ -69,7 +69,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
       currencyCode: '',
     });
   } else if (currenciesSet.size === 1) {
-    const amount = filteredPayments.reduce((summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit), 0);
+    const amount = filteredPayments.reduce((summary, payment) => summary + (isDebit ? payment.amountByDebit : payment.amountByCredit), 0);
 
     labelText = locale.moneyString.unsigned({
       amount: String(amount),
@@ -106,7 +106,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
             Array.from(currenciesSet.values()).reduce<React.ReactElement[]>((paymentRows, currency, index) => {
               const currencyPayments = filteredPayments.filter(payment => payment.account.currency.letterCode === currency);
               const amount = currencyPayments.reduce(
-                (summary, payment) => summary + (isDebit ? payment.amountDebit : payment.amountCredit),
+                (summary, payment) => summary + (isDebit ? payment.amountByDebit : payment.amountByCredit),
                 0
               );
 

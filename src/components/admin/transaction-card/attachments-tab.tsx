@@ -13,8 +13,6 @@ export interface IAttachmentsTabProps {
   attachmentActions: IExtendedIActionWithAuth[];
   /** Проводка. */
   transaction: IGetTransactionCardResponseDto;
-  /** Id запроса на выписку. */
-  statementId: string;
 }
 
 /**
@@ -22,14 +20,14 @@ export interface IAttachmentsTabProps {
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=32245869
  */
-export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction: doc, statementId, attachmentActions }) => {
+export const AttachmentsTab: FC<IAttachmentsTabProps> = ({ transaction: doc, attachmentActions }) => {
   const { appendixDto: { documents: docs = [] } = {} } = doc;
 
   const { getAvailableActions } = useAuth();
 
   const getActions = useCallback(
-    documentType => getActiveActionButtons(getAvailableActions(attachmentActions), executor, [[doc], statementId, documentType]),
-    [doc, getAvailableActions, statementId, attachmentActions]
+    documentType => getActiveActionButtons(getAvailableActions(attachmentActions), executor, [[doc], documentType]),
+    [doc, getAvailableActions, attachmentActions]
   );
 
   return (

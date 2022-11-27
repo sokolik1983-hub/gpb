@@ -68,6 +68,36 @@
   "admin.userType.technical": {
     "ru": "Технический пользователь"
   },
+  "admin.maintenanceType.start": {
+    "ru": "Начало технических работ на Ф1"
+  },
+  "admin.maintenanceType.end": {
+    "ru": "Окончание технических работ на Ф1"
+  },
+  "admin.maintenanceStatus.start": {
+    "ru": "Начаты"
+  },
+  "admin.maintenanceStatus.end": {
+    "ru": "Закончены"
+  },
+  "admin.turnoverReconciliationRecordSource.closingOfDay": {
+    "ru": "Закрытие дня"
+  },
+  "admin.turnoverReconciliationRecordSource.changingSetOfEntries": {
+    "ru": "Пересчет дня в связи с изменением набора проводок"
+  },
+  "admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod": {
+    "ru": "Пересчет дня в связи с изменением набора проводок предыдущего периода"
+  },
+  "admin.turnoverReconciliationStatus.difference": {
+    "ru": "Есть расхождения"
+  },
+  "admin.turnoverReconciliationStatus.notAvailable": {
+    "ru": "Сверка не проводилась"
+  },
+  "admin.turnoverReconciliationStatus.noDifference": {
+    "ru": "Расхождений нет"
+  },
   "scroller.tags.labels.resetAll": {
     "ru": "Сбросить всё"
   },
@@ -407,117 +437,248 @@
   "historyScroller.statementFormat.labels.multicash": {
     "ru": "Multicash"
   },
-  "admin.historyScroller.pageTitle": {
-    "ru": "Запросы выписки"
-  },
-  "admin.historyScroller.filter.labels.requestStatus": {
+  "admin.statementScroller.filter.labels.requestStatus": {
     "ru": "Статус запроса"
   },
-  "admin.historyScroller.filter.labels.statementStatus": {
+  "admin.statementScroller.filter.labels.statementStatus": {
     "ru": "Статус выписки / справки"
   },
-  "admin.historyScroller.filter.labels.signaturePresence": {
+  "admin.statementScroller.filter.labels.signaturePresence": {
     "ru": "Электронная подпись"
   },
-  "admin.historyScroller.filter.labels.period": {
+  "admin.statementScroller.filter.labels.period": {
     "ru": "Период"
   },
-  "admin.historyScroller.filter.labels.organization": {
+  "admin.statementScroller.filter.labels.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.filter.placeholder.account": {
+  "admin.statementScroller.filter.placeholder.account": {
     "ru": "Счёт"
   },
-  "admin.historyScroller.filter.placeholder.organization": {
+  "admin.statementScroller.filter.placeholder.organization": {
     "ru": "Название или ИНН"
   },
-  "admin.historyScroller.filter.labels.statementType": {
+  "admin.statementScroller.filter.labels.statementType": {
     "ru": "Выписка/справка"
   },
-  "admin.historyScroller.filter.labels.user": {
+  "admin.statementScroller.filter.labels.user": {
     "ru": "Пользователь"
   },
-  "admin.historyScroller.filter.labels.serviceBranch": {
+  "admin.statementScroller.filter.labels.serviceBranch": {
     "ru": "Подразделение обслуживания"
   },
-  "admin.historyScroller.table.header.createdAt": {
+  "admin.statementScroller.table.header.createdAt": {
     "ru": "Дата запроса"
   },
-  "admin.historyScroller.table.header.accountNumber": {
+  "admin.statementScroller.table.header.accountNumber": {
     "ru": "Счёт"
   },
-  "admin.historyScroller.table.header.organization": {
+  "admin.statementScroller.table.header.organization": {
     "ru": "Организация"
   },
-  "admin.historyScroller.table.header.requestPeriod": {
+  "admin.statementScroller.table.header.requestPeriod": {
     "ru": "Период"
   },
-  "admin.historyScroller.table.header.format": {
+  "admin.statementScroller.table.header.format": {
     "ru": "Формат"
   },
-  "admin.historyScroller.table.header.requestStatus": {
+  "admin.statementScroller.table.header.requestStatus": {
     "ru": "Статус запроса"
   },
-  "admin.historyScroller.table.header.user": {
+  "admin.statementScroller.table.header.user": {
     "ru": "Пользователь, сформировавший запрос"
   },
-  "admin.historyScroller.table.header.serviceBranch": {
+  "admin.statementScroller.table.header.serviceBranch": {
     "ru": "Филиал обслуживания"
   },
-  "admin.historyScroller.table.header.statementType": {
+  "admin.statementScroller.table.header.statementType": {
     "ru": "Признак сформированной выписки"
   },
-  "admin.historyScroller.table.header.statementStatus": {
+  "admin.statementScroller.table.header.statementStatus": {
     "ru": "Статус сформированной выписки"
   },
-  "admin.historyScroller.table.cell.inn": {
+  "admin.statementScroller.table.cell.inn": {
     "ru": "ИНН"
   },
-  "admin.historyScroller.table.total": {
+  "admin.statementScroller.table.total": {
     "ru": "Запросы"
   },
-  "admin.historyScroller.action.createStatement": {
+  "admin.statementScroller.action.createStatement": {
     "ru": "Запросить выписку"
   },
-  "admin.historyScroller.action.exportRegistryStatements": {
+  "admin.statementScroller.action.exportRegistryStatements": {
     "ru": "Экспорт реестра"
   },
-  "admin.historyScroller.action.repeatStatement": {
+  "admin.statementScroller.action.repeatStatement": {
     "ru": "Повторить выписку"
   },
-  "admin.historyScroller.action.exportStatement": {
+  "admin.statementScroller.action.exportStatement": {
     "ru": "Экспорт выписки"
   },
-  "admin.historyScroller.action.viewModifiedTransactions": {
-    "ru": "Просмотреть измененные проводки"
+  "admin.statementScroller.action.viewModifiedTransactions": {
+    "ru": "Просмотр удаленных/добавленных проводок"
   },
-  "admin.historyScroller.action.viewTransactions": {
+  "admin.statementScroller.action.viewTransactions": {
     "ru": "Просмотреть выписку"
   },
-  "admin.historyScroller.action.viewQueryParams": {
+  "admin.statementScroller.action.viewQueryParams": {
     "ru": "Просмотреть параметры запроса"
   },
-  "admin.historyScroller.footer.selected": {
+  "admin.statementScroller.footer.selected": {
     "ru": "Выбрано:"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.header": {
+  "admin.statementScroller.dialog.exportRegistryStatement.header": {
     "@count": "number",
     "ru": "Документы: {count}"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.content": {
+  "admin.statementScroller.dialog.exportRegistryStatement.content": {
     "ru": "Экспорт реестра"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.button.excel": {
+  "admin.statementScroller.dialog.exportRegistryStatement.button.excel": {
     "ru": "Excel"
   },
-  "admin.historyScroller.dialog.exportRegistryStatement.button.pdf": {
+  "admin.statementScroller.dialog.exportRegistryStatement.button.pdf": {
     "ru": "PDF"
+  },
+  "admin.historyScroller.pageTitle": {
+    "ru": "Запросы выписки"
+  },
+  "admin.relatedQueriesScroller.header.button.back": {
+    "ru": "Запросы выписки"
+  },
+  "admin.relatedQueriesScroller.header.title": {
+    "ru": "Связанные запросы"
+  },
+  "admin.relatedQueriesScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.relatedQueriesScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
   },
   "admin.entriesScroller.statementSummary.buttons.showTotals": {
     "ru": "Все валюты"
   },
   "admin.entriesScroller.statementSummary.buttons.hideTotals": {
     "ru": "Скрыть валюты"
+  },
+  "admin.closedDaysScroller.pageTitle": {
+    "ru": "Закрытые дни"
+  },
+  "admin.closedDaysScroller.filter.placeholder.branch": {
+    "ru": "Филиал"
+  },
+  "admin.closedDaysScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.closedDaysScroller.table.header.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.closedDaysScroller.table.header.branch": {
+    "ru": "Филиал"
+  },
+  "admin.closedDaysScroller.table.header.secondPhase": {
+    "ru": "Закрытие второй фазы"
+  },
+  "admin.closedDaysScroller.table.header.thirdPhase": {
+    "ru": "Закрытие третьей фазы"
+  },
+  "admin.closedDaysScroller.table.cell.phase.dateTime": {
+    "@date": "string",
+    "@time": "string",
+    "ru": "{date} в {time}"
+  },
+  "admin.closedDaysScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.closedDaysScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.reconciliationTurnoversScroller.pageTitle": {
+    "ru": "Сверка остатков и оборотов"
+  },
+  "admin.reconciliationTurnoversScroller.filter.label.operationDate": {
+    "ru": "Опер. дата"
+  },
+  "admin.reconciliationTurnoversScroller.filter.placeholder.account": {
+    "ru": "Счёт"
+  },
+  "admin.reconciliationTurnoversScroller.filter.placeholder.status": {
+    "ru": "Статус сверки"
+  },
+  "admin.reconciliationTurnoversScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.accountNumber": {
+    "ru": "№ счёта"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.reconciliationDate": {
+    "ru": "Дата сверки"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.recordSource": {
+    "ru": "Источник записи"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.status": {
+    "ru": "Статус сверки"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.turnoverDebit": {
+    "ru": "Обороты Дт"
+  },
+  "admin.reconciliationTurnoversScroller.table.header.turnoverCredit": {
+    "ru": "Обороты Кт"
+  },
+  "admin.currencyRatesScroller.pageTitle": {
+    "ru": "Курсы валют"
+  },
+  "admin.currencyRatesScroller.table.total": {
+    "ru": "Курсы валют"
+  },
+  "admin.currencyRatesScroller.filter.label.rateDate": {
+    "ru": "Дата курса"
+  },
+  "admin.currencyRatesScroller.filter.placeholder.currencyCode": {
+    "ru": "Код"
+  },
+  "admin.currencyRatesScroller.table.header.letterCode": {
+    "ru": "Код"
+  },
+  "admin.currencyRatesScroller.table.header.units": {
+    "ru": "Единиц"
+  },
+  "admin.currencyRatesScroller.table.header.rateValue": {
+    "ru": "Курс"
+  },
+  "admin.currencyRatesScroller.table.header.rateDate": {
+    "ru": "Дата курса"
+  },
+  "admin.maintenanceScroller.pageTitle": {
+    "ru": "Технические работы Ф1"
+  },
+  "admin.maintenanceScroller.filter.placeholder.maintenanceType": {
+    "ru": "Технические работы"
+  },
+  "admin.maintenanceScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.maintenanceScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.maintenanceScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.maintenanceScroller.table.header.creationDate": {
+    "ru": "Дата и время"
+  },
+  "admin.maintenanceScroller.table.header.maintenanceType": {
+    "ru": "Технические работы"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
@@ -765,6 +926,12 @@
   "common.documentsSetParams.onlyRequestStatementDocuments": {
     "ru": "Только документы выписки"
   },
+  "common.documentsSetParams.requestStatementDocuments": {
+    "ru": "Документы выписки"
+  },
+  "common.documentsSetParams.requestBaseDocuments": {
+    "ru": "Документы основания"
+  },
   "common.debitParams.label": {
     "ru": "Дебетовые"
   },
@@ -786,6 +953,12 @@
   "common.email.label": {
     "ru": "Адрес электронной почты"
   },
+  "admin.button.toStatementRequest": {
+    "ru": "К запросу выписок"
+  },
+  "admin.button.toStatementRequests": {
+    "ru": "К запросам выписок"
+  },
   "form.buttons.download.label": {
     "ru": "Экспорт"
   },
@@ -800,6 +973,24 @@
   },
   "form.buttons.cancel.label": {
     "ru": "Отменить"
+  },
+  "admin.statementRequestCard.pageTitle": {
+    "ru": "Параметры запроса"
+  },
+  "admin.statementRequestForm.pageTitle": {
+    "ru": "Запрос выписки"
+  },
+  "admin.statementRequestForm.label.organization": {
+    "ru": "Организация"
+  },
+  "admin.statementRequestForm.label.serviceBranch": {
+    "ru": "Подразделение обслуживания"
+  },
+  "admin.statementRequestForm.label.account": {
+    "ru": "Счёт"
+  },
+  "admin.statementRequestForm.label.accountType": {
+    "ru": "Тип счёта"
   },
   "table.header.sortInfo": {
     "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
@@ -917,9 +1108,6 @@
   },
   "errors.periodEnd.dateLessRestriction": {
     "ru": "Дата окончания периода не может быть меньше даты начала"
-  },
-  "errors.printStatement.content": {
-    "ru": "Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл"
   },
   "exportParamsDialog.buttons.download.label": {
     "ru": "Экспорт"
@@ -1069,5 +1257,255 @@
   },
   "admin.entryScroller.footer.print": {
     "ru": "Печать документов"
+  },
+  "admin.turnoverScroller.filter.labels.operationDate": {
+    "ru": "Опер. дата"
+  },
+  "admin.turnoverScroller.filter.placeholders.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.filter.placeholders.account": {
+    "ru": "Счёт"
+  },
+  "admin.turnoverScroller.columns.operationDate": {
+    "ru": "Операционная дата"
+  },
+  "admin.turnoverScroller.columns.accountNumber": {
+    "ru": "№ счёта"
+  },
+  "admin.turnoverScroller.columns.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.columns.accountBranch": {
+    "ru": "Филиал баланса счёта"
+  },
+  "admin.turnoverScroller.columns.serviceBranch": {
+    "ru": "Филиал обслуживания"
+  },
+  "admin.turnoverScroller.aggregateRow.incomingBalance": {
+    "ru": "Входящий остаток"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverDebit": {
+    "ru": "Обороты Дт"
+  },
+  "admin.turnoverScroller.aggregateRow.turnoverCredit": {
+    "ru": "Обороты Кт"
+  },
+  "admin.turnoverScroller.aggregateRow.outgoingBalance": {
+    "ru": "Исходящий остаток"
+  },
+  "common.inn": {
+    "@inn": "string",
+    "ru": "ИНН: {inn}"
+  },
+  "admin.transactionsScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.transactionsScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.transactionsScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.transactionsScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.transactionsScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.transactionsScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.transactionsScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.transactionsScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.transactionsScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.transactionsScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.transactionsScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.transactionsScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.transactionsScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.transactionsScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.transactionsScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.transactionsScroller.footer.printAction": {
+    "ru": "Печать документа"
+  },
+  "admin.transactionsScroller.footer.exportAction": {
+    "ru": "Экспорт документа"
+  },
+  "admin.transactionsScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.transactionsScroller.table.total": {
+    "ru": "Операций"
+  },
+  "common.formats.PDF": {
+    "ru": "PDF"
+  },
+  "common.formats.Excel": {
+    "ru": "Excel"
+  },
+  "admin.turnoverScroller.actions.exportTurnovers": {
+    "ru": "Экспорт"
+  },
+  "admin.turnoverScroller.labels.format": {
+    "ru": "Формат:"
+  },
+  "admin.turnoverScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.turnoverScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.turnoverScroller.title": {
+    "ru": "Остатки и обороты"
+  },
+  "admin.turnoverScroller.table.total": {
+    "ru": "Записей"
+  },
+  "common.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.columns.date": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.columns.account": {
+    "ru": "Клиент банка"
+  },
+  "admin.changedEntriesScroller.columns.document": {
+    "ru": "Документ"
+  },
+  "admin.changedEntriesScroller.columns.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.columns.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.columns.income": {
+    "ru": "Поступления"
+  },
+  "admin.changedEntriesScroller.columns.outcome": {
+    "ru": "Списания"
+  },
+  "admin.changedEntriesScroller.columns.summary": {
+    "ru": "Сумма"
+  },
+  "admin.changedEntriesScroller.cells.documentDate": {
+    "@date": "string",
+    "ru": "от {date}"
+  },
+  "admin.changedEntryStatus.added": {
+    "ru": "Добавлена"
+  },
+  "admin.changedEntryStatus.removed": {
+    "ru": "Удалена"
+  },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Удаленные/добавленные проводки"
+  },
+  "admin.changedEntriesScroller.footer.selected": {
+    "ru": "Выбрано:"
+  },
+  "admin.changedEntriesScroller.footer.income": {
+    "ru": "Поступления:"
+  },
+  "admin.changedEntriesScroller.footer.outcome": {
+    "ru": "Списания:"
+  },
+  "admin.changedEntriesScroller.footer.tooltip": {
+    "ru": "на сумму:"
+  },
+  "admin.changedEntriesScroller.footer.collapsedCurrencies": {
+    "@amount": "string",
+    "@currencies": "string",
+    "ru": "{currencies} и ещё {amount}"
+  },
+  "admin.changedEntriesScroller.footer.printAction": {
+    "ru": "Печать документа"
+  },
+  "admin.changedEntriesScroller.footer.exportAction": {
+    "ru": "Экспорт документа"
+  },
+  "admin.changedEntriesScroller.pageTitle": {
+    "ru": "Проводки"
+  },
+  "admin.changedEntriesScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.changedEntriesScroller.tags.docNumber": {
+    "ru": "Номер документа:"
+  },
+  "admin.changedEntriesScroller.tags.dateFrom": {
+    "ru": "Дата платежа c:"
+  },
+  "admin.changedEntriesScroller.tags.dateTo": {
+    "ru": "Дата платежа по:"
+  },
+  "admin.changedEntriesScroller.tags.transactionType": {
+    "ru": "Операция:"
+  },
+  "admin.changedEntriesScroller.tags.status": {
+    "ru": "Статус:"
+  },
+  "admin.changedEntriesScroller.tags.counterparty": {
+    "ru": "Контрагент:"
+  },
+  "admin.changedEntriesScroller.tags.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента:"
+  },
+  "admin.changedEntriesScroller.tags.client": {
+    "ru": "Клиент:"
+  },
+  "admin.changedEntriesScroller.tags.clientAccountNumber": {
+    "ru": "Счёт клиента:"
+  },
+  "admin.changedEntriesScroller.labels.docNumber": {
+    "ru": "Номер документа"
+  },
+  "admin.changedEntriesScroller.labels.paymentDate": {
+    "ru": "Дата платежа"
+  },
+  "admin.changedEntriesScroller.labels.transactionDate": {
+    "ru": "Дата проводки"
+  },
+  "admin.changedEntriesScroller.labels.transactionType": {
+    "ru": "Операция"
+  },
+  "admin.changedEntriesScroller.labels.status": {
+    "ru": "Статус"
+  },
+  "admin.changedEntriesScroller.labels.recentRequests": {
+    "ru": "Недавние запросы"
+  },
+  "admin.changedEntriesScroller.labels.counterparty": {
+    "ru": "Контрагент"
+  },
+  "admin.changedEntriesScroller.labels.counterpartyAccountNumber": {
+    "ru": "Счёт контрагента"
+  },
+  "admin.changedEntriesScroller.labels.client": {
+    "ru": "Клиент"
+  },
+  "admin.changedEntriesScroller.labels.clientAccountNumber": {
+    "ru": "Счёт клиента"
   }
 }

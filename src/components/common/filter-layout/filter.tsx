@@ -12,7 +12,7 @@ export const Filter: React.FC<IFilterProperties> = ({
   AdditionalFilter,
   QuickFilter,
   TagsPanel,
-  additionalFilterFields,
+  additionalFilterFields = [],
   applyMixValuesFormAndStorage,
   filterFields,
   filterState,
@@ -89,24 +89,30 @@ export const Filter: React.FC<IFilterProperties> = ({
   return (
     <>
       <Box className={css.filterWrapper}>
-        <Pattern>
-          <Pattern.Span size={10}>
-            <QuickFilter applyMixValuesFormAndStorage={applyMixValuesFormAndStorage} />
-          </Pattern.Span>
-          <Pattern.Span size={2}>
-            <Horizon align={'CENTER'} className={css.toggleButtonWrapper}>
-              <Horizon.Spacer />
-              <ToggleButton opened={visibleAdditionalFilter} onClick={handleToggle} />
-            </Horizon>
-          </Pattern.Span>
-        </Pattern>
-        <TagsPanel
-          defaultAdditionalFilterValues={defaultAdditionalFilterValues}
-          onChangeVisibleAdditionalFilter={setVisibleAdditionalFilter}
-        />
+        {AdditionalFilter ? (
+          <Pattern>
+            <Pattern.Span size={10}>
+              <QuickFilter applyMixValuesFormAndStorage={applyMixValuesFormAndStorage} />
+            </Pattern.Span>
+            <Pattern.Span size={2}>
+              <Horizon align={'CENTER'} className={css.toggleButtonWrapper}>
+                <Horizon.Spacer />
+                <ToggleButton opened={visibleAdditionalFilter} onClick={handleToggle} />
+              </Horizon>
+            </Pattern.Span>
+          </Pattern>
+        ) : (
+          <QuickFilter applyMixValuesFormAndStorage={applyMixValuesFormAndStorage} />
+        )}
+        {TagsPanel && (
+          <TagsPanel
+            defaultAdditionalFilterValues={defaultAdditionalFilterValues}
+            onChangeVisibleAdditionalFilter={setVisibleAdditionalFilter}
+          />
+        )}
       </Box>
       <Line fill="FAINT" />
-      {visibleAdditionalFilter && (
+      {AdditionalFilter && visibleAdditionalFilter && (
         <Box aria-expanded={visibleAdditionalFilter} data-name={'additionalFilter'} role={ROLE.PANEL}>
           <Box className={css.additionalFilterWrapper}>
             <AdditionalFilter />

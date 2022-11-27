@@ -27,9 +27,9 @@ export const FORM_FIELDS = {
   /** Счёт контрагента. */
   COUNTERPARTY_ACCOUNT: getPath('counterpartyAccountNumber'),
   /** Клиент. */
-  CLIENT: getPath('client'),
+  CLIENT: getPath('bankClient'),
   /** Счёт клиента. */
-  CLIENT_ACCOUNT: getPath('clientAccountNumber'),
+  CLIENT_ACCOUNT: getPath('bankClientAccountNumber'),
   /** Номер документа. */
   DOC_NUMBER: getPath('documentNumber'),
   /** Дата платежа. */

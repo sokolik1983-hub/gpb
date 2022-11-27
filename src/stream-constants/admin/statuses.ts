@@ -1,5 +1,6 @@
 import { STATEMENT_REQUEST_STATUSES, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
-import { USER_TYPE } from 'interfaces/admin';
+import { MAINTENANCE_TYPE, RECONCILIATION_STATUS, RECORD_SOURCE, USER_TYPE } from 'interfaces/admin';
+import { CHANGED_ENTRY_STATUSES } from 'interfaces/changed-entry-statuses';
 import { locale } from 'localization';
 import { DOCUMENT_STATUS_TYPE } from '@platform/ui';
 
@@ -77,4 +78,74 @@ export const STATEMENT_STATUS_COLOR = {
   [STATEMENT_STATUSES.ERROR]: DOCUMENT_STATUS_TYPE.ERROR,
   /** Данные не актуальны. */
   [STATEMENT_STATUSES.NOT_RELEVANT]: DOCUMENT_STATUS_TYPE.ERROR,
+};
+
+/** Лейблы источника записи сверки. */
+export const TURNOVER_RECONCILIATION_RECORD_SOURCE_LABEL = {
+  /** Закрытие дня. */
+  [RECORD_SOURCE.CLOSING_OF_DAY]: locale.admin.turnoverReconciliationRecordSource.closingOfDay,
+  /** Пересчет дня в связи с изменением набора проводок. */
+  [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntries,
+  /** Пересчет дня в связи с изменением набора проводок предыдущего периода. */
+  [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES_OF_PREV_PERIOD]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod,
+};
+
+/** Цвета статусов сверки остатков/оборотов. */
+export const TURNOVER_RECONCILIATION_STATUS_COLOR = {
+  /** Есть расхождения. */
+  [RECONCILIATION_STATUS.DIFFERENCE]: DOCUMENT_STATUS_TYPE.ERROR,
+  /** Сверка не проводилась. */
+  [RECONCILIATION_STATUS.NOT_AVAILABLE]: DOCUMENT_STATUS_TYPE.INPROGRESS,
+  /** Расхождений нет. */
+  [RECONCILIATION_STATUS.NO_DIFFERENCE]: DOCUMENT_STATUS_TYPE.SUCCESS,
+};
+
+/** Лейблы статусов сверки остатков/оборотов. */
+export const TURNOVER_RECONCILIATION_STATUS_LABEL = {
+  /** Сверка не проводилась. */
+  [RECONCILIATION_STATUS.NOT_AVAILABLE]: locale.admin.turnoverReconciliationStatus.notAvailable,
+  /** Расхождений нет. */
+  [RECONCILIATION_STATUS.NO_DIFFERENCE]: locale.admin.turnoverReconciliationStatus.noDifference,
+  /** Есть расхождения. */
+  [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
+};
+
+/** Цвета статусов добавленных/удалённых проводок. */
+export const CHANGED_ENTRIES_STATUS_COLOR = {
+  /** Добавлена. */
+  [CHANGED_ENTRY_STATUSES.ADDED]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** Удалена. */
+  [CHANGED_ENTRY_STATUSES.REMOVED]: DOCUMENT_STATUS_TYPE.ERROR,
+};
+
+/** Лейблы статусов добавленных/удалённых проводок. */
+export const CHANGED_ENTRIES_STATUS_LABEL = {
+  /** Добавлена. */
+  [CHANGED_ENTRY_STATUSES.ADDED]: locale.admin.changedEntryStatus.added,
+  /** Удалена. */
+  [CHANGED_ENTRY_STATUSES.REMOVED]: locale.admin.changedEntryStatus.removed,
+};
+
+/** Лейблы типов технических работ. */
+export const MAINTENANCE_TYPE_LABEL = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: locale.admin.maintenanceType.end,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: locale.admin.maintenanceType.start,
+};
+
+/** Лейблы статусов технических работ. */
+export const MAINTENANCE_STATUS_LABEL = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: locale.admin.maintenanceStatus.end,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: locale.admin.maintenanceStatus.start,
+};
+
+/** Цвета статусов технических работ. */
+export const MAINTENANCE_STATUS_COLOR = {
+  /** Окончание технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_END]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** Начало технических работ на Ф1. */
+  [MAINTENANCE_TYPE.MAINTENANCE_START]: DOCUMENT_STATUS_TYPE.INPROGRESS,
 };

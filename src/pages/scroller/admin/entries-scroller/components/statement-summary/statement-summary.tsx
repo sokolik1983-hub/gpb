@@ -70,12 +70,12 @@ export const StatementSummary: FC = () => {
                   </Pattern.Span>
                   <Pattern.Span size={3}>
                     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
-                      {locale.moneyString.negative({ amount: String(turnoverCredit), currencyCode })}
+                      {locale.moneyString.negative({ amount: String(turnoverDebit), currencyCode })}
                     </Typography.P>
                   </Pattern.Span>
                   <Pattern.Span size={3}>
                     <Typography.P align={'RIGHT'} fill={'SUCCESS'}>
-                      {locale.moneyString.positive({ amount: String(turnoverDebit), currencyCode })}
+                      {locale.moneyString.positive({ amount: String(turnoverCredit), currencyCode })}
                     </Typography.P>
                   </Pattern.Span>
                   <Pattern.Span size={3}>

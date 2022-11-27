@@ -1,5 +1,5 @@
 import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
-import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { accessor, addMaxWidthField } from 'utils/common';
 import {
@@ -15,7 +15,7 @@ import {
 import { COLUMN_NAMES } from './constants';
 
 /** Колонки для подстрок таблицы. */
-export const columns = addMaxWidthField<BankAccountingEntryCard, { isVisible: boolean; optionLabel?: string }>([
+export const columns = addMaxWidthField<BankAccountingEntryTurnoverCard, { isVisible: boolean; optionLabel?: string }>([
   {
     Header: locale.admin.entryScroller.columns.date,
     id: COLUMN_NAMES.DATE,
