@@ -11,3 +11,4 @@ export * from './use-filter-tags';
 export * from './use-date-period';
 export * from './use-data-table';
 export * from './use-submit-scroller-filter';
+export * from './use-search-history';

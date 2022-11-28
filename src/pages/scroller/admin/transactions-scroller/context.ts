@@ -11,6 +11,8 @@ export interface ITransactionsScrollerContext {
   total: number;
   /** Строка поиска из фильтра. */
   searchQuery: string;
+  /** Признак получения новых проводок с сервера. */
+  newTransactionsFetched: boolean;
 }
 
 /** Значение по-умолчанию контекста скроллера проводок. */
@@ -18,6 +20,7 @@ export const defaultValue: ITransactionsScrollerContext = {
   fetch: asyncNoop,
   total: 0,
   searchQuery: '',
+  newTransactionsFetched: false,
 };
 
 /** Контекст скроллера проводок. */

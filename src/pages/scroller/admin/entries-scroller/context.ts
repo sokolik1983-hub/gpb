@@ -26,6 +26,8 @@ export interface IEntriesScrollerContext {
   statementSummary: StatementSummary;
   /** Свойства формы фильтрации. */
   filters: IFilters;
+  /** Признак получения новых записей с сервера. */
+  newEntriesFetched: boolean;
 }
 
 /** Значение по-умолчанию контекста скроллера проводок. */
@@ -46,6 +48,7 @@ export const defaultValue: IEntriesScrollerContext = {
     statement: { dateFrom: '', dateTo: '', id: '' },
   },
   filters: {},
+  newEntriesFetched: false,
 };
 
 /** Контекст скроллера проводок. */

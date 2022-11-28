@@ -11,6 +11,8 @@ export interface IChangedEntriesScrollerContext {
   total: number;
   /** Строка поиска из фильтра. */
   searchQuery: string;
+  /** Признак получения новых записей с сервера. */
+  newEntriesFetched: boolean;
 }
 
 /** Значение по-умолчанию контекста ЭФ Банка "Журнал проводок удаленных/добавленных". */
@@ -18,6 +20,7 @@ export const defaultValue: IChangedEntriesScrollerContext = {
   fetch: asyncNoop,
   total: 0,
   searchQuery: '',
+  newEntriesFetched: false,
 };
 
 /** Контекст ЭФ Банка "Журнал проводок удаленных/добавленных". */

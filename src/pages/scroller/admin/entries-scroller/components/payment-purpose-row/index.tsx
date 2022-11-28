@@ -1,12 +1,14 @@
 import React from 'react';
-import { LinesEllipsis } from 'components/common';
+import { HightlightText, LinesEllipsis } from 'components/common';
 import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
+import { useQueryString } from 'pages/scroller/admin/entries-scroller/hooks';
 import { Box, Typography, WithInfoTooltip, CONTAINER_POSITION } from '@platform/ui';
 import css from './styles.scss';
 
-/** Комипонент для отображении строки с назначением платежа. */
+/** Компонент для отображения строки с назначением платежа. */
 export const PaymentPurposeRow: React.FC<{ row: BankAccountingEntryTurnoverCard }> = ({ row }) => {
   const { paymentPurpose } = row;
+  const queryString = useQueryString();
 
   return (
     <Box className={css.row}>
@@ -25,7 +27,7 @@ export const PaymentPurposeRow: React.FC<{ row: BankAccountingEntryTurnoverCard 
             <LinesEllipsis maxLines={1}>
               {(elementRef, clamped) => (
                 <div ref={elementRef} style={{ textOverflow: clamped ? undefined : 'ellipsis', overflow: 'hidden' }}>
-                  {paymentPurpose}
+                  <HightlightText searchWords={queryString} textToHightlight={paymentPurpose} />
                 </div>
               )}
             </LinesEllipsis>

@@ -6,7 +6,7 @@ import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'componen
 import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
-import { useStreamContentHeight } from 'hooks/common';
+import { usePrevious, useStreamContentHeight } from 'hooks/common';
 import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
@@ -33,6 +33,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
+  const [entriesFetching, setEntriesFetching] = useState(false);
 
   const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     backButtonTitle: locale.admin.button.toStatementRequest,
@@ -47,6 +48,8 @@ export const ChangedEntriesScrollerPage: FC = () => {
 
   const fetch = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>> => {
+      setEntriesFetching(true);
+
       try {
         const metaData: IMetaData = {
           filters,
@@ -65,18 +68,23 @@ export const ChangedEntriesScrollerPage: FC = () => {
         if (!tableDataInitialed) {
           setTableDataInitialed(true);
         }
+
+        setEntriesFetching(false);
       }
     },
     [filters, tableDataInitialed]
   );
+
+  const prevEntriesFetching = usePrevious(entriesFetching);
 
   const contextValue: IChangedEntriesScrollerContext = useMemo<IChangedEntriesScrollerContext>(
     () => ({
       fetch,
       total,
       searchQuery: searchString,
+      newEntriesFetched: Boolean(tableDataInitialed && prevEntriesFetching && !entriesFetching),
     }),
-    [fetch, searchString, total]
+    [entriesFetching, fetch, prevEntriesFetching, searchString, tableDataInitialed, total]
   );
 
   const height = useStreamContentHeight();

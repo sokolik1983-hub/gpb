@@ -5,7 +5,7 @@ import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'componen
 import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
-import { useStreamContentHeight } from 'hooks/common';
+import { usePrevious, useStreamContentHeight } from 'hooks/common';
 import type { IUrlParams } from 'interfaces';
 import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
@@ -53,6 +53,7 @@ export const EntriesScrollerPage: React.FC = () => {
   const [groupBy, setGroupBy] = useState<GROUP_BY>(defaultValue.groupBy);
   const [filters, setFilters] = useState<IFilters>({});
   const [entriesInitialed, setEntriesInitialed] = useState(false);
+  const [entriesFetching, setEntriesFetching] = useState(false);
 
   useEffect(() => {
     if (selectedRows.length === 0) {
@@ -64,6 +65,8 @@ export const EntriesScrollerPage: React.FC = () => {
 
   const fetchData = useCallback(
     async ({ page: pageIndex, pageSize, multiSort }: IFetchDataParams) => {
+      setEntriesFetching(true);
+
       const metaData: IMetaData = {
         filters,
         multiSort: convertTableSortByMap(multiSort ?? DEFAULT_SORT, SORTING_MAP),
@@ -85,6 +88,8 @@ export const EntriesScrollerPage: React.FC = () => {
         if (!entriesInitialed) {
           setEntriesInitialed(true);
         }
+
+        setEntriesFetching(false);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -92,6 +97,8 @@ export const EntriesScrollerPage: React.FC = () => {
   );
 
   const { data: statementSummary, isFetching: isTotalTurnoversFetching } = useStatementSummary();
+
+  const prevEntriesFetching = usePrevious(entriesFetching);
 
   const contextValue: IEntriesScrollerContext = useMemo(
     () => ({
@@ -104,8 +111,19 @@ export const EntriesScrollerPage: React.FC = () => {
       setVisibleOnlySelectedRows,
       statementSummary,
       filters,
+      newEntriesFetched: Boolean(entriesInitialed && prevEntriesFetching && !entriesFetching),
     }),
-    [filters, groupBy, selectedRows, statementSummary, total, visibleOnlySelectedRows]
+    [
+      entriesFetching,
+      entriesInitialed,
+      filters,
+      groupBy,
+      prevEntriesFetching,
+      selectedRows,
+      statementSummary,
+      total,
+      visibleOnlySelectedRows,
+    ]
   );
 
   const footerActions = useCallback(
