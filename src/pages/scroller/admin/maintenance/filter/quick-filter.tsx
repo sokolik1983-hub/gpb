@@ -13,7 +13,14 @@ import { Fields, Pattern } from '@platform/ui';
 export const QuickFilter: FC = () => {
   const { values } = useFormState<FilterValues>();
 
-  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
+  useSubmitScrollerFilter<FilterValues>({
+    submitDep: {
+      dateTo: values.dateTo || '',
+      dateFrom: values.dateFrom || '',
+      maintenanceTypeDto: values.maintenanceTypeDto || '',
+      periodType: values.periodType || '',
+    },
+  });
 
   const { setDatePeriodFetched } = useContext(FilterContext);
 
