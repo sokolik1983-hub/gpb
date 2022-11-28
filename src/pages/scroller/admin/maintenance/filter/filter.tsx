@@ -7,7 +7,7 @@ import { FORM_FIELDS, STORAGE_KEY, fields } from 'pages/scroller/admin/maintenan
 import type { FilterContextProps } from 'pages/scroller/admin/maintenance/filter/context';
 import { FilterContext } from 'pages/scroller/admin/maintenance/filter/context';
 import { QuickFilter } from 'pages/scroller/admin/maintenance/filter/quick-filter';
-import { getDateRangeValidationScheme } from 'schemas';
+import { getDateRangeValidationScheme } from 'schemas/admin';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
 

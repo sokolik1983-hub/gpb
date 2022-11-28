@@ -1,7 +1,7 @@
 import type { DATE_PERIODS } from 'interfaces';
 import type { OPERATIONS } from 'interfaces/common';
 import { FORM_FIELDS, FORM_FIELD_LABELS } from 'pages/form/admin/views/statement-request/constants';
-import { getDateRangeValidationScheme } from 'schemas';
+import { getDateRangeValidationScheme } from 'schemas/admin';
 import { getEmptyFieldErrorMessage } from 'utils/common';
 import type { AnyObjectSchema } from 'yup';
 import { object, string, array, mixed } from 'yup';

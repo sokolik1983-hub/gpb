@@ -568,7 +568,7 @@
     "ru": "Филиал"
   },
   "admin.closedDaysScroller.table.total": {
-    "ru": "Операций"
+    "ru": "Записей"
   },
   "admin.closedDaysScroller.table.header.operationDate": {
     "ru": "Операционная дата"
@@ -666,7 +666,7 @@
     "ru": "Технические работы"
   },
   "admin.maintenanceScroller.table.total": {
-    "ru": "Операций"
+    "ru": "Записей"
   },
   "admin.maintenanceScroller.table.placeholder.title": {
     "ru": "Выберите значение в фильтре"
@@ -1103,11 +1103,17 @@
   "errors.periodStart.dateMoreRestriction": {
     "ru": "Дата начала периода не может быть больше даты окончания"
   },
+  "errors.periodStart.required": {
+    "ru": "Реквизит \"Начало периода\" является обязательным для заполнения, не может быть пустым"
+  },
   "errors.periodEnd.tomorrowRestriction": {
     "ru": "Дата окончания периода не может быть больше текущей даты"
   },
   "errors.periodEnd.dateLessRestriction": {
     "ru": "Дата окончания периода не может быть меньше даты начала"
+  },
+  "errors.periodEnd.required": {
+    "ru": "Реквизит \"Конец периода\" является обязательным для заполнения, не может быть пустым"
   },
   "exportParamsDialog.buttons.download.label": {
     "ru": "Экспорт"
