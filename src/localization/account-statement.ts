@@ -704,7 +704,7 @@ export default {
 			table: {
 				/**
 				 * @ru
-				 * Операций
+				 * Записей
 				 */
 				get total() {
 					return t('admin.closedDaysScroller.table.total');
@@ -966,7 +966,7 @@ export default {
 			table: {
 				/**
 				 * @ru
-				 * Операций
+				 * Записей
 				 */
 				get total() {
 					return t('admin.maintenanceScroller.table.total');

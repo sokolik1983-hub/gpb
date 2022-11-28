@@ -184,7 +184,7 @@
   "admin.entriesScroller.statementSummary.buttons.hideTotals": "Скрыть валюты",
   "admin.closedDaysScroller.pageTitle": "Закрытые дни",
   "admin.closedDaysScroller.filter.placeholder.branch": "Филиал",
-  "admin.closedDaysScroller.table.total": "Операций",
+  "admin.closedDaysScroller.table.total": "Записей",
   "admin.closedDaysScroller.table.header.operationDate": "Операционная дата",
   "admin.closedDaysScroller.table.header.branch": "Филиал",
   "admin.closedDaysScroller.table.header.secondPhase": "Закрытие второй фазы",
@@ -216,7 +216,7 @@
   "admin.currencyRatesScroller.table.header.rateDate": "Дата курса",
   "admin.maintenanceScroller.pageTitle": "Технические работы Ф1",
   "admin.maintenanceScroller.filter.placeholder.maintenanceType": "Технические работы",
-  "admin.maintenanceScroller.table.total": "Операций",
+  "admin.maintenanceScroller.table.total": "Записей",
   "admin.maintenanceScroller.table.placeholder.title": "Выберите значение в фильтре",
   "admin.maintenanceScroller.table.placeholder.message": "чтобы получить результат",
   "admin.maintenanceScroller.table.header.creationDate": "Дата и время",
@@ -498,3 +498,4 @@
   "client.scheduleNewPage.title": "Запрос на выписку по расписанию",
   "client.scheduleHistoryScrollerPage.title": "Реестр запросов на выписку по расписанию"
 }
+
