@@ -2,6 +2,9 @@ import { DATE_PERIODS } from 'interfaces';
 import type { IGetDatePeriodRequestDto, IGetDatePeriodResponseDto } from 'interfaces/dto';
 import { dateTime } from '@platform/tools/date-time';
 
+/**
+ * Метод рассчёта дат прошлого квартала.
+ */
 const getLastQuarter = function (): IGetDatePeriodResponseDto {
   const format = 'YYYY-MM-DD';
   const month = dateTime().month();
@@ -29,6 +32,10 @@ const getLastQuarter = function (): IGetDatePeriodResponseDto {
   };
 };
 
+/**
+ * Метод для получения периода дат по типу периода.
+ * Заменяет запрос calculate-period, работая от текущей даты, игнорируя закрытые дни.
+ */
 // eslint-disable-next-line @typescript-eslint/require-await
 export const getDatePeriod = async function ({ periodType }: IGetDatePeriodRequestDto): Promise<IGetDatePeriodResponseDto> {
   const format = 'YYYY-MM-DD';
