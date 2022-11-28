@@ -22,7 +22,7 @@ import { QuickFilter } from 'pages/scroller/admin/statements/components/filter/q
 import { TagsPanel } from 'pages/scroller/admin/statements/components/filter/tags-panel';
 import type { FilterValues } from 'pages/scroller/admin/statements/components/filter/types';
 import { useDebounce } from 'platform-copies/hooks';
-import { getDateRangeValidationScheme } from 'schemas';
+import { getDateRangeValidationScheme } from 'schemas/admin';
 import { DELAY, QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { getAccountSearchFilter, getOrganizationSearchFilter } from 'utils/admin';

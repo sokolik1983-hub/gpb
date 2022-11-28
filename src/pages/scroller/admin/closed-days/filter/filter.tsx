@@ -7,7 +7,7 @@ import { FORM_FIELDS, STORAGE_KEY, fields } from 'pages/scroller/admin/closed-da
 import type { FilterContextProps } from 'pages/scroller/admin/closed-days/filter/context';
 import { FilterContext } from 'pages/scroller/admin/closed-days/filter/context';
 import { QuickFilter } from 'pages/scroller/admin/closed-days/filter/quick-filter';
-import { getDateRangeValidationScheme } from 'schemas';
+import { getDateRangeValidationScheme } from 'schemas/admin';
 import { QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';

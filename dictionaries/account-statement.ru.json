@@ -358,8 +358,10 @@
   "errors.emailRequired": "Для отправки выписки на почту необходимо заполнить адрес электронной почты",
   "errors.periodStart.tomorrowRestriction": "Дата начала периода не может быть больше текущей даты",
   "errors.periodStart.dateMoreRestriction": "Дата начала периода не может быть больше даты окончания",
+  "errors.periodStart.required": "Реквизит \"Начало периода\" является обязательным для заполнения, не может быть пустым",
   "errors.periodEnd.tomorrowRestriction": "Дата окончания периода не может быть больше текущей даты",
   "errors.periodEnd.dateLessRestriction": "Дата окончания периода не может быть меньше даты начала",
+  "errors.periodEnd.required": "Реквизит \"Конец периода\" является обязательным для заполнения, не может быть пустым",
   "exportParamsDialog.buttons.download.label": "Экспорт",
   "exportParamsDialog.buttons.sendToEmail.label": "Отправить на почту",
   "exportParamsDialog.buttons.print.label": "Печать",
@@ -498,4 +500,3 @@
   "client.scheduleNewPage.title": "Запрос на выписку по расписанию",
   "client.scheduleHistoryScrollerPage.title": "Реестр запросов на выписку по расписанию"
 }
-

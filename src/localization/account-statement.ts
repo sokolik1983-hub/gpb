@@ -3654,6 +3654,13 @@ export default {
 			get dateMoreRestriction() {
 				return t('errors.periodStart.dateMoreRestriction');
 			},
+			/**
+			 * @ru
+			 * Реквизит "Начало периода" является обязательным для заполнения, не может быть пустым
+			 */
+			get required() {
+				return t('errors.periodStart.required');
+			},
 		},
 		periodEnd: {
 			/**
@@ -3669,6 +3676,13 @@ export default {
 			 */
 			get dateLessRestriction() {
 				return t('errors.periodEnd.dateLessRestriction');
+			},
+			/**
+			 * @ru
+			 * Реквизит "Конец периода" является обязательным для заполнения, не может быть пустым
+			 */
+			get required() {
+				return t('errors.periodEnd.required');
 			},
 		},
 		datatable: {

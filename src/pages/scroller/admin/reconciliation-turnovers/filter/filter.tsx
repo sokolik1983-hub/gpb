@@ -9,7 +9,7 @@ import type { FilterContextProps } from 'pages/scroller/admin/reconciliation-tur
 import { FilterContext } from 'pages/scroller/admin/reconciliation-turnovers/filter/context';
 import { QuickFilter } from 'pages/scroller/admin/reconciliation-turnovers/filter/quick-filter';
 import { useDebounce } from 'platform-copies/hooks';
-import { getDateRangeValidationScheme } from 'schemas';
+import { getDateRangeValidationScheme } from 'schemas/admin';
 import { DELAY, QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { getAccountSearchFilter } from 'utils/admin';
 import { useFilter } from '@platform/services';
