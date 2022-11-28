@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks/common';
 import type { ITagsPanelProps } from 'interfaces';
@@ -7,6 +7,7 @@ import { TRANSACTION_TYPE_LABELS } from 'stream-constants';
 import { orderTags, stringifyCounterparty } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
+import { formatAccountCode } from '@platform/tools/localization';
 import { Gap } from '@platform/ui';
 import { FIELDS_WITH_TAGS, FORM_FIELDS } from './constants';
 import type { IFilterContext } from './filter-context';
@@ -19,22 +20,23 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
 
   const {
     counterparties,
+    clients,
     filterPanel: { values: storageValues },
     tagsPanel: { tags },
   } = useContext<IFilterContext>(FilterContext);
 
   const values = valid ? storageValues : formValues;
 
-  const counterpartyNameById = useMemo(
-    () =>
-      counterparties.reduce((acc, item) => {
+  const clientOrCounterpartyNameById = useCallback(
+    (clientsOrCounterparties: Array<{ name: string; inn: string }>) =>
+      clientsOrCounterparties.reduce((acc, item) => {
         const { name } = item;
 
         acc[stringifyCounterparty(item)] = name;
 
         return acc;
-      }, {}),
-    [counterparties]
+      }),
+    []
   );
 
   const tagValueFormatter = (name: keyof IFormState, formState: IFormState): string[] | string => {
@@ -46,8 +48,13 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
         return formatDateTime(value as string, { keepLocalTime: true, format: DATE_FORMAT });
       case FORM_FIELDS.TRANSACTION_TYPE:
         return TRANSACTION_TYPE_LABELS[value as string];
+      case FORM_FIELDS.CLIENT:
+        return (value as string[]).map(item => clientOrCounterpartyNameById(clients)[item]);
       case FORM_FIELDS.COUNTERPARTY:
-        return (value as string[]).map(item => counterpartyNameById[item]);
+        return (value as string[]).map(item => clientOrCounterpartyNameById(counterparties)[item]);
+      case FORM_FIELDS.CLIENT_ACCOUNT:
+      case FORM_FIELDS.COUNTERPARTY_ACCOUNT:
+        return (value as string[]).map(item => formatAccountCode(item));
       default:
         return value!;
     }

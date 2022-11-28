@@ -75,6 +75,22 @@ export default {
 				return t('client.form.title');
 			},
 		},
+		pages: {
+			/**
+			 * @ru
+			 * Реестр запросов на выписку по расписанию
+			 */
+			get historyTitle() {
+				return t('client.pages.historyTitle');
+			},
+			/**
+			 * @ru
+			 * Запрос на выписку по расписанию
+			 */
+			get newScheduleTitle() {
+				return t('client.pages.newScheduleTitle');
+			},
+		},
 		breadcrumbs: {
 			/**
 			 * @ru
@@ -82,6 +98,20 @@ export default {
 			 */
 			get toMainPage() {
 				return t('client.breadcrumbs.toMainPage');
+			},
+			/**
+			 * @ru
+			 * К выпискам
+			 */
+			get toRequestsPage() {
+				return t('client.breadcrumbs.toRequestsPage');
+			},
+			/**
+			 * @ru
+			 * К запросу
+			 */
+			get toConfirmPage() {
+				return t('client.breadcrumbs.toConfirmPage');
 			},
 			/**
 			 * @ru
@@ -96,6 +126,15 @@ export default {
 			 */
 			get toRequestPage() {
 				return t('client.breadcrumbs.toRequestPage');
+			},
+		},
+		buttons: {
+			/**
+			 * @ru
+			 * Создать
+			 */
+			get createSchedule() {
+				return t('client.buttons.createSchedule');
 			},
 		},
 		scheduleNewPage: {
@@ -114,15 +153,6 @@ export default {
 			 */
 			get title() {
 				return t('client.scheduleHistoryScrollerPage.title');
-			},
-		},
-		buttons: {
-			/**
-			 * @ru
-			 * Создать
-			 */
-			get createSchedule() {
-				return t('client.buttons.createSchedule');
 			},
 		},
 	},
@@ -1596,7 +1626,7 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Проводки
+			 * Удаленные/добавленные проводки
 			 */
 			get pageTitle() {
 				return t('admin.changedEntriesScroller.pageTitle');

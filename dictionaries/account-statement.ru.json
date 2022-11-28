@@ -459,7 +459,7 @@
   "admin.changedEntriesScroller.cells.documentDate": "от {date}",
   "admin.changedEntryStatus.added": "Добавлена",
   "admin.changedEntryStatus.removed": "Удалена",
-  "admin.changedEntriesScroller.pageTitle": "Проводки",
+  "admin.changedEntriesScroller.pageTitle": "Удаленные/добавленные проводки",
   "admin.changedEntriesScroller.footer.selected": "Выбрано:",
   "admin.changedEntriesScroller.footer.income": "Поступления:",
   "admin.changedEntriesScroller.footer.outcome": "Списания:",
@@ -492,9 +492,9 @@
   "client.breadcrumbs.toMainPage": "К главной",
   "client.breadcrumbs.toRequestsPage": "К выпискам",
   "client.breadcrumbs.toConfirmPage": "К запросу",
+  "client.buttons.createSchedule": "Создать",
   "client.breadcrumbs.toRequestsListPage": "К выпискам",
   "client.breadcrumbs.toRequestPage": "К запросу",
   "client.scheduleNewPage.title": "Запрос на выписку по расписанию",
-  "client.scheduleHistoryScrollerPage.title": "Реестр запросов на выписку по расписанию",
-  "client.buttons.createSchedule": "Создать"
+  "client.scheduleHistoryScrollerPage.title": "Реестр запросов на выписку по расписанию"
 }

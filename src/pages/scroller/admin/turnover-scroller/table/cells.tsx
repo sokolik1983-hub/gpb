@@ -39,22 +39,37 @@ export const OrganizationCell: React.FC<CellProps<TurnoverCard>> = ({ value: { a
   account ? (
     <>
       <Typography.P line="COLLAPSE">{locale.common.inn({ inn: account?.bankClient?.inn })}</Typography.P>
-      <Typography.Text>{account?.bankClient?.name}</Typography.Text>
+      <Typography.Text fill="FAINT">{account?.bankClient?.name}</Typography.Text>
     </>
   ) : null;
 
 OrganizationCell.displayName = 'OrganizationCell';
 
 /** Компонент с ячейкой для отображения о филиале баланса счёта. */
-export const AccountBranchCell: React.FC<CellProps<TurnoverCard>> = ({ value: { balanceBranchCode } }) => (
-  <Typography.P line="COLLAPSE">{balanceBranchCode}</Typography.P>
+export const AccountBranchCell: React.FC<CellProps<TurnoverCard>> = ({
+  value: {
+    balanceBranch: { absNumber, filialName },
+  },
+}) => (
+  <>
+    <Typography.P line="COLLAPSE">{absNumber}</Typography.P>
+    <Typography.Text fill="FAINT">{filialName}</Typography.Text>
+  </>
 );
 
 AccountBranchCell.displayName = 'AccountBranchCell';
 
 /** Компонент с ячейкой для отображения информации о филиале обслуживания. */
-export const ServiceBranchCell: React.FC<CellProps<TurnoverCard>> = ({ value: { serviceBranchCode } }) => (
-  <Typography.P line="COLLAPSE">{serviceBranchCode}</Typography.P>
+export const ServiceBranchCell: React.FC<CellProps<TurnoverCard>> = ({
+  value: {
+    serviceBranch: { absNumber, filialName },
+  },
+  // eslint-disable-next-line sonarjs/no-identical-functions
+}) => (
+  <>
+    <Typography.P line="COLLAPSE">{absNumber}</Typography.P>
+    <Typography.Text fill="FAINT">{filialName}</Typography.Text>
+  </>
 );
 
 ServiceBranchCell.displayName = 'ServiceBranchCell';

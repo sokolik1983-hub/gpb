@@ -93,7 +93,7 @@ export const tagLabels = {
   [FORM_FIELDS.COUNTERPARTY]: locale.transactionsScroller.tags.counterparty,
   [FORM_FIELDS.COUNTERPARTY_ACCOUNT]: locale.transactionsScroller.tags.counterpartyAccountNumber,
   [FORM_FIELDS.CLIENT]: locale.transactionsScroller.tags.client,
-  [FORM_FIELDS.COUNTERPARTY_ACCOUNT]: locale.transactionsScroller.tags.clientAccountNumber,
+  [FORM_FIELDS.CLIENT_ACCOUNT]: locale.transactionsScroller.tags.clientAccountNumber,
 };
 
 /**
@@ -104,8 +104,11 @@ export const FIELDS_WITH_TAGS = [
   FORM_FIELDS.DOC_NUMBER,
   FORM_FIELDS.PAYMENT_DATE_FROM,
   FORM_FIELDS.PAYMENT_DATE_TO,
-  FORM_FIELDS.TRANSACTION_TYPE,
+  FORM_FIELDS.CLIENT,
+  FORM_FIELDS.CLIENT_ACCOUNT,
   FORM_FIELDS.COUNTERPARTY,
+  FORM_FIELDS.COUNTERPARTY_ACCOUNT,
+  FORM_FIELDS.TRANSACTION_TYPE,
 ];
 
 /** Ключ в Session Storage по которому хранится состояние фильтрации. */
