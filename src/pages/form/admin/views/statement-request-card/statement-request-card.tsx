@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import React, { useCallback, useMemo } from 'react';
 import { executor, viewStatementHistoryScroller } from 'actions/admin';
 import { FormPageLayout } from 'components/admin';
-import { CreationParams } from 'components/admin/form/creation-params';
 import { DetailDocumentsParams } from 'components/common/form/detail-documents-params';
 import { FileFormats } from 'components/common/form/file-formats';
 import { Operations } from 'components/common/form/operations';
@@ -21,6 +20,7 @@ import type { IOption } from '@platform/ui';
 import { Box, DATA_TYPE, Fields, LoaderOverlay, Pattern, RegularButton } from '@platform/ui';
 import { ACTIONS } from '@platform/ui/dist-types/constants';
 import css from '../styles.scss';
+import { CreationParams } from './creation-params';
 
 /** Свойства карточки запроса выписки. */
 interface StatementRequestCardProps {
@@ -96,7 +96,7 @@ export const StatementRequestCard: FC<StatementRequestCardProps> = ({ statementI
                 </Row>
                 <Operations disabled />
                 <FileFormats disabled />
-                <CreationParams disabled withEntriesList={false} />
+                <CreationParams />
                 <DetailDocumentsParams disabled />
                 <RegularButton extraSmall data-action={ACTIONS.BACK} dimension="SM" onClick={handleToStatementRequests}>
                   {locale.admin.button.toStatementRequests}
