@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { TagsPanelView } from 'components/common';
 import { useFilterTags } from 'hooks/common';
 import type { ITagsPanelProps } from 'interfaces';
@@ -35,9 +35,12 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
         acc[stringifyCounterparty(item)] = name;
 
         return acc;
-      }),
+      }, {}),
     []
   );
+
+  const clientNameById = useMemo(() => clientOrCounterpartyNameById(clients), [clientOrCounterpartyNameById, clients]);
+  const counterpartyNameById = useMemo(() => clientOrCounterpartyNameById(counterparties), [clientOrCounterpartyNameById, counterparties]);
 
   const tagValueFormatter = (name: keyof IFormState, formState: IFormState): string[] | string => {
     const value = formState[name];
@@ -49,9 +52,9 @@ export const TagsPanel: React.FC<ITagsPanelProps> = ({ defaultAdditionalFilterVa
       case FORM_FIELDS.TRANSACTION_TYPE:
         return TRANSACTION_TYPE_LABELS[value as string];
       case FORM_FIELDS.CLIENT:
-        return (value as string[]).map(item => clientOrCounterpartyNameById(clients)[item]);
+        return (value as string[]).map(item => clientNameById[item]);
       case FORM_FIELDS.COUNTERPARTY:
-        return (value as string[]).map(item => clientOrCounterpartyNameById(counterparties)[item]);
+        return (value as string[]).map(item => counterpartyNameById[item]);
       case FORM_FIELDS.CLIENT_ACCOUNT:
       case FORM_FIELDS.COUNTERPARTY_ACCOUNT:
         return (value as string[]).map(item => formatAccountCode(item));
