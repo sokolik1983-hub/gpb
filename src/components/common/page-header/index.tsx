@@ -2,21 +2,26 @@ import React from 'react';
 import { BackButton } from 'components/common/back-button';
 import { Box, Gap, Typography } from '@platform/ui';
 
-/** Свойства компонента для отображения шапки страницы. */
+/** Свойства компонента отображения шапки страницы. */
 export interface IPageHeader {
-  /** Текст кнопки. */
-  backButtonTitle: string;
-  /** Функция-обработчик клика. */
-  onClick(): void;
+  /** Текст кнопки "Назад". */
+  backButtonTitle?: string;
+  // TODO: Код взят из develop ветки, реализованной командой Tern. Необходимо переименовать в onBack. onClick логичнее для самого заголовка как то.
+  /** Обработчик клика по кнопке "Назад". */
+  onClick?(): void;
   /** Заголовок. */
   header: string;
 }
 
-/** Компонент для отображения шапки страницы. */
+/** Компонент отображения шапки страницы. */
 export const PageHeader: React.FC<IPageHeader> = ({ backButtonTitle, onClick, header }) => (
   <Box>
-    <BackButton title={backButtonTitle} onClick={onClick} />
-    <Gap.X2S />
+    {onClick && backButtonTitle && (
+      <>
+        <BackButton title={backButtonTitle} onClick={onClick} />
+        <Gap.X2S />
+      </>
+    )}
     <Typography.H2>{header}</Typography.H2>
   </Box>
 );

@@ -1,5 +1,6 @@
 import type { DATE_PERIODS, OPERATIONS, FORMAT } from 'interfaces';
 import type { StatementAccount } from 'interfaces/admin/account';
+import type { AccountOrganization } from 'interfaces/admin/organization';
 
 /** Параметры формирования комплекта документов. */
 interface DocumentOptions {
@@ -19,36 +20,38 @@ interface DocumentOptions {
 export interface StatementRequestCard {
   /** Номера счетов. */
   accounts: StatementAccount[];
+  /** Параметры формирования комплекта документов. */
+  documentOptionsDto: DocumentOptions;
+  /** Формат выписки. */
+  format: FORMAT;
+  /** Скрыть нулевые обороты. */
+  hideEmptyTurnovers: boolean;
+  /** Нац. Эквивалент. */
+  nationalCurrency: boolean;
   /** Только документы выписки. */
   onlyStatementDocuments: boolean;
-  /** С комплектом документов. */
-  packageOfDocuments: boolean;
-  /** Дата запроса. */
-  createdAt: string;
   /** Операции. */
   operations: OPERATIONS;
-  /** Наименование организаций. */
-  organizations: string[];
-  /** "Дата по" которая запрашивалась в выписке. */
+  /** С комплектом документов. */
+  packageOfDocuments: boolean;
+  /** Конец периода. */
   periodEnd: string;
-  /** "Дата с" которая запрашивалась в выписке. */
+  /** Начало периода. */
   periodStart: string;
   /** Тип периода. */
   periodType: DATE_PERIODS;
-  /** Формат выписки. */
-  format: FORMAT;
-  /** Параметры формирования комплекта документов. */
-  documentOptionsDto: DocumentOptions;
+  /** Проводки переоценки. */
+  revaluationAccountingEntry: boolean;
   /** Отдельный файл по каждому счету. */
   separateAccountsFiles: boolean;
   /** Признак того, необходимо ли подписывать выписку. */
   signNeeded: boolean;
-  /** Скрыть нулевые обороты. */
-  hideEmptyTurnovers: boolean;
   /** Итоги за день. */
   totalsOfDay: boolean;
-  /** Рублёвый эквивалент. */
-  nationalCurrency: boolean;
-  /** Проводки переоценки. */
-  revaluationAccountingEntry: boolean;
+}
+
+/** Расширенные свойства карточки запроса выписки. */
+export interface ExtendedStatementRequestCard extends StatementRequestCard {
+  /** Организации. */
+  organizations: AccountOrganization[];
 }

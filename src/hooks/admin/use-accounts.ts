@@ -7,48 +7,25 @@ import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services/admin';
 
 /**
- * Получить фильтры для запроса.
+ * Возвращает список счетов по переданному фильтру.
  *
- * @param value - Подстрока запроса.
+ * @param filter - Фильтр.
+ * @param enabled - Признак, что нужно сделать запрос.
  */
-const getFilters = (value: string): IFilters => {
-  const formattedValue = value.replace(/\./g, '');
-  const onlyDigit = /^\d+$/.test(formattedValue);
-
-  return onlyDigit
-    ? {
-        accountNumber: {
-          value: formattedValue,
-          condition: 'contains',
-          fieldName: 'accountNumber',
-        },
-      }
-    : {
-        clientFullName: {
-          value: formattedValue,
-          condition: 'contains',
-          fieldName: 'clientFullName',
-        },
-      };
-};
-
-/**
- * Возвращает список счетов по переданной подстроке.
- *
- * @param value - Значение подстроки поиска.
- */
-export const useAccounts = (value = '') => {
+export const useAccounts = (filter: IFilters, enabled = true) => {
   const metaData: IMetaData = {
-    filters: getFilters(value),
+    filters: filter,
     offset: 0,
     pageSize: PAGE_SIZES.PER_25,
   };
 
   const { data = [], isError, isFetched, isFetching, isSuccess } = useQuery<Account[]>({
     cacheTime: 0,
-    queryFn: () => statementService.getAccountList(metaData),
-    queryKey: [PREFIX, '@eco/statement', 'accounts', value],
+    enabled,
+    queryFn: () => statementService.getAccountsPage(metaData),
+    queryKey: [PREFIX, '@eco/statement', 'accounts', filter],
     retry: false,
+    staleTime: 0,
   });
 
   return { data, isError, isFetched, isFetching, isSuccess };

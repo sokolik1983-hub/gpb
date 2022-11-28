@@ -1,35 +1,38 @@
-import type { EXPORT_PARAMS_USE_CASES, StatementRequestCard } from 'interfaces/admin';
+import type { ExtendedStatementRequestCard } from 'interfaces/admin';
+import type { StatementRequestCardFormState } from 'interfaces/admin/form';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
-import type { IFormState } from 'stream-constants/form';
-import { defaultFormState } from 'stream-constants/form';
+import { defaultFormState as defaultFormStateCommon } from 'stream-constants/form';
 import { mapDtoToForm } from 'utils/admin/actions';
-import { alwaysSendParamCasesFromUI } from 'utils/admin/export-params-dialog';
 
 /** Конфиг начального состояния формы. */
 export interface IStateConfig {
-  /** Вариант вызова диалога. */
-  useCase?: EXPORT_PARAMS_USE_CASES;
+  /** Выписка экспортируется со списком проводок. */
+  withEntriesList: boolean;
   /** Запрос на выписку. */
-  statement?: StatementRequestCard;
+  statement?: ExtendedStatementRequestCard;
   /** Дата начала периода. */
   dateFrom?: string;
   /** Дата окончания периода. */
   dateTo?: string;
-  /** Предзаполненные поля формы при запросе выписки с другого сервиса. */
-  prefilledFormValues?: IFormState;
+  /** Дефолтное состояние формы. */
+  defaultFormState?: StatementRequestCardFormState;
 }
 
 /** Функция возвращающая начальное значение состояния формы. */
-export const getInitialFormState = ({ statement, useCase, dateFrom, dateTo, prefilledFormValues }: IStateConfig): Partial<IFormState> => {
-  if (prefilledFormValues) {
-    return { ...defaultFormState, ...prefilledFormValues };
-  }
+export const getInitialFormState = ({
+  statement,
+  withEntriesList,
+  dateFrom,
+  dateTo,
+  defaultFormState: defaultFormStateOwn,
+}: IStateConfig): Partial<StatementRequestCardFormState> => {
+  const defaultFormState = defaultFormStateOwn || defaultFormStateCommon;
 
   if (!statement) {
     const creationParams: string[] = [];
     const documentsSetParams: string[] = [];
 
-    if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
+    if (withEntriesList) {
       creationParams.push(CREATION_PARAMS.WITH_DOCUMENTS_SET);
     }
 

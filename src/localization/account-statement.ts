@@ -247,6 +247,38 @@ export default {
 				return t('admin.userType.technical');
 			},
 		},
+		maintenanceType: {
+			/**
+			 * @ru
+			 * Начало технических работ на Ф1
+			 */
+			get start() {
+				return t('admin.maintenanceType.start');
+			},
+			/**
+			 * @ru
+			 * Окончание технических работ на Ф1
+			 */
+			get end() {
+				return t('admin.maintenanceType.end');
+			},
+		},
+		maintenanceStatus: {
+			/**
+			 * @ru
+			 * Начаты
+			 */
+			get start() {
+				return t('admin.maintenanceStatus.start');
+			},
+			/**
+			 * @ru
+			 * Закончены
+			 */
+			get end() {
+				return t('admin.maintenanceStatus.end');
+			},
+		},
 		turnoverReconciliationRecordSource: {
 			/**
 			 * @ru
@@ -491,7 +523,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Просмотреть измененные проводки
+				 * Просмотр удаленных/добавленных проводок
 				 */
 				get viewModifiedTransactions() {
 					return t('admin.statementScroller.action.viewModifiedTransactions');
@@ -563,12 +595,23 @@ export default {
 			},
 		},
 		relatedQueriesScroller: {
-			/**
-			 * @ru
-			 * Связанные запросы
-			 */
-			get pageTitle() {
-				return t('admin.relatedQueriesScroller.pageTitle');
+			header: {
+				button: {
+					/**
+					 * @ru
+					 * Запросы выписки
+					 */
+					get back() {
+						return t('admin.relatedQueriesScroller.header.button.back');
+					},
+				},
+				/**
+				 * @ru
+				 * Связанные запросы
+				 */
+				get title() {
+					return t('admin.relatedQueriesScroller.header.title');
+				},
 			},
 			table: {
 				placeholder: {
@@ -871,6 +914,67 @@ export default {
 				},
 			},
 		},
+		maintenanceScroller: {
+			/**
+			 * @ru
+			 * Технические работы Ф1
+			 */
+			get pageTitle() {
+				return t('admin.maintenanceScroller.pageTitle');
+			},
+			filter: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Технические работы
+					 */
+					get maintenanceType() {
+						return t('admin.maintenanceScroller.filter.placeholder.maintenanceType');
+					},
+				},
+			},
+			table: {
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.maintenanceScroller.table.total');
+				},
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.maintenanceScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.maintenanceScroller.table.placeholder.message');
+					},
+				},
+				header: {
+					/**
+					 * @ru
+					 * Дата и время
+					 */
+					get creationDate() {
+						return t('admin.maintenanceScroller.table.header.creationDate');
+					},
+					/**
+					 * @ru
+					 * Технические работы
+					 */
+					get maintenanceType() {
+						return t('admin.maintenanceScroller.table.header.maintenanceType');
+					},
+				},
+			},
+		},
 		form: {
 			/**
 			 * @ru
@@ -905,6 +1009,70 @@ export default {
 			 */
 			get title() {
 				return t('admin.scroller.title');
+			},
+		},
+		button: {
+			/**
+			 * @ru
+			 * К запросу выписок
+			 */
+			get toStatementRequest() {
+				return t('admin.button.toStatementRequest');
+			},
+			/**
+			 * @ru
+			 * К запросам выписок
+			 */
+			get toStatementRequests() {
+				return t('admin.button.toStatementRequests');
+			},
+		},
+		statementRequestCard: {
+			/**
+			 * @ru
+			 * Параметры запроса
+			 */
+			get pageTitle() {
+				return t('admin.statementRequestCard.pageTitle');
+			},
+		},
+		statementRequestForm: {
+			/**
+			 * @ru
+			 * Запрос выписки
+			 */
+			get pageTitle() {
+				return t('admin.statementRequestForm.pageTitle');
+			},
+			label: {
+				/**
+				 * @ru
+				 * Организация
+				 */
+				get organization() {
+					return t('admin.statementRequestForm.label.organization');
+				},
+				/**
+				 * @ru
+				 * Подразделение обслуживания
+				 */
+				get serviceBranch() {
+					return t('admin.statementRequestForm.label.serviceBranch');
+				},
+				/**
+				 * @ru
+				 * Счёт
+				 */
+				get account() {
+					return t('admin.statementRequestForm.label.account');
+				},
+				/**
+				 * @ru
+				 * Тип счёта
+				 */
+				get accountType() {
+					return t('admin.statementRequestForm.label.accountType');
+				},
 			},
 		},
 		entryScroller: {
@@ -1074,6 +1242,33 @@ export default {
 			},
 		},
 		turnoverScroller: {
+			filter: {
+				labels: {
+					/**
+					 * @ru
+					 * Опер. дата
+					 */
+					get operationDate() {
+						return t('admin.turnoverScroller.filter.labels.operationDate');
+					},
+				},
+				placeholders: {
+					/**
+					 * @ru
+					 * Организация
+					 */
+					get organization() {
+						return t('admin.turnoverScroller.filter.placeholders.organization');
+					},
+					/**
+					 * @ru
+					 * Счёт
+					 */
+					get account() {
+						return t('admin.turnoverScroller.filter.placeholders.account');
+					},
+				},
+			},
 			columns: {
 				/**
 				 * @ru
@@ -1150,6 +1345,40 @@ export default {
 					return t('admin.turnoverScroller.actions.exportTurnovers');
 				},
 			},
+			labels: {
+				/**
+				 * @ru
+				 * Формат:
+				 */
+				get format() {
+					return t('admin.turnoverScroller.labels.format');
+				},
+			},
+			table: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.turnoverScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.turnoverScroller.table.placeholder.message');
+					},
+				},
+				/**
+				 * @ru
+				 * Записей
+				 */
+				get total() {
+					return t('admin.turnoverScroller.table.total');
+				},
+			},
 			/**
 			 * @ru
 			 * Остатки и обороты
@@ -1159,6 +1388,31 @@ export default {
 			},
 		},
 		transactionsScroller: {
+			table: {
+				placeholder: {
+					/**
+					 * @ru
+					 * Выберите значение в фильтре
+					 */
+					get title() {
+						return t('admin.transactionsScroller.table.placeholder.title');
+					},
+					/**
+					 * @ru
+					 * чтобы получить результат
+					 */
+					get message() {
+						return t('admin.transactionsScroller.table.placeholder.message');
+					},
+				},
+				/**
+				 * @ru
+				 * Операций
+				 */
+				get total() {
+					return t('admin.transactionsScroller.table.total');
+				},
+			},
 			columns: {
 				/**
 				 * @ru
@@ -1272,15 +1526,6 @@ export default {
 			 */
 			get pageTitle() {
 				return t('admin.transactionsScroller.pageTitle');
-			},
-			table: {
-				/**
-				 * @ru
-				 * Операций
-				 */
-				get total() {
-					return t('admin.transactionsScroller.table.total');
-				},
 			},
 		},
 		changedEntriesScroller: {
@@ -3030,6 +3275,20 @@ export default {
 			get onlyRequestStatementDocuments() {
 				return t('common.documentsSetParams.onlyRequestStatementDocuments');
 			},
+			/**
+			 * @ru
+			 * Документы выписки
+			 */
+			get requestStatementDocuments() {
+				return t('common.documentsSetParams.requestStatementDocuments');
+			},
+			/**
+			 * @ru
+			 * Документы основания
+			 */
+			get requestBaseDocuments() {
+				return t('common.documentsSetParams.requestBaseDocuments');
+			},
 		},
 		debitParams: {
 			/**
@@ -3380,15 +3639,6 @@ export default {
 			 */
 			get dateLessRestriction() {
 				return t('errors.periodEnd.dateLessRestriction');
-			},
-		},
-		printStatement: {
-			/**
-			 * @ru
-			 * Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл
-			 */
-			get content() {
-				return t('errors.printStatement.content');
 			},
 		},
 		datatable: {

@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/admin';
 import type { ACTION } from 'interfaces/common';
 import { Form } from 'react-final-form';
 import { getInitialFormState } from 'stream-constants/admin/form';
@@ -15,23 +14,27 @@ interface StatementParamsDialogResponse {
   formState: IFormState;
 }
 
+export interface IDialogOptions {
+  withEntriesList: boolean;
+}
+
 /** Свойства ЭФ с параметрами выписки и документов. */
 export interface IExportParamsDialogProps {
+  /** Идентификатор выписки. */
+  statementId: string;
   /** Действие. */
   action: ACTION;
-  /** Вариант вызова диалога. */
-  useCase: EXPORT_PARAMS_USE_CASES;
+  /** Параметры вызова диалого. */
+  options: IDialogOptions;
   /** Обработчик закрытия формы. */
   onClose(): void;
   /** Обработчик отправки формы. */
   onSubmit(values: StatementParamsDialogResponse): void;
-  /** Идентификатор выписки. */
-  statementId?: string;
 }
 
 /** Компонент "ЭФ параметров выписки и документов". */
-export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, useCase, action, statementId }) => {
-  const initialFormState = getInitialFormState({ useCase, dateFrom: '', dateTo: '' });
+export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose, onSubmit, action, statementId, options }) => {
+  const initialFormState = getInitialFormState({ dateFrom: '', dateTo: '', withEntriesList: options.withEntriesList });
 
   const handleSubmit = (formState: IFormState) => {
     onClose();
@@ -41,11 +44,11 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
   const value: IDialogContext = useMemo(
     () => ({
       onClose,
-      useCase,
+      options,
       action,
       statementId,
     }),
-    [action, onClose, useCase, statementId]
+    [action, onClose, options, statementId]
   );
 
   return (
@@ -57,7 +60,7 @@ export const ExportParamsDialog: React.FC<IExportParamsDialogProps> = ({ onClose
 
 ExportParamsDialog.displayName = 'StatementParamsDialog';
 
-export const showStatementParamsDialog = (useCase: EXPORT_PARAMS_USE_CASES, action: ACTION, statementId) =>
+export const showStatementParamsDialog = (params: Omit<IExportParamsDialogProps, 'onClose' | 'onSubmit'>) =>
   new Promise<StatementParamsDialogResponse>((resolve, reject) =>
-    dialog.show('statementParamsDialog', ExportParamsDialog, { useCase, action, onSubmit: resolve, statementId }, () => reject(true))
+    dialog.show('statementParamsDialog', ExportParamsDialog, { onSubmit: resolve, ...params }, () => reject(true))
   );

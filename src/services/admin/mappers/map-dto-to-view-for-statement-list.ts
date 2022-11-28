@@ -1,5 +1,5 @@
 import { DATE_PERIODS } from 'interfaces';
-import type { AccountOrganization, ServiceBranch, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
+import type { AccountOrganization, Branch, StatementHistoryResponseDto, StatementHistoryRow } from 'interfaces/admin';
 import { getDateAndTime } from 'services/admin/mappers/utils';
 import { uniqBy } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services';
@@ -48,7 +48,7 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
         accountNumbers: string[];
         accountIds: string[];
         organizations: AccountOrganization[];
-        serviceBranches: ServiceBranch[];
+        serviceBranches: Branch[];
       }>(
         (prevValue, { branch, id: accountId, number, bankClient: organization }) => ({
           accountNumbers: [...prevValue.accountNumbers, number],
@@ -77,7 +77,7 @@ export const mapDtoToViewForStatementList = (statements: StatementHistoryRespons
         periodStart,
         periodType,
         requestStatus: status,
-        serviceBranches: uniqBy<ServiceBranch>(serviceBranches, 'id').map(({ filialName }) => filialName),
+        serviceBranches: uniqBy<Branch>(serviceBranches, 'id').map(({ filialName }) => filialName),
         statementId,
         statementType,
         statementStatus,

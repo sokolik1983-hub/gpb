@@ -16,7 +16,7 @@ export const columns = addMaxWidthField<ReconciliationTurnoverRow, { isVisible: 
     Cell: OperationDate,
     Header: locale.admin.reconciliationTurnoversScroller.table.header.operationDate,
     accessor,
-    id: COLUMN_NAMES.OPERATION_DATA,
+    id: COLUMN_NAMES.OPERATION_DATE,
     isVisible: true,
     maxWidth: 208,
     minWidth: 138,

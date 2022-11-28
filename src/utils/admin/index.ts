@@ -1,2 +1,2 @@
 export * from './actions';
-export * from './export-params-dialog';
+export * from './filter';

@@ -7,46 +7,23 @@ import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services/admin';
 
 /**
- * Получить фильтры для запроса.
+ * Возвращает список организаций по переданному фильтру.
  *
- * @param value - Подстрока запроса.
+ * @param filter - Фильтр.
+ * @param enabled - Признак, что нужно сделать запрос.
  */
-const getFilters = (value: string): IFilters => {
-  const onlyDigit = /^\d+$/.test(value);
-
-  return onlyDigit
-    ? {
-        innKio: {
-          value,
-          condition: 'contains',
-          fieldName: 'innKio',
-        },
-      }
-    : {
-        fullName: {
-          value,
-          condition: 'contains',
-          fieldName: 'fullName',
-        },
-      };
-};
-
-/**
- * Возвращает список организаций по переданной подстроке.
- *
- * @param value - Значение подстроки поиска.
- */
-export const useOrganizations = (value = '') => {
+export const useOrganizations = (filter: IFilters, enabled = true) => {
   const metaData: IMetaData = {
-    filters: getFilters(value),
+    filters: filter,
     offset: 0,
     pageSize: PAGE_SIZES.PER_25,
   };
 
   const { data = [], isError, isFetched, isFetching, isSuccess } = useQuery<Organization[]>({
     cacheTime: 0,
-    queryFn: () => statementService.getOrganizationList(metaData),
-    queryKey: [PREFIX, '@eco/statement', 'organizations', value],
+    enabled,
+    queryFn: () => statementService.getOrganizationsPage(metaData),
+    queryKey: [PREFIX, '@eco/statement', 'organizations', filter],
     retry: false,
   });
 

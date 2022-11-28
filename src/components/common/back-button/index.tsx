@@ -5,7 +5,7 @@ import { Gap, ServiceIcons, Typography, Horizon } from '@platform/ui';
 export interface IBackButton {
   /** Текст кнопки. */
   title: string;
-  /** Функция-обработчик клика. */
+  /** Обработчик клика. */
   onClick(): void;
 }
 

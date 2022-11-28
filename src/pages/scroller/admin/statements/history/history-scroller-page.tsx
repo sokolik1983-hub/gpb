@@ -1,5 +1,6 @@
 import React from 'react';
-import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -27,7 +28,7 @@ export const StatementHistoryScrollerPage = () => {
     statements,
   });
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     actions,
     header: locale.admin.historyScroller.pageTitle,
   };
@@ -43,7 +44,7 @@ export const StatementHistoryScrollerPage = () => {
             <Table
               apiMethod={statementService.getStatementHistoryList}
               filter={filter}
-              height={height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - QUICK_FILTER_HEIGHT}
+              height={height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.BASE - QUICK_FILTER_HEIGHT}
               setStatements={setStatements}
               show={datePeriodInitialed}
               storageKey={TABLE_STORAGE_KEY}

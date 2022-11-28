@@ -6,16 +6,16 @@ import { useForm, useFormState } from 'react-final-form';
 import { statementService } from 'services/admin';
 import type { IFormState } from 'stream-constants/form';
 import { CREDIT_PARAMS, DEBIT_PARAMS, FORM_FIELDS, FormContext } from 'stream-constants/form';
-import { withDocumentsSetCases } from 'utils/admin';
-import { alwaysSendParamCasesFromUI, getHideEsignCases, getHideSeparateAccountFilesCases } from 'utils/admin/export-params-dialog';
 import { defaultCreationParamsOptions, isNeedTotalsOfDay } from 'utils/common';
 import type { ICheckboxOption } from '@platform/ui';
 
-/** Хук с бизнес-логикой для компонента "Параметры создания выписки". */
-export const useCreationParams = (): [ICheckboxOption[]] => {
-  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, useCase, action, hasForeignCurrency, hasAccounts } = useContext(
-    FormContext
-  );
+/**
+ * Хук с бизнес-логикой для компонента "Параметры создания выписки".
+ *
+ * @param withEntriesList Выписка экспортируется со списком проводок.
+ * */
+export const useCreationParams = (withEntriesList: boolean): [ICheckboxOption[]] => {
+  const { withSign, withDocumentsSet, onlyRequestsStatement, isPdf, action, hasForeignCurrency, hasAccounts } = useContext(FormContext);
   const { batch, change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -32,7 +32,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     const newOptions = defaultCreationParamsOptions.reduce<ICheckboxOption[]>((acc, x) => {
       switch (x.value) {
         case CREATION_PARAMS.SEPARATE_ACCOUNTS_FILES:
-          if ((!useCase || (useCase && !getHideSeparateAccountFilesCases(action!).includes(useCase))) && hasMoreThenOneAccounts) {
+          if (hasMoreThenOneAccounts) {
             if (values.format === FORMAT.EXCEL || values.format === FORMAT.TXT) {
               acc.push({ ...x, disabled: true });
             } else {
@@ -42,7 +42,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
 
           break;
         case CREATION_PARAMS.WITH_DOCUMENTS_SET: {
-          if (isPdf && (!useCase || (useCase && withDocumentsSetCases.includes(useCase)))) {
+          if (isPdf && !withEntriesList) {
             if (withSign) {
               acc.push({ ...x, disabled: false });
             } else {
@@ -53,7 +53,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
           break;
         }
         case CREATION_PARAMS.WITH_PDF_SIGN: {
-          if (isPdf && (!useCase || (useCase && !getHideEsignCases(action!).includes(useCase)))) {
+          if (isPdf && !withEntriesList) {
             acc.push(withPdfEsignOption);
           }
 
@@ -103,7 +103,6 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
     action,
     change,
     isPdf,
-    useCase,
     values.accountIds.length,
     values.dateFrom,
     values.dateTo,
@@ -129,7 +128,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
       });
     } else if (!onlyRequestsStatement && !withSign) {
       batch(() => {
-        if (useCase && alwaysSendParamCasesFromUI.includes(useCase)) {
+        if (withEntriesList) {
           change(FORM_FIELDS.CREDIT_PARAMS, [CREDIT_PARAMS.INCLUDE_STATEMENTS, CREDIT_PARAMS.INCLUDE_ORDERS]);
           change(FORM_FIELDS.DEBIT_PARAMS, [DEBIT_PARAMS.INCLUDE_STATEMENTS, DEBIT_PARAMS.INCLUDE_ORDERS]);
         } else {
@@ -138,7 +137,7 @@ export const useCreationParams = (): [ICheckboxOption[]] => {
         }
       });
     }
-  }, [batch, change, onlyRequestsStatement, useCase, withDocumentsSet, withSign]);
+  }, [batch, change, onlyRequestsStatement, withEntriesList, withDocumentsSet, withSign]);
 
   return [options];
 };

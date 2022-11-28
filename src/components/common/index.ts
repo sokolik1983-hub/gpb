@@ -22,3 +22,5 @@ export * from './lines-ellipsis';
 export * from './select-with-search';
 export * from './table-with-total';
 export * from './page-header';
+export * from './back-button';
+export * from './options';

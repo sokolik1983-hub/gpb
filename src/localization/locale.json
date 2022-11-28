@@ -68,6 +68,18 @@
   "admin.userType.technical": {
     "ru": "Технический пользователь"
   },
+  "admin.maintenanceType.start": {
+    "ru": "Начало технических работ на Ф1"
+  },
+  "admin.maintenanceType.end": {
+    "ru": "Окончание технических работ на Ф1"
+  },
+  "admin.maintenanceStatus.start": {
+    "ru": "Начаты"
+  },
+  "admin.maintenanceStatus.end": {
+    "ru": "Закончены"
+  },
   "admin.turnoverReconciliationRecordSource.closingOfDay": {
     "ru": "Закрытие дня"
   },
@@ -504,7 +516,7 @@
     "ru": "Экспорт выписки"
   },
   "admin.statementScroller.action.viewModifiedTransactions": {
-    "ru": "Просмотреть измененные проводки"
+    "ru": "Просмотр удаленных/добавленных проводок"
   },
   "admin.statementScroller.action.viewTransactions": {
     "ru": "Просмотреть выписку"
@@ -531,7 +543,10 @@
   "admin.historyScroller.pageTitle": {
     "ru": "Запросы выписки"
   },
-  "admin.relatedQueriesScroller.pageTitle": {
+  "admin.relatedQueriesScroller.header.button.back": {
+    "ru": "Запросы выписки"
+  },
+  "admin.relatedQueriesScroller.header.title": {
     "ru": "Связанные запросы"
   },
   "admin.relatedQueriesScroller.table.placeholder.title": {
@@ -643,6 +658,27 @@
   },
   "admin.currencyRatesScroller.table.header.rateDate": {
     "ru": "Дата курса"
+  },
+  "admin.maintenanceScroller.pageTitle": {
+    "ru": "Технические работы Ф1"
+  },
+  "admin.maintenanceScroller.filter.placeholder.maintenanceType": {
+    "ru": "Технические работы"
+  },
+  "admin.maintenanceScroller.table.total": {
+    "ru": "Операций"
+  },
+  "admin.maintenanceScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.maintenanceScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
+  "admin.maintenanceScroller.table.header.creationDate": {
+    "ru": "Дата и время"
+  },
+  "admin.maintenanceScroller.table.header.maintenanceType": {
+    "ru": "Технические работы"
   },
   "turnoverScroller.filter.tags.dateFrom": {
     "ru": "Дата от:"
@@ -890,6 +926,12 @@
   "common.documentsSetParams.onlyRequestStatementDocuments": {
     "ru": "Только документы выписки"
   },
+  "common.documentsSetParams.requestStatementDocuments": {
+    "ru": "Документы выписки"
+  },
+  "common.documentsSetParams.requestBaseDocuments": {
+    "ru": "Документы основания"
+  },
   "common.debitParams.label": {
     "ru": "Дебетовые"
   },
@@ -911,6 +953,12 @@
   "common.email.label": {
     "ru": "Адрес электронной почты"
   },
+  "admin.button.toStatementRequest": {
+    "ru": "К запросу выписок"
+  },
+  "admin.button.toStatementRequests": {
+    "ru": "К запросам выписок"
+  },
   "form.buttons.download.label": {
     "ru": "Экспорт"
   },
@@ -925,6 +973,24 @@
   },
   "form.buttons.cancel.label": {
     "ru": "Отменить"
+  },
+  "admin.statementRequestCard.pageTitle": {
+    "ru": "Параметры запроса"
+  },
+  "admin.statementRequestForm.pageTitle": {
+    "ru": "Запрос выписки"
+  },
+  "admin.statementRequestForm.label.organization": {
+    "ru": "Организация"
+  },
+  "admin.statementRequestForm.label.serviceBranch": {
+    "ru": "Подразделение обслуживания"
+  },
+  "admin.statementRequestForm.label.account": {
+    "ru": "Счёт"
+  },
+  "admin.statementRequestForm.label.accountType": {
+    "ru": "Тип счёта"
   },
   "table.header.sortInfo": {
     "ru": "Для сортировки по нескольким столбцам следует нажать на заголовки полей в требуемом порядке, удерживая клавишу «SHIFT»"
@@ -1042,9 +1108,6 @@
   },
   "errors.periodEnd.dateLessRestriction": {
     "ru": "Дата окончания периода не может быть меньше даты начала"
-  },
-  "errors.printStatement.content": {
-    "ru": "Для печати и экспорта больших файлов перейдите в Экранную форму запроса выписки и выполните экспорт в файл"
   },
   "exportParamsDialog.buttons.download.label": {
     "ru": "Экспорт"
@@ -1195,6 +1258,15 @@
   "admin.entryScroller.footer.print": {
     "ru": "Печать документов"
   },
+  "admin.turnoverScroller.filter.labels.operationDate": {
+    "ru": "Опер. дата"
+  },
+  "admin.turnoverScroller.filter.placeholders.organization": {
+    "ru": "Организация"
+  },
+  "admin.turnoverScroller.filter.placeholders.account": {
+    "ru": "Счёт"
+  },
   "admin.turnoverScroller.columns.operationDate": {
     "ru": "Операционная дата"
   },
@@ -1225,6 +1297,12 @@
   "common.inn": {
     "@inn": "string",
     "ru": "ИНН: {inn}"
+  },
+  "admin.transactionsScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.transactionsScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
   },
   "admin.transactionsScroller.columns.date": {
     "ru": "Дата проводки"
@@ -1289,8 +1367,20 @@
   "admin.turnoverScroller.actions.exportTurnovers": {
     "ru": "Экспорт"
   },
+  "admin.turnoverScroller.labels.format": {
+    "ru": "Формат:"
+  },
+  "admin.turnoverScroller.table.placeholder.title": {
+    "ru": "Выберите значение в фильтре"
+  },
+  "admin.turnoverScroller.table.placeholder.message": {
+    "ru": "чтобы получить результат"
+  },
   "admin.turnoverScroller.title": {
     "ru": "Остатки и обороты"
+  },
+  "admin.turnoverScroller.table.total": {
+    "ru": "Записей"
   },
   "common.footer.selected": {
     "ru": "Выбрано:"

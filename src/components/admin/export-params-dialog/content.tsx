@@ -3,37 +3,29 @@ import { CreationParams } from 'components/admin/form/creation-params';
 import { DetailDocumentsParams } from 'components/admin/form/detail-documents-params';
 import { FocusLock } from 'components/common/focus-lock';
 import { FileFormats } from 'components/common/form/file-formats';
-import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
+import { ACTION } from 'interfaces';
 import { locale } from 'localization';
 import type { FormRenderProps } from 'react-final-form';
 import type { IFormState } from 'stream-constants/form';
-import { exportCases, creationParamsShowCases, fileFormatShowCases } from 'utils/admin';
-import { DATA_TYPE, BUTTON, DialogTemplate, Box } from '@platform/ui';
-import { DialogContext } from './dialog-context';
+import { Box, BUTTON, DATA_TYPE, DialogTemplate } from '@platform/ui';
 import type { IDialogContext } from './dialog-context';
+import { DialogContext } from './dialog-context';
 import { FormProvider } from './form-provider';
 import css from './styles.scss';
 
 /** Функция получения заголовка ЭФ. */
-const getFormHeaderByUseCase = (useCase: EXPORT_PARAMS_USE_CASES) => {
-  switch (useCase) {
-    case EXPORT_PARAMS_USE_CASES.TWO:
-      return locale.exportParamsDialog.printStatement.label;
-    case EXPORT_PARAMS_USE_CASES.THREE:
-    case EXPORT_PARAMS_USE_CASES.SEVEN:
-      return locale.exportParamsDialog.exportStatementDocuments.label;
-    case EXPORT_PARAMS_USE_CASES.FOUR:
-    case EXPORT_PARAMS_USE_CASES.SIX:
-      return locale.exportParamsDialog.printStatementDocuments.label;
-    default:
-      return locale.exportParamsDialog.exportStatement.label;
+const getFormHeader = (isExport: boolean, withEntriesList: boolean) => {
+  if (isExport) {
+    return withEntriesList ? locale.exportParamsDialog.exportStatementDocuments.label : locale.exportParamsDialog.exportStatement.label;
   }
+
+  return withEntriesList ? locale.exportParamsDialog.printStatementDocuments.label : locale.exportParamsDialog.printStatement.label;
 };
 
 /** Содержимое модального окна ЭФ параметров выписки и документов. */
 export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit }) => {
-  const { onClose, useCase, action, statementId } = useContext<IDialogContext>(DialogContext);
-  const isExport = exportCases.includes(useCase!);
+  const { onClose, action, statementId, options } = useContext<IDialogContext>(DialogContext);
+  const isExport = action !== ACTION.PRINT;
 
   /** Кнопки модального окна. */
   const getActions = useCallback(() => {
@@ -64,10 +56,10 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
 
   const actions = getActions();
 
-  const header = getFormHeaderByUseCase(useCase!);
+  const header = getFormHeader(isExport, Boolean(options?.withEntriesList));
 
-  const fileFormatsVisible = !useCase || (useCase && fileFormatShowCases.includes(useCase));
-  const creationParamsVisible = !useCase || (useCase && creationParamsShowCases.includes(useCase));
+  const fileFormatsVisible = isExport && !options?.withEntriesList;
+  const creationParamsVisible = !options?.withEntriesList;
 
   return (
     <FocusLock>
@@ -76,11 +68,11 @@ export const Content: React.FC<FormRenderProps<IFormState>> = ({ handleSubmit })
           extraSmall
           actions={actions}
           content={
-            <FormProvider action={action} statementId={statementId} useCase={useCase} onSubmit={handleSubmit}>
+            <FormProvider action={action} statementId={statementId} onSubmit={handleSubmit}>
               <Box className={css.container}>
                 {fileFormatsVisible && <FileFormats />}
-                {creationParamsVisible && <CreationParams />}
-                <DetailDocumentsParams />
+                {creationParamsVisible && <CreationParams withEntriesList={Boolean(options?.withEntriesList)} />}
+                <DetailDocumentsParams withEntriesList={Boolean(options?.withEntriesList)} />
               </Box>
             </FormProvider>
           }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -20,9 +21,9 @@ export const CurrencyRatesScrollerPage = () => {
   const [filter, setFilter] = useState<IFilters>({});
 
   const contentHeight = useStreamContentHeight();
-  const tableHeight = contentHeight - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - QUICK_FILTER_HEIGHT;
+  const tableHeight = contentHeight - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.BASE - QUICK_FILTER_HEIGHT;
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
     header: locale.admin.currencyRatesScroller.pageTitle,
   };
 

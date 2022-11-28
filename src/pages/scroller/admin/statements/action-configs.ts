@@ -1,11 +1,11 @@
 import {
-  exportStatement,
   exportStatementsHistory,
   repeatStatement,
   showStatementRequestForm,
   viewTransactionsScroller,
-  viewModifiedTransactions,
   viewStatementRequestCard,
+  viewChangedEntriesScroller,
+  exportExistingStatement,
 } from 'actions/admin';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { DATA_ACTION } from 'interfaces/data-action';
@@ -44,7 +44,7 @@ export const REPEAT_STATEMENT: IExtendedIActionWithAuth = {
 
 /** Экшн экспорта выписки. */
 const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
-  action: exportStatement,
+  action: exportExistingStatement,
   authorities: [],
   dataAction: DATA_ACTION.EXPORT,
   icon: Icons.Export,
@@ -53,7 +53,7 @@ const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
 };
 
 /** Экшно создания запроса выписки. */
-export const CREATE_STATEMENT: IExtendedIActionWithAuth = {
+const CREATE_STATEMENT: IExtendedIActionWithAuth = {
   authorities: [],
   action: showStatementRequestForm,
   icon: Icons.Statement,
@@ -61,10 +61,10 @@ export const CREATE_STATEMENT: IExtendedIActionWithAuth = {
   name: 'CREATE_STATEMENT',
 };
 
-/** Экшн просмотра изменных проводок. */
+/** Экшн просмотра измененных проводок. */
 export const VIEW_MODIFIED_TRANSACTIONS: IExtendedIActionWithAuth = {
   authorities: [],
-  action: viewModifiedTransactions,
+  action: viewChangedEntriesScroller,
   icon: ServiceIcons.EyeOpened,
   label: locale.admin.statementScroller.action.viewModifiedTransactions,
   name: ACTION_NAME.VIEW_MODIFIED_TRANSACTIONS,
@@ -88,11 +88,11 @@ const VIEW_STATEMENT_REQUEST_PARAMS: IExtendedIActionWithAuth = {
   name: ACTION_NAME.VIEW_QUERY_PARAMS,
 };
 
-/** Экшены футера скроллера Истории запросов выписок. */
+/** Экшены футера скроллера. */
 export const FOOTER_ACTIONS = [EXPORT_STATEMENTS_HISTORY];
 
-/** Экшены выписки строки скроллреа Истории запросов выписок. */
-export const ROW_ACTIONS = [EXPORT_STATEMENT, VIEW_STATEMENT_REQUEST_PARAMS, VIEW_TRANSACTIONS];
+/** Экшены выписки строки скроллера. */
+export const ROW_ACTIONS = [EXPORT_STATEMENT, VIEW_STATEMENT_REQUEST_PARAMS, VIEW_TRANSACTIONS, VIEW_MODIFIED_TRANSACTIONS];
 
-/** Экшены в заголовке скроллера Истории запросов выписок. */
-export const HEADER_ACTIONS = [EXPORT_STATEMENTS_HISTORY];
+/** Экшены в заголовке скроллера. */
+export const HEADER_ACTIONS = [EXPORT_STATEMENTS_HISTORY, CREATE_STATEMENT];

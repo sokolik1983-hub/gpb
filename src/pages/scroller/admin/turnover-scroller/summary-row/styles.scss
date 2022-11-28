@@ -1,0 +1,23 @@
+.container {
+  margin: 12px 0;
+  padding: 12px 32px;
+  min-height: 68px;
+  text-align: right;
+}
+
+.item {
+  color: #7c8793;
+  line-height: 16px;
+}
+
+.unsigned {
+  opacity: 0.7;
+}
+
+.negative {
+  opacity: 0.6;
+}
+
+.positive {
+  opacity: 0.7;
+}

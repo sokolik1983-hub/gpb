@@ -11,14 +11,16 @@ import { useCreationParams } from './use-creation-params';
 
 /** Свойства компонента параметров создания выписки. */
 interface CreationParamsProps {
+  /** Выписка экспортируется со списком проводок. */
+  withEntriesList: boolean;
   /** Блокировка редактирования значений. */
   disabled?: boolean;
 }
 
 /** Компонент параметров создания выписки. */
-export const CreationParams: React.FC<CreationParamsProps> = ({ disabled }) => {
+export const CreationParams: React.FC<CreationParamsProps> = ({ withEntriesList, disabled }) => {
   const { change, batch } = useForm();
-  const [options] = useCreationParams();
+  const [options] = useCreationParams(withEntriesList);
   const { withSign } = useContext<IFormContext>(FormContext);
 
   const onChangeParams: OnChangeType<string[]> = useCallback(

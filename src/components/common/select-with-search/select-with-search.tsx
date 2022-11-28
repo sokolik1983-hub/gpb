@@ -20,7 +20,7 @@ interface SelectWithSearchProps {
   /** Опции выбора при поиске. */
   searchOptions: IOption[];
   /** Выбранные ранее опции. */
-  selectedOptions: IOption[];
+  selectedOptions?: IOption[];
   /** Устанавливает значение подстроки поиска опций выбора. */
   setSearchValue(value: string): void;
 }
@@ -33,7 +33,7 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
   optionTemplate,
   placeholder,
   searchOptions,
-  selectedOptions,
+  selectedOptions = [],
   setSearchValue,
 }) => {
   const [currentSelectedOptions, setCurrentSelectedOptions] = useState<IOption[]>([]);
@@ -65,7 +65,7 @@ export const SelectWithSearch: FC<SelectWithSearchProps> = ({
     [currentSelectedOptions]
   );
 
-  /** Обработчие очищения поля выбора. */
+  /** Обработчик очищения поля выбора. */
   const handleClear = useCallback(() => change(name, ''), [change, name]);
 
   const options = useMemo(() => uniqBy<IOption>([...currentSelectedOptions, ...selectedOptions, ...searchOptions], 'value'), [

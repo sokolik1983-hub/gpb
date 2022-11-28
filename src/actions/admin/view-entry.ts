@@ -10,7 +10,7 @@ import type { context } from './executor';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=34440049
  */
 export const viewEntry: IActionConfig<typeof context, Promise<void>> = {
-  action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: IBaseEntity[], statementId: string) => {
+  action: ({ done, fatal }, { service, showLoader, hideLoader }) => async ([doc]: IBaseEntity[]) => {
     showLoader();
 
     const [res, err] = await to(service.getTransaction({ accountingEntryId: doc.id }));
@@ -23,7 +23,7 @@ export const viewEntry: IActionConfig<typeof context, Promise<void>> = {
 
     fatal(error);
 
-    void showTransactionCard(transaction, statementId);
+    void showTransactionCard(transaction);
 
     done();
   },

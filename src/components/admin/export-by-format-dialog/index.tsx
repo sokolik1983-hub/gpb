@@ -51,7 +51,7 @@ const ExportByFormatDialog: FC<ExportByFormatDialogProps> = ({ onClose, onSelect
           content={
             <Box className={css['export-by-format-dialog__content']}>
               <Gap.XS />
-              <Typography.PBold>{locale.admin.turnoverScroller.actions.exportTurnovers}</Typography.PBold>
+              <Typography.Text>{locale.admin.turnoverScroller.labels.format}</Typography.Text>
             </Box>
           }
           dataType={DATA_TYPE.CONFIRMATION}

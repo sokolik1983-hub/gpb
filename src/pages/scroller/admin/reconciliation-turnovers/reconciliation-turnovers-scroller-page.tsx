@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -20,7 +20,7 @@ export const ReconciliationTurnoversScrollerPage = () => {
   const [filter, setFilter] = useState<IFilters>({});
 
   const contentHeight = useStreamContentHeight();
-  const tableHeight = contentHeight - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT - QUICK_FILTER_HEIGHT;
+  const tableHeight = contentHeight - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.BASE - QUICK_FILTER_HEIGHT;
 
   const headerProps = {
     header: locale.admin.reconciliationTurnoversScroller.pageTitle,

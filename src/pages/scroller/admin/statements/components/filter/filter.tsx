@@ -25,6 +25,7 @@ import { useDebounce } from 'platform-copies/hooks';
 import { getDateRangeValidationScheme } from 'schemas';
 import { DELAY, QUICK_FILTER_HEIGHT } from 'stream-constants';
 import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
+import { getAccountSearchFilter, getOrganizationSearchFilter } from 'utils/admin';
 import { useFilter } from '@platform/services';
 import { validate } from '@platform/validation';
 
@@ -54,7 +55,7 @@ export const Filter: FC<FilterProps> = ({ setFilter, setDatePeriodFetched, stora
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountIds);
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
-  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(accountSearchValueDebounced);
+  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);
@@ -64,7 +65,7 @@ export const Filter: FC<FilterProps> = ({ setFilter, setDatePeriodFetched, stora
   const { data: selectedOrganizations } = useOrganizationsByIds(selectedOrganizationIds);
 
   const organizationSearchValueDebounced = useDebounce(organizationSearchValue, DELAY);
-  const { data: organizations } = useOrganizations(organizationSearchValueDebounced);
+  const { data: organizations } = useOrganizations(getOrganizationSearchFilter(organizationSearchValueDebounced));
 
   // Получение пользователей.
   const selectedUserIds = filterValues?.[FORM_FIELDS.USER_IDS]?.value || [];

@@ -10,7 +10,11 @@ import { TransactionsScrollerContext } from '../context';
 import { Footer } from './footer-content';
 import { SettingsForm } from './settings-form';
 
-export const Table = () => {
+interface IProps {
+  filtersEmpty: boolean;
+}
+
+export const Table = ({ filtersEmpty }: IProps) => {
   const [selectedRows, setSelectedRows] = useState<BankAccountingEntryCard[]>([]);
   const { fetch, total } = useContext(TransactionsScrollerContext);
   /** Обработчик клика по строке скроллера. */
@@ -36,6 +40,10 @@ export const Table = () => {
         customSettingsForm={SettingsForm}
         executor={executor}
         fetchData={fetch}
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        placeholderMessage={filtersEmpty ? <b>{locale.admin.transactionsScroller.table.placeholder.message}</b> : undefined}
+        placeholderTitle={filtersEmpty ? locale.admin.transactionsScroller.table.placeholder.title : undefined}
         selectedRows={selectedRows}
         storageKey={STORAGE_KEY}
         onRowClick={handleRowClick}

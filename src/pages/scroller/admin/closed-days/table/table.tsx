@@ -12,14 +12,8 @@ import { InfiniteDataTable } from 'platform-copies/services';
 import { statementService } from 'services/admin';
 import { Box } from '@platform/ui';
 
-/** Свойства таблицы журнала закрытых дней. */
-interface TableProps extends ScrollerTable {
-  /** Признак, что можно показать таблицу. */
-  show: boolean;
-}
-
 /** Таблица журнала закрытых дней. */
-export const Table: FC<TableProps> = ({ filter, height, show }) => {
+export const Table: FC<ScrollerTable> = ({ filter, height, show }) => {
   const { fetch, initialed, total } = useDataTable<ClosedDayRow>({ apiMethod: statementService.getClosedDays, filter });
 
   return (

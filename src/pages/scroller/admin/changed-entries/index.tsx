@@ -1,6 +1,9 @@
 import type { FC } from 'react';
 import React, { useCallback, useMemo, useState } from 'react';
-import { ContentLoader, SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/common';
+import { executor, viewStatementHistoryScroller } from 'actions/admin';
+import type { ScrollerPageLayoutProps } from 'components/admin';
+import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'components/admin';
+import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { useStreamContentHeight } from 'hooks/common';
@@ -31,8 +34,10 @@ export const ChangedEntriesScrollerPage: FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
 
-  const headerProps = {
+  const headerProps: ScrollerPageLayoutProps['headerProps'] = {
+    backButtonTitle: locale.admin.button.toStatementRequest,
     header: locale.admin.changedEntriesScroller.pageTitle,
+    onBack: () => void executor.execute(viewStatementHistoryScroller),
   };
 
   const handleSetFilters = (filtersValue: IFilters) => {
@@ -76,7 +81,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
 
   const height = useStreamContentHeight();
 
-  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT;
+  const tableHeight = height - SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT.WITH_BACK_BUTTON;
 
   return (
     <ChangedEntriesScrollerContext.Provider value={contextValue}>
