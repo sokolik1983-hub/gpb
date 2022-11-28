@@ -4,7 +4,7 @@ import { SCROLLER_PAGE_LAYOUT_HEADER_HEIGHT, ScrollerPageLayout } from 'componen
 import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
-import { useStreamContentHeight } from 'hooks/common';
+import { usePrevious, useStreamContentHeight } from 'hooks/common';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import { locale } from 'localization/index';
 import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
@@ -28,6 +28,7 @@ export const TransactionsScrollerPage: React.FC = () => {
   const [total, setTotal] = useState<number>(0);
   const [tableDataInitialed, setTableDataInitialed] = useState<boolean>(false);
   const [filtersEmpty, setFiltersEmpty] = useState<boolean>(false);
+  const [transactionsFetching, setTransactionsFetching] = useState(false);
 
   // TODO Добавить действия заголовка
   const actions = useMemo(() => [], []);
@@ -44,6 +45,8 @@ export const TransactionsScrollerPage: React.FC = () => {
 
   const fetch = useCallback(
     async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryCard>> => {
+      setTransactionsFetching(true);
+
       try {
         if (Object.values(filters).every(filterValue => !filterValue)) {
           setFiltersEmpty(true);
@@ -70,18 +73,23 @@ export const TransactionsScrollerPage: React.FC = () => {
         if (!tableDataInitialed) {
           setTableDataInitialed(true);
         }
+
+        setTransactionsFetching(false);
       }
     },
     [filters, tableDataInitialed]
   );
+
+  const prevTransactionsFetching = usePrevious(transactionsFetching);
 
   const contextValue: ITransactionsScrollerContext = useMemo<ITransactionsScrollerContext>(
     () => ({
       fetch,
       total,
       searchQuery: searchString,
+      newTransactionsFetched: Boolean(tableDataInitialed && prevTransactionsFetching && !transactionsFetching),
     }),
-    [fetch, searchString, total]
+    [fetch, prevTransactionsFetching, searchString, tableDataInitialed, total, transactionsFetching]
   );
 
   const height = useStreamContentHeight();

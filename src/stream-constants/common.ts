@@ -36,3 +36,6 @@ export const DELAY = 300;
 
 /** Высота основного фильтра скроллера по умолчанию. */
 export const QUICK_FILTER_HEIGHT = 58;
+
+/** Максимальный размер истории поиска. */
+export const MAX_SEARCH_HISTORY_SIZE = 5;
