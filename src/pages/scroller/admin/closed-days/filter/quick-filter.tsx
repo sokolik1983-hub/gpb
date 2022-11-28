@@ -8,7 +8,7 @@ import { FilterContext } from 'pages/scroller/admin/closed-days/filter/context';
 import type { FilterValues } from 'pages/scroller/admin/closed-days/filter/types';
 import { getBranchOption } from 'pages/scroller/admin/closed-days/filter/utils';
 import { useForm, useFormState } from 'react-final-form';
-import { statementService } from 'services/admin';
+import { getDatePeriod } from 'utils/common/get-date-period';
 import { Fields, Pattern } from '@platform/ui';
 
 /** Основной фильтр. Изменения значений этих полей вызывают обновление скроллера. */
@@ -23,7 +23,7 @@ export const QuickFilter: FC = () => {
   const branchOptions = useMemo(() => allBranches.map(getBranchOption), [allBranches]);
 
   const { DateRange, DatePeriodType } = useDatePeriod({
-    fetch: statementService.getDatePeriod,
+    fetch: getDatePeriod,
     fieldName: { dateFrom: FORM_FIELDS.DATE_FROM, dateTo: FORM_FIELDS.DATE_TO, periodType: FORM_FIELDS.PERIOD_TYPE },
     onCalculateFinal: setDatePeriodFetched,
   });
