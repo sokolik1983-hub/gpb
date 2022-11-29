@@ -1,5 +1,13 @@
 import type { IBaseEntity } from '@platform/services';
 
+/** Карточка валюты. */
+export interface CurrencyCard {
+  /** Буквенный код. */
+  letterCode: string;
+  /** Цифровой код. */
+  numericCode: string;
+}
+
 /** Карточка бухгалтерской проводки для ‘bank’ модуля. */
 export interface BankAccountingEntryCard extends IBaseEntity {
   /** Сумма по кредиту. */
@@ -29,9 +37,9 @@ export interface BankAccountingEntryCard extends IBaseEntity {
   /** Обороты по дебету. */
   turnoverByDebit: number;
   /** Цифровой код валюты по дебету. */
-  currencyNumericCodeByDebit: string;
+  currencyByDebit: CurrencyCard;
   /** Цифровой код валюты по кредиту. */
-  currencyNumericCodeByCredit: string;
+  currencyByCredit: CurrencyCard;
   /** Номер счета клиента банка. */
   bankClientAccountNumber: string;
   /** Наименование клиента банка. */

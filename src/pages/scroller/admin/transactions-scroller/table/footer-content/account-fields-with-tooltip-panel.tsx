@@ -59,7 +59,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
   const currenciesSet = useMemo(
     () =>
       filteredPayments.reduce<Set<string>>(
-        (result, payment) => result.add(isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit),
+        (result, payment) => result.add(isDebit ? payment.currencyByDebit.letterCode : payment.currencyByCredit.letterCode),
         new Set()
       ),
     [filteredPayments, isDebit]
@@ -77,7 +77,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
 
     labelText = locale.moneyString.unsigned({
       amount: String(amount),
-      currencyCode: isDebit ? filteredPayments[0].currencyNumericCodeByDebit : filteredPayments[0].currencyNumericCodeByCredit,
+      currencyCode: isDebit ? filteredPayments[0].currencyByDebit.letterCode : filteredPayments[0].currencyByCredit.letterCode,
     });
   } else {
     const currencies = Array.from(currenciesSet.values());
@@ -109,7 +109,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
           ) : (
             Array.from(currenciesSet.values()).reduce<React.ReactElement[]>((paymentRows, currency, index) => {
               const currencyPayments = filteredPayments.filter(payment => {
-                const paymentCurrency = isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit;
+                const paymentCurrency = isDebit ? payment.currencyByDebit.letterCode : payment.currencyByCredit.letterCode;
 
                 return paymentCurrency === currency;
               });
