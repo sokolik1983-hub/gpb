@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { executor, viewEntry } from 'actions/admin';
 import { DataTableWithTotal } from 'components/common';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { InfiniteDataTable } from 'platform-copies/services';
 import { columns } from '../columns';
@@ -11,17 +11,17 @@ import { Footer } from './footer-content';
 import { SettingsForm } from './settings-form';
 
 export const Table = () => {
-  const [selectedRows, setSelectedRows] = useState<BankAccountingChangedEntry[]>([]);
+  const [selectedRows, setSelectedRows] = useState<BankAccountingEntryTurnoverCard[]>([]);
   const { fetch, total } = useContext(ChangedEntriesScrollerContext);
   /** Обработчик клика по строке скроллера. */
-  const handleRowClick = useCallback((statement: BankAccountingChangedEntry) => {
+  const handleRowClick = useCallback((statement: BankAccountingEntryTurnoverCard) => {
     void executor.execute(viewEntry, [statement]);
   }, []);
 
   return (
     <DataTableWithTotal label={locale.admin.transactionsScroller.table.total} total={total}>
       <>
-        <InfiniteDataTable<BankAccountingChangedEntry>
+        <InfiniteDataTable<BankAccountingEntryTurnoverCard>
           columns={columns}
           customSettingsForm={SettingsForm}
           executor={executor}

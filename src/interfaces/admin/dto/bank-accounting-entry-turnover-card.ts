@@ -1,3 +1,4 @@
+import type { CHANGED_ENTRY_STATUSES } from 'interfaces/changed-entry-statuses';
 import type { IBaseEntity } from '@platform/services';
 import type { BankAccountingEntryAccount } from './bank-accounting-entry-account';
 
@@ -29,6 +30,6 @@ export interface BankAccountingEntryTurnoverCard extends IBaseEntity {
   paymentPurpose: string;
   /** Обороты по кредиту. */
   turnoverByCredit: number;
-  /** Обороты по дебету. */
-  turnoverByDebit: number;
+  /** Признак удаления. */
+  deleted: CHANGED_ENTRY_STATUSES;
 }

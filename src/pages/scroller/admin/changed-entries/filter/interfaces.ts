@@ -28,7 +28,7 @@ export interface IFormState {
   /** Тип операции. */
   transactionType?: TRANSACTION_TYPES;
   /** Статус проводки. */
-  status?: CHANGED_ENTRY_STATUSES;
+  deleted?: CHANGED_ENTRY_STATUSES;
   /** Источник вызова ЭФ Банка "Журнал проводок удаленных/добавленных". */
   source?: string;
 }

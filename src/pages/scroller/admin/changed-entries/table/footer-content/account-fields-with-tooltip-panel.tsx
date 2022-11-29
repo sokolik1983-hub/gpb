@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { formatMoney } from '@platform/tools/big-number';
 import { CONTAINER_POSITION, Gap, Horizon, Link, Tooltip, Typography, WithTooltip } from '@platform/ui';
@@ -19,7 +19,7 @@ export interface IAccountFieldsWithTooltipPanelProps {
   /** Выводить списания(true для списаний, false для поступлений). */
   isDebit: boolean;
   /** Список счетов. */
-  payments: BankAccountingChangedEntry[];
+  payments: BankAccountingEntryTurnoverCard[];
 }
 
 /**
@@ -57,12 +57,8 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
   const handleMouseLeave = useCallback(() => setShow(false), []);
 
   const currenciesSet = useMemo(
-    () =>
-      filteredPayments.reduce<Set<string>>(
-        (result, payment) => result.add(isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit),
-        new Set()
-      ),
-    [filteredPayments, isDebit]
+    () => filteredPayments.reduce<Set<string>>((result, payment) => result.add(payment.account.currency.letterCode), new Set()),
+    [filteredPayments]
   );
 
   let labelText = '';
@@ -77,7 +73,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
 
     labelText = locale.moneyString.unsigned({
       amount: String(amount),
-      currencyCode: isDebit ? filteredPayments[0].currencyNumericCodeByDebit : filteredPayments[0].currencyNumericCodeByCredit,
+      currencyCode: filteredPayments[0].account.currency.letterCode,
     });
   } else {
     const currencies = Array.from(currenciesSet.values());
@@ -109,7 +105,7 @@ export const AccountFieldsWithTooltipPanel: React.FC<IAccountFieldsWithTooltipPa
           ) : (
             Array.from(currenciesSet.values()).reduce<React.ReactElement[]>((paymentRows, currency, index) => {
               const currencyPayments = filteredPayments.filter(payment => {
-                const paymentCurrency = isDebit ? payment.currencyNumericCodeByDebit : payment.currencyNumericCodeByCredit;
+                const paymentCurrency = payment.account.currency.letterCode;
 
                 return paymentCurrency === currency;
               });

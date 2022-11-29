@@ -43,7 +43,7 @@ export const FORM_FIELDS = {
   /** Тип операции. */
   TRANSACTION_TYPE: getPath('transactionType'),
   /** Статус операции. */
-  STATUS: getPath('status'),
+  STATUS: getPath('deleted'),
   /** Источник вызова ЭФ Банка "Журнал проводок удаленных/добавленных". */
   SOURCE: getPath('source'),
 };
@@ -75,7 +75,7 @@ export const getFields = (entrySourceView?: typeof ENTRY_SOURCE_VIEW): Record<st
     [FORM_FIELDS.PAYMENT_DATE_TO]: filterFields.le(EMPTY_VALUE, FORM_FIELDS.PAYMENT_DATE),
     [FORM_FIELDS.DOC_NUMBER]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.DOC_NUMBER),
     [FORM_FIELDS.TRANSACTION_TYPE]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.TRANSACTION_TYPE),
-    [FORM_FIELDS.STATUS]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.TRANSACTION_TYPE),
+    [FORM_FIELDS.STATUS]: filterFields.eq(EMPTY_VALUE, FORM_FIELDS.STATUS, (value): boolean => value === CHANGED_ENTRY_STATUSES.REMOVED),
     [FORM_FIELDS.COUNTERPARTY]: filterFields.in([], FORM_FIELDS.COUNTERPARTY, bankClientFieldFormatter),
     [FORM_FIELDS.CLIENT]: filterFields.in([], FORM_FIELDS.CLIENT, bankClientFieldFormatter),
     [FORM_FIELDS.COUNTERPARTY_ACCOUNT]: filterFields.in([], FORM_FIELDS.COUNTERPARTY_ACCOUNT),

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { executor } from 'actions/admin';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { getActiveActionButtons } from 'utils/common';
 import { useAuth } from '@platform/services/admin';
 import { Box, Horizon, FILL, SHADOW, Adjust, SIZE } from '@platform/ui';
@@ -12,7 +12,7 @@ import css from './styles.scss';
 /** Свойства компонета с футером ЭФ Банка "Журнал проводок удаленных/добавленных". */
 interface FooterProps {
   /** Набор выбранных проводок. */
-  selectedRows: BankAccountingChangedEntry[];
+  selectedRows: BankAccountingEntryTurnoverCard[];
 }
 
 /** Компонент для вывода футера ЭФ Банка "Журнал проводок удаленных/добавленных". */

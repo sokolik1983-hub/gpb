@@ -8,7 +8,10 @@ import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения суммы списания. */
 export const Outcome: React.FC<CellProps<BankAccountingEntryCard, BankAccountingEntryCard>> = ({
-  value: { amountByDebit, currencyNumericCodeByDebit },
+  value: {
+    amountByDebit,
+    currencyByDebit: { letterCode },
+  },
 }) => {
   const queryString = useQueryString();
 
@@ -20,7 +23,7 @@ export const Outcome: React.FC<CellProps<BankAccountingEntryCard, BankAccounting
     <Typography.P align={'RIGHT'} fill={'CRITIC'}>
       <HightlightText
         searchWords={queryString}
-        textToHightlight={locale.moneyString.negative({ amount: String(amountByDebit), currencyCode: currencyNumericCodeByDebit })}
+        textToHightlight={locale.moneyString.negative({ amount: String(amountByDebit), currencyCode: letterCode })}
       />
     </Typography.P>
   );

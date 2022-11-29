@@ -35,7 +35,6 @@ import type {
   User,
 } from 'interfaces/admin';
 import type { AccountingEntryAttachmentRequest } from 'interfaces/admin/accounting-entry-attachment-request';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
 import type { BankAccountingEntryCard } from 'interfaces/admin/dto/bank-accounting-entry-card';
 import type { BankAccountingEntryGroup } from 'interfaces/admin/dto/bank-accounting-entry-group';
 import type { CreateReportFileDto, TurnoverCard } from 'interfaces/admin/dto/turnover';
@@ -58,7 +57,6 @@ import {
   mapDtoToViewStatementRequestCard,
   mapForTurnovers,
 } from 'services/admin/mappers';
-import { mockChangedEntriesData } from 'services/admin/mock/changed-entries';
 import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
 import { getStatementList, metadataToRequestParamsWithCustomFilter, metadataToRequestParamsWithCustomSort } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
@@ -344,19 +342,26 @@ export const statementService = {
   /** Получение данных скроллера добавленных/удалённых проводок. */
   // TODO Убрать после реализации API
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getChangedEntries: (metaData: IMetaData): Promise<ICollectionResponse<BankAccountingChangedEntry>> =>
-    new Promise<{ data: IServerDataResp<IScrollerResponseDto<BankAccountingChangedEntry>> }>(resolve => {
-      resolve({ data: mockChangedEntriesData });
-    }).then(response => {
-      if (response.data.error?.code) {
-        throw new Error(response.data.error.message);
-      }
+  getChangedEntries: (metaData: IMetaData, statementId: string): Promise<ScrollerResponseDto<BankAccountingEntryGroup>> => {
+    const { params } = metadataToRequestParams({
+      ...metaData,
+      filters: {
+        ...metaData.filters,
+        modifiedAccountingEntry: {
+          fieldName: 'modifiedAccountingEntry',
+          condition: 'eq',
+          value: true,
+        },
+      },
+    });
+    const { multiSort, ...rest } = params;
 
-      return {
-        data: response.data.data.page,
-        total: response.data.data.size,
-      };
-    }),
+    return request<IServerResp<ScrollerResponseDto<BankAccountingEntryGroup>>>({
+      url: `${STATEMENT_BANK_URL}/entry/${statementId}/page`,
+      method: 'POST',
+      data: { ...rest, sorting: multiSort },
+    }).then(x => x.data.data);
+  },
   /** Возвращает список курсов валют. */
   getCurrencyRates: (metaData: IMetaData): Promise<ICollectionResponse<CurrencyRateRow>> =>
     request<IServerDataResp<IScrollerResponseDto<CurrencyRateDto>>>({

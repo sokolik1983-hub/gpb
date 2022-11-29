@@ -1,12 +1,12 @@
 import { COLUMN_PADDING_TYPES, HEADER_ALIGN } from 'interfaces';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { accessor, addMaxWidthField } from 'utils/common';
 import { AccountInfo, Actions, CounterpartyInfo, EntryDate, DocumentInfo, Summary, Outcome, Income, Status } from './cells';
 import { COLUMN_NAMES } from './constants';
 
 /** Колонки для подстрок таблицы. */
-export const columns = addMaxWidthField<BankAccountingChangedEntry, { isVisible: boolean; optionLabel?: string }>([
+export const columns = addMaxWidthField<BankAccountingEntryTurnoverCard, { isVisible: boolean; optionLabel?: string }>([
   {
     Header: locale.admin.changedEntriesScroller.columns.date,
     id: COLUMN_NAMES.DATE,
