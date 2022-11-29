@@ -1,6 +1,6 @@
 import React from 'react';
 import { HightlightText } from 'components/common';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import type { CellProps } from 'react-table';
 import { DATE_FORMAT } from '@platform/services';
@@ -9,7 +9,7 @@ import { Typography, WithInfoTooltip } from '@platform/ui';
 import { useQueryString } from '../hooks';
 
 /** Компонент с ячейкой для отображения информации о документе.  */
-export const DocumentInfo: React.FC<CellProps<BankAccountingChangedEntry, BankAccountingChangedEntry>> = ({
+export const DocumentInfo: React.FC<CellProps<BankAccountingEntryTurnoverCard, BankAccountingEntryTurnoverCard>> = ({
   value: { documentDate, documentNumber },
 }) => {
   const queryString = useQueryString();

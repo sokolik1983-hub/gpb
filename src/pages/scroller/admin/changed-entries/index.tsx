@@ -7,10 +7,11 @@ import { ContentLoader } from 'components/common';
 import { FocusLock } from 'components/common/focus-lock';
 import { FocusTree } from 'components/common/focus-tree';
 import { usePrevious, useStreamContentHeight } from 'hooks/common';
-import type { BankAccountingChangedEntry } from 'interfaces/admin/dto/bank-accounting-changed-entry';
+import type { BankAccountingEntryTurnoverCard } from 'interfaces/admin/dto/bank-accounting-entry-turnover-card';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'pages/scroller/admin/changed-entries/filter/constants';
 import type { IFetchDataResponse, IFetchDataParams } from 'platform-copies/services';
+import { useParams } from 'react-router-dom';
 import { statementService } from 'services/admin';
 import { COMMON_SCROLLER_NODE } from 'stream-constants/a11y-nodes';
 import { convertTablePaginationToMetaData } from 'utils/common';
@@ -29,6 +30,7 @@ import { Table } from './table';
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=80646436
  */
 export const ChangedEntriesScrollerPage: FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [searchString, setSearchString] = useState<string>('');
   const [filters, setFilters] = useState<IFilters>({});
   const [total, setTotal] = useState<number>(0);
@@ -47,7 +49,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
   };
 
   const fetch = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingChangedEntry>> => {
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<BankAccountingEntryTurnoverCard>> => {
       setEntriesFetching(true);
 
       try {
@@ -59,7 +61,10 @@ export const ChangedEntriesScrollerPage: FC = () => {
 
         setTotal(0);
 
-        const { data: rows, total: pageCount } = await statementService.getChangedEntries(metaData);
+        const responseDto = await statementService.getChangedEntries(metaData, id);
+
+        const rows = responseDto.page[0].entries;
+        const pageCount = responseDto.size;
 
         return { rows, pageCount };
       } catch {
@@ -72,7 +77,7 @@ export const ChangedEntriesScrollerPage: FC = () => {
         setEntriesFetching(false);
       }
     },
-    [filters, tableDataInitialed]
+    [filters, id, tableDataInitialed]
   );
 
   const prevEntriesFetching = usePrevious(entriesFetching);
