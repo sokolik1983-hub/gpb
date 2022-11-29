@@ -31,7 +31,7 @@ export const Filter: FC<ScrollerFilter> = ({ setFilter }) => {
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountId ? [selectedAccountId] : []);
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
-  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
+  const { data: accounts, isFetched: isAccountsFetched } = useAccounts({ filter: getAccountSearchFilter(accountSearchValueDebounced) });
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);

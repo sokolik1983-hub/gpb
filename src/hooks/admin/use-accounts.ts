@@ -6,17 +6,22 @@ import { PREFIX } from 'stream-constants/admin';
 import type { IFilters } from '@platform/core';
 import type { IMetaData } from '@platform/services/admin';
 
-/**
- * Возвращает список счетов по переданному фильтру.
- *
- * @param filter - Фильтр.
- * @param enabled - Признак, что нужно сделать запрос.
- */
-export const useAccounts = (filter: IFilters, enabled = true) => {
+/** Входные данные хука useAccounts. */
+interface UseAccountsRequestProps {
+  /** Фильтр. */
+  filter?: IFilters;
+  /** Признак вызова апи. */
+  enabled?: boolean;
+  /** Размер страницы. */
+  pageSize?: number;
+}
+
+/** Возвращает список счетов по переданному фильтру. */
+export const useAccounts = ({ filter = {}, enabled = true, pageSize = PAGE_SIZES.PER_25 }: UseAccountsRequestProps) => {
   const metaData: IMetaData = {
     filters: filter,
     offset: 0,
-    pageSize: PAGE_SIZES.PER_25,
+    pageSize,
   };
 
   const { data = [], isError, isFetched, isFetching, isSuccess } = useQuery<Account[]>({

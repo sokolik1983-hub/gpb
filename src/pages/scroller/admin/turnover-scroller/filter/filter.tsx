@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { ContentLoader, FilterLayout } from 'components/common';
 import { FocusNode } from 'components/common/focus-tree';
-import { useAccounts, useAccountsByIds, useDebounceFilter, useOrganizations, useOrganizationsByIds } from 'hooks/admin';
+import { useAccounts, useDebounceFilter, useOrganizations, useOrganizationsByIds } from 'hooks/admin';
 import { useIsFetchedData } from 'hooks/common';
 import type { IFilterPanel, ScrollerFilter } from 'interfaces';
 import { useDebounce } from 'platform-copies/hooks';
@@ -30,11 +30,18 @@ export const Filter: React.FC<ScrollerFilter> = ({ setFilter }) => {
   useDebounceFilter({ filterValues, setFilter });
 
   // Получение счетов.
-  const selectedAccountIds = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]?.value || [];
-  const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountIds);
+  const accountFilter = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]
+    ? { [FORM_FIELDS.ACCOUNT_NUMBERS]: filterValues[FORM_FIELDS.ACCOUNT_NUMBERS] }
+    : undefined;
+  const accountsCount = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]?.value.length || 0;
+  const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccounts({
+    filter: accountFilter,
+    enabled: Boolean(accountsCount),
+    pageSize: accountsCount,
+  });
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
-  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
+  const { data: accounts, isFetched: isAccountsFetched } = useAccounts({ filter: getAccountSearchFilter(accountSearchValueDebounced) });
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);
@@ -46,7 +53,7 @@ export const Filter: React.FC<ScrollerFilter> = ({ setFilter }) => {
   const organizationSearchValueDebounced = useDebounce(organizationSearchValue, DELAY);
   const { data: organizations } = useOrganizations(getOrganizationSearchFilter(organizationSearchValueDebounced));
 
-  const loading = selectedAccountIds.length > 0 ? !(selectedAccountsFetched && accountsFetched) : !accountsFetched;
+  const loading = accountFilter ? !(selectedAccountsFetched && accountsFetched) : !accountsFetched;
 
   const contextValue = useMemo(
     () => ({
