@@ -55,7 +55,7 @@ export const Filter: FC<FilterProps> = ({ setFilter, setDatePeriodFetched, stora
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccountsByIds(selectedAccountIds);
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
-  const { data: accounts, isFetched: isAccountsFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
+  const { data: accounts, isFetched: isAccountsFetched } = useAccounts({ filter: getAccountSearchFilter(accountSearchValueDebounced) });
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
   const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);

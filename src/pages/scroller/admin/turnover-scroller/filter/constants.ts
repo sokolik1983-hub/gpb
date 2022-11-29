@@ -16,13 +16,17 @@ export const FORM_FIELDS = {
   DATE_TO: getPath('dateTo'),
   /** Организации. */
   BANK_CLIENT_IDS: getPath('bankClientIds'),
-  /** Период. */
+  /** Номера счетов. */
   ACCOUNT_NUMBERS: getPath('accountNumbers'),
 };
 
 /** Значения полей и условия фильтрации (для useFilter). */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.ACCOUNT_NUMBERS]: filterFields.in([], 'accountNumber'),
+  [FORM_FIELDS.ACCOUNT_NUMBERS]: filterFields.in([], 'accountNumber', value => {
+    const accountNumbers = value as string[];
+
+    return accountNumbers.map(item => item.replace(/\./g, ''));
+  }),
   [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, 'turnoverDate', value => dateWithStartOfDay(value as string)),
   [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, 'turnoverDate', value => dateWithEndOfDay(value as string)),
   [FORM_FIELDS.BANK_CLIENT_IDS]: filterFields.in([], 'bankClientId'),

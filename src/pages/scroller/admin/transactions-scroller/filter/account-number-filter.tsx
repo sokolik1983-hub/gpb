@@ -42,7 +42,7 @@ export const AccountNumberFilter: React.FC<IProps> = ({ name, placeholder }: IPr
   const [searchString, setSearchString] = useState('');
 
   const accountSearchValueDebounced = useDebounce(searchString, DEBOUNCE_DELAY);
-  const { data: accounts, isFetched } = useAccounts(getAccountSearchFilter(accountSearchValueDebounced));
+  const { data: accounts, isFetched } = useAccounts({ filter: getAccountSearchFilter(accountSearchValueDebounced) });
 
   const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
   const selectedAccountOptions = useMemo(() => selectedOptions.map(getAccountOption), [selectedOptions]);

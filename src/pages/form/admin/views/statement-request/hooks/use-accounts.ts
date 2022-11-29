@@ -126,10 +126,13 @@ export const useAccounts = (): UseAccountsResponse => {
     [dep]
   );
 
-  const { data: searchOrganizations } = useAccountsByFilter(getAccountSearchFilter(searchValueDebounced), Object.keys(filter).length === 0);
+  const { data: searchOrganizations } = useAccountsByFilter({
+    filter: getAccountSearchFilter(searchValueDebounced),
+    enabled: Object.keys(filter).length === 0,
+  });
 
   // TODO: Разобраться, почему не выбирается визуально в селекте счет, если указать второй параметр.
-  const { data: dependentOrganizations } = useAccountsByFilter(filter);
+  const { data: dependentOrganizations } = useAccountsByFilter({ filter });
 
   const options = useMemo(() => (isEqual(dep, initialState) ? searchOrganizations : dependentOrganizations).map(getAccountOption), [
     dep,
