@@ -26,10 +26,10 @@ export const FORM_FIELDS = {
 
 /** Значения полей и условия фильтрации (для useFilter). */
 export const fields: Record<string, IFilterField> = {
-  [FORM_FIELDS.ACCOUNT_ID]: filterFields.eq(EMPTY_VALUE, 'accountId'),
-  [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, 'createdAt', value => dateWithStartOfDay(value as string)),
-  [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, 'createdAt', value => dateWithEndOfDay(value as string)),
-  [FORM_FIELDS.STATUS]: filterFields.eq(EMPTY_VALUE, 'status'),
+  [FORM_FIELDS.ACCOUNT_ID]: filterFields.eq(EMPTY_VALUE, 'accountNumber'),
+  [FORM_FIELDS.DATE_FROM]: filterFields.ge(EMPTY_VALUE, 'operationDate', value => dateWithStartOfDay(value as string)),
+  [FORM_FIELDS.DATE_TO]: filterFields.le(EMPTY_VALUE, 'operationDate', value => dateWithEndOfDay(value as string)),
+  [FORM_FIELDS.STATUS]: filterFields.in(EMPTY_VALUE, 'status', value => [value]),
 };
 
 /** Ключ в Session Storage, по которому хранится состояние фильтрации. */

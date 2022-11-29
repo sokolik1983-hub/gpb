@@ -20,9 +20,9 @@ export interface ReconciliationTurnoverDto extends IBaseEntity {
   /** Статус сверки. */
   status: string;
   /** Обороты по кредиту (Приход). */
-  turnoverCredit: number;
+  turnoverByCredit: number;
   /** Обороты по дебету (Расход). */
-  turnoverDebit: number;
+  turnoverByDebit: number;
 }
 
 /** Сверка остатков/оборотов в строке таблицы. */

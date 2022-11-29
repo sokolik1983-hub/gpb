@@ -8,11 +8,10 @@ import { formatAccountCode } from '@platform/tools/localization';
  * @param account - Счет.
  * @param account.accountNumber - Номер счета.
  * @param account.bankClient - Информация об организации.
- * @param account.id - Идентификатор.
  */
-export const getAccountOption = ({ accountNumber, bankClient, id }: Account): IAccountOption => ({
+export const getAccountOption = ({ accountNumber, bankClient }: Account): IAccountOption => ({
   accountNumber,
   label: formatAccountCode(accountNumber),
   orgName: bankClient?.shortName || bankClient?.fullName,
-  value: id,
+  value: accountNumber,
 });

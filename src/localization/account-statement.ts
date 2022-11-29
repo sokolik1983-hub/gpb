@@ -326,33 +326,54 @@ export default {
 			},
 			/**
 			 * @ru
-			 * Пересчет дня в связи с изменением набора проводок предыдущего периода
+			 * Подключение счета к ДБО
 			 */
-			get changingSetOfEntriesOfPrevPeriod() {
-				return t('admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod');
+			get dboContract() {
+				return t('admin.turnoverReconciliationRecordSource.dboContract');
 			},
 		},
 		turnoverReconciliationStatus: {
 			/**
 			 * @ru
-			 * Есть расхождения
+			 * Сверка не проводилась
 			 */
-			get difference() {
-				return t('admin.turnoverReconciliationStatus.difference');
+			get none() {
+				return t('admin.turnoverReconciliationStatus.none');
 			},
 			/**
 			 * @ru
-			 * Сверка не проводилась
+			 * Отсутствуют обороты за прошлую дату
 			 */
-			get notAvailable() {
-				return t('admin.turnoverReconciliationStatus.notAvailable');
+			get noTurnoversFound() {
+				return t('admin.turnoverReconciliationStatus.noTurnoversFound');
 			},
 			/**
 			 * @ru
 			 * Расхождений нет
 			 */
-			get noDifference() {
-				return t('admin.turnoverReconciliationStatus.noDifference');
+			get success() {
+				return t('admin.turnoverReconciliationStatus.success');
+			},
+			/**
+			 * @ru
+			 * Есть расхождения
+			 */
+			get failure() {
+				return t('admin.turnoverReconciliationStatus.failure');
+			},
+			/**
+			 * @ru
+			 * Выполняется ремонт
+			 */
+			get underRepair() {
+				return t('admin.turnoverReconciliationStatus.underRepair');
+			},
+			/**
+			 * @ru
+			 * Ошибки ремонта
+			 */
+			get repairFailure() {
+				return t('admin.turnoverReconciliationStatus.repairFailure');
 			},
 		},
 		statementScroller: {

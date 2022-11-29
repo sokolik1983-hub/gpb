@@ -86,28 +86,40 @@ export const TURNOVER_RECONCILIATION_RECORD_SOURCE_LABEL = {
   [RECORD_SOURCE.CLOSING_OF_DAY]: locale.admin.turnoverReconciliationRecordSource.closingOfDay,
   /** Пересчет дня в связи с изменением набора проводок. */
   [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntries,
-  /** Пересчет дня в связи с изменением набора проводок предыдущего периода. */
-  [RECORD_SOURCE.CHANGING_SET_OF_ENTRIES_OF_PREV_PERIOD]: locale.admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod,
+  /** Подключение счета к ДБО. */
+  [RECORD_SOURCE.DBO_CONTRACT]: locale.admin.turnoverReconciliationRecordSource.dboContract,
 };
 
 /** Цвета статусов сверки остатков/оборотов. */
 export const TURNOVER_RECONCILIATION_STATUS_COLOR = {
   /** Есть расхождения. */
-  [RECONCILIATION_STATUS.DIFFERENCE]: DOCUMENT_STATUS_TYPE.ERROR,
+  [RECONCILIATION_STATUS.FAILURE]: DOCUMENT_STATUS_TYPE.ERROR,
+  /** Ошибки ремонта. */
+  [RECONCILIATION_STATUS.REPAIR_FAILURE]: DOCUMENT_STATUS_TYPE.ERROR,
+  /** Отсутствуют обороты за прошлую дату. */
+  [RECONCILIATION_STATUS.NO_TURNOVER_FOUND]: DOCUMENT_STATUS_TYPE.ERROR,
   /** Сверка не проводилась. */
-  [RECONCILIATION_STATUS.NOT_AVAILABLE]: DOCUMENT_STATUS_TYPE.INPROGRESS,
+  [RECONCILIATION_STATUS.NONE]: DOCUMENT_STATUS_TYPE.INPROGRESS,
+  /** Выполняется ремонт. */
+  [RECONCILIATION_STATUS.UNDER_REPAIR]: DOCUMENT_STATUS_TYPE.INPROGRESS,
   /** Расхождений нет. */
-  [RECONCILIATION_STATUS.NO_DIFFERENCE]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  [RECONCILIATION_STATUS.SUCCESS]: DOCUMENT_STATUS_TYPE.SUCCESS,
 };
 
 /** Лейблы статусов сверки остатков/оборотов. */
 export const TURNOVER_RECONCILIATION_STATUS_LABEL = {
   /** Сверка не проводилась. */
-  [RECONCILIATION_STATUS.NOT_AVAILABLE]: locale.admin.turnoverReconciliationStatus.notAvailable,
+  [RECONCILIATION_STATUS.NONE]: locale.admin.turnoverReconciliationStatus.none,
+  /** Отсутствуют обороты за прошлую дату. */
+  [RECONCILIATION_STATUS.NO_TURNOVER_FOUND]: locale.admin.turnoverReconciliationStatus.noTurnoversFound,
   /** Расхождений нет. */
-  [RECONCILIATION_STATUS.NO_DIFFERENCE]: locale.admin.turnoverReconciliationStatus.noDifference,
+  [RECONCILIATION_STATUS.SUCCESS]: locale.admin.turnoverReconciliationStatus.success,
   /** Есть расхождения. */
-  [RECONCILIATION_STATUS.DIFFERENCE]: locale.admin.turnoverReconciliationStatus.difference,
+  [RECONCILIATION_STATUS.FAILURE]: locale.admin.turnoverReconciliationStatus.failure,
+  /** Выполняется ремонт. */
+  [RECONCILIATION_STATUS.UNDER_REPAIR]: locale.admin.turnoverReconciliationStatus.underRepair,
+  /** Ошибки ремонта. */
+  [RECONCILIATION_STATUS.REPAIR_FAILURE]: locale.admin.turnoverReconciliationStatus.repairFailure,
 };
 
 /** Цвета статусов добавленных/удалённых проводок. */

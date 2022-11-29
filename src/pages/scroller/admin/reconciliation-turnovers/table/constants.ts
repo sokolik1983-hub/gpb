@@ -8,15 +8,15 @@ import { SORT_DIRECTION } from '@platform/services';
  * */
 export const COLUMN_NAMES = {
   /** Номер счета. */
-  ACCOUNT_NUMBER: 'accountNumber',
+  ACCOUNT_NUMBER: 'ACCOUNT_NUMBER',
   /** Операционная дата. */
-  OPERATION_DATE: 'operationDate',
+  OPERATION_DATE: 'OPERATION_DATE',
   /** Дата сверки. */
-  RECONCILIATION_DATE: 'reconciliationDate',
+  RECONCILIATION_DATE: 'RECONCILIATION_DATE',
   /** Источник записи. */
-  RECORD_SOURCE: 'recordSource',
+  RECORD_SOURCE: 'RECORD_SOURCE',
   /** Статус сверки. */
-  STATUS: 'status',
+  STATUS: 'STATUS',
 };
 
 /** Состояние сортировки по умолчанию. */
