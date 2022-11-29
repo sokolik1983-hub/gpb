@@ -59,12 +59,12 @@ export const ChangedEntriesScrollerPage: FC = () => {
           ...convertTablePaginationToMetaData({ pageIndex, pageSize }),
         };
 
-        setTotal(0);
-
         const responseDto = await statementService.getChangedEntries(metaData, id);
 
         const rows = responseDto.page[0].entries;
         const pageCount = responseDto.size;
+
+        setTotal(pageCount);
 
         return { rows, pageCount };
       } catch {
