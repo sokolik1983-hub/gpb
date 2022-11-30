@@ -33,18 +33,18 @@ export const Filter: React.FC<ScrollerFilter> = ({ setFilter }) => {
   const accountFilter = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]
     ? { [FORM_FIELDS.ACCOUNT_NUMBERS]: filterValues[FORM_FIELDS.ACCOUNT_NUMBERS] }
     : undefined;
-  const accountsCount = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]?.value.length || 0;
+  const selectedAccountsCount = filterValues?.[FORM_FIELDS.ACCOUNT_NUMBERS]?.value.length || 0;
   const { data: selectedAccounts, isFetched: isSelectedAccountsFetched } = useAccounts({
     filter: accountFilter,
-    enabled: Boolean(accountsCount),
-    pageSize: accountsCount,
+    enabled: Boolean(selectedAccountsCount),
+    pageSize: selectedAccountsCount,
   });
 
   const accountSearchValueDebounced = useDebounce(accountSearchValue, DELAY);
   const { data: accounts, isFetched: isAccountsFetched } = useAccounts({ filter: getAccountSearchFilter(accountSearchValueDebounced) });
 
   const accountsFetched = useIsFetchedData(isAccountsFetched);
-  const selectedAccountsFetched = useIsFetchedData(isSelectedAccountsFetched);
+  const selectedAccountsFetched = useIsFetchedData(selectedAccountsCount > 0 ? isSelectedAccountsFetched : true);
 
   // Получение организаций.
   const selectedOrganizationIds = filterValues?.[FORM_FIELDS.BANK_CLIENT_IDS]?.value || [];
