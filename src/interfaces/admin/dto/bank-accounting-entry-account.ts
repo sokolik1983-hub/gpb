@@ -10,4 +10,11 @@ export interface BankAccountingEntryAccount extends IBaseEntity {
   currency: CurrencyCard;
   /** Номер. */
   number: string;
+  /** Остаток. */
+  balance: {
+    /** Входящий. */
+    incoming: number;
+    /** Исходящий. */
+    outgoing: number;
+  };
 }
