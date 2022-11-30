@@ -581,6 +581,13 @@ export default {
 				},
 				/**
 				 * @ru
+				 * Просмотр связанных запросов
+				 */
+				get viewRelatedQueries() {
+					return t('admin.statementScroller.action.viewRelatedQueries');
+				},
+				/**
+				 * @ru
 				 * Просмотреть выписку
 				 */
 				get viewTransactions() {
