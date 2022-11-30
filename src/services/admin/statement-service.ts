@@ -57,7 +57,6 @@ import {
   mapDtoToViewStatementRequestCard,
   mapForTurnovers,
 } from 'services/admin/mappers';
-import { mockReconciliationTurnoversData } from 'services/admin/mock/reconciliation-turnovers';
 import { getStatementList, metadataToRequestParamsWithCustomFilter, metadataToRequestParamsWithCustomSort } from 'services/admin/utils';
 import type { ICollectionResponse, IMetaData, IServerResp } from '@platform/services';
 import { AUTH_REQUEST_CONFIG } from '@platform/services';
@@ -315,13 +314,10 @@ export const statementService = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getReconciliationTurnovers: (metaData: IMetaData): Promise<ICollectionResponse<ReconciliationTurnoverRow>> =>
     // TODO: Для целевого использования.
-    // request<IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>>>({
-    //   data: metadataToRequestParams(metaData),
-    //   method: 'POST',
-    //   url: `${API_PREFIX}/reconciliation-turnovers/page`,
-    // })
-    new Promise<{ data: IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>> }>(resolve => {
-      resolve({ data: mockReconciliationTurnoversData });
+    request<IServerDataResp<IScrollerResponseDto<ReconciliationTurnoverDto>>>({
+      data: metadataToRequestParamsWithCustomSort(metaData).params,
+      method: 'POST',
+      url: `${STATEMENT_BANK_URL}/statement/turnover/reconciliation/page`,
     }).then(response => {
       if (response.data.error?.code) {
         throw new Error(response.data.error.message);

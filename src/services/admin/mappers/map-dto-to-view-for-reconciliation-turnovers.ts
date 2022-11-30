@@ -10,9 +10,9 @@ import { formatAccountCode } from '@platform/tools/localization';
  * @param reconciliationTurnovers - Список сверки остатков/оборотов.
  */
 export const mapDtoToViewForReconciliationTurnovers = (reconciliationTurnovers: ReconciliationTurnoverDto[]): ReconciliationTurnoverRow[] =>
-  reconciliationTurnovers.map(({ accountNumber, operationDate, reconciliationDate, ...rest }) => ({
+  reconciliationTurnovers.map(({ accountNumber, operationDate, reconciliationTime, ...rest }) => ({
     ...rest,
     accountNumber: formatAccountCode(accountNumber),
     operationDate: formatDateTime(operationDate, { keepLocalTime: true, format: DATE_FORMAT }),
-    reconciliationDate: getDateAndTime(reconciliationDate),
+    reconciliationDate: getDateAndTime(reconciliationTime),
   }));

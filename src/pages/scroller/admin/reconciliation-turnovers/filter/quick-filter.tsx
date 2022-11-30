@@ -19,9 +19,11 @@ export const QuickFilter: FC = () => {
   const accountOptions = useMemo(() => accounts.map(getAccountOption), [accounts]);
   const selectedAccountOptions = useMemo(() => selectedAccounts.map(getAccountOption), [selectedAccounts]);
 
-  const { values } = useFormState<FilterValues>();
+  const {
+    values: { dateFrom, dateTo, accountId, status },
+  } = useFormState<FilterValues>();
 
-  useSubmitScrollerFilter<FilterValues>({ submitDep: values });
+  useSubmitScrollerFilter<FilterValues>({ submitDep: { dateFrom, dateTo, accountId, status } });
 
   return (
     <Pattern gap={'MD'}>

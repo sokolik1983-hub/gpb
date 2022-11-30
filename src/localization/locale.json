@@ -86,17 +86,26 @@
   "admin.turnoverReconciliationRecordSource.changingSetOfEntries": {
     "ru": "Пересчет дня в связи с изменением набора проводок"
   },
-  "admin.turnoverReconciliationRecordSource.changingSetOfEntriesOfPrevPeriod": {
-    "ru": "Пересчет дня в связи с изменением набора проводок предыдущего периода"
+  "admin.turnoverReconciliationRecordSource.dboContract": {
+    "ru": "Подключение счета к ДБО"
   },
-  "admin.turnoverReconciliationStatus.difference": {
-    "ru": "Есть расхождения"
-  },
-  "admin.turnoverReconciliationStatus.notAvailable": {
+  "admin.turnoverReconciliationStatus.none": {
     "ru": "Сверка не проводилась"
   },
-  "admin.turnoverReconciliationStatus.noDifference": {
+  "admin.turnoverReconciliationStatus.noTurnoversFound": {
+    "ru": "Отсутствуют обороты за прошлую дату"
+  },
+  "admin.turnoverReconciliationStatus.success": {
     "ru": "Расхождений нет"
+  },
+  "admin.turnoverReconciliationStatus.failure": {
+    "ru": "Есть расхождения"
+  },
+  "admin.turnoverReconciliationStatus.underRepair": {
+    "ru": "Выполняется ремонт"
+  },
+  "admin.turnoverReconciliationStatus.repairFailure": {
+    "ru": "Ошибки ремонта"
   },
   "scroller.tags.labels.resetAll": {
     "ru": "Сбросить всё"

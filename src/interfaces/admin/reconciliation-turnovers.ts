@@ -1,3 +1,4 @@
+import type { RECORD_SOURCE } from 'interfaces/admin/record-source';
 import type { IBaseEntity } from '@platform/services/admin';
 
 /** Дто ответа сервера по сверке остатков/оборотов. */
@@ -13,19 +14,19 @@ export interface ReconciliationTurnoverDto extends IBaseEntity {
   /** Исходящий остаток. */
   outgoingBalance: number;
   /** Дата сверки. */
-  reconciliationDate: string;
+  reconciliationTime: string;
   /** Источник записи. */
-  recordSource: string;
+  source: RECORD_SOURCE;
   /** Статус сверки. */
   status: string;
   /** Обороты по кредиту (Приход). */
-  turnoverCredit: number;
+  turnoverByCredit: number;
   /** Обороты по дебету (Расход). */
-  turnoverDebit: number;
+  turnoverByDebit: number;
 }
 
 /** Сверка остатков/оборотов в строке таблицы. */
-export interface ReconciliationTurnoverRow extends Omit<ReconciliationTurnoverDto, 'reconciliationDate'> {
+export interface ReconciliationTurnoverRow extends Omit<ReconciliationTurnoverDto, 'reconciliationTime'> {
   /** Дата сверки. */
   reconciliationDate: {
     /** Дата. */

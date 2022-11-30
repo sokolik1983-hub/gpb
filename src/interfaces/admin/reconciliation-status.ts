@@ -1,9 +1,15 @@
 /**	Статус сверки. */
 export enum RECONCILIATION_STATUS {
-  /** Есть расхождения. */
-  DIFFERENCE = 'DIFFERENCE',
   /** Сверка не проводилась. */
-  NOT_AVAILABLE = 'NOT_AVAILABLE',
+  NONE = 'NONE',
+  /** Отсутствуют обороты за прошлую дату. */
+  NO_TURNOVER_FOUND = 'NO_TURNOVER_FOUND',
   /** Расхождений нет. */
-  NO_DIFFERENCE = 'NO_DIFFERENCE',
+  SUCCESS = 'SUCCESS',
+  /** Есть расхождения. */
+  FAILURE = 'FAILURE',
+  /** Выполняется ремонт. */
+  UNDER_REPAIR = 'UNDER_REPAIR',
+  /** Ошибки ремонта. */
+  REPAIR_FAILURE = 'REPAIR_FAILED',
 }

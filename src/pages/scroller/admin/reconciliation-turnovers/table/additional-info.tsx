@@ -10,7 +10,7 @@ type ValueState = 'negative' | 'positive' | 'unsigned';
 
 /** Конфиг структурированного вывода дополнительной информации сверки остатков/оборотов. */
 const config: Record<
-  keyof Pick<ReconciliationTurnoverRow, 'incomingBalance' | 'outgoingBalance' | 'turnoverCredit' | 'turnoverDebit'>,
+  keyof Pick<ReconciliationTurnoverRow, 'incomingBalance' | 'outgoingBalance' | 'turnoverByCredit' | 'turnoverByDebit'>,
   { fillCell: FILL; header: string; valueState: ValueState }
 > = {
   incomingBalance: {
@@ -18,12 +18,12 @@ const config: Record<
     header: locale.admin.reconciliationTurnoversScroller.table.header.incomingBalance,
     valueState: 'unsigned',
   },
-  turnoverDebit: {
+  turnoverByDebit: {
     fillCell: FILL.CRITIC,
     header: locale.admin.reconciliationTurnoversScroller.table.header.turnoverDebit,
     valueState: 'negative',
   },
-  turnoverCredit: {
+  turnoverByCredit: {
     fillCell: FILL.SUCCESS,
     header: locale.admin.reconciliationTurnoversScroller.table.header.turnoverCredit,
     valueState: 'positive',
