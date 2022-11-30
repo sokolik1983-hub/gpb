@@ -48,7 +48,7 @@ const EXPORT_STATEMENT: IExtendedIActionWithAuth = {
   action: exportExistingStatement,
   authorities: [],
   dataAction: DATA_ACTION.EXPORT,
-  icon: Icons.Export,
+  icon: Icons.Download,
   label: locale.admin.statementScroller.action.exportStatement,
   name: ACTION_NAME.EXPORT_STATEMENT,
 };
