@@ -106,7 +106,7 @@ export const statementService = {
     }).then(x => x.data.data);
   },
   /** Получение страницы бухгалтерских проводок. */
-  getTransactionsPage: (metaData: IMetaData): Promise<ScrollerResponseDto<BankAccountingEntryCard>> => {
+  getTransactionsPage: (metaData: IMetaData): Promise<ICollectionResponse<BankAccountingEntryCard>> => {
     const { params } = metadataToRequestParams(metaData);
     const { multiSort, ...rest } = params;
 
@@ -119,7 +119,10 @@ export const statementService = {
         throw new Error(response.data.error.message);
       }
 
-      return response.data.data;
+      return {
+        data: response.data.data.page,
+        total: response.data.data.size,
+      };
     });
   },
   /** Получить сущность "Запрос выписки". */
