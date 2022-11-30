@@ -39,19 +39,19 @@ export const SummaryRow: React.FC<IExpandedRowComponentProps<TurnoverCard>> = ({
         </Pattern.Span>
         <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverDebit}</Typography.Text>
-          <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(turnoverByCredit), currencyCode })}</Typography.P>
+          <Typography.P fill="CRITIC">{locale.moneyString.negative({ amount: String(turnoverByDebit), currencyCode })}</Typography.P>
           <Typography.P className={css.negative} fill="CRITIC">
             {locale.moneyString.negative({
-              amount: String(turnoverByCreditInNationalCurrency),
+              amount: String(turnoverByDebitInNationalCurrency),
               currencyCode: RUB_CURRENCY,
             })}
           </Typography.P>
         </Pattern.Span>
         <Pattern.Span size={2}>
           <Typography.Text className={css.item}>{locale.admin.turnoverScroller.aggregateRow.turnoverCredit}</Typography.Text>
-          <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(turnoverByDebit), currencyCode })}</Typography.P>
+          <Typography.P fill="SUCCESS">{locale.moneyString.positive({ amount: String(turnoverByCredit), currencyCode })}</Typography.P>
           <Typography.P className={css.positive} fill="SUCCESS">
-            {locale.moneyString.positive({ amount: String(turnoverByDebitInNationalCurrency), currencyCode: RUB_CURRENCY })}
+            {locale.moneyString.positive({ amount: String(turnoverByCreditInNationalCurrency), currencyCode: RUB_CURRENCY })}
           </Typography.P>
         </Pattern.Span>
         <Pattern.Span size={2}>
