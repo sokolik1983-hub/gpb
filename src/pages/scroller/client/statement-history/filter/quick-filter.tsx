@@ -38,12 +38,6 @@ export const QuickFilter: FC<QuickFilterPanelProps> = ({ applyMixValuesFormAndSt
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [accountIds, dateFrom, dateTo, valid]);
 
-  useEffect(() => {
-    // Устанавливает окончательное значение фильтров и тэгов, после того как с сервера будут получены счета.
-    void submit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [accounts]);
-
   return (
     <Pattern>
       <Pattern.Span size={7}>
