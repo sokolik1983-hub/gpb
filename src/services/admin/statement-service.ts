@@ -155,12 +155,25 @@ export const statementService = {
       url: `${STATEMENT_REQUEST_URL}/page`,
     }).then(({ data }) => getStatementList(data)),
   /** Возвращает список связанных запросов. */
-  getRelatedQueryList: (metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> =>
-    request<IServerDataResp<IScrollerResponseDto<StatementHistoryResponseDto>>>({
-      data: metadataToRequestParams(metaData),
-      url: `${STATEMENT_REQUEST_URL}/page`,
+  getRelatedQueryList: (id: string, metaData: IMetaData): Promise<ICollectionResponse<StatementHistoryRow>> => {
+    const {
+      params: { filter, ...rest },
+    } = metadataToRequestParams(metaData);
+
+    return request<IServerDataResp<IScrollerResponseDto<StatementHistoryResponseDto>>>({
+      data: {
+        params: {
+          ...rest,
+          filter: {
+            bankStatementRequestFilter: filter,
+            statementRequestId: id,
+          },
+        },
+      },
+      url: `${STATEMENT_REQUEST_URL}/related-page`,
       method: 'POST',
-    }).then(({ data }) => getStatementList(data)),
+    }).then(({ data }) => getStatementList(data));
+  },
   /** Генерация ПФ Список запросов выписки. */
   generateStatementsReport: ({
     dateFrom,

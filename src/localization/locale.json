@@ -527,6 +527,9 @@
   "admin.statementScroller.action.viewModifiedTransactions": {
     "ru": "Просмотр удаленных/добавленных проводок"
   },
+  "admin.statementScroller.action.viewRelatedQueries": {
+    "ru": "Просмотр связанных запросов"
+  },
   "admin.statementScroller.action.viewTransactions": {
     "ru": "Просмотреть выписку"
   },

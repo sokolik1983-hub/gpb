@@ -19,7 +19,7 @@ export const ADMIN_STREAM_URL = {
   /** Скроллер истории запросов выписок. */
   STATEMENT_HISTORY: '/account-statement/history',
   /** Скроллер связанных запросов. */
-  RELATED_QUERIES: '/account-statement/related-queries',
+  RELATED_QUERIES: '/account-statement/:id/related-queries',
   /** Скроллер остатков и оборотов. */
   STATEMENT_TURNOVER: '/account-statement/turnover',
   /** Скроллер технических работ. */

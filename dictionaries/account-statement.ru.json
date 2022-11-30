@@ -171,6 +171,7 @@
   "admin.statementScroller.action.repeatStatement": "Повторить выписку",
   "admin.statementScroller.action.exportStatement": "Экспорт выписки",
   "admin.statementScroller.action.viewModifiedTransactions": "Просмотр удаленных/добавленных проводок",
+  "admin.statementScroller.action.viewRelatedQueries": "Просмотр связанных запросов",
   "admin.statementScroller.action.viewTransactions": "Просмотреть выписку",
   "admin.statementScroller.action.viewQueryParams": "Просмотреть параметры запроса",
   "admin.statementScroller.footer.selected": "Выбрано:",

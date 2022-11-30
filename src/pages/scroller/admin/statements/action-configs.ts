@@ -7,6 +7,7 @@ import {
   viewChangedEntriesScroller,
   exportExistingStatement,
 } from 'actions/admin';
+import { viewRelatedQueriesScroller } from 'actions/admin/view-related-queries-scroller';
 import type { IExtendedIActionWithAuth } from 'interfaces';
 import { DATA_ACTION } from 'interfaces/data-action';
 import { locale } from 'localization';
@@ -70,6 +71,15 @@ export const VIEW_MODIFIED_TRANSACTIONS: IExtendedIActionWithAuth = {
   name: ACTION_NAME.VIEW_MODIFIED_TRANSACTIONS,
 };
 
+/** Экшн просмотра измененных проводок. */
+export const VIEW_RELATED_QUERIES: IExtendedIActionWithAuth = {
+  authorities: [],
+  action: viewRelatedQueriesScroller,
+  icon: ServiceIcons.EyeOpened,
+  label: locale.admin.statementScroller.action.viewRelatedQueries,
+  name: ACTION_NAME.VIEW_MODIFIED_TRANSACTIONS,
+};
+
 /** Экшн просмотра выписки (проводок). */
 const VIEW_TRANSACTIONS: IExtendedIActionWithAuth = {
   authorities: [],
@@ -92,7 +102,13 @@ const VIEW_STATEMENT_REQUEST_PARAMS: IExtendedIActionWithAuth = {
 export const FOOTER_ACTIONS = [EXPORT_STATEMENTS_HISTORY];
 
 /** Экшены выписки строки скроллера. */
-export const ROW_ACTIONS = [EXPORT_STATEMENT, VIEW_STATEMENT_REQUEST_PARAMS, VIEW_TRANSACTIONS, VIEW_MODIFIED_TRANSACTIONS];
+export const ROW_ACTIONS = [
+  EXPORT_STATEMENT,
+  VIEW_STATEMENT_REQUEST_PARAMS,
+  VIEW_TRANSACTIONS,
+  VIEW_MODIFIED_TRANSACTIONS,
+  VIEW_RELATED_QUERIES,
+];
 
 /** Экшены в заголовке скроллера. */
 export const HEADER_ACTIONS = [EXPORT_STATEMENTS_HISTORY, CREATE_STATEMENT];
