@@ -10,6 +10,8 @@ interface UseDataTableRequest<R> {
   apiMethod(metaData: IMetaData): Promise<ICollectionResponse<R>>;
   /** Значения формы фильтрации. */
   filter: IFilters;
+  /** Признак, что необходимо вернуть пустые данные. */
+  returnEmptyData?: boolean;
 }
 
 /** Выходные данные хука useDataTable. */
@@ -27,7 +29,7 @@ interface UseDataTableResponse<R> {
 }
 
 /** Хук для таблиц скроллеров. */
-export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): UseDataTableResponse<R> => {
+export const useDataTable = <R>({ apiMethod, filter, returnEmptyData }: UseDataTableRequest<R>): UseDataTableResponse<R> => {
   const [initialed, setInitialed] = useState(false);
   const [items, setItems] = useState<R[]>([]);
   const [loading, setLoading] = useState(false);
@@ -43,8 +45,12 @@ export const useDataTable = <R>({ apiMethod, filter }: UseDataTableRequest<R>): 
 
   /** Метод запроса данных с сервера. */
   const fetch = useCallback(
-    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<any>> => {
+    async ({ page: pageIndex, multiSort, pageSize }: IFetchDataParams): Promise<IFetchDataResponse<R>> => {
       try {
+        if (returnEmptyData) {
+          return { rows: [], pageCount: 0 };
+        }
+
         setLoading(true);
 
         const metaData: IMetaData = {
