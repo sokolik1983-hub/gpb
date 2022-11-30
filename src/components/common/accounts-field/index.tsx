@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import React, { useMemo, useEffect, useCallback } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
-import { useForm } from 'react-final-form';
 import { noop, compareStrings } from 'utils/common';
 import { formatAccountCode } from '@platform/tools/localization';
 import type { OnChangeType } from '@platform/ui';
@@ -40,8 +39,6 @@ export interface IAccountsFieldProps {
 
 /** Селект выбора счетов. */
 export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeholder, onChange = noop, disabled }) => {
-  const { change, getFieldState } = useForm();
-
   const sortedOptions = useMemo(
     () => accounts.map(account => getAccountOption(account)).sort((a, b) => compareStrings(a.orgName, b.orgName)),
     [accounts]
@@ -67,19 +64,6 @@ export const AccountsField: FC<IAccountsFieldProps> = ({ name, accounts, placeho
     },
     [sortedOptions]
   );
-
-  useEffect(() => {
-    // Значение поля получается внутри хука, чтобы избежать циклического рендера
-    const { value = [] } = getFieldState(name) ?? {};
-
-    // При первоначальной загрузке, если ничего не выбрано, то выбираются все значения.
-    if (value.length === 0 && accounts.length > 0) {
-      change(
-        name,
-        accounts.map(item => item.id)
-      );
-    }
-  }, [accounts, change, getFieldState, name]);
 
   return (
     <Fields.MultiSelect
