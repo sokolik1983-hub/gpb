@@ -20,3 +20,4 @@ export const COMMON_STREAM_URL = {
 
 export * from './statuses';
 export * from './privilege';
+export * from './methods';

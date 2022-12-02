@@ -1,41 +1,82 @@
-import React from 'react';
-import { PageHeader } from 'components/common';
-import { SCHEDULE_ACTIONS } from 'interfaces/client';
-import { locale } from 'localization';
-import { COMMON_STREAM_URL } from 'stream-constants/client';
-import { useRedirect } from '@platform/services';
+import React, { useMemo } from 'react';
+import { ContentLoader, FilterLayout, ScrollerLoadingOverlay, ScrollerPageLayout } from 'components/common';
+import { FocusLock } from 'components/common/focus-lock';
+import { FocusNode, FocusTree } from 'components/common/focus-tree';
+import { useScheduleScrollerHeaderProps } from 'hooks/client';
+import { useScrollerPagination, useScrollerTabsProps } from 'hooks/common';
+import { ADDITIONAL_FORM_FIELDS, fields, QuickFilter, STORAGE_KEY, tagLabels } from 'pages/scroller/client/statement-history/filter';
+import { AdditionalFilter } from 'pages/scroller/client/statement-history/filter/additional-filter';
+import { TagsPanel } from 'pages/scroller/client/statement-history/filter/tags-panel';
+import { DEFAULT_SORTING } from 'pages/scroller/client/statement-history/history-scroller-context';
+import { DEFAULT_PAGINATION, QUICK_FILTER_HEIGHT } from 'stream-constants';
+import { COMMON_SCROLLER_NODE, HISTORY_SCROLLER_FILTER_NODE } from 'stream-constants/a11y-nodes';
 import { MainLayout } from '@platform/services/client';
-import { PrimaryButton, Horizon, Gap } from '@platform/ui';
+import { Line } from '@platform/ui';
+import { useGetStatementList } from './hooks/use-get-schedule-list';
+import { ScheduleScrollerContext } from './schedule-scroller-context';
+import type { IScheduleScrollerContext } from './schedule-scroller-context';
+import { Table } from './table/table';
 
 /**
- * [ВПР] ЭФ Клиента: реестр запросов на услугу Выписка по расписанию.
+ * [ВПР] ЭФ Клиента: заявки на выписку по расписанию.
  *
  * @see https://confluence.gboteam.ru/pages/viewpage.action?pageId=84446197
  * */
 export const ScheduleHistoryScrollerPage = () => {
-  const goBack = useRedirect(COMMON_STREAM_URL.MAINPAGE);
-  const createNewSchedule = useRedirect(COMMON_STREAM_URL.STATEMENT_SCHEDULE_NEW);
+  const sorting = DEFAULT_SORTING;
+  const tabsProps = useScrollerTabsProps();
+  const headerProps = useScheduleScrollerHeaderProps();
+
+  const { filterPanel, tagsPanel, filterValues, pagination } = useScrollerPagination({
+    fields,
+    labels: tagLabels,
+    storageKey: STORAGE_KEY,
+    defaultPagination: DEFAULT_PAGINATION,
+  });
+
+  const {
+    data: { data: statements, total: totalStatementsAmount },
+    isFetched: isStatementsFetched,
+    isFetching: isStatementsFetching,
+  } = useGetStatementList({ filters: filterValues, sorting, pagination });
+
+  const contextValue: IScheduleScrollerContext = useMemo(
+    () => ({
+      statements,
+      pagination,
+      isStatementsFetched,
+      totalStatementsAmount,
+    }),
+    [pagination, statements, totalStatementsAmount, isStatementsFetched]
+  );
 
   return (
-    <MainLayout>
-      <Gap.XL />
-      <Horizon>
-        <Gap.XL />
-        <Gap.XS />
-        <PageHeader
-          backButtonTitle={locale.client.breadcrumbs.toMainPage}
-          header={locale.client.scheduleHistoryScrollerPage.title}
-          onClick={goBack}
-        />
-        <Horizon.Spacer />
-        <PrimaryButton dataAction={SCHEDULE_ACTIONS.CREATE} onClick={createNewSchedule}>
-          {locale.client.buttons.createSchedule}
-        </PrimaryButton>
-        <Gap.XL />
-        <Gap.XS />
-      </Horizon>
-      <Gap.XL />
-    </MainLayout>
+    <ScheduleScrollerContext.Provider value={contextValue}>
+      <MainLayout>
+        <FocusLock>
+          <FocusTree treeId={COMMON_SCROLLER_NODE}>
+            <ScrollerPageLayout categoryTabs={tabsProps} headerProps={{ ...headerProps }} loading={isStatementsFetching}>
+              <FocusNode hidden nodeId={HISTORY_SCROLLER_FILTER_NODE} parentId={COMMON_SCROLLER_NODE}>
+                <ContentLoader height={QUICK_FILTER_HEIGHT} loading={isStatementsFetching}>
+                  <FilterLayout
+                    AdditionalFilter={AdditionalFilter}
+                    QuickFilter={QuickFilter}
+                    TagsPanel={TagsPanel}
+                    additionalFilterFields={ADDITIONAL_FORM_FIELDS}
+                    filterFields={fields}
+                    filterState={filterPanel}
+                    tagsState={tagsPanel}
+                  />
+                </ContentLoader>
+              </FocusNode>
+              {!isStatementsFetching && <Line fill="FAINT" />}
+              <Table />
+              {isStatementsFetching && <ScrollerLoadingOverlay />}
+            </ScrollerPageLayout>
+          </FocusTree>
+        </FocusLock>
+      </MainLayout>
+    </ScheduleScrollerContext.Provider>
   );
 };
 

@@ -17,4 +17,6 @@ export enum DATA_ACTION {
   REFUSE = 'refuse', // отказать в акцепте
   MORE = 'more', // ещё
   REPEAT_REQUEST = 'repeat-request', // Повторный запрос
+  VIEW = 'view', // Просмотреть
+  CANCEL = 'cancel', // Отключить услугу
 }
