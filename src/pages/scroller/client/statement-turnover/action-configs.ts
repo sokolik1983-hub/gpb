@@ -1,4 +1,5 @@
 import { createStatement } from 'actions/client';
+import { showScheduleRequestForm } from 'actions/client/show-schedule-request-form';
 import { showStatementRequestForm } from 'actions/client/show-statement-request-form';
 import { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
 import { locale } from 'localization';
@@ -11,6 +12,15 @@ export const CREATE_STATEMENT: IActionWithAuth = {
   action: showStatementRequestForm,
   authorities: [PRIVILEGE.STATEMENT_REQUEST],
   label: locale.action.labels.createStatement,
+  name: 'CREATE_STATEMENT',
+  icon: Icons.Statement,
+};
+
+/** Функция создания нового запроса выписки по расписанию. */
+export const CREATE_SCHEDULE_STATEMENT: IActionWithAuth = {
+  action: showScheduleRequestForm,
+  authorities: [PRIVILEGE.STATEMENT_REQUEST],
+  label: locale.action.labels.createScheduleStatement,
   name: 'CREATE_STATEMENT',
   icon: Icons.Statement,
 };
@@ -34,4 +44,4 @@ export const PRINT_ACTION: IActionWithAuth = {
 };
 
 /** Действия хэдера скроллера оборотов. */
-export const HEADER_ACTIONS = [CREATE_STATEMENT];
+export const HEADER_ACTIONS = [CREATE_SCHEDULE_STATEMENT, CREATE_STATEMENT];

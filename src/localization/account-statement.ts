@@ -57,6 +57,36 @@ export default {
 				return t('client.statementStatuses.canceled');
 			},
 		},
+		scheduleStatuses: {
+			/**
+			 * @ru
+			 * Подключено
+			 */
+			get active() {
+				return t('client.scheduleStatuses.active');
+			},
+			/**
+			 * @ru
+			 * В обработке
+			 */
+			get inWork() {
+				return t('client.scheduleStatuses.inWork');
+			},
+			/**
+			 * @ru
+			 * Отказано
+			 */
+			get denied() {
+				return t('client.scheduleStatuses.denied');
+			},
+			/**
+			 * @ru
+			 * Отключено
+			 */
+			get canceled() {
+				return t('client.scheduleStatuses.canceled');
+			},
+		},
 		scroller: {
 			/**
 			 * @ru
@@ -78,7 +108,7 @@ export default {
 		pages: {
 			/**
 			 * @ru
-			 * Реестр запросов на выписку по расписанию
+			 * Заявки на выписку по расписанию
 			 */
 			get historyTitle() {
 				return t('client.pages.historyTitle');
@@ -140,7 +170,7 @@ export default {
 		scheduleNewPage: {
 			/**
 			 * @ru
-			 * Запрос на выписку по расписанию
+			 * Заявка на подключение услуги выписка по расписанию
 			 */
 			get title() {
 				return t('client.scheduleNewPage.title');
@@ -149,10 +179,116 @@ export default {
 		scheduleHistoryScrollerPage: {
 			/**
 			 * @ru
-			 * Реестр запросов на выписку по расписанию
+			 * Заявки на выписку по расписанию
 			 */
 			get title() {
 				return t('client.scheduleHistoryScrollerPage.title');
+			},
+		},
+		scheduleScroller: {
+			columns: {
+				/**
+				 * @ru
+				 * Кнопки
+				 */
+				get actions() {
+					return t('client.scheduleScroller.columns.actions');
+				},
+				/**
+				 * @ru
+				 * Почтовые ящики
+				 */
+				get emails() {
+					return t('client.scheduleScroller.columns.emails');
+				},
+				/**
+				 * @ru
+				 * Способ
+				 */
+				get scheduleMethod() {
+					return t('client.scheduleScroller.columns.scheduleMethod');
+				},
+				/**
+				 * @ru
+				 * Время
+				 */
+				get scheduleTime() {
+					return t('client.scheduleScroller.columns.scheduleTime');
+				},
+				/**
+				 * @ru
+				 * Статус
+				 */
+				get status() {
+					return t('client.scheduleScroller.columns.status');
+				},
+				/**
+				 * @ru
+				 * Формат
+				 */
+				get statementFormat() {
+					return t('client.scheduleScroller.columns.statementFormat');
+				},
+				/**
+				 * @ru
+				 * Период
+				 */
+				get periodType() {
+					return t('client.scheduleScroller.columns.periodType');
+				},
+				/**
+				 * @ru
+				 * Счёт
+				 */
+				get accountsIds() {
+					return t('client.scheduleScroller.columns.accountsIds');
+				},
+				/**
+				 * @ru
+				 * Дата запроса
+				 */
+				get createdAt() {
+					return t('client.scheduleScroller.columns.createdAt');
+				},
+			},
+		},
+		scheduleMethods: {
+			/**
+			 * @ru
+			 * Сохранено
+			 */
+			get save() {
+				return t('client.scheduleMethods.save');
+			},
+			/**
+			 * @ru
+			 * Электронная почта
+			 */
+			get email() {
+				return t('client.scheduleMethods.email');
+			},
+		},
+		actions: {
+			/**
+			 * @ru
+			 * Просмотреть
+			 */
+			get view() {
+				return t('client.actions.view');
+			},
+			/**
+			 * @ru
+			 * Распечатать
+			 */
+			get print() {
+				return t('client.actions.print');
+			},
+			/**
+			 * @ru
+			 * Отключить услугу
+			 */
+			get cancel() {
+				return t('client.actions.cancel');
 			},
 		},
 	},
@@ -1900,6 +2036,13 @@ export default {
 				get history() {
 					return t('scroller.navTabs.labels.history');
 				},
+				/**
+				 * @ru
+				 * Заявки на выписку по расписанию
+				 */
+				get scheduleHistory() {
+					return t('scroller.navTabs.labels.scheduleHistory');
+				},
 			},
 		},
 		filter: {
@@ -2601,6 +2744,13 @@ export default {
 				},
 				/**
 				 * @ru
+				 * За последнюю неделю
+				 */
+				get lastWeek() {
+					return t('historyScroller.period.labels.lastWeek');
+				},
+				/**
+				 * @ru
 				 * За текущий месяц
 				 */
 				get currentMonth() {
@@ -2986,6 +3136,13 @@ export default {
 			 */
 			get createStatement() {
 				return t('action.labels.createStatement');
+			},
+			/**
+			 * @ru
+			 * Настроить расписание
+			 */
+			get createScheduleStatement() {
+				return t('action.labels.createScheduleStatement');
 			},
 		},
 	},
@@ -3431,6 +3588,15 @@ export default {
 			 */
 			get Excel() {
 				return t('common.formats.Excel');
+			},
+		},
+		testData: {
+			/**
+			 * @ru
+			 * ООО "РогоКопытинский Комбинат"
+			 */
+			get organization() {
+				return t('common.testData.organization');
 			},
 		},
 		footer: {

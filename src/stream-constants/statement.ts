@@ -1,4 +1,4 @@
-import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT } from 'interfaces';
+import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT, SCHEDULE_DATE_PERIODS } from 'interfaces';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 
@@ -25,6 +25,17 @@ export const DATE_PERIOD_SCROLLER_LABELS = {
   [DATE_PERIODS.CURRENT_MONTH]: locale.historyScroller.period.labels.currentMonth,
   [DATE_PERIODS.LAST_MONTH]: locale.historyScroller.period.labels.lastMonth,
   [DATE_PERIODS.PREVIOUS_QUARTER]: locale.historyScroller.period.labels.previousQuarter,
+};
+
+/** Названия периодов для отображения в таблице скроллера реестра выписок по расписанию. */
+export const DATE_PERIOD_SCHEDULE_SCROLLER_LABELS = {
+  [SCHEDULE_DATE_PERIODS.YESTERDAY]: locale.historyScroller.period.labels.yesterday,
+  [SCHEDULE_DATE_PERIODS.TODAY]: locale.historyScroller.period.labels.today,
+  [SCHEDULE_DATE_PERIODS.LAST_WEEK]: locale.historyScroller.period.labels.lastWeek,
+  [SCHEDULE_DATE_PERIODS.LAST_3_DAYS]: locale.historyScroller.period.labels.last3Days,
+  [SCHEDULE_DATE_PERIODS.CURRENT_MONTH]: locale.historyScroller.period.labels.currentMonth,
+  [SCHEDULE_DATE_PERIODS.LAST_MONTH]: locale.historyScroller.period.labels.lastMonth,
+  [SCHEDULE_DATE_PERIODS.PREVIOUS_QUARTER]: locale.historyScroller.period.labels.previousQuarter,
 };
 
 /** Наименования форматов выписки. */

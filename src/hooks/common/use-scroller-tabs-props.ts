@@ -27,6 +27,7 @@ export const useScrollerTabsProps = (): ICategoryTabsProps => {
     categories: [
       { label: locale.scroller.navTabs.labels.turnover, value: COMMON_STREAM_URL.STATEMENT_TURNOVER },
       { label: locale.scroller.navTabs.labels.history, value: COMMON_STREAM_URL.STATEMENT_HISTORY },
+      { label: locale.scroller.navTabs.labels.scheduleHistory, value: COMMON_STREAM_URL.STATEMENT_SCHEDULE_HISTORY },
     ],
     onCategoryChange,
     showCounts: false,

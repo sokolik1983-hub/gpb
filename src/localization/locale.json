@@ -20,6 +20,18 @@
   "client.statementStatuses.canceled": {
     "ru": "Отменен"
   },
+  "client.scheduleStatuses.active": {
+    "ru": "Подключено"
+  },
+  "client.scheduleStatuses.inWork": {
+    "ru": "В обработке"
+  },
+  "client.scheduleStatuses.denied": {
+    "ru": "Отказано"
+  },
+  "client.scheduleStatuses.canceled": {
+    "ru": "Отключено"
+  },
   "admin.requestStatus.new": {
     "ru": "Запрос сформирован"
   },
@@ -118,6 +130,9 @@
   },
   "scroller.navTabs.labels.history": {
     "ru": "История запросов"
+  },
+  "scroller.navTabs.labels.scheduleHistory": {
+    "ru": "Заявки на выписку по расписанию"
   },
   "scroller.filter.buttons.expand": {
     "ru": "Показать фильтры"
@@ -409,6 +424,9 @@
   },
   "historyScroller.period.labels.last3Days": {
     "ru": "За последние 3 дня"
+  },
+  "historyScroller.period.labels.lastWeek": {
+    "ru": "За последнюю неделю"
   },
   "historyScroller.period.labels.currentMonth": {
     "ru": "За текущий месяц"
@@ -838,6 +856,9 @@
   },
   "action.labels.createStatement": {
     "ru": "Запросить выписку"
+  },
+  "action.labels.createScheduleStatement": {
+    "ru": "Настроить расписание"
   },
   "accountType.labels.checking": {
     "ru": "Расчётный"
@@ -1379,6 +1400,9 @@
   "common.formats.PDF": {
     "ru": "PDF"
   },
+  "common.testData.organization": {
+    "ru": "ООО \"РогоКопытинский Комбинат\""
+  },
   "common.formats.Excel": {
     "ru": "Excel"
   },
@@ -1524,7 +1548,7 @@
     "ru": "Счёт клиента"
   },
   "client.pages.historyTitle": {
-    "ru": "Реестр запросов на выписку по расписанию"
+    "ru": "Заявки на выписку по расписанию"
   },
   "client.pages.newScheduleTitle": {
     "ru": "Запрос на выписку по расписанию"
@@ -1548,9 +1572,51 @@
     "ru": "К запросу"
   },
   "client.scheduleNewPage.title": {
-    "ru": "Запрос на выписку по расписанию"
+    "ru": "Заявка на подключение услуги выписка по расписанию"
   },
   "client.scheduleHistoryScrollerPage.title": {
-    "ru": "Реестр запросов на выписку по расписанию"
+    "ru": "Заявки на выписку по расписанию"
+  },
+  "client.scheduleScroller.columns.actions": {
+    "ru": "Кнопки"
+  },
+  "client.scheduleScroller.columns.emails": {
+    "ru": "Почтовые ящики"
+  },
+  "client.scheduleScroller.columns.scheduleMethod": {
+    "ru": "Способ"
+  },
+  "client.scheduleScroller.columns.scheduleTime": {
+    "ru": "Время"
+  },
+  "client.scheduleScroller.columns.status": {
+    "ru": "Статус"
+  },
+  "client.scheduleScroller.columns.statementFormat": {
+    "ru": "Формат"
+  },
+  "client.scheduleScroller.columns.periodType": {
+    "ru": "Период"
+  },
+  "client.scheduleScroller.columns.accountsIds": {
+    "ru": "Счёт"
+  },
+  "client.scheduleScroller.columns.createdAt": {
+    "ru": "Дата запроса"
+  },
+  "client.scheduleMethods.save": {
+    "ru": "Сохранено"
+  },
+  "client.scheduleMethods.email": {
+    "ru": "Электронная почта"
+  },
+  "client.actions.view": {
+    "ru": "Просмотреть"
+  },
+  "client.actions.print": {
+    "ru": "Распечатать"
+  },
+  "client.actions.cancel": {
+    "ru": "Отключить услугу"
   }
 }

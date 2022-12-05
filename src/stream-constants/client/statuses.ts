@@ -1,4 +1,4 @@
-import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
+import { STATEMENT_REQUEST_STATUSES, SCHEDULE_REQUEST_STATUSES } from 'interfaces';
 import { DOCUMENT_STATUS_TYPE } from '@platform/ui';
 
 /** Цвета клиентских статусов. */
@@ -15,4 +15,16 @@ export const STATUS_COLOR = {
   [STATEMENT_REQUEST_STATUSES.EXECUTED]: DOCUMENT_STATUS_TYPE.SUCCESS,
   /** Отклонен. */
   [STATEMENT_REQUEST_STATUSES.DENIED]: DOCUMENT_STATUS_TYPE.ERROR,
+};
+
+/** Цвета клиентских статусов для реестра выписок по расписанию. */
+export const SCHEDULE_STATUS_COLOR = {
+  /** Подключено. */
+  [SCHEDULE_REQUEST_STATUSES.ACTIVE]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** В обработке. */
+  [SCHEDULE_REQUEST_STATUSES.IN_WORK]: DOCUMENT_STATUS_TYPE.INPROGRESS,
+  /** Отказано. */
+  [SCHEDULE_REQUEST_STATUSES.DENIED]: DOCUMENT_STATUS_TYPE.SUCCESS,
+  /** Отключено. */
+  [SCHEDULE_REQUEST_STATUSES.CANCELED]: DOCUMENT_STATUS_TYPE.ERROR,
 };

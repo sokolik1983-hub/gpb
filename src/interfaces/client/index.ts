@@ -5,3 +5,4 @@ export * from './statement';
 export * from './statement-params-use-cases';
 export * from './quick-filter-panel';
 export * from './schedule-action';
+export * from './schedule-history-row';

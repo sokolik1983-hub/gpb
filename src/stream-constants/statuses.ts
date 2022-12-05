@@ -1,4 +1,4 @@
-import { STATEMENT_REQUEST_STATUSES } from 'interfaces';
+import { STATEMENT_REQUEST_STATUSES, SCHEDULE_REQUEST_STATUSES } from 'interfaces';
 import { locale } from 'localization';
 
 /** Лейблы статусов запроса выписки. */
@@ -17,6 +17,18 @@ export const STATEMENT_REQUEST_STATUS_FOR_CLIENT_LABEL = {
   [STATEMENT_REQUEST_STATUSES.DENIED]: locale.client.statementStatuses.denied,
   /** Отменен. */
   [STATEMENT_REQUEST_STATUSES.CANCELED]: locale.client.statementStatuses.canceled,
+};
+
+/** Лейблы статусов запроса выписки по расписанию. */
+export const STATEMENT_REQUEST_STATUS_FOR_SCHEDULE = {
+  /** Запрос подключён. */
+  [SCHEDULE_REQUEST_STATUSES.ACTIVE]: locale.client.scheduleStatuses.active,
+  /** Запрос находится в обработке. */
+  [SCHEDULE_REQUEST_STATUSES.IN_WORK]: locale.client.scheduleStatuses.inWork,
+  /** В запросе отказано. */
+  [SCHEDULE_REQUEST_STATUSES.DENIED]: locale.client.scheduleStatuses.denied,
+  /** Запрос отключён. */
+  [SCHEDULE_REQUEST_STATUSES.CANCELED]: locale.client.scheduleStatuses.canceled,
 };
 
 /** Соответствие статусов запроса выписки для отображения. */

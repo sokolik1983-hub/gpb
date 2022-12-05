@@ -5,7 +5,7 @@ import type {
   FieldsRequired,
   IExpandedScrollerResponceDto,
 } from 'interfaces';
-import type { IStatementHistoryRow, IStatementTransactionRow, IStatement } from 'interfaces/client';
+import type { IStatementHistoryRow, IStatementTransactionRow, IStatement, IStatementScheduleRow } from 'interfaces/client';
 import type { Counterparty } from 'interfaces/common';
 import type {
   IGetDatePeriodResponseDto,
@@ -25,9 +25,12 @@ import type {
 } from 'interfaces/dto';
 import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { StatementAttachmentStatusDto } from 'interfaces/dto/statement-attachment-status-dto';
+import { scheduleStatements } from 'mocks/shedule-statements';
 import type { ICollectionResponse, IServerResp } from '@platform/services';
-import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG } from '@platform/services';
+import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
+import { formatDateTime } from '@platform/tools/date-time';
+import { formatAccountCode } from '@platform/tools/localization';
 
 /** Базовый URL сервиса "Выписки". */
 const BASE_URL = '/api/statement-client';
@@ -72,6 +75,24 @@ export const statementService = {
       data: metadataToRequestParams(metaData),
     }).then(res => ({
       data: res.data.data.page,
+      total: res.data.data.size,
+    })),
+  /** Возвращает список выписок для скроллера выписок по расписанию. */
+  getScheduleList: (metaData: IMetaData): Promise<any> =>
+    request<IServerDataResp<IScrollerResponseDto<IStatementScheduleRow>>>({
+      url: `${STATEMENT_REQUEST_URL}/get-page`,
+      method: 'POST',
+      data: metadataToRequestParams(metaData),
+    }).then(res => ({
+      data: scheduleStatements.data.map(item => ({
+        ...item,
+        createdAt: formatDateTime(item.createdAt, {
+          // форматируем дату для отображения в таблице
+          keepLocalTime: true,
+          format: DATE_TIME_FORMAT_WITHOUT_SEC,
+        }).split(' ')[0],
+        accountNumbers: item.accountNumbers.map(el => formatAccountCode(el)), // форматируем номера аккаунтов
+      })),
       total: res.data.data.size,
     })),
   /** Возвращает список контрагентов. */

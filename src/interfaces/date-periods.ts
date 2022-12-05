@@ -19,3 +19,23 @@ export enum DATE_PERIODS {
   /** Предыдущий квартал. */
   PREVIOUS_QUARTER = 'PREVQUARTER',
 }
+/**
+ * Классификатор типов периодов заявок на выписку по расписанию.
+ *
+ */
+export enum SCHEDULE_DATE_PERIODS {
+  /** Вчера. */
+  YESTERDAY = 'YESTERDAY',
+  /** Сегодня. */
+  TODAY = 'TODAY',
+  /** Последние 3 дня. */
+  LAST_3_DAYS = 'LAST3DAYS',
+  /** Последнюю неделю. */
+  LAST_WEEK = 'LAST_WEEK',
+  /** Текущий месяц. */
+  CURRENT_MONTH = 'CURMONTH',
+  /** Прошлый месяц. */
+  LAST_MONTH = 'LASTMONTH',
+  /** Предыдущий квартал. */
+  PREVIOUS_QUARTER = 'PREVQUARTER',
+}
