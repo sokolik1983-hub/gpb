@@ -5,7 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'period': string;
+    'emailsType': string;
   }
 }
 

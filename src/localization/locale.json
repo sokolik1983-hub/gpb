@@ -767,6 +767,9 @@
   "turnoverScroller.groupInfo.organizations": {
     "ru": "Организации"
   },
+  "turnoverScroller.groupInfo.emails": {
+    "ru": "Адрес электронной почты"
+  },
   "turnoverScroller.groupInfo.currencies": {
     "ru": "Валюты"
   },
@@ -890,6 +893,15 @@
   "common.period.label": {
     "ru": "Период"
   },
+  "common.time.label": {
+    "ru": "Время отправки сформированного файла"
+  },
+  "common.organizations.label": {
+    "ru": "Организация"
+  },
+  "common.method.label": {
+    "ru": "Способ получения выписки"
+  },
   "common.periodStart.label": {
     "ru": "Начало периода"
   },
@@ -1006,6 +1018,9 @@
   },
   "form.buttons.cancel.label": {
     "ru": "Отменить"
+  },
+  "form.buttons.further.label": {
+    "ru": "Далее"
   },
   "admin.statementRequestCard.pageTitle": {
     "ru": "Параметры запроса"
