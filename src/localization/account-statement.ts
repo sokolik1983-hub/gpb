@@ -2987,6 +2987,13 @@ export default {
 			},
 			/**
 			 * @ru
+			 * Адрес электронной почты
+			 */
+			get emails() {
+				return t('turnoverScroller.groupInfo.emails');
+			},
+			/**
+			 * @ru
 			 * Валюты
 			 */
 			get currencies() {
@@ -3252,6 +3259,15 @@ export default {
 					return t('form.buttons.cancel.label');
 				},
 			},
+			further: {
+				/**
+				 * @ru
+				 * Далее
+				 */
+				get label() {
+					return t('form.buttons.further.label');
+				},
+			},
 		},
 		tooltip: {
 			/**
@@ -3305,6 +3321,33 @@ export default {
 			 */
 			get label() {
 				return t('common.period.label');
+			},
+		},
+		time: {
+			/**
+			 * @ru
+			 * Время отправки сформированного файла
+			 */
+			get label() {
+				return t('common.time.label');
+			},
+		},
+		organizations: {
+			/**
+			 * @ru
+			 * Организация
+			 */
+			get label() {
+				return t('common.organizations.label');
+			},
+		},
+		method: {
+			/**
+			 * @ru
+			 * Способ получения выписки
+			 */
+			get label() {
+				return t('common.method.label');
 			},
 		},
 		periodStart: {

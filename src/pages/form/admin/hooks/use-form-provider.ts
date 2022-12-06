@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAccounts } from 'hooks/common/use-accounts';
+import { FORMAT } from 'interfaces/client/format';
 import type { ACTION } from 'interfaces/common';
-import { FORMAT } from 'interfaces/common/classificators/format';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';
 import { useFormState } from 'react-final-form';

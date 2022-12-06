@@ -8,6 +8,7 @@ declare namespace StylesScssModule {
     'additionalFilterWrapper': string;
     'filterWrapper': string;
     'footerWrapper': string;
+    'inputWidth': string;
     'linkFocusable': string;
     'toggleButtonWrapper': string;
     'wrapper': string;

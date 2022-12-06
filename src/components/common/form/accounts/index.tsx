@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import css from 'common.scss';
 import { AccountsField } from 'components/common';
 import { useSeparateAccountFiles } from 'components/common/form/common/use-separate-account-files';
 import { Row } from 'components/common/form/row';
@@ -12,7 +13,6 @@ import type { IFormState } from 'stream-constants/form';
 import { FORM_FIELDS } from 'stream-constants/form';
 import type { OnChangeType } from '@platform/ui';
 import { Box } from '@platform/ui';
-import css from './styles.scss';
 
 /** Свойства компонента счета. */
 interface AccountsProps {
@@ -55,7 +55,7 @@ export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
 
   return (
     <Row label={locale.common.accounts.label}>
-      <Box className={css.accounts}>
+      <Box className={css.inputWidth}>
         <AccountsField accounts={accounts} disabled={disabled} name={FORM_FIELDS.ACCOUNTS} onChange={onChangeAccounts} />
       </Box>
     </Row>
