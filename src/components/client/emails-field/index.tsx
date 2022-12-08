@@ -11,11 +11,11 @@ import { EmailOption } from './email-option';
  * Возвращает опцию для выпадающего списка селекта электронной почты.
  */
 const getEmailOption = (account: IGetAccountsResponseDto): IAccountOption => {
-  const { id, bankClient } = account;
+  const { bankClient } = account;
   const { emails } = bankClient;
 
   return {
-    value: id,
+    value: emails ? emails.toString() : '',
     label: emails ? emails.toString() : '',
   };
 };
@@ -46,7 +46,7 @@ export const EmailsField: FC<IAccountsFieldProps> = ({ name, accounts, disabled 
     if (value.length === 0 && accounts.length > 0) {
       change(
         name,
-        accounts.map(item => item.id)
+        accounts.map(item => (item.bankClient?.emails ? item.bankClient?.emails.toString() : ''))
       );
     }
   }, [accounts, change, getFieldState, name]);

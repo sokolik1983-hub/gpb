@@ -95,6 +95,18 @@ export const statementService = {
       })),
       total: res.data.data.size,
     })),
+  // .catch(() => ({
+  //     data: scheduleStatements.data.map(item => ({
+  //         ...item,
+  //         createdAt: formatDateTime(item.createdAt, {
+  //             // форматируем дату для отображения в таблице
+  //             keepLocalTime: true,
+  //             format: DATE_TIME_FORMAT_WITHOUT_SEC,
+  //         }).split(' ')[0],
+  //         accountNumbers: item.accountNumbers.map(el => formatAccountCode(el)), // форматируем номера аккаунтов
+  //     })),
+  //     total: '173',
+  // })),
   /** Возвращает список контрагентов. */
   getCounterparties: (id: string): Promise<Counterparty[]> =>
     request<IServerDataResp<Counterparty[]>>({

@@ -9,10 +9,10 @@ import { OrganizationOption } from './organization-option';
 
 /** * Возвращает данные об организации. */
 const getAccountOption = (account: IGetAccountsResponseDto): IAccountOption => {
-  const { id, bankClient } = account;
+  const { bankClient } = account;
 
   return {
-    value: id,
+    value: bankClient?.shortName || bankClient?.fullName,
     label: bankClient?.shortName || bankClient?.fullName,
   };
 };
@@ -43,7 +43,7 @@ export const OrganizationsField: FC<IAccountsFieldProps> = ({ name, accounts, di
     if (value.length === 0 && accounts.length > 0) {
       change(
         name,
-        accounts.map(item => item.id)
+        accounts.map(item => item.bankClient?.shortName || item.bankClient?.fullName)
       );
     }
   }, [accounts, change, getFieldState, name]);

@@ -1,6 +1,5 @@
 import type { FC } from 'react';
-import React, { useContext, useMemo } from 'react';
-import { executor } from 'actions/client';
+import React, { useContext } from 'react';
 import { ItemWithRestInPopUp } from 'components/common';
 import { StopPropagation } from 'components/common/stop-propagation';
 import { DATE_PERIODS } from 'interfaces';
@@ -11,12 +10,9 @@ import { HistoryScrollerContext } from 'pages/scroller/client/statement-history/
 import type { CellProps } from 'react-table';
 import { DATE_PERIOD_SCHEDULE_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS, STATEMENT_REQUEST_STATUS_FOR_SCHEDULE } from 'stream-constants';
 import { SCHEDULE_METHOD, SCHEDULE_STATUS_COLOR } from 'stream-constants/client';
-import { getActiveActionButtons } from 'utils/common';
 import { DATE_FORMAT } from '@platform/services';
-import { useAuth } from '@platform/services/client';
 import { formatDateTime } from '@platform/tools/date-time';
-import { Box, Horizon, RegularButton, Status as StatusMarker, Typography, Gap, WithDropDown, ServiceIcons } from '@platform/ui';
-import { ROW_ACTIONS } from '../action-config';
+import { Box, Horizon, RegularButton, Status as StatusMarker, Typography, Gap, ServiceIcons } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства ячеек таблицы истории выписки по расписанию. */
@@ -112,27 +108,24 @@ Method.displayName = 'Method';
 /** Действия со строкой. */
 export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
   const { status } = doc;
-  const { getAvailableActions } = useAuth();
-  const actions = useMemo(() => getActiveActionButtons(getAvailableActions(ROW_ACTIONS), executor, [[doc]]), [getAvailableActions, doc]);
+
+  const handleClick = () => {
+    console.log('doc', doc);
+  };
 
   return (
     <StopPropagation>
       {status === 'ACTIVE' && (
         <Box className={css.rowActions}>
           <Gap.XS />
-          <WithDropDown extraSmall actions={actions} offset={6} radius="XS" shadow="LG">
-            {(ref, _, toggleOpen) => (
-              <RegularButton
-                ref={ref}
-                extraSmall
-                className={css.action}
-                data-action={DATA_ACTION.MORE}
-                dimension={'MC'}
-                icon={ServiceIcons.ActionMenuHorizontal}
-                onClick={toggleOpen}
-              />
-            )}
-          </WithDropDown>
+          <RegularButton
+            extraSmall
+            className={css.action}
+            data-action={DATA_ACTION.VIEW}
+            dimension={'MC'}
+            icon={ServiceIcons.EyeOpened}
+            onClick={handleClick}
+          />
         </Box>
       )}
     </StopPropagation>

@@ -3,6 +3,7 @@ import { RequestStatementForm } from 'pages/form/client';
 import { ScheduleConfirmPage } from 'pages/scroller/client/schedule-confirm';
 import { ScheduleHistoryScrollerPage } from 'pages/scroller/client/schedule-history';
 import { ScheduleNewPage } from 'pages/scroller/client/schedule-new';
+import { ScheduleStatement } from 'pages/scroller/client/schedule-statement';
 import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-history';
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
@@ -48,6 +49,13 @@ export const routes = [
     authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
     component={ScheduleConfirmPage}
     path={COMMON_STREAM_URL.STATEMENT_SCHEDULE_CONFIRM}
+  />,
+  <GuardRoute
+    key="schedule-statement-client-form"
+    exact
+    authority={PRIVILEGE.STATEMENT_REQUEST}
+    component={ScheduleStatement}
+    path={`${COMMON_STREAM_URL.STATEMENT_SCHEDULE}`}
   />,
   <GuardRoute
     key="client-statement-transactions-scroller"

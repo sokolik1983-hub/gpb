@@ -508,6 +508,8 @@
   "admin.changedEntriesScroller.labels.clientAccountNumber": "Счёт клиента",
   "client.pages.historyTitle": "Заявки на выписку по расписанию",
   "client.pages.newScheduleTitle": "Запрос на выписку по расписанию",
+  "client.scheduleConfirmPage.form.checkBoxLabel": "При указании адреса электронной почты Клиент даёт согласие на передачу информации по электронной почте и осознаёт риск получения этой информации неуполномоченными лицами. При использовании электронной почты сообщения направляются Банком с адреса электронной почты, содержащего доменное имя «@gazprombank.ru»",
+  "client.scheduleConfirmPage.form.signAndSend": "Подписать и отправить",
   "client.breadcrumbs.toMainPage": "К главной",
   "client.breadcrumbs.toRequestsPage": "К выпискам",
   "client.breadcrumbs.toConfirmPage": "К запросу",
@@ -525,9 +527,13 @@
   "client.scheduleScroller.columns.periodType": "Период",
   "client.scheduleScroller.columns.accountsIds": "Счёт",
   "client.scheduleScroller.columns.createdAt": "Дата запроса",
-  "client.scheduleMethods.save": "Сохранено",
+  "client.scheduleMethods.save": "История запросов",
   "client.scheduleMethods.email": "Электронная почта",
   "client.actions.view": "Просмотреть",
   "client.actions.print": "Распечатать",
-  "client.actions.cancel": "Отключить услугу"
+  "client.actions.cancel": "Отключить услугу",
+  "client.modal.electronicSignature.sign": "Подписать",
+  "client.modal.electronicSignature.cancel": "Отмена",
+  "client.modal.electronicSignature.content": "Здесь будет выбор сертификата электронной подписи",
+  "client.modal.electronicSignature.title": "Установка подписи"
 }

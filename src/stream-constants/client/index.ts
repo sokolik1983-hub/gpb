@@ -16,6 +16,8 @@ export const COMMON_STREAM_URL = {
   STATEMENT_SCHEDULE_NEW: '/account-statement/schedule-new',
   /** [Выписки по расписанию] Нередактируемая форма. */
   STATEMENT_SCHEDULE_CONFIRM: '/account-statement/schedule-confirm',
+  /** [Выписки по расписанию] Нередактируемая форма. */
+  STATEMENT_SCHEDULE: '/account-statement/schedule-statement',
 };
 
 export * from './statuses';
