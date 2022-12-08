@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
-import type { IAccountOption } from 'components/common/accounts-field/account-option';
-import { AccountOption } from 'components/common/accounts-field/account-option';
 import { SelectWithSearch } from 'components/common/select-with-search';
 import { useAccounts } from 'hooks/admin';
 import type { Account } from 'interfaces/admin';
+import { AccountOption } from 'pages/form/client/components/accounts-field/account-option';
+import type { IAccountOption } from 'pages/form/client/components/accounts-field/account-option';
 import { useDebounce } from 'platform-copies/hooks';
 import { useFormState } from 'react-final-form';
 import { getAccountSearchFilter } from 'utils/admin';

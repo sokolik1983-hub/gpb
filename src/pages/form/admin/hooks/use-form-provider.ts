@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useAccounts } from 'hooks/common/use-accounts';
-import { FORMAT } from 'interfaces/client/format';
+import { FORMAT } from 'interfaces/common';
 import type { ACTION } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';

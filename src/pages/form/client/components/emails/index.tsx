@@ -1,28 +1,28 @@
 import React from 'react';
 import css from 'common.scss';
-import { OrganizationsField } from 'components/client/organizations-field';
 import { Row } from 'components/common/form/row';
 import { useScheduleAccounts } from 'hooks/client';
 import { locale } from 'localization';
+import { EmailsField } from 'pages/form/client/components/emails-field';
 import { FORM_FIELDS } from 'stream-constants/form/schedule-form-state';
 import { Box } from '@platform/ui';
 
-/** Компонент поля Организации. */
-export const Organizations: React.FC = () => {
+/** Компонент поля Адрес электронной почты. */
+export const Emails: React.FC = () => {
   const { data: accounts } = useScheduleAccounts();
 
   return (
-    <Row label={locale.turnoverScroller.groupInfo.organizations}>
+    <Row label={locale.turnoverScroller.groupInfo.emails}>
       <Box className={css.inputWidth}>
-        <OrganizationsField
+        <EmailsField
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           accounts={accounts}
-          name={FORM_FIELDS.ORGANIZATIONS}
+          name={FORM_FIELDS.EMAIL}
         />
       </Box>
     </Row>
   );
 };
 
-Organizations.displayName = 'Organizations';
+Emails.displayName = 'Emails';

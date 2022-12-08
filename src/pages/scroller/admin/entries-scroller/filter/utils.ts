@@ -1,6 +1,6 @@
-import type { IAccountOption } from 'components/common/accounts-field/account-option';
 import type { Counterparty } from 'interfaces/admin';
 import type { BankClient } from 'interfaces/common';
+import type { IAccountOption } from 'pages/form/client/components/accounts-field/account-option';
 import { parseCounterparty } from 'utils/common';
 import { formatAccountCode } from '@platform/tools/localization';
 

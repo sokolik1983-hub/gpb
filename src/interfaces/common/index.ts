@@ -4,6 +4,7 @@ export * from './bank-client';
 export * from './classificators';
 export * from './counterparty';
 export * from './scroller';
+export * from './format';
 
 /** Распарсеные параметры УРЛа. */
 export interface IUrlParams {

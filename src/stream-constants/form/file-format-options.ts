@@ -1,4 +1,4 @@
-import { FORMAT } from 'interfaces/client/format';
+import { FORMAT } from 'interfaces/common';
 import { locale } from 'localization';
 
 /** Опций форматов файла выписки. */

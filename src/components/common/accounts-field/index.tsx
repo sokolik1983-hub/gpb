@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import React, { useMemo, useCallback, useEffect } from 'react';
+import React, { useMemo, useEffect, useCallback } from 'react';
 import type { IGetAccountsResponseDto } from 'interfaces/dto';
 import { useForm } from 'react-final-form';
 import { noop, compareStrings } from 'utils/common';

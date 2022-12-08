@@ -1,9 +1,9 @@
 import type { DATE_PERIODS, IUserDeviceInfo } from 'interfaces';
-import type { FORMAT } from 'interfaces/client/format';
 import type { ACTION } from 'interfaces/common/classificators/action';
 import type { CREATION_TYPE } from 'interfaces/common/classificators/creation-type';
 import type { OPERATIONS } from 'interfaces/common/classificators/operations';
 import type { TYPE } from 'interfaces/common/classificators/type';
+import type { FORMAT } from 'interfaces/common/format';
 import type { IBaseEntity } from '@platform/services';
 import type { ICreationParamsDto } from './creation-params-dto';
 

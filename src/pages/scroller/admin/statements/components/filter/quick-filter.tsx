@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import React, { useContext, useMemo } from 'react';
 import { SelectWithSearch } from 'components/common';
-import { AccountOption } from 'components/common/accounts-field/account-option';
 import { useDatePeriod, useSubmitScrollerFilter } from 'hooks/common';
 import type { QuickFilterPanelProps } from 'interfaces/admin';
 import { locale } from 'localization';
+import { AccountOption } from 'pages/form/client/components/accounts-field/account-option';
 import { FORM_FIELDS } from 'pages/scroller/admin/statements/components/filter/constants';
 import { FilterContext } from 'pages/scroller/admin/statements/components/filter/context';
 import type { FilterValues } from 'pages/scroller/admin/statements/components/filter/types';

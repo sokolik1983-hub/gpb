@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { EXPORT_PARAMS_USE_CASES } from 'interfaces/client';
-import { FORMAT } from 'interfaces/client/format';
 import type { ACTION } from 'interfaces/common';
+import { FORMAT } from 'interfaces/common/format';
 import type { IStatementSummaryInfoResponseDto } from 'interfaces/dto';
 import { CREATION_PARAMS } from 'interfaces/form/creation-params';
 import { DETAIL_DOCUMENT_PARAMS } from 'interfaces/form/detail-document-params';

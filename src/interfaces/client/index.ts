@@ -7,4 +7,3 @@ export * from './quick-filter-panel';
 export * from './schedule-action';
 export * from './schedule-history-row';
 export * from './methods';
-export * from './format';
