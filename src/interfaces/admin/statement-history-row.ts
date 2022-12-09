@@ -1,6 +1,7 @@
 import type { STATEMENT_REQUEST_STATUSES, DATE_PERIODS, STATEMENT_STATUSES, STATEMENT_TYPE } from 'interfaces';
 import type { AccountOrganization, StatementUser } from 'interfaces/admin';
-import type { FORMAT, ACTION } from 'interfaces/common/classificators';
+import type { FORMAT } from 'interfaces/common';
+import type { ACTION } from 'interfaces/common/classificators';
 
 /** Строка скроллера Истории запросов выписок. */
 export interface StatementHistoryRow {

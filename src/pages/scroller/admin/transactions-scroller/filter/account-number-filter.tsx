@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import type { IAccountOption } from 'components/common/accounts-field/account-option';
 import { AccountOption } from 'components/common/accounts-field/account-option';
+import type { IAccountOption } from 'components/common/accounts-field/account-option';
 import { SelectWithSearch } from 'components/common/select-with-search';
 import { useAccounts } from 'hooks/admin';
 import type { Account } from 'interfaces/admin';

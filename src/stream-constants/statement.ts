@@ -1,4 +1,4 @@
-import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT, SCHEDULE_DATE_PERIODS } from 'interfaces';
+import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT, SCHEDULE_DATE_PERIODS, SCHEDULE_METHODS } from 'interfaces';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 
@@ -55,3 +55,9 @@ export const TRANSACTION_TYPE_LABELS = {
   [TRANSACTION_TYPES.INCOME]: locale.transactionType.labels.income,
   [TRANSACTION_TYPES.OUTCOME]: locale.transactionType.labels.outcome,
 };
+
+/** Опции селекта выбора способа получения выписки по расписанию. */
+export const METHOD_OPTIONS = [
+  { value: SCHEDULE_METHODS.EMAIL, label: locale.client.scheduleMethods.email },
+  { value: SCHEDULE_METHODS.SAVE, label: locale.client.scheduleMethods.save },
+];

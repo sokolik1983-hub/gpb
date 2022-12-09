@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 import css from 'common.scss';
-import { AccountsField } from 'components/common';
 import { useSeparateAccountFiles } from 'components/common/form/common/use-separate-account-files';
 import { Row } from 'components/common/form/row';
-import { useAccounts } from 'hooks/common';
+import { useScheduleAccounts } from 'hooks/client';
 import { FORMAT } from 'interfaces/common';
 import { CREATION_PARAMS } from 'interfaces/form';
 import { locale } from 'localization';
+import { AccountsField } from 'pages/form/client/components/accounts-field';
 import { useFormState, useForm } from 'react-final-form';
 import { RUB_CURRENCY } from 'stream-constants';
 import type { IFormState } from 'stream-constants/form';
@@ -22,7 +22,7 @@ interface AccountsProps {
 
 /** Компонент счета. */
 export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
-  const { data: accounts } = useAccounts();
+  const { data: accounts } = useScheduleAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
 
@@ -56,7 +56,14 @@ export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
   return (
     <Row label={locale.common.accounts.label}>
       <Box className={css.inputWidth}>
-        <AccountsField accounts={accounts} disabled={disabled} name={FORM_FIELDS.ACCOUNTS} onChange={onChangeAccounts} />
+        <AccountsField
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          accounts={accounts}
+          disabled={disabled}
+          name={FORM_FIELDS.ACCOUNTS}
+          onChange={onChangeAccounts}
+        />
       </Box>
     </Row>
   );
