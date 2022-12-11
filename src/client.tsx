@@ -4,6 +4,7 @@ import { ScheduleConfirmPage } from 'pages/scroller/client/schedule-confirm';
 import { ScheduleHistoryScrollerPage } from 'pages/scroller/client/schedule-history';
 import { ScheduleNewPage } from 'pages/scroller/client/schedule-new';
 import { ScheduleStatement } from 'pages/scroller/client/schedule-statement';
+import { ScheduleStatementRequestHistory } from 'pages/scroller/client/schedule-statement-request-history';
 import { StatementHistoryScrollerPage } from 'pages/scroller/client/statement-history';
 import { StatementTransactionScrollerPage } from 'pages/scroller/client/statement-transaction';
 import { StatementTurnoverScrollerPage } from 'pages/scroller/client/statement-turnover';
@@ -47,7 +48,7 @@ export const routes = [
     key="client-schedule-statement-request-history"
     exact
     authority={PRIVILEGE.ACCOUNTING_ENTRY_VIEW}
-    component={ScheduleStatement}
+    component={ScheduleStatementRequestHistory}
     path={COMMON_STREAM_URL.STATEMENT_SCHEDULE_REQUEST_HISTORY}
   />,
   <GuardRoute

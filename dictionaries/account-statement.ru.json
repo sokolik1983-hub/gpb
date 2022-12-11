@@ -524,6 +524,7 @@
   "client.scheduleScroller.columns.actions": "Кнопки",
   "client.scheduleScroller.columns.emails": "Почтовые ящики",
   "client.scheduleScroller.columns.scheduleMethod": "Способ",
+  "client.scheduleScroller.columns.scheduleEndDate": "Дата завершения",
   "client.scheduleScroller.columns.scheduleTime": "Время",
   "client.scheduleScroller.columns.status": "Статус",
   "client.scheduleScroller.columns.statementFormat": "Формат",

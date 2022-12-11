@@ -1616,6 +1616,9 @@
   "client.scheduleScroller.columns.scheduleMethod": {
     "ru": "Способ"
   },
+  "client.scheduleScroller.columns.scheduleEndDate": {
+    "ru": "Дата завершения"
+  },
   "client.scheduleScroller.columns.scheduleTime": {
     "ru": "Время"
   },

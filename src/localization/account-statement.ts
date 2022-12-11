@@ -322,6 +322,13 @@ export default {
 				},
 				/**
 				 * @ru
+				 * Дата завершения
+				 */
+				get scheduleEndDate() {
+					return t('client.scheduleScroller.columns.scheduleEndDate');
+				},
+				/**
+				 * @ru
 				 * Время
 				 */
 				get scheduleTime() {
