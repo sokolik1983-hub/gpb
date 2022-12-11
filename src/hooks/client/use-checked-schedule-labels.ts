@@ -31,8 +31,12 @@ export const useCheckedScheduleLabels = (
     if (value.length === 0 && accounts.length > 0) {
       change(
         name,
-        accounts.map(item =>
-          name === 'email' ? item.bankClient.emails?.toString() : item.bankClient.shortName || item.bankClient.fullName
+        accounts.map(
+          item =>
+            (name === 'email' && item.bankClient.emails?.toString()) ||
+            (name === 'accountIds' && item.accountNumber) ||
+            item.bankClient.shortName ||
+            item.bankClient.fullName
         )
       );
     }

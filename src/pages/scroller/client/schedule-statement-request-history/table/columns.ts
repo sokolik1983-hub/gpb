@@ -42,7 +42,7 @@ export const columns = addMaxWidthField<IStatementScheduleRow, { isVisible: bool
     id: COLUMN_NAMES.SCHEDULE_METHOD,
     accessor,
     Cell: Method,
-    width: 330,
+    width: 230,
     isVisible: true,
   },
   {
@@ -50,7 +50,7 @@ export const columns = addMaxWidthField<IStatementScheduleRow, { isVisible: bool
     id: COLUMN_NAMES.SCHEDULE_END_DATE,
     accessor,
     Cell: ScheduleEndDate,
-    width: 330,
+    width: 230,
     isVisible: true,
   },
   {

@@ -19,7 +19,7 @@ const getAccountOption = (account: IAccountV2): IAccountOption => {
   const { accountNumber, bankClient } = account;
 
   return {
-    value: bankClient?.shortName || bankClient?.fullName,
+    value: accountNumber,
     label: formatAccountCode(accountNumber), // Лейбл тегов выбранных значений
     accountNumber,
     orgName: bankClient?.shortName || bankClient?.fullName,

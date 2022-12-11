@@ -9,6 +9,7 @@ import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { FORM_FIELD_LABELS, FORM_FIELDS } from 'stream-constants/form/schedule-form-state';
 import { DATE_PERIOD_SCROLLER_LABELS, SCHEDULE_OPERATIONS, METHOD_LABELS, STATEMENT_FORMAT_LABELS } from 'stream-constants/statement';
 import { MainLayout, useRedirect } from '@platform/services/client';
+import { formatAccountCode } from '@platform/tools/localization';
 import { Checkbox, Gap, Horizon, Pattern, Typography, Box, ServiceIcons } from '@platform/ui';
 import css from './styles.scss';
 
@@ -70,7 +71,7 @@ export const ScheduleConfirmPage = () => {
               <Box className={css.period}>{organizations.map(item => item)}</Box>
             </Row>
             <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS]}>
-              <Box className={css.period}>{accountIds.map(item => item)}</Box>
+              <Box className={css.period}>{accountIds.map(item => formatAccountCode(item))}</Box>
             </Row>
             <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.OPERATION]}>
               <Box className={css.period}>{SCHEDULE_OPERATIONS[operations]}</Box>

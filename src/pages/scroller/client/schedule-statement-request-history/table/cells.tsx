@@ -12,7 +12,7 @@ import { DATE_PERIOD_SCHEDULE_SCROLLER_LABELS, STATEMENT_FORMAT_LABELS, STATEMEN
 import { COMMON_STREAM_URL, SCHEDULE_METHOD, SCHEDULE_STATUS_COLOR } from 'stream-constants/client';
 import { DATE_FORMAT, useRedirect } from '@platform/services';
 import { formatDateTime } from '@platform/tools/date-time';
-import { Box, Horizon, RegularButton, Status as StatusMarker, Typography, Gap, ServiceIcons } from '@platform/ui';
+import { Box, Horizon, RegularButton, Status as StatusMarker, Typography, Gap, Icons } from '@platform/ui';
 import css from './styles.scss';
 
 /** Свойства ячеек таблицы истории выписки по расписанию. */
@@ -118,25 +118,22 @@ export const Method: FC<HistoryCellProps> = ({ value: { scheduleMethod } }) => (
 Method.displayName = 'Method';
 
 /** Действия со строкой. */
-export const Actions: FC<HistoryCellProps> = ({ value: doc }) => {
-  const { status } = doc;
-  const redirectToStatementPage = useRedirect(COMMON_STREAM_URL.STATEMENT_SCHEDULE);
+export const Actions: FC<HistoryCellProps> = () => {
+  const redirectToHistoryPage = useRedirect(COMMON_STREAM_URL.STATEMENT_SCHEDULE_HISTORY);
 
   return (
     <StopPropagation>
-      {status === 'ACTIVE' && (
-        <Box className={css.rowActions}>
-          <Gap.XS />
-          <RegularButton
-            extraSmall
-            className={css.action}
-            data-action={DATA_ACTION.VIEW}
-            dimension={'MC'}
-            icon={ServiceIcons.EyeOpened}
-            onClick={redirectToStatementPage}
-          />
-        </Box>
-      )}
+      <Box className={css.rowActions}>
+        <Gap.XS />
+        <RegularButton
+          extraSmall
+          className={css.action}
+          data-action={DATA_ACTION.VIEW}
+          dimension={'MC'}
+          icon={Icons.Download}
+          onClick={redirectToHistoryPage}
+        />
+      </Box>
     </StopPropagation>
   );
 };

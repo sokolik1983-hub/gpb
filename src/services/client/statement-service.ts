@@ -262,7 +262,7 @@ export const statementService = {
       url: `${STATEMENT_REQUEST_URL}/get-page`,
       method: 'POST',
       data: metadataToRequestParams(metaData),
-    }).then(res => ({
+    }).then(() => ({
       data: [],
       // data: scheduleRequestHistory.data.map(item => ({
       //     ...item,
@@ -273,7 +273,7 @@ export const statementService = {
       //     }).split(' ')[0],
       //     accountNumbers: item.accountNumbers.map(el => formatAccountCode(el)), // форматируем номера аккаунтов
       // })),
-      total: res.data.data.size,
+      // total: res.data.data.size,
     })),
   // .catch(() => ({
   //     data: scheduleRequestHistory.data.map(item => ({

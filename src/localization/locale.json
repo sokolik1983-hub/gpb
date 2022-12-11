@@ -1686,7 +1686,7 @@
     "ru": "Отмена"
   },
   "client.modal.electronicSignature.content": {
-    "ru": "Здесь будет выбор сертификата электронной подписи"
+    "ru": "Выбран сертификат"
   },
   "client.modal.electronicSignature.title": {
     "ru": "Установка подписи"
