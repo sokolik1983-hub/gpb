@@ -1640,6 +1640,33 @@
   "client.scheduleMethods.email": {
     "ru": "Электронная почта"
   },
+  "client.scheduleStatementPage.testData.name": {
+    "ru": "Иван"
+  },
+  "client.scheduleStatementPage.testData.secondName": {
+    "ru": "Петрович"
+  },
+  "client.scheduleStatementPage.testData.surName": {
+    "ru": "Иванов"
+  },
+  "client.scheduleStatementPage.testData.buttons.back": {
+    "ru": "К запросам выписок"
+  },
+  "client.scheduleStatementPage.testData.buttons.print": {
+    "ru": "Печать"
+  },
+  "client.scheduleStatementPage.testData.buttons.export": {
+    "ru": "Экспорт"
+  },
+  "client.scheduleStatementPage.testData.strings.date": {
+    "ru": "Дата запроса"
+  },
+  "client.scheduleStatementPage.testData.strings.getDate": {
+    "ru": "01.11.2022"
+  },
+  "client.scheduleStatementPage.testData.strings.createdAt": {
+    "ru": "Сформирована"
+  },
   "client.actions.view": {
     "ru": "Просмотреть"
   },

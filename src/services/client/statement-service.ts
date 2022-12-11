@@ -95,7 +95,7 @@ export const statementService = {
       })),
       total: res.data.data.size,
     })),
-  //       .catch(() => ({
+  //   .catch(() => ({
   //     data: scheduleStatements.data.map(item => ({
   //         ...item,
   //         createdAt: formatDateTime(item.createdAt, {

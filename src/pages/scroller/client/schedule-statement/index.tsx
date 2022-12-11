@@ -1,4 +1,5 @@
 import React from 'react';
+import { ScheduleStatementParams } from 'components/client/schedule-statement';
 import { PageHeader } from 'components/common';
 import { useScrollerTabsProps } from 'hooks/client';
 import { locale } from 'localization';
@@ -27,6 +28,7 @@ export const ScheduleStatement = () => {
         <Gap.XS />
         <CategoryTabs {...categoryTabs} />
       </Horizon>
+      <ScheduleStatementParams />
       <Gap.XL />
     </MainLayout>
   );

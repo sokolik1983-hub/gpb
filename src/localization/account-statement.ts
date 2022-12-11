@@ -227,6 +227,75 @@ export default {
 					return t('client.scheduleStatementPage.navTabs.history');
 				},
 			},
+			testData: {
+				/**
+				 * @ru
+				 * Иван
+				 */
+				get name() {
+					return t('client.scheduleStatementPage.testData.name');
+				},
+				/**
+				 * @ru
+				 * Петрович
+				 */
+				get secondName() {
+					return t('client.scheduleStatementPage.testData.secondName');
+				},
+				/**
+				 * @ru
+				 * Иванов
+				 */
+				get surName() {
+					return t('client.scheduleStatementPage.testData.surName');
+				},
+				buttons: {
+					/**
+					 * @ru
+					 * К запросам выписок
+					 */
+					get back() {
+						return t('client.scheduleStatementPage.testData.buttons.back');
+					},
+					/**
+					 * @ru
+					 * Печать
+					 */
+					get print() {
+						return t('client.scheduleStatementPage.testData.buttons.print');
+					},
+					/**
+					 * @ru
+					 * Экспорт
+					 */
+					get export() {
+						return t('client.scheduleStatementPage.testData.buttons.export');
+					},
+				},
+				strings: {
+					/**
+					 * @ru
+					 * Дата запроса
+					 */
+					get date() {
+						return t('client.scheduleStatementPage.testData.strings.date');
+					},
+					/**
+					 * @ru
+					 * 01.11.2022
+					 */
+					get getDate() {
+						return t('client.scheduleStatementPage.testData.strings.getDate');
+					},
+					/**
+					 * @ru
+					 * Сформирована
+					 */
+					get createdAt() {
+						return t('client.scheduleStatementPage.testData.strings.createdAt');
+					},
+				},
+			},
 		},
 		scheduleScroller: {
 			columns: {
