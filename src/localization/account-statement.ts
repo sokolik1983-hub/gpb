@@ -121,6 +121,24 @@ export default {
 				return t('client.pages.newScheduleTitle');
 			},
 		},
+		scheduleConfirmPage: {
+			form: {
+				/**
+				 * @ru
+				 * При указании адреса электронной почты Клиент даёт согласие на передачу информации по электронной почте и осознаёт риск получения этой информации неуполномоченными лицами. При использовании электронной почты сообщения направляются Банком с адреса электронной почты, содержащего доменное имя «@gazprombank.ru»
+				 */
+				get checkBoxLabel() {
+					return t('client.scheduleConfirmPage.form.checkBoxLabel');
+				},
+				/**
+				 * @ru
+				 * Подписать и отправить
+				 */
+				get signAndSend() {
+					return t('client.scheduleConfirmPage.form.signAndSend');
+				},
+			},
+		},
 		breadcrumbs: {
 			/**
 			 * @ru
@@ -183,6 +201,31 @@ export default {
 			 */
 			get title() {
 				return t('client.scheduleHistoryScrollerPage.title');
+			},
+		},
+		scheduleStatementPage: {
+			/**
+			 * @ru
+			 * Выписка по расписанию
+			 */
+			get title() {
+				return t('client.scheduleStatementPage.title');
+			},
+			navTabs: {
+				/**
+				 * @ru
+				 * Параметры заявки
+				 */
+				get scheduleStatementTitle() {
+					return t('client.scheduleStatementPage.navTabs.scheduleStatementTitle');
+				},
+				/**
+				 * @ru
+				 * История запросов
+				 */
+				get history() {
+					return t('client.scheduleStatementPage.navTabs.history');
+				},
 			},
 		},
 		scheduleScroller: {
@@ -255,7 +298,7 @@ export default {
 		scheduleMethods: {
 			/**
 			 * @ru
-			 * Сохранено
+			 * История запросов
 			 */
 			get save() {
 				return t('client.scheduleMethods.save');
@@ -289,6 +332,38 @@ export default {
 			 */
 			get cancel() {
 				return t('client.actions.cancel');
+			},
+		},
+		modal: {
+			electronicSignature: {
+				/**
+				 * @ru
+				 * Подписать
+				 */
+				get sign() {
+					return t('client.modal.electronicSignature.sign');
+				},
+				/**
+				 * @ru
+				 * Отмена
+				 */
+				get cancel() {
+					return t('client.modal.electronicSignature.cancel');
+				},
+				/**
+				 * @ru
+				 * Здесь будет выбор сертификата электронной подписи
+				 */
+				get content() {
+					return t('client.modal.electronicSignature.content');
+				},
+				/**
+				 * @ru
+				 * Установка подписи
+				 */
+				get title() {
+					return t('client.modal.electronicSignature.title');
+				},
 			},
 		},
 	},

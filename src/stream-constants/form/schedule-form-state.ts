@@ -8,6 +8,8 @@ import { pathGenerator } from '@platform/core';
 export interface IScheduleFormState {
   /** Идентификаторы счетов. */
   accountIds: string[];
+  /** Номера счетов. */
+  accountNumber: string[];
   /** Действие. */
   action?: ACTION;
   /** Параметры создания выписки. */
@@ -19,7 +21,7 @@ export interface IScheduleFormState {
   /** Параметры комплекта документов. */
   documentsSetParams: string[];
   /** Адрес электронной почты. */
-  email: string;
+  email: string[];
   /** Формат файла выписки. */
   format: FORMAT;
   /** Операции выписки. */
@@ -37,15 +39,16 @@ export interface IScheduleFormState {
 /** Начальное значение состояния формы. */
 export const defaultFormState: IScheduleFormState = {
   accountIds: [],
+  accountNumber: [],
   creationParams: [],
   creditParams: [],
   debitParams: [],
   documentsSetParams: [],
-  email: '',
+  email: [],
   format: FORMAT.PDF,
   operations: OPERATIONS.ALL,
   periodType: DATE_PERIODS.YESTERDAY,
-  time: '09:00', //+
+  time: '09:00',
   organizations: [],
   method: SCHEDULE_METHODS.EMAIL,
 };

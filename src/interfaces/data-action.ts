@@ -18,5 +18,6 @@ export enum DATA_ACTION {
   MORE = 'more', // ещё
   REPEAT_REQUEST = 'repeat-request', // Повторный запрос
   VIEW = 'view', // Просмотреть
+  VIEW_SCHEDULE = 'view', // Просмотреть печатную форму выписки по расписанию
   CANCEL = 'cancel', // Отключить услугу
 }

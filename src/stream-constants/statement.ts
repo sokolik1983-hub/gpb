@@ -1,4 +1,4 @@
-import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT, SCHEDULE_DATE_PERIODS, SCHEDULE_METHODS } from 'interfaces';
+import { DATE_PERIODS, TRANSACTION_TYPES, FORMAT, SCHEDULE_DATE_PERIODS, SCHEDULE_METHODS, OPERATIONS } from 'interfaces';
 import { locale } from 'localization';
 import type { IOption } from '@platform/ui';
 
@@ -61,3 +61,15 @@ export const METHOD_OPTIONS = [
   { value: SCHEDULE_METHODS.EMAIL, label: locale.client.scheduleMethods.email },
   { value: SCHEDULE_METHODS.SAVE, label: locale.client.scheduleMethods.save },
 ];
+
+/** Наименование типов операций в форме выписки по расписанию. */
+export const SCHEDULE_OPERATIONS = {
+  [OPERATIONS.ALL]: locale.common.operations.ALL,
+  [OPERATIONS.INCOME]: locale.common.operations.INCOME,
+  [OPERATIONS.WRITE_OFF]: locale.common.operations.OUTCOME,
+};
+/** Наименование способов отправки выписки по расписанию. */
+export const METHOD_LABELS = {
+  [SCHEDULE_METHODS.EMAIL]: locale.client.scheduleMethods.email,
+  [SCHEDULE_METHODS.SAVE]: locale.client.scheduleMethods.save,
+};

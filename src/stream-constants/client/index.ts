@@ -16,6 +16,10 @@ export const COMMON_STREAM_URL = {
   STATEMENT_SCHEDULE_NEW: '/account-statement/schedule-new',
   /** [Выписки по расписанию] Нередактируемая форма. */
   STATEMENT_SCHEDULE_CONFIRM: '/account-statement/schedule-confirm',
+  /** [Выписки по расписанию] Нередактируемая форма. */
+  STATEMENT_SCHEDULE: '/account-statement/schedule-statement',
+  /** [Выписки по расписанию] Страница истории запросов определённой выписки по расписанию. */
+  STATEMENT_SCHEDULE_REQUEST_HISTORY: '/account-statement/schedule-statement-history/143',
 };
 
 export * from './statuses';
