@@ -6,9 +6,10 @@ import { locale } from 'localization';
 import { exampleScheduleParams } from 'mocks/shedule-statement-params';
 import { FORM_FIELD_LABELS, FORM_FIELDS } from 'stream-constants/form/schedule-form-state';
 import { Box, Gap, Horizon, Pattern, ServiceIcons, Typography } from '@platform/ui';
+import css from './styles.scss';
 
 export const ScheduleStatementParams = () => (
-  <Box fill={'FAINT'} style={{ position: 'relative', minHeight: 'calc(100vh - 58px - 64px)', padding: '32px' }}>
+  <Box className={css.wrap} fill={'FAINT'}>
     <Pattern gap={'XL'}>
       <Pattern.Span size={9}>
         <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE]}>
@@ -57,17 +58,7 @@ export const ScheduleStatementParams = () => (
           <Typography.P style={{ paddingBottom: '12px' }}>{exampleScheduleParams.surname}</Typography.P>
         </Box>
         <Horizon style={{ cursor: 'pointer' }} onClick={() => showModalPicture('CANCEL')}>
-          <Box
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: '20px',
-              height: '20px',
-              border: '1px solid lightgrey',
-              borderRadius: '50%',
-            }}
-          >
+          <Box className={css.iconWrapper}>
             <ServiceIcons.Close fill={'ACCENT'} scale={'SM'} />
           </Box>
           <Gap.XS />

@@ -1,0 +1,14 @@
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 50%;
+}
+.wrap {
+  position: relative;
+  min-height: calc(100vh - 58px - 64px);
+  padding: 32px;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { showModalElectronicSignature } from 'components/client';
 import { FocusLock } from 'components/common/focus-lock';
 import { locale } from 'localization';
-import { mocksAssets } from 'mocks/assets';
+// import { mocksAssets } from 'mocks/assets'; //Закоменчено из-за неработающих моков.
 import type { IButtonAction } from '@platform/ui';
 import { dialog, Box, DialogTemplate, DATA_TYPE, LayoutScroll, BUTTON } from '@platform/ui';
 import css from './styles.scss';
@@ -47,9 +47,7 @@ export const ModalPicture: React.FC<IModalPicture> = props => {
         actions={type === 'VIEW' ? [] : actions}
         content={
           <Box className={css.wrap} tabIndex={0}>
-            <LayoutScroll>
-              <img alt="example-img" src={type === 'CANCEL' ? mocksAssets.cancel : mocksAssets.sign} />
-            </LayoutScroll>
+            <LayoutScroll>{/* <img alt="example-img" src={type === 'CANCEL' ? mocksAssets.cancel : mocksAssets.sign} /> */}</LayoutScroll>
           </Box>
         }
         dataType={DATA_TYPE.CUSTOM}

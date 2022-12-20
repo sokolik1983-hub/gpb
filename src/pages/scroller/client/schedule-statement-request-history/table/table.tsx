@@ -41,7 +41,7 @@ export const Table: FC = () => {
         </Horizon>
         <Gap.LG />
       </Box>
-      <Box style={{ height: '500px' }}>
+      <Box className={css.tableWrap}>
         <InfiniteDataTable<IStatementScheduleRow>
           columns={columns}
           customSettingsForm={SettingsForm}

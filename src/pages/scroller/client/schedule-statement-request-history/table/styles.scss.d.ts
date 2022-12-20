@@ -5,6 +5,11 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
+    'action': string;
+    'rowActionButton': string;
+    'rowActions': string;
+    'status': string;
+    'tableWrap': string;
     'totalWrapper': string;
   }
 }

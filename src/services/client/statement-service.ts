@@ -25,12 +25,13 @@ import type {
 } from 'interfaces/dto';
 import type { IHasClosedDayRequestDto } from 'interfaces/dto/has-closed-day-request-dto';
 import type { StatementAttachmentStatusDto } from 'interfaces/dto/statement-attachment-status-dto';
-import { scheduleRequestHistory } from 'mocks/shedule-request-history';
+// import { scheduleRequestHistory } from 'mocks/shedule-request-history';
 import { scheduleStatements } from 'mocks/shedule-statements';
-import { getTestData } from 'utils/client/get-test-data';
 import type { ICollectionResponse, IServerResp } from '@platform/services';
-import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG } from '@platform/services';
+import { request, metadataToRequestParams, AUTH_REQUEST_CONFIG, DATE_TIME_FORMAT_WITHOUT_SEC } from '@platform/services';
 import type { IServerDataResp, IMetaData } from '@platform/services/client';
+import { formatDateTime } from '@platform/tools/date-time';
+import { formatAccountCode } from '@platform/tools/localization';
 
 /** Базовый URL сервиса "Выписки". */
 const BASE_URL = '/api/statement-client';
@@ -84,7 +85,15 @@ export const statementService = {
       method: 'POST',
       data: metadataToRequestParams(metaData),
     }).then(res => ({
-      data: getTestData(scheduleStatements),
+      data: scheduleStatements.data.map(item => ({
+        ...item,
+        createdAt: formatDateTime(item.createdAt, {
+          // форматируем дату для отображения в таблице
+          keepLocalTime: true,
+          format: DATE_TIME_FORMAT_WITHOUT_SEC,
+        }).split(' ')[0],
+        accountNumbers: item.accountNumbers.map(el => formatAccountCode(el)), // форматируем номера аккаунтов
+      })),
       total: res.data.data.size,
     })),
   /** Возвращает список контрагентов. */
@@ -242,7 +251,16 @@ export const statementService = {
       method: 'POST',
       data: metadataToRequestParams(metaData),
     }).then(() => ({
-      data: getTestData(scheduleRequestHistory),
+      data: [],
+      // data: scheduleRequestHistory.data.map(item => ({
+      //     ...item,
+      //     createdAt: formatDateTime(item.createdAt, {
+      //         // форматируем дату для отображения в таблице
+      //         keepLocalTime: true,
+      //         format: DATE_TIME_FORMAT_WITHOUT_SEC,
+      //     }).split(' ')[0],
+      //     accountNumbers: item.accountNumbers.map(el => formatAccountCode(el)), // форматируем номера аккаунтов
+      // })),
       total: 2,
     })),
 };

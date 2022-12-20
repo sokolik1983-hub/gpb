@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FocusLock } from 'components/common/focus-lock';
 import { locale } from 'localization';
-import { mocksAssets } from 'mocks/assets';
+// import { mocksAssets } from 'mocks/assets'; закоменчено из-за моков
 import { COMMON_STREAM_URL } from 'stream-constants/client';
 import { useRedirect } from '@platform/services/client';
 import { Gap, dialog, Box, BUTTON, DialogTemplate, Typography, DATA_TYPE, ServiceIcons } from '@platform/ui';
@@ -52,7 +52,7 @@ export const ModalElectronicSignature: React.FC<IModalElectronicSignature> = ({ 
               <Typography.H3 className={css.h3}>{locale.client.modal.electronicSignature.content}</Typography.H3>
               <Box style={{ position: 'relative' }} onClick={() => setVisible(!visible)}>
                 {/* Тестовая картинка для показания работы c ЭП */}
-                <img alt="electronic-signature-img" src={mocksAssets.electronic} />
+                {/* <img alt="electronic-signature-img" src={mocksAssets.electronic} /> */}
                 <ServiceIcons.Tick className={css.icon} fill={'ACCENT'} scale={'MD'} style={{ display: visible ? 'block' : 'none' }} />
               </Box>
             </>

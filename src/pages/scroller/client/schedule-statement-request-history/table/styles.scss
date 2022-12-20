@@ -2,3 +2,27 @@
   flex: 0 0 auto;
   padding: 0 32px;
 }
+.tableWrap {
+  height: 100vh;
+}
+.status {
+  margin-top: 5px;
+}
+.rowActions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.rowActionButton {
+  width: 32px;
+  height: 24px;
+  margin: 0 4px;
+  padding: 0;
+}
+.action {
+  width: 32px;
+  height: 24px;
+  margin: 0 4px;
+  padding: 0;
+}

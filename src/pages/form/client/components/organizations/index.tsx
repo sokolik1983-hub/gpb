@@ -15,9 +15,9 @@ export const Organizations: React.FC = () => {
     <Row label={locale.turnoverScroller.groupInfo.organizations}>
       <Box className={css.inputWidth}>
         <OrganizationsField
-          accounts={accounts}
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
+          accounts={accounts}
           disabled={accounts.length === 1}
           name={FORM_FIELDS.ORGANIZATIONS}
         />
