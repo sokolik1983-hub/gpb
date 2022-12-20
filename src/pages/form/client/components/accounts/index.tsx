@@ -14,14 +14,8 @@ import { FORM_FIELDS } from 'stream-constants/form';
 import type { OnChangeType } from '@platform/ui';
 import { Box } from '@platform/ui';
 
-/** Свойства компонента счета. */
-interface AccountsProps {
-  /** Блокировка редактирования значений. */
-  disabled?: boolean;
-}
-
 /** Компонент счета. */
-export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
+export const Accounts: React.FC = () => {
   const { data: accounts } = useScheduleAccounts();
   const { change } = useForm();
   const { values } = useFormState<IFormState>();
@@ -60,7 +54,7 @@ export const Accounts: React.FC<AccountsProps> = ({ disabled }) => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
           accounts={accounts}
-          disabled={disabled}
+          disabled={accounts.length === 1}
           name={FORM_FIELDS.ACCOUNTS}
           onChange={onChangeAccounts}
         />

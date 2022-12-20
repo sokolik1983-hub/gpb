@@ -2,13 +2,15 @@ import type { FC } from 'react';
 import React, { useCallback, useContext } from 'react';
 import { executor } from 'actions/client';
 import type { IStatementScheduleRow } from 'interfaces/client';
+import { locale } from 'localization';
 import { STORAGE_KEY } from 'pages/scroller/client/statement-transaction/filter';
 import { DEFAULT_SORTING } from 'pages/scroller/client/statement-transaction/transaction-scroller-context';
 import type { IFetchDataResponse } from 'platform-copies/services';
 import { InfiniteDataTable } from 'platform-copies/services';
-import { SettingsForm } from '@platform/ui';
+import { Box, Gap, Horizon, SettingsForm, Typography } from '@platform/ui';
 import { ScheduleScrollerContext } from '../schedule-scroller-context';
 import { columns } from './columns';
+import css from './styles.scss';
 
 /** Таблица выписок по расписанию. */
 export const Table: FC = () => {
@@ -29,14 +31,25 @@ export const Table: FC = () => {
   );
 
   return (
-    <InfiniteDataTable<IStatementScheduleRow>
-      columns={columns}
-      customSettingsForm={SettingsForm}
-      defaultSort={DEFAULT_SORTING}
-      executor={executor}
-      fetchData={sendHistoryToDataTable}
-      storageKey={STORAGE_KEY}
-    />
+    <>
+      <Box className={css.totalWrapper}>
+        <Gap.SM />
+        <Horizon>
+          <Typography.TextBold>{locale.client.scheduleHistoryScrollerPage.total}</Typography.TextBold>
+          <Gap.SM />
+          <Typography.TextBold>{totalStatementsAmount}</Typography.TextBold>
+        </Horizon>
+        <Gap.LG />
+      </Box>
+      <InfiniteDataTable<IStatementScheduleRow>
+        columns={columns}
+        customSettingsForm={SettingsForm}
+        defaultSort={DEFAULT_SORTING}
+        executor={executor}
+        fetchData={sendHistoryToDataTable}
+        storageKey={STORAGE_KEY}
+      />
+    </>
   );
 };
 Table.displayName = 'Table';

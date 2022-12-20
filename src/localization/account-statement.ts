@@ -113,6 +113,15 @@ export default {
 			get historyTitle() {
 				return t('client.pages.historyTitle');
 			},
+			sheduleRequestHistoryPage: {
+				/**
+				 * @ru
+				 * Всего запросов:
+				 */
+				get total() {
+					return t('client.pages.sheduleRequestHistoryPage.total');
+				},
+			},
 			/**
 			 * @ru
 			 * Запрос на выписку по расписанию
@@ -136,6 +145,13 @@ export default {
 				 */
 				get signAndSend() {
 					return t('client.scheduleConfirmPage.form.signAndSend');
+				},
+				/**
+				 * @ru
+				 * Перейти к подписанию
+				 */
+				get goToSign() {
+					return t('client.scheduleConfirmPage.form.goToSign');
 				},
 			},
 		},
@@ -201,6 +217,13 @@ export default {
 			 */
 			get title() {
 				return t('client.scheduleHistoryScrollerPage.title');
+			},
+			/**
+			 * @ru
+			 * Всего выписок по расписанию:
+			 */
+			get total() {
+				return t('client.scheduleHistoryScrollerPage.total');
 			},
 		},
 		scheduleStatementPage: {
@@ -428,7 +451,7 @@ export default {
 				},
 				/**
 				 * @ru
-				 * Здесь будет выбор сертификата электронной подписи
+				 * Выбран сертификат
 				 */
 				get content() {
 					return t('client.modal.electronicSignature.content');
@@ -3791,6 +3814,13 @@ export default {
 			 */
 			get organization() {
 				return t('common.testData.organization');
+			},
+			/**
+			 * @ru
+			 * ООО "Ромашка"
+			 */
+			get organization2() {
+				return t('common.testData.organization2');
 			},
 		},
 		footer: {

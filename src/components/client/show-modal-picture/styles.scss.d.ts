@@ -5,7 +5,7 @@
 
 declare namespace StylesScssModule {
   export interface IStylesScss {
-    'totalWrapper': string;
+    'wrap': string;
   }
 }
 

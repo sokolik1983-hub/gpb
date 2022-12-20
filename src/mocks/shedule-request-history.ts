@@ -1,5 +1,6 @@
 import { locale } from 'localization';
 
+/** Тестовые данные для отображения запросов выписки по расписанию на странице /account-statement/schedule-statement-history/143. */
 export const scheduleRequestHistory = {
   data: [
     {

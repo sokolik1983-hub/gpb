@@ -1,5 +1,5 @@
 import type { DATE_PERIODS, OPERATIONS } from 'interfaces';
-import { FORM_FIELD_LABELS, FORM_FIELDS } from 'stream-constants/form';
+import { FORM_FIELD_LABELS, FORM_FIELDS } from 'stream-constants/form/schedule-form-state';
 import type { IScheduleFormState } from 'stream-constants/form/schedule-form-state';
 import { getEmptyFieldErrorMessage } from 'utils/common';
 import { array, mixed, object } from 'yup';
@@ -15,4 +15,6 @@ export const scheduleRequestValidationSchema: SchemaOf<FieldsToValidate> = objec
   periodType: mixed<DATE_PERIODS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.PERIOD_TYPE])),
   accountIds: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ACCOUNTS])),
   operations: mixed<OPERATIONS>().required(getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.OPERATION])),
+  organizations: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.ORGANIZATIONS])),
+  email: array().min(1, getEmptyFieldErrorMessage(FORM_FIELD_LABELS[FORM_FIELDS.EMAIL])),
 });

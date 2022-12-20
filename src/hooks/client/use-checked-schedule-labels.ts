@@ -27,8 +27,8 @@ export const useCheckedScheduleLabels = (
     // Значение поля получается внутри хука, чтобы избежать циклического рендера
     const { value = [] } = getFieldState(name) ?? {};
 
-    // При первоначальной загрузке, если ничего не выбрано, то выбираются все значения.
-    if (value.length === 0 && accounts.length > 0) {
+    // При первоначальной загрузке, если значение одно, то выбирается оно.
+    if (value.length === 0 && accounts.length === 1) {
       change(
         name,
         accounts.map(

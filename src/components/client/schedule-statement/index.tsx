@@ -1,6 +1,6 @@
 import React from 'react';
-import { showModalElectronicSignature } from 'components/client';
 import { ScheduleStatementFooter } from 'components/client/schedule-statement-footer';
+import { showModalPicture } from 'components/client/show-modal-picture/show-modal-picture';
 import { Row } from 'components/common/form/row';
 import { locale } from 'localization';
 import { exampleScheduleParams } from 'mocks/shedule-statement-params';
@@ -56,7 +56,7 @@ export const ScheduleStatementParams = () => (
         <Box>
           <Typography.P style={{ paddingBottom: '12px' }}>{exampleScheduleParams.surname}</Typography.P>
         </Box>
-        <Horizon style={{ cursor: 'pointer' }} onClick={showModalElectronicSignature}>
+        <Horizon style={{ cursor: 'pointer' }} onClick={() => showModalPicture('CANCEL')}>
           <Box
             style={{
               display: 'flex',

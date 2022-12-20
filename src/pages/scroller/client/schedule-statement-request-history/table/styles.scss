@@ -1,43 +1,4 @@
-@import '~@platform/ui/dist/streams/ui/common';
-
-.status {
-  margin-top: 5px;
-}
-
 .totalWrapper {
   flex: 0 0 auto;
   padding: 0 32px;
-}
-
-.rowActions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.rowActionButton {
-  width: 32px;
-  height: 24px;
-  margin: 0 4px;
-  padding: 0;
-}
-
-.scrollIcon {
-  position: absolute;
-  right: 50px;
-  bottom: 17px;
-  z-index: getIndex(control);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  opacity: 0.4;
-}
-.action {
-  width: 32px;
-  height: 24px;
-  margin: 0 4px;
-  padding: 0;
 }

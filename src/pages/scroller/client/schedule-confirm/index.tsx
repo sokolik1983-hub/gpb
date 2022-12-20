@@ -82,9 +82,11 @@ export const ScheduleConfirmPage = () => {
             <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.METHOD]}>
               <Box className={css.period}>{METHOD_LABELS[method]}</Box>
             </Row>
-            <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.EMAIL]}>
-              <Box className={css.period}>{email.map(item => item)}</Box>
-            </Row>
+            {email.length > 0 && (
+              <Row align={'TOP'} label={FORM_FIELD_LABELS[FORM_FIELDS.EMAIL]}>
+                <Box className={css.period}>{email.map(item => item)}</Box>
+              </Row>
+            )}
             <Box style={{ paddingBottom: '40px' }}>
               <Checkbox
                 extraSmall
@@ -98,12 +100,11 @@ export const ScheduleConfirmPage = () => {
             <ScheduleConfirmFooter disabled={isChecked} />
           </Pattern.Span>
           <Pattern.Span size={3}>
-            <Horizon style={{ cursor: 'pointer' }} onClick={showModalPicture}>
+            <Horizon style={{ cursor: 'pointer' }} onClick={() => showModalPicture('VIEW')}>
               <ServiceIcons.EyeOpened fill={'ACCENT'} scale={'SM'} />
               <Gap.XS />
               <Typography.P fill={'ACCENT'}>{locale.client.actions.view}</Typography.P>
             </Horizon>
-            {/* <FormValidation fieldLabels={FORM_FIELD_LABELS} /> */}
           </Pattern.Span>
         </Pattern>
       </Box>

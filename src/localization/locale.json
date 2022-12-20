@@ -1418,6 +1418,9 @@
   "common.testData.organization": {
     "ru": "ООО \"РогоКопытинский Комбинат\""
   },
+  "common.testData.organization2": {
+    "ru": "ООО \"Ромашка\""
+  },
   "common.formats.Excel": {
     "ru": "Excel"
   },
@@ -1565,6 +1568,9 @@
   "client.pages.historyTitle": {
     "ru": "Заявки на выписку по расписанию"
   },
+  "client.pages.sheduleRequestHistoryPage.total": {
+    "ru": "Всего запросов: "
+  },
   "client.pages.newScheduleTitle": {
     "ru": "Запрос на выписку по расписанию"
   },
@@ -1573,6 +1579,9 @@
   },
   "client.scheduleConfirmPage.form.signAndSend": {
     "ru": "Подписать и отправить"
+  },
+  "client.scheduleConfirmPage.form.goToSign": {
+    "ru": "Перейти к подписанию"
   },
   "client.breadcrumbs.toMainPage": {
     "ru": "К главной"
@@ -1597,6 +1606,9 @@
   },
   "client.scheduleHistoryScrollerPage.title": {
     "ru": "Заявки на выписку по расписанию"
+  },
+  "client.scheduleHistoryScrollerPage.total": {
+    "ru": "Всего выписок по расписанию: "
   },
   "client.scheduleStatementPage.title": {
     "ru": "Выписка по расписанию"

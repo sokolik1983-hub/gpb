@@ -1,34 +1,66 @@
 import React from 'react';
+import { showModalElectronicSignature } from 'components/client';
 import { FocusLock } from 'components/common/focus-lock';
-import { dialog, Box, DialogTemplate, DATA_TYPE, LayoutScroll } from '@platform/ui';
+import { locale } from 'localization';
+import { mocksAssets } from 'mocks/assets';
+import type { IButtonAction } from '@platform/ui';
+import { dialog, Box, DialogTemplate, DATA_TYPE, LayoutScroll, BUTTON } from '@platform/ui';
+import css from './styles.scss';
 
 /** Свойства компонента ModalPicture. */
 export interface IModalPicture {
   /** Коллбэк закрытия формы. */
   onClose(): void;
+  /** Свойство, описывающее какой кнопкой открывается модальное окно. */
+  type?: string;
 }
 
 /** Модальное окно с тестовым документом. */
-export const ModalPicture: React.FC<IModalPicture> = ({ onClose }) => (
-  <FocusLock>
-    <Box style={{ outline: 'none' }} tabIndex={0}>
+export const ModalPicture: React.FC<IModalPicture> = props => {
+  const { onClose, type } = props;
+  const clickAndGo = () => {
+    onClose();
+    showModalElectronicSignature();
+  };
+
+  const actions: IButtonAction[] = [
+    {
+      name: 'submit',
+      label: locale.client.modal.electronicSignature.sign,
+      onClick: clickAndGo,
+      buttonType: BUTTON.PRIMARY,
+      extraSmall: true,
+    },
+    {
+      name: 'cancel',
+      label: locale.client.modal.electronicSignature.cancel,
+      onClick: onClose,
+      buttonType: BUTTON.REGULAR,
+      extraSmall: true,
+    },
+  ];
+
+  return (
+    <FocusLock>
       <DialogTemplate
         extraSmall
+        actions={type === 'VIEW' ? [] : actions}
         content={
-          <LayoutScroll style={{ height: '500px', width: '566px' }}>
-            <img alt="example-img" src={'https://i.postimg.cc/m2kTB9G8/example-statement.png'} />
-          </LayoutScroll>
+          <Box className={css.wrap} tabIndex={0}>
+            <LayoutScroll>
+              <img alt="example-img" src={type === 'CANCEL' ? mocksAssets.cancel : mocksAssets.sign} />
+            </LayoutScroll>
+          </Box>
         }
         dataType={DATA_TYPE.CUSTOM}
         header={''}
         onClose={() => onClose()}
       />
-    </Box>
-  </FocusLock>
-);
+    </FocusLock>
+  );
+};
 
 ModalPicture.displayName = 'ModalPicture';
 
-export const showModalPicture = () => {
-  dialog.show('ModalPicture', ModalPicture);
-};
+/** Функция, вызывающая модальное окно с тестовым документом. */
+export const showModalPicture = string => dialog.show('ModalPicture', ModalPicture, { type: string });

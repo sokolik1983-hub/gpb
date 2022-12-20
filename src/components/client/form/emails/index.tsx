@@ -1,7 +1,7 @@
 import React from 'react';
 import { EmailsField } from 'components/client/emails-field';
 import { Row } from 'components/common/form/row';
-import { useScheduleAccounts } from 'hooks/common';
+import { useScheduleAccounts } from 'hooks/client';
 import { locale } from 'localization';
 import { FORM_FIELDS } from 'stream-constants/form/schedule-form-state';
 import { Box } from '@platform/ui';
@@ -14,7 +14,12 @@ export const Emails: React.FC = () => {
   return (
     <Row label={locale.turnoverScroller.groupInfo.emails}>
       <Box className={css.emailsType}>
-        <EmailsField accounts={accounts} name={FORM_FIELDS.EMAIL} />
+        <EmailsField
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          accounts={accounts}
+          name={FORM_FIELDS.EMAIL}
+        />
       </Box>
     </Row>
   );
